@@ -89,6 +89,9 @@
             }
         },
         "responses": {
+            "401": {
+                "description": "Principal is not authorized to access this endpoint. Check to make sure the Bearer token is valid and present!"
+            },
             "404": {
                 "description": "The requested object was not found."
             },
@@ -648,11 +651,11 @@
             }
         },
         "securitySchemes": {
-            "AzureAD": {
-                "description": "The session ID is stored in the cookie value. To start the auth process, go to the `/Auth/SignIn` endpoint. Automated redirection will occur after a new session token is generated and set.",
-                "in": "cookie",
-                "name": "sop-auth-session",
-                "type": "apiKey"
+            "EntraID": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT",
+                "description": "The Access Token from Entra ID for the App ID of `ID HERE`."
             }
         }
     },
@@ -697,6 +700,9 @@
                             }
                         },
                         "description": "OK"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     },
                     "503": {
                         "$ref": "#/components/responses/503"
@@ -762,6 +768,9 @@
                             }
                         },
                         "description": "OK"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     }
                 },
                 "summary": "Deploy the core infrastructure architecture specification",
@@ -802,6 +811,9 @@
                         },
                         "description": "OK"
                     },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
                     "503": {
                         "$ref": "#/components/responses/503"
                     }
@@ -838,6 +850,9 @@
                         },
                         "description": "OK"
                     },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
                     "503": {
                         "$ref": "#/components/responses/503"
                     },
@@ -866,6 +881,9 @@
                 "responses": {
                     "204": {
                         "description": "OK: Deleted successfully"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     },
                     "404": {
                         "$ref": "#/components/responses/404"
@@ -903,6 +921,9 @@
                             }
                         },
                         "description": "OK"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     },
                     "404": {
                         "$ref": "#/components/responses/404"
@@ -967,6 +988,9 @@
                     "204": {
                         "description": "OK: Deleted successfully"
                     },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
                     "404": {
                         "$ref": "#/components/responses/404"
                     },
@@ -1011,6 +1035,9 @@
                             }
                         },
                         "description": "OK"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     },
                     "404": {
                         "$ref": "#/components/responses/404"
@@ -1084,6 +1111,9 @@
                         },
                         "description": "OK"
                     },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
                     "404": {
                         "$ref": "#/components/responses/404"
                     },
@@ -1129,6 +1159,9 @@
                             }
                         },
                         "description": "OK"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     },
                     "404": {
                         "$ref": "#/components/responses/404"
@@ -1202,6 +1235,9 @@
                         },
                         "description": "OK"
                     },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
                     "503": {
                         "$ref": "#/components/responses/503"
                     },
@@ -1236,6 +1272,9 @@
                             }
                         },
                         "description": "OK"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     },
                     "503": {
                         "$ref": "#/components/responses/503"
@@ -1304,6 +1343,9 @@
                         },
                         "description": "OK"
                     },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
                     "503": {
                         "$ref": "#/components/responses/503"
                     },
@@ -1342,6 +1384,9 @@
                             }
                         },
                         "description": "OK"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     },
                     "503": {
                         "$ref": "#/components/responses/503"
@@ -1392,6 +1437,9 @@
                         },
                         "description": "OK"
                     },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
                     "404": {
                         "$ref": "#/components/responses/404"
                     },
@@ -1423,6 +1471,9 @@
                 "responses": {
                     "204": {
                         "description": "OK: Deleted successfully"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     },
                     "404": {
                         "$ref": "#/components/responses/404"
@@ -1460,6 +1511,9 @@
                             }
                         },
                         "description": "OK"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     },
                     "404": {
                         "$ref": "#/components/responses/404"
@@ -1502,6 +1556,9 @@
                             }
                         },
                         "description": "OK"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     },
                     "503": {
                         "$ref": "#/components/responses/503"
@@ -1558,6 +1615,9 @@
                         },
                         "description": "OK"
                     },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
                     "404": {
                         "$ref": "#/components/responses/404"
                     },
@@ -1592,6 +1652,9 @@
                 "responses": {
                     "204": {
                         "description": "OK: Deleted successfully"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     },
                     "404": {
                         "$ref": "#/components/responses/404"
@@ -1629,6 +1692,9 @@
                             }
                         },
                         "description": "OK"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     },
                     "404": {
                         "$ref": "#/components/responses/404"
@@ -1676,6 +1742,9 @@
                         },
                         "description": "OK"
                     },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
                     "404": {
                         "$ref": "#/components/responses/404"
                     },
@@ -1697,6 +1766,9 @@
                 "description": "Lists all of the available marketplace offerings along with their metadata.",
                 "operationId": "/API/Marketplace/Offering/ListAll",
                 "responses": {
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
                     "503": {
                         "$ref": "#/components/responses/503"
                     },
@@ -1766,6 +1838,9 @@
                         },
                         "description": "OK"
                     },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
                     "404": {
                         "$ref": "#/components/responses/404"
                     },
@@ -1779,196 +1854,6 @@
                 "summary": "Deploy a Marketplace Offering",
                 "tags": [
                     "Marketplace"
-                ]
-            }
-        },
-        "/Auth/IsAuthenticated": {
-            "get": {
-                "description": "Used to get a true/false response on if the current user is logged in where true indicates principal is logged in and false indicates it is not.",
-                "operationId": "/Auth/IsAuthenticated",
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "examples": {
-                                    "Principal Logged In": {
-                                        "description": "Principal has a valid auth session with the server.",
-                                        "summary": "Principal is authenticated.",
-                                        "value": true
-                                    },
-                                    "Principal Not Logged In": {
-                                        "description": "Principal does not have a valid session or has no session cookie.",
-                                        "summary": "Principal has no valid session.",
-                                        "value": false
-                                    }
-                                },
-                                "schema": {
-                                    "type": "boolean"
-                                }
-                            }
-                        },
-                        "description": "OK"
-                    },
-                    "503": {
-                        "$ref": "#/components/responses/503"
-                    }
-                },
-                "security": [],
-                "summary": "Used to check if the user is logged in.",
-                "tags": [
-                    "App Authentication"
-                ]
-            }
-        },
-        "/Auth/Me": {
-            "get": {
-                "description": "Used to get the context of the currently authenticated principal. This gets the session data and returns it rather than calling the graph API `/me` endpoint. That means this data could be out of date and should only be used for non-critical uses.",
-                "operationId": "/Auth/Me",
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PrincipalAuthContext"
-                                }
-                            }
-                        },
-                        "description": "OK"
-                    },
-                    "503": {
-                        "$ref": "#/components/responses/503"
-                    }
-                },
-                "summary": "Get current principal context",
-                "tags": [
-                    "App Authentication"
-                ]
-            }
-        },
-        "/Auth/Redirect": {
-            "post": {
-                "description": "Receives the auth data from Entra ID and validates it. After successful validation, commits the auth state to the session.",
-                "operationId": "/Auth/Redirect",
-                "requestBody": {
-                    "content": {
-                        "application/x-www-form-urlencoded": {
-                            "examples": {
-                                "1:1 map": {
-                                    "description": "This example is the security best practice of having only one user mapped to a managed device.",
-                                    "summary": "1:1 User Mapping",
-                                    "value": "{\"userList\": [\"user@contoso.com\"]}"
-                                },
-                                "Multi-User Managed Device": {
-                                    "description": "This example is the security best practice of having only one user mapped to a managed device.",
-                                    "summary": "Multi-User Assignment",
-                                    "value": "{\"userList\": [\"user@contoso.com\",\"anotherUser@contoso.com\"]}"
-                                }
-                            },
-                            "schema": {
-                                "properties": {
-                                    "client_info": {
-                                        "description": "Contains a base64 encoded JSON string that contains the user's object ID (uid) and home tenant GUID (utid).",
-                                        "type": "string"
-                                    },
-                                    "code": {
-                                        "description": "A string that was generated by Entra ID that contains the OAuth 2 authorization code.",
-                                        "example": "AwABAAAAvPM1KaPlrEqdFSBzjqfTGBCmLdgfSTLEMPGYuNHSUYBrq...(truncated)",
-                                        "type": "string"
-                                    },
-                                    "session_state": {
-                                        "description": "The GUID that represents the session state. The GUID is the key that is used to look up the session in the memory store.",
-                                        "example": "8f7f614c-d39d-4519-add2-c7dcf76a10a2",
-                                        "format": "uuid",
-                                        "maxLength": 36,
-                                        "minLength": 36,
-                                        "type": "string"
-                                    },
-                                    "state": {
-                                        "description": "A base 64 encoded JSON string that contains the session GUID (csrfToken) and the url to redirect to (redirectTo) after authentication has been validated.",
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "301": {
-                        "description": "Redirect to the URL specified in the Entra ID returned state",
-                        "headers": {
-                            "location": {
-                                "schema": {
-                                    "example": "https://demo.shilab.com",
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    },
-                    "409": {
-                        "description": "Already authenticated. Sign out and try again."
-                    },
-                    "503": {
-                        "$ref": "#/components/responses/503"
-                    }
-                },
-                "security": [],
-                "summary": "Relays the Entra ID auth token to the server.",
-                "tags": [
-                    "App Authentication"
-                ]
-            }
-        },
-        "/Auth/SignIn": {
-            "get": {
-                "description": "Used to create a new user authentication session, sets the session ID in a cookie, and then redirects the user to Entra ID to get a valid access token while passing the session state.",
-                "operationId": "/Auth/SignIn",
-                "responses": {
-                    "301": {
-                        "description": "Entra ID Auth Redirect",
-                        "headers": {
-                            "location": {
-                                "schema": {
-                                    "example": "https://login.microsoftonline.com/<tenantId>/oauth2/v2.0/authorize",
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    },
-                    "503": {
-                        "$ref": "#/components/responses/503"
-                    }
-                },
-                "security": [],
-                "summary": "Starts the log in process",
-                "tags": [
-                    "App Authentication"
-                ]
-            }
-        },
-        "/Auth/SignOut": {
-            "get": {
-                "description": "Destroys the auth session and redirects to the Entra ID logout URL.",
-                "operationId": "/Auth/SignOut",
-                "responses": {
-                    "301": {
-                        "description": "Entra ID Logout Redirect",
-                        "headers": {
-                            "location": {
-                                "schema": {
-                                    "example": "https://login.microsoftonline.com/<tenantId>/oauth2/v2.0/logout?post_logout_redirect_uri=https%3A%2F%2Fdemo.mootinc.com",
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    },
-                    "503": {
-                        "$ref": "#/components/responses/503"
-                    }
-                },
-                "summary": "Logs the user out of SOP and send the user to Entra ID.",
-                "tags": [
-                    "App Authentication"
                 ]
             }
         },
@@ -1990,7 +1875,7 @@
     },
     "security": [
         {
-            "AzureAD": []
+            "EntraID": []
         }
     ],
     "servers": [
