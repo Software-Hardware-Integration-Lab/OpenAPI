@@ -674,6 +674,67 @@
     },
     "openapi": "3.1.0",
     "paths": {
+        "/API/Auth/Id":{
+            "get": {
+                "description": "Provides the Tenant ID and the Application ID of the service principal that access tokens need to be issued against. This is also useful for configuring public clients to be able to authenticate to for auth code flows.",
+                "operationId": "/API/Auth/GetId",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Tenant Configuration": {
+                                        "description": "All API calls should be available since the core infrastructure is deployed.",
+                                        "summary": "Infrastructure is deployed",
+                                        "value": {
+                                            "appId": "241fa678-f004-400b-b8e4-ac7b9cfb052c",
+                                            "tenantId": "23aa34d3-6ccc-457d-bc9c-93a234a19519"
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "properties": {
+                                        "appId": {
+                                            "description": "Application ID that should be used in Access Tokens as the audience and the endpoint necessary for auth code flows.",
+                                            "examples": {
+                                                "Application ID Example": {
+                                                    "summary": "Example Application ID",
+                                                    "description": "Application ID is not the Object ID of the service principal.",
+                                                    "value": "5ac148a6-9b7e-42d8-be8d-16b777b63cf5"
+                                                }
+                                            },
+                                            "type": "string",
+                                            "format": "uuid"
+                                        },
+                                        "tenantId": {
+                                            "description": "Tenant ID necessary for authority host URL configuration and UI customization.",
+                                            "examples": {
+                                                "Tenant ID Example": {
+                                                    "value": "7254d111-8bd3-4f7a-8ca4-fa15b08c46e3"
+                                                }
+                                            },
+                                            "type": "string",
+                                            "format": "uuid"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "503": {
+                        "$ref": "#/components/responses/503"
+                    },
+                    "525": {
+                        "$ref": "#/components/responses/525"
+                    }
+                },
+                "tags": [ "Authentication" ],
+                "security": [],
+                "summary": "Retrieves the IDs required to authenticate."
+            }
+        },
         "/API/Infrastructure/Deploy": {
             "get": {
                 "description": "Has the core infrastructure engine check if the config engine can initialize properly.",
@@ -776,7 +837,8 @@
                 "summary": "Deploy the core infrastructure architecture specification",
                 "tags": [
                     "Infrastructure Deployment"
-                ]
+                ],
+                "security": []
             }
         },
         "/API/Infrastructure/Version": {
@@ -1869,7 +1931,8 @@
                 "summary": "Render this Swagger UI",
                 "tags": [
                     "Debug Mode"
-                ]
+                ],
+                "security": []
             }
         }
     },
@@ -1890,8 +1953,8 @@
     ],
     "tags": [
         {
-            "description": "Used to manage the user session and authentication state.",
-            "name": "App Authentication"
+            "description": "Used to manage UI and API authentication.",
+            "name": "Authentication"
         },
         {
             "description": "Device lifecycle management.",
@@ -1914,7 +1977,7 @@
             "name": "Infrastructure Deployment"
         },
         {
-            "description": "Endpoints that are exposed only in debug mode. You can use these to see as the app sees.",
+            "description": "WARNING AUTHENTICATION IS DISABLED IN DEBUG MODE!!! Endpoints that are exposed only in debug mode. You can use these to see as the app sees.",
             "name": "Debug Mode"
         }
     ]
