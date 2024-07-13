@@ -483,7 +483,7 @@
     },
     "openapi": "3.0.0",
     "paths": {
-        "/API/Auth/Id":{
+        "/API/Auth/Id": {
             "get": {
                 "description": "Provides the Tenant ID and the Application ID of the service principal that access tokens need to be issued against. This is also useful for configuring public clients to be able to authenticate to for auth code flows.",
                 "operationId": "/API/Auth/GetId",
@@ -537,7 +537,9 @@
                         "$ref": "#/components/responses/525"
                     }
                 },
-                "tags": [ "Authentication" ],
+                "tags": [
+                    "Authentication"
+                ],
                 "security": [],
                 "summary": "Retrieves the IDs required to authenticate."
             }
@@ -829,12 +831,22 @@
                                 "One user": {
                                     "description": "Removes 1 session host, and removed the requested user from the assignments security group.",
                                     "summary": "Remove Single User",
-                                    "value": "{\"userList\": [\"cf5b12a9-b939-4d5c-a380-fb62e4fe88ef\"]}"
+                                    "value": {
+                                        "userList": [
+                                            "cf5b12a9-b939-4d5c-a380-fb62e4fe88ef"
+                                        ]
+                                    }
                                 },
                                 "Two users": {
                                     "description": "Removes 3 session hosts, and removed the requested users from the assignments security group.",
                                     "summary": "Remove Multiple Users",
-                                    "value": "{\"userList\": [\"0c56b055-9042-4f54-8e6e-6510e12a81dc\",\"dd27937c-6287-45b3-98de-387725b068f3\",\"989d3dc1-43f4-4ff7-82ba-43661f94a428\"]}"
+                                    "value": {
+                                        "userList": [
+                                            "0c56b055-9042-4f54-8e6e-6510e12a81dc",
+                                            "dd27937c-6287-45b3-98de-387725b068f3",
+                                            "989d3dc1-43f4-4ff7-82ba-43661f94a428"
+                                        ]
+                                    }
                                 }
                             },
                             "schema": {
@@ -941,12 +953,22 @@
                                 "One user": {
                                     "description": "Creates 1 session host, and added the requested user to the assignments security group.",
                                     "summary": "Assign Single User",
-                                    "value": "{\"userList\": [\"cf5b12a9-b939-4d5c-a380-fb62e4fe88ef\"]}"
+                                    "value": {
+                                        "userList": [
+                                            "cf5b12a9-b939-4d5c-a380-fb62e4fe88ef"
+                                        ]
+                                    }
                                 },
                                 "Two users": {
                                     "description": "Creates 3 session hosts, and added the requested users to the assignments security group.",
                                     "summary": "Assign Multiple Users",
-                                    "value": "{\"userList\": [\"0c56b055-9042-4f54-8e6e-6510e12a81dc\",\"dd27937c-6287-45b3-98de-387725b068f3\",\"989d3dc1-43f4-4ff7-82ba-43661f94a428\"]}"
+                                    "value": {
+                                        "userList": [
+                                            "0c56b055-9042-4f54-8e6e-6510e12a81dc",
+                                            "dd27937c-6287-45b3-98de-387725b068f3",
+                                            "989d3dc1-43f4-4ff7-82ba-43661f94a428"
+                                        ]
+                                    }
                                 }
                             },
                             "schema": {
@@ -1064,12 +1086,21 @@
                                 "Multiple Users": {
                                     "description": "Remove multiple user assignments from a managed device.",
                                     "summary": "Unassign multiple users",
-                                    "value": "{\"userList\": [\"0674276a-31e8-4773-8ed9-6fb49dbd0fa8\",\"66714224-b1a6-4fd6-b9d8-5263fdf755fc\"]}"
+                                    "value": {
+                                        "userList": [
+                                            "0674276a-31e8-4773-8ed9-6fb49dbd0fa8",
+                                            "66714224-b1a6-4fd6-b9d8-5263fdf755fc"
+                                        ]
+                                    }
                                 },
                                 "Single User": {
                                     "description": "Remove a single user assignment from a managed device.",
                                     "summary": "Unassign one user",
-                                    "value": "{\"userList\": [\"01ebf268-cf28-4607-954a-261dfd480453\"]}"
+                                    "value": {
+                                        "userList": [
+                                            "01ebf268-cf28-4607-954a-261dfd480453"
+                                        ]
+                                    }
                                 }
                             },
                             "schema": {
@@ -1172,12 +1203,21 @@
                                 "1:1 map": {
                                     "description": "This example is the security best practice of having only one user mapped to a managed device.",
                                     "summary": "1:1 User Mapping",
-                                    "value": "{\"userList\": [\"user@contoso.com\"]}"
+                                    "value": {
+                                        "userList": [
+                                            "user@contoso.com"
+                                        ]
+                                    }
                                 },
                                 "Multi-User Managed Device": {
                                     "description": "This example is the security best practice of having only one user mapped to a managed device.",
                                     "summary": "Multi-User Assignment",
-                                    "value": "{\"userList\": [\"user@contoso.com\",\"anotherUser@contoso.com\"]}"
+                                    "value": {
+                                        "userList": [
+                                            "user@contoso.com",
+                                            "anotherUser@contoso.com"
+                                        ]
+                                    }
                                 }
                             },
                             "schema": {
@@ -1280,11 +1320,19 @@
                 "requestBody": {
                     "content": {
                         "application/json": {
-                            "example": "{\"deviceId\":\"f7e1a66f-ce2e-4351-83df-2776813ef95d\"}",
+                            "example": {
+                                "deviceId": "f7e1a66f-ce2e-4351-83df-2776813ef95d"
+                            },
                             "schema": {
                                 "properties": {
                                     "deviceId": {
-                                        "$ref": "#/components/parameters/deviceId"
+                                        "description": "The SOP ID (Entra ID Device ID) of the device to target.",
+                                        "example": "75da7fa4-4a04-44c8-8f2c-c1b2fa29aa51",
+                                        "format": "uuid",
+                                        "maxLength": 36,
+                                        "minLength": 36,
+                                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                                        "type": "string"
                                     }
                                 },
                                 "required": [
@@ -1452,7 +1500,9 @@
                 "requestBody": {
                     "content": {
                         "application/json": {
-                            "example": "{\"userId\":\"d886680d-a283-4fc2-803f-370d81d62366\"}",
+                            "example": {
+                                "userId": "d886680d-a283-4fc2-803f-370d81d62366"
+                            },
                             "schema": {
                                 "properties": {
                                     "userId": {
@@ -1675,7 +1725,16 @@
                                 "Azure Virtual Desktop": {
                                     "description": "Deploys an AVD cluster that is connected to the device configurations system in SOP. The type property can be omitted because it is passed via path parameter.",
                                     "summary": "Azure Virtual Desktop",
-                                    "value": "{\n  \"name\": \"Legacy Reach Back\",\n  \"properties\": {\n    \"addressRangeCIDR\": \"172.16.1.0/24\",\n    \"index\": 0,\n    \"location\": \"East US 2\",\n    \"sessionHostPrefix\": \"Reach\",\n    \"vmSku\": \"Standard_D2s_v5\"\n  }\n}"
+                                    "value": {
+                                        "name": "Legacy Reach Back",
+                                        "properties": {
+                                            "addressRangeCIDR": "172.16.1.0/24",
+                                            "index": 0,
+                                            "location": "East US 2",
+                                            "sessionHostPrefix": "Reach",
+                                            "vmSku": "Standard_D2s_v5"
+                                        }
+                                    }
                                 }
                             },
                             "schema": {
