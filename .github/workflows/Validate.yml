@@ -1,5 +1,5 @@
 # Display Name of the workflow
-name: Validate Open API Spec Files
+name: Validate OpenAPI Spec Files
 
 on:
   # Allows you to run this workflow manually from the Actions tab
@@ -14,7 +14,7 @@ on:
 jobs:
   Validate:
     # Display name of the job
-    name: Validate Open API Specs
+    name: Validate OpenAPI Specs
     
     # Operating system filter for the runners
     runs-on: ubuntu-latest
@@ -42,5 +42,5 @@ jobs:
       run: npm install @openapitools/openapi-generator-cli -g
 
     # Run the validation of all Specification Files
-    - name: Validate Open API Specs
+    - name: Validate OpenAPI Specs
       run: openapi-generator-cli validate -i *.json
