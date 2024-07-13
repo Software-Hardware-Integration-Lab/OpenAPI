@@ -1,0 +1,46 @@
+# Display Name of the workflow
+name: Validate Open API Spec Files
+
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+  # Run the unit tests on every change
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  Validate:
+    # Display name of the job
+    name: Validate Open API Specs
+    
+    # Operating system filter for the runners
+    runs-on: ubuntu-latest
+
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE
+    - name: Download Source Files
+      uses: actions/checkout@v4
+
+      # Set up NodeJS on the build host
+    - name: Setup Node.JS Environment
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20.x
+
+    # Sets up OpenJDK on the build host
+    - name: Set up Microsoft OpenJDK
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'microsoft'
+
+    # Install all of the dependencies
+    - name: Install All of the Project Dependencies
+      run: npm install @openapitools/openapi-generator-cli -g
+
+    # Run the validation of all Specification Files
+    - name: Validate Open API Specs
+      run: openapi-generator-cli validate -i *.json
