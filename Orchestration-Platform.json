@@ -267,8 +267,7 @@
                     "uniqueGroup",
                     "type",
                     "displayName",
-                    "commissionedDate",
-                    "uniqueGroup"
+                    "commissionedDate"
                 ],
                 "title": "Managed Device Object",
                 "type": "object"
