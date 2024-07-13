@@ -524,7 +524,11 @@
                                             "format": "uuid"
                                         }
                                     },
-                                    "type": "object"
+                                    "type": "object",
+                                    "required": [
+                                        "appId",
+                                        "tenantId"
+                                    ]
                                 }
                             }
                         },
