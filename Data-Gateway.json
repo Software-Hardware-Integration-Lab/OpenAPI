@@ -1,0 +1,1589 @@
+{
+    "components": {
+        "parameters": {
+            "correlationId": {
+                "description": "The object ID of the correlation identifier for the specified record.",
+                "in": "path",
+                "name": "correlationId",
+                "required": true,
+                "schema": {
+                    "example": "1d71e0fe-6e4a-464d-a690-80addf3bda55",
+                    "format": "uuid",
+                    "maxLength": 36,
+                    "minLength": 36,
+                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                    "type": "string"
+                }
+            },
+            "tenantId": {
+                "description": "The object ID of the tenant to operate against.",
+                "in": "path",
+                "name": "tenantId",
+                "required": true,
+                "schema": {
+                    "example": "b2fd105a-2594-437e-b934-1a62a51c28b4",
+                    "format": "uuid",
+                    "maxLength": 36,
+                    "minLength": 36,
+                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                    "type": "string"
+                }
+            }
+        },
+        "responses": {
+            "400": {
+                "description": "Invalid input!"
+            },
+            "401": {
+                "description": "Principal is not authorized to access this endpoint. Check to make sure the Bearer token is valid and present!"
+            },
+            "403": {
+                "description": "Principal does not contain the correct scopes (permissions) for the API call that was made, or was made from the wrong tenant. If the permissions were granted, ensure that the access token was requested with the correct scopes."
+            },
+            "404": {
+                "description": "The requested object was not found."
+            },
+            "503": {
+                "description": "App is starting still. Feature is not available. Please try again later."
+            },
+            "525": {
+                "description": "Infrastructure not deployed. Please deploy the infrastructure before using this endpoint."
+            }
+        },
+        "schemas": {
+            "LicenseData.CorrelationRecord": {
+                "description": "Metadata that describes the execution session (run) that is used to tie/relate all of the license data together.",
+                "example": {
+                    "AuditTenantAccount": "priv-user@example.com",
+                    "CorrelationId": "9d838115-0868-45d4-b8a5-98adc1af7e42",
+                    "ReportTenantAccount": "ent-user@example.com",
+                    "TenantId": "7e536189-b2dd-4c8b-98b1-9b174777883f",
+                    "createdAt": "2024-08-01T21:13:12.821Z",
+                    "updatedAt": "2024-08-01T21:13:12.821Z"
+                },
+                "properties": {
+                    "AuditTenantAccount": {
+                        "description": "The user account used to retrieve the license information in the tenant being audited.",
+                        "example": "admin-user@example.com",
+                        "format": "email",
+                        "type": "string"
+                    },
+                    "CorrelationId": {
+                        "description": "The ID of the execution session (run) that is used to tie/relate all of the data together.",
+                        "example": "88da2253-758f-4135-9d37-64448c8b65c1",
+                        "format": "uuid",
+                        "type": "string",
+                        "pattern": "^\\w+-\\w+-\\w+-\\w+-\\w+$"
+                    },
+                    "ReportTenantAccount": {
+                        "description": "User account used to store/report the license data to the SHI Lab cloud service.",
+                        "example": "generic-user@example.com",
+                        "format": "email",
+                        "type": "string"
+                    },
+                    "TenantId": {
+                        "description": "Unique ID of customer's Microsoft tenant that the license data is for.",
+                        "example": "0e1fe83f-a33f-4250-8546-225b8d45ae01",
+                        "format": "uuid",
+                        "type": "string",
+                        "pattern": "^\\w+-\\w+-\\w+-\\w+-\\w+$"
+                    },
+                    "createdAt": {
+                        "description": "Timestamp of when the report was created.",
+                        "example": "2024-08-01T21:12:22.148Z",
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "description": "Timestamp of when the report was last updated.",
+                        "example": "2024-08-01T21:12:22.148Z",
+                        "format": "date-time",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "AuditTenantAccount",
+                    "ReportTenantAccount"
+                ],
+                "title": "License Data - Correlation Record",
+                "type": "object"
+            },
+            "LicenseData": {
+                "description": "Completely calculated license data structure that is the result of a complete run.",
+                "example": {
+                    "AvailableLicense": {
+                        "e17b13ee-9749-488b-9289-d31a8fde045d": 123,
+                        "2d995b6a-d4aa-4d8d-a03c-372ecb66509d": 456,
+                        "cbf6ee7c-c3c1-44a6-9f18-020c65536470": 789
+                    },
+                    "Correlation": {
+                        "AuditTenantAccount": "admin-user@example.com",
+                        "CorrelationId": "88da2253-758f-4135-9d37-64448c8b65c1",
+                        "ReportTenantAccount": "generic-user@example.com",
+                        "TenantId": "0e1fe83f-a33f-4250-8546-225b8d45ae01"
+                    },
+                    "LicenseData": {
+                        "250844e1-a7ab-4f21-8e3f-58f51b5983a3": {
+                            "AssignedLicense": {
+                                "e17b13ee-9749-488b-9289-d31a8fde045d": null
+                            },
+                            "AssignedService": {
+                                "cbf6ee7c-c3c1-44a6-9f18-020c65536470": null,
+                                "c7bcba35-199c-41e5-8c8d-6d4e4aad8964": null
+                            }
+                        }
+                    }
+                },
+                "type": "object",
+                "properties": {
+                    "AvailableLicense": {
+                        "additionalProperties": {
+                            "example": 1234,
+                            "type": "integer"
+                        },
+                        "description": "Breakdown of the purchased licenses/service plans available in the tenant being audited for this run. Where the key is the ID of the service plan and the value is how many licenses are available/purchase for it.",
+                        "example": {
+                            "eec0eb4f-6444-4f95-aba0-50c24d67f998": 1234,
+                            "41781fb2-bc02-4b7c-bd55-b576c07bb09d": 123
+                        },
+                        "title": "License Data - Available Licenses",
+                        "type": "object"
+                    },
+                    "Correlation": {
+                        "$ref": "#/components/schemas/LicenseData.CorrelationRecord"
+                    },
+                    "LicenseData": {
+                        "additionalProperties": {
+                            "type": "object",
+                            "properties": {
+                                "AssignedLicense": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "type": "integer",
+                                        "nullable": true
+                                    }
+                                },
+                                "AssignedService": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "type": "integer",
+                                        "nullable": true
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Collection of principals that have had their in-use licenses and assigned licenses. Where the key is the principal ID and the value is the insights.",
+                        "example": {
+                            "17d963dd-8a19-4025-8b84-47fb6f6eaa7f": {
+                                "AssignedLicense": {
+                                    "7159f980-6f83-4b67-bf41-e172b3ae1352": null
+                                },
+                                "AssignedService": {
+                                    "fa5e1889-6f7e-480c-9fae-29639d5751e7": null,
+                                    "ce5d0e60-7f7d-445d-a7f2-819ba0839fae": null
+                                }
+                            }
+                        },
+                        "title": "License Data - Computed Principals",
+                        "type": "object"
+                    }
+                },
+                "title": "License Data - Complete Object"
+            },
+            "LicenseEntitlement.Sop": {
+                "description": "Record that describes the purchased licenses for a specific tenant. More than one of these can be active at a single time.",
+                "properties": {
+                    "CorrelationId": {
+                        "description": "Used to correlate the license entitlements with other records.",
+                        "example": "e097a3f5-9599-44a2-8923-fd3276c83ae1",
+                        "format": "uuid",
+                        "maxLength": 36,
+                        "minLength": 36,
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "EnterpriseDeviceCount": {
+                        "description": "Count of Enterprise Devices that are allowed to be managed.",
+                        "example": 5,
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "EnterpriseInterfaceCount": {
+                        "description": "Count of Enterprise Interfaces that are allowed to be managed.",
+                        "example": 6,
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "EnterpriseIntermediaryCount": {
+                        "description": "Count of Enterprise Intermediaries that are allowed to be managed.",
+                        "example": 7,
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "EnterpriseUserCount": {
+                        "description": "Count of Enterprise Users that are allowed to be managed.",
+                        "example": 8,
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "NotValidAfter": {
+                        "description": "Date that the entitlement expires at.",
+                        "example": "2024-07-30T17:35:24.044Z",
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "NotValidBefore": {
+                        "description": "Date that the entitlement becomes active at.",
+                        "example": "2024-07-30T17:37:15.300Z",
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "PrivilegedDeviceCount": {
+                        "description": "Count of Privileged Devices (PAW) that are allowed to be managed.",
+                        "example": 9,
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "PrivilegedInterfaceCount": {
+                        "description": "Count of Privileged Interfaces that are allowed to be managed.",
+                        "example": 10,
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "PrivilegedIntermediaryCount": {
+                        "description": "Count of Privileged Intermediaries that are allowed to be managed.",
+                        "example": 11,
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "PrivilegedUserCount": {
+                        "description": "Count of Privileged Users that are allowed to be managed.",
+                        "example": 12,
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "PurchaseId": {
+                        "description": "This could be any value used to correlate the purchase operation to this entitlement record.",
+                        "example": "Bob's your uncle.",
+                        "type": "string"
+                    },
+                    "SpecializedDeviceCount": {
+                        "description": "Count of Specialized Devices that are allowed to be managed.",
+                        "example": 13,
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "SpecializedInterfaceCount": {
+                        "description": "Count of Specialized Interfaces that are allowed to be managed.",
+                        "example": 14,
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "SpecializedIntermediaryCount": {
+                        "description": "Count of Specialized Intermediaries that are allowed to be managed.",
+                        "example": 15,
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "SpecializedUserCount": {
+                        "description": "Count of Specialized Users that are allowed to be managed.",
+                        "example": 15,
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "TenantId": {
+                        "description": "Tenant that this license entitlement is valid for.",
+                        "example": "a2a1698d-a3e0-42d3-96a4-47eb3e8f7dd1",
+                        "format": "uuid",
+                        "maxLength": 36,
+                        "minLength": 36,
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                        "readOnly": true,
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "EnterpriseDeviceCount",
+                    "EnterpriseInterfaceCount",
+                    "EnterpriseIntermediaryCount",
+                    "EnterpriseUserCount",
+                    "NotValidAfter",
+                    "NotValidBefore",
+                    "PrivilegedDeviceCount",
+                    "PrivilegedInterfaceCount",
+                    "PrivilegedIntermediaryCount",
+                    "PrivilegedUserCount",
+                    "SpecializedDeviceCount",
+                    "SpecializedInterfaceCount",
+                    "SpecializedIntermediaryCount",
+                    "SpecializedUserCount",
+                    "TenantId"
+                ],
+                "title": "License Entitlement - SOP Record",
+                "type": "object"
+            },
+            "LicenseEntitlement.Sop.Count": {
+                "properties": {
+                    "EnterpriseDeviceCount": {
+                        "description": "Count of Enterprise Devices that are allowed to be managed.",
+                        "example": 5,
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "EnterpriseInterfaceCount": {
+                        "description": "Count of Enterprise Interfaces that are allowed to be managed.",
+                        "example": 6,
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "EnterpriseIntermediaryCount": {
+                        "description": "Count of Enterprise Intermediaries that are allowed to be managed.",
+                        "example": 7,
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "EnterpriseUserCount": {
+                        "description": "Count of Enterprise Users that are allowed to be managed.",
+                        "example": 8,
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "PrivilegedDeviceCount": {
+                        "description": "Count of Privileged Devices (PAW) that are allowed to be managed.",
+                        "example": 9,
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "PrivilegedInterfaceCount": {
+                        "description": "Count of Privileged Interfaces that are allowed to be managed.",
+                        "example": 10,
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "PrivilegedIntermediaryCount": {
+                        "description": "Count of Privileged Intermediaries that are allowed to be managed.",
+                        "example": 11,
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "PrivilegedUserCount": {
+                        "description": "Count of Privileged Users that are allowed to be managed.",
+                        "example": 12,
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "SpecializedDeviceCount": {
+                        "description": "Count of Specialized Devices that are allowed to be managed.",
+                        "example": 13,
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "SpecializedInterfaceCount": {
+                        "description": "Count of Specialized Interfaces that are allowed to be managed.",
+                        "example": 14,
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "SpecializedIntermediaryCount": {
+                        "description": "Count of Specialized Intermediaries that are allowed to be managed.",
+                        "example": 15,
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "SpecializedUserCount": {
+                        "description": "Count of Specialized Users that are allowed to be managed.",
+                        "example": 15,
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "EnterpriseDeviceCount",
+                    "EnterpriseInterfaceCount",
+                    "EnterpriseIntermediaryCount",
+                    "EnterpriseUserCount",
+                    "PrivilegedDeviceCount",
+                    "PrivilegedInterfaceCount",
+                    "PrivilegedIntermediaryCount",
+                    "PrivilegedUserCount",
+                    "SpecializedDeviceCount",
+                    "SpecializedInterfaceCount",
+                    "SpecializedIntermediaryCount",
+                    "SpecializedUserCount"
+                ],
+                "title": "License Entitlement - Active SOP Count",
+                "type": "object"
+            },
+            "Telemetry.Sop": {
+                "properties": {
+                    "CorrelationId": {
+                        "description": "Primary key for the table, used to correlate multiple telemetry records together.",
+                        "format": "uuid",
+                        "type": "string"
+                    },
+                    "EnterpriseDeviceCount": {
+                        "description": "Count of Enterprise Devices that are deployed in the CX environment.",
+                        "type": "integer",
+                        "minimum": 0
+                    },
+                    "EnterpriseInterfaceCount": {
+                        "description": "Number of active Enterprise interfaces.",
+                        "type": "integer",
+                        "minimum": 0
+                    },
+                    "EnterpriseIntermediaryCount": {
+                        "description": "Number of active Enterprise intermediaries.",
+                        "type": "integer",
+                        "minimum": 0
+                    },
+                    "EnterpriseUserCount": {
+                        "description": "Count of Enterprise Users that are deployed in the CX environment.",
+                        "type": "integer",
+                        "minimum": 0
+                    },
+                    "MonthlyActiveEntUsers": {
+                        "description": "Number of active managed Enterprise users.",
+                        "type": "integer",
+                        "minimum": 0
+                    },
+                    "MonthlyActivePrivUsers": {
+                        "description": "Number of active managed privileged users.",
+                        "type": "integer",
+                        "minimum": 0
+                    },
+                    "MonthlyActiveSpecUsers": {
+                        "description": "Number of active managed Specialized users.",
+                        "type": "integer",
+                        "minimum": 0
+                    },
+                    "PrivilegedDeviceCount": {
+                        "description": "Count of Privileged Devices (PAW) that are deployed in the CX environment.",
+                        "type": "integer",
+                        "minimum": 0
+                    },
+                    "PrivilegedInterfaceCount": {
+                        "description": "Number of active Privileged interfaces.",
+                        "type": "integer",
+                        "minimum": 0
+                    },
+                    "PrivilegedIntermediaryCount": {
+                        "description": "Number of active Privileged intermediaries.",
+                        "type": "integer",
+                        "minimum": 0
+                    },
+                    "PrivilegedUserCount": {
+                        "description": "Count of Privileged Users that are deployed in the CX environment.",
+                        "type": "integer",
+                        "minimum": 0
+                    },
+                    "SopArchitectureVersion": {
+                        "description": "Version number of the architecture that is deployed.",
+                        "example": "27",
+                        "type": "string",
+                        "minimum": 1
+                    },
+                    "SopCoreVersion": {
+                        "description": "Version number of the product that the product is running.",
+                        "example": "2.5.6",
+                        "type": "string"
+                    },
+                    "SpecializedDeviceCount": {
+                        "description": "Count of Specialized Devices that are deployed in the CX environment.",
+                        "type": "integer",
+                        "minimum": 0
+                    },
+                    "SpecializedInterfaceCount": {
+                        "description": "Number of active Specialized interfaces.",
+                        "type": "integer",
+                        "minimum": 0
+                    },
+                    "SpecializedIntermediaryCount": {
+                        "description": "Number of active Specialized intermediaries.",
+                        "type": "integer",
+                        "minimum": 0
+                    },
+                    "SpecializedUserCount": {
+                        "description": "Count of Specialized Users that are deployed in the CX environment.",
+                        "type": "integer",
+                        "minimum": 0
+                    },
+                    "TenantId": {
+                        "description": "Tenant ID for the CX in question.",
+                        "example": "5ae80362-6fe8-4ab1-9b6d-8dfa99d91657",
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "description": "Timestamp on when the record was created. This is auto managed by sequelize.",
+                        "example": "2024-08-02T23:48:50.231Z",
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "description": "Timestamp on when the record was last updated. This is auto managed by sequelize.",
+                        "example": "2024-08-02T23:48:50.231Z",
+                        "format": "date-time",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "EnterpriseDeviceCount",
+                    "EnterpriseInterfaceCount",
+                    "EnterpriseIntermediaryCount",
+                    "EnterpriseUserCount",
+                    "MonthlyActiveEntUsers",
+                    "MonthlyActivePrivUsers",
+                    "MonthlyActiveSpecUsers",
+                    "PrivilegedDeviceCount",
+                    "PrivilegedInterfaceCount",
+                    "PrivilegedIntermediaryCount",
+                    "PrivilegedUserCount",
+                    "SopArchitectureVersion",
+                    "SopCoreVersion",
+                    "SpecializedDeviceCount",
+                    "SpecializedInterfaceCount",
+                    "SpecializedIntermediaryCount",
+                    "SpecializedUserCount"
+                ],
+                "title": "Application Telemetry - SOP",
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "EntraID": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT",
+                "description": "The Access Token from Entra ID. Please note required scopes (permissions) in each endpoint."
+            }
+        }
+    },
+    "externalDocs": {
+        "description": "Official Documentation",
+        "url": "https://docs.shilab.com"
+    },
+    "info": {
+        "contact": {
+            "email": "elliot_huffman@shi.com",
+            "name": "SHI - Lab"
+        },
+        "description": "Collects data from the various SHI Lab products and makes it available in a standardized way.",
+        "title": "SHI Data Gateway",
+        "version": "1.0.0"
+    },
+    "openapi": "3.0.0",
+    "paths": {
+        "/API/LicenseData/": {
+            "post": {
+                "description": "Store the results of a license analytics run. This endpoint requires the `LicenseData.Write` scope (permission).",
+                "operationId": "/API/LicenseData/Post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "examples": {
+                                "Example License Report": {
+                                    "description": "Sample, truncated report from an example customer environment.",
+                                    "summary": "Example License Report",
+                                    "value": {
+                                        "AvailableLicense": {
+                                            "3d282045-ec7f-4813-88e2-29b74ee609f7": 123456,
+                                            "5888a922-9f5b-45fd-bd5f-de3283d6a79e": 99999999,
+                                            "a4b2e176-d63d-4081-9e21-226e2ac624b9": 5,
+                                            "547404d4-8734-415f-a7ca-e9c1ffb95e48": 25,
+                                            "d76878d6-1495-4243-a334-a82bb9818cd0": 500
+                                        },
+                                        "Correlation": {
+                                            "AuditTenantAccount": "somebodyThatI@example.com",
+                                            "CorrelationId": "6d7c9271-9e68-4bdf-9ae3-f90c4213f74b",
+                                            "ReportTenantAccount": "usedToKnow@example.com",
+                                            "TenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db"
+                                        },
+                                        "LicenseData": {
+                                            "250844e1-a7ab-4f21-8e3f-58f51b5983a3": {
+                                                "AssignedLicense": {
+                                                    "5888a922-9f5b-45fd-bd5f-de3283d6a79e": null,
+                                                    "3d282045-ec7f-4813-88e2-29b74ee609f7": null
+                                                },
+                                                "AssignedService": {
+                                                    "a4b2e176-d63d-4081-9e21-226e2ac624b9": null,
+                                                    "d76878d6-1495-4243-a334-a82bb9818cd0": null
+                                                }
+                                            },
+                                            "04e88835-771a-482b-9d6f-ba06c32cbb67": {
+                                                "AssignedLicense": {
+                                                    "3d282045-ec7f-4813-88e2-29b74ee609f7": null
+                                                },
+                                                "AssignedService": {
+                                                    "a4b2e176-d63d-4081-9e21-226e2ac624b9": null,
+                                                    "d76878d6-1495-4243-a334-a82bb9818cd0": null
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "Ignorant License Data Report Request": {
+                                    "description": "Clueless dev trying to automate this application without reading the docs. RTFM!",
+                                    "summary": "Ignorant License Data Report Request",
+                                    "value": {}
+                                }
+                            },
+                            "schema": {
+                                "$ref": "#/components/schemas/LicenseData"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Example License Report": {
+                                        "description": "Sample, truncated report from an example customer environment.",
+                                        "summary": "Example License Report",
+                                        "value": {
+                                            "AvailableLicense": {
+                                                "3d282045-ec7f-4813-88e2-29b74ee609f7": 123456,
+                                                "5888a922-9f5b-45fd-bd5f-de3283d6a79e": 99999999,
+                                                "a4b2e176-d63d-4081-9e21-226e2ac624b9": 5,
+                                                "547404d4-8734-415f-a7ca-e9c1ffb95e48": 25,
+                                                "d76878d6-1495-4243-a334-a82bb9818cd0": 500
+                                            },
+                                            "Correlation": {
+                                                "AuditTenantAccount": "somebodyThatI@example.com",
+                                                "CorrelationId": "6d7c9271-9e68-4bdf-9ae3-f90c4213f74b",
+                                                "ReportTenantAccount": "usedToKnow@example.com",
+                                                "TenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db"
+                                            },
+                                            "LicenseData": {
+                                                "250844e1-a7ab-4f21-8e3f-58f51b5983a3": {
+                                                    "AssignedLicense": {
+                                                        "5888a922-9f5b-45fd-bd5f-de3283d6a79e": null,
+                                                        "3d282045-ec7f-4813-88e2-29b74ee609f7": null
+                                                    },
+                                                    "AssignedService": {
+                                                        "a4b2e176-d63d-4081-9e21-226e2ac624b9": null,
+                                                        "d76878d6-1495-4243-a334-a82bb9818cd0": null
+                                                    }
+                                                },
+                                                "04e88835-771a-482b-9d6f-ba06c32cbb67": {
+                                                    "AssignedLicense": {
+                                                        "3d282045-ec7f-4813-88e2-29b74ee609f7": null
+                                                    },
+                                                    "AssignedService": {
+                                                        "a4b2e176-d63d-4081-9e21-226e2ac624b9": null,
+                                                        "d76878d6-1495-4243-a334-a82bb9818cd0": null
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/LicenseData"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    }
+                },
+                "tags": [
+                    "License Analytics"
+                ],
+                "summary": "Store License Analytics Data"
+            }
+        },
+        "/API/LicenseData/Correlation/": {
+            "get": {
+                "description": "Retrieves the list of correlation records for the authenticated tenant. Correlation records store the metadata for a specific license data report. This endpoint requires the `LicenseData.Read` scope (permission).",
+                "operationId": "/API/LicenseData/Correlation/Get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Example License Report": {
+                                        "description": "Sample list of correlation records for the authenticated tenant.",
+                                        "summary": "Available Correlation Records",
+                                        "value": [
+                                            {
+                                                "AuditTenantAccount": "somebodyThatI@example.com",
+                                                "CorrelationId": "6d7c9271-9e68-4bdf-9ae3-f90c4213f74b",
+                                                "ReportTenantAccount": "usedToKnow@example.com",
+                                                "TenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db",
+                                                "createdAt": "2024-08-01T21:14:45.026Z",
+                                                "updatedAt": "2024-08-01T21:14:45.026Z"
+                                            },
+                                            {
+                                                "AuditTenantAccount": "somebodyThatI@example.com",
+                                                "CorrelationId": "d8095827-a313-40e1-b086-f72636de0edf",
+                                                "ReportTenantAccount": "usedToKnow@example.com",
+                                                "TenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db",
+                                                "createdAt": "2024-07-25T21:14:45.026Z",
+                                                "updatedAt": "2024-07-25T21:14:45.026Z"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "schema": {
+                                    "type": "array",
+                                    "minItems": 0,
+                                    "items": {
+                                        "$ref": "#/components/schemas/LicenseData.CorrelationRecord"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    }
+                },
+                "tags": [
+                    "License Analytics"
+                ],
+                "summary": "Retrieve the List of Correlation Records"
+            }
+        },
+        "/API/LicenseData/Correlation/Tenant/{tenantId}/": {
+            "get": {
+                "description": "Retrieves the list of correlation records for the specified tenant. Correlation records store the metadata for a specific license data report. This endpoint requires the `LicenseData.Read.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "operationId": "/API/LicenseData/Correlation/Tenant/:tenantId/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/tenantId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Example License Report": {
+                                        "description": "Sample list of correlation records for the authenticated tenant.",
+                                        "summary": "Available Correlation Records",
+                                        "value": [
+                                            {
+                                                "AuditTenantAccount": "somebodyThatI@example.com",
+                                                "CorrelationId": "6d7c9271-9e68-4bdf-9ae3-f90c4213f74b",
+                                                "ReportTenantAccount": "usedToKnow@example.com",
+                                                "TenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db",
+                                                "createdAt": "2024-08-01T21:14:45.026Z",
+                                                "updatedAt": "2024-08-01T21:14:45.026Z"
+                                            },
+                                            {
+                                                "AuditTenantAccount": "somebodyThatI@example.com",
+                                                "CorrelationId": "d8095827-a313-40e1-b086-f72636de0edf",
+                                                "ReportTenantAccount": "usedToKnow@example.com",
+                                                "TenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db",
+                                                "createdAt": "2024-07-25T21:14:45.026Z",
+                                                "updatedAt": "2024-07-25T21:14:45.026Z"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "schema": {
+                                    "type": "array",
+                                    "minItems": 0,
+                                    "items": {
+                                        "$ref": "#/components/schemas/LicenseData.CorrelationRecord"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    }
+                },
+                "tags": [
+                    "License Analytics"
+                ],
+                "summary": "Retrieve the List of Correlation Records for Specified Tenant"
+            }
+        },
+        "/API/LicenseData/Correlation/{correlationId}/Data/": {
+            "get": {
+                "description": "Retrieves the full license data report for the specified correlation ID in the authenticated tenant. The license data report contains all of the license usage and compliance information with the required correlation data. This endpoint requires the `LicenseData.Read` scope (permission).",
+                "operationId": "/API/LicenseData/Correlation/:correlationId/Data/get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/correlationId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "License Report": {
+                                        "description": "Sample, truncated report from an example customer environment.",
+                                        "summary": "License Report",
+                                        "value": {
+                                            "AvailableLicense": {
+                                                "e17b13ee-9749-488b-9289-d31a8fde045d": 123,
+                                                "2d995b6a-d4aa-4d8d-a03c-372ecb66509d": 456,
+                                                "cbf6ee7c-c3c1-44a6-9f18-020c65536470": 789
+                                            },
+                                            "Correlation": {
+                                                "AuditTenantAccount": "admin-user@example.com",
+                                                "CorrelationId": "88da2253-758f-4135-9d37-64448c8b65c1",
+                                                "ReportTenantAccount": "generic-user@example.com",
+                                                "TenantId": "0e1fe83f-a33f-4250-8546-225b8d45ae01"
+                                            },
+                                            "LicenseData": {
+                                                "250844e1-a7ab-4f21-8e3f-58f51b5983a3": {
+                                                    "AssignedLicense": {
+                                                        "e17b13ee-9749-488b-9289-d31a8fde045d": null
+                                                    },
+                                                    "AssignedService": {
+                                                        "cbf6ee7c-c3c1-44a6-9f18-020c65536470": null,
+                                                        "c7bcba35-199c-41e5-8c8d-6d4e4aad8964": null
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/LicenseData"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    }
+                },
+                "tags": [
+                    "License Analytics"
+                ],
+                "summary": "Retrieve the Specified License Data Report"
+            }
+        },
+        "/API/LicenseData/Correlation/{correlationId}/Tenant/{tenantId}/Data/": {
+            "get": {
+                "description": "Retrieves the full license data report for the specified correlation ID and tenant. The license data report contains all of the license usage and compliance information with the required correlation data. This endpoint requires the `LicenseData.Read.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "operationId": "/API/LicenseData/Correlation/:correlationId/Tenant/:tenantId/Data/get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/correlationId"
+                    },
+                    {
+                        "$ref": "#/components/parameters/tenantId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "License Report": {
+                                        "description": "Sample, truncated report from an example customer environment.",
+                                        "summary": "License Report",
+                                        "value": {
+                                            "AvailableLicense": {
+                                                "e17b13ee-9749-488b-9289-d31a8fde045d": 123,
+                                                "2d995b6a-d4aa-4d8d-a03c-372ecb66509d": 456,
+                                                "cbf6ee7c-c3c1-44a6-9f18-020c65536470": 789
+                                            },
+                                            "Correlation": {
+                                                "AuditTenantAccount": "admin-user@example.com",
+                                                "CorrelationId": "88da2253-758f-4135-9d37-64448c8b65c1",
+                                                "ReportTenantAccount": "generic-user@example.com",
+                                                "TenantId": "0e1fe83f-a33f-4250-8546-225b8d45ae01"
+                                            },
+                                            "LicenseData": {
+                                                "250844e1-a7ab-4f21-8e3f-58f51b5983a3": {
+                                                    "AssignedLicense": {
+                                                        "e17b13ee-9749-488b-9289-d31a8fde045d": null
+                                                    },
+                                                    "AssignedService": {
+                                                        "cbf6ee7c-c3c1-44a6-9f18-020c65536470": null,
+                                                        "c7bcba35-199c-41e5-8c8d-6d4e4aad8964": null
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/LicenseData"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    }
+                },
+                "tags": [
+                    "License Analytics"
+                ],
+                "summary": "Retrieve the Specified License Data Report for Specified Tenant"
+            }
+        },
+        "/API/Entitlement/Sop/": {
+            "post": {
+                "description": "Creates a new license entitlement (activation) for the orchestration platform. This endpoint requires the `LicenseEntitlement.Write` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "operationId": "/API/Entitlement/Sop/Post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "examples": {
+                                "Specialized Purchase": {
+                                    "description": "Add-on purchase for the specified customer for some additional specialized licenses.",
+                                    "summary": "Specialized Purchase",
+                                    "value": {
+                                        "EnterpriseDeviceCount": 0,
+                                        "EnterpriseInterfaceCount": 0,
+                                        "EnterpriseIntermediaryCount": 0,
+                                        "EnterpriseUserCount": 0,
+                                        "NotValidAfter": "2024-07-30T18:09:05.970Z",
+                                        "NotValidBefore": "1970-01-01T00:00:00.000Z",
+                                        "PrivilegedDeviceCount": 0,
+                                        "PrivilegedInterfaceCount": 0,
+                                        "PrivilegedIntermediaryCount": 0,
+                                        "PrivilegedUserCount": 0,
+                                        "PurchaseId": "ABC123",
+                                        "SpecializedDeviceCount": 50,
+                                        "SpecializedInterfaceCount": 3,
+                                        "SpecializedIntermediaryCount": 1,
+                                        "SpecializedUserCount": 50,
+                                        "TenantId": "4b00fb78-d291-4dbd-8c0a-c93ae20bffd1"
+                                    }
+                                },
+                                "Initial Purchase": {
+                                    "description": "Complete suite of components purchased for the specified customer.",
+                                    "summary": "Initial Purchase",
+                                    "value": {
+                                        "EnterpriseDeviceCount": 7000,
+                                        "EnterpriseInterfaceCount": 500,
+                                        "EnterpriseIntermediaryCount": 10,
+                                        "EnterpriseUserCount": 7000,
+                                        "NotValidAfter": "2024-07-30T18:12:23.049Z",
+                                        "NotValidBefore": "1970-01-01T00:00:00.000Z",
+                                        "PrivilegedDeviceCount": 200,
+                                        "PrivilegedInterfaceCount": 50,
+                                        "PrivilegedIntermediaryCount": 3,
+                                        "PrivilegedUserCount": 200,
+                                        "PurchaseId": "654DEF",
+                                        "SpecializedDeviceCount": 1000,
+                                        "SpecializedInterfaceCount": 11,
+                                        "SpecializedIntermediaryCount": 2,
+                                        "SpecializedUserCount": 1000,
+                                        "TenantId": "58ffb93f-5098-4630-bfc4-eeb4664208b4"
+                                    }
+                                },
+                                "Ignorant Entitlement Creation Request": {
+                                    "description": "Clueless dev trying to automate this application without reading the docs. RTFM!",
+                                    "summary": "Ignorant Entitlement Creation Request",
+                                    "value": {}
+                                }
+                            },
+                            "schema": {
+                                "$ref": "#/components/schemas/LicenseEntitlement.Sop"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Small MSP": {
+                                        "description": "Example license entitlement for a small MSP.",
+                                        "summary": "Local MSP",
+                                        "value": {
+                                            "CorrelationId": "60594489-6022-4ddb-8aa5-288c8d356cf2",
+                                            "EnterpriseDeviceCount": 25,
+                                            "EnterpriseInterfaceCount": 25,
+                                            "EnterpriseIntermediaryCount": 25,
+                                            "EnterpriseUserCount": 25,
+                                            "NotValidAfter": "2024-07-30T17:56:00.704Z",
+                                            "NotValidBefore": "1970-01-01T00:00:00.000Z",
+                                            "PrivilegedDeviceCount": 10,
+                                            "PrivilegedInterfaceCount": 10,
+                                            "PrivilegedIntermediaryCount": 2,
+                                            "PrivilegedUserCount": 10,
+                                            "PurchaseId": "Bob's your mother's brother.",
+                                            "SpecializedDeviceCount": 5,
+                                            "SpecializedInterfaceCount": 5,
+                                            "SpecializedIntermediaryCount": 0,
+                                            "SpecializedUserCount": 5,
+                                            "TenantId": "1948adeb-797f-466b-962d-cc708a69d08d"
+                                        }
+                                    },
+                                    "Enterprise": {
+                                        "description": "Example license entitlement for an enterprise sized company.",
+                                        "summary": "Enterprise",
+                                        "value": {
+                                            "CorrelationId": "46569e8d-eeaa-42f4-b954-05a998108eee",
+                                            "EnterpriseDeviceCount": 50000,
+                                            "EnterpriseInterfaceCount": 50000,
+                                            "EnterpriseIntermediaryCount": 100,
+                                            "EnterpriseUserCount": 50000,
+                                            "NotValidAfter": "2024-07-30T17:58:54.619Z",
+                                            "NotValidBefore": "1970-01-01T00:00:00.000Z",
+                                            "PrivilegedDeviceCount": 300,
+                                            "PrivilegedInterfaceCount": 100,
+                                            "PrivilegedIntermediaryCount": 50,
+                                            "PrivilegedUserCount": 300,
+                                            "PurchaseId": "Bob's your mother's brother.",
+                                            "SpecializedDeviceCount": 1000,
+                                            "SpecializedInterfaceCount": 5,
+                                            "SpecializedIntermediaryCount": 10,
+                                            "SpecializedUserCount": 1000,
+                                            "TenantId": "bf78263c-6cec-44bc-9893-024dde25a486"
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/LicenseEntitlement.Sop"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    }
+                },
+                "tags": [
+                    "License Entitlement"
+                ],
+                "summary": "Creates a new License Entitlement for the Orchestration Platform."
+            }
+        },
+        "/API/Entitlement/Sop/Active/": {
+            "get": {
+                "description": "Retrieves the count of licenses that are available to the authenticated tenant. No scopes (permissions) required.",
+                "operationId": "/API/Entitlement/Sop/Active/Get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Small MSP": {
+                                        "description": "Example active license count for a small MSP.",
+                                        "summary": "Local MSP",
+                                        "value": {
+                                            "EnterpriseDeviceCount": 54,
+                                            "EnterpriseInterfaceCount": 46,
+                                            "EnterpriseIntermediaryCount": 2,
+                                            "EnterpriseUserCount": 54,
+                                            "PrivilegedDeviceCount": 12,
+                                            "PrivilegedInterfaceCount": 52,
+                                            "PrivilegedIntermediaryCount": 4,
+                                            "PrivilegedUserCount": 12,
+                                            "SpecializedDeviceCount": 20,
+                                            "SpecializedInterfaceCount": 15,
+                                            "SpecializedIntermediaryCount": 0,
+                                            "SpecializedUserCount": 20
+                                        }
+                                    },
+                                    "No Licenses": {
+                                        "description": "Example license count for a company that doesn't have any licenses.",
+                                        "summary": "No License",
+                                        "value": {
+                                            "EnterpriseDeviceCount": 0,
+                                            "EnterpriseInterfaceCount": 0,
+                                            "EnterpriseIntermediaryCount": 0,
+                                            "EnterpriseUserCount": 0,
+                                            "PrivilegedDeviceCount": 0,
+                                            "PrivilegedInterfaceCount": 0,
+                                            "PrivilegedIntermediaryCount": 0,
+                                            "PrivilegedUserCount": 0,
+                                            "SpecializedDeviceCount": 0,
+                                            "SpecializedInterfaceCount": 0,
+                                            "SpecializedIntermediaryCount": 0,
+                                            "SpecializedUserCount": 0
+                                        }
+                                    },
+                                    "Enterprise": {
+                                        "description": "Example active license count for an enterprise sized company.",
+                                        "summary": "Enterprise",
+                                        "value": {
+                                            "EnterpriseDeviceCount": 60000,
+                                            "EnterpriseInterfaceCount": 500,
+                                            "EnterpriseIntermediaryCount": 20,
+                                            "EnterpriseUserCount": 60000,
+                                            "PrivilegedDeviceCount": 200,
+                                            "PrivilegedInterfaceCount": 450,
+                                            "PrivilegedIntermediaryCount": 15,
+                                            "PrivilegedUserCount": 200,
+                                            "SpecializedDeviceCount": 1000,
+                                            "SpecializedInterfaceCount": 50,
+                                            "SpecializedIntermediaryCount": 2,
+                                            "SpecializedUserCount": 1000
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/LicenseEntitlement.Sop.Count"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    }
+                },
+                "tags": [
+                    "License Entitlement"
+                ],
+                "summary": "List of Available Licenses"
+            }
+        },
+        "/API/Entitlement/Sop/Tenant/{tenantId}/": {
+            "get": {
+                "description": "Retrieves the list of license entitlements that are assigned to the specified tenant. This endpoint requires the `LicenseEntitlement.Read` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "operationId": "/API/Entitlement/Sop/Tenant/:tenantId/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/tenantId"
+                    }
+                ],
+                "summary": "List of Entitlement Records for Specified Tenant",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "minItems": 0,
+                                    "items": {
+                                        "$ref": "#/components/schemas/LicenseEntitlement.Sop"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    }
+                },
+                "tags": [
+                    "License Entitlement"
+                ]
+            }
+        },
+        "/API/Entitlement/Sop/Tenant/{tenantId}/Correlation/{correlationId}/": {
+            "delete": {
+                "description": "Deletes the requested orchestration platform license entitlement record. This endpoint requires the `Telemetry.Sop.Write.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "operationId": "/API/Entitlement/Sop/Tenant/:tenantId/Correlation/:correlationId/Delete",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/tenantId"
+                    },
+                    {
+                        "$ref": "#/components/parameters/correlationId"
+                    }
+                ],
+                "summary": "Delete Specified License Entitlement",
+                "responses": {
+                    "201": {
+                        "description": "Deleted Successfully"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    }
+                },
+                "tags": [
+                    "License Entitlement"
+                ]
+            }
+        },
+        "/API/Telemetry/Sop/": {
+            "post": {
+                "description": "Submits the telemetry report for the orchestration platform. This endpoint requires the `Telemetry.Sop.Write` or `Telemetry.Sop.Write.All` scope (permission).",
+                "operationId": "/API/Telemetry/Sop/Post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "examples": {
+                                "Monthly Report": {
+                                    "description": "Example monthly telemetry report for an enterprise organization.",
+                                    "summary": "Monthly Report",
+                                    "value": {
+                                        "EnterpriseDeviceCount": 64221,
+                                        "EnterpriseInterfaceCount": 523,
+                                        "EnterpriseIntermediaryCount": 44,
+                                        "EnterpriseUserCount": 642219,
+                                        "MonthlyActiveEntUsers": 0,
+                                        "MonthlyActivePrivUsers": 0,
+                                        "MonthlyActiveSpecUsers": 0,
+                                        "PrivilegedDeviceCount": 50,
+                                        "PrivilegedInterfaceCount": 2000,
+                                        "PrivilegedIntermediaryCount": 25,
+                                        "PrivilegedUserCount": 50,
+                                        "SopArchitectureVersion": "2",
+                                        "SopCoreVersion": "3.0.0",
+                                        "SpecializedDeviceCount": 0,
+                                        "SpecializedInterfaceCount": 612,
+                                        "SpecializedIntermediaryCount": 2,
+                                        "SpecializedUserCount": 5238
+                                    }
+                                }
+                            },
+                            "schema": {
+                                "$ref": "#/components/schemas/Telemetry.Sop"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Monthly Report": {
+                                        "description": "Example monthly telemetry report for an enterprise organization.",
+                                        "summary": "Monthly Report",
+                                        "value": {
+                                            "CorrelationId": "6fe3cd30-931c-439a-b759-1e7f3a73622e",
+                                            "EnterpriseDeviceCount": 64221,
+                                            "EnterpriseInterfaceCount": 523,
+                                            "EnterpriseIntermediaryCount": 44,
+                                            "EnterpriseUserCount": 642219,
+                                            "MonthlyActiveEntUsers": 0,
+                                            "MonthlyActivePrivUsers": 0,
+                                            "MonthlyActiveSpecUsers": 0,
+                                            "PrivilegedDeviceCount": 50,
+                                            "PrivilegedInterfaceCount": 2000,
+                                            "PrivilegedIntermediaryCount": 25,
+                                            "PrivilegedUserCount": 50,
+                                            "SopArchitectureVersion": "2",
+                                            "SopCoreVersion": "3.0.0",
+                                            "SpecializedDeviceCount": 0,
+                                            "SpecializedInterfaceCount": 612,
+                                            "SpecializedIntermediaryCount": 2,
+                                            "SpecializedUserCount": 5238,
+                                            "TenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                                            "createdAt": "2024-08-05T15:25:55.525Z",
+                                            "updatedAt": "2024-08-05T15:25:55.525Z"
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/Telemetry.Sop"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    }
+                },
+                "tags": [
+                    "Telemetry"
+                ],
+                "summary": "Collects Orchestration Platform Telemetry"
+            },
+            "get": {
+                "description": "Retrieves the telemetry records that have been reported for the authenticated tenant. Data is not guaranteed to be retrieved in any specific order. This endpoint requires the `Telemetry.Sop.Read` or `Telemetry.Sop.Read.All` scope (permission).",
+                "operationId": "/API/Telemetry/Sop/Get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "List of Reports": {
+                                        "description": "List of all available telemetry reports for the authenticated tenant.",
+                                        "summary": "List of Reports",
+                                        "value": [
+                                            {
+                                            "CorrelationId": "6fe3cd30-931c-439a-b759-1e7f3a73622e",
+                                            "EnterpriseDeviceCount": 64221,
+                                            "EnterpriseInterfaceCount": 523,
+                                            "EnterpriseIntermediaryCount": 44,
+                                            "EnterpriseUserCount": 642219,
+                                            "MonthlyActiveEntUsers": 0,
+                                            "MonthlyActivePrivUsers": 0,
+                                            "MonthlyActiveSpecUsers": 0,
+                                            "PrivilegedDeviceCount": 50,
+                                            "PrivilegedInterfaceCount": 2000,
+                                            "PrivilegedIntermediaryCount": 25,
+                                            "PrivilegedUserCount": 50,
+                                            "SopArchitectureVersion": "2",
+                                            "SopCoreVersion": "3.0.0",
+                                            "SpecializedDeviceCount": 0,
+                                            "SpecializedInterfaceCount": 612,
+                                            "SpecializedIntermediaryCount": 2,
+                                            "SpecializedUserCount": 5238,
+                                            "TenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                                            "createdAt": "2024-08-05T15:25:55.525Z",
+                                            "updatedAt": "2024-08-05T15:25:55.525Z"
+                                        },
+                                        {
+                                            "CorrelationId": "a57d03c6-8218-4738-b860-ac158e257e27",
+                                            "EnterpriseDeviceCount": 63221,
+                                            "EnterpriseInterfaceCount": 523,
+                                            "EnterpriseIntermediaryCount": 44,
+                                            "EnterpriseUserCount": 632219,
+                                            "MonthlyActiveEntUsers": 0,
+                                            "MonthlyActivePrivUsers": 0,
+                                            "MonthlyActiveSpecUsers": 0,
+                                            "PrivilegedDeviceCount": 50,
+                                            "PrivilegedInterfaceCount": 2000,
+                                            "PrivilegedIntermediaryCount": 25,
+                                            "PrivilegedUserCount": 50,
+                                            "SopArchitectureVersion": "2",
+                                            "SopCoreVersion": "3.0.0",
+                                            "SpecializedDeviceCount": 0,
+                                            "SpecializedInterfaceCount": 612,
+                                            "SpecializedIntermediaryCount": 2,
+                                            "SpecializedUserCount": 5238,
+                                            "TenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                                            "createdAt": "2024-07-05T15:25:55.525Z",
+                                            "updatedAt": "2024-07-05T15:25:55.525Z"
+                                        }
+                                    ]
+                                    }
+                                },
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Telemetry.Sop"
+                                    },
+                                    "minItems": 0
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    }
+                },
+                "summary": "Lists Reported Telemetry",
+                "tags": [
+                    "Telemetry"
+                ]
+            }
+        },
+        "/API/Telemetry/Sop/Tenant/{tenantId}/": {
+            "get": {
+                "description": "Retrieves the telemetry records that have been reported for the specified tenant. Data is not guaranteed to be retrieved in any specific order. This endpoint requires the `Telemetry.Sop.Read.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "operationId": "/API/Telemetry/Sop/Tenant/:tenantId/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/tenantId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "List of Reports": {
+                                        "description": "List of all available telemetry reports for the authenticated tenant.",
+                                        "summary": "List of Reports",
+                                        "value": [
+                                            {
+                                            "CorrelationId": "6fe3cd30-931c-439a-b759-1e7f3a73622e",
+                                            "EnterpriseDeviceCount": 64221,
+                                            "EnterpriseInterfaceCount": 523,
+                                            "EnterpriseIntermediaryCount": 44,
+                                            "EnterpriseUserCount": 642219,
+                                            "MonthlyActiveEntUsers": 0,
+                                            "MonthlyActivePrivUsers": 0,
+                                            "MonthlyActiveSpecUsers": 0,
+                                            "PrivilegedDeviceCount": 50,
+                                            "PrivilegedInterfaceCount": 2000,
+                                            "PrivilegedIntermediaryCount": 25,
+                                            "PrivilegedUserCount": 50,
+                                            "SopArchitectureVersion": "2",
+                                            "SopCoreVersion": "3.0.0",
+                                            "SpecializedDeviceCount": 0,
+                                            "SpecializedInterfaceCount": 612,
+                                            "SpecializedIntermediaryCount": 2,
+                                            "SpecializedUserCount": 5238,
+                                            "TenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                                            "createdAt": "2024-08-05T15:25:55.525Z",
+                                            "updatedAt": "2024-08-05T15:25:55.525Z"
+                                        },
+                                        {
+                                            "CorrelationId": "a57d03c6-8218-4738-b860-ac158e257e27",
+                                            "EnterpriseDeviceCount": 63221,
+                                            "EnterpriseInterfaceCount": 523,
+                                            "EnterpriseIntermediaryCount": 44,
+                                            "EnterpriseUserCount": 632219,
+                                            "MonthlyActiveEntUsers": 0,
+                                            "MonthlyActivePrivUsers": 0,
+                                            "MonthlyActiveSpecUsers": 0,
+                                            "PrivilegedDeviceCount": 50,
+                                            "PrivilegedInterfaceCount": 2000,
+                                            "PrivilegedIntermediaryCount": 25,
+                                            "PrivilegedUserCount": 50,
+                                            "SopArchitectureVersion": "2",
+                                            "SopCoreVersion": "3.0.0",
+                                            "SpecializedDeviceCount": 0,
+                                            "SpecializedInterfaceCount": 612,
+                                            "SpecializedIntermediaryCount": 2,
+                                            "SpecializedUserCount": 5238,
+                                            "TenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                                            "createdAt": "2024-07-05T15:25:55.525Z",
+                                            "updatedAt": "2024-07-05T15:25:55.525Z"
+                                        }
+                                    ]
+                                    }
+                                },
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Telemetry.Sop"
+                                    },
+                                    "minItems": 0
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    }
+                },
+                "summary": "Retrieves Telemetry for Specified Tenant",
+                "tags": [
+                    "Telemetry"
+                ]
+            }
+        },
+        "/API/Telemetry/Sop/Tenant/{tenantId}/Correlation/{correlationId}/": {
+            "delete": {
+                "description": "Deletes the specified telemetry record for the specified tenant. This endpoint requires the `Telemetry.Sop.Write.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "operationId": "/API/Telemetry/Sop/Tenant/:tenantId/Correlation/:correlationId/Delete",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/tenantId"
+                    },
+                    {
+                        "$ref": "#/components/parameters/correlationId"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Deleted Successfully"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    }
+                },
+                "summary": "Delete Specified Telemetry Record",
+                "tags": [
+                    "Telemetry"
+                ]
+            }
+        }
+    },
+    "security": [
+        {
+            "EntraID": []
+        }
+    ],
+    "servers": [
+        {
+            "description": "Server the hosts the API described in the document.",
+            "url": "https://api.shilab.com/"
+        }
+    ],
+    "tags": [
+        {
+            "description": "Collects and reports data from the license analytics product.",
+            "name": "License Analytics",
+            "externalDocs": {
+                "description": "License Analytics Documentation",
+                "url": "https://docs.shilab.com/License-Analytics/"
+            }
+        },
+        {
+            "description": "Manages and reports the list of purchased licenses for the various SHI Lab Products.",
+            "name": "License Entitlement"
+        },
+        {
+            "description": "Collects data from the various SHI Lab products.",
+            "name": "Telemetry"
+        }
+    ]
+}
