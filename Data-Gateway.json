@@ -108,6 +108,21 @@
                 "title": "License Data - Correlation Record",
                 "type": "object"
             },
+            "LicenseData.FeatureBreakdown": {
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "description": "List of features that are configured for the specific service plan's service configuration for the related principal.\nThe key is the name of the feature that is being described.\nThe value is the state of the feature configuration, `true` is in scope and `false` meaning not in scope.",
+                "example": {
+                    "Conditional Access": true,
+                    "Access Reviews": true,
+                    "Dynamic Groups": false,
+                    "On-Prem Password Rest": true,
+                    "On-Prem Password Protection": false
+                },
+                "title": "License Data - Feature Breakdown",
+                "type": "object"
+            },
             "LicenseData": {
                 "description": "Completely calculated license data structure that is the result of a complete run.",
                 "example": {
@@ -157,18 +172,44 @@
                             "type": "object",
                             "properties": {
                                 "AssignedLicense": {
-                                    "type": "object",
                                     "additionalProperties": {
                                         "type": "integer",
                                         "nullable": true
-                                    }
+                                    },
+                                    "description": "License assignment on the specified principal.",
+                                    "type": "object"
                                 },
                                 "AssignedService": {
-                                    "type": "object",
                                     "additionalProperties": {
-                                        "type": "integer",
+                                        "oneOf": [
+                                            {
+                                                "$ref": "#/components/schemas/LicenseData.FeatureBreakdown"
+                                            },
+                                            {
+                                                "type": "integer",
+                                                "format": "int32"
+                                            }
+                                        ],
                                         "nullable": true
-                                    }
+                                    },
+                                    "description": "Service configuration assignment.  This is used to record the set of principals that are \"benefiting\" from the service, regardless of license status.",
+                                    "type": "object"
+                                },
+                                "ConsumedService": {
+                                    "additionalProperties": {
+                                        "oneOf": [
+                                            {
+                                                "$ref": "#/components/schemas/LicenseData.FeatureBreakdown"
+                                            },
+                                            {
+                                                "type": "integer",
+                                                "format": "int32"
+                                            }
+                                        ],
+                                        "nullable": true
+                                    },
+                                    "description": "Usage telemetry retrieved for the service to indicate if the specific principal is consuming the service or not, regardless of license status.",
+                                    "type": "object"
                                 }
                             }
                         },
@@ -176,11 +217,71 @@
                         "example": {
                             "17d963dd-8a19-4025-8b84-47fb6f6eaa7f": {
                                 "AssignedLicense": {
+                                    "eec0eb4f-6444-4f95-aba0-50c24d67f998": null,
+                                    "41781fb2-bc02-4b7c-bd55-b576c07bb09d": null,
                                     "7159f980-6f83-4b67-bf41-e172b3ae1352": null
                                 },
                                 "AssignedService": {
-                                    "fa5e1889-6f7e-480c-9fae-29639d5751e7": null,
-                                    "ce5d0e60-7f7d-445d-a7f2-819ba0839fae": null
+                                    "eec0eb4f-6444-4f95-aba0-50c24d67f998": {
+                                        "Conditional Access": false,
+                                        "Access Review": true,
+                                        "Entitlement Management": false,
+                                        "Identity Protection": true
+                                    },
+                                    "41781fb2-bc02-4b7c-bd55-b576c07bb09d": {
+                                        "Conditional Access": true,
+                                        "Dynamic Group": false,
+                                        "Group Naming": true,
+                                        "On-Prem SSPR": false,
+                                        "Group Expiration": true,
+                                        "Provisioning Engine": true,
+                                        "Enterprise State Roaming": false
+                                    },
+                                    "6511755b-c27d-4c66-a59e-b835e6b54e7f": null
+                                },
+                                "ConsumedService": {
+                                    "eec0eb4f-6444-4f95-aba0-50c24d67f998": {
+                                        "Conditional Access": true,
+                                        "Access Review": false,
+                                        "Entitlement Management": false,
+                                        "Identity Protection": true
+                                    },
+                                    "41781fb2-bc02-4b7c-bd55-b576c07bb09d": {
+                                        "Conditional Access": true,
+                                        "Dynamic Group": false,
+                                        "Group Naming": true,
+                                        "On-Prem SSPR": false,
+                                        "Group Expiration": true,
+                                        "Provisioning Engine": true,
+                                        "Enterprise State Roaming": false
+                                    },
+                                    "4b0d28f2-c1ce-48ae-a7d2-1caaa7825891": null,
+                                    "c90f1a25-e6cd-4163-ac6c-ca7616c585a9": null
+                                }
+                            },
+                            "7a360e84-1bbe-4406-bf7d-25ae2405cbfc": {
+                                "AssignedLicense": {},
+                                "AssignedService": {
+                                    "eec0eb4f-6444-4f95-aba0-50c24d67f998": {
+                                        "Conditional Access": false,
+                                        "Access Review": true,
+                                        "Entitlement Management": false,
+                                        "Identity Protection": true
+                                    },
+                                    "41781fb2-bc02-4b7c-bd55-b576c07bb09d": {
+                                        "Conditional Access": true,
+                                        "Dynamic Group": false,
+                                        "Group Naming": true,
+                                        "On-Prem SSPR": false,
+                                        "Group Expiration": true,
+                                        "Provisioning Engine": true,
+                                        "Enterprise State Roaming": false
+                                    },
+                                    "6511755b-c27d-4c66-a59e-b835e6b54e7f": null
+                                },
+                                "ConsumedService": {
+                                    "4b0d28f2-c1ce-48ae-a7d2-1caaa7825891": null,
+                                    "c90f1a25-e6cd-4163-ac6c-ca7616c585a9": null
                                 }
                             }
                         },
@@ -1352,52 +1453,52 @@
                                         "summary": "List of Reports",
                                         "value": [
                                             {
-                                            "CorrelationId": "6fe3cd30-931c-439a-b759-1e7f3a73622e",
-                                            "EnterpriseDeviceCount": 64221,
-                                            "EnterpriseInterfaceCount": 523,
-                                            "EnterpriseIntermediaryCount": 44,
-                                            "EnterpriseUserCount": 642219,
-                                            "MonthlyActiveEntUsers": 0,
-                                            "MonthlyActivePrivUsers": 0,
-                                            "MonthlyActiveSpecUsers": 0,
-                                            "PrivilegedDeviceCount": 50,
-                                            "PrivilegedInterfaceCount": 2000,
-                                            "PrivilegedIntermediaryCount": 25,
-                                            "PrivilegedUserCount": 50,
-                                            "SopArchitectureVersion": "2",
-                                            "SopCoreVersion": "3.0.0",
-                                            "SpecializedDeviceCount": 0,
-                                            "SpecializedInterfaceCount": 612,
-                                            "SpecializedIntermediaryCount": 2,
-                                            "SpecializedUserCount": 5238,
-                                            "TenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
-                                            "createdAt": "2024-08-05T15:25:55.525Z",
-                                            "updatedAt": "2024-08-05T15:25:55.525Z"
-                                        },
-                                        {
-                                            "CorrelationId": "a57d03c6-8218-4738-b860-ac158e257e27",
-                                            "EnterpriseDeviceCount": 63221,
-                                            "EnterpriseInterfaceCount": 523,
-                                            "EnterpriseIntermediaryCount": 44,
-                                            "EnterpriseUserCount": 632219,
-                                            "MonthlyActiveEntUsers": 0,
-                                            "MonthlyActivePrivUsers": 0,
-                                            "MonthlyActiveSpecUsers": 0,
-                                            "PrivilegedDeviceCount": 50,
-                                            "PrivilegedInterfaceCount": 2000,
-                                            "PrivilegedIntermediaryCount": 25,
-                                            "PrivilegedUserCount": 50,
-                                            "SopArchitectureVersion": "2",
-                                            "SopCoreVersion": "3.0.0",
-                                            "SpecializedDeviceCount": 0,
-                                            "SpecializedInterfaceCount": 612,
-                                            "SpecializedIntermediaryCount": 2,
-                                            "SpecializedUserCount": 5238,
-                                            "TenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
-                                            "createdAt": "2024-07-05T15:25:55.525Z",
-                                            "updatedAt": "2024-07-05T15:25:55.525Z"
-                                        }
-                                    ]
+                                                "CorrelationId": "6fe3cd30-931c-439a-b759-1e7f3a73622e",
+                                                "EnterpriseDeviceCount": 64221,
+                                                "EnterpriseInterfaceCount": 523,
+                                                "EnterpriseIntermediaryCount": 44,
+                                                "EnterpriseUserCount": 642219,
+                                                "MonthlyActiveEntUsers": 0,
+                                                "MonthlyActivePrivUsers": 0,
+                                                "MonthlyActiveSpecUsers": 0,
+                                                "PrivilegedDeviceCount": 50,
+                                                "PrivilegedInterfaceCount": 2000,
+                                                "PrivilegedIntermediaryCount": 25,
+                                                "PrivilegedUserCount": 50,
+                                                "SopArchitectureVersion": "2",
+                                                "SopCoreVersion": "3.0.0",
+                                                "SpecializedDeviceCount": 0,
+                                                "SpecializedInterfaceCount": 612,
+                                                "SpecializedIntermediaryCount": 2,
+                                                "SpecializedUserCount": 5238,
+                                                "TenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                                                "createdAt": "2024-08-05T15:25:55.525Z",
+                                                "updatedAt": "2024-08-05T15:25:55.525Z"
+                                            },
+                                            {
+                                                "CorrelationId": "a57d03c6-8218-4738-b860-ac158e257e27",
+                                                "EnterpriseDeviceCount": 63221,
+                                                "EnterpriseInterfaceCount": 523,
+                                                "EnterpriseIntermediaryCount": 44,
+                                                "EnterpriseUserCount": 632219,
+                                                "MonthlyActiveEntUsers": 0,
+                                                "MonthlyActivePrivUsers": 0,
+                                                "MonthlyActiveSpecUsers": 0,
+                                                "PrivilegedDeviceCount": 50,
+                                                "PrivilegedInterfaceCount": 2000,
+                                                "PrivilegedIntermediaryCount": 25,
+                                                "PrivilegedUserCount": 50,
+                                                "SopArchitectureVersion": "2",
+                                                "SopCoreVersion": "3.0.0",
+                                                "SpecializedDeviceCount": 0,
+                                                "SpecializedInterfaceCount": 612,
+                                                "SpecializedIntermediaryCount": 2,
+                                                "SpecializedUserCount": 5238,
+                                                "TenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                                                "createdAt": "2024-07-05T15:25:55.525Z",
+                                                "updatedAt": "2024-07-05T15:25:55.525Z"
+                                            }
+                                        ]
                                     }
                                 },
                                 "schema": {
@@ -1443,52 +1544,52 @@
                                         "summary": "List of Reports",
                                         "value": [
                                             {
-                                            "CorrelationId": "6fe3cd30-931c-439a-b759-1e7f3a73622e",
-                                            "EnterpriseDeviceCount": 64221,
-                                            "EnterpriseInterfaceCount": 523,
-                                            "EnterpriseIntermediaryCount": 44,
-                                            "EnterpriseUserCount": 642219,
-                                            "MonthlyActiveEntUsers": 0,
-                                            "MonthlyActivePrivUsers": 0,
-                                            "MonthlyActiveSpecUsers": 0,
-                                            "PrivilegedDeviceCount": 50,
-                                            "PrivilegedInterfaceCount": 2000,
-                                            "PrivilegedIntermediaryCount": 25,
-                                            "PrivilegedUserCount": 50,
-                                            "SopArchitectureVersion": "2",
-                                            "SopCoreVersion": "3.0.0",
-                                            "SpecializedDeviceCount": 0,
-                                            "SpecializedInterfaceCount": 612,
-                                            "SpecializedIntermediaryCount": 2,
-                                            "SpecializedUserCount": 5238,
-                                            "TenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
-                                            "createdAt": "2024-08-05T15:25:55.525Z",
-                                            "updatedAt": "2024-08-05T15:25:55.525Z"
-                                        },
-                                        {
-                                            "CorrelationId": "a57d03c6-8218-4738-b860-ac158e257e27",
-                                            "EnterpriseDeviceCount": 63221,
-                                            "EnterpriseInterfaceCount": 523,
-                                            "EnterpriseIntermediaryCount": 44,
-                                            "EnterpriseUserCount": 632219,
-                                            "MonthlyActiveEntUsers": 0,
-                                            "MonthlyActivePrivUsers": 0,
-                                            "MonthlyActiveSpecUsers": 0,
-                                            "PrivilegedDeviceCount": 50,
-                                            "PrivilegedInterfaceCount": 2000,
-                                            "PrivilegedIntermediaryCount": 25,
-                                            "PrivilegedUserCount": 50,
-                                            "SopArchitectureVersion": "2",
-                                            "SopCoreVersion": "3.0.0",
-                                            "SpecializedDeviceCount": 0,
-                                            "SpecializedInterfaceCount": 612,
-                                            "SpecializedIntermediaryCount": 2,
-                                            "SpecializedUserCount": 5238,
-                                            "TenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
-                                            "createdAt": "2024-07-05T15:25:55.525Z",
-                                            "updatedAt": "2024-07-05T15:25:55.525Z"
-                                        }
-                                    ]
+                                                "CorrelationId": "6fe3cd30-931c-439a-b759-1e7f3a73622e",
+                                                "EnterpriseDeviceCount": 64221,
+                                                "EnterpriseInterfaceCount": 523,
+                                                "EnterpriseIntermediaryCount": 44,
+                                                "EnterpriseUserCount": 642219,
+                                                "MonthlyActiveEntUsers": 0,
+                                                "MonthlyActivePrivUsers": 0,
+                                                "MonthlyActiveSpecUsers": 0,
+                                                "PrivilegedDeviceCount": 50,
+                                                "PrivilegedInterfaceCount": 2000,
+                                                "PrivilegedIntermediaryCount": 25,
+                                                "PrivilegedUserCount": 50,
+                                                "SopArchitectureVersion": "2",
+                                                "SopCoreVersion": "3.0.0",
+                                                "SpecializedDeviceCount": 0,
+                                                "SpecializedInterfaceCount": 612,
+                                                "SpecializedIntermediaryCount": 2,
+                                                "SpecializedUserCount": 5238,
+                                                "TenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                                                "createdAt": "2024-08-05T15:25:55.525Z",
+                                                "updatedAt": "2024-08-05T15:25:55.525Z"
+                                            },
+                                            {
+                                                "CorrelationId": "a57d03c6-8218-4738-b860-ac158e257e27",
+                                                "EnterpriseDeviceCount": 63221,
+                                                "EnterpriseInterfaceCount": 523,
+                                                "EnterpriseIntermediaryCount": 44,
+                                                "EnterpriseUserCount": 632219,
+                                                "MonthlyActiveEntUsers": 0,
+                                                "MonthlyActivePrivUsers": 0,
+                                                "MonthlyActiveSpecUsers": 0,
+                                                "PrivilegedDeviceCount": 50,
+                                                "PrivilegedInterfaceCount": 2000,
+                                                "PrivilegedIntermediaryCount": 25,
+                                                "PrivilegedUserCount": 50,
+                                                "SopArchitectureVersion": "2",
+                                                "SopCoreVersion": "3.0.0",
+                                                "SpecializedDeviceCount": 0,
+                                                "SpecializedInterfaceCount": 612,
+                                                "SpecializedIntermediaryCount": 2,
+                                                "SpecializedUserCount": 5238,
+                                                "TenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                                                "createdAt": "2024-07-05T15:25:55.525Z",
+                                                "updatedAt": "2024-07-05T15:25:55.525Z"
+                                            }
+                                        ]
                                     }
                                 },
                                 "schema": {
