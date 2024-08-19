@@ -1143,6 +1143,36 @@
                     "License Analytics"
                 ],
                 "summary": "Retrieve the Specified License Data Report for Specified Tenant"
+            },
+            "delete": {
+                "description": "Deletes the full license data report for the specified correlation ID and tenant. This endpoint requires the `LicenseData.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "operationId": "/API/LicenseData/Correlation/:correlationId/Tenant/:tenantId/Data/delete",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/correlationId"
+                    },
+                    {
+                        "$ref": "#/components/parameters/tenantId"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Deleted successfully"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    }
+                },
+                "tags": [
+                    "License Analytics"
+                ],
+                "summary": "Delete the Specified License Data Report for Specified Tenant"
             }
         },
         "/API/Entitlement/Sop/": {
