@@ -683,7 +683,7 @@
     "paths": {
         "/API/LicenseData/": {
             "post": {
-                "description": "Store the results of a license analytics run. This endpoint requires the `LicenseData.Write` scope (permission).",
+                "description": "Store the results of a license analytics run. This endpoint requires the `LicenseData.ReadWrite`, or `LicenseData.ReadWrite.All` scope (permission).",
                 "operationId": "/API/LicenseData/Post",
                 "requestBody": {
                     "content": {
@@ -840,7 +840,7 @@
         },
         "/API/LicenseData/Correlation/": {
             "get": {
-                "description": "Retrieves the list of correlation records for the authenticated tenant. Correlation records store the metadata for a specific license data report. This endpoint requires the `LicenseData.Read` or `LicenseData.Read.All` scope (permission).",
+                "description": "Retrieves the list of correlation records for the authenticated tenant. Correlation records store the metadata for a specific license data report. This endpoint requires the `LicenseData.Read`,  `LicenseData.Read.All`, `LicenseData.ReadWrite`, or `LicenseData.ReadWrite.All` scope (permission).",
                 "operationId": "/API/LicenseData/Correlation/Get",
                 "responses": {
                     "200": {
@@ -896,7 +896,7 @@
         },
         "/API/LicenseData/Correlation/Tenant/{tenantId}/": {
             "get": {
-                "description": "Retrieves the list of correlation records for the specified tenant. Correlation records store the metadata for a specific license data report. This endpoint requires the `LicenseData.Read.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "description": "Retrieves the list of correlation records for the specified tenant. Correlation records store the metadata for a specific license data report. This endpoint requires the `LicenseData.Read.All`, or `LicenseData.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
                 "operationId": "/API/LicenseData/Correlation/Tenant/:tenantId/Get",
                 "parameters": [
                     {
@@ -960,8 +960,8 @@
         },
         "/API/LicenseData/Correlation/{correlationId}/Data/": {
             "get": {
-                "description": "Retrieves the full license data report for the specified correlation ID in the authenticated tenant. The license data report contains all of the license usage and compliance information with the required correlation data. This endpoint requires the `LicenseData.Read` or the `LicenseData.Read.All` scope (permission).",
-                "operationId": "/API/LicenseData/Correlation/:correlationId/Data/get",
+                "description": "Retrieves the full license data report for the specified correlation ID in the authenticated tenant. The license data report contains all of the license usage and compliance information with the required correlation data. This endpoint requires the `LicenseData.Read`, `LicenseData.Read.All`, `LicenseData.ReadWrite`, or `LicenseData.ReadWrite.All` scope (permission).",
+                "operationId": "/API/LicenseData/Correlation/:correlationId/Data/Get",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/correlationId"
@@ -1052,8 +1052,8 @@
         },
         "/API/LicenseData/Correlation/{correlationId}/Tenant/{tenantId}/Data/": {
             "get": {
-                "description": "Retrieves the full license data report for the specified correlation ID and tenant. The license data report contains all of the license usage and compliance information with the required correlation data. This endpoint requires the `LicenseData.Read.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
-                "operationId": "/API/LicenseData/Correlation/:correlationId/Tenant/:tenantId/Data/get",
+                "description": "Retrieves the full license data report for the specified correlation ID and tenant. The license data report contains all of the license usage and compliance information with the required correlation data. This endpoint requires the `LicenseData.Read.All`, or `LicenseData.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "operationId": "/API/LicenseData/Correlation/:correlationId/Tenant/:tenantId/Data/Get",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/correlationId"
@@ -1177,7 +1177,7 @@
         },
         "/API/Entitlement/Sop/": {
             "post": {
-                "description": "Creates a new license entitlement (activation) for the orchestration platform. This endpoint requires the `LicenseEntitlement.Write.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "description": "Creates a new license entitlement (activation) for the orchestration platform. This endpoint requires the `LicenseEntitlement.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
                 "operationId": "/API/Entitlement/Sop/Post",
                 "requestBody": {
                     "content": {
@@ -1394,7 +1394,7 @@
         },
         "/API/Entitlement/Sop/Tenant/{tenantId}/": {
             "get": {
-                "description": "Retrieves the list of license entitlements that are assigned to the specified tenant. This endpoint requires the `LicenseEntitlement.Read.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "description": "Retrieves the list of license entitlements that are assigned to the specified tenant. This endpoint requires the `LicenseEntitlement.Read.All`, or `LicenseEntitlement.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
                 "operationId": "/API/Entitlement/Sop/Tenant/:tenantId/Get",
                 "parameters": [
                     {
@@ -1434,7 +1434,7 @@
         },
         "/API/Entitlement/Sop/Tenant/{tenantId}/Correlation/{correlationId}/": {
             "delete": {
-                "description": "Deletes the requested orchestration platform license entitlement record. This endpoint requires the `LicenseEntitlement.Write.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "description": "Deletes the requested orchestration platform license entitlement record. This endpoint requires the `LicenseEntitlement.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
                 "operationId": "/API/Entitlement/Sop/Tenant/:tenantId/Correlation/:correlationId/Delete",
                 "parameters": [
                     {
@@ -1469,7 +1469,7 @@
         },
         "/API/Telemetry/Sop/": {
             "post": {
-                "description": "Submits the telemetry report for the orchestration platform. This endpoint requires the `Telemetry.Sop.Write` or `Telemetry.Sop.Write.All` scope (permission).",
+                "description": "Submits the telemetry report for the orchestration platform. This endpoint requires the `Telemetry.Sop.ReadWrite`, or `Telemetry.Sop.ReadWrite.All` scope (permission).",
                 "operationId": "/API/Telemetry/Sop/Post",
                 "requestBody": {
                     "content": {
@@ -1558,7 +1558,7 @@
                 "summary": "Collects Orchestration Platform Telemetry"
             },
             "get": {
-                "description": "Retrieves the telemetry records that have been reported for the authenticated tenant. Data is not guaranteed to be retrieved in any specific order. This endpoint requires the `Telemetry.Sop.Read` or `Telemetry.Sop.Read.All` scope (permission).",
+                "description": "Retrieves the telemetry records that have been reported for the authenticated tenant. Data is not guaranteed to be retrieved in any specific order. This endpoint requires the `Telemetry.Sop.Read`, `Telemetry.Sop.Read.All`, `Telemetry.Sop.ReadWrite`, or `Telemetry.Sop.ReadWrite.All` scope (permission).",
                 "operationId": "/API/Telemetry/Sop/Get",
                 "responses": {
                     "200": {
@@ -1644,7 +1644,7 @@
         },
         "/API/Telemetry/Sop/Tenant/{tenantId}/": {
             "get": {
-                "description": "Retrieves the telemetry records that have been reported for the specified tenant. Data is not guaranteed to be retrieved in any specific order. This endpoint requires the `Telemetry.Sop.Read.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "description": "Retrieves the telemetry records that have been reported for the specified tenant. Data is not guaranteed to be retrieved in any specific order. This endpoint requires the `Telemetry.Sop.Read.All`, or `Telemetry.Sop.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
                 "operationId": "/API/Telemetry/Sop/Tenant/:tenantId/Get",
                 "parameters": [
                     {
@@ -1741,7 +1741,7 @@
         },
         "/API/Telemetry/Sop/Tenant/{tenantId}/Correlation/{correlationId}/": {
             "delete": {
-                "description": "Deletes the specified telemetry record for the specified tenant. This endpoint requires the `Telemetry.Sop.Write.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "description": "Deletes the specified telemetry record for the specified tenant. This endpoint requires the `Telemetry.Sop.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
                 "operationId": "/API/Telemetry/Sop/Tenant/:tenantId/Correlation/:correlationId/Delete",
                 "parameters": [
                     {
