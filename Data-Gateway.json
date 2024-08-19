@@ -51,6 +51,27 @@
             }
         },
         "schemas": {
+            "Core.HealthReport": {
+                "description": "Health report that indicates if a service is down or not that the data gateway relies on.",
+                "properties": {
+                    "bulkStorage": {
+                        "description": "Flag that indicates if the bulk storage system is down (`false`) or not (`true`). False indicate the service is not working, true indicates the service is working.",
+                        "example": true,
+                        "type": "boolean"
+                    },
+                    "database": {
+                        "description": "Flag that indicates if the ORM (Database) system is down (`false`) or not (`true`). False indicate the service is not working, true indicates the service is working.",
+                        "example": false,
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "bulkStorage",
+                    "database"
+                ],
+                "title": "Core System - Health Report",
+                "type": "object"
+            },
             "LicenseData.CorrelationRecord": {
                 "description": "Metadata that describes the execution session (run) that is used to tie/relate all of the license data together.",
                 "example": {
@@ -677,10 +698,36 @@
         },
         "description": "Collects data from the various SHI Lab products and makes it available in a standardized way.",
         "title": "SHI Data Gateway",
-        "version": "1.0.5"
+        "version": "1.0.6"
     },
     "openapi": "3.0.0",
     "paths": {
+        "/API/Core/Health/": {
+            "get": {
+                "description": "Check the health of the various components of the data gateway and report back. Useful for automated health probing.",
+                "operationId": "/API/ServiceHealth/Get",
+                "responses": {
+                    "201": {
+                        "description": "Service is operational!"
+                    },
+                    "500": {
+                        "description": "Service has a failure described with following report.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Core.HealthReport"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Core System"
+                ],
+                "security": [],
+                "summary": "Health of the Service for Probing"
+            }
+        },
         "/API/LicenseData/": {
             "post": {
                 "description": "Store the results of a license analytics run. This endpoint requires the `LicenseData.ReadWrite`, or `LicenseData.ReadWrite.All` scope (permission).",
@@ -1787,6 +1834,14 @@
         }
     ],
     "tags": [
+        {
+            "description": "Routes for the core data gateway system.",
+            "name": "Core System",
+            "externalDocs": {
+                "description": "Data Gateway Documentation",
+                "url": "https://docs.shilab.com/Date-Gateway/"
+            }
+        },
         {
             "description": "Collects and reports data from the license analytics product.",
             "name": "License Analytics",
