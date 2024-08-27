@@ -54,6 +54,16 @@
             "Core.HealthReport": {
                 "description": "Health report that indicates if a service is down or not that the data gateway relies on.",
                 "properties": {
+                    "authClient": {
+                        "description": "Flag that indicates if the client side authentication validation is working or not.",
+                        "example": false,
+                        "type": "boolean"
+                    },
+                    "authServer": {
+                        "description": "Flag that indicates if the server side authentication is working or not.",
+                        "example": true,
+                        "type": "boolean"
+                    },
                     "bulkStorage": {
                         "description": "Flag that indicates if the bulk storage system is down (`false`) or not (`true`). False indicate the service is not working, true indicates the service is working.",
                         "example": true,
@@ -66,6 +76,8 @@
                     }
                 },
                 "required": [
+                    "authClient",
+                    "authServer",
                     "bulkStorage",
                     "database"
                 ],
@@ -698,7 +710,7 @@
         },
         "description": "Collects data from the various SHI Lab products and makes it available in a standardized way.",
         "title": "SHI Data Gateway",
-        "version": "1.0.6"
+        "version": "1.0.7"
     },
     "openapi": "3.0.0",
     "paths": {
