@@ -84,8 +84,8 @@
                 "title": "Core System - Health Report",
                 "type": "object"
             },
-            "LicenseData.CorrelationRecord": {
-                "description": "Metadata that describes the execution session (run) that is used to tie/relate all of the license data together.",
+            "LicenseReport.CorrelationRecord": {
+                "description": "Metadata that describes the execution session (run) that is used to tie/relate all of the license report together.",
                 "example": {
                     "AuditTenantAccount": "priv-user@example.com",
                     "CorrelationId": "9d838115-0868-45d4-b8a5-98adc1af7e42",
@@ -109,13 +109,13 @@
                         "pattern": "^\\w+-\\w+-\\w+-\\w+-\\w+$"
                     },
                     "ReportTenantAccount": {
-                        "description": "User account used to store/report the license data to the SHI Lab cloud service.",
+                        "description": "User account used to store/report the license report to the SHI Lab cloud service.",
                         "example": "generic-user@example.com",
                         "format": "email",
                         "type": "string"
                     },
                     "TenantId": {
-                        "description": "Unique ID of customer's Microsoft tenant that the license data is for.",
+                        "description": "Unique ID of customer's Microsoft tenant that the license report is for.",
                         "example": "0e1fe83f-a33f-4250-8546-225b8d45ae01",
                         "format": "uuid",
                         "type": "string",
@@ -138,10 +138,10 @@
                     "AuditTenantAccount",
                     "ReportTenantAccount"
                 ],
-                "title": "License Data - Correlation Record",
+                "title": "License Report - Correlation Record",
                 "type": "object"
             },
-            "LicenseData.FeatureBreakdown": {
+            "LicenseReport.FeatureBreakdown": {
                 "additionalProperties": {
                     "type": "boolean"
                 },
@@ -153,11 +153,11 @@
                     "On-Prem Password Rest": true,
                     "On-Prem Password Protection": false
                 },
-                "title": "License Data - Feature Breakdown",
+                "title": "License Report - Feature Breakdown",
                 "type": "object"
             },
-            "LicenseData": {
-                "description": "Completely calculated license data structure that is the result of a complete run.",
+            "LicenseReport": {
+                "description": "Completely calculated license report structure that is the result of a complete run.",
                 "example": {
                     "AvailableLicense": {
                         "e17b13ee-9749-488b-9289-d31a8fde045d": 123,
@@ -201,11 +201,11 @@
                             "eec0eb4f-6444-4f95-aba0-50c24d67f998": 1234,
                             "41781fb2-bc02-4b7c-bd55-b576c07bb09d": 123
                         },
-                        "title": "License Data - Available Licenses",
+                        "title": "License Report - Available Licenses",
                         "type": "object"
                     },
                     "Correlation": {
-                        "$ref": "#/components/schemas/LicenseData.CorrelationRecord"
+                        "$ref": "#/components/schemas/LicenseReport.CorrelationRecord"
                     },
                     "LicenseData": {
                         "additionalProperties": {
@@ -223,7 +223,7 @@
                                     "additionalProperties": {
                                         "oneOf": [
                                             {
-                                                "$ref": "#/components/schemas/LicenseData.FeatureBreakdown"
+                                                "$ref": "#/components/schemas/LicenseReport.FeatureBreakdown"
                                             },
                                             {
                                                 "type": "integer",
@@ -239,7 +239,7 @@
                                     "additionalProperties": {
                                         "oneOf": [
                                             {
-                                                "$ref": "#/components/schemas/LicenseData.FeatureBreakdown"
+                                                "$ref": "#/components/schemas/LicenseReport.FeatureBreakdown"
                                             },
                                             {
                                                 "type": "integer",
@@ -325,11 +325,11 @@
                                 }
                             }
                         },
-                        "title": "License Data - Computed Principals",
+                        "title": "License Report - Computed Principals",
                         "type": "object"
                     }
                 },
-                "title": "License Data - Complete Object"
+                "title": "License Report - Complete Object"
             },
             "LicenseEntitlement.Sop": {
                 "description": "Record that describes the purchased licenses for a specific tenant. More than one of these can be active at a single time.",
@@ -740,10 +740,10 @@
                 "summary": "Health of the Service for Probing"
             }
         },
-        "/API/LicenseData/": {
+        "/API/LicenseReport/": {
             "post": {
-                "description": "Store the results of a license analytics run. This endpoint requires the `LicenseData.ReadWrite`, or `LicenseData.ReadWrite.All` scope (permission).",
-                "operationId": "/API/LicenseData/Post",
+                "description": "Store the results of a license analytics run. This endpoint requires the `LicenseReport.ReadWrite`, or `LicenseReport.ReadWrite.All` scope (permission).",
+                "operationId": "/API/LicenseReport/Post",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -802,14 +802,14 @@
                                         }
                                     }
                                 },
-                                "Ignorant License Data Report Request": {
+                                "Ignorant License Report Request": {
                                     "description": "Clueless dev trying to automate this application without reading the docs. RTFM!",
-                                    "summary": "Ignorant License Data Report Request",
+                                    "summary": "Ignorant License Report Request",
                                     "value": {}
                                 }
                             },
                             "schema": {
-                                "$ref": "#/components/schemas/LicenseData"
+                                "$ref": "#/components/schemas/LicenseReport"
                             }
                         }
                     }
@@ -875,7 +875,7 @@
                                     }
                                 },
                                 "schema": {
-                                    "$ref": "#/components/schemas/LicenseData"
+                                    "$ref": "#/components/schemas/LicenseReport"
                                 }
                             }
                         },
@@ -897,10 +897,10 @@
                 "summary": "Store License Analytics Data"
             }
         },
-        "/API/LicenseData/Correlation/": {
+        "/API/LicenseReport/Correlation/": {
             "get": {
-                "description": "Retrieves the list of correlation records for the authenticated tenant. Correlation records store the metadata for a specific license data report. This endpoint requires the `LicenseData.Read`,  `LicenseData.Read.All`, `LicenseData.ReadWrite`, or `LicenseData.ReadWrite.All` scope (permission).",
-                "operationId": "/API/LicenseData/Correlation/Get",
+                "description": "Retrieves the list of correlation records for the authenticated tenant. Correlation records store the metadata for a specific license report. This endpoint requires the `LicenseReport.Read`,  `LicenseReport.Read.All`, `LicenseReport.ReadWrite`, or `LicenseReport.ReadWrite.All` scope (permission).",
+                "operationId": "/API/LicenseReport/Correlation/Get",
                 "responses": {
                     "200": {
                         "content": {
@@ -933,7 +933,7 @@
                                     "type": "array",
                                     "minItems": 0,
                                     "items": {
-                                        "$ref": "#/components/schemas/LicenseData.CorrelationRecord"
+                                        "$ref": "#/components/schemas/LicenseReport.CorrelationRecord"
                                     }
                                 }
                             }
@@ -953,10 +953,10 @@
                 "summary": "Retrieve the List of Correlation Records"
             }
         },
-        "/API/LicenseData/Correlation/Tenant/{tenantId}/": {
+        "/API/LicenseReport/Correlation/Tenant/{tenantId}/": {
             "get": {
-                "description": "Retrieves the list of correlation records for the specified tenant. Correlation records store the metadata for a specific license data report. This endpoint requires the `LicenseData.Read.All`, or `LicenseData.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
-                "operationId": "/API/LicenseData/Correlation/Tenant/:tenantId/Get",
+                "description": "Retrieves the list of correlation records for the specified tenant. Correlation records store the metadata for a specific license report. This endpoint requires the `LicenseReport.Read.All`, or `LicenseReport.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "operationId": "/API/LicenseReport/Correlation/Tenant/:tenantId/Get",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/tenantId"
@@ -994,7 +994,7 @@
                                     "type": "array",
                                     "minItems": 0,
                                     "items": {
-                                        "$ref": "#/components/schemas/LicenseData.CorrelationRecord"
+                                        "$ref": "#/components/schemas/LicenseReport.CorrelationRecord"
                                     }
                                 }
                             }
@@ -1017,10 +1017,10 @@
                 "summary": "Retrieve the List of Correlation Records for Specified Tenant"
             }
         },
-        "/API/LicenseData/Correlation/{correlationId}/Data/": {
+        "/API/LicenseReport/Correlation/{correlationId}/Data/": {
             "get": {
-                "description": "Retrieves the full license data report for the specified correlation ID in the authenticated tenant. The license data report contains all of the license usage and compliance information with the required correlation data. This endpoint requires the `LicenseData.Read`, `LicenseData.Read.All`, `LicenseData.ReadWrite`, or `LicenseData.ReadWrite.All` scope (permission).",
-                "operationId": "/API/LicenseData/Correlation/:correlationId/Data/Get",
+                "description": "Retrieves the full license report for the specified correlation ID in the authenticated tenant. The license report contains all of the license usage and compliance information with the required correlation data. This endpoint requires the `LicenseReport.Read`, `LicenseReport.Read.All`, `LicenseReport.ReadWrite`, or `LicenseReport.ReadWrite.All` scope (permission).",
+                "operationId": "/API/LicenseReport/Correlation/:correlationId/Data/Get",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/correlationId"
@@ -1087,7 +1087,7 @@
                                     }
                                 },
                                 "schema": {
-                                    "$ref": "#/components/schemas/LicenseData"
+                                    "$ref": "#/components/schemas/LicenseReport"
                                 }
                             }
                         },
@@ -1106,13 +1106,13 @@
                 "tags": [
                     "License Analytics"
                 ],
-                "summary": "Retrieve the Specified License Data Report"
+                "summary": "Retrieve the Specified License Report"
             }
         },
-        "/API/LicenseData/Correlation/{correlationId}/Tenant/{tenantId}/Data/": {
+        "/API/LicenseReport/Correlation/{correlationId}/Tenant/{tenantId}/Data/": {
             "get": {
-                "description": "Retrieves the full license data report for the specified correlation ID and tenant. The license data report contains all of the license usage and compliance information with the required correlation data. This endpoint requires the `LicenseData.Read.All`, or `LicenseData.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
-                "operationId": "/API/LicenseData/Correlation/:correlationId/Tenant/:tenantId/Data/Get",
+                "description": "Retrieves the full license report for the specified correlation ID and tenant. The license report contains all of the license usage and compliance information with the required correlation data. This endpoint requires the `LicenseReport.Read.All`, or `LicenseReport.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "operationId": "/API/LicenseReport/Correlation/:correlationId/Tenant/:tenantId/Data/Get",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/correlationId"
@@ -1182,7 +1182,7 @@
                                     }
                                 },
                                 "schema": {
-                                    "$ref": "#/components/schemas/LicenseData"
+                                    "$ref": "#/components/schemas/LicenseReport"
                                 }
                             }
                         },
@@ -1201,11 +1201,11 @@
                 "tags": [
                     "License Analytics"
                 ],
-                "summary": "Retrieve the Specified License Data Report for Specified Tenant"
+                "summary": "Retrieve the Specified License Report for Specified Tenant"
             },
             "delete": {
-                "description": "Deletes the full license data report for the specified correlation ID and tenant. This endpoint requires the `LicenseData.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
-                "operationId": "/API/LicenseData/Correlation/:correlationId/Tenant/:tenantId/Data/delete",
+                "description": "Deletes the full license report for the specified correlation ID and tenant. This endpoint requires the `LicenseReport.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "operationId": "/API/LicenseReport/Correlation/:correlationId/Tenant/:tenantId/Data/delete",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/correlationId"
@@ -1231,7 +1231,7 @@
                 "tags": [
                     "License Analytics"
                 ],
-                "summary": "Delete the Specified License Data Report for Specified Tenant"
+                "summary": "Delete the Specified License Report for Specified Tenant"
             }
         },
         "/API/Entitlement/Sop/": {
