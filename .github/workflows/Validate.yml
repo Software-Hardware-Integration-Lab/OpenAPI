@@ -44,6 +44,6 @@ jobs:
     # Run the validation of all Specification Files
     - name: Validate OpenAPI Specs
       run: |
-        for file in $(find . -name "*.json"); do
+        for file in $(find . -path ./\.vscode -prune -name "*.json"); do
           openapi-generator-cli validate -i "$file"
         done
