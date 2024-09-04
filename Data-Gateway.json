@@ -135,8 +135,7 @@
                     }
                 },
                 "required": [
-                    "AuditTenantAccount",
-                    "ReportTenantAccount"
+                    "AuditTenantAccount"
                 ],
                 "title": "License Report - Correlation Record",
                 "type": "object"
@@ -760,10 +759,7 @@
                                             "d76878d6-1495-4243-a334-a82bb9818cd0": 500
                                         },
                                         "Correlation": {
-                                            "AuditTenantAccount": "somebodyThatI@example.com",
-                                            "CorrelationId": "6d7c9271-9e68-4bdf-9ae3-f90c4213f74b",
-                                            "ReportTenantAccount": "usedToKnow@example.com",
-                                            "TenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db"
+                                            "AuditTenantAccount": "somebodyThatI@UsedToKnow.com"
                                         },
                                         "LicenseData": {
                                             "250844e1-a7ab-4f21-8e3f-58f51b5983a3": {
