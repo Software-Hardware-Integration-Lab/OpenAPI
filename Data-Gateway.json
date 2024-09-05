@@ -250,7 +250,12 @@
                                     "description": "Usage telemetry retrieved for the service to indicate if the specific principal is consuming the service or not, regardless of license status.",
                                     "type": "object"
                                 }
-                            }
+                            },
+                            "required": [
+                                "AssignedLicense",
+                                "AssignedService",
+                                "ConsumedService"
+                            ]
                         },
                         "description": "Collection of principals that have had their in-use licenses and assigned licenses. Where the key is the principal ID and the value is the insights.",
                         "example": {
