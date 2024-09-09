@@ -140,6 +140,102 @@
                 "title": "License Report - Correlation Record",
                 "type": "object"
             },
+            "LicenseReport.LicenseData": {
+                "type": "object",
+                "properties": {
+                    "AssignedLicense": {
+                        "additionalProperties": {
+                            "type": "integer",
+                            "nullable": true
+                        },
+                        "description": "License assignment on the specified principal.",
+                        "type": "object"
+                    },
+                    "AssignedService": {
+                        "additionalProperties": {
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/LicenseReport.FeatureBreakdown"
+                                },
+                                {
+                                    "type": "integer",
+                                    "format": "int32"
+                                }
+                            ],
+                            "nullable": true
+                        },
+                        "description": "Service configuration assignment.  This is used to record the set of principals that are \"benefiting\" from the service, regardless of license status.",
+                        "type": "object"
+                    },
+                    "ConsumedService": {
+                        "additionalProperties": {
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/LicenseReport.FeatureBreakdown"
+                                },
+                                {
+                                    "type": "integer",
+                                    "format": "int32"
+                                }
+                            ],
+                            "nullable": true
+                        },
+                        "description": "Usage telemetry retrieved for the service to indicate if the specific principal is consuming the service or not, regardless of license status.",
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "AssignedLicense",
+                    "AssignedService",
+                    "ConsumedService"
+                ],
+                "description": "Collection of principals that have had their in-use licenses and assigned licenses. Where the key is the principal ID and the value is the insights.",
+                "example": {
+                    "AssignedLicense": {
+                        "eec0eb4f-6444-4f95-aba0-50c24d67f998": null,
+                        "41781fb2-bc02-4b7c-bd55-b576c07bb09d": null,
+                        "7159f980-6f83-4b67-bf41-e172b3ae1352": null
+                    },
+                    "AssignedService": {
+                        "eec0eb4f-6444-4f95-aba0-50c24d67f998": {
+                            "Conditional Access": false,
+                            "Access Review": true,
+                            "Entitlement Management": false,
+                            "Identity Protection": true
+                        },
+                        "41781fb2-bc02-4b7c-bd55-b576c07bb09d": {
+                            "Conditional Access": true,
+                            "Dynamic Group": false,
+                            "Group Naming": true,
+                            "On-Prem SSPR": false,
+                            "Group Expiration": true,
+                            "Provisioning Engine": true,
+                            "Enterprise State Roaming": false
+                        },
+                        "6511755b-c27d-4c66-a59e-b835e6b54e7f": null
+                    },
+                    "ConsumedService": {
+                        "eec0eb4f-6444-4f95-aba0-50c24d67f998": {
+                            "Conditional Access": true,
+                            "Access Review": false,
+                            "Entitlement Management": false,
+                            "Identity Protection": true
+                        },
+                        "41781fb2-bc02-4b7c-bd55-b576c07bb09d": {
+                            "Conditional Access": true,
+                            "Dynamic Group": false,
+                            "Group Naming": true,
+                            "On-Prem SSPR": false,
+                            "Group Expiration": true,
+                            "Provisioning Engine": true,
+                            "Enterprise State Roaming": false
+                        },
+                        "4b0d28f2-c1ce-48ae-a7d2-1caaa7825891": null,
+                        "c90f1a25-e6cd-4163-ac6c-ca7616c585a9": null
+                    }
+                },
+                "title": "License Report - License Data"
+            },
             "LicenseReport.FeatureBreakdown": {
                 "additionalProperties": {
                     "type": "boolean"
@@ -208,129 +304,8 @@
                     },
                     "LicenseData": {
                         "additionalProperties": {
-                            "type": "object",
-                            "properties": {
-                                "AssignedLicense": {
-                                    "additionalProperties": {
-                                        "type": "integer",
-                                        "nullable": true
-                                    },
-                                    "description": "License assignment on the specified principal.",
-                                    "type": "object"
-                                },
-                                "AssignedService": {
-                                    "additionalProperties": {
-                                        "oneOf": [
-                                            {
-                                                "$ref": "#/components/schemas/LicenseReport.FeatureBreakdown"
-                                            },
-                                            {
-                                                "type": "integer",
-                                                "format": "int32"
-                                            }
-                                        ],
-                                        "nullable": true
-                                    },
-                                    "description": "Service configuration assignment.  This is used to record the set of principals that are \"benefiting\" from the service, regardless of license status.",
-                                    "type": "object"
-                                },
-                                "ConsumedService": {
-                                    "additionalProperties": {
-                                        "oneOf": [
-                                            {
-                                                "$ref": "#/components/schemas/LicenseReport.FeatureBreakdown"
-                                            },
-                                            {
-                                                "type": "integer",
-                                                "format": "int32"
-                                            }
-                                        ],
-                                        "nullable": true
-                                    },
-                                    "description": "Usage telemetry retrieved for the service to indicate if the specific principal is consuming the service or not, regardless of license status.",
-                                    "type": "object"
-                                }
-                            },
-                            "required": [
-                                "AssignedLicense",
-                                "AssignedService",
-                                "ConsumedService"
-                            ]
-                        },
-                        "description": "Collection of principals that have had their in-use licenses and assigned licenses. Where the key is the principal ID and the value is the insights.",
-                        "example": {
-                            "17d963dd-8a19-4025-8b84-47fb6f6eaa7f": {
-                                "AssignedLicense": {
-                                    "eec0eb4f-6444-4f95-aba0-50c24d67f998": null,
-                                    "41781fb2-bc02-4b7c-bd55-b576c07bb09d": null,
-                                    "7159f980-6f83-4b67-bf41-e172b3ae1352": null
-                                },
-                                "AssignedService": {
-                                    "eec0eb4f-6444-4f95-aba0-50c24d67f998": {
-                                        "Conditional Access": false,
-                                        "Access Review": true,
-                                        "Entitlement Management": false,
-                                        "Identity Protection": true
-                                    },
-                                    "41781fb2-bc02-4b7c-bd55-b576c07bb09d": {
-                                        "Conditional Access": true,
-                                        "Dynamic Group": false,
-                                        "Group Naming": true,
-                                        "On-Prem SSPR": false,
-                                        "Group Expiration": true,
-                                        "Provisioning Engine": true,
-                                        "Enterprise State Roaming": false
-                                    },
-                                    "6511755b-c27d-4c66-a59e-b835e6b54e7f": null
-                                },
-                                "ConsumedService": {
-                                    "eec0eb4f-6444-4f95-aba0-50c24d67f998": {
-                                        "Conditional Access": true,
-                                        "Access Review": false,
-                                        "Entitlement Management": false,
-                                        "Identity Protection": true
-                                    },
-                                    "41781fb2-bc02-4b7c-bd55-b576c07bb09d": {
-                                        "Conditional Access": true,
-                                        "Dynamic Group": false,
-                                        "Group Naming": true,
-                                        "On-Prem SSPR": false,
-                                        "Group Expiration": true,
-                                        "Provisioning Engine": true,
-                                        "Enterprise State Roaming": false
-                                    },
-                                    "4b0d28f2-c1ce-48ae-a7d2-1caaa7825891": null,
-                                    "c90f1a25-e6cd-4163-ac6c-ca7616c585a9": null
-                                }
-                            },
-                            "7a360e84-1bbe-4406-bf7d-25ae2405cbfc": {
-                                "AssignedLicense": {},
-                                "AssignedService": {
-                                    "eec0eb4f-6444-4f95-aba0-50c24d67f998": {
-                                        "Conditional Access": false,
-                                        "Access Review": true,
-                                        "Entitlement Management": false,
-                                        "Identity Protection": true
-                                    },
-                                    "41781fb2-bc02-4b7c-bd55-b576c07bb09d": {
-                                        "Conditional Access": true,
-                                        "Dynamic Group": false,
-                                        "Group Naming": true,
-                                        "On-Prem SSPR": false,
-                                        "Group Expiration": true,
-                                        "Provisioning Engine": true,
-                                        "Enterprise State Roaming": false
-                                    },
-                                    "6511755b-c27d-4c66-a59e-b835e6b54e7f": null
-                                },
-                                "ConsumedService": {
-                                    "4b0d28f2-c1ce-48ae-a7d2-1caaa7825891": null,
-                                    "c90f1a25-e6cd-4163-ac6c-ca7616c585a9": null
-                                }
-                            }
-                        },
-                        "title": "License Report - Computed Principals",
-                        "type": "object"
+                            "$ref": "#/components/schemas/LicenseReport.LicenseData"
+                        }
                     }
                 },
                 "title": "License Report - Complete Object"
