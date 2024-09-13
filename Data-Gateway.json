@@ -667,6 +667,19 @@
                 ],
                 "title": "Application Telemetry - SOP",
                 "type": "object"
+            },
+            "Update.Sop.Check": {
+                "description": "Object returning the value of the version of the latest application package available.",
+                "properties": {
+                    "updateVersion": {
+                        "description": "Latest found version of the application package.",
+                        "example": "1.12.5",
+                        "type": "string"
+                    }
+                },
+                "required": [ "updateVersion" ],
+                "title": "Update SOP Check - latest application package version",
+                "type": "object"
             }
         },
         "securitySchemes": {
@@ -1806,6 +1819,81 @@
                 "summary": "Delete Specified Telemetry Record",
                 "tags": [
                     "Telemetry"
+                ]
+            }
+        },
+        "/API/Update/Sop/Check/": {
+            "get": {
+                "description": "Retrieves the latest available version of the package for the running application. Version depends on the channel associated with the current tenant, or channel mentioned in the request, or default channel value. Applicable channel would be calculated on the server for each request.",
+                "operationId": "/API/Update/Sop/Check/Get",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "channel",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": false,
+                        "description": "Name of the deploy channel where to look for the latest version of the application package."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Update.Sop.Check"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "400": {
+                      "$ref": "#/components/responses/400"
+                    },
+                    "500": {
+                        "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
+                    }
+                },
+                "tags": [
+                    "SOP Update"
+                ]
+            }
+        },
+        "/API/Update/Sop/Download/": {
+            "get": {
+                "description": "Receives a stream of the ZIP archive content to be saved and that represents requested application update package.",
+                "operationId": "/API/Update/Sop/Download/Get",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "channel",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": false,
+                        "description": "Name of the deploy channel where to look for the latest version of the application package."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/zip": {
+                                "type": "string",
+                                "format": "binary"
+                            }
+                        }
+                    },
+                    "400": {
+                      "$ref": "#/components/responses/400"
+                    },
+                    "500": {
+                        "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
+                    }
+                },
+                "tags": [
+                    "SOP Update"
                 ]
             }
         }
