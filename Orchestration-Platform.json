@@ -89,20 +89,179 @@
             }
         },
         "responses": {
+            "201": {
+                "description": "The authorization was recorded successfully."
+            },
+            "202": {
+                "description": "The process to create a report has started."
+            },
             "401": {
                 "description": "Principal is not authorized to access this endpoint. Check to make sure the Bearer token is valid and present!"
             },
             "404": {
                 "description": "The requested object was not found."
             },
-            "503": {
-                "description": "App is starting still. Feature is not available. Please try again later."
+            "409": {
+                "description": "A job is already in progress."
             },
             "525": {
                 "description": "Infrastructure not deployed. Please deploy the infrastructure before using this endpoint."
             }
         },
         "schemas": {
+            "Core.SystemRequirements": {
+                "title": "Core - System Requirements",
+                "description": "Collection of indicators that notify the caller if the system requirements have been met for various sub components to operate.",
+                "properties": {
+                    "AzurePermissions": {
+                        "description": "Flag that indicates if the required Azure RBAC assignment(s) are present or not.",
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "DefendEntitlement": {
+                        "description": "Flag that indicates if the required defend licenses are present or not.",
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "DiscoverEntitlement": {
+                        "description": "Flag that indicates if the required discover licenses are present or not.",
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "EntraPermissions": {
+                        "description": "Flag that indicates if the required Entra ID Role assignment(s) are present or not.",
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "ServicePlans": {
+                        "description": "Flag that indicates if the required M365 licenses are present or not.",
+                        "type": "boolean",
+                        "example": false
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "AzurePermissions",
+                    "DefendEntitlement",
+                    "DiscoverEntitlement",
+                    "EntraPermissions",
+                    "ServicePlans"
+                ]
+            },
+            "Shield.Authenticator.Status": {
+                "title": "Authentication - Status",
+                "description": "List of credentials that are being waited for by SHIELD's internal authentication engine.",
+                "properties": {
+                    "accessToken": {
+                        "oneOf": [
+                            {
+                                "description": "Flag that represents if the server is not waiting for a specific access token.",
+                                "type": "boolean",
+                                "example": false
+                            },
+                            {
+                                "$ref": "#/components/schemas/Shield.Authenticator.Status.TokenAudience"
+                            }
+                        ]
+                    },
+                    "sccAuth": {
+                        "description": "Flag that represents if the server is waiting for SCC Auth credentials.",
+                        "type": "boolean",
+                        "example": true
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "accessToken",
+                    "sccAuth"
+                ]
+            },
+            "Shield.Authenticator.Status.TokenAudience": {
+                "title": "SHIELD - Authenticator - Status - Token Audience",
+                "description": "If a access token is being requested, this is the audience that the access token should have when being submitted.",
+                "properties": {
+                    "audience": {
+                        "description": "Audience ID of the access token that is being requested.",
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "00000002-0000-0000-c000-000000000000"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "audience"
+                ]
+            },
+            "Shield.Authenticator.Container.Credentials": {
+                "title": "SHIELD - Authenticator - SCC Auth",
+                "description": "SHIELD - Defender, and Purview portal Container Credentials",
+                "type": "object",
+                "properties": {
+                    "authenticatedUpn": {
+                        "description": "User principal name of the user that authenticated to the portals.",
+                        "example": "user@example.com",
+                        "type": "string",
+                        "format": "email"
+                    },
+                    "expiration": {
+                        "description": "Point in time at which the whole authentication structure has an expired state and is un-useable.",
+                        "example": "2024-09-26T18:16:29.340Z",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "security": {
+                        "$ref": "#/components/schemas/Shield.Authenticator.Container.Credentials.SccAuth"
+                    },
+                    "compliance": {
+                        "$ref": "#/components/schemas/Shield.Authenticator.Container.Credentials.SccAuth"
+                    },
+                    "purview": {
+                        "$ref": "#/components/schemas/Shield.Authenticator.Container.Credentials.SccAuth"
+                    }
+                },
+                "required": [
+                    "authenticatedUpn",
+                    "security",
+                    "compliance",
+                    "purview"
+                ]
+            },
+            "Shield.Authenticator.Container.Credentials.SccAuth": {
+                "title": "SHIELD - Authenticator - SCC Auth - Credential Container",
+                "description": "Container for the credentials for a single SccAuth authenticated site.",
+                "properties": {
+                    "sccAuth": {
+                        "description": "Authentication Token.",
+                        "example": "54BKPtTL-eSMFp5cqYTMMSblm2U80cUJqQgmbe4f_sRn4ammMmU1NKNurn9HqpsUtS4FrMJRTKa3Or_pFbedM_57R0fVBfNJ-m2Pvey9OweWIDradzT0dB1WnufPTJiT2y7zSQy91Y9wJIn1_aY5q-MNh75qwjM84Dng-mYzbd9KqUfyPUolOo-j-... (Truncated)",
+                        "type": "string"
+                    },
+                    "xsrf": {
+                        "description": "Cross Site Request Forgery Prevention Token.",
+                        "example": "PEDwTvWdm2qSTe-n8h-1praK4OcQK1ELTJ08DWYqBRzQiyA2MIuEKEMNLu4ExjDNpAOUnAxmsqOeuGzb82MJYkegOE6hW8BzpSM6k9nbTbJ4yjNGzMSQvWUnyqrBvGa8JfSRiSeaKdXGBnxGd90Spw2:... (truncated)",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "sccAuth",
+                    "xsrf"
+                ],
+                "type": "object"
+            },
+            "Shield.Discover.Status": {
+                "title": "Discover - Status",
+                "description": "Detailed status that indicates the current state of the Discover engine and its progress.",
+                "type": "object",
+                "properties": {
+                    "running": {
+                        "description": "Flag that indicates if another run is already in progress or not.",
+                        "type": "boolean",
+                        "example": true
+                    }
+                },
+                "required": [
+                    "running"
+                ]
+            },
             "Intermediary": {
                 "description": "Base template for all intermediary objects to inherit from.",
                 "properties": {
@@ -483,6 +642,29 @@
     },
     "openapi": "3.0.0",
     "paths": {
+        "/API/Core/SystemRequirements": {
+            "get": {
+                "description": "Provides a detailed breakdown of if the system requirements are being met for the various components of the SHIELD platform.",
+                "operationId": "/API/Core/GetSystemRequirements",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Core.SystemRequirements"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "Core"
+                ],
+                "security": [],
+                "summary": "Indicates if the System Requirements are met or not."
+            }
+        },
         "/API/Auth/Id": {
             "get": {
                 "description": "Provides the Tenant ID and the Application ID of the service principal that access tokens need to be issued against. This is also useful for configuring public clients to be able to authenticate to for auth code flows.",
@@ -491,35 +673,15 @@
                     "200": {
                         "content": {
                             "application/json": {
-                                "examples": {
-                                    "Tenant Configuration": {
-                                        "description": "All API calls should be available since the core infrastructure is deployed.",
-                                        "summary": "Infrastructure is deployed",
-                                        "value": {
-                                            "appId": "241fa678-f004-400b-b8e4-ac7b9cfb052c",
-                                            "tenantId": "23aa34d3-6ccc-457d-bc9c-93a234a19519"
-                                        }
-                                    }
-                                },
                                 "schema": {
                                     "properties": {
                                         "appId": {
                                             "description": "Application ID that should be used in Access Tokens as the audience and the endpoint necessary for auth code flows.",
-                                            "example": {
-                                                "summary": "Example Application ID",
-                                                "description": "Application ID is not the Object ID of the service principal.",
-                                                "value": "5ac148a6-9b7e-42d8-be8d-16b777b63cf5"
-                                            },
                                             "type": "string",
                                             "format": "uuid"
                                         },
                                         "tenantId": {
                                             "description": "Tenant ID necessary for authority host URL configuration and UI customization.",
-                                            "example": {
-                                                "summary": "Example Tenant ID",
-                                                "description": "Tenant ID to send authentication requests to for the specific web app instance.",
-                                                "value": "7254d111-8bd3-4f7a-8ca4-fa15b08c46e3"
-                                            },
                                             "type": "string",
                                             "format": "uuid"
                                         }
@@ -534,9 +696,6 @@
                         },
                         "description": "OK"
                     },
-                    "503": {
-                        "$ref": "#/components/responses/503"
-                    },
                     "525": {
                         "$ref": "#/components/responses/525"
                     }
@@ -546,6 +705,170 @@
                 ],
                 "security": [],
                 "summary": "Retrieves the IDs required to authenticate."
+            }
+        },
+        "/API/Auth/Authenticator": {
+            "get": {
+                "summary": "Provides Attestation for Authenticator App",
+                "description": "Provides the attestation to the authenticator that this endpoint is authorized for receiving credentials from the authenticator.",
+                "operationId": "/API/Auth/GetAuthenticator",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "Access token that the SHIELD platform uses to prove it is a valid recipient of credentials.",
+                                    "type": "string",
+                                    "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik1jN2wzSXo5M2c3dXdnTmVFbW13X1dZR1BrbyJ9.eyJhdWQiOiJjYjU5ZjIyOC0wNjkwLTRhY2ItOWE3Yi0wMGMzNmEyZjRlOGQiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vMmQxMDJkYTktZDExZS00YTgwLTkwMjItYzQxOGZhNDg1NGM3L3YyLjAiLCJpYXQiOjE3MjczNjgzODQsIm5iZiI6MTcyNzM2ODM4NCwiZXhwIjoxNzI3MzcyMjg0LCJhaW8iOiJBU1FBMi84WUFBQUFSN0hyaW5XTmRwcisvdnoreWlkZER6WVExeFRpc3BSZGY4TG1XNjhRaE0wPSIsImF6cCI6IjRlODU5MTQ2LWY5M2UtNDlmMi05ODZmLWI3MjIyNmZjZDViOSIsImF6cGFjciI6IjEiLCJvaWQiOiJlMmRlNzQ0ZC1hZjVlLTQ4NDEtYmI4Zi02OTRkZDI1ZmVmNGQiLCJyaCI6IjAuQWNvQXFTMFFMUjdSZ0VxUUlzUVkta2hVeHlqeVdjdVFCc3RLbW5zQXcyb3ZUbzM2QUFBLiIsInJvbGVzIjpbIkF1dGhlbnRpY2F0b3IuQXR0ZXN0Il0sInN1YiI6ImUyZGU3NDRkLWFmNWUtNDg0MS1iYjhmLTY5NGRkMjVmZWY0ZCIsInRpZCI6IjJkMTAyZGE5LWQxMWUtNGE4MC05MDIyLWM0MThmYTQ4NTRjNyIsInV0aSI6Il9MaUdVWWxmS2txNFZoR09NeGw4QUEiLCJ2ZXIiOiIyLjAifQ.xlXZfOnDoOVW3_aOiSIZH8uiySeohro-HVnDzDEff2EjmOk9adrTOP5Sw1av6g3vy38r6dSu4tViwNGrb7Z2krgRKKvp-4A9rkPqeJjjd2rhFl2KiOlxL0mmykbroZZ70RJzwHy2GC7wfuLwJwr-5m7POV2grbxIAlTsMdZWDFXYi-AahfDVtLugarWG5-tXAqiPBKjaU6ntAJIbu7Ol1vYZaeYMsNKTs8O1P10YM460zN9OkfoI1gV7_InHEr8RSyQnEPCJ2W1Or4lDhqdey4ohMoP9EzLgMsn9Ckss5g5C6vVE0GQawUoeGozPOBpgb31J8JzZUyB1JyVfi-vKkQ"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "Authentication"
+                ]
+            }
+        },
+        "/API/Auth/Authenticator/Cache/Status": {
+            "get": {
+                "summary": "Indicates if SHIELD is waiting for any credentials.",
+                "description": "Provides a breakdown view of if the platform is waiting for any specific type of credential or credentials.",
+                "operationId": "/API/Auth/Authenticator/Cache/GetStatus",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Waiting on Nothing": {
+                                        "description": "No credentials are being requested at the moment.",
+                                        "value": {
+                                            "accessToken": false,
+                                            "sccAuth": false
+                                        }
+                                    },
+                                    "Waiting on Access Token": {
+                                        "description": "Waiting on an Access Token with the Audience of the Legacy Windows Graph API.",
+                                        "value": {
+                                            "accessToken": {
+                                                "audience": "00000002-0000-0000-c000-000000000000"
+                                            },
+                                            "sccAuth": false
+                                        }
+                                    },
+                                    "Waiting on SccAuth": {
+                                        "description": "Waiting on an SCC Auth data from the SHIELD - Authenticator App.",
+                                        "value": {
+                                            "accessToken": false,
+                                            "sccAuth": true
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/Shield.Authenticator.Status"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "Authentication"
+                ]
+            }
+        },
+        "/API/Auth/Authenticator/Cache/SccAuth": {
+            "post": {
+                "description": "Provide your SHIELD authenticator credentials",
+                "operationId": "/API/Auth/Authenticator/Cache/PostSccAuth",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Shield.Authenticator.Container.Credentials"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Credential was successfully stored"
+                    }
+                },
+                "summary": "Configure the  web server to support and process the authentication API routes",
+                "tags": [
+                    "Authentication"
+                ]
+            }
+        },
+        "/API/Auth/Authenticator/Cache/AccessToken": {
+            "post": {
+                "summary": "Receive Access Token Credentials",
+                "description": "SHIELD Authenticator credentials for the requested Access Token.",
+                "operationId": "/API/Auth/Authenticator/Cache/PostAccessToken",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "description": "Access Token to be stored in the SHIELD authentication engine.",
+                                "type": "string",
+                                "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik1jN2wzSXo5M2c3dXdnTmVFbW13X1dZR1BrbyJ9.eyJhdWQiOiI0YzQwMjgxYi1hMzA1LTRhYWYtOTBhNC1kNWJiZWU2ZWI4ZWQiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vMmQxMDJkYTktZDExZS00YTgwLTkwMjItYzQxOGZhNDg1NGM3L3YyLjAiLCJpYXQiOjE3MjczNzUzNzMsIm5iZiI6MTcyNzM3NTM3MywiZXhwIjoxNzI3Mzc5MjczLCJhaW8iOiJrMkJnWU9BM1ByL2lTc2loRmYzeU9uVk40UTZOc1dsZnRnWEhoMW5HYm5saWVuS1hRZ2tBIiwiYXpwIjoiNGU4NTkxNDYtZjkzZS00OWYyLTk4NmYtYjcyMjI2ZmNkNWI5IiwiYXpwYWNyIjoiMSIsIm9pZCI6ImUyZGU3NDRkLWFmNWUtNDg0MS1iYjhmLTY5NGRkMjVmZWY0ZCIsInJoIjoiMC5BY29BcVMwUUxSN1JnRXFRSXNRWS1raFV4eHNvUUV3Rm82OUtrS1RWdS01dXVPMzZBQUEuIiwicm9sZXMiOlsiVGVsZW1ldHJ5LlNvcC5SZWFkV3JpdGUiLCJMaWNlbnNlUmVwb3J0LlJlYWRXcml0ZSJdLCJzdWIiOiJlMmRlNzQ0ZC1hZjVlLTQ4NDEtYmI4Zi02OTRkZDI1ZmVmNGQiLCJ0aWQiOiIyZDEwMmRhOS1kMTFlLTRhODAtOTAyMi1jNDE4ZmE0ODU0YzciLCJ1dGkiOiJfTGlHVVlsZktrcTRWaEdPXzNpRkFBIiwidmVyIjoiMi4wIn0.CZMOfyo5Lo1Km8bgWtOw8f30n1AZ5HJQ-StyIPr_P_eEjanzHVSEiRsHweNATW0GQFfLs0lGH43xztFcNNepu7CctyEzoktJ-9De2mMLIMJviF1rlB19mxH3a3hUSPZuPeYPPONkYtjL4fZj0mCYcALoq-orc0Oswg0l3fatbS7a-DAgxZdLHa6M7OtXksMlMXwooxmocOQeg_zhpko1zyuzSsVwNrz1uMZYpivwaM1ImWZiqgjMc1NWCN2Co1nYNuvxg6Chcr0OOsPRaXayfzrP7IlsZIg5Itg9lrqN0cjT3t8GSejL2P8HmfPcYftlqOobCesjSfBthir5hGUoNA"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Credential was successfully stored"
+                    },
+                    "400": {
+                        "description": "Invalid Access Token"
+                    }
+                },
+                "tags": [
+                    "Authentication"
+                ]
+            }
+        },
+        "/API/Discover/Status": {
+            "get": {
+                "summary": "State of the Discover Module.",
+                "description": "Provides a detailed breakdown of the current state of the discover module and it progress.",
+                "operationId": "/API/Discover/GetStatus",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Shield.Discover.Status"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "Discover"
+                ]
+            }
+        },
+        "/API/Discover/Report": {
+            "get": {
+                "summary": "Start Discover's Report Generation",
+                "description": "Starts the Discover module's report collection engine to create a license report and upload it to the data gateway.",
+                "operationId": "/API/Discover/GetReport",
+                "responses": {
+                    "202": {
+                        "$ref": "#/components/responses/202"
+                    },
+                    "409": {
+                        "$ref": "#/components/responses/409"
+                    }
+                },
+                "tags": [
+                    "Discover"
+                ]
             }
         },
         "/API/Infrastructure/Deploy": {
@@ -577,9 +900,6 @@
                     },
                     "401": {
                         "$ref": "#/components/responses/401"
-                    },
-                    "503": {
-                        "$ref": "#/components/responses/503"
                     }
                 },
                 "summary": "Get the current status of the infrastructure deployment",
@@ -688,9 +1008,6 @@
                     },
                     "401": {
                         "$ref": "#/components/responses/401"
-                    },
-                    "503": {
-                        "$ref": "#/components/responses/503"
                     }
                 },
                 "summary": "Gets the version of SOPs components",
@@ -699,7 +1016,7 @@
                 ]
             }
         },
-        "/API/Intermediary/Type/{securityClass}/Offering/8a921026-ec06-4e08-af19-8812e161e61f/Instance/": {
+        "/API/Intermediary/Type/{securityClass}/Offering/8a921026-ec06-4e08-af19-8812e161e61f/Instance": {
             "get": {
                 "description": "Retrieves a list of all AVD intermediaries for the specified security class filter. Next links may be provided for pagination to allow for good performance on larger environments. If a nextLink is return, not all data was returned on this query and the next link can be sent back to the API to get the next page of data.",
                 "operationId": "/API/Intermediary/AVD/GetAll",
@@ -727,9 +1044,6 @@
                     },
                     "401": {
                         "$ref": "#/components/responses/401"
-                    },
-                    "503": {
-                        "$ref": "#/components/responses/503"
                     },
                     "525": {
                         "$ref": "#/components/responses/525"
@@ -762,9 +1076,6 @@
                     },
                     "404": {
                         "$ref": "#/components/responses/404"
-                    },
-                    "503": {
-                        "$ref": "#/components/responses/503"
                     },
                     "525": {
                         "$ref": "#/components/responses/525"
@@ -802,9 +1113,6 @@
                     },
                     "404": {
                         "$ref": "#/components/responses/404"
-                    },
-                    "503": {
-                        "$ref": "#/components/responses/503"
                     },
                     "525": {
                         "$ref": "#/components/responses/525"
@@ -879,9 +1187,6 @@
                     "404": {
                         "$ref": "#/components/responses/404"
                     },
-                    "503": {
-                        "$ref": "#/components/responses/503"
-                    },
                     "525": {
                         "$ref": "#/components/responses/525"
                     }
@@ -926,9 +1231,6 @@
                     },
                     "404": {
                         "$ref": "#/components/responses/404"
-                    },
-                    "503": {
-                        "$ref": "#/components/responses/503"
                     },
                     "525": {
                         "$ref": "#/components/responses/525"
@@ -1012,9 +1314,6 @@
                     "404": {
                         "$ref": "#/components/responses/404"
                     },
-                    "503": {
-                        "$ref": "#/components/responses/503"
-                    },
                     "525": {
                         "$ref": "#/components/responses/525"
                     }
@@ -1060,9 +1359,6 @@
                     },
                     "404": {
                         "$ref": "#/components/responses/404"
-                    },
-                    "503": {
-                        "$ref": "#/components/responses/503"
                     },
                     "525": {
                         "$ref": "#/components/responses/525"
@@ -1142,9 +1438,6 @@
                     "401": {
                         "$ref": "#/components/responses/401"
                     },
-                    "503": {
-                        "$ref": "#/components/responses/503"
-                    },
                     "525": {
                         "$ref": "#/components/responses/525"
                     }
@@ -1179,9 +1472,6 @@
                     },
                     "401": {
                         "$ref": "#/components/responses/401"
-                    },
-                    "503": {
-                        "$ref": "#/components/responses/503"
                     },
                     "525": {
                         "$ref": "#/components/responses/525"
@@ -1259,9 +1549,6 @@
                     "401": {
                         "$ref": "#/components/responses/401"
                     },
-                    "503": {
-                        "$ref": "#/components/responses/503"
-                    },
                     "525": {
                         "$ref": "#/components/responses/525"
                     }
@@ -1300,9 +1587,6 @@
                     },
                     "401": {
                         "$ref": "#/components/responses/401"
-                    },
-                    "503": {
-                        "$ref": "#/components/responses/503"
                     },
                     "525": {
                         "$ref": "#/components/responses/525"
@@ -1364,9 +1648,6 @@
                     "404": {
                         "$ref": "#/components/responses/404"
                     },
-                    "503": {
-                        "$ref": "#/components/responses/503"
-                    },
                     "525": {
                         "$ref": "#/components/responses/525"
                     }
@@ -1398,9 +1679,6 @@
                     },
                     "404": {
                         "$ref": "#/components/responses/404"
-                    },
-                    "503": {
-                        "$ref": "#/components/responses/503"
                     },
                     "525": {
                         "$ref": "#/components/responses/525"
@@ -1438,9 +1716,6 @@
                     },
                     "404": {
                         "$ref": "#/components/responses/404"
-                    },
-                    "503": {
-                        "$ref": "#/components/responses/503"
                     },
                     "525": {
                         "$ref": "#/components/responses/525"
@@ -1480,9 +1755,6 @@
                     },
                     "401": {
                         "$ref": "#/components/responses/401"
-                    },
-                    "503": {
-                        "$ref": "#/components/responses/503"
                     },
                     "525": {
                         "$ref": "#/components/responses/525"
@@ -1547,9 +1819,6 @@
                     "409": {
                         "description": "User is already managed."
                     },
-                    "503": {
-                        "$ref": "#/components/responses/503"
-                    },
                     "525": {
                         "$ref": "#/components/responses/525"
                     }
@@ -1581,9 +1850,6 @@
                     },
                     "404": {
                         "$ref": "#/components/responses/404"
-                    },
-                    "503": {
-                        "$ref": "#/components/responses/503"
                     },
                     "525": {
                         "$ref": "#/components/responses/525"
@@ -1621,9 +1887,6 @@
                     },
                     "404": {
                         "$ref": "#/components/responses/404"
-                    },
-                    "503": {
-                        "$ref": "#/components/responses/503"
                     },
                     "525": {
                         "$ref": "#/components/responses/525"
@@ -1671,9 +1934,6 @@
                     "404": {
                         "$ref": "#/components/responses/404"
                     },
-                    "503": {
-                        "$ref": "#/components/responses/503"
-                    },
                     "525": {
                         "$ref": "#/components/responses/525"
                     }
@@ -1691,9 +1951,6 @@
                 "responses": {
                     "401": {
                         "$ref": "#/components/responses/401"
-                    },
-                    "503": {
-                        "$ref": "#/components/responses/503"
                     },
                     "525": {
                         "$ref": "#/components/responses/525"
@@ -1722,9 +1979,9 @@
                         "application/json": {
                             "examples": {
                                 "Azure Bastion": {
-                                    "description": "Coming Soon!",
+                                    "description": "lorem ipsum!",
                                     "summary": "Azure Bastion",
-                                    "value": "Coming soon!"
+                                    "value": "lorem ipsum!"
                                 },
                                 "Azure Virtual Desktop": {
                                     "description": "Deploys an AVD cluster that is connected to the device configurations system in SOP. The type property can be omitted because it is passed via path parameter.",
@@ -1776,9 +2033,6 @@
                     "404": {
                         "$ref": "#/components/responses/404"
                     },
-                    "503": {
-                        "$ref": "#/components/responses/503"
-                    },
                     "525": {
                         "$ref": "#/components/responses/525"
                     }
@@ -1823,8 +2077,16 @@
     ],
     "tags": [
         {
+            "description": "Configures the specified web server to support and process the authentication API routes.",
+            "name": "Core"
+        },
+        {
             "description": "Used to manage UI and API authentication.",
             "name": "Authentication"
+        },
+        {
+            "description": "License Analytics info.",
+            "name": "Discover"
         },
         {
             "description": "Device lifecycle management.",
@@ -1847,7 +2109,7 @@
             "name": "Infrastructure Deployment"
         },
         {
-            "description": "WARNING AUTHENTICATION IS DISABLED IN DEBUG MODE!!! Endpoints that are exposed only in debug mode. You can use these to see as the app sees.",
+            "description": "WARNING AUTHENTICATION IS DISABLED WHEN DEBUG MODE IS ENABLED!!! Endpoints that are exposed only in debug mode. You can use these to see as the app sees.",
             "name": "Debug Mode"
         }
     ]
