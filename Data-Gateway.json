@@ -308,6 +308,11 @@
                         }
                     }
                 },
+                "required": [
+                    "AvailableLicense",
+                    "Correlation",
+                    "LicenseData"
+                ],
                 "title": "License Report - Complete Object"
             },
             "LicenseEntitlement.Sop": {
