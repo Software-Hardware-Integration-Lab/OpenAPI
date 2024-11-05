@@ -689,7 +689,7 @@
                     },
                     "value": {
                         "items": {
-                            "oneOf":[
+                            "oneOf": [
                                 {
                                     "$ref": "#/components/schemas/ManagedUser"
                                 },
@@ -1572,11 +1572,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "items": {
-                                        "$ref": "#/components/schemas/ObjectPage.ManagedUser"
-                                    },
-                                    "minItems": 0,
-                                    "type": "array"
+                                    "$ref": "#/components/schemas/ObjectPage.ManagedUser"
                                 }
                             }
                         },
