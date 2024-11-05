@@ -1573,7 +1573,7 @@
                             "application/json": {
                                 "schema": {
                                     "items": {
-                                        "$ref": "#/components/schemas/ManagedUser"
+                                        "$ref": "#/components/schemas/ObjectPage.ManagedUser"
                                     },
                                     "minItems": 0,
                                     "type": "array"
