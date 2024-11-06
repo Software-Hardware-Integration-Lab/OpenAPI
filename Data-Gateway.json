@@ -1885,8 +1885,10 @@
                         "description": "OK",
                         "content": {
                             "application/zip": {
-                                "type": "string",
-                                "format": "binary"
+                                "schema": {
+                                    "type": "string",
+                                    "format": "binary"
+                                }
                             }
                         }
                     },
