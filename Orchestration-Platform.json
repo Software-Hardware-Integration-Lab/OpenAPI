@@ -515,6 +515,19 @@
                         "readOnly": true,
                         "type": "string"
                     },
+                    "intermediaryAssignmentList":{
+                        "type": "array",
+                        "description": "List of intermediaries that the user is assigned to.",
+                        "items": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "example": [
+                            "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                            "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                            "995f3b39-1e01-40d4-9368-ee956343e97c"
+                        ]
+                    },
                     "lastName": {
                         "description": "Surname/family name of the privileged user according to Entra ID.",
                         "maxLength": 64,
@@ -531,6 +544,19 @@
                     },
                     "securityClass": {
                         "$ref": "#/components/schemas/SecurityClassList"
+                    },
+                    "siloAssignmentList":{
+                        "type": "array",
+                        "description": "List of silos that the user is assigned to.",
+                        "items": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "example": [
+                            "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                            "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                            "995f3b39-1e01-40d4-9368-ee956343e97c"
+                        ]
                     },
                     "uiEducation": {
                         "description": "Indicates if user education is enabled in the UI for the specified user. True is on, false is off.",
@@ -549,9 +575,11 @@
                 "required": [
                     "creationDate",
                     "securityClass",
+                    "id",
+                    "intermediaryAssignmentList",
+                    "siloAssignmentList",
                     "uiEducation",
                     "uniqueGroupId",
-                    "id",
                     "upn"
                 ],
                 "type": "object"
