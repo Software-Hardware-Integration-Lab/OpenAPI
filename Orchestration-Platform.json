@@ -1363,12 +1363,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "items": {
-                                        "$ref": "#/components/schemas/ManagedUser"
-                                    },
-                                    "maxItems": 1,
-                                    "minItems": 0,
-                                    "type": "array"
+                                    "$ref": "#/components/schemas/ObjectPage.ManagedUser"
                                 }
                             }
                         },
@@ -1492,11 +1487,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "items": {
-                                        "$ref": "#/components/schemas/ManagedUser"
-                                    },
-                                    "minItems": 0,
-                                    "type": "array"
+                                    "$ref": "#/components/schemas/ObjectPage.ManagedUser"
                                 }
                             }
                         },
