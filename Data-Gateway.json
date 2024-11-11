@@ -673,7 +673,7 @@
                 "title": "Application Telemetry - SOP",
                 "type": "object"
             },
-            "Update.Sop.Check": {
+            "Update.Shield.Check": {
                 "description": "Object returning the value of the version of the latest application package available.",
                 "properties": {
                     "updateVersion": {
@@ -683,7 +683,7 @@
                     }
                 },
                 "required": [ "updateVersion" ],
-                "title": "Update SOP Check - latest application package version",
+                "title": "Update SHIELD Check - latest application package version",
                 "type": "object"
             }
         },
@@ -1827,10 +1827,10 @@
                 ]
             }
         },
-        "/API/Update/Sop/Check/": {
+        "/API/Update/Shield/Check/": {
             "get": {
                 "description": "Retrieves the latest available version of the package for the running application. Version depends on the channel associated with the current tenant, or channel mentioned in the request, or default channel value. Applicable channel would be calculated on the server for each request.",
-                "operationId": "/API/Update/Sop/Check/Get",
+                "operationId": "/API/Update/Shield/Check/Get",
                 "parameters": [
                     {
                         "in": "query",
@@ -1847,7 +1847,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Update.Sop.Check"
+                                    "$ref": "#/components/schemas/Update.Shield.Check"
                                 }
                             }
                         },
@@ -1861,14 +1861,14 @@
                     }
                 },
                 "tags": [
-                    "SOP Update"
+                    "Update"
                 ]
             }
         },
-        "/API/Update/Sop/Download/": {
+        "/API/Update/Shield/Download/": {
             "get": {
                 "description": "Receives a stream of the ZIP archive content to be saved and that represents requested application update package.",
-                "operationId": "/API/Update/Sop/Download/Get",
+                "operationId": "/API/Update/Shield/Download/Get",
                 "parameters": [
                     {
                         "in": "query",
@@ -1900,7 +1900,7 @@
                     }
                 },
                 "tags": [
-                    "SOP Update"
+                    "Update"
                 ]
             }
         }
