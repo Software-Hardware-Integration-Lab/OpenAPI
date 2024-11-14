@@ -315,7 +315,7 @@
                 ],
                 "title": "License Report - Complete Object"
             },
-            "LicenseEntitlement.Sop": {
+            "LicenseEntitlement.Shield": {
                 "description": "Record that describes the purchased licenses for a specific tenant. More than one of these can be active at a single time.",
                 "properties": {
                     "CorrelationId": {
@@ -445,10 +445,10 @@
                     "SpecializedUserCount",
                     "TenantId"
                 ],
-                "title": "License Entitlement - SOP Record",
+                "title": "License Entitlement - SHIELD Record",
                 "type": "object"
             },
-            "LicenseEntitlement.Sop.Count": {
+            "LicenseEntitlement.Shield.Count": {
                 "properties": {
                     "EnterpriseDeviceCount": {
                         "description": "Count of Enterprise Devices that are allowed to be managed.",
@@ -537,10 +537,10 @@
                     "SpecializedIntermediaryCount",
                     "SpecializedUserCount"
                 ],
-                "title": "License Entitlement - Active SOP Count",
+                "title": "License Entitlement - Active SHIELD Count",
                 "type": "object"
             },
-            "Telemetry.Sop": {
+            "Telemetry.Shield": {
                 "properties": {
                     "CorrelationId": {
                         "description": "Primary key for the table, used to correlate multiple telemetry records together.",
@@ -602,13 +602,13 @@
                         "type": "integer",
                         "minimum": 0
                     },
-                    "SopArchitectureVersion": {
+                    "ShieldArchitectureVersion": {
                         "description": "Version number of the architecture that is deployed.",
                         "example": "27",
                         "type": "string",
                         "minimum": 1
                     },
-                    "SopCoreVersion": {
+                    "ShieldCoreVersion": {
                         "description": "Version number of the product that the product is running.",
                         "example": "2.5.6",
                         "type": "string"
@@ -663,14 +663,14 @@
                     "PrivilegedInterfaceCount",
                     "PrivilegedIntermediaryCount",
                     "PrivilegedUserCount",
-                    "SopArchitectureVersion",
-                    "SopCoreVersion",
+                    "ShieldArchitectureVersion",
+                    "ShieldCoreVersion",
                     "SpecializedDeviceCount",
                     "SpecializedInterfaceCount",
                     "SpecializedIntermediaryCount",
                     "SpecializedUserCount"
                 ],
-                "title": "Application Telemetry - SOP",
+                "title": "Application Telemetry - SHIELD",
                 "type": "object"
             },
             "Update.Shield.Check": {
@@ -1228,10 +1228,10 @@
                 "summary": "Delete the Specified License Report for Specified Tenant"
             }
         },
-        "/API/Entitlement/Sop/": {
+        "/API/Entitlement/Shield/": {
             "post": {
-                "description": "Creates a new license entitlement (activation) for the orchestration platform. This endpoint requires the `LicenseEntitlement.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
-                "operationId": "/API/Entitlement/Sop/Post",
+                "description": "Creates a new license entitlement (activation) for SHIELD. This endpoint requires the `LicenseEntitlement.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "operationId": "/API/Entitlement/Shield/Post",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -1287,7 +1287,7 @@
                                 }
                             },
                             "schema": {
-                                "$ref": "#/components/schemas/LicenseEntitlement.Sop"
+                                "$ref": "#/components/schemas/LicenseEntitlement.Shield"
                             }
                         }
                     }
@@ -1345,7 +1345,7 @@
                                     }
                                 },
                                 "schema": {
-                                    "$ref": "#/components/schemas/LicenseEntitlement.Sop"
+                                    "$ref": "#/components/schemas/LicenseEntitlement.Shield"
                                 }
                             }
                         },
@@ -1361,13 +1361,13 @@
                 "tags": [
                     "License Entitlement"
                 ],
-                "summary": "Creates a new License Entitlement for the Orchestration Platform."
+                "summary": "Creates a new License Entitlement for SHIELD."
             }
         },
-        "/API/Entitlement/Sop/Active/": {
+        "/API/Entitlement/Shield/Active/": {
             "get": {
                 "description": "Retrieves the count of licenses that are available to the authenticated tenant. No scopes (permissions) required.",
-                "operationId": "/API/Entitlement/Sop/Active/Get",
+                "operationId": "/API/Entitlement/Shield/Active/Get",
                 "responses": {
                     "200": {
                         "content": {
@@ -1429,7 +1429,7 @@
                                     }
                                 },
                                 "schema": {
-                                    "$ref": "#/components/schemas/LicenseEntitlement.Sop.Count"
+                                    "$ref": "#/components/schemas/LicenseEntitlement.Shield.Count"
                                 }
                             }
                         },
@@ -1445,10 +1445,10 @@
                 "summary": "List of Available Licenses"
             }
         },
-        "/API/Entitlement/Sop/Tenant/{tenantId}/": {
+        "/API/Entitlement/Shield/Tenant/{tenantId}/": {
             "get": {
                 "description": "Retrieves the list of license entitlements that are assigned to the specified tenant. This endpoint requires the `LicenseEntitlement.Read.All`, or `LicenseEntitlement.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
-                "operationId": "/API/Entitlement/Sop/Tenant/:tenantId/Get",
+                "operationId": "/API/Entitlement/Shield/Tenant/:tenantId/Get",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/tenantId"
@@ -1463,7 +1463,7 @@
                                     "type": "array",
                                     "minItems": 0,
                                     "items": {
-                                        "$ref": "#/components/schemas/LicenseEntitlement.Sop"
+                                        "$ref": "#/components/schemas/LicenseEntitlement.Shield"
                                     }
                                 }
                             }
@@ -1485,10 +1485,10 @@
                 ]
             }
         },
-        "/API/Entitlement/Sop/Tenant/{tenantId}/Correlation/{correlationId}/": {
+        "/API/Entitlement/Shield/Tenant/{tenantId}/Correlation/{correlationId}/": {
             "delete": {
-                "description": "Deletes the requested orchestration platform license entitlement record. This endpoint requires the `LicenseEntitlement.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
-                "operationId": "/API/Entitlement/Sop/Tenant/:tenantId/Correlation/:correlationId/Delete",
+                "description": "Deletes the requested SHIELD license entitlement record. This endpoint requires the `LicenseEntitlement.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "operationId": "/API/Entitlement/Shield/Tenant/:tenantId/Correlation/:correlationId/Delete",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/tenantId"
@@ -1520,10 +1520,10 @@
                 ]
             }
         },
-        "/API/Telemetry/Sop/": {
+        "/API/Telemetry/Shield/": {
             "post": {
-                "description": "Submits the telemetry report for the orchestration platform. This endpoint requires the `Telemetry.Sop.ReadWrite`, or `Telemetry.Sop.ReadWrite.All` scope (permission).",
-                "operationId": "/API/Telemetry/Sop/Post",
+                "description": "Submits the telemetry report for SHIELD. This endpoint requires the `Telemetry.Shield.ReadWrite`, or `Telemetry.Shield.ReadWrite.All` scope (permission).",
+                "operationId": "/API/Telemetry/Shield/Post",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -1543,8 +1543,8 @@
                                         "PrivilegedInterfaceCount": 2000,
                                         "PrivilegedIntermediaryCount": 25,
                                         "PrivilegedUserCount": 50,
-                                        "SopArchitectureVersion": "2",
-                                        "SopCoreVersion": "3.0.0",
+                                        "ShieldArchitectureVersion": "2",
+                                        "ShieldCoreVersion": "3.0.0",
                                         "SpecializedDeviceCount": 0,
                                         "SpecializedInterfaceCount": 612,
                                         "SpecializedIntermediaryCount": 2,
@@ -1553,7 +1553,7 @@
                                 }
                             },
                             "schema": {
-                                "$ref": "#/components/schemas/Telemetry.Sop"
+                                "$ref": "#/components/schemas/Telemetry.Shield"
                             }
                         }
                     }
@@ -1579,8 +1579,8 @@
                                             "PrivilegedInterfaceCount": 2000,
                                             "PrivilegedIntermediaryCount": 25,
                                             "PrivilegedUserCount": 50,
-                                            "SopArchitectureVersion": "2",
-                                            "SopCoreVersion": "3.0.0",
+                                            "ShieldArchitectureVersion": "2",
+                                            "ShieldCoreVersion": "3.0.0",
                                             "SpecializedDeviceCount": 0,
                                             "SpecializedInterfaceCount": 612,
                                             "SpecializedIntermediaryCount": 2,
@@ -1592,7 +1592,7 @@
                                     }
                                 },
                                 "schema": {
-                                    "$ref": "#/components/schemas/Telemetry.Sop"
+                                    "$ref": "#/components/schemas/Telemetry.Shield"
                                 }
                             }
                         },
@@ -1608,11 +1608,11 @@
                 "tags": [
                     "Telemetry"
                 ],
-                "summary": "Collects Orchestration Platform Telemetry"
+                "summary": "Collects SHIELD Telemetry"
             },
             "get": {
-                "description": "Retrieves the telemetry records that have been reported for the authenticated tenant. Data is not guaranteed to be retrieved in any specific order. This endpoint requires the `Telemetry.Sop.Read`, `Telemetry.Sop.Read.All`, `Telemetry.Sop.ReadWrite`, or `Telemetry.Sop.ReadWrite.All` scope (permission).",
-                "operationId": "/API/Telemetry/Sop/Get",
+                "description": "Retrieves the telemetry records that have been reported for the authenticated tenant. Data is not guaranteed to be retrieved in any specific order. This endpoint requires the `Telemetry.Shield.Read`, `Telemetry.Shield.Read.All`, `Telemetry.Shield.ReadWrite`, or `Telemetry.Shield.ReadWrite.All` scope (permission).",
+                "operationId": "/API/Telemetry/Shield/Get",
                 "responses": {
                     "200": {
                         "content": {
@@ -1635,8 +1635,8 @@
                                                 "PrivilegedInterfaceCount": 2000,
                                                 "PrivilegedIntermediaryCount": 25,
                                                 "PrivilegedUserCount": 50,
-                                                "SopArchitectureVersion": "2",
-                                                "SopCoreVersion": "3.0.0",
+                                                "ShieldArchitectureVersion": "2",
+                                                "ShieldCoreVersion": "3.0.0",
                                                 "SpecializedDeviceCount": 0,
                                                 "SpecializedInterfaceCount": 612,
                                                 "SpecializedIntermediaryCount": 2,
@@ -1658,8 +1658,8 @@
                                                 "PrivilegedInterfaceCount": 2000,
                                                 "PrivilegedIntermediaryCount": 25,
                                                 "PrivilegedUserCount": 50,
-                                                "SopArchitectureVersion": "2",
-                                                "SopCoreVersion": "3.0.0",
+                                                "ShieldArchitectureVersion": "2",
+                                                "ShieldCoreVersion": "3.0.0",
                                                 "SpecializedDeviceCount": 0,
                                                 "SpecializedInterfaceCount": 612,
                                                 "SpecializedIntermediaryCount": 2,
@@ -1674,7 +1674,7 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/Telemetry.Sop"
+                                        "$ref": "#/components/schemas/Telemetry.Shield"
                                     },
                                     "minItems": 0
                                 }
@@ -1695,10 +1695,10 @@
                 ]
             }
         },
-        "/API/Telemetry/Sop/Tenant/{tenantId}/": {
+        "/API/Telemetry/Shield/Tenant/{tenantId}/": {
             "get": {
-                "description": "Retrieves the telemetry records that have been reported for the specified tenant. Data is not guaranteed to be retrieved in any specific order. This endpoint requires the `Telemetry.Sop.Read.All`, or `Telemetry.Sop.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
-                "operationId": "/API/Telemetry/Sop/Tenant/:tenantId/Get",
+                "description": "Retrieves the telemetry records that have been reported for the specified tenant. Data is not guaranteed to be retrieved in any specific order. This endpoint requires the `Telemetry.Shield.Read.All`, or `Telemetry.Shield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "operationId": "/API/Telemetry/Shield/Tenant/:tenantId/Get",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/tenantId"
@@ -1726,8 +1726,8 @@
                                                 "PrivilegedInterfaceCount": 2000,
                                                 "PrivilegedIntermediaryCount": 25,
                                                 "PrivilegedUserCount": 50,
-                                                "SopArchitectureVersion": "2",
-                                                "SopCoreVersion": "3.0.0",
+                                                "ShieldArchitectureVersion": "2",
+                                                "ShieldCoreVersion": "3.0.0",
                                                 "SpecializedDeviceCount": 0,
                                                 "SpecializedInterfaceCount": 612,
                                                 "SpecializedIntermediaryCount": 2,
@@ -1749,8 +1749,8 @@
                                                 "PrivilegedInterfaceCount": 2000,
                                                 "PrivilegedIntermediaryCount": 25,
                                                 "PrivilegedUserCount": 50,
-                                                "SopArchitectureVersion": "2",
-                                                "SopCoreVersion": "3.0.0",
+                                                "ShieldArchitectureVersion": "2",
+                                                "ShieldCoreVersion": "3.0.0",
                                                 "SpecializedDeviceCount": 0,
                                                 "SpecializedInterfaceCount": 612,
                                                 "SpecializedIntermediaryCount": 2,
@@ -1765,7 +1765,7 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/Telemetry.Sop"
+                                        "$ref": "#/components/schemas/Telemetry.Shield"
                                     },
                                     "minItems": 0
                                 }
@@ -1792,10 +1792,10 @@
                 ]
             }
         },
-        "/API/Telemetry/Sop/Tenant/{tenantId}/Correlation/{correlationId}/": {
+        "/API/Telemetry/Shield/Tenant/{tenantId}/Correlation/{correlationId}/": {
             "delete": {
-                "description": "Deletes the specified telemetry record for the specified tenant. This endpoint requires the `Telemetry.Sop.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
-                "operationId": "/API/Telemetry/Sop/Tenant/:tenantId/Correlation/:correlationId/Delete",
+                "description": "Deletes the specified telemetry record for the specified tenant. This endpoint requires the `Telemetry.Shield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "operationId": "/API/Telemetry/Shield/Tenant/:tenantId/Correlation/:correlationId/Delete",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/tenantId"
