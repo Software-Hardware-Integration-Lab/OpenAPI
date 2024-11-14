@@ -1019,7 +1019,7 @@
                 ]
             }
         },
-        "/API/Infrastructure/Deploy": {
+        "/API/Deploy": {
             "get": {
                 "description": "Has the core infrastructure engine check if the config engine can initialize properly.",
                 "operationId": "/API/Infrastructure/GetDeploy",
@@ -1122,7 +1122,7 @@
                 "security": []
             }
         },
-        "/API/Infrastructure/Version": {
+        "/API/Deploy/Version": {
             "get": {
                 "description": "Gets the version of the API server and the architecture version deployed as well as the supported version of the architecture spec from the server.",
                 "operationId": "/API/Infrastructure/GetVersion",
@@ -1509,7 +1509,7 @@
                 ]
             }
         },
-        "/API/Lifecycle/Type/Privileged/Device/{deviceId}/Assign": {
+        "/API/Defend/Device/{deviceId}/Type/Privileged/Assign": {
             "delete": {
                 "description": "Remove the specified user list from the device.",
                 "operationId": "/API/lifecycle/DeleteDeviceAssignment",
@@ -1694,7 +1694,7 @@
                 ]
             }
         },
-        "/API/Lifecycle/Type/{securityClass}/Device": {
+        "/API/Defend/Device/Type/{securityClass}": {
             "get": {
                 "description": "Returns a list of all commissioned devices managed by the SHI Environment Lockdown and Defense.",
                 "operationId": "/API/lifecycle/GetDeviceList",
@@ -1793,7 +1793,7 @@
                 ]
             }
         },
-        "/API/Lifecycle/Type/{securityClass}/Device/{deviceId}": {
+        "/API/Defend/Device/{deviceId}/Type/{securityClass}": {
             "delete": {
                 "description": "Removes the device from the management hierarchy, removes metadata tagging and issues the wipe command to the devices.",
                 "operationId": "/API/lifecycle/DeleteDevice",
@@ -1862,7 +1862,7 @@
                 ]
             }
         },
-        "/API/Lifecycle/Type/{securityClass}/User": {
+        "/API/Defend/User/Type/{securityClass}": {
             "get": {
                 "description": "Returns a list of all users managed by the SHI Environment Lockdown and Defense.",
                 "operationId": "/API/Lifecycle/GetUserList",
@@ -1964,7 +1964,7 @@
                 ]
             }
         },
-        "/API/Lifecycle/Type/{securityClass}/User/{userId}": {
+        "/API/Defend/User/{userId}/Type/{securityClass}": {
             "delete": {
                 "description": "Deletes the user account and removes the management artifacts.",
                 "operationId": "/API/lifecycle/DeleteUser",
@@ -2097,7 +2097,7 @@
                 ]
             }
         },
-        "/API/Marketplace/Type/{securityClass}/Offering/{offeringId}": {
+        "/API/Defend/Marketplace/Type/{securityClass}/Offering/{offeringId}": {
             "post": {
                 "description": "Creates the offering with the requested settings. In the body payload, the `type` property in the `property` object is ignored. See the AVD example.",
                 "operationId": "/API/Marketplace/Offering/Create",
