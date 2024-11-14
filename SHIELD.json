@@ -2079,24 +2079,6 @@
                 ]
             }
         },
-        "/API/Marketplace/": {
-            "get": {
-                "description": "Lists all of the available marketplace offerings along with their metadata.",
-                "operationId": "/API/Marketplace/Offering/ListAll",
-                "responses": {
-                    "401": {
-                        "$ref": "#/components/responses/401"
-                    },
-                    "525": {
-                        "$ref": "#/components/responses/525"
-                    }
-                },
-                "summary": "List All Available Offerings",
-                "tags": [
-                    "Marketplace"
-                ]
-            }
-        },
         "/API/Defend/Marketplace/Type/{securityClass}/Offering/{offeringId}": {
             "post": {
                 "description": "Creates the offering with the requested settings. In the body payload, the `type` property in the `property` object is ignored. See the AVD example.",
