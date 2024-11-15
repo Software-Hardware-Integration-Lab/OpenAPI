@@ -15,10 +15,10 @@
                     "type": "string"
                 }
             },
-            "instanceId": {
+            "intermediaryId": {
                 "description": "The Object ID of the parent group for the intermediary that you wish to target.",
                 "in": "path",
-                "name": "instanceId",
+                "name": "intermediaryId",
                 "required": true,
                 "schema": {
                     "example": "25d4d9da-28ea-42f8-b3df-23c3969abffa",
@@ -1164,10 +1164,10 @@
                 ]
             }
         },
-        "/API/Intermediary/Type/{securityClass}/Offering/8a921026-ec06-4e08-af19-8812e161e61f/Instance": {
+        "/API/Defend/Intermediary/Type/{securityClass}/Offering/8a921026-ec06-4e08-af19-8812e161e61f": {
             "get": {
                 "description": "Retrieves a list of all AVD intermediaries for the specified security class filter. Next links may be provided for pagination to allow for good performance on larger environments. If a nextLink is return, not all data was returned on this query and the next link can be sent back to the API to get the next page of data.",
-                "operationId": "/API/Intermediary/AVD/GetAll",
+                "operationId": "/API/Defend/Intermediary/Offering/AVD/GetAll",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -1203,7 +1203,7 @@
                 ]
             }
         },
-        "/API/Intermediary/Type/{securityClass}/Offering/8a921026-ec06-4e08-af19-8812e161e61f/Instance/{instanceId}": {
+        "/API/Defend/Intermediary/{intermediaryId}/Type/{securityClass}/Offering/8a921026-ec06-4e08-af19-8812e161e61f": {
             "delete": {
                 "description": "Deletes the specified intermediary (by the parent group's Entra ID Object ID) using the requested security class as a filter.",
                 "operationId": "/API/Intermediary/AVD/DeleteInstance",
@@ -1212,7 +1212,7 @@
                         "$ref": "#/components/parameters/securityClass"
                     },
                     {
-                        "$ref": "#/components/parameters/instanceId"
+                        "$ref": "#/components/parameters/intermediaryId"
                     }
                 ],
                 "responses": {
@@ -1236,13 +1236,13 @@
             },
             "get": {
                 "description": "Retrieves the specified intermediary (by the parent group's Entra ID Object ID) using the requested security class as a filter.",
-                "operationId": "/API/Intermediary/AVD/GetInstance",
+                "operationId": "/API/Defend/Intermediary/Offering/AVD/GetInstance",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
                     },
                     {
-                        "$ref": "#/components/parameters/instanceId"
+                        "$ref": "#/components/parameters/intermediaryId"
                     }
                 ],
                 "responses": {
@@ -1272,7 +1272,7 @@
                 ]
             }
         },
-        "/API/Intermediary/Type/{securityClass}/Offering/8a921026-ec06-4e08-af19-8812e161e61f/Instance/{instanceId}/Assign": {
+        "/API/Defend/Intermediary/{intermediaryId}/Type/{securityClass}/Offering/8a921026-ec06-4e08-af19-8812e161e61f/Assign": {
             "delete": {
                 "description": "Removes the specified user(s) as identified by their Object ID from the AVD cluster and deletes their corresponding session host(s).",
                 "operationId": "/API/Intermediary/AVD/Instance/RemoveAssign",
@@ -1281,7 +1281,7 @@
                         "$ref": "#/components/parameters/securityClass"
                     },
                     {
-                        "$ref": "#/components/parameters/instanceId"
+                        "$ref": "#/components/parameters/intermediaryId"
                     }
                 ],
                 "requestBody": {
@@ -1352,7 +1352,7 @@
                         "$ref": "#/components/parameters/securityClass"
                     },
                     {
-                        "$ref": "#/components/parameters/instanceId"
+                        "$ref": "#/components/parameters/intermediaryId"
                     },
                     {
                         "$ref": "#/components/parameters/nextLink"
@@ -1386,13 +1386,13 @@
             },
             "post": {
                 "description": "Assigns the specified user(s) as identified by their Object ID to the AVD cluster and create corresponding session host(s) for them.",
-                "operationId": "/API/Intermediary/AVD/Instance/Assign",
+                "operationId": "/API/Defend/Intermediary/Offering/AVD/Assign",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
                     },
                     {
-                        "$ref": "#/components/parameters/instanceId"
+                        "$ref": "#/components/parameters/intermediaryId"
                     }
                 ],
                 "requestBody": {
@@ -1467,7 +1467,7 @@
                 ]
             }
         },
-        "/API/Intermediary/Type/{securityClass}/Offering/8a921026-ec06-4e08-af19-8812e161e61f/Instance/{instanceId}/Assign/{userId}": {
+        "/API/Defend/Intermediary/{intermediaryId}/Type/{securityClass}/Offering/8a921026-ec06-4e08-af19-8812e161e61f/Assign/{userId}": {
             "get": {
                 "description": "Get the specified managed user's from the specified AVD intermediary assignment list.",
                 "operationId": "/API/Intermediary/AVD/Instance/GetSpecificAssign",
@@ -1476,7 +1476,7 @@
                         "$ref": "#/components/parameters/securityClass"
                     },
                     {
-                        "$ref": "#/components/parameters/instanceId"
+                        "$ref": "#/components/parameters/intermediaryId"
                     },
                     {
                         "$ref": "#/components/parameters/userId"
