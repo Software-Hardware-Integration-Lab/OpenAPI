@@ -784,7 +784,7 @@
         "/API/Core/SystemRequirements": {
             "get": {
                 "description": "Provides a detailed breakdown of if the system requirements are being met for the various components of the SHIELD platform.",
-                "operationId": "/API/Core/GetSystemRequirements",
+                "operationId": "/API/Core/SystemRequirements/Get",
                 "responses": {
                     "200": {
                         "content": {
@@ -807,7 +807,7 @@
         "/API/Auth/Id": {
             "get": {
                 "description": "Provides the Tenant ID and the Application ID of the service principal that access tokens need to be issued against. This is also useful for configuring public clients to be able to authenticate to for auth code flows.",
-                "operationId": "/API/Auth/GetId",
+                "operationId": "/API/Auth/Id/Get",
                 "responses": {
                     "200": {
                         "content": {
@@ -850,7 +850,7 @@
             "get": {
                 "summary": "Provides Attestation for Authenticator App",
                 "description": "Provides the attestation to the authenticator that this endpoint is authorized for receiving credentials from the authenticator.",
-                "operationId": "/API/Auth/GetAuthenticator",
+                "operationId": "/API/Auth/Authenticator/GetAttest",
                 "responses": {
                     "200": {
                         "content": {
@@ -874,7 +874,7 @@
             "get": {
                 "summary": "Indicates if SHIELD is waiting for any credentials.",
                 "description": "Provides a breakdown view of if the platform is waiting for any specific type of credential or credentials.",
-                "operationId": "/API/Auth/Authenticator/Cache/GetStatus",
+                "operationId": "/API/Auth/Authenticator/Cache/Status/Get",
                 "responses": {
                     "200": {
                         "content": {
@@ -920,7 +920,7 @@
         "/API/Auth/Authenticator/Cache/SccAuth": {
             "post": {
                 "description": "Provide your SHIELD authenticator credentials",
-                "operationId": "/API/Auth/Authenticator/Cache/PostSccAuth",
+                "operationId": "/API/Auth/Authenticator/Cache/SccAuth/Post",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -945,7 +945,7 @@
             "post": {
                 "summary": "Receive Access Token Credentials",
                 "description": "SHIELD Authenticator credentials for the requested Access Token.",
-                "operationId": "/API/Auth/Authenticator/Cache/PostAccessToken",
+                "operationId": "/API/Auth/Authenticator/Cache/AccessToken/Post",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -983,7 +983,7 @@
             "get": {
                 "summary": "State of the Discover Module.",
                 "description": "Provides a detailed breakdown of the current state of the discover module and it progress.",
-                "operationId": "/API/Discover/GetStatus",
+                "operationId": "/API/Discover/Status/Get",
                 "responses": {
                     "200": {
                         "content": {
@@ -1005,7 +1005,7 @@
             "get": {
                 "summary": "Start Discover's Report Generation",
                 "description": "Starts the Discover module's report collection engine to create a license report and upload it to the data gateway.",
-                "operationId": "/API/Discover/GetReport",
+                "operationId": "/API/Discover/Report/Start",
                 "responses": {
                     "202": {
                         "$ref": "#/components/responses/202"
@@ -1022,7 +1022,7 @@
         "/API/Deploy": {
             "get": {
                 "description": "Has the core infrastructure engine check if the config engine can initialize properly.",
-                "operationId": "/API/Infrastructure/GetDeploy",
+                "operationId": "/API/Deploy/GetStatus",
                 "responses": {
                     "200": {
                         "content": {
@@ -1057,7 +1057,7 @@
             },
             "post": {
                 "description": "After the user consents, deploy the core security groups, scope tag, configurations and metadata.",
-                "operationId": "/API/Infrastructure/PostDeploy",
+                "operationId": "/API/Deploy/DeployInfra",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -1125,7 +1125,7 @@
         "/API/Deploy/Version": {
             "get": {
                 "description": "Gets the version of the API server and the architecture version deployed as well as the supported version of the architecture spec from the server.",
-                "operationId": "/API/Infrastructure/GetVersion",
+                "operationId": "/API/Deploy/Version/Get",
                 "responses": {
                     "200": {
                         "content": {
@@ -1206,7 +1206,7 @@
         "/API/Defend/Intermediary/{intermediaryId}/Type/{securityClass}/Offering/8a921026-ec06-4e08-af19-8812e161e61f": {
             "delete": {
                 "description": "Deletes the specified intermediary (by the parent group's Entra ID Object ID) using the requested security class as a filter.",
-                "operationId": "/API/Intermediary/AVD/DeleteInstance",
+                "operationId": "/API/Defend/Intermediary/Offering/AVD/DeleteInstance",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -1275,7 +1275,7 @@
         "/API/Defend/Intermediary/{intermediaryId}/Type/{securityClass}/Offering/8a921026-ec06-4e08-af19-8812e161e61f/Assign": {
             "delete": {
                 "description": "Removes the specified user(s) as identified by their Object ID from the AVD cluster and deletes their corresponding session host(s).",
-                "operationId": "/API/Intermediary/AVD/Instance/RemoveAssign",
+                "operationId": "/API/Defend/Intermediary/Offering/AVD/RemoveAssign",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -1346,7 +1346,7 @@
             },
             "get": {
                 "description": "Gets the list of assigned user from the specified AVD Intermediary.",
-                "operationId": "/API/Intermediary/AVD/Instance/GetAssign",
+                "operationId": "/API/Defend/Intermediary/Offering/AVD/GetAssign",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -1470,7 +1470,7 @@
         "/API/Defend/Intermediary/{intermediaryId}/Type/{securityClass}/Offering/8a921026-ec06-4e08-af19-8812e161e61f/Assign/{userId}": {
             "get": {
                 "description": "Get the specified managed user's from the specified AVD intermediary assignment list.",
-                "operationId": "/API/Intermediary/AVD/Instance/GetSpecificAssign",
+                "operationId": "/API/Defend/Intermediary/Offering/AVD/GetSpecificAssign",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -1512,7 +1512,7 @@
         "/API/Defend/Device/{deviceId}/Type/Privileged/Assign": {
             "delete": {
                 "description": "Remove the specified user list from the device.",
-                "operationId": "/API/lifecycle/DeleteDeviceAssignment",
+                "operationId": "/API/Defend/Device/DeleteAssign",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/deviceId"
@@ -1588,7 +1588,7 @@
             },
             "get": {
                 "description": "Lists all of the users that are currently assigned to the specified device.",
-                "operationId": "/API/lifecycle/GetDeviceAssignment",
+                "operationId": "/API/Defend/Device/GetAssign",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/deviceId"
@@ -1619,7 +1619,7 @@
             },
             "post": {
                 "description": "Adds the specified list of users to the list of users that are allowed to log in on the specific privileged device.",
-                "operationId": "/API/lifecycle/ReplaceDeviceAssignment",
+                "operationId": "/API/Defend/Device/AddAssign",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/deviceId"
@@ -1697,7 +1697,7 @@
         "/API/Defend/Device/Type/{securityClass}": {
             "get": {
                 "description": "Returns a list of all commissioned devices managed by the SHI Environment Lockdown and Defense.",
-                "operationId": "/API/lifecycle/GetDeviceList",
+                "operationId": "/API/Defend/Device/GetAll",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -1734,7 +1734,7 @@
             },
             "post": {
                 "description": "Commissions a new device, into the device hierarchy and appends appropriate metadata and initial policies. Appends required metadata to proper locations.",
-                "operationId": "/API/lifecycle/CreateDevice",
+                "operationId": "/API/Defend/Device/Create",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -1796,7 +1796,7 @@
         "/API/Defend/Device/{deviceId}/Type/{securityClass}": {
             "delete": {
                 "description": "Removes the device from the management hierarchy, removes metadata tagging and issues the wipe command to the devices.",
-                "operationId": "/API/lifecycle/DeleteDevice",
+                "operationId": "/API/Defend/Device/Delete",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -1826,7 +1826,7 @@
             },
             "get": {
                 "description": "Get the specified managed device by its Entra ID Device ID.",
-                "operationId": "/API/lifecycle/GetDevice",
+                "operationId": "/API/Defend/Device/Get",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -1865,7 +1865,7 @@
         "/API/Defend/User/Type/{securityClass}": {
             "get": {
                 "description": "Returns a list of all users managed by the SHI Environment Lockdown and Defense.",
-                "operationId": "/API/Lifecycle/GetUserList",
+                "operationId": "/API/Defend/User/GetAll",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -1902,7 +1902,7 @@
             },
             "post": {
                 "description": "Securely clones the specified user's properties into a new managed user object.",
-                "operationId": "/API/lifecycle/CreateUser",
+                "operationId": "/API/Defend/User/Create",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -1967,7 +1967,7 @@
         "/API/Defend/User/{userId}/Type/{securityClass}": {
             "delete": {
                 "description": "Deletes the user account and removes the management artifacts.",
-                "operationId": "/API/lifecycle/DeleteUser",
+                "operationId": "/API/Defend/User/Delete",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -1997,7 +1997,7 @@
             },
             "get": {
                 "description": "Retrieves the specified managed user by its Entra ID User ID",
-                "operationId": "/API/lifecycle/GetUser",
+                "operationId": "/API/Defend/User/Get",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -2034,7 +2034,7 @@
             },
             "patch": {
                 "description": "Updates the user's mutable data such as their display name, uiEducation or first/last name. All other properties passed will be ignored.",
-                "operationId": "/API/lifecycle/UpdateUser",
+                "operationId": "/API/Defend/User/Update",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -2082,7 +2082,7 @@
         "/API/Defend/Marketplace/Type/{securityClass}/Offering/{offeringId}": {
             "post": {
                 "description": "Creates the offering with the requested settings. In the body payload, the `type` property in the `property` object is ignored. See the AVD example.",
-                "operationId": "/API/Marketplace/Offering/Create",
+                "operationId": "/API/Defend/Marketplace/Offering/Create",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -2163,7 +2163,7 @@
         "/Docs": {
             "get": {
                 "description": "Runs the Swagger UI render to render the OpenAPI spec that you are viewing now.",
-                "operationId": "/Docs/GetSwaggerUi",
+                "operationId": "/Docs/GetApiDocs",
                 "responses": {
                     "200": {
                         "description": "Returns the HTML for Swagger UI renderer's output"
