@@ -783,7 +783,7 @@
     "paths": {
         "/API/Core/SystemRequirements": {
             "get": {
-                "description": "Provides a detailed breakdown of if the system requirements are being met for the various components of the SHIELD platform.",
+                "description": "Provides a detailed breakdown of if the system requirements are being met for the various components of the SHIELD.",
                 "operationId": "/API/Core/SystemRequirements/Get",
                 "responses": {
                     "200": {
@@ -856,7 +856,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "description": "Access token that the SHIELD platform uses to prove it is a valid recipient of credentials.",
+                                    "description": "Access token that SHIELD uses to prove it is a valid recipient of credentials.",
                                     "type": "string",
                                     "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik1jN2wzSXo5M2c3dXdnTmVFbW13X1dZR1BrbyJ9.eyJhdWQiOiJjYjU5ZjIyOC0wNjkwLTRhY2ItOWE3Yi0wMGMzNmEyZjRlOGQiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vMmQxMDJkYTktZDExZS00YTgwLTkwMjItYzQxOGZhNDg1NGM3L3YyLjAiLCJpYXQiOjE3MjczNjgzODQsIm5iZiI6MTcyNzM2ODM4NCwiZXhwIjoxNzI3MzcyMjg0LCJhaW8iOiJBU1FBMi84WUFBQUFSN0hyaW5XTmRwcisvdnoreWlkZER6WVExeFRpc3BSZGY4TG1XNjhRaE0wPSIsImF6cCI6IjRlODU5MTQ2LWY5M2UtNDlmMi05ODZmLWI3MjIyNmZjZDViOSIsImF6cGFjciI6IjEiLCJvaWQiOiJlMmRlNzQ0ZC1hZjVlLTQ4NDEtYmI4Zi02OTRkZDI1ZmVmNGQiLCJyaCI6IjAuQWNvQXFTMFFMUjdSZ0VxUUlzUVkta2hVeHlqeVdjdVFCc3RLbW5zQXcyb3ZUbzM2QUFBLiIsInJvbGVzIjpbIkF1dGhlbnRpY2F0b3IuQXR0ZXN0Il0sInN1YiI6ImUyZGU3NDRkLWFmNWUtNDg0MS1iYjhmLTY5NGRkMjVmZWY0ZCIsInRpZCI6IjJkMTAyZGE5LWQxMWUtNGE4MC05MDIyLWM0MThmYTQ4NTRjNyIsInV0aSI6Il9MaUdVWWxmS2txNFZoR09NeGw4QUEiLCJ2ZXIiOiIyLjAifQ.xlXZfOnDoOVW3_aOiSIZH8uiySeohro-HVnDzDEff2EjmOk9adrTOP5Sw1av6g3vy38r6dSu4tViwNGrb7Z2krgRKKvp-4A9rkPqeJjjd2rhFl2KiOlxL0mmykbroZZ70RJzwHy2GC7wfuLwJwr-5m7POV2grbxIAlTsMdZWDFXYi-AahfDVtLugarWG5-tXAqiPBKjaU6ntAJIbu7Ol1vYZaeYMsNKTs8O1P10YM460zN9OkfoI1gV7_InHEr8RSyQnEPCJ2W1Or4lDhqdey4ohMoP9EzLgMsn9Ckss5g5C6vVE0GQawUoeGozPOBpgb31J8JzZUyB1JyVfi-vKkQ"
                                 }
@@ -873,7 +873,7 @@
         "/API/Auth/Authenticator/Cache/Status": {
             "get": {
                 "summary": "Indicates if SHIELD is waiting for any credentials.",
-                "description": "Provides a breakdown view of if the platform is waiting for any specific type of credential or credentials.",
+                "description": "Provides a breakdown view of if SHIELD is waiting for any specific type of credential or credentials.",
                 "operationId": "/API/Auth/Authenticator/Cache/Status/Get",
                 "responses": {
                     "200": {
