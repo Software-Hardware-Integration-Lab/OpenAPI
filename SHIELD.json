@@ -15,10 +15,10 @@
                     "type": "string"
                 }
             },
-            "instanceId": {
+            "intermediaryId": {
                 "description": "The Object ID of the parent group for the intermediary that you wish to target.",
                 "in": "path",
-                "name": "instanceId",
+                "name": "intermediaryId",
                 "required": true,
                 "schema": {
                     "example": "25d4d9da-28ea-42f8-b3df-23c3969abffa",
@@ -783,8 +783,8 @@
     "paths": {
         "/API/Core/SystemRequirements": {
             "get": {
-                "description": "Provides a detailed breakdown of if the system requirements are being met for the various components of the SHIELD platform.",
-                "operationId": "/API/Core/GetSystemRequirements",
+                "description": "Provides a detailed breakdown of if the system requirements are being met for the various components of the SHIELD.",
+                "operationId": "/API/Core/SystemRequirements/Get",
                 "responses": {
                     "200": {
                         "content": {
@@ -807,7 +807,7 @@
         "/API/Auth/Id": {
             "get": {
                 "description": "Provides the Tenant ID and the Application ID of the service principal that access tokens need to be issued against. This is also useful for configuring public clients to be able to authenticate to for auth code flows.",
-                "operationId": "/API/Auth/GetId",
+                "operationId": "/API/Auth/Id/Get",
                 "responses": {
                     "200": {
                         "content": {
@@ -850,13 +850,13 @@
             "get": {
                 "summary": "Provides Attestation for Authenticator App",
                 "description": "Provides the attestation to the authenticator that this endpoint is authorized for receiving credentials from the authenticator.",
-                "operationId": "/API/Auth/GetAuthenticator",
+                "operationId": "/API/Auth/Authenticator/GetAttest",
                 "responses": {
                     "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "description": "Access token that the SHIELD platform uses to prove it is a valid recipient of credentials.",
+                                    "description": "Access token that SHIELD uses to prove it is a valid recipient of credentials.",
                                     "type": "string",
                                     "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik1jN2wzSXo5M2c3dXdnTmVFbW13X1dZR1BrbyJ9.eyJhdWQiOiJjYjU5ZjIyOC0wNjkwLTRhY2ItOWE3Yi0wMGMzNmEyZjRlOGQiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vMmQxMDJkYTktZDExZS00YTgwLTkwMjItYzQxOGZhNDg1NGM3L3YyLjAiLCJpYXQiOjE3MjczNjgzODQsIm5iZiI6MTcyNzM2ODM4NCwiZXhwIjoxNzI3MzcyMjg0LCJhaW8iOiJBU1FBMi84WUFBQUFSN0hyaW5XTmRwcisvdnoreWlkZER6WVExeFRpc3BSZGY4TG1XNjhRaE0wPSIsImF6cCI6IjRlODU5MTQ2LWY5M2UtNDlmMi05ODZmLWI3MjIyNmZjZDViOSIsImF6cGFjciI6IjEiLCJvaWQiOiJlMmRlNzQ0ZC1hZjVlLTQ4NDEtYmI4Zi02OTRkZDI1ZmVmNGQiLCJyaCI6IjAuQWNvQXFTMFFMUjdSZ0VxUUlzUVkta2hVeHlqeVdjdVFCc3RLbW5zQXcyb3ZUbzM2QUFBLiIsInJvbGVzIjpbIkF1dGhlbnRpY2F0b3IuQXR0ZXN0Il0sInN1YiI6ImUyZGU3NDRkLWFmNWUtNDg0MS1iYjhmLTY5NGRkMjVmZWY0ZCIsInRpZCI6IjJkMTAyZGE5LWQxMWUtNGE4MC05MDIyLWM0MThmYTQ4NTRjNyIsInV0aSI6Il9MaUdVWWxmS2txNFZoR09NeGw4QUEiLCJ2ZXIiOiIyLjAifQ.xlXZfOnDoOVW3_aOiSIZH8uiySeohro-HVnDzDEff2EjmOk9adrTOP5Sw1av6g3vy38r6dSu4tViwNGrb7Z2krgRKKvp-4A9rkPqeJjjd2rhFl2KiOlxL0mmykbroZZ70RJzwHy2GC7wfuLwJwr-5m7POV2grbxIAlTsMdZWDFXYi-AahfDVtLugarWG5-tXAqiPBKjaU6ntAJIbu7Ol1vYZaeYMsNKTs8O1P10YM460zN9OkfoI1gV7_InHEr8RSyQnEPCJ2W1Or4lDhqdey4ohMoP9EzLgMsn9Ckss5g5C6vVE0GQawUoeGozPOBpgb31J8JzZUyB1JyVfi-vKkQ"
                                 }
@@ -873,8 +873,8 @@
         "/API/Auth/Authenticator/Cache/Status": {
             "get": {
                 "summary": "Indicates if SHIELD is waiting for any credentials.",
-                "description": "Provides a breakdown view of if the platform is waiting for any specific type of credential or credentials.",
-                "operationId": "/API/Auth/Authenticator/Cache/GetStatus",
+                "description": "Provides a breakdown view of if SHIELD is waiting for any specific type of credential or credentials.",
+                "operationId": "/API/Auth/Authenticator/Cache/Status/Get",
                 "responses": {
                     "200": {
                         "content": {
@@ -920,7 +920,7 @@
         "/API/Auth/Authenticator/Cache/SccAuth": {
             "post": {
                 "description": "Provide your SHIELD authenticator credentials",
-                "operationId": "/API/Auth/Authenticator/Cache/PostSccAuth",
+                "operationId": "/API/Auth/Authenticator/Cache/SccAuth/Post",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -945,7 +945,7 @@
             "post": {
                 "summary": "Receive Access Token Credentials",
                 "description": "SHIELD Authenticator credentials for the requested Access Token.",
-                "operationId": "/API/Auth/Authenticator/Cache/PostAccessToken",
+                "operationId": "/API/Auth/Authenticator/Cache/AccessToken/Post",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -983,7 +983,7 @@
             "get": {
                 "summary": "State of the Discover Module.",
                 "description": "Provides a detailed breakdown of the current state of the discover module and it progress.",
-                "operationId": "/API/Discover/GetStatus",
+                "operationId": "/API/Discover/Status/Get",
                 "responses": {
                     "200": {
                         "content": {
@@ -1005,7 +1005,7 @@
             "get": {
                 "summary": "Start Discover's Report Generation",
                 "description": "Starts the Discover module's report collection engine to create a license report and upload it to the data gateway.",
-                "operationId": "/API/Discover/GetReport",
+                "operationId": "/API/Discover/Report/Start",
                 "responses": {
                     "202": {
                         "$ref": "#/components/responses/202"
@@ -1022,7 +1022,7 @@
         "/API/Deploy": {
             "get": {
                 "description": "Has the core infrastructure engine check if the config engine can initialize properly.",
-                "operationId": "/API/Infrastructure/GetDeploy",
+                "operationId": "/API/Deploy/GetStatus",
                 "responses": {
                     "200": {
                         "content": {
@@ -1057,7 +1057,7 @@
             },
             "post": {
                 "description": "After the user consents, deploy the core security groups, scope tag, configurations and metadata.",
-                "operationId": "/API/Infrastructure/PostDeploy",
+                "operationId": "/API/Deploy/DeployInfra",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -1125,7 +1125,7 @@
         "/API/Deploy/Version": {
             "get": {
                 "description": "Gets the version of the API server and the architecture version deployed as well as the supported version of the architecture spec from the server.",
-                "operationId": "/API/Infrastructure/GetVersion",
+                "operationId": "/API/Deploy/Version/Get",
                 "responses": {
                     "200": {
                         "content": {
@@ -1164,10 +1164,10 @@
                 ]
             }
         },
-        "/API/Intermediary/Type/{securityClass}/Offering/8a921026-ec06-4e08-af19-8812e161e61f/Instance": {
+        "/API/Defend/Intermediary/Type/{securityClass}/Offering/8a921026-ec06-4e08-af19-8812e161e61f": {
             "get": {
                 "description": "Retrieves a list of all AVD intermediaries for the specified security class filter. Next links may be provided for pagination to allow for good performance on larger environments. If a nextLink is return, not all data was returned on this query and the next link can be sent back to the API to get the next page of data.",
-                "operationId": "/API/Intermediary/AVD/GetAll",
+                "operationId": "/API/Defend/Intermediary/Offering/AVD/GetAll",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -1203,16 +1203,16 @@
                 ]
             }
         },
-        "/API/Intermediary/Type/{securityClass}/Offering/8a921026-ec06-4e08-af19-8812e161e61f/Instance/{instanceId}": {
+        "/API/Defend/Intermediary/{intermediaryId}/Type/{securityClass}/Offering/8a921026-ec06-4e08-af19-8812e161e61f": {
             "delete": {
                 "description": "Deletes the specified intermediary (by the parent group's Entra ID Object ID) using the requested security class as a filter.",
-                "operationId": "/API/Intermediary/AVD/DeleteInstance",
+                "operationId": "/API/Defend/Intermediary/Offering/AVD/DeleteInstance",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
                     },
                     {
-                        "$ref": "#/components/parameters/instanceId"
+                        "$ref": "#/components/parameters/intermediaryId"
                     }
                 ],
                 "responses": {
@@ -1236,13 +1236,13 @@
             },
             "get": {
                 "description": "Retrieves the specified intermediary (by the parent group's Entra ID Object ID) using the requested security class as a filter.",
-                "operationId": "/API/Intermediary/AVD/GetInstance",
+                "operationId": "/API/Defend/Intermediary/Offering/AVD/GetInstance",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
                     },
                     {
-                        "$ref": "#/components/parameters/instanceId"
+                        "$ref": "#/components/parameters/intermediaryId"
                     }
                 ],
                 "responses": {
@@ -1272,16 +1272,16 @@
                 ]
             }
         },
-        "/API/Intermediary/Type/{securityClass}/Offering/8a921026-ec06-4e08-af19-8812e161e61f/Instance/{instanceId}/Assign": {
+        "/API/Defend/Intermediary/{intermediaryId}/Type/{securityClass}/Offering/8a921026-ec06-4e08-af19-8812e161e61f/Assign": {
             "delete": {
                 "description": "Removes the specified user(s) as identified by their Object ID from the AVD cluster and deletes their corresponding session host(s).",
-                "operationId": "/API/Intermediary/AVD/Instance/RemoveAssign",
+                "operationId": "/API/Defend/Intermediary/Offering/AVD/RemoveAssign",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
                     },
                     {
-                        "$ref": "#/components/parameters/instanceId"
+                        "$ref": "#/components/parameters/intermediaryId"
                     }
                 ],
                 "requestBody": {
@@ -1346,13 +1346,13 @@
             },
             "get": {
                 "description": "Gets the list of assigned user from the specified AVD Intermediary.",
-                "operationId": "/API/Intermediary/AVD/Instance/GetAssign",
+                "operationId": "/API/Defend/Intermediary/Offering/AVD/GetAssign",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
                     },
                     {
-                        "$ref": "#/components/parameters/instanceId"
+                        "$ref": "#/components/parameters/intermediaryId"
                     },
                     {
                         "$ref": "#/components/parameters/nextLink"
@@ -1386,13 +1386,13 @@
             },
             "post": {
                 "description": "Assigns the specified user(s) as identified by their Object ID to the AVD cluster and create corresponding session host(s) for them.",
-                "operationId": "/API/Intermediary/AVD/Instance/Assign",
+                "operationId": "/API/Defend/Intermediary/Offering/AVD/Assign",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
                     },
                     {
-                        "$ref": "#/components/parameters/instanceId"
+                        "$ref": "#/components/parameters/intermediaryId"
                     }
                 ],
                 "requestBody": {
@@ -1467,16 +1467,16 @@
                 ]
             }
         },
-        "/API/Intermediary/Type/{securityClass}/Offering/8a921026-ec06-4e08-af19-8812e161e61f/Instance/{instanceId}/Assign/{userId}": {
+        "/API/Defend/Intermediary/{intermediaryId}/Type/{securityClass}/Offering/8a921026-ec06-4e08-af19-8812e161e61f/Assign/{userId}": {
             "get": {
                 "description": "Get the specified managed user's from the specified AVD intermediary assignment list.",
-                "operationId": "/API/Intermediary/AVD/Instance/GetSpecificAssign",
+                "operationId": "/API/Defend/Intermediary/Offering/AVD/GetSpecificAssign",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
                     },
                     {
-                        "$ref": "#/components/parameters/instanceId"
+                        "$ref": "#/components/parameters/intermediaryId"
                     },
                     {
                         "$ref": "#/components/parameters/userId"
@@ -1512,7 +1512,7 @@
         "/API/Defend/Device/{deviceId}/Type/Privileged/Assign": {
             "delete": {
                 "description": "Remove the specified user list from the device.",
-                "operationId": "/API/lifecycle/DeleteDeviceAssignment",
+                "operationId": "/API/Defend/Device/DeleteAssign",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/deviceId"
@@ -1588,7 +1588,7 @@
             },
             "get": {
                 "description": "Lists all of the users that are currently assigned to the specified device.",
-                "operationId": "/API/lifecycle/GetDeviceAssignment",
+                "operationId": "/API/Defend/Device/GetAssign",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/deviceId"
@@ -1619,7 +1619,7 @@
             },
             "post": {
                 "description": "Adds the specified list of users to the list of users that are allowed to log in on the specific privileged device.",
-                "operationId": "/API/lifecycle/ReplaceDeviceAssignment",
+                "operationId": "/API/Defend/Device/AddAssign",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/deviceId"
@@ -1697,7 +1697,7 @@
         "/API/Defend/Device/Type/{securityClass}": {
             "get": {
                 "description": "Returns a list of all commissioned devices managed by the SHI Environment Lockdown and Defense.",
-                "operationId": "/API/lifecycle/GetDeviceList",
+                "operationId": "/API/Defend/Device/GetAll",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -1734,7 +1734,7 @@
             },
             "post": {
                 "description": "Commissions a new device, into the device hierarchy and appends appropriate metadata and initial policies. Appends required metadata to proper locations.",
-                "operationId": "/API/lifecycle/CreateDevice",
+                "operationId": "/API/Defend/Device/Create",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -1796,7 +1796,7 @@
         "/API/Defend/Device/{deviceId}/Type/{securityClass}": {
             "delete": {
                 "description": "Removes the device from the management hierarchy, removes metadata tagging and issues the wipe command to the devices.",
-                "operationId": "/API/lifecycle/DeleteDevice",
+                "operationId": "/API/Defend/Device/Delete",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -1826,7 +1826,7 @@
             },
             "get": {
                 "description": "Get the specified managed device by its Entra ID Device ID.",
-                "operationId": "/API/lifecycle/GetDevice",
+                "operationId": "/API/Defend/Device/Get",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -1865,7 +1865,7 @@
         "/API/Defend/User/Type/{securityClass}": {
             "get": {
                 "description": "Returns a list of all users managed by the SHI Environment Lockdown and Defense.",
-                "operationId": "/API/Lifecycle/GetUserList",
+                "operationId": "/API/Defend/User/GetAll",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -1902,7 +1902,7 @@
             },
             "post": {
                 "description": "Securely clones the specified user's properties into a new managed user object.",
-                "operationId": "/API/lifecycle/CreateUser",
+                "operationId": "/API/Defend/User/Create",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -1967,7 +1967,7 @@
         "/API/Defend/User/{userId}/Type/{securityClass}": {
             "delete": {
                 "description": "Deletes the user account and removes the management artifacts.",
-                "operationId": "/API/lifecycle/DeleteUser",
+                "operationId": "/API/Defend/User/Delete",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -1997,7 +1997,7 @@
             },
             "get": {
                 "description": "Retrieves the specified managed user by its Entra ID User ID",
-                "operationId": "/API/lifecycle/GetUser",
+                "operationId": "/API/Defend/User/Get",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -2034,7 +2034,7 @@
             },
             "patch": {
                 "description": "Updates the user's mutable data such as their display name, uiEducation or first/last name. All other properties passed will be ignored.",
-                "operationId": "/API/lifecycle/UpdateUser",
+                "operationId": "/API/Defend/User/Update",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -2082,7 +2082,7 @@
         "/API/Defend/Marketplace/Type/{securityClass}/Offering/{offeringId}": {
             "post": {
                 "description": "Creates the offering with the requested settings. In the body payload, the `type` property in the `property` object is ignored. See the AVD example.",
-                "operationId": "/API/Marketplace/Offering/Create",
+                "operationId": "/API/Defend/Marketplace/Offering/Create",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -2163,7 +2163,7 @@
         "/Docs": {
             "get": {
                 "description": "Runs the Swagger UI render to render the OpenAPI spec that you are viewing now.",
-                "operationId": "/Docs/GetSwaggerUi",
+                "operationId": "/Docs/GetApiDocs",
                 "responses": {
                     "200": {
                         "description": "Returns the HTML for Swagger UI renderer's output"
