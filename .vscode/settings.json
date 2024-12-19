@@ -4,5 +4,6 @@
         "Lockdown",
         "openapi",
         "SSPR"
-    ]
+    ],
+    "github.copilot.editor.enableAutoCompletions": false
 }
