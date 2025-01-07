@@ -49,6 +49,16 @@
                     "type": "integer",
                     "minimum": 0
                 }
+            },
+            "version": {
+                "description": "Version of the application package.",
+                "in": "path",
+                "name": "version",
+                "required": true,
+                "schema": {
+                    "example": "1.12.5",
+                    "type": "string"
+                }
             }
         },
         "responses": {
@@ -1950,6 +1960,7 @@
                         "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
                     }
                 },
+                "summary": "Retrieves All Channel Configurations",
                 "tags": [
                     "Update"
                 ]
@@ -2092,7 +2103,7 @@
                         "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
                     }
                 },
-                "summary": "Delete Specified Channel Configuration",
+                "summary": "Deletes Specified Channel Configuration",
                 "tags": [
                     "Update"
                 ]
@@ -2102,6 +2113,11 @@
             "get": {
                 "description": "Retrieves all of the ring configurations for a channel that are present in the update service.",
                 "operationId": "/API/Update/Shield/Channel/:channelName/Ring/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/channelName"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "content": {
@@ -2126,6 +2142,7 @@
                         "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
                     }
                 },
+                "summary": "Retrieves All Ring Configurations",
                 "tags": [
                     "Update"
                 ]
@@ -2239,7 +2256,7 @@
                         "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
                     }
                 },
-                "summary": "Modifies Channel Ring Configuration",
+                "summary": "Modifies Specific Channel Ring Configuration",
                 "tags": [
                     "Update"
                 ]
@@ -2269,21 +2286,54 @@
                         "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
                     }
                 },
-                "summary": "Delete Specified Channel Ring Configuration",
+                "summary": "Deletes Specific Channel Ring Configuration",
                 "tags": [
                     "Update"
                 ]
             }
         },
-        "/API/Update/Shield/Channel/:channelName/Version/:version/": {
-            "": {
-                "description": "",
-                "operationId": "",
-                "responses": {
-
+        "/API/Update/Shield/Channel/{channelName}/Version/{version}/": {
+            "post": {
+                "description": "Uploads new version of the update package for SHIELD in a specific channel.",
+                "operationId": "/API/Update/Shield/Channel/:channelName/Version/:version/Post",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/channelName"
+                    },
+                    {
+                        "$ref": "#/components/parameters/version"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/octet-stream": {
+                            "schema": {
+                                 "type": "string",
+                                "format": "binary"
+                            }
+                        }
+                    }
                 },
+                "responses": {
+                    "204": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "500": {
+                        "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
+                    }
+                },
+                "summary": "Uploads New Application Package",
                 "tags": [
-
+                    "Update"
                 ]
             }
         },
@@ -2302,13 +2352,41 @@
                         },
                         "description": "OK"
                     },
-                    "400": {
-                      "$ref": "#/components/responses/400"
+                    "500": {
+                        "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
+                    }
+                },
+                "summary": "Retrieves Latest Application Version Number",
+                "tags": [
+                    "Update"
+                ]
+            }
+        },
+        "/API/Update/Shield/Check/Channel/{channelName}/": {
+            "get": {
+                "description": "Retrieves the latest available version of the package for the running application for the specific channel.",
+                "operationId": "/API/Update/Shield/Check/Channel/:channelName/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/channelName"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Update.Shield.Check"
+                                }
+                            }
+                        },
+                        "description": "OK"
                     },
                     "500": {
                         "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
                     }
                 },
+                "summary": "Retrieves Application Version Number For Specific Channel",
                 "tags": [
                     "Update"
                 ]
@@ -2316,17 +2394,37 @@
         },
         "/API/Update/Shield/Download/": {
             "get": {
-                "description": "Receives a stream of the ZIP archive content to be saved and that represents requested application update package.",
+                "description": "Sends a stream of the ZIP archive content to be saved that represents requested application update package.",
                 "operationId": "/API/Update/Shield/Download/Get",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/zip": {
+                                "schema": {
+                                    "type": "string",
+                                    "format": "binary"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
+                    }
+                },
+                "summary": "Streams File Content To Download",
+                "tags": [
+                    "Update"
+                ]
+            }
+        },
+        "/API/Update/Shield/Download/Channel/{channelName}/": {
+            "get": {
+                "description": "Sends a stream of the ZIP archive content to be saved that represents requested application update package for the specific channel.",
+                "operationId": "/API/Update/Shield/Download/Channel/:channelName/Get",
                 "parameters": [
                     {
-                        "in": "query",
-                        "name": "channel",
-                        "schema": {
-                            "type": "string"
-                        },
-                        "required": false,
-                        "description": "Name of the deploy channel where to look for the latest version of the application package."
+                        "$ref": "#/components/parameters/channelName"
                     }
                 ],
                 "responses": {
@@ -2341,27 +2439,16 @@
                             }
                         }
                     },
-                    "400": {
-                      "$ref": "#/components/responses/400"
+                    "403": {
+                        "$ref": "#/components/responses/403"
                     },
                     "500": {
                         "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
                     }
                 },
+                "summary": "Streams File Content From Specific Channel To Download",
                 "tags": [
                     "Update"
-                ]
-            }
-        },
-        "/API/Update/Shield/Download/Channel/:channelName/": {
-            "": {
-                "description": "",
-                "operationId": "",
-                "responses": {
-
-                },
-                "tags": [
-
                 ]
             }
         },
@@ -2393,6 +2480,7 @@
                         "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
                     }
                 },
+                "summary": "Retrieves All Tenant Configurations",
                 "tags": [
                     "Update"
                 ]
@@ -2514,7 +2602,7 @@
                         "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
                     }
                 },
-                "summary": "Modifies Tenant Configuration",
+                "summary": "Modifies Specific Tenant Configuration",
                 "tags": [
                     "Update"
                 ]
@@ -2541,7 +2629,7 @@
                         "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
                     }
                 },
-                "summary": "Delete Specified Tenant Configuration",
+                "summary": "Deletes Specific Tenant Configuration",
                 "tags": [
                     "Update"
                 ]
