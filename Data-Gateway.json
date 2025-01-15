@@ -28,6 +28,37 @@
                     "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
                     "type": "string"
                 }
+            },
+            "channelName": {
+                "description": "Name of the deploy channel to operate against.",
+                "in": "path",
+                "name": "channelName",
+                "required": true,
+                "schema": {
+                    "example": "beta",
+                    "type": "string"
+                }
+            },
+            "channelRing": {
+                "description": "Integer number representing ring to operate against.",
+                "in": "path",
+                "name": "number",
+                "required": true,
+                "schema": {
+                    "example": 1,
+                    "type": "integer",
+                    "minimum": 0
+                }
+            },
+            "version": {
+                "description": "Version of the application package.",
+                "in": "path",
+                "name": "version",
+                "required": true,
+                "schema": {
+                    "example": "1.12.5",
+                    "type": "string"
+                }
             }
         },
         "responses": {
@@ -671,6 +702,107 @@
                     "SpecializedUserCount"
                 ],
                 "title": "Application Telemetry - SHIELD",
+                "type": "object"
+            },
+            "Update.Shield.Check": {
+                "description": "Object returning the value of the version of the latest application package available.",
+                "properties": {
+                    "updateVersion": {
+                        "description": "Latest found version of the application package.",
+                        "example": "1.12.5",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "updateVersion"
+                ],
+                "title": "Update SHIELD Check - latest application package version",
+                "type": "object"
+            },
+            "Update.Shield.Channel": {
+                "description": "Channel configuration for the SHIELD update service.",
+                "properties": {
+                    "latest": {
+                        "description": "Version number of the latest update available to the chanel.",
+                        "example": "1.12.5",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "(Unique) Name of the update channel that this configuration belongs to.",
+                        "example": "stable",
+                        "type": "string"
+                    },
+                    "previous": {
+                        "description": "Version number of the number that is being replaced via ring deployment, available to all rings at the minimum.",
+                        "example": "1.12.4",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "latest",
+                    "name",
+                    "previous"
+                ],
+                "title": "SHIELD Update - Channel",
+                "type": "object"
+            },
+            "Update.Shield.Channel.Ring": {
+                "description": "Object containing channel ring configuration.",
+                "properties": {
+                    "latest": {
+                        "description": "Flag that indicates if the ring should be operating off of the latest version number provided by the channel (`true`) or the previous (`false`).",
+                        "example": true,
+                        "type": "boolean"
+                    },
+                    "number": {
+                        "description": "Ring number that this configuration belongs to.",
+                        "example": 1,
+                        "type": "integer",
+                        "minimum": 0
+                    }
+                },
+                "required": [
+                    "latest",
+                    "number"
+                ],
+                "title": "Update SHIELD Channel Ring - configuration entry",
+                "type": "object"
+            },
+            "Update.Shield.Tenant": {
+                "description": "Object containing tenant update configuration.",
+                "properties": {
+                    "alphaEnabled": {
+                        "description": "Flag that indicates if the current tenant is allowed to request alpha builds (`true`) or not (`false`).",
+                        "example": false,
+                        "type": "boolean"
+                    },
+                    "channel": {
+                        "description": "Name of the deploy channel.",
+                        "example": "stable",
+                        "type": "string"
+                    },
+                    "ring": {
+                        "description": "Ring number that the client is a member of for the current chanel.",
+                        "example": 1,
+                        "type": "integer"
+                    },
+                    "tenantId": {
+                        "description": "Tenant ID that the configuration belongs to.",
+                        "example": "a2a1698d-a3e0-42d3-96a4-47eb3e8f7dd1",
+                        "format": "uuid",
+                        "maxLength": 36,
+                        "minLength": 36,
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "alphaEnabled",
+                    "channel",
+                    "ring",
+                    "tenantId"
+                ],
+                "title": "Update SHIELD Tenant - configuration entry",
                 "type": "object"
             }
         },
@@ -1813,6 +1945,709 @@
                     "Telemetry"
                 ]
             }
+        },
+        "/API/Update/Shield/Channel/": {
+            "get": {
+                "description": "Retrieves all of the channel configurations that are present in the update service. This endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
+                "operationId": "/API/Update/Shield/Channel/Get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Update.Shield.Channel"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "500": {
+                        "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
+                    }
+                },
+                "summary": "Retrieves All Channel Configurations",
+                "tags": [
+                    "SHIELD - Update"
+                ]
+            }
+        },
+        "/API/Update/Shield/Channel/{channelName}/": {
+            "get": {
+                "description": "Retrieves configuration for the specific channel from the update service. This endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
+                "operationId": "/API/Update/Shield/Channel/:channelName/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/channelName"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Update.Shield.Channel"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "500": {
+                        "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
+                    }
+                },
+                "summary": "Retrieves Specific Channel Configuration",
+                "tags": [
+                    "SHIELD - Update"
+                ]
+            },
+            "patch": {
+                "description": "Updates (or adds when missing) the specified channel configuration. This endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
+                "operationId": "/API/Update/Shield/Channel/:channelName/Patch",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/channelName"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "examples": {
+                                "Channel Configuration Details": {
+                                    "description": "Example channel configuration object.",
+                                    "summary": "Channel Configuration",
+                                    "value": {
+                                        "latest": "1.12.5",
+                                        "previous": "1.12.4"
+                                    }
+                                }
+                            },
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "latest": {
+                                        "description": "Flag that indicates if the ring should be operating off of the latest version number provided by the channel (`true`) or the previous (`false`).",
+                                        "example": "true",
+                                        "type": "boolean"
+                                    },
+                                    "number": {
+                                        "description": "Ring number that this configuration belongs to.",
+                                        "example": 1,
+                                        "type": "integer",
+                                        "minimum": 0
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Channel Configuration Details": {
+                                        "description": "Example object returned on creation or update.",
+                                        "summary": "Channel Configuration",
+                                        "value": {
+                                            "latest": "1.12.5",
+                                            "name": "stable",
+                                            "previous": "1.12.4"
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/Update.Shield.Channel"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "500": {
+                        "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
+                    }
+                },
+                "summary": "Upserts Channel Configuration",
+                "tags": [
+                    "SHIELD - Update"
+                ]
+            },
+            "delete": {
+                "description": "Deletes the specified channel configuration and associated rings. This endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
+                "operationId": "/API/Update/Shield/Channel/:channelName/Delete",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/channelName"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Deleted Successfully"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "500": {
+                        "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
+                    }
+                },
+                "summary": "Deletes the Specified Channel",
+                "tags": [
+                    "SHIELD - Update"
+                ]
+            }
+        },
+        "/API/Update/Shield/Channel/{channelName}/Ring/": {
+            "get": {
+                "description": "Retrieves all of the ring configurations for a channel that are present in the update service. This endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
+                "operationId": "/API/Update/Shield/Channel/:channelName/Ring/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/channelName"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Update.Shield.Channel.Ring"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "500": {
+                        "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
+                    }
+                },
+                "summary": "Retrieves All Ring Configurations",
+                "tags": [
+                    "SHIELD - Update"
+                ]
+            }
+        },
+        "/API/Update/Shield/Channel/{channelName}/Ring/{number}/": {
+            "get": {
+                "description": "Retrieves configuration for the specific channel ring from the update service. This endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
+                "operationId": "/API/Update/Shield/Channel/:channelName/Ring/:number/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/channelName"
+                    },
+                    {
+                        "$ref": "#/components/parameters/channelRing"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Update.Shield.Channel.Ring"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "500": {
+                        "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
+                    }
+                },
+                "summary": "Retrieves Specific Channel Ring Configuration",
+                "tags": [
+                    "SHIELD - Update"
+                ]
+            },
+            "patch": {
+                "description": "Updates (or adds when missing) channel ring configuration. This endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
+                "operationId": "/API/Update/Shield/Channel/:channelName/Ring/:number/Patch",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/channelName"
+                    },
+                    {
+                        "$ref": "#/components/parameters/channelRing"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "examples": {
+                                "Channel Ring Configuration Details": {
+                                    "description": "Example channel ring configuration object.",
+                                    "summary": "Channel Ring Configuration",
+                                    "value": {
+                                        "latest": true
+                                    }
+                                }
+                            },
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "latest": {
+                                        "description": "Flag that indicates if the ring should be operating off of the latest version number provided by the channel (`true`) or the previous (`false`).",
+                                        "example": true,
+                                        "type": "boolean"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Channel Ring Configuration Details": {
+                                        "description": "Example object returned on creation or update.",
+                                        "summary": "Channel Ring Configuration",
+                                        "value": {
+                                            "latest": true,
+                                            "number": 1
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/Update.Shield.Channel.Ring"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "500": {
+                        "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
+                    }
+                },
+                "summary": "Modifies Specific Channel Ring Configuration",
+                "tags": [
+                    "SHIELD - Update"
+                ]
+            },
+            "delete": {
+                "description": "Deletes configuration of the specific channel ring. This endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
+                "operationId": "/API/Update/Shield/Channel/:channelName/Ring/:number/Delete",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/channelName"
+                    },
+                    {
+                        "$ref": "#/components/parameters/channelRing"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Deleted Successfully"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "500": {
+                        "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
+                    }
+                },
+                "summary": "Deletes Specific Channel Ring Configuration",
+                "tags": [
+                    "SHIELD - Update"
+                ]
+            }
+        },
+        "/API/Update/Shield/Channel/{channelName}/Version/{version}/": {
+            "post": {
+                "description": "Uploads new version of the update package for SHIELD in a specific channel. This endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
+                "operationId": "/API/Update/Shield/Channel/:channelName/Version/:version/Post",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/channelName"
+                    },
+                    {
+                        "$ref": "#/components/parameters/version"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/octet-stream": {
+                            "schema": {
+                                "type": "string",
+                                "format": "binary"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "500": {
+                        "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
+                    }
+                },
+                "summary": "Uploads New Application Package",
+                "tags": [
+                    "SHIELD - Update"
+                ]
+            }
+        },
+        "/API/Update/Shield/Check/": {
+            "get": {
+                "description": "Retrieves the latest available version of the package for the running application. Version depends on the channel associated with the current tenant, or channel mentioned in the request, or default channel value. Applicable channel would be calculated on the server for each request.",
+                "operationId": "/API/Update/Shield/Check/Get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Update.Shield.Check"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "500": {
+                        "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
+                    }
+                },
+                "summary": "Retrieves Latest Application Version Number",
+                "tags": [
+                    "SHIELD - Update"
+                ]
+            }
+        },
+        "/API/Update/Shield/Check/Channel/{channelName}/": {
+            "get": {
+                "description": "Retrieves the latest available version of the package for the running application for the specific channel.",
+                "operationId": "/API/Update/Shield/Check/Channel/:channelName/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/channelName"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Update.Shield.Check"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "500": {
+                        "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
+                    }
+                },
+                "summary": "Retrieves Application Version Number For Specific Channel",
+                "tags": [
+                    "SHIELD - Update"
+                ]
+            }
+        },
+        "/API/Update/Shield/Download/": {
+            "get": {
+                "description": "Sends a stream of the ZIP archive content to be saved that represents requested application update package.",
+                "operationId": "/API/Update/Shield/Download/Get",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/zip": {
+                                "schema": {
+                                    "type": "string",
+                                    "format": "binary"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
+                    }
+                },
+                "summary": "Streams File Content To Download",
+                "tags": [
+                    "SHIELD - Update"
+                ]
+            }
+        },
+        "/API/Update/Shield/Download/Channel/{channelName}/": {
+            "get": {
+                "description": "Sends a stream of the ZIP archive content to be saved that represents requested application update package for the specific channel.",
+                "operationId": "/API/Update/Shield/Download/Channel/:channelName/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/channelName"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/zip": {
+                                "schema": {
+                                    "type": "string",
+                                    "format": "binary"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "500": {
+                        "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
+                    }
+                },
+                "summary": "Streams File Content From Specific Channel To Download",
+                "tags": [
+                    "SHIELD - Update"
+                ]
+            }
+        },
+        "/API/Update/Shield/Tenant/": {
+            "get": {
+                "description": "Retrieves all tenant configurations present in the update service. This endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
+                "operationId": "/API/Update/Shield/Tenant/Get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Update.Shield.Tenant"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "500": {
+                        "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
+                    }
+                },
+                "summary": "Retrieves All Tenant Configurations",
+                "tags": [
+                    "SHIELD - Update"
+                ]
+            }
+        },
+        "/API/Update/Shield/Tenant/{tenantId}/": {
+            "get": {
+                "description": "Retrieves configuration for the specific tenant from the update service. This endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
+                "operationId": "/API/Update/Shield/Tenant/:tenantId/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/tenantId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Update.Shield.Tenant"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "500": {
+                        "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
+                    }
+                },
+                "summary": "Retrieves Specific Tenant Configuration",
+                "tags": [
+                    "SHIELD - Update"
+                ]
+            },
+            "patch": {
+                "description": "Updates (or adds when missing) tenant configuration. This endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
+                "operationId": "/API/Update/Shield/Tenant/:tenantId/Patch",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/tenantId"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "examples": {
+                                "Tenant Configuration Details": {
+                                    "description": "Example tenant configuration object.",
+                                    "summary": "Tenant Configuration",
+                                    "value": {
+                                        "alphaEnabled": false,
+                                        "channel": "stable",
+                                        "ring": 1
+                                    }
+                                }
+                            },
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "alphaEnabled": {
+                                        "description": "Flag that indicates if the current tenant is allowed to request alpha builds (`true`) or not (`false`).",
+                                        "example": false,
+                                        "type": "boolean"
+                                    },
+                                    "channel": {
+                                        "description": "Name of the deploy channel.",
+                                        "example": "stable",
+                                        "type": "string"
+                                    },
+                                    "ring": {
+                                        "description": "Ring number that the client is a member of for the current chanel.",
+                                        "example": 1,
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Tenant Configuration Details": {
+                                        "description": "Example object returned on creation or update.",
+                                        "summary": "Tenant Configuration",
+                                        "value": {
+                                            "alphaEnabled": false,
+                                            "channel": "stable",
+                                            "ring": 1,
+                                            "tenantId": "a2a1698d-a3e0-42d3-96a4-47eb3e8f7dd1"
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/Update.Shield.Tenant"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "500": {
+                        "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
+                    }
+                },
+                "summary": "Upserts Specific Tenant Configuration",
+                "tags": [
+                    "SHIELD - Update"
+                ]
+            },
+            "delete": {
+                "description": "Deletes configuration for the specific tenant. This endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
+                "operationId": "/API/Update/Shield/Tenant/:tenantId/Delete",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/tenantId"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Deleted Successfully"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "500": {
+                        "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
+                    }
+                },
+                "summary": "Deletes Specific Tenant Configuration",
+                "tags": [
+                    "SHIELD - Update"
+                ]
+            }
         }
     },
     "security": [
@@ -1850,6 +2685,10 @@
         {
             "description": "Collects data from the various SHI Lab products.",
             "name": "Telemetry"
+        },
+        {
+            "name": "SHIELD - Update",
+            "description": "Update Service Configuration for SHIELD."
         }
     ]
 }
