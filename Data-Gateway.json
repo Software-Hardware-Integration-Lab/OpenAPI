@@ -713,12 +713,14 @@
                         "type": "string"
                     }
                 },
-                "required": [ "updateVersion" ],
+                "required": [
+                    "updateVersion"
+                ],
                 "title": "Update SHIELD Check - latest application package version",
                 "type": "object"
             },
             "Update.Shield.Channel": {
-                "description": "Object containing deploy channel configuration.",
+                "description": "Channel configuration for the SHIELD update service.",
                 "properties": {
                     "latest": {
                         "description": "Version number of the latest update available to the chanel.",
@@ -731,13 +733,17 @@
                         "type": "string"
                     },
                     "previous": {
-                        "description": "Version number of the package that was available until the newest deploy.",
+                        "description": "Version number of the number that is being replaced via ring deployment, available to all rings at the minimum.",
                         "example": "1.12.4",
                         "type": "string"
                     }
                 },
-                "required": [ "latest", "name", "previous" ],
-                "title": "Update SHIELD Channel - configuration entry",
+                "required": [
+                    "latest",
+                    "name",
+                    "previous"
+                ],
+                "title": "SHIELD Update - Channel",
                 "type": "object"
             },
             "Update.Shield.Channel.Ring": {
@@ -755,7 +761,10 @@
                         "minimum": 0
                     }
                 },
-                "required": [ "latest", "number" ],
+                "required": [
+                    "latest",
+                    "number"
+                ],
                 "title": "Update SHIELD Channel Ring - configuration entry",
                 "type": "object"
             },
@@ -787,7 +796,12 @@
                         "type": "string"
                     }
                 },
-                "required": [ "alphaEnabled", "channel", "ring", "tenantId" ],
+                "required": [
+                    "alphaEnabled",
+                    "channel",
+                    "ring",
+                    "tenantId"
+                ],
                 "title": "Update SHIELD Tenant - configuration entry",
                 "type": "object"
             }
@@ -1934,7 +1948,7 @@
         },
         "/API/Update/Shield/Channel/": {
             "get": {
-                "description": "Retrieves all of the channel configurations that are present in the update service.",
+                "description": "Retrieves all of the channel configurations that are present in the update service. This endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
                 "operationId": "/API/Update/Shield/Channel/Get",
                 "responses": {
                     "200": {
@@ -1962,13 +1976,13 @@
                 },
                 "summary": "Retrieves All Channel Configurations",
                 "tags": [
-                    "Update"
+                    "SHIELD - Update"
                 ]
             }
         },
         "/API/Update/Shield/Channel/{channelName}/": {
             "get": {
-                "description": "Retrieves configuration for the specific channel from the update service.",
+                "description": "Retrieves configuration for the specific channel from the update service. This endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
                 "operationId": "/API/Update/Shield/Channel/:channelName/Get",
                 "parameters": [
                     {
@@ -1998,11 +2012,11 @@
                 },
                 "summary": "Retrieves Specific Channel Configuration",
                 "tags": [
-                    "Update"
+                    "SHIELD - Update"
                 ]
             },
             "patch": {
-                "description": "Updates (or adds when missing) channel configuration.",
+                "description": "Updates (or adds when missing) the specified channel configuration. This endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
                 "operationId": "/API/Update/Shield/Channel/:channelName/Patch",
                 "parameters": [
                     {
@@ -2076,13 +2090,13 @@
                         "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
                     }
                 },
-                "summary": "Modifies Channel Configuration",
+                "summary": "Upserts Channel Configuration",
                 "tags": [
-                    "Update"
+                    "SHIELD - Update"
                 ]
             },
             "delete": {
-                "description": "Deletes configuration of the specific channel.",
+                "description": "Deletes the specified channel configuration and associated rings. This endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
                 "operationId": "/API/Update/Shield/Channel/:channelName/Delete",
                 "parameters": [
                     {
@@ -2103,15 +2117,15 @@
                         "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
                     }
                 },
-                "summary": "Deletes Specified Channel Configuration",
+                "summary": "Deletes the Specified Channel",
                 "tags": [
-                    "Update"
+                    "SHIELD - Update"
                 ]
             }
         },
         "/API/Update/Shield/Channel/{channelName}/Ring/": {
             "get": {
-                "description": "Retrieves all of the ring configurations for a channel that are present in the update service.",
+                "description": "Retrieves all of the ring configurations for a channel that are present in the update service. This endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
                 "operationId": "/API/Update/Shield/Channel/:channelName/Ring/Get",
                 "parameters": [
                     {
@@ -2144,13 +2158,13 @@
                 },
                 "summary": "Retrieves All Ring Configurations",
                 "tags": [
-                    "Update"
+                    "SHIELD - Update"
                 ]
             }
         },
         "/API/Update/Shield/Channel/{channelName}/Ring/{number}/": {
             "get": {
-                "description": "Retrieves configuration for the specific channel ring from the update service.",
+                "description": "Retrieves configuration for the specific channel ring from the update service. This endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
                 "operationId": "/API/Update/Shield/Channel/:channelName/Ring/:number/Get",
                 "parameters": [
                     {
@@ -2183,11 +2197,11 @@
                 },
                 "summary": "Retrieves Specific Channel Ring Configuration",
                 "tags": [
-                    "Update"
+                    "SHIELD - Update"
                 ]
             },
             "patch": {
-                "description": "Updates (or adds when missing) channel ring configuration.",
+                "description": "Updates (or adds when missing) channel ring configuration. This endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
                 "operationId": "/API/Update/Shield/Channel/:channelName/Ring/:number/Patch",
                 "parameters": [
                     {
@@ -2258,11 +2272,11 @@
                 },
                 "summary": "Modifies Specific Channel Ring Configuration",
                 "tags": [
-                    "Update"
+                    "SHIELD - Update"
                 ]
             },
             "delete": {
-                "description": "Deletes configuration of the specific channel ring.",
+                "description": "Deletes configuration of the specific channel ring. This endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
                 "operationId": "/API/Update/Shield/Channel/:channelName/Ring/:number/Delete",
                 "parameters": [
                     {
@@ -2288,13 +2302,13 @@
                 },
                 "summary": "Deletes Specific Channel Ring Configuration",
                 "tags": [
-                    "Update"
+                    "SHIELD - Update"
                 ]
             }
         },
         "/API/Update/Shield/Channel/{channelName}/Version/{version}/": {
             "post": {
-                "description": "Uploads new version of the update package for SHIELD in a specific channel.",
+                "description": "Uploads new version of the update package for SHIELD in a specific channel. This endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
                 "operationId": "/API/Update/Shield/Channel/:channelName/Version/:version/Post",
                 "parameters": [
                     {
@@ -2308,7 +2322,7 @@
                     "content": {
                         "application/octet-stream": {
                             "schema": {
-                                 "type": "string",
+                                "type": "string",
                                 "format": "binary"
                             }
                         }
@@ -2333,7 +2347,7 @@
                 },
                 "summary": "Uploads New Application Package",
                 "tags": [
-                    "Update"
+                    "SHIELD - Update"
                 ]
             }
         },
@@ -2358,7 +2372,7 @@
                 },
                 "summary": "Retrieves Latest Application Version Number",
                 "tags": [
-                    "Update"
+                    "SHIELD - Update"
                 ]
             }
         },
@@ -2388,7 +2402,7 @@
                 },
                 "summary": "Retrieves Application Version Number For Specific Channel",
                 "tags": [
-                    "Update"
+                    "SHIELD - Update"
                 ]
             }
         },
@@ -2414,7 +2428,7 @@
                 },
                 "summary": "Streams File Content To Download",
                 "tags": [
-                    "Update"
+                    "SHIELD - Update"
                 ]
             }
         },
@@ -2448,13 +2462,13 @@
                 },
                 "summary": "Streams File Content From Specific Channel To Download",
                 "tags": [
-                    "Update"
+                    "SHIELD - Update"
                 ]
             }
         },
         "/API/Update/Shield/Tenant/": {
             "get": {
-                "description": "Retrieves all tenant configurations present in the update service.",
+                "description": "Retrieves all tenant configurations present in the update service. This endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
                 "operationId": "/API/Update/Shield/Tenant/Get",
                 "responses": {
                     "200": {
@@ -2482,13 +2496,13 @@
                 },
                 "summary": "Retrieves All Tenant Configurations",
                 "tags": [
-                    "Update"
+                    "SHIELD - Update"
                 ]
             }
         },
         "/API/Update/Shield/Tenant/{tenantId}/": {
             "get": {
-                "description": "Retrieves configuration for the specific tenant from the update service.",
+                "description": "Retrieves configuration for the specific tenant from the update service. This endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
                 "operationId": "/API/Update/Shield/Tenant/:tenantId/Get",
                 "parameters": [
                     {
@@ -2518,11 +2532,11 @@
                 },
                 "summary": "Retrieves Specific Tenant Configuration",
                 "tags": [
-                    "Update"
+                    "SHIELD - Update"
                 ]
             },
             "patch": {
-                "description": "Updates (or adds when missing) tenant configuration.",
+                "description": "Updates (or adds when missing) tenant configuration. This endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
                 "operationId": "/API/Update/Shield/Tenant/:tenantId/Patch",
                 "parameters": [
                     {
@@ -2602,13 +2616,13 @@
                         "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
                     }
                 },
-                "summary": "Modifies Specific Tenant Configuration",
+                "summary": "Upserts Specific Tenant Configuration",
                 "tags": [
-                    "Update"
+                    "SHIELD - Update"
                 ]
             },
             "delete": {
-                "description": "Deletes configuration for the specific tenant.",
+                "description": "Deletes configuration for the specific tenant. This endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
                 "operationId": "/API/Update/Shield/Tenant/:tenantId/Delete",
                 "parameters": [
                     {
@@ -2631,7 +2645,7 @@
                 },
                 "summary": "Deletes Specific Tenant Configuration",
                 "tags": [
-                    "Update"
+                    "SHIELD - Update"
                 ]
             }
         }
@@ -2671,6 +2685,10 @@
         {
             "description": "Collects data from the various SHI Lab products.",
             "name": "Telemetry"
+        },
+        {
+            "name": "SHIELD - Update",
+            "description": "Update Service Configuration for SHIELD."
         }
     ]
 }
