@@ -42,7 +42,7 @@
                         "value": "3",
                         "summary": "Number for the next page in the navigation flow"
                     },
-                    "uri":  {
+                    "uri": {
                         "value": "https://graph.microsoft.com/beta/devices?$top=20&$skiptoken=RFNwdCtEZXZpY2VfMThkNGY4OTAtMDA2YS00ZWM1LWI2OWYtY2VmNDY4ZjczNzQ4K0RldmljZV8xOGQ0Zjg5MC0wMDZhLTRlYzUtYjY5Zi1jZWY0NjhmNzM3NDg",
                         "summary": "Complete URL with details of the request and a skip token for MS Graph to parse and respond"
                     }
@@ -530,7 +530,7 @@
                         "readOnly": true,
                         "type": "string"
                     },
-                    "intermediaryAssignmentList":{
+                    "intermediaryAssignmentList": {
                         "type": "array",
                         "description": "List of intermediaries that the user is assigned to.",
                         "items": {
@@ -560,7 +560,7 @@
                     "securityClass": {
                         "$ref": "#/components/schemas/SecurityClassList"
                     },
-                    "siloAssignmentList":{
+                    "siloAssignmentList": {
                         "type": "array",
                         "description": "List of silos that the user is assigned to.",
                         "items": {
@@ -777,7 +777,7 @@
                 "type": "http",
                 "scheme": "bearer",
                 "bearerFormat": "JWT",
-                "description": "The Access Token from Entra ID for the App ID of `ID HERE`."
+                "description": "The Access Token from Entra ID for the `SHIELD - End User Login` Enterprise App (may need to be created from the App Registration)."
             }
         }
     },
