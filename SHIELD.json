@@ -81,6 +81,21 @@
                     "$ref": "#/components/schemas/SecurityClassList"
                 }
             },
+            "updateChannelName": {
+                "description": "Name of the update channel that should be used when querying or downloading updates.",
+                "in": "path",
+                "name": "Update Channel Name",
+                "required": true,
+                "schema": {
+                    "example": "stable",
+                    "type": "string",
+                    "enum": [
+                        "alpha",
+                        "beta",
+                        "stable"
+                    ]
+                }
+            },
             "userId": {
                 "description": "The SHIELD ID (Entra ID User's Object ID) of the managed user to target.",
                 "in": "path",
@@ -976,6 +991,139 @@
                 },
                 "tags": [
                     "Authentication"
+                ]
+            }
+        },
+        "/API/Update/": {
+            "get": {
+                "summary": "Check if an Update Is Pending",
+                "description": "Provides the state of the update engine. Where true means there is an update detected and false means there isn't an update available. This endpoint is available to all authorization levels.",
+                "operationId": "/API/Update/Get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "Update"
+                ]
+            }
+        },
+        "/API/Update/Check/": {
+            "get": {
+                "summary": "Check for a New Version",
+                "description": "Checks with data gateway and compares the reported version to the version that is locally installed. If there is a difference, a new update is marked as available. Always returns the latest version available on data gateway, even if that version is installed locally.\n\nThis endpoint requires the `Update.Read`, or `Update.ReadWrite` scope (permission).",
+                "operationId": "/API/Update/Check/Get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "1.2.3"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "Update"
+                ]
+            }
+        },
+        "/API/Update/Check/Channel/{Update Channel Name}/": {
+            "get": {
+                "summary": "Check for a New Version in Channel",
+                "description": "Checks with the SHI Data Gateway in the specified update channel and compares the reported version to the version that is locally installed. If there is a difference, a new update is marked as available. Always returns the latest version available on data gateway, even if that version is installed locally.\n\nThis endpoint requires the `Update.Read`, or `Update.ReadWrite` scope (permission).",
+                "operationId": "/API/Update/Check/Channel/UpdateChannelName/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/updateChannelName"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "1.2.3"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "Update"
+                ]
+            }
+        },
+        "/API/Update/Install/": {
+            "post": {
+                "summary": "Check for a New Version in Channel",
+                "description": "Installs the latest version that is available from SHI Data Gateway. Even if that version is the same that is installed.\n\nThis endpoint requires the `Update.ReadWrite` scope (permission).",
+                "operationId": "/API/Update/Install/Post",
+                "responses": {
+                    "204": {
+                        "description": "OK: Update Submitted to Azure"
+                    }
+                },
+                "tags": [
+                    "Update"
+                ]
+            }
+        },
+        "/API/Update/Install/Channel/{Update Channel Name}/": {
+            "post": {
+                "summary": "Check for a New Version in Channel",
+                "description": "Installs the latest version that is available from SHI Data Gateway in the specified channel. Even if that version is the same that is installed.\n\nThis endpoint requires the `Update.ReadWrite` scope (permission).",
+                "operationId": "/API/Update/Install/Channel/UpdateChannelName/Post",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/updateChannelName"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "OK: Update Submitted to Azure"
+                    }
+                },
+                "tags": [
+                    "Update"
+                ]
+            }
+        },
+        "/API/Update/Upload/": {
+            "post": {
+                "summary": "Upload Custom Update Package",
+                "description": "THIS API SHOULD ONLY BE USED IF INSTRUCTED BY SHI EMPLOYEES!\n\nUploads the specified ZIP package, validates signature and installs it if it matches. This ignores version numbers and will allow you to install the same version again if necessary.\n\nThis endpoint requires the `Update.ReadWrite` scope (permission).",
+                "operationId": "/API/Update/Upload/Post",
+                "requestBody": {
+                    "content": {
+                        "application/octet-stream": {
+                            "schema": {
+                                "type": "string",
+                                "format": "binary"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "OK: Update Submitted to Azure"
+                    }
+                },
+                "tags": [
+                    "Update"
                 ]
             }
         },
@@ -2224,6 +2372,10 @@
         {
             "description": "Checks the status and starts deployment of the core infrastructure.",
             "name": "Infrastructure Deployment"
+        },
+        {
+            "description": "Manage the updates for SHIELD and the policies deployed into the managed environment.",
+            "name": "Update"
         },
         {
             "description": "WARNING AUTHENTICATION IS DISABLED WHEN DEBUG MODE IS ENABLED!!! Endpoints that are exposed only in debug mode. You can use these to see as the app sees.",
