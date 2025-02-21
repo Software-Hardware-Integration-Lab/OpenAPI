@@ -1026,8 +1026,14 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "string",
-                                    "example": "1.2.3"
+                                    "properties": {
+                                        "appVersion": {
+                                            "description": "Follows symantec versioning as laid out here: https://semver.org/. This number is the version of the application package.",
+                                            "example": "1.2.3",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
                                 }
                             }
                         },
@@ -1054,8 +1060,14 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "string",
-                                    "example": "1.2.3"
+                                    "properties": {
+                                        "appVersion": {
+                                            "description": "Follows symantec versioning as laid out here: https://semver.org/. This number is the version of the application package.",
+                                            "example": "1.2.3",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
                                 }
                             }
                         },
