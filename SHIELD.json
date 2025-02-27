@@ -109,6 +109,30 @@
                     "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
                     "type": "string"
                 }
+            },
+            "configId": {
+                "description": "Reference of the configuration property in the template used during deploy.Reference of the configuration property in the template used during deploy.",
+                "in": "query",
+                "name": "configId",
+                "required": true,
+                "schema": {
+                    "type": "string",
+                    "format": "uuid",
+                    "maxLength": 36,
+                    "minLength": 36,
+                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                    "example": "42ff150d-2ff0-4b38-849e-fe6aa5eedb49"
+                }
+            },
+            "path": {
+                "description": "Location of the item in the object structure flattened for predictable navigation.",
+                "in": "query",
+                "name": "path",
+                "required": true,
+                "schema": {
+                    "type": "string",
+                    "example": "roleScopeTagIds"
+                }
             }
         },
         "responses": {
@@ -770,6 +794,51 @@
                 "example": "Privileged",
                 "title": "Type of security class the object(s) belongs to",
                 "type": "string"
+            },
+            "Shield.Deploy.Delta.Restore": {
+                "title": "SHIELD - Deploy - Delta - Restore",
+                "description": "Payload expected for Restore operation",
+                "type": "object",
+                "properties": {
+                    "configId": {
+                        "description": "Reference of the configuration property in the template used during deploy.Reference of the configuration property in the template used during deploy.",
+                        "type": "string",
+                        "format": "uuid",
+                        "maxLength": 36,
+                        "minLength": 36,
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                        "example": "8c9befc8-b25b-44b6-9778-350d7c511557"
+                    },
+                    "path": {
+                        "description": "Location of the item in the object structure flattened for predictable navigation.",
+                        "type": "string",
+                        "example": "displayName"
+                    }
+                },
+                "required": [ "configId", "path" ]
+
+            },
+            "Shield.Deploy.Delta.Skip": {
+                "title": "SHIELD - Deploy - Delta - Skip",
+                "description": "Payload expected for Skip operation",
+                "type": "object",
+                "properties": {
+                    "configId": {
+                        "description": "Reference of the configuration property in the template used during deploy.Reference of the configuration property in the template used during deploy.",
+                        "type": "string",
+                        "format": "uuid",
+                        "maxLength": 36,
+                        "minLength": 36,
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                        "example": "42ff150d-2ff0-4b38-849e-fe6aa5eedb49"
+                    },
+                    "path": {
+                        "description": "Location of the item in the object structure flattened for predictable navigation.",
+                        "type": "string",
+                        "example": "roleScopeTagIds"
+                    }
+                },
+                "required": [ "configId", "path" ]
             }
         },
         "securitySchemes": {
@@ -1280,6 +1349,184 @@
                     "Infrastructure Deployment"
                 ],
                 "security": []
+            }
+        },
+        "/API/Deploy/Delta": {
+            "get": {
+                "summary": "Initiate evaluation for configuration discrepancies",
+                "description": "Runs the comparison between configuration templates and live data to find discrepancies to be addressed.",
+                "operationId": "/API/Deploy/Delta/Get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "invalid": {
+                                            "additionalProperties": {
+                                                "description": "String with details of the error response.",
+                                                "type": "string"
+                                            },
+                                            "description": "Collection of the configuration items where request for live data responded with error.",
+                                            "type": "object"
+                                        },
+                                        "missing": {
+                                            "additionalProperties": {
+                                                "description": "String indicating name and description of the configuration item.",
+                                                "type": "string"
+                                            },
+                                            "description": "Collection of the configuration items that are present in the template but do not have reference to indicate they were deployed.",
+                                            "type": "object"
+                                        },
+                                        "results": {
+                                            "additionalProperties": {
+                                                "items": {
+                                                    "properties": {
+                                                        "actions": {
+                                                            "items": {
+                                                                "type": "string"
+                                                            },
+                                                            "description": "List of operations available to be performed on the entity.",
+                                                            "type": "array",
+                                                            "minItems": 1
+                                                        },
+                                                        "message": {
+                                                            "description": "Detailed information about the discrepancy for the entity.",
+                                                            "type": "string"
+                                                        },
+                                                        "path": {
+                                                            "description": "Location in the object where evaluated property encountered an error.",
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "type": "object",
+                                                    "required": [ "actions", "message", "path" ]
+                                                },
+                                                "type": "array"
+                                            },
+                                            "description": "Collection of the configuration items where discrepancies where found.",
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [ "invalid", "missing", "results"],
+                                    "example": {
+                                        "invalid": {
+                                            "a14402b8-98c5-41e3-ba99-e5e1a536f68d": "Setting ID '58246273-d366-40d5-ac3d-daacb8bc2655' - Item not found.",
+                                            "9af9209d-d191-4b42-9f65-dfd8b7882bba": "Setting ID 'f6f5d07b-230c-4818-93de-e407b8ca9537' - Insufficient access to view this data."
+                                        },
+                                        "missing": {
+                                            "78afd77c-c2a6-4328-9c61-b9fd44114823": "Microsoft.Policies.PowerToysMicrosoft.Policies.PowerToys - Version 0.86.0"
+                                        },
+                                        "results": {
+                                            "c47c20bd-46fa-4dfe-b971-3e5b1ce34a86": [
+                                                {
+                                                    "actions": [ "ignore", "restore" ],
+                                                    "message": "Value mismatch for property 'displayName' with current value being 'Audit Platform and Configuration Updates2'",
+                                                    "path": "displayName"
+                                                },
+                                                {
+                                                    "actions": [ "ignore" ],
+                                                    "message": "Expected object at level 'groupPolicyUploadedLanguageFiles', but encountered 'Array'",
+                                                    "path": "groupPolicyUploadedLanguageFiles"
+                                                }
+                                            ],
+                                            "4b26b6f6-9cb3-4384-bd1e-6d298455c2c4": [
+                                                {
+                                                    "actions": [ "restore" ],
+                                                    "message": "Array value at level 'roleScopeTagIds/1' is not found in the returned value",
+                                                    "path": "roleScopeTagIds/1"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "Delta"
+                ]
+            }
+        },
+        "/API/Deploy/Delta/Restore": {
+            "patch": {
+                "summary": "Restores the intended structure",
+                "description": "Applies a change to restore configuration item or its property to the value from the template.",
+                "operationId": "/API/Deploy/Delta/Restore/Patch",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Shield.Deploy.Delta.Restore"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204":{
+                        "description": "Restoration of configuration item or its property is successful"
+                    },
+                    "400": {
+                        "description": "The body does not match expected format!"
+                    }
+                },
+                "tags": [
+                    "Delta"
+                ]
+            }
+        },
+        "/API/Deploy/Delta/Skip": {
+            "post": {
+                "summary": "Records intention to bypass evaluation",
+                "description": "Stores the reference to the entity to be skipped during the evaluation process. Could be entire configuration item or a specific property.",
+                "operationId": "/API/Deploy/Delta/Skip/Post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Shield.Deploy.Delta.Skip"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204":{
+                        "description": "Recorded successfully"
+                    },
+                    "400": {
+                        "description": "The body does not match expected format!"
+                    }
+                },
+                "tags": [
+                    "Delta"
+                ]
+            },
+            "delete": {
+                "summary": "Removes entry that allowed to bypass evaluation",
+                "description": "Deletes the reference to the entity so that evaluation process does not skip over it.",
+                "operationId": "/API/Deploy/Delta/Skip/Delete",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/configId"
+                    },
+                    {
+                        "$ref": "#/components/parameters/path"
+                    }
+                ],
+                "responses": {
+                    "204":{
+                        "description": "Record has been removed successfully"
+                    },
+                    "400": {
+                        "description": "Required fields are not found among query parameters!"
+                    }
+                },
+                "tags": [
+                    "Delta"
+                ]
             }
         },
         "/API/Deploy/Version": {
