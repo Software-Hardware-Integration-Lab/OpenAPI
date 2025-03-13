@@ -1432,8 +1432,8 @@
         },
         "/API/Discover/LicenseReport/Correlation/": {
             "get": {
-                "description": "Retrieves the list of correlation records for the authenticated tenant. Correlation records store the metadata for a specific license report. This endpoint requires the `LicenseReport.Read`,  `LicenseReport.Read.All`, `LicenseReport.ReadWrite`, or `LicenseReport.ReadWrite.All` scope (permission).",
-                "operationId": "/API/LicenseReport/Correlation/Get",
+                "description": "Retrieves the list of correlation records for the authenticated tenant. Correlation records store the metadata for a specific license report. This endpoint requires the `Discover.Read`, or the `Everything.ReadWrite` scope (permission).",
+                "operationId": "/API/Discover/LicenseReport/Correlation/Get",
                 "responses": {
                     "200": {
                         "content": {
@@ -1488,8 +1488,8 @@
         },
         "/API/Discover/LicenseReport/Correlation/{correlationId}/Data/": {
             "get": {
-                "description": "Retrieves the full license report for the specified correlation ID in the authenticated tenant. The license report contains all of the license usage and compliance information with the required correlation data. This endpoint requires the `LicenseReport.Read`, `LicenseReport.Read.All`, `LicenseReport.ReadWrite`, or `LicenseReport.ReadWrite.All` scope (permission).",
-                "operationId": "/API/LicenseReport/Correlation/:correlationId/Data/Get",
+                "description": "Retrieves the full license report for the specified correlation ID in the authenticated tenant. The license report contains all of the license usage and compliance information with the required correlation data. This endpoint requires the `Discover.Read`, or the `Everything.ReadWrite` scope (permission).",
+                "operationId": "/API/Discover/LicenseReport/Correlation/:correlationId/Data/Get",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/correlationId"
