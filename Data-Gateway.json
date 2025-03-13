@@ -59,6 +59,20 @@
                     "example": "1.12.5",
                     "type": "string"
                 }
+            },
+            "customerId": {
+                "description": "The object ID of the customer value to operate against.",
+                "in": "path",
+                "name": "customerId",
+                "required": true,
+                "schema": {
+                    "example": "3b241101-e2bb-4255-8caf-4136c566a962",
+                    "format": "uuid",
+                    "maxLength": 36,
+                    "minLength": 36,
+                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                    "type": "string"
+                }
             }
         },
         "responses": {
@@ -804,6 +818,65 @@
                 ],
                 "title": "Update SHIELD Tenant - configuration entry",
                 "type": "object"
+            },
+            "CustomerList.Record": {
+                "title": "Customer List Record",
+                "description": "Details of a single entry in the list of customer records",
+                "properties": {
+                    "customerId": {
+                        "description": "The object ID of the customer record",
+                        "example": "1c4d2f3b-2e4b-4a5b-8c6d-7e8f9a0b1c2d",
+                        "format": "uuid",
+                        "maxLength": 36,
+                        "minLength": 36,
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                        "type": "string"
+                    },
+                    "customerDisplayName": {
+                        "description": "Human readable name for the customer record",
+                        "example": "Contoso - Prod",
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "customerId",
+                    "customerDisplayName"
+                ]
+            },
+            "Customer.Record": {
+                "title": "Customer Record",
+                "description": "Details of a single customer record requested directly that includes additional information",
+                "properties": {
+                    "customerId": {
+                        "description": "The object ID of the customer record",
+                        "example": "1c4d2f3b-2e4b-4a5b-8c6d-7e8f9a0b1c2d",
+                        "format": "uuid",
+                        "maxLength": 36,
+                        "minLength": 36,
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                        "type": "string"
+                    },
+                    "customerDisplayName": {
+                        "description": "Human readable name for the customer record",
+                        "example": "Contoso - Prod",
+                        "type": "string"
+                    },
+                    "tenantIdList": {
+                        "description": "Object representing collection of tenant records that include tenant id and name and are associated with this customer record",
+                        "additionalProperties": {
+                            "description": "Human readable name for the tenant record",
+                            "type": "string"
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "customerId",
+                    "customerDisplayName",
+                    "tenantIdList"
+                ]
             }
         },
         "securitySchemes": {
@@ -2646,6 +2719,200 @@
                 "summary": "Deletes Specific Tenant Configuration",
                 "tags": [
                     "SHIELD - Update"
+                ]
+            }
+        },
+        "/API/Customer/" : {
+            "get": {
+                "description": "Retrieves the list of unique customer records in the system. This endpoint requires the `Customer.Read.All` or `Customer.ReadWrite.All` scopes (permissions).",
+                "operationId": "/API/Customer/Get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "minItems": 0,
+                                    "items": {
+                                       "$ref": "#/components/schemas/CustomerList.Record"
+                                    }
+                                },
+                                "examples": {
+                                    "Example List Of Customer Records": {
+                                        "description": "Sample list of unique customer records in the system",
+                                        "summary": "Existing Customer Records",
+                                        "value": [
+                                            {
+                                                "customerId": "5d6e7f8a-9b0c-1d2e-3f4a-5b6c7d8e9f0a",
+                                                "customerDisplayName": "Contoso - Legal"
+                                            },
+                                            {
+                                                "customerId": "7e8f9a0b-1c2d-3e4b-5a6c-7d8e9f0a1b2c",
+                                                "customerDisplayName": "Contoso - R&D"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "summary": "Retrieves the customer records",
+                "tags": [
+                    "Customer Records"
+                ]
+            }
+        },
+        "/API/Customer/{customerId}/": {
+            "get": {
+                "description": "Retrieves complete details of one customer record including associated list of tenant records. This endpoint requires the `Customer.Read.All` or `Customer.ReadWrite.All` scopes (permissions).",
+                "operationId": "/API/Customer/:customerId/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/customerId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Customer.Record"
+                                },
+                                "examples": {
+                                    "Example Complete Customer Record": {
+                                        "description": "Sample details of one customer record with extended list of associated tenant records",
+                                        "summary": "Existing Customer Record",
+                                        "value": {
+                                            "customerId": "9f0a1b2c-3d4e-5f6a-7b8c-9d0e1f2a3b4c",
+                                            "customerDisplayName": "Contoso - Testing",
+                                            "tenantIdList": {
+                                                "9f0a1b2c-3d4e-5f6a-7b8c-9d0e1f2a3b4c": "Contoso - Testing",
+                                                "2e3f4a5b-6c7d-8e9f-0a1b-2c3d4e5f6a7b": "Contoso - Testing - Staging 1",
+                                                "4b5c6d7e-8f9a-0b1c-2d3e-4f5a6b7c8d9e": "Contoso - Testing - Staging 2"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "500": {
+                        "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
+                    }
+                },
+                "summary": "Retrieves Details of One Customer Record",
+                "tags": [
+                    "Customer Records"
+                ]
+            },
+            "patch": {
+                "description": "Update customer record to either create association for provided tenant value, or adjust human readable name, or both. This endpoint requires the `Customer.ReadWrite.All` scope (permission).",
+                "operationId": "/API/Customer/:customerId/Patch",
+                "parameters": [
+                    {
+                         "$ref": "#/components/parameters/customerId"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "tenantId": {
+                                        "description": "Optional Object ID of the tenant record to operate against.",
+                                        "example": "b2fd105a-2594-437e-b934-1a62a51c28b4",
+                                        "format": "uuid",
+                                        "maxLength": 36,
+                                        "minLength": 36,
+                                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                                        "type": "string"
+                                    },
+                                    "displayName": {
+                                        "description": "Optional string representing human readable name for the records.",
+                                        "example": "Contoso - New Tenant",
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "Example Request for Tenant Association": {
+                                    "description": "Sample payload requesting for the provided tenant record to be associated with referenced customer value",
+                                    "summary": "Create Customer Association for Tenant",
+                                    "value": {
+                                        "tenantId": "6a7b8c9d-0e1f-2a3b-4c5d-6e7f8a9b0c1d"
+                                    }
+                                },
+                                "Example Request for Tenant Association and Name Update": {
+                                    "description": "Sample payload requesting to associate tenant record with the customer value and also update name of the customer record",
+                                    "summary": "Update Customer Record Name and Create Customer Association for Tenant",
+                                    "value": {
+                                        "tenantId": "8f9a0b1c-2d3e-4f5a-6b7c-8d9e0a1b2c3d",
+                                        "displayName": "Contoso - R&D East"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Updated successfully"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "500": {
+                        "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
+                    }
+                },
+                "summary": "Update Customer Record",
+                "tags": [
+                    "Customer Records"
+                ]
+            }
+        },
+        "/API/Customer/{customerId}/Tenant/{tenantId}/": {
+            "delete": {
+                "description": "Removes customer association for the specified tenant record. This endpoint requires the `Customer.ReadWrite.All` scope (permission).",
+                "operationId": "/API/Customer/:customerId/Delete",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/customerId"
+                    },
+                    {
+                        "$ref": "#/components/parameters/tenantId"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Deleted successfully"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "500": {
+                        "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
+                    }
+                },
+                "summary": "Remove Associated Customer value from Tenant Record",
+                "tags": [
+                    "Customer Records"
                 ]
             }
         }
