@@ -1,6 +1,20 @@
 {
     "components": {
         "parameters": {
+            "correlationId": {
+                "description": "The object ID of the correlation identifier for the specified record.",
+                "in": "path",
+                "name": "correlationId",
+                "required": true,
+                "schema": {
+                    "example": "1d71e0fe-6e4a-464d-a690-80addf3bda55",
+                    "format": "uuid",
+                    "maxLength": 36,
+                    "minLength": 36,
+                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                    "type": "string"
+                }
+            },
             "deviceId": {
                 "description": "The SHIELD ID (Entra ID Device ID) of the managed device to target.",
                 "in": "path",
@@ -118,8 +132,14 @@
             "202": {
                 "description": "The process to create a report has started."
             },
+            "400": {
+                "description": "Invalid input!"
+            },
             "401": {
                 "description": "Principal is not authorized to access this endpoint. Check to make sure the Bearer token is valid and present!"
+            },
+            "403": {
+                "description": "Principal does not contain the correct scopes (permissions) for the API call that was made, or was made from the wrong tenant. If the permissions were granted, ensure that the access token was requested with the correct scopes."
             },
             "404": {
                 "description": "The requested object was not found."
@@ -386,6 +406,237 @@
                 ],
                 "title": "Intermediary - Azure Virtual Desktop",
                 "type": "object"
+            },
+            "LicenseReport.CorrelationRecord": {
+                "description": "Metadata that describes the execution session (run) that is used to tie/relate all of the license report together.",
+                "example": {
+                    "AuditTenantAccount": "priv-user@example.com",
+                    "CorrelationId": "9d838115-0868-45d4-b8a5-98adc1af7e42",
+                    "ReportTenantAccount": "ent-user@example.com",
+                    "TenantId": "7e536189-b2dd-4c8b-98b1-9b174777883f",
+                    "createdAt": "2024-08-01T21:13:12.821Z",
+                    "updatedAt": "2024-08-01T21:13:12.821Z"
+                },
+                "properties": {
+                    "AuditTenantAccount": {
+                        "description": "The user account used to retrieve the license information in the tenant being audited.",
+                        "example": "admin-user@example.com",
+                        "format": "email",
+                        "type": "string"
+                    },
+                    "CorrelationId": {
+                        "description": "The ID of the execution session (run) that is used to tie/relate all of the data together.",
+                        "example": "88da2253-758f-4135-9d37-64448c8b65c1",
+                        "format": "uuid",
+                        "type": "string",
+                        "pattern": "^\\w+-\\w+-\\w+-\\w+-\\w+$"
+                    },
+                    "ReportTenantAccount": {
+                        "description": "User account used to store/report the license report to the SHI Lab cloud service.",
+                        "example": "generic-user@example.com",
+                        "format": "email",
+                        "type": "string"
+                    },
+                    "TenantId": {
+                        "description": "Unique ID of customer's Microsoft tenant that the license report is for.",
+                        "example": "0e1fe83f-a33f-4250-8546-225b8d45ae01",
+                        "format": "uuid",
+                        "type": "string",
+                        "pattern": "^\\w+-\\w+-\\w+-\\w+-\\w+$"
+                    },
+                    "createdAt": {
+                        "description": "Timestamp of when the report was created.",
+                        "example": "2024-08-01T21:12:22.148Z",
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "description": "Timestamp of when the report was last updated.",
+                        "example": "2024-08-01T21:12:22.148Z",
+                        "format": "date-time",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "AuditTenantAccount"
+                ],
+                "title": "License Report - Correlation Record",
+                "type": "object"
+            },
+            "LicenseReport.LicenseData": {
+                "type": "object",
+                "properties": {
+                    "AssignedLicense": {
+                        "additionalProperties": {
+                            "type": "integer",
+                            "nullable": true
+                        },
+                        "description": "License assignment on the specified principal.",
+                        "type": "object"
+                    },
+                    "AssignedService": {
+                        "additionalProperties": {
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/LicenseReport.FeatureBreakdown"
+                                },
+                                {
+                                    "type": "integer",
+                                    "format": "int32"
+                                }
+                            ],
+                            "nullable": true
+                        },
+                        "description": "Service configuration assignment.  This is used to record the set of principals that are \"benefiting\" from the service, regardless of license status.",
+                        "type": "object"
+                    },
+                    "ConsumedService": {
+                        "additionalProperties": {
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/LicenseReport.FeatureBreakdown"
+                                },
+                                {
+                                    "type": "integer",
+                                    "format": "int32"
+                                }
+                            ],
+                            "nullable": true
+                        },
+                        "description": "Usage telemetry retrieved for the service to indicate if the specific principal is consuming the service or not, regardless of license status.",
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "AssignedLicense",
+                    "AssignedService",
+                    "ConsumedService"
+                ],
+                "description": "Collection of principals that have had their in-use licenses and assigned licenses. Where the key is the principal ID and the value is the insights.",
+                "example": {
+                    "AssignedLicense": {
+                        "eec0eb4f-6444-4f95-aba0-50c24d67f998": null,
+                        "41781fb2-bc02-4b7c-bd55-b576c07bb09d": null,
+                        "7159f980-6f83-4b67-bf41-e172b3ae1352": null
+                    },
+                    "AssignedService": {
+                        "eec0eb4f-6444-4f95-aba0-50c24d67f998": {
+                            "Conditional Access": false,
+                            "Access Review": true,
+                            "Entitlement Management": false,
+                            "Identity Protection": true
+                        },
+                        "41781fb2-bc02-4b7c-bd55-b576c07bb09d": {
+                            "Conditional Access": true,
+                            "Dynamic Group": false,
+                            "Group Naming": true,
+                            "On-Prem SSPR": false,
+                            "Group Expiration": true,
+                            "Provisioning Engine": true,
+                            "Enterprise State Roaming": false
+                        },
+                        "6511755b-c27d-4c66-a59e-b835e6b54e7f": null
+                    },
+                    "ConsumedService": {
+                        "eec0eb4f-6444-4f95-aba0-50c24d67f998": {
+                            "Conditional Access": true,
+                            "Access Review": false,
+                            "Entitlement Management": false,
+                            "Identity Protection": true
+                        },
+                        "41781fb2-bc02-4b7c-bd55-b576c07bb09d": {
+                            "Conditional Access": true,
+                            "Dynamic Group": false,
+                            "Group Naming": true,
+                            "On-Prem SSPR": false,
+                            "Group Expiration": true,
+                            "Provisioning Engine": true,
+                            "Enterprise State Roaming": false
+                        },
+                        "4b0d28f2-c1ce-48ae-a7d2-1caaa7825891": null,
+                        "c90f1a25-e6cd-4163-ac6c-ca7616c585a9": null
+                    }
+                },
+                "title": "License Report - License Data"
+            },
+            "LicenseReport.FeatureBreakdown": {
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "description": "List of features that are configured for the specific service plan's service configuration for the related principal.\nThe key is the name of the feature that is being described.\nThe value is the state of the feature configuration, `true` is in scope and `false` meaning not in scope.",
+                "example": {
+                    "Conditional Access": true,
+                    "Access Reviews": true,
+                    "Dynamic Groups": false,
+                    "On-Prem Password Rest": true,
+                    "On-Prem Password Protection": false
+                },
+                "title": "License Report - Feature Breakdown",
+                "type": "object"
+            },
+            "LicenseReport": {
+                "description": "Completely calculated license report structure that is the result of a complete run.",
+                "example": {
+                    "AvailableLicense": {
+                        "e17b13ee-9749-488b-9289-d31a8fde045d": 123,
+                        "2d995b6a-d4aa-4d8d-a03c-372ecb66509d": 456,
+                        "cbf6ee7c-c3c1-44a6-9f18-020c65536470": 789
+                    },
+                    "Correlation": {
+                        "AuditTenantAccount": "admin-user@example.com",
+                        "CorrelationId": "88da2253-758f-4135-9d37-64448c8b65c1",
+                        "ReportTenantAccount": "generic-user@example.com",
+                        "TenantId": "0e1fe83f-a33f-4250-8546-225b8d45ae01"
+                    },
+                    "LicenseData": {
+                        "250844e1-a7ab-4f21-8e3f-58f51b5983a3": {
+                            "AssignedLicense": {
+                                "e17b13ee-9749-488b-9289-d31a8fde045d": null
+                            },
+                            "AssignedService": {
+                                "cbf6ee7c-c3c1-44a6-9f18-020c65536470": null,
+                                "c7bcba35-199c-41e5-8c8d-6d4e4aad8964": null
+                            },
+                            "ConsumedService": {
+                                "fe98c41a-d931-4f6f-a5bc-750ba7144a77": null,
+                                "0474bdf1-ee76-4aff-a65c-6f82e5e1d5a6": {
+                                    "Something Here": true,
+                                    "Other Obscure feature": false
+                                }
+                            }
+                        }
+                    }
+                },
+                "type": "object",
+                "properties": {
+                    "AvailableLicense": {
+                        "additionalProperties": {
+                            "example": 1234,
+                            "type": "integer"
+                        },
+                        "description": "Breakdown of the purchased licenses/service plans available in the tenant being audited for this run. Where the key is the ID of the service plan and the value is how many licenses are available/purchase for it.",
+                        "example": {
+                            "eec0eb4f-6444-4f95-aba0-50c24d67f998": 1234,
+                            "41781fb2-bc02-4b7c-bd55-b576c07bb09d": 123
+                        },
+                        "title": "License Report - Available Licenses",
+                        "type": "object"
+                    },
+                    "Correlation": {
+                        "$ref": "#/components/schemas/LicenseReport.CorrelationRecord"
+                    },
+                    "LicenseData": {
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/LicenseReport.LicenseData"
+                        }
+                    }
+                },
+                "required": [
+                    "AvailableLicense",
+                    "Correlation",
+                    "LicenseData"
+                ],
+                "title": "License Report - Complete Object"
             },
             "ManagedDevice": {
                 "title": "Managed Device",
@@ -1177,6 +1428,154 @@
                 "tags": [
                     "Discover"
                 ]
+            }
+        },
+        "/API/Discover/LicenseReport/Correlation/": {
+            "get": {
+                "description": "Retrieves the list of correlation records for the authenticated tenant. Correlation records store the metadata for a specific license report. This endpoint requires the `Discover.Read`, or the `Everything.ReadWrite` scope (permission).",
+                "operationId": "/API/Discover/LicenseReport/Correlation/Get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Example License Report": {
+                                        "description": "Sample list of correlation records for the authenticated tenant.",
+                                        "summary": "Available Correlation Records",
+                                        "value": [
+                                            {
+                                                "AuditTenantAccount": "somebodyThatI@example.com",
+                                                "CorrelationId": "6d7c9271-9e68-4bdf-9ae3-f90c4213f74b",
+                                                "ReportTenantAccount": "usedToKnow@example.com",
+                                                "TenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db",
+                                                "createdAt": "2024-08-01T21:14:45.026Z",
+                                                "updatedAt": "2024-08-01T21:14:45.026Z"
+                                            },
+                                            {
+                                                "AuditTenantAccount": "somebodyThatI@example.com",
+                                                "CorrelationId": "d8095827-a313-40e1-b086-f72636de0edf",
+                                                "ReportTenantAccount": "usedToKnow@example.com",
+                                                "TenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db",
+                                                "createdAt": "2024-07-25T21:14:45.026Z",
+                                                "updatedAt": "2024-07-25T21:14:45.026Z"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "schema": {
+                                    "type": "array",
+                                    "minItems": 0,
+                                    "items": {
+                                        "$ref": "#/components/schemas/LicenseReport.CorrelationRecord"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    }
+                },
+                "tags": [
+                    "License Analytics"
+                ],
+                "summary": "Retrieve the List of Correlation Records"
+            }
+        },
+        "/API/Discover/LicenseReport/Correlation/{correlationId}/Data/": {
+            "get": {
+                "description": "Retrieves the full license report for the specified correlation ID in the authenticated tenant. The license report contains all of the license usage and compliance information with the required correlation data. This endpoint requires the `Discover.Read`, or the `Everything.ReadWrite` scope (permission).",
+                "operationId": "/API/Discover/LicenseReport/Correlation/:correlationId/Data/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/correlationId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "License Report": {
+                                        "description": "Sample, truncated report from an example customer environment.",
+                                        "summary": "License Report",
+                                        "value": {
+                                            "AvailableLicense": {
+                                                "3d282045-ec7f-4813-88e2-29b74ee609f7": 123456,
+                                                "5888a922-9f5b-45fd-bd5f-de3283d6a79e": 99999999,
+                                                "a4b2e176-d63d-4081-9e21-226e2ac624b9": 5,
+                                                "547404d4-8734-415f-a7ca-e9c1ffb95e48": 25,
+                                                "d76878d6-1495-4243-a334-a82bb9818cd0": 500
+                                            },
+                                            "Correlation": {
+                                                "AuditTenantAccount": "somebodyThatI@example.com",
+                                                "CorrelationId": "6d7c9271-9e68-4bdf-9ae3-f90c4213f74b",
+                                                "ReportTenantAccount": "usedToKnow@example.com",
+                                                "TenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db"
+                                            },
+                                            "LicenseData": {
+                                                "250844e1-a7ab-4f21-8e3f-58f51b5983a3": {
+                                                    "AssignedLicense": {
+                                                        "5888a922-9f5b-45fd-bd5f-de3283d6a79e": null,
+                                                        "3d282045-ec7f-4813-88e2-29b74ee609f7": null
+                                                    },
+                                                    "AssignedService": {
+                                                        "a4b2e176-d63d-4081-9e21-226e2ac624b9": null,
+                                                        "d76878d6-1495-4243-a334-a82bb9818cd0": null
+                                                    },
+                                                    "ConsumedService": {
+                                                        "e0d101e8-6f1e-40a9-a66f-cad4112c9a59": null,
+                                                        "c63b7a2d-6573-4c37-9ca8-e12b954d3198": {
+                                                            "Something Here": true,
+                                                            "Other Obscure feature": false
+                                                        }
+                                                    }
+                                                },
+                                                "04e88835-771a-482b-9d6f-ba06c32cbb67": {
+                                                    "AssignedLicense": {
+                                                        "3d282045-ec7f-4813-88e2-29b74ee609f7": null
+                                                    },
+                                                    "AssignedService": {
+                                                        "a4b2e176-d63d-4081-9e21-226e2ac624b9": null,
+                                                        "d76878d6-1495-4243-a334-a82bb9818cd0": null
+                                                    },
+                                                    "ConsumedService": {
+                                                        "9d3603de-b378-4c4a-adcc-ee133cbef914": null,
+                                                        "e9a4e3d3-ebe0-405a-a8f4-35a04c4dba1f": {
+                                                            "Something Here": true,
+                                                            "Other Obscure feature": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/LicenseReport"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    }
+                },
+                "tags": [
+                    "License Analytics"
+                ],
+                "summary": "Retrieve the Specified License Report"
             }
         },
         "/API/Deploy": {
