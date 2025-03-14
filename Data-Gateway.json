@@ -862,7 +862,7 @@
                         "example": "Contoso - Prod",
                         "type": "string"
                     },
-                    "tenantIdList": {
+                    "tenantList": {
                         "description": "Object representing collection of tenant records that include tenant id and name and are associated with this customer record",
                         "additionalProperties": {
                             "description": "Human readable name for the tenant record",
@@ -2787,7 +2787,7 @@
                                         "value": {
                                             "customerId": "9f0a1b2c-3d4e-5f6a-7b8c-9d0e1f2a3b4c",
                                             "customerDisplayName": "Contoso - Testing",
-                                            "tenantIdList": {
+                                            "tenantList": {
                                                 "9f0a1b2c-3d4e-5f6a-7b8c-9d0e1f2a3b4c": "Contoso - Testing",
                                                 "2e3f4a5b-6c7d-8e9f-0a1b-2c3d4e5f6a7b": "Contoso - Testing - Staging 1",
                                                 "4b5c6d7e-8f9a-0b1c-2d3e-4f5a6b7c8d9e": "Contoso - Testing - Staging 2"
@@ -2813,13 +2813,15 @@
                 "tags": [
                     "Customer Records"
                 ]
-            },
+            }
+        },
+        "/API/Customer/Tenant/{tenantId}/": {
             "patch": {
-                "description": "Update customer record to either create association for provided tenant value, or adjust human readable name, or both. This endpoint requires the `Customer.ReadWrite.All` scope (permission).",
-                "operationId": "/API/Customer/:customerId/Patch",
+                "description": "Update tenant record to either create association with provided customer value, or adjust human readable name, or both. This endpoint requires the `Customer.ReadWrite.All` scope (permission).",
+                "operationId": "/API/Customer/Tenant/:tenantId/Patch",
                 "parameters": [
                     {
-                         "$ref": "#/components/parameters/customerId"
+                         "$ref": "#/components/parameters/tenantId"
                     }
                 ],
                 "requestBody": {
@@ -2828,8 +2830,8 @@
                             "schema": {
                                 "type": "object",
                                 "properties": {
-                                    "tenantId": {
-                                        "description": "Optional Object ID of the tenant record to operate against.",
+                                    "customerId": {
+                                        "description": "Optional Object ID of the customer record to to use during update process.",
                                         "example": "b2fd105a-2594-437e-b934-1a62a51c28b4",
                                         "format": "uuid",
                                         "maxLength": 36,
@@ -2846,18 +2848,25 @@
                             },
                             "examples": {
                                 "Example Request for Tenant Association": {
-                                    "description": "Sample payload requesting for the provided tenant record to be associated with referenced customer value",
+                                    "description": "Sample payload requesting for the referenced tenant record to be associated with provided customer value",
                                     "summary": "Create Customer Association for Tenant",
                                     "value": {
-                                        "tenantId": "6a7b8c9d-0e1f-2a3b-4c5d-6e7f8a9b0c1d"
+                                        "customerId": "6a7b8c9d-0e1f-2a3b-4c5d-6e7f8a9b0c1d"
                                     }
                                 },
                                 "Example Request for Tenant Association and Name Update": {
-                                    "description": "Sample payload requesting to associate tenant record with the customer value and also update name of the customer record",
-                                    "summary": "Update Customer Record Name and Create Customer Association for Tenant",
+                                    "description": "Sample payload requesting to associate tenant record with the customer value and also update name on the tenant record",
+                                    "summary": "Update Tenant Record Name and Create Customer Association for Tenant",
                                     "value": {
-                                        "tenantId": "8f9a0b1c-2d3e-4f5a-6b7c-8d9e0a1b2c3d",
+                                        "customerId": "8f9a0b1c-2d3e-4f5a-6b7c-8d9e0a1b2c3d",
                                         "displayName": "Contoso - R&D East"
+                                    }
+                                },
+                                "Example Request for Tenant Name Update": {
+                                    "description": "Sample payload requesting to update name on the tenant record",
+                                    "summary": "Update Tenant Record Name",
+                                    "value": {
+                                        "displayName": "Contoso - R&D North"
                                     }
                                 }
                             }
@@ -2877,43 +2886,14 @@
                     "403": {
                         "$ref": "#/components/responses/403"
                     },
-                    "500": {
-                        "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
-                    }
-                },
-                "summary": "Update Customer Record",
-                "tags": [
-                    "Customer Records"
-                ]
-            }
-        },
-        "/API/Customer/{customerId}/Tenant/{tenantId}/": {
-            "delete": {
-                "description": "Removes customer association for the specified tenant record. This endpoint requires the `Customer.ReadWrite.All` scope (permission).",
-                "operationId": "/API/Customer/:customerId/Delete",
-                "parameters": [
-                    {
-                        "$ref": "#/components/parameters/customerId"
-                    },
-                    {
-                        "$ref": "#/components/parameters/tenantId"
-                    }
-                ],
-                "responses": {
-                    "204": {
-                        "description": "Deleted successfully"
-                    },
-                    "401": {
-                        "$ref": "#/components/responses/401"
-                    },
-                    "403": {
-                        "$ref": "#/components/responses/403"
+                    "404": {
+                        "$ref": "#/components/responses/404"
                     },
                     "500": {
                         "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
                     }
                 },
-                "summary": "Remove Associated Customer value from Tenant Record",
+                "summary": "Update Tenant Record",
                 "tags": [
                     "Customer Records"
                 ]
