@@ -931,7 +931,7 @@
         },
         "/API/LicenseReport/": {
             "post": {
-                "description": "Store the results of a license analytics run. This endpoint requires the `LicenseReport.ReadWrite`, or `LicenseReport.ReadWrite.All` scope (permission).",
+                "description": "Store the results of a license analytics run.\n\nThis endpoint requires the `LicenseReport.ReadWrite`, or `LicenseReport.ReadWrite.All` scope (permission).",
                 "operationId": "/API/LicenseReport/Post",
                 "requestBody": {
                     "content": {
@@ -1085,7 +1085,7 @@
         },
         "/API/LicenseReport/Correlation/": {
             "get": {
-                "description": "Retrieves the list of correlation records for the authenticated tenant. Correlation records store the metadata for a specific license report. This endpoint requires the `LicenseReport.Read`,  `LicenseReport.Read.All`, `LicenseReport.ReadWrite`, or `LicenseReport.ReadWrite.All` scope (permission).",
+                "description": "Retrieves the list of correlation records for the authenticated tenant. Correlation records store the metadata for a specific license report.\n\nThis endpoint requires the `LicenseReport.Read`,  `LicenseReport.Read.All`, `LicenseReport.ReadWrite`, or `LicenseReport.ReadWrite.All` scope (permission).",
                 "operationId": "/API/LicenseReport/Correlation/Get",
                 "responses": {
                     "200": {
@@ -1141,7 +1141,7 @@
         },
         "/API/LicenseReport/Correlation/Tenant/{tenantId}/": {
             "get": {
-                "description": "Retrieves the list of correlation records for the specified tenant. Correlation records store the metadata for a specific license report. This endpoint requires the `LicenseReport.Read.All`, or `LicenseReport.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "description": "Retrieves the list of correlation records for the specified tenant. Correlation records store the metadata for a specific license report.\n\nThis endpoint requires the `LicenseReport.Read.All`, or `LicenseReport.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
                 "operationId": "/API/LicenseReport/Correlation/Tenant/:tenantId/Get",
                 "parameters": [
                     {
@@ -1205,7 +1205,7 @@
         },
         "/API/LicenseReport/Correlation/{correlationId}/Data/": {
             "get": {
-                "description": "Retrieves the full license report for the specified correlation ID in the authenticated tenant. The license report contains all of the license usage and compliance information with the required correlation data. This endpoint requires the `LicenseReport.Read`, `LicenseReport.Read.All`, `LicenseReport.ReadWrite`, or `LicenseReport.ReadWrite.All` scope (permission).",
+                "description": "Retrieves the full license report for the specified correlation ID in the authenticated tenant. The license report contains all of the license usage and compliance information with the required correlation data.\n\nThis endpoint requires the `LicenseReport.Read`, `LicenseReport.Read.All`, `LicenseReport.ReadWrite`, or `LicenseReport.ReadWrite.All` scope (permission).",
                 "operationId": "/API/LicenseReport/Correlation/:correlationId/Data/Get",
                 "parameters": [
                     {
@@ -1297,7 +1297,7 @@
         },
         "/API/LicenseReport/Correlation/{correlationId}/Tenant/{tenantId}/Data/": {
             "get": {
-                "description": "Retrieves the full license report for the specified correlation ID and tenant. The license report contains all of the license usage and compliance information with the required correlation data. This endpoint requires the `LicenseReport.Read.All`, or `LicenseReport.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "description": "Retrieves the full license report for the specified correlation ID and tenant. The license report contains all of the license usage and compliance information with the required correlation data.\n\nThis endpoint requires the `LicenseReport.Read.All`, or `LicenseReport.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
                 "operationId": "/API/LicenseReport/Correlation/:correlationId/Tenant/:tenantId/Data/Get",
                 "parameters": [
                     {
@@ -1390,7 +1390,7 @@
                 "summary": "Retrieve the Specified License Report for Specified Tenant"
             },
             "delete": {
-                "description": "Deletes the full license report for the specified correlation ID and tenant. This endpoint requires the `LicenseReport.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "description": "Deletes the full license report for the specified correlation ID and tenant.\n\nThis endpoint requires the `LicenseReport.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
                 "operationId": "/API/LicenseReport/Correlation/:correlationId/Tenant/:tenantId/Data/delete",
                 "parameters": [
                     {
@@ -1422,7 +1422,7 @@
         },
         "/API/Entitlement/Shield/": {
             "post": {
-                "description": "Creates a new license entitlement (activation) for SHIELD. This endpoint requires the `LicenseEntitlement.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "description": "Creates a new license entitlement (activation) for SHIELD.\n\nThis endpoint requires the `LicenseEntitlement.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
                 "operationId": "/API/Entitlement/Shield/Post",
                 "requestBody": {
                     "content": {
@@ -1639,7 +1639,7 @@
         },
         "/API/Entitlement/Shield/Tenant/{tenantId}/": {
             "get": {
-                "description": "Retrieves the list of license entitlements that are assigned to the specified tenant. This endpoint requires the `LicenseEntitlement.Read.All`, or `LicenseEntitlement.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "description": "Retrieves the list of license entitlements that are assigned to the specified tenant.\n\nThis endpoint requires the `LicenseEntitlement.Read.All`, or `LicenseEntitlement.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
                 "operationId": "/API/Entitlement/Shield/Tenant/:tenantId/Get",
                 "parameters": [
                     {
@@ -1679,7 +1679,7 @@
         },
         "/API/Entitlement/Shield/Tenant/{tenantId}/Correlation/{correlationId}/": {
             "delete": {
-                "description": "Deletes the requested SHIELD license entitlement record. This endpoint requires the `LicenseEntitlement.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "description": "Deletes the requested SHIELD license entitlement record.\n\nThis endpoint requires the `LicenseEntitlement.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
                 "operationId": "/API/Entitlement/Shield/Tenant/:tenantId/Correlation/:correlationId/Delete",
                 "parameters": [
                     {
@@ -1714,7 +1714,7 @@
         },
         "/API/Telemetry/Shield/": {
             "post": {
-                "description": "Submits the telemetry report for SHIELD. This endpoint requires the `Telemetry.Shield.ReadWrite`, or `Telemetry.Shield.ReadWrite.All` scope (permission).",
+                "description": "Submits the telemetry report for SHIELD.\n\nThis endpoint requires the `Telemetry.Shield.ReadWrite`, or `Telemetry.Shield.ReadWrite.All` scope (permission).",
                 "operationId": "/API/Telemetry/Shield/Post",
                 "requestBody": {
                     "content": {
@@ -1803,7 +1803,7 @@
                 "summary": "Collects SHIELD Telemetry"
             },
             "get": {
-                "description": "Retrieves the telemetry records that have been reported for the authenticated tenant. Data is not guaranteed to be retrieved in any specific order. This endpoint requires the `Telemetry.Shield.Read`, `Telemetry.Shield.Read.All`, `Telemetry.Shield.ReadWrite`, or `Telemetry.Shield.ReadWrite.All` scope (permission).",
+                "description": "Retrieves the telemetry records that have been reported for the authenticated tenant. Data is not guaranteed to be retrieved in any specific order.\n\nThis endpoint requires the `Telemetry.Shield.Read`, `Telemetry.Shield.Read.All`, `Telemetry.Shield.ReadWrite`, or `Telemetry.Shield.ReadWrite.All` scope (permission).",
                 "operationId": "/API/Telemetry/Shield/Get",
                 "responses": {
                     "200": {
@@ -1889,7 +1889,7 @@
         },
         "/API/Telemetry/Shield/Tenant/{tenantId}/": {
             "get": {
-                "description": "Retrieves the telemetry records that have been reported for the specified tenant. Data is not guaranteed to be retrieved in any specific order. This endpoint requires the `Telemetry.Shield.Read.All`, or `Telemetry.Shield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "description": "Retrieves the telemetry records that have been reported for the specified tenant. Data is not guaranteed to be retrieved in any specific order.\n\nThis endpoint requires the `Telemetry.Shield.Read.All`, or `Telemetry.Shield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
                 "operationId": "/API/Telemetry/Shield/Tenant/:tenantId/Get",
                 "parameters": [
                     {
@@ -1986,7 +1986,7 @@
         },
         "/API/Telemetry/Shield/Tenant/{tenantId}/Correlation/{correlationId}/": {
             "delete": {
-                "description": "Deletes the specified telemetry record for the specified tenant. This endpoint requires the `Telemetry.Shield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "description": "Deletes the specified telemetry record for the specified tenant.\n\nThis endpoint requires the `Telemetry.Shield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
                 "operationId": "/API/Telemetry/Shield/Tenant/:tenantId/Correlation/:correlationId/Delete",
                 "parameters": [
                     {
@@ -2021,7 +2021,7 @@
         },
         "/API/Update/Shield/Channel/": {
             "get": {
-                "description": "Retrieves all of the channel configurations that are present in the update service. This endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
+                "description": "Retrieves all of the channel configurations that are present in the update service.\n\nThis endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
                 "operationId": "/API/Update/Shield/Channel/Get",
                 "responses": {
                     "200": {
@@ -2055,7 +2055,7 @@
         },
         "/API/Update/Shield/Channel/{channelName}/": {
             "get": {
-                "description": "Retrieves configuration for the specific channel from the update service. This endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
+                "description": "Retrieves configuration for the specific channel from the update service.\n\nThis endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
                 "operationId": "/API/Update/Shield/Channel/:channelName/Get",
                 "parameters": [
                     {
@@ -2089,7 +2089,7 @@
                 ]
             },
             "patch": {
-                "description": "Updates (or adds when missing) the specified channel configuration. This endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
+                "description": "Updates (or adds when missing) the specified channel configuration.\n\nThis endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
                 "operationId": "/API/Update/Shield/Channel/:channelName/Patch",
                 "parameters": [
                     {
@@ -2169,7 +2169,7 @@
                 ]
             },
             "delete": {
-                "description": "Deletes the specified channel configuration and associated rings. This endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
+                "description": "Deletes the specified channel configuration and associated rings.\n\nThis endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
                 "operationId": "/API/Update/Shield/Channel/:channelName/Delete",
                 "parameters": [
                     {
@@ -2198,7 +2198,7 @@
         },
         "/API/Update/Shield/Channel/{channelName}/Ring/": {
             "get": {
-                "description": "Retrieves all of the ring configurations for a channel that are present in the update service. This endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
+                "description": "Retrieves all of the ring configurations for a channel that are present in the update service.\n\nThis endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
                 "operationId": "/API/Update/Shield/Channel/:channelName/Ring/Get",
                 "parameters": [
                     {
@@ -2237,7 +2237,7 @@
         },
         "/API/Update/Shield/Channel/{channelName}/Ring/{number}/": {
             "get": {
-                "description": "Retrieves configuration for the specific channel ring from the update service. This endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
+                "description": "Retrieves configuration for the specific channel ring from the update service.\n\nThis endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
                 "operationId": "/API/Update/Shield/Channel/:channelName/Ring/:number/Get",
                 "parameters": [
                     {
@@ -2274,7 +2274,7 @@
                 ]
             },
             "patch": {
-                "description": "Updates (or adds when missing) channel ring configuration. This endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
+                "description": "Updates (or adds when missing) channel ring configuration.\n\nThis endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
                 "operationId": "/API/Update/Shield/Channel/:channelName/Ring/:number/Patch",
                 "parameters": [
                     {
@@ -2349,7 +2349,7 @@
                 ]
             },
             "delete": {
-                "description": "Deletes configuration of the specific channel ring. This endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
+                "description": "Deletes configuration of the specific channel ring.\n\nThis endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
                 "operationId": "/API/Update/Shield/Channel/:channelName/Ring/:number/Delete",
                 "parameters": [
                     {
@@ -2381,7 +2381,7 @@
         },
         "/API/Update/Shield/Channel/{channelName}/Version/{version}/": {
             "post": {
-                "description": "Uploads new version of the update package for SHIELD in a specific channel. This endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
+                "description": "Uploads new version of the update package for SHIELD in a specific channel.\n\nThis endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
                 "operationId": "/API/Update/Shield/Channel/:channelName/Version/:version/Post",
                 "parameters": [
                     {
@@ -2541,7 +2541,7 @@
         },
         "/API/Update/Shield/Tenant/": {
             "get": {
-                "description": "Retrieves all tenant configurations present in the update service. This endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
+                "description": "Retrieves all tenant configurations present in the update service.\n\nThis endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
                 "operationId": "/API/Update/Shield/Tenant/Get",
                 "responses": {
                     "200": {
@@ -2575,7 +2575,7 @@
         },
         "/API/Update/Shield/Tenant/{tenantId}/": {
             "get": {
-                "description": "Retrieves configuration for the specific tenant from the update service. This endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
+                "description": "Retrieves configuration for the specific tenant from the update service.\n\nThis endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
                 "operationId": "/API/Update/Shield/Tenant/:tenantId/Get",
                 "parameters": [
                     {
@@ -2609,7 +2609,7 @@
                 ]
             },
             "patch": {
-                "description": "Updates (or adds when missing) tenant configuration. This endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
+                "description": "Updates (or adds when missing) tenant configuration.\n\nThis endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
                 "operationId": "/API/Update/Shield/Tenant/:tenantId/Patch",
                 "parameters": [
                     {
@@ -2695,7 +2695,7 @@
                 ]
             },
             "delete": {
-                "description": "Deletes configuration for the specific tenant. This endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
+                "description": "Deletes configuration for the specific tenant.\n\nThis endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI Lab` tenant. End user access is restricted.",
                 "operationId": "/API/Update/Shield/Tenant/:tenantId/Delete",
                 "parameters": [
                     {
