@@ -2758,7 +2758,7 @@
                         "description": "OK"
                     }
                 },
-                "summary": "Retrieves the customer records",
+                "summary": "Retrieves list of customer records",
                 "tags": [
                     "Customer Records"
                 ]
@@ -2782,7 +2782,7 @@
                                 },
                                 "examples": {
                                     "Example Complete Customer Record": {
-                                        "description": "Sample details of one customer record with extended list of associated tenant records",
+                                        "description": "Sample details of one customer record with list of associated tenant records",
                                         "summary": "Existing Customer Record",
                                         "value": {
                                             "customerId": "9f0a1b2c-3d4e-5f6a-7b8c-9d0e1f2a3b4c",
