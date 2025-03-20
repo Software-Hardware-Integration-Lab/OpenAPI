@@ -125,8 +125,8 @@
                 }
             },
             "configId": {
-                "description": "Reference of the configuration property in the template used during deploy.Reference of the configuration property in the template used during deploy.",
-                "in": "query",
+                "description": "Reference of the configuration property in the architecture template used during deploy.",
+                "in": "path",
                 "name": "configId",
                 "required": true,
                 "schema": {
@@ -136,16 +136,6 @@
                     "minLength": 36,
                     "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
                     "example": "42ff150d-2ff0-4b38-849e-fe6aa5eedb49"
-                }
-            },
-            "path": {
-                "description": "Location of the item in the object structure flattened for predictable navigation.",
-                "in": "query",
-                "name": "path",
-                "required": true,
-                "schema": {
-                    "type": "string",
-                    "example": "roleScopeTagIds"
                 }
             }
         },
@@ -1046,50 +1036,18 @@
                 "title": "Type of security class the object(s) belongs to",
                 "type": "string"
             },
-            "Shield.Deploy.Delta.Restore": {
-                "title": "SHIELD - Deploy - Delta - Restore",
-                "description": "Payload expected for Restore operation",
+            "Shield.Deploy.Delta.Action": {
+                "title": "SHIELD - Deploy - Delta - Action",
+                "description": "Payload expected for various operations related to Delta Engine",
                 "type": "object",
                 "properties": {
-                    "configId": {
-                        "description": "Reference of the configuration property in the template used during deploy.Reference of the configuration property in the template used during deploy.",
-                        "type": "string",
-                        "format": "uuid",
-                        "maxLength": 36,
-                        "minLength": 36,
-                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
-                        "example": "8c9befc8-b25b-44b6-9778-350d7c511557"
-                    },
                     "path": {
-                        "description": "Location of the item in the object structure flattened for predictable navigation.",
+                        "description": "Location of the item in the object structure of the architecture reference template flattened for predictable navigation.",
                         "type": "string",
-                        "example": "displayName"
+                        "example": "/roleScopeTagIds"
                     }
                 },
-                "required": [ "configId", "path" ]
-
-            },
-            "Shield.Deploy.Delta.Skip": {
-                "title": "SHIELD - Deploy - Delta - Skip",
-                "description": "Payload expected for Skip operation",
-                "type": "object",
-                "properties": {
-                    "configId": {
-                        "description": "Reference of the configuration property in the template used during deploy.Reference of the configuration property in the template used during deploy.",
-                        "type": "string",
-                        "format": "uuid",
-                        "maxLength": 36,
-                        "minLength": 36,
-                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
-                        "example": "42ff150d-2ff0-4b38-849e-fe6aa5eedb49"
-                    },
-                    "path": {
-                        "description": "Location of the item in the object structure flattened for predictable navigation.",
-                        "type": "string",
-                        "example": "roleScopeTagIds"
-                    }
-                },
-                "required": [ "configId", "path" ]
+                "required": [ "path" ]
             }
         },
         "securitySchemes": {
@@ -1750,10 +1708,10 @@
                 "security": []
             }
         },
-        "/API/Deploy/Delta": {
+        "/API/Deploy/Delta/": {
             "get": {
                 "summary": "Initiate evaluation for configuration discrepancies",
-                "description": "Runs the comparison between configuration templates and live data to find discrepancies to be addressed.",
+                "description": "Runs the comparison between configuration templates and live data to find discrepancies to be addressed. Returns results split into several categories.\n\nThis endpoint requires the `Deploy.Read`, or `Deploy.ReadWrite` scope (permission).",
                 "operationId": "/API/Deploy/Delta/Get",
                 "responses": {
                     "200": {
@@ -1850,16 +1808,21 @@
                 ]
             }
         },
-        "/API/Deploy/Delta/Restore": {
+        "/API/Deploy/Delta/Restore/{configId}/": {
             "patch": {
                 "summary": "Restores the intended structure",
-                "description": "Applies a change to restore configuration item or its property to the value from the template.",
-                "operationId": "/API/Deploy/Delta/Restore/Patch",
+                "description": "Applies a change to restore configuration item or its property to the value from the template.\n\nThis endpoint requires the `Deploy.ReadWrite` scope (permission).",
+                "operationId": "/API/Deploy/Delta/Restore/:configId/Patch",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/configId"
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Shield.Deploy.Delta.Restore"
+                                "$ref": "#/components/schemas/Shield.Deploy.Delta.Action"
                             }
                         }
                     }
@@ -1877,16 +1840,55 @@
                 ]
             }
         },
-        "/API/Deploy/Delta/Skip": {
+        "/API/Deploy/Delta/Skip/": {
+            "get": {
+                "summary": "Retrieve list of existing override rules.",
+                "description": "Retrieves the details of override property in the Settings Engine and returns list grouped by architecture reference.\n\nThis endpoint requires `Deploy.Read`, or `Deploy.ReadWrite` scope (permission).",
+                "operationId": "/API/Deploy/Delta/Skip/Get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "description": "Flat path representing entire item or specific nested property in the architecture configuration template item."
+                                        }
+                                    },
+                                    "description": "Collection of object with UUID string as property name and array of strings as value.",
+                                    "example": {
+                                        "f47ac10b-58cc-4372-a567-0e02b2c3d479": ["/"],
+                                        "9c858901-8a57-4791-81fe-4c455b099bc9": ["/description", "/name"]
+                                    }
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "Delta"
+                ]
+            }
+        },
+        "/API/Deploy/Delta/Skip/{configId}/": {
             "post": {
                 "summary": "Records intention to bypass evaluation",
-                "description": "Stores the reference to the entity to be skipped during the evaluation process. Could be entire configuration item or a specific property.",
-                "operationId": "/API/Deploy/Delta/Skip/Post",
+                "description": "Stores the reference to the entity to be skipped during the evaluation process. Could be entire configuration item or a specific property.\n\nThis endpoint requires the `Deploy.ReadWrite` scope (permission).",
+                "operationId": "/API/Deploy/Delta/Skip/:configId/Post",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/configId"
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Shield.Deploy.Delta.Skip"
+                                "$ref": "#/components/schemas/Shield.Deploy.Delta.Action"
                             }
                         }
                     }
@@ -1905,16 +1907,22 @@
             },
             "delete": {
                 "summary": "Removes entry that allowed to bypass evaluation",
-                "description": "Deletes the reference to the entity so that evaluation process does not skip over it.",
-                "operationId": "/API/Deploy/Delta/Skip/Delete",
+                "description": "Deletes the reference to the entity so that evaluation process does not skip over it.\n\nThis endpoint requires the `Deploy.ReadWrite` scope (permission).",
+                "operationId": "/API/Deploy/Delta/Skip/:configId/Delete",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/configId"
-                    },
-                    {
-                        "$ref": "#/components/parameters/path"
                     }
                 ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Shield.Deploy.Delta.Action"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "204":{
                         "description": "Record has been removed successfully"
@@ -1928,7 +1936,7 @@
                 ]
             }
         },
-        "/API/Deploy/Version": {
+        "/API/Deploy/Version/": {
             "get": {
                 "description": "Gets the version of the API server and the architecture version deployed as well as the supported version of the architecture spec from the server.\n\nThis endpoint requires the `Deploy.Read`, `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
                 "operationId": "/API/Deploy/Version/Get",
