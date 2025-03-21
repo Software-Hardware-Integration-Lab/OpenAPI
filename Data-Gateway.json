@@ -60,11 +60,11 @@
                     "type": "string"
                 }
             },
-            "customerId": {
-                "description": "The object ID of the customer value to operate against.",
-                "in": "path",
-                "name": "customerId",
-                "required": true,
+            "parentId": {
+                "description": "The object ID of the parent value to operate against.",
+                "in": "query",
+                "name": "parentId",
+                "required": false,
                 "schema": {
                     "example": "3b241101-e2bb-4255-8caf-4136c566a962",
                     "format": "uuid",
@@ -819,12 +819,12 @@
                 "title": "Update SHIELD Tenant - configuration entry",
                 "type": "object"
             },
-            "CustomerList.Record": {
-                "title": "Customer List Record",
-                "description": "Details of a single entry in the list of customer records",
+            "TenantDetails.Record": {
+                "title": "Tenant Details Record",
+                "description": "Information about a single tenant record",
                 "properties": {
-                    "customerId": {
-                        "description": "The object ID of the customer record",
+                    "tenantId": {
+                        "description": "The object ID of the tenant record",
                         "example": "1c4d2f3b-2e4b-4a5b-8c6d-7e8f9a0b1c2d",
                         "format": "uuid",
                         "maxLength": 36,
@@ -832,50 +832,42 @@
                         "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
                         "type": "string"
                     },
-                    "customerDisplayName": {
-                        "description": "Human readable name for the customer record",
+                    "displayName": {
+                        "description": "Human readable name for the tenant record",
                         "example": "Contoso - Prod",
                         "type": "string"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "customerId",
-                    "customerDisplayName"
-                ]
-            },
-            "Customer.Record": {
-                "title": "Customer Record",
-                "description": "Details of a single customer record requested directly that includes additional information",
-                "properties": {
-                    "customerId": {
-                        "description": "The object ID of the customer record",
-                        "example": "1c4d2f3b-2e4b-4a5b-8c6d-7e8f9a0b1c2d",
+                    },
+                    "parentId": {
+                        "description": "The object ID of the tenant that is considered a parent to this record",
+                        "example": "22354a3f-2e21-4bd2-8327-dc842cfa80c8",
                         "format": "uuid",
                         "maxLength": 36,
                         "minLength": 36,
                         "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
                         "type": "string"
                     },
-                    "customerDisplayName": {
-                        "description": "Human readable name for the customer record",
-                        "example": "Contoso - Prod",
-                        "type": "string"
-                    },
-                    "tenantList": {
-                        "description": "Object representing collection of tenant records that include tenant id and name and are associated with this customer record",
-                        "additionalProperties": {
-                            "description": "Human readable name for the tenant record",
+                    "authorizedPrincipalList": {
+                        "description": "List of object IDs that are allowed to access this record and related data.",
+                        "type": "array",
+                        "items": {
+                            "format": "uuid",
+                            "maxLength": 36,
+                            "minLength": 36,
+                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
                             "type": "string"
                         },
-                        "type": "object"
+                        "example": [
+                            "fd9a6a53-594d-41aa-950a-b21ff41d4688",
+                            "54fc12cd-403d-4c48-be12-86b807e958d3"
+                        ]
                     }
                 },
                 "type": "object",
                 "required": [
-                    "customerId",
-                    "customerDisplayName",
-                    "tenantIdList"
+                    "tenantId",
+                    "displayName",
+                    "parentId",
+                    "authorizedPrincipalList"
                 ]
             }
         },
@@ -2722,10 +2714,15 @@
                 ]
             }
         },
-        "/API/Customer/" : {
+        "/API/Tenant/" : {
             "get": {
-                "description": "Retrieves the list of unique customer records in the system. This endpoint requires the `Customer.Read.All` or `Customer.ReadWrite.All` scopes (permissions).",
-                "operationId": "/API/Customer/Get",
+                "description": "Retrieves the list of tenant records. Can use filter by parent ID limit the results. This endpoint requires the `Tenant.Read.All` or `Tenant.ReadWrite.All` scopes (permissions).",
+                "operationId": "/API/Tenant/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/parentId"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "content": {
@@ -2734,21 +2731,28 @@
                                     "type": "array",
                                     "minItems": 0,
                                     "items": {
-                                       "$ref": "#/components/schemas/CustomerList.Record"
+                                       "$ref": "#/components/schemas/TenantDetails.Record"
                                     }
                                 },
                                 "examples": {
-                                    "Example List Of Customer Records": {
-                                        "description": "Sample list of unique customer records in the system",
-                                        "summary": "Existing Customer Records",
+                                    "Example List Of Tenant Records": {
+                                        "description": "Sample list of tenant records in the database",
+                                        "summary": "Existing Tenant Records",
                                         "value": [
                                             {
-                                                "customerId": "5d6e7f8a-9b0c-1d2e-3f4a-5b6c7d8e9f0a",
-                                                "customerDisplayName": "Contoso - Legal"
+                                                "tenantId": "5d6e7f8a-9b0c-1d2e-3f4a-5b6c7d8e9f0a",
+                                                "displayName": "Contoso - Legal",
+                                                "parentId": "f3ed1efc-4e62-46b8-bf2a-6b59ca9784e5",
+                                                "authorizedPrincipalList": [
+                                                    "59673771-3b4f-4518-9187-aee8a51c8c07",
+                                                    "47c42971-2dea-4553-a788-d29a42e3e867"
+                                                ]
                                             },
                                             {
-                                                "customerId": "7e8f9a0b-1c2d-3e4b-5a6c-7d8e9f0a1b2c",
-                                                "customerDisplayName": "Contoso - R&D"
+                                                "tenantId": "7e8f9a0b-1c2d-3e4b-5a6c-7d8e9f0a1b2c",
+                                                "displayName": "Contoso - R&D",
+                                                "parentId": "f3ed1efc-4e62-46b8-bf2a-6b59ca9784e5",
+                                                "authorizedPrincipalList": []
                                             }
                                         ]
                                     }
@@ -2756,21 +2760,30 @@
                             }
                         },
                         "description": "OK"
+                    },
+                    "404":{
+                        "$ref": "#/components/responses/404"
+                    },
+                    "500": {
+                        "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
                     }
                 },
-                "summary": "Retrieves list of customer records",
+                "summary": "Retrieves list of tenant records",
                 "tags": [
-                    "Customer Records"
+                    "Tenant Records"
                 ]
             }
         },
-        "/API/Customer/{customerId}/": {
+        "/API/Tenant/{tenantId}/": {
             "get": {
-                "description": "Retrieves complete details of one customer record including associated list of tenant records. This endpoint requires the `Customer.Read.All` or `Customer.ReadWrite.All` scopes (permissions).",
-                "operationId": "/API/Customer/:customerId/Get",
+                "description": "Retrieves details of a specific tenant record. This endpoint requires the `Tenant.Read.All` or `Tenant.ReadWrite.All` scopes (permissions).",
+                "operationId": "/API/Tenant/:tenantId/Get",
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/customerId"
+                        "$ref": "#/components/parameters/tenantId"
+                    },
+                    {
+                        "$ref": "#/components/parameters/parentId"
                     }
                 ],
                 "responses": {
@@ -2778,20 +2791,21 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Customer.Record"
+                                    "$ref": "#/components/schemas/TenantDetails.Record"
                                 },
                                 "examples": {
-                                    "Example Complete Customer Record": {
-                                        "description": "Sample details of one customer record with list of associated tenant records",
-                                        "summary": "Existing Customer Record",
+                                    "Example Complete Tenant Record": {
+                                        "description": "Sample details of one tenant record",
+                                        "summary": "Existing Tenant Record",
                                         "value": {
-                                            "customerId": "9f0a1b2c-3d4e-5f6a-7b8c-9d0e1f2a3b4c",
-                                            "customerDisplayName": "Contoso - Testing",
-                                            "tenantList": {
-                                                "9f0a1b2c-3d4e-5f6a-7b8c-9d0e1f2a3b4c": "Contoso - Testing",
-                                                "2e3f4a5b-6c7d-8e9f-0a1b-2c3d4e5f6a7b": "Contoso - Testing - Staging 1",
-                                                "4b5c6d7e-8f9a-0b1c-2d3e-4f5a6b7c8d9e": "Contoso - Testing - Staging 2"
-                                            }
+                                            "tenantId": "9f0a1b2c-3d4e-5f6a-7b8c-9d0e1f2a3b4c",
+                                            "displayName": "Contoso - Testing",
+                                            "parentId": "f3ed1efc-4e62-46b8-bf2a-6b59ca9784e5",
+                                            "authorizedPrincipalList": [
+                                                "9f0a1b2c-3d4e-5f6a-7b8c-9d0e1f2a3b4c",
+                                                "2e3f4a5b-6c7d-8e9f-0a1b-2c3d4e5f6a7b",
+                                                "4b5c6d7e-8f9a-0b1c-2d3e-4f5a6b7c8d9e"
+                                            ]
                                         }
                                     }
                                 }
@@ -2799,26 +2813,21 @@
                         },
                         "description": "OK"
                     },
-                    "401": {
-                        "$ref": "#/components/responses/401"
-                    },
-                    "403": {
-                        "$ref": "#/components/responses/403"
+                    "404":{
+                        "$ref": "#/components/responses/404"
                     },
                     "500": {
                         "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
                     }
                 },
-                "summary": "Retrieves Details of One Customer Record",
+                "summary": "Retrieves Details of One Tenant Record",
                 "tags": [
-                    "Customer Records"
+                    "Tenant Records"
                 ]
-            }
-        },
-        "/API/Customer/Tenant/{tenantId}/": {
+            },
             "patch": {
-                "description": "Update tenant record to either create association with provided customer value, or adjust human readable name, or both. This endpoint requires the `Customer.ReadWrite.All` scope (permission).",
-                "operationId": "/API/Customer/Tenant/:tenantId/Patch",
+                "description": "Update tenant record using provided information. Payload could contain any combination of existing properties. This endpoint requires the `Tenant.ReadWrite.All` scopes (permissions).",
+                "operationId": "/API/Tenant/:tenantId/Patch",
                 "parameters": [
                     {
                          "$ref": "#/components/parameters/tenantId"
@@ -2830,43 +2839,63 @@
                             "schema": {
                                 "type": "object",
                                 "properties": {
-                                    "customerId": {
-                                        "description": "Optional Object ID of the customer record to to use during update process.",
-                                        "example": "b2fd105a-2594-437e-b934-1a62a51c28b4",
+                                    "displayName": {
+                                        "description": "Human readable name for the tenant record",
+                                        "type": "string"
+                                    },
+                                    "parentId": {
+                                        "description": "The object ID of the tenant that is considered a parent to this record",
                                         "format": "uuid",
                                         "maxLength": 36,
                                         "minLength": 36,
                                         "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
                                         "type": "string"
                                     },
-                                    "displayName": {
-                                        "description": "Optional string representing human readable name for the records.",
-                                        "example": "Contoso - New Tenant",
-                                        "type": "string"
-                                    }
-                                }
-                            },
-                            "examples": {
-                                "Example Request for Tenant Association": {
-                                    "description": "Sample payload requesting for the referenced tenant record to be associated with provided customer value",
-                                    "summary": "Create Customer Association for Tenant",
-                                    "value": {
-                                        "customerId": "6a7b8c9d-0e1f-2a3b-4c5d-6e7f8a9b0c1d"
+                                    "authorizedPrincipalList": {
+                                        "description": "List of object IDs that are allowed to access this record and related data.",
+                                        "type": "array",
+                                        "items": {
+                                            "format": "uuid",
+                                            "maxLength": 36,
+                                            "minLength": 36,
+                                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                                            "type": "string"
+                                        }
                                     }
                                 },
-                                "Example Request for Tenant Association and Name Update": {
-                                    "description": "Sample payload requesting to associate tenant record with the customer value and also update name on the tenant record",
-                                    "summary": "Update Tenant Record Name and Create Customer Association for Tenant",
+                                "anyOf": [
+                                    {
+                                        "required": [ "displayName" ]
+                                    },
+                                    {
+                                        "required": [ "parentId" ]
+                                    },
+                                    {
+                                        "required": [ "authorizedPrincipalList" ]
+                                    }
+                                ]
+                            },
+                            "examples": {
+                                "Example Request to Update Tenant Parent": {
+                                    "description": "Sample payload requesting adjustment to the parent value",
+                                    "summary": "Update Parent Information for Tenant",
                                     "value": {
-                                        "customerId": "8f9a0b1c-2d3e-4f5a-6b7c-8d9e0a1b2c3d",
+                                        "parentId": "6a7b8c9d-0e1f-2a3b-4c5d-6e7f8a9b0c1d"
+                                    }
+                                },
+                                "Example Request for Tenant Name and Parent Update": {
+                                    "description": "Sample payload requesting to update parent value and display name on the tenant record",
+                                    "summary": "Update Tenant Record Name and Parent Information",
+                                    "value": {
+                                        "parentId": "8f9a0b1c-2d3e-4f5a-6b7c-8d9e0a1b2c3d",
                                         "displayName": "Contoso - R&D East"
                                     }
                                 },
-                                "Example Request for Tenant Name Update": {
-                                    "description": "Sample payload requesting to update name on the tenant record",
-                                    "summary": "Update Tenant Record Name",
+                                "Example Request for Tenant Authorized Principals Update": {
+                                    "description": "Sample payload requesting to update authorized principals for the tenant record",
+                                    "summary": "Update Tenant Authorized Principals List",
                                     "value": {
-                                        "displayName": "Contoso - R&D North"
+                                        "authorizedPrincipalList": [ "4cae3355-0cff-410c-b4f9-69cb5de8f1ac", "0e52e6ac-f8e1-4070-ae2e-9bd0a37507a1" ]
                                     }
                                 }
                             }
@@ -2874,20 +2903,29 @@
                     }
                 },
                 "responses": {
-                    "204": {
-                        "description": "Updated successfully"
-                    },
-                    "400": {
-                        "$ref": "#/components/responses/400"
-                    },
-                    "401": {
-                        "$ref": "#/components/responses/401"
-                    },
-                    "403": {
-                        "$ref": "#/components/responses/403"
-                    },
-                    "404": {
-                        "$ref": "#/components/responses/404"
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TenantDetails.Record"
+                                },
+                                "examples": {
+                                    "Example Complete Tenant Record": {
+                                        "description": "Sample response after updating a tenant record",
+                                        "summary": "Updated Tenant Record",
+                                        "value": {
+                                            "tenantId": "c00ffc2c-b6f6-4121-bd8e-4d02e9504eb9",
+                                            "displayName": "Contoso - Testing",
+                                            "parentId": "8c291062-a4f7-4706-b4df-59e605497f06",
+                                            "authorizedPrincipalList": [
+                                                "b856517a-2086-4be4-b63e-d6ca8a5b0ff6"
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "OK"
                     },
                     "500": {
                         "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
@@ -2895,7 +2933,7 @@
                 },
                 "summary": "Update Tenant Record",
                 "tags": [
-                    "Customer Records"
+                    "Tenant Records"
                 ]
             }
         }
