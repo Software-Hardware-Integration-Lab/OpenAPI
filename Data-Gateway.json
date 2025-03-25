@@ -2768,7 +2768,7 @@
                         "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
                     }
                 },
-                "summary": "Retrieves list of tenant records",
+                "summary": "Retrieves List of Tenant Records",
                 "tags": [
                     "Tenant Records"
                 ]
@@ -2820,13 +2820,13 @@
                         "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
                     }
                 },
-                "summary": "Retrieves Details of One Tenant Record",
+                "summary": "Retrieves Tenant Record",
                 "tags": [
                     "Tenant Records"
                 ]
             },
             "patch": {
-                "description": "Update tenant record using provided information. Payload could contain any combination of existing properties. This endpoint requires the `Tenant.ReadWrite.All` scopes (permissions).",
+                "description": "Update tenant record using provided information. Payload could contain any combination of existing properties. To remove a parent, set the parentId to be the same as the tenant ID value. This endpoint requires the `Tenant.ReadWrite.All` scopes (permissions).",
                 "operationId": "/API/Tenant/:tenantId/Patch",
                 "parameters": [
                     {
@@ -2957,6 +2957,10 @@
                 "description": "Data Gateway Documentation",
                 "url": "https://docs.shilab.com/Date-Gateway/"
             }
+        },
+        {
+            "description": "Manages the list of tenants that have interacted with the Data Gateway in the past.",
+            "name": "Tenant Records"
         },
         {
             "description": "Collects and reports data from the license analytics product.",
