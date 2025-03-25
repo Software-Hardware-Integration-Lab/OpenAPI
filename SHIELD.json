@@ -1036,6 +1036,97 @@
                 "title": "Type of security class the object(s) belongs to",
                 "type": "string"
             },
+            "Shield.Deploy.Delta.Response": {
+                "title": "SHIELD - Deploy - Delta - Response",
+                "description": "Object returned as a result of query for cached data or re-evaluation operation.",
+                "type": "object",
+                "properties": {
+                    "invalid": {
+                        "additionalProperties": {
+                            "description": "String with details of the error response.",
+                            "type": "string"
+                        },
+                        "description": "Collection of the configuration items where request for live data responded with error.",
+                        "type": "object"
+                    },
+                    "lastRunTimestamp": {
+                        "description": "Point in time expressed in ISO 8601 format when the evaluation results were generated last. ",
+                        "example": "2025-03-25T14:28:54Z",
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "missing": {
+                        "additionalProperties": {
+                            "description": "String indicating name and description of the configuration item.",
+                            "type": "string"
+                        },
+                        "description": "Collection of the configuration items that are present in the template but do not have reference to indicate they were deployed.",
+                        "type": "object"
+                    },
+                    "results": {
+                        "additionalProperties": {
+                            "items": {
+                                "properties": {
+                                    "actions": {
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "description": "List of operations available to be performed on the entity.",
+                                        "type": "array",
+                                        "minItems": 1
+                                    },
+                                    "message": {
+                                        "description": "Detailed information about the discrepancy for the entity.",
+                                        "type": "string"
+                                    },
+                                    "path": {
+                                        "description": "Location in the object where evaluated property encountered an error.",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [ "actions", "message", "path" ]
+                            },
+                            "type": "array"
+                        },
+                        "description": "Collection of the configuration items where discrepancies where found.",
+                        "type": "object"
+                    }
+                },
+                "required": [ "invalid", "lastRunTimestamp", "missing", "results"],
+                "example": {
+                    "invalid": {
+                        "a14402b8-98c5-41e3-ba99-e5e1a536f68d": "Setting ID '58246273-d366-40d5-ac3d-daacb8bc2655' - Item not found.",
+                        "9af9209d-d191-4b42-9f65-dfd8b7882bba": "Setting ID 'f6f5d07b-230c-4818-93de-e407b8ca9537' - Insufficient access to view this data."
+                    },
+                    "lastRunTimestamp": "2025-03-25T14:28:54Z",
+                    "missing": {
+                        "78afd77c-c2a6-4328-9c61-b9fd44114823": "Microsoft.Policies.PowerToysMicrosoft.Policies.PowerToys - Version 0.86.0"
+                    },
+                    "results": {
+                        "c47c20bd-46fa-4dfe-b971-3e5b1ce34a86": [
+                            {
+                                "actions": [ "ignore", "restore" ],
+                                "message": "Value mismatch for property 'displayName' with current value being 'Audit Platform and Configuration Updates2'",
+                                "path": "displayName"
+                            },
+                            {
+                                "actions": [ "ignore" ],
+                                "message": "Expected object at level 'groupPolicyUploadedLanguageFiles', but encountered 'Array'",
+                                "path": "groupPolicyUploadedLanguageFiles"
+                            }
+                        ],
+                        "4b26b6f6-9cb3-4384-bd1e-6d298455c2c4": [
+                            {
+                                "actions": [ "restore" ],
+                                "message": "Array value at level 'roleScopeTagIds/1' is not found in the returned value",
+                                "path": "roleScopeTagIds/1"
+                            }
+                        ]
+                    }
+                }
+            },
             "Shield.Deploy.Delta.Action": {
                 "title": "SHIELD - Deploy - Delta - Action",
                 "description": "Payload expected for various operations related to Delta Engine",
@@ -1710,93 +1801,43 @@
         },
         "/API/Deploy/Delta/": {
             "get": {
-                "summary": "Initiate evaluation for configuration discrepancies",
-                "description": "Runs the comparison between configuration templates and live data to find discrepancies to be addressed. Returns results split into several categories.\n\nThis endpoint requires the `Deploy.Read`, or `Deploy.ReadWrite` scope (permission).",
+                "summary": "Retrieves cached evaluation results",
+                "description": "Retrieves cached results of the comparison between configuration templates and live data to find discrepancies to be addressed. Results split into several categories and include timestamp when the evaluation was performed.\n\nThis endpoint requires the `Deploy.Read`, or `Deploy.ReadWrite` scope (permission).",
                 "operationId": "/API/Deploy/Delta/Get",
                 "responses": {
                     "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "invalid": {
-                                            "additionalProperties": {
-                                                "description": "String with details of the error response.",
-                                                "type": "string"
-                                            },
-                                            "description": "Collection of the configuration items where request for live data responded with error.",
-                                            "type": "object"
-                                        },
-                                        "missing": {
-                                            "additionalProperties": {
-                                                "description": "String indicating name and description of the configuration item.",
-                                                "type": "string"
-                                            },
-                                            "description": "Collection of the configuration items that are present in the template but do not have reference to indicate they were deployed.",
-                                            "type": "object"
-                                        },
-                                        "results": {
-                                            "additionalProperties": {
-                                                "items": {
-                                                    "properties": {
-                                                        "actions": {
-                                                            "items": {
-                                                                "type": "string"
-                                                            },
-                                                            "description": "List of operations available to be performed on the entity.",
-                                                            "type": "array",
-                                                            "minItems": 1
-                                                        },
-                                                        "message": {
-                                                            "description": "Detailed information about the discrepancy for the entity.",
-                                                            "type": "string"
-                                                        },
-                                                        "path": {
-                                                            "description": "Location in the object where evaluated property encountered an error.",
-                                                            "type": "string"
-                                                        }
-                                                    },
-                                                    "type": "object",
-                                                    "required": [ "actions", "message", "path" ]
-                                                },
-                                                "type": "array"
-                                            },
-                                            "description": "Collection of the configuration items where discrepancies where found.",
-                                            "type": "object"
-                                        }
-                                    },
-                                    "type": "object",
-                                    "required": [ "invalid", "missing", "results"],
-                                    "example": {
-                                        "invalid": {
-                                            "a14402b8-98c5-41e3-ba99-e5e1a536f68d": "Setting ID '58246273-d366-40d5-ac3d-daacb8bc2655' - Item not found.",
-                                            "9af9209d-d191-4b42-9f65-dfd8b7882bba": "Setting ID 'f6f5d07b-230c-4818-93de-e407b8ca9537' - Insufficient access to view this data."
-                                        },
-                                        "missing": {
-                                            "78afd77c-c2a6-4328-9c61-b9fd44114823": "Microsoft.Policies.PowerToysMicrosoft.Policies.PowerToys - Version 0.86.0"
-                                        },
-                                        "results": {
-                                            "c47c20bd-46fa-4dfe-b971-3e5b1ce34a86": [
-                                                {
-                                                    "actions": [ "ignore", "restore" ],
-                                                    "message": "Value mismatch for property 'displayName' with current value being 'Audit Platform and Configuration Updates2'",
-                                                    "path": "displayName"
-                                                },
-                                                {
-                                                    "actions": [ "ignore" ],
-                                                    "message": "Expected object at level 'groupPolicyUploadedLanguageFiles', but encountered 'Array'",
-                                                    "path": "groupPolicyUploadedLanguageFiles"
-                                                }
-                                            ],
-                                            "4b26b6f6-9cb3-4384-bd1e-6d298455c2c4": [
-                                                {
-                                                    "actions": [ "restore" ],
-                                                    "message": "Array value at level 'roleScopeTagIds/1' is not found in the returned value",
-                                                    "path": "roleScopeTagIds/1"
-                                                }
-                                            ]
-                                        }
-                                    }
+                                    "$ref": "#/components/schemas/Shield.Deploy.Delta.Response"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "Delta"
+                ]
+            }
+        },
+        "/API/Deploy/Delta/Check": {
+            "post": {
+                "summary": "Performs evaluation and return results",
+                "description": "Initiates evaluation process to calculate and return the results of the comparison between configuration templates and live data to find discrepancies to be addressed. Results split into several categories and include timestamp when the evaluation was performed.\n\nThis endpoint requires the `Deploy.ReadWrite` scope (permission).",
+                "operationId": "/API/Deploy/Delta/Check/Post",
+                "requestBody": {
+                    "description": "No payload is expected or needed for this operation",
+                    "content": {
+                        "application/json": {}
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Shield.Deploy.Delta.Response"
                                 }
                             }
                         },
@@ -1842,7 +1883,7 @@
         },
         "/API/Deploy/Delta/Skip/": {
             "get": {
-                "summary": "Retrieve list of existing override rules.",
+                "summary": "Retrieves list of existing override rules.",
                 "description": "Retrieves the details of override property in the Settings Engine and returns list grouped by architecture reference.\n\nThis endpoint requires `Deploy.Read`, or `Deploy.ReadWrite` scope (permission).",
                 "operationId": "/API/Deploy/Delta/Skip/Get",
                 "responses": {
