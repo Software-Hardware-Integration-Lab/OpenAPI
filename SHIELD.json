@@ -1185,7 +1185,7 @@
                     "Core"
                 ],
                 "security": [],
-                "summary": "Indicates if the System Requirements are met or not."
+                "summary": "Indicates if the System Requirements Are Met or Not"
             }
         },
         "/API/Auth/Id/": {
@@ -1227,7 +1227,7 @@
                     "Authentication"
                 ],
                 "security": [],
-                "summary": "Retrieves the IDs required to authenticate."
+                "summary": "Retrieves the IDs Required to Authenticate"
             }
         },
         "/API/Auth/Authenticator/": {
@@ -1256,7 +1256,7 @@
         },
         "/API/Auth/Authenticator/Cache/Status/": {
             "get": {
-                "summary": "Indicates if SHIELD is waiting for any credentials.",
+                "summary": "Indicates if SHIELD Is Waiting for Any Credentials",
                 "description": "Provides a breakdown view of if SHIELD is waiting for any specific type of credential or credentials.\n\nThis endpoint requires the `Authentication.Read`, `Authentication.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
                 "operationId": "/API/Auth/Authenticator/Cache/Status/Get",
                 "responses": {
@@ -1319,7 +1319,7 @@
                         "description": "Credential was successfully stored"
                     }
                 },
-                "summary": "Provide Your SHIELD Authenticator Credentials - SCC Auth",
+                "summary": "Provide Your SHIELD Authenticator Credentials - Scc Auth",
                 "tags": [
                     "Authentication"
                 ]
@@ -1365,7 +1365,7 @@
         },
         "/API/Update/": {
             "get": {
-                "summary": "Check if an Update Is Pending",
+                "summary": "Checks if an Update Is Pending",
                 "description": "Provides the state of the update engine. Where `true` means there is an update detected and `false` means there isn't an update available. This endpoint is available to all authorization levels.",
                 "operationId": "/API/Update/Get",
                 "responses": {
@@ -1387,7 +1387,7 @@
         },
         "/API/Update/Check/": {
             "get": {
-                "summary": "Check for a New Version",
+                "summary": "Checks for a New Version",
                 "description": "Checks with data gateway and compares the reported version to the version that is locally installed. If there is a difference, a new update is marked as available. Always returns the latest version available on data gateway, even if that version is installed locally.\n\nThis endpoint requires the `Update.Read`, `Update.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
                 "operationId": "/API/Update/Check/Get",
                 "responses": {
@@ -1465,7 +1465,7 @@
         },
         "/API/Update/Install/Channel/{Update Channel Name}/": {
             "post": {
-                "summary": "Installs SHIELD Core Update from Channel",
+                "summary": "Installs SHIELD Core Update From Channel",
                 "description": "Installs the latest version that is available from SHI Data Gateway in the specified channel. Even if that version is the same that is installed.\n\nThis endpoint requires the `Update.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
                 "operationId": "/API/Update/Install/Channel/UpdateChannelName/Post",
                 "parameters": [
@@ -1510,7 +1510,7 @@
         },
         "/API/Discover/Status/": {
             "get": {
-                "summary": "State of the Discover Module.",
+                "summary": "State of the Discover Module",
                 "description": "Provides a detailed breakdown of the current state of the discover module and it progress.\n\nThis endpoint requires the `Discover.Read`, or the `Everything.ReadWrite` scope (permission).",
                 "operationId": "/API/Discover/Status/Get",
                 "responses": {
@@ -1727,7 +1727,7 @@
                         "$ref": "#/components/responses/401"
                     }
                 },
-                "summary": "Get the current status of the infrastructure deployment",
+                "summary": "Get the Current Status of the Infrastructure Deployment",
                 "tags": [
                     "Infrastructure Deployment"
                 ]
@@ -1792,7 +1792,7 @@
                         "$ref": "#/components/responses/401"
                     }
                 },
-                "summary": "Deploy the core infrastructure architecture specification",
+                "summary": "Deploy the Core Infrastructure Architecture Specification",
                 "tags": [
                     "Infrastructure Deployment"
                 ],
@@ -1801,7 +1801,7 @@
         },
         "/API/Deploy/Delta/": {
             "get": {
-                "summary": "Retrieves cached evaluation results",
+                "summary": "Retrieves Cached Evaluation Results",
                 "description": "Retrieves cached results of the comparison between configuration templates and live data to find discrepancies to be addressed. Results split into several categories and include timestamp when the evaluation was performed.\n\nThis endpoint requires the `Deploy.Read`, or `Deploy.ReadWrite` scope (permission).",
                 "operationId": "/API/Deploy/Delta/Get",
                 "responses": {
@@ -1823,7 +1823,7 @@
         },
         "/API/Deploy/Delta/Check": {
             "post": {
-                "summary": "Performs evaluation and return results",
+                "summary": "Performs Evaluation and Return Results",
                 "description": "Initiates evaluation process to calculate and return the results of the comparison between configuration templates and live data to find discrepancies to be addressed. Results split into several categories and include timestamp when the evaluation was performed.\n\nThis endpoint requires the `Deploy.ReadWrite` scope (permission).",
                 "operationId": "/API/Deploy/Delta/Check/Post",
                 "requestBody": {
@@ -1851,7 +1851,7 @@
         },
         "/API/Deploy/Delta/Restore/{configId}/": {
             "patch": {
-                "summary": "Restores the intended structure",
+                "summary": "Restores the Intended Structure",
                 "description": "Applies a change to restore configuration item or its property to the value from the template.\n\nThis endpoint requires the `Deploy.ReadWrite` scope (permission).",
                 "operationId": "/API/Deploy/Delta/Restore/:configId/Patch",
                 "parameters": [
@@ -1883,7 +1883,7 @@
         },
         "/API/Deploy/Delta/Skip/": {
             "get": {
-                "summary": "Retrieves list of existing override rules.",
+                "summary": "Retrieves List of Existing Override Rules",
                 "description": "Retrieves the details of override property in the Settings Engine and returns list grouped by architecture reference.\n\nThis endpoint requires `Deploy.Read`, or `Deploy.ReadWrite` scope (permission).",
                 "operationId": "/API/Deploy/Delta/Skip/Get",
                 "responses": {
@@ -1917,7 +1917,7 @@
         },
         "/API/Deploy/Delta/Skip/{configId}/": {
             "post": {
-                "summary": "Records intention to bypass evaluation",
+                "summary": "Records Intention to Bypass Evaluation",
                 "description": "Stores the reference to the entity to be skipped during the evaluation process. Could be entire configuration item or a specific property.\n\nThis endpoint requires the `Deploy.ReadWrite` scope (permission).",
                 "operationId": "/API/Deploy/Delta/Skip/:configId/Post",
                 "parameters": [
@@ -2013,7 +2013,7 @@
                         "$ref": "#/components/responses/401"
                     }
                 },
-                "summary": "Gets the version of SHIELDs components",
+                "summary": "Gets the Version of SHIELDs Components",
                 "tags": [
                     "Infrastructure Deployment"
                 ]
@@ -2052,7 +2052,7 @@
                         "$ref": "#/components/responses/525"
                     }
                 },
-                "summary": "Retrieves all AVD Intermediary Instances",
+                "summary": "Retrieves All Avd Intermediary Instances",
                 "tags": [
                     "Intermediary"
                 ]
@@ -2194,7 +2194,7 @@
                         "$ref": "#/components/responses/525"
                     }
                 },
-                "summary": "Removes the assignment of the specified users",
+                "summary": "Removes the Assignment of the Specified Users",
                 "tags": [
                     "Intermediary"
                 ]
@@ -2234,7 +2234,7 @@
                         "$ref": "#/components/responses/525"
                     }
                 },
-                "summary": "List all assigned users (paginated)",
+                "summary": "List All Assigned Users (Paginated)",
                 "tags": [
                     "Intermediary"
                 ]
@@ -2316,7 +2316,7 @@
                         "$ref": "#/components/responses/525"
                     }
                 },
-                "summary": "Assigns the list of specified users",
+                "summary": "Assigns the List of Specified Users",
                 "tags": [
                     "Intermediary"
                 ]
@@ -2358,7 +2358,7 @@
                         "$ref": "#/components/responses/525"
                     }
                 },
-                "summary": "Get a specific assigned user",
+                "summary": "Get a Specific Assigned User",
                 "tags": [
                     "Intermediary"
                 ]
@@ -3041,6 +3041,10 @@
         {
             "description": "WARNING AUTHENTICATION IS DISABLED WHEN DEBUG MODE IS ENABLED!!! Endpoints that are exposed only in debug mode. You can use these to see as the app sees.",
             "name": "Debug Mode"
+        },
+        {
+            "description": "Manages the data and processes involved in identifying discrepancies between the desired architecture template and the deployed infrastructure outcomes.",
+            "name": "Delta"
         }
     ]
 }
