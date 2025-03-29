@@ -191,7 +191,7 @@
                     "ServicePlans"
                 ]
             },
-            "Shield.Authenticator.Status": {
+            "Authenticator.RequestStatus": {
                 "title": "Authentication - Status",
                 "description": "List of credentials that are being waited for by SHIELD's internal authentication engine.",
                 "properties": {
@@ -203,7 +203,7 @@
                                 "example": false
                             },
                             {
-                                "$ref": "#/components/schemas/Shield.Authenticator.Status.TokenAudience"
+                                "$ref": "#/components/schemas/Authenticator.Status.TokenAudience"
                             }
                         ]
                     },
@@ -219,7 +219,7 @@
                     "sccAuth"
                 ]
             },
-            "Shield.Authenticator.Status.TokenAudience": {
+            "Authenticator.Status.TokenAudience": {
                 "title": "SHIELD - Authenticator - Status - Token Audience",
                 "description": "If a access token is being requested, this is the audience that the access token should have when being submitted.",
                 "properties": {
@@ -235,7 +235,7 @@
                     "audience"
                 ]
             },
-            "Shield.Authenticator.Container.Credentials": {
+            "Authenticator.Container.Credentials": {
                 "title": "SHIELD - Authenticator - SCC Auth",
                 "description": "SHIELD - Defender, and Purview portal Container Credentials",
                 "type": "object",
@@ -253,13 +253,13 @@
                         "format": "date-time"
                     },
                     "security": {
-                        "$ref": "#/components/schemas/Shield.Authenticator.Container.Credentials.SccAuth"
+                        "$ref": "#/components/schemas/Authenticator.Container.Credentials.SccAuth"
                     },
                     "compliance": {
-                        "$ref": "#/components/schemas/Shield.Authenticator.Container.Credentials.SccAuth"
+                        "$ref": "#/components/schemas/Authenticator.Container.Credentials.SccAuth"
                     },
                     "purview": {
-                        "$ref": "#/components/schemas/Shield.Authenticator.Container.Credentials.SccAuth"
+                        "$ref": "#/components/schemas/Authenticator.Container.Credentials.SccAuth"
                     }
                 },
                 "required": [
@@ -269,7 +269,7 @@
                     "purview"
                 ]
             },
-            "Shield.Authenticator.Container.Credentials.SccAuth": {
+            "Authenticator.Container.Credentials.SccAuth": {
                 "title": "SHIELD - Authenticator - SCC Auth - Credential Container",
                 "description": "Container for the credentials for a single SccAuth authenticated site.",
                 "properties": {
@@ -290,7 +290,7 @@
                 ],
                 "type": "object"
             },
-            "Shield.Discover.Status": {
+            "Discover.ExecutionStatus": {
                 "title": "Discover - Status",
                 "description": "Detailed status that indicates the current state of the Discover engine and its progress.",
                 "type": "object",
@@ -305,7 +305,7 @@
                     "running"
                 ]
             },
-            "Intermediary": {
+            "ManagedObject.Intermediary": {
                 "description": "Base template for all intermediary objects to inherit from.",
                 "properties": {
                     "id": {
@@ -340,7 +340,7 @@
                 "title": "Intermediary - Base Type",
                 "type": "object"
             },
-            "Intermediary.AVD": {
+            "ManagedObject.AvdIntermediary": {
                 "properties": {
                     "addressRangeCIDR": {
                         "description": "Optional Virtual Network IP Address range, defaults to 10.0.0.0/16.",
@@ -638,7 +638,7 @@
                 ],
                 "title": "License Report - Complete Object"
             },
-            "ManagedDevice": {
+            "ManagedObject.Device": {
                 "title": "Managed Device",
                 "description": "Structure that represents a all of the states a managed device could be in.",
                 "type": "object",
@@ -692,13 +692,13 @@
                     "uniqueGroupId"
                 ]
             },
-            "ManagedDevice.Privileged": {
+            "ManagedObject.PrivilegedDevice": {
                 "description": "Set of properties that are available on privileged managed device objects only.",
                 "title": "Managed Device - Privileged",
                 "type": "object",
                 "allOf": [
                     {
-                        "$ref": "#/components/schemas/ManagedDevice"
+                        "$ref": "#/components/schemas/ManagedObject.Device"
                     },
                     {
                         "type": "object",
@@ -747,7 +747,7 @@
                     }
                 ]
             },
-            "ManagedUser": {
+            "ManagedObject.User": {
                 "title": "Managed User",
                 "description": "A user object that has limited properties. The user object is generated by combining multiple pieces of metadata from Entra ID and SHIELD.",
                 "properties": {
@@ -850,12 +850,12 @@
                 ],
                 "type": "object"
             },
-            "ManagedUser.Privileged": {
+            "ManagedObject.PrivilegedUser": {
                 "title": "Managed User - Privileged",
                 "description": "Additional settings that represent a privileged user object. All data in this structure is preserved in the settings engine's permanent storage system.",
                 "allOf": [
                     {
-                        "$ref": "#/components/schemas/ManagedUser"
+                        "$ref": "#/components/schemas/ManagedObject.User"
                     },
                     {
                         "properties": {
@@ -912,7 +912,7 @@
                     }
                 ]
             },
-            "ObjectPage.Intermediary.AVD": {
+            "ObjectPage.Intermediary.Avd": {
                 "properties": {
                     "@odata.count": {
                         "nullable": true,
@@ -926,12 +926,12 @@
                         "items": {
                             "allOf": [
                                 {
-                                    "$ref": "#/components/schemas/Intermediary"
+                                    "$ref": "#/components/schemas/ManagedObject.Intermediary"
                                 },
                                 {
                                     "properties": {
                                         "properties": {
-                                            "$ref": "#/components/schemas/Intermediary.AVD"
+                                            "$ref": "#/components/schemas/ManagedObject.AvdIntermediary"
                                         }
                                     },
                                     "type": "object"
@@ -962,10 +962,10 @@
                         "items": {
                             "oneOf": [
                                 {
-                                    "$ref": "#/components/schemas/ManagedDevice"
+                                    "$ref": "#/components/schemas/ManagedObject.Device"
                                 },
                                 {
-                                    "$ref": "#/components/schemas/ManagedDevice.Privileged"
+                                    "$ref": "#/components/schemas/ManagedObject.PrivilegedDevice"
                                 }
                             ]
                         },
@@ -993,10 +993,10 @@
                         "items": {
                             "oneOf": [
                                 {
-                                    "$ref": "#/components/schemas/ManagedUser"
+                                    "$ref": "#/components/schemas/ManagedObject.User"
                                 },
                                 {
-                                    "$ref": "#/components/schemas/ManagedUser.Privileged"
+                                    "$ref": "#/components/schemas/ManagedObject.PrivilegedUser"
                                 }
                             ]
                         },
@@ -1047,10 +1047,10 @@
     },
     "openapi": "3.0.0",
     "paths": {
-        "/API/Core/SystemRequirements/": {
+        "/Api/Core/SystemRequirements/": {
             "get": {
                 "description": "Provides a detailed breakdown of if the system requirements are being met for the various components of the SHIELD.",
-                "operationId": "/API/Core/SystemRequirements/Get",
+                "operationId": "/Api/Core/SystemRequirements/Get",
                 "responses": {
                     "200": {
                         "content": {
@@ -1070,10 +1070,10 @@
                 "summary": "Indicates if the System Requirements are met or not."
             }
         },
-        "/API/Auth/Id/": {
+        "/Api/Auth/Id/": {
             "get": {
                 "description": "Provides the Tenant ID and the Application ID of the service principal that access tokens need to be issued against. This is also useful for configuring public clients to be able to authenticate to for auth code flows.",
-                "operationId": "/API/Auth/Id/Get",
+                "operationId": "/Api/Auth/Id/Get",
                 "responses": {
                     "200": {
                         "content": {
@@ -1112,11 +1112,11 @@
                 "summary": "Retrieves the IDs required to authenticate."
             }
         },
-        "/API/Auth/Authenticator/": {
+        "/Api/Auth/Authenticator/": {
             "get": {
                 "summary": "Provides Attestation for Authenticator App",
                 "description": "Provides the attestation to the authenticator that this endpoint is authorized for receiving credentials from the authenticator.\n\nThis endpoint requires the `Authentication.Actions.Attest`, or the `Everything.ReadWrite` scope (permission).",
-                "operationId": "/API/Auth/Authenticator/GetAttest",
+                "operationId": "/Api/Auth/Authenticator/GetAttest",
                 "responses": {
                     "200": {
                         "content": {
@@ -1136,11 +1136,11 @@
                 ]
             }
         },
-        "/API/Auth/Authenticator/Cache/Status/": {
+        "/Api/Auth/Authenticator/Cache/Status/": {
             "get": {
                 "summary": "Indicates if SHIELD is waiting for any credentials.",
                 "description": "Provides a breakdown view of if SHIELD is waiting for any specific type of credential or credentials.\n\nThis endpoint requires the `Authentication.Read`, `Authentication.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
-                "operationId": "/API/Auth/Authenticator/Cache/Status/Get",
+                "operationId": "/Api/Auth/Authenticator/Cache/Status/Get",
                 "responses": {
                     "200": {
                         "content": {
@@ -1171,7 +1171,7 @@
                                     }
                                 },
                                 "schema": {
-                                    "$ref": "#/components/schemas/Shield.Authenticator.Status"
+                                    "$ref": "#/components/schemas/Authenticator.RequestStatus"
                                 }
                             }
                         },
@@ -1183,15 +1183,15 @@
                 ]
             }
         },
-        "/API/Auth/Authenticator/Cache/SccAuth/": {
+        "/Api/Auth/Authenticator/Cache/SccAuth/": {
             "post": {
                 "description": "Configure SHIELD to use the specific SCC Auth credentials from the authenticator app to run web requests on behalf of the end user.\n\nThis endpoint requires the `Authentication.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
-                "operationId": "/API/Auth/Authenticator/Cache/SccAuth/Post",
+                "operationId": "/Api/Auth/Authenticator/Cache/SccAuth/Post",
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Shield.Authenticator.Container.Credentials"
+                                "$ref": "#/components/schemas/Authenticator.Container.Credentials"
                             }
                         }
                     }
@@ -1207,11 +1207,11 @@
                 ]
             }
         },
-        "/API/Auth/Authenticator/Cache/AccessToken/": {
+        "/Api/Auth/Authenticator/Cache/AccessToken/": {
             "post": {
                 "summary": "Provide Your SHIELD Authenticator Credentials - Access Token",
                 "description": "Configure SHIELD to use the specific Access Token credentials from the authenticator app to run web requests on behalf of the end user.\n\nThis endpoint requires the `Authentication.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
-                "operationId": "/API/Auth/Authenticator/Cache/AccessToken/Post",
+                "operationId": "/Api/Auth/Authenticator/Cache/AccessToken/Post",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -1245,11 +1245,11 @@
                 ]
             }
         },
-        "/API/Update/": {
+        "/Api/Update/": {
             "get": {
                 "summary": "Check if an Update Is Pending",
                 "description": "Provides the state of the update engine. Where `true` means there is an update detected and `false` means there isn't an update available. This endpoint is available to all authorization levels.",
-                "operationId": "/API/Update/Get",
+                "operationId": "/Api/Update/Get",
                 "responses": {
                     "200": {
                         "content": {
@@ -1267,11 +1267,11 @@
                 ]
             }
         },
-        "/API/Update/Check/": {
+        "/Api/Update/Check/": {
             "get": {
                 "summary": "Check for a New Version",
                 "description": "Checks with data gateway and compares the reported version to the version that is locally installed. If there is a difference, a new update is marked as available. Always returns the latest version available on data gateway, even if that version is installed locally.\n\nThis endpoint requires the `Update.Read`, `Update.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
-                "operationId": "/API/Update/Check/Get",
+                "operationId": "/Api/Update/Check/Get",
                 "responses": {
                     "200": {
                         "content": {
@@ -1296,11 +1296,11 @@
                 ]
             }
         },
-        "/API/Update/Check/Channel/{Update Channel Name}/": {
+        "/Api/Update/Check/Channel/{Update Channel Name}/": {
             "get": {
                 "summary": "Check for a New Version in Channel",
                 "description": "Checks with the SHI Data Gateway in the specified update channel and compares the reported version to the version that is locally installed. If there is a difference, a new update is marked as available. Always returns the latest version available on data gateway, even if that version is installed locally.\n\nThis endpoint requires the `Update.Read`, `Update.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
-                "operationId": "/API/Update/Check/Channel/UpdateChannelName/Get",
+                "operationId": "/Api/Update/Check/Channel/UpdateChannelName/Get",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/updateChannelName"
@@ -1330,11 +1330,11 @@
                 ]
             }
         },
-        "/API/Update/Install/": {
+        "/Api/Update/Install/": {
             "post": {
                 "summary": "Installs SHIELD Core Update",
                 "description": "Installs the latest version that is available from SHI Data Gateway. Even if that version is the same that is installed.\n\nThis endpoint requires the `Update.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
-                "operationId": "/API/Update/Install/Post",
+                "operationId": "/Api/Update/Install/Post",
                 "responses": {
                     "204": {
                         "description": "OK: Update Submitted to Azure"
@@ -1345,11 +1345,11 @@
                 ]
             }
         },
-        "/API/Update/Install/Channel/{Update Channel Name}/": {
+        "/Api/Update/Install/Channel/{Update Channel Name}/": {
             "post": {
                 "summary": "Installs SHIELD Core Update from Channel",
                 "description": "Installs the latest version that is available from SHI Data Gateway in the specified channel. Even if that version is the same that is installed.\n\nThis endpoint requires the `Update.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
-                "operationId": "/API/Update/Install/Channel/UpdateChannelName/Post",
+                "operationId": "/Api/Update/Install/Channel/UpdateChannelName/Post",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/updateChannelName"
@@ -1365,11 +1365,11 @@
                 ]
             }
         },
-        "/API/Update/Upload/": {
+        "/Api/Update/Upload/": {
             "post": {
                 "summary": "Upload Custom Update Package",
                 "description": "THIS API SHOULD ONLY BE USED IF INSTRUCTED BY SHI EMPLOYEES!\n\nUploads the specified ZIP package, validates signature and installs it if it matches. This ignores version numbers and will allow you to install the same version again if necessary.\n\nThis endpoint requires the `Update.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
-                "operationId": "/API/Update/Upload/Post",
+                "operationId": "/Api/Update/Upload/Post",
                 "requestBody": {
                     "content": {
                         "application/octet-stream": {
@@ -1390,17 +1390,17 @@
                 ]
             }
         },
-        "/API/Discover/Status/": {
+        "/Api/Discover/Status/": {
             "get": {
                 "summary": "State of the Discover Module.",
                 "description": "Provides a detailed breakdown of the current state of the discover module and it progress.\n\nThis endpoint requires the `Discover.Read`, or the `Everything.ReadWrite` scope (permission).",
-                "operationId": "/API/Discover/Status/Get",
+                "operationId": "/Api/Discover/Status/Get",
                 "responses": {
                     "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Shield.Discover.Status"
+                                    "$ref": "#/components/schemas/Discover.ExecutionStatus"
                                 }
                             }
                         },
@@ -1412,11 +1412,11 @@
                 ]
             }
         },
-        "/API/Discover/Report/": {
+        "/Api/Discover/Report/": {
             "get": {
                 "summary": "Start Discover's Report Generation",
                 "description": "Starts the Discover module's report collection engine to create a license report and upload it to the data gateway.\n\nThis endpoint requires the `Discover.Action.Run`, or the `Everything.ReadWrite` scope (permission).",
-                "operationId": "/API/Discover/Report/Start",
+                "operationId": "/Api/Discover/Report/Start",
                 "responses": {
                     "202": {
                         "$ref": "#/components/responses/202"
@@ -1430,10 +1430,10 @@
                 ]
             }
         },
-        "/API/Discover/LicenseReport/Correlation/": {
+        "/Api/Discover/LicenseReport/Correlation/": {
             "get": {
                 "description": "Retrieves the list of correlation records for the authenticated tenant. Correlation records store the metadata for a specific license report.\n\nThis endpoint requires the `Discover.Read`, or the `Everything.ReadWrite` scope (permission).",
-                "operationId": "/API/Discover/LicenseReport/Correlation/Get",
+                "operationId": "/Api/Discover/LicenseReport/Correlation/Get",
                 "responses": {
                     "200": {
                         "content": {
@@ -1486,10 +1486,10 @@
                 "summary": "Retrieve the List of Correlation Records"
             }
         },
-        "/API/Discover/LicenseReport/Correlation/{correlationId}/Data/": {
+        "/Api/Discover/LicenseReport/Correlation/{correlationId}/Data/": {
             "get": {
                 "description": "Retrieves the full license report for the specified correlation ID in the authenticated tenant. The license report contains all of the license usage and compliance information with the required correlation data.\n\nThis endpoint requires the `Discover.Read`, or the `Everything.ReadWrite` scope (permission).",
-                "operationId": "/API/Discover/LicenseReport/Correlation/:correlationId/Data/Get",
+                "operationId": "/Api/Discover/LicenseReport/Correlation/:correlationId/Data/Get",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/correlationId"
@@ -1578,10 +1578,10 @@
                 "summary": "Retrieve the Specified License Report"
             }
         },
-        "/API/Deploy/": {
+        "/Api/Deploy/": {
             "get": {
                 "description": "Has the core infrastructure engine check if the config engine can initialize properly.\n\nThis endpoint requires the `Deploy.Read`, `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
-                "operationId": "/API/Deploy/Get",
+                "operationId": "/Api/Deploy/Get",
                 "responses": {
                     "200": {
                         "content": {
@@ -1616,7 +1616,7 @@
             },
             "post": {
                 "description": "After the user consents, deploy the core security groups, scope tag, configurations and metadata.\n\nThis endpoint requires the `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
-                "operationId": "/API/Deploy/Post",
+                "operationId": "/Api/Deploy/Post",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -1681,10 +1681,10 @@
                 "security": []
             }
         },
-        "/API/Deploy/Version/": {
+        "/Api/Deploy/Version/": {
             "get": {
                 "description": "Gets the version of the API server and the architecture version deployed as well as the supported version of the architecture spec from the server.\n\nThis endpoint requires the `Deploy.Read`, `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
-                "operationId": "/API/Deploy/Version/Get",
+                "operationId": "/Api/Deploy/Version/Get",
                 "responses": {
                     "200": {
                         "content": {
@@ -1723,10 +1723,10 @@
                 ]
             }
         },
-        "/API/Defend/Intermediary/Type/{securityClass}/Offering/8a921026-ec06-4e08-af19-8812e161e61f/": {
+        "/Api/Defend/Intermediary/Type/{securityClass}/Offering/8a921026-ec06-4e08-af19-8812e161e61f/": {
             "get": {
                 "description": "Retrieves a list of all AVD intermediaries for the specified security class filter. Next links may be provided for pagination to allow for good performance on larger environments. If a nextLink is return, not all data was returned on this query and the next link can be sent back to the API to get the next page of data.\n\nThis endpoint requires the `Intermediary.Privileged.Read`, `Intermediary.Privileged.ReadWrite`, `Intermediary.Specialized.Read`, `Intermediary.Specialized.ReadWrite`, `Intermediary.Enterprise.ReadWrite`, `Intermediary.Enterprise.Read`, or the `Everything.ReadWrite` scope (permission). The security class parameter in the URL path corresponds to the same permission in the scope. That means if you are granted a privileged role, you can only call the privilege class URL.",
-                "operationId": "/API/Defend/Intermediary/Type/:securityClass/Offering/AVD/Get",
+                "operationId": "/Api/Defend/Intermediary/Type/:securityClass/Offering/AVD/Get",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -1743,7 +1743,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ObjectPage.Intermediary.AVD"
+                                    "$ref": "#/components/schemas/ObjectPage.Intermediary.Avd"
                                 }
                             }
                         },
@@ -1762,10 +1762,10 @@
                 ]
             }
         },
-        "/API/Defend/Intermediary/{intermediaryId}/Type/{securityClass}/Offering/8a921026-ec06-4e08-af19-8812e161e61f/": {
+        "/Api/Defend/Intermediary/{intermediaryId}/Type/{securityClass}/Offering/8a921026-ec06-4e08-af19-8812e161e61f/": {
             "delete": {
                 "description": "Deletes the specified intermediary (by the parent group's Entra ID Object ID) using the requested security class as a filter.\n\nThis endpoint requires the `Intermediary.Privileged.ReadWrite`, `Intermediary.Specialized.ReadWrite`, `Intermediary.Enterprise.ReadWrite`, or the `Everything.ReadWrite` scope (permission). The security class parameter in the URL path corresponds to the same permission in the scope. That means if you are granted a privileged role, you can only call the privilege class URL.",
-                "operationId": "/API/Defend/Intermediary/:intermediaryId/Type/:securityClass/Offering/AVD/Delete",
+                "operationId": "/Api/Defend/Intermediary/:intermediaryId/Type/:securityClass/Offering/AVD/Delete",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -1795,7 +1795,7 @@
             },
             "get": {
                 "description": "Retrieves the specified intermediary (by the parent group's Entra ID Object ID) using the requested security class as a filter.\n\nThis endpoint requires the `Intermediary.Privileged.Read`, `Intermediary.Privileged.ReadWrite`, `Intermediary.Specialized.Read`, `Intermediary.Specialized.ReadWrite`, `Intermediary.Enterprise.ReadWrite`, `Intermediary.Enterprise.Read`, or the `Everything.ReadWrite` scope (permission). The security class parameter in the URL path corresponds to the same permission in the scope. That means if you are granted a privileged role, you can only call the privilege class URL.",
-                "operationId": "/API/Defend/Intermediary/:intermediaryId/Type/:securityClass/Offering/AVD/Get",
+                "operationId": "/Api/Defend/Intermediary/:intermediaryId/Type/:securityClass/Offering/AVD/Get",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -1809,7 +1809,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ObjectPage.Intermediary.AVD"
+                                    "$ref": "#/components/schemas/ObjectPage.Intermediary.Avd"
                                 }
                             }
                         },
@@ -1831,10 +1831,10 @@
                 ]
             }
         },
-        "/API/Defend/Intermediary/{intermediaryId}/Type/{securityClass}/Offering/8a921026-ec06-4e08-af19-8812e161e61f/Assign/": {
+        "/Api/Defend/Intermediary/{intermediaryId}/Type/{securityClass}/Offering/8a921026-ec06-4e08-af19-8812e161e61f/Assign/": {
             "delete": {
                 "description": "Removes the specified user(s) as identified by their Object ID from the AVD cluster and deletes their corresponding session host(s).\n\nThis endpoint requires the `Intermediary.Privileged.ReadWrite`, `Intermediary.Specialized.ReadWrite`, `Intermediary.Enterprise.ReadWrite`, or the `Everything.ReadWrite` scope (permission). The security class parameter in the URL path corresponds to the same permission in the scope. That means if you are granted a privileged role, you can only call the privilege class URL.",
-                "operationId": "/API/Defend/Intermediary/:intermediaryId/Type/:securityClass/Offering/AVD/Assign/Delete",
+                "operationId": "/Api/Defend/Intermediary/:intermediaryId/Type/:securityClass/Offering/AVD/Assign/Delete",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -1905,7 +1905,7 @@
             },
             "get": {
                 "description": "Gets the list of assigned user from the specified AVD Intermediary.\n\nThis endpoint requires the `Intermediary.Privileged.Read`, `Intermediary.Privileged.ReadWrite`, `Intermediary.Specialized.Read`, `Intermediary.Specialized.ReadWrite`, `Intermediary.Enterprise.ReadWrite`, `Intermediary.Enterprise.Read`, or the `Everything.ReadWrite` scope (permission). The security class parameter in the URL path corresponds to the same permission in the scope. That means if you are granted a privileged role, you can only call the privilege class URL.",
-                "operationId": "/API/Defend/Intermediary/:intermediaryId/Type/:securityClass/Offering/AVD/Assign/Get",
+                "operationId": "/Api/Defend/Intermediary/:intermediaryId/Type/:securityClass/Offering/AVD/Assign/Get",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -1945,7 +1945,7 @@
             },
             "post": {
                 "description": "Assigns the specified user(s) as identified by their Object ID to the AVD cluster and create corresponding session host(s) for them.\n\nThis endpoint requires the `Intermediary.Privileged.ReadWrite`, `Intermediary.Specialized.ReadWrite`, `Intermediary.Enterprise.ReadWrite`, or the `Everything.ReadWrite` scope (permission). The security class parameter in the URL path corresponds to the same permission in the scope. That means if you are granted a privileged role, you can only call the privilege class URL.",
-                "operationId": "/API/Defend/Intermediary/:intermediaryId/Type/:securityClass/Offering/AVD/Assign/Post",
+                "operationId": "/Api/Defend/Intermediary/:intermediaryId/Type/:securityClass/Offering/AVD/Assign/Post",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -2001,7 +2001,7 @@
                             "application/json": {
                                 "schema": {
                                     "items": {
-                                        "$ref": "#/components/schemas/ManagedUser"
+                                        "$ref": "#/components/schemas/ManagedObject.User"
                                     },
                                     "minItems": 0,
                                     "type": "array"
@@ -2026,10 +2026,10 @@
                 ]
             }
         },
-        "/API/Defend/Intermediary/{intermediaryId}/Type/{securityClass}/Offering/8a921026-ec06-4e08-af19-8812e161e61f/Assign/{userId}/": {
+        "/Api/Defend/Intermediary/{intermediaryId}/Type/{securityClass}/Offering/8a921026-ec06-4e08-af19-8812e161e61f/Assign/{userId}/": {
             "get": {
                 "description": "Get the specified managed user's from the specified AVD intermediary assignment list.\n\nThis endpoint requires the `Intermediary.Privileged.Read`, `Intermediary.Privileged.ReadWrite`, `Intermediary.Specialized.Read`, `Intermediary.Specialized.ReadWrite`, `Intermediary.Enterprise.ReadWrite`, `Intermediary.Enterprise.Read`, or the `Everything.ReadWrite` scope (permission). The security class parameter in the URL path corresponds to the same permission in the scope. That means if you are granted a privileged role, you can only call the privilege class URL.",
-                "operationId": "/API/Defend/Intermediary/:intermediaryId/Type/:securityClass/Offering/AVD/Assign/:userId/Get",
+                "operationId": "/Api/Defend/Intermediary/:intermediaryId/Type/:securityClass/Offering/AVD/Assign/:userId/Get",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -2068,10 +2068,10 @@
                 ]
             }
         },
-        "/API/Defend/Device/{deviceId}/Type/Privileged/Assign/": {
+        "/Api/Defend/Device/{deviceId}/Type/Privileged/Assign/": {
             "delete": {
                 "description": "Remove the specified user list from the device.\n\nThis endpoint requires the `Device.Privileged.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
-                "operationId": "/API/Defend/Device/:deviceId/Type/Privileged/Assign/Delete",
+                "operationId": "/Api/Defend/Device/:deviceId/Type/Privileged/Assign/Delete",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/deviceId"
@@ -2124,7 +2124,7 @@
                             "application/json": {
                                 "schema": {
                                     "items": {
-                                        "$ref": "#/components/schemas/ManagedUser"
+                                        "$ref": "#/components/schemas/ManagedObject.User"
                                     },
                                     "minItems": 0,
                                     "type": "array"
@@ -2147,7 +2147,7 @@
             },
             "get": {
                 "description": "Lists all of the users that are currently assigned to the specified device.\n\nThis endpoint requires the `Device.Privileged.Read`, `Device.Privileged.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
-                "operationId": "/API/Defend/Device/:deviceId/Type/Privileged/Assign/Get",
+                "operationId": "/Api/Defend/Device/:deviceId/Type/Privileged/Assign/Get",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/deviceId"
@@ -2178,7 +2178,7 @@
             },
             "post": {
                 "description": "Adds the specified list of users to the list of users that are allowed to log in on the specific privileged device.\n\nThis endpoint requires the `Device.Privileged.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
-                "operationId": "/API/Defend/Device/:deviceId/Type/Privileged/Assign/Post",
+                "operationId": "/Api/Defend/Device/:deviceId/Type/Privileged/Assign/Post",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/deviceId"
@@ -2231,7 +2231,7 @@
                             "application/json": {
                                 "schema": {
                                     "items": {
-                                        "$ref": "#/components/schemas/ManagedUser"
+                                        "$ref": "#/components/schemas/ManagedObject.User"
                                     },
                                     "minItems": 0,
                                     "type": "array"
@@ -2253,10 +2253,10 @@
                 ]
             }
         },
-        "/API/Defend/Device/Type/{securityClass}/": {
+        "/Api/Defend/Device/Type/{securityClass}/": {
             "get": {
                 "description": "Returns a list of all devices managed or unmanaged.\n\nThis endpoint requires the `Device.Privileged.Read`, `Device.Privileged.ReadWrite`, `Device.Specialized.Read`, `Device.Specialized.ReadWrite`, `Device.Enterprise.ReadWrite`, `Device.Enterprise.Read`, or the `Everything.ReadWrite` scope (permission). The security class parameter in the URL path corresponds to the same permission in the scope. That means if you are granted a privileged role, you can only call the privilege class URL. When reading the `unmanaged` objects, any security class permission can read them, no need for a specific `unmanaged` class assignment.",
-                "operationId": "/API/Defend/Device/Type/:securityClass/Get",
+                "operationId": "/Api/Defend/Device/Type/:securityClass/Get",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -2293,7 +2293,7 @@
             },
             "post": {
                 "description": "Commissions a new device, into the device hierarchy and appends appropriate metadata and initial policies. Appends required metadata to proper locations.\n\nThis endpoint requires the `Device.Privileged.ReadWrite`, `Device.Specialized.ReadWrite`, `Device.Enterprise.ReadWrite`, or the `Everything.ReadWrite` scope (permission). The security class parameter in the URL path corresponds to the same permission in the scope. That means if you are granted a privileged role, you can only call the privilege class URL.",
-                "operationId": "/API/Defend/Device/Type/:securityClass/Post",
+                "operationId": "/Api/Defend/Device/Type/:securityClass/Post",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -2330,7 +2330,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ManagedDevice"
+                                    "$ref": "#/components/schemas/ManagedObject.Device"
                                 }
                             }
                         },
@@ -2352,10 +2352,10 @@
                 ]
             }
         },
-        "/API/Defend/Device/{deviceId}/Type/{securityClass}/": {
+        "/Api/Defend/Device/{deviceId}/Type/{securityClass}/": {
             "delete": {
                 "description": "Removes the device from the management hierarchy, removes metadata tagging and issues the wipe command to the devices.\n\nThis endpoint requires the `Device.Privileged.ReadWrite`, `Device.Specialized.ReadWrite`, `Device.Enterprise.ReadWrite`, or the `Everything.ReadWrite` scope (permission). The security class parameter in the URL path corresponds to the same permission in the scope. That means if you are granted a privileged role, you can only call the privilege class URL.",
-                "operationId": "/API/Defend/Device/:deviceId/Type/:securityClass/Delete",
+                "operationId": "/Api/Defend/Device/:deviceId/Type/:securityClass/Delete",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -2385,7 +2385,7 @@
             },
             "get": {
                 "description": "Get the specified managed device by its Entra ID Device ID.\n\nThis endpoint requires the `Device.Privileged.Read`, `Device.Privileged.ReadWrite`, `Device.Specialized.Read`, `Device.Specialized.ReadWrite`, `Device.Enterprise.ReadWrite`, `Device.Enterprise.Read`, or the `Everything.ReadWrite` scope (permission). The security class parameter in the URL path corresponds to the same permission in the scope. That means if you are granted a privileged role, you can only call the privilege class URL.",
-                "operationId": "/API/Defend/Device/:deviceId/Type/:securityClass/Get",
+                "operationId": "/Api/Defend/Device/:deviceId/Type/:securityClass/Get",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -2399,7 +2399,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ManagedDevice"
+                                    "$ref": "#/components/schemas/ManagedObject.Device"
                                 }
                             }
                         },
@@ -2421,10 +2421,10 @@
                 ]
             }
         },
-        "/API/Defend/User/Type/{securityClass}/": {
+        "/Api/Defend/User/Type/{securityClass}/": {
             "get": {
                 "description": "Returns a list of all devices managed or unmanaged.\n\nThis endpoint requires the `User.Privileged.Read`, `User.Privileged.ReadWrite`, `User.Specialized.Read`, `User.Specialized.ReadWrite`, `User.Enterprise.ReadWrite`, `User.Enterprise.Read`, or the `Everything.ReadWrite` scope (permission). The security class parameter in the URL path corresponds to the same permission in the scope. That means if you are granted a privileged role, you can only call the privilege class URL. When reading the `unmanaged` objects, any security class permission can read them, no need for a specific `unmanaged` class assignment.",
-                "operationId": "/API/Defend/User/Type/:securityClass/Get",
+                "operationId": "/Api/Defend/User/Type/:securityClass/Get",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -2461,7 +2461,7 @@
             },
             "post": {
                 "description": "For Specialized or Enterprise, adds existing user into management. For Privileged, securely clones the specified user's properties into a new managed user object in the privileged baselines.\n\nThis endpoint requires the `User.Privileged.ReadWrite`, `User.Specialized.ReadWrite`, `User.Enterprise.ReadWrite`, or the `Everything.ReadWrite` scope (permission). The security class parameter in the URL path corresponds to the same permission in the scope. That means if you are granted a privileged role, you can only call the privilege class URL.",
-                "operationId": "/API/Defend/User/Type/:securityClass/Post",
+                "operationId": "/Api/Defend/User/Type/:securityClass/Post",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -2498,7 +2498,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ManagedUser"
+                                    "$ref": "#/components/schemas/ManagedObject.User"
                                 }
                             }
                         },
@@ -2523,10 +2523,10 @@
                 ]
             }
         },
-        "/API/Defend/User/{userId}/Type/{securityClass}/": {
+        "/Api/Defend/User/{userId}/Type/{securityClass}/": {
             "delete": {
                 "description": "Deletes the user account and removes the management artifacts.\n\nThis endpoint requires the `User.Privileged.ReadWrite`, `User.Specialized.ReadWrite`, `User.Enterprise.ReadWrite`, or the `Everything.ReadWrite` scope (permission). The security class parameter in the URL path corresponds to the same permission in the scope. That means if you are granted a privileged role, you can only call the privilege class URL.",
-                "operationId": "/API/Defend/User/:userId/Type/:securityClass/Delete",
+                "operationId": "/Api/Defend/User/:userId/Type/:securityClass/Delete",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -2556,7 +2556,7 @@
             },
             "get": {
                 "description": "Retrieves the specified managed user by its Entra ID User ID.\n\nThis endpoint requires the `User.Privileged.Read`, `User.Privileged.ReadWrite`, `User.Specialized.Read`, `User.Specialized.ReadWrite`, `User.Enterprise.ReadWrite`, `User.Enterprise.Read`, or the `Everything.ReadWrite` scope (permission). The security class parameter in the URL path corresponds to the same permission in the scope. That means if you are granted a privileged role, you can only call the privilege class URL.",
-                "operationId": "/API/Defend/User/:userId/Type/:securityClass/Get",
+                "operationId": "/Api/Defend/User/:userId/Type/:securityClass/Get",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -2570,7 +2570,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ManagedUser"
+                                    "$ref": "#/components/schemas/ManagedObject.User"
                                 }
                             }
                         },
@@ -2592,10 +2592,10 @@
                 ]
             }
         },
-        "/API/Defend/Marketplace/Type/{securityClass}/Offering/{offeringId}/": {
+        "/Api/Defend/Marketplace/Type/{securityClass}/Offering/{offeringId}/": {
             "post": {
                 "description": "Creates the offering with the requested settings. In the body payload, the `type` property in the `property` object is ignored. See the AVD example.\n\nThis endpoint requires the `Intermediary.Privileged.ReadWrite`, `Intermediary.Specialized.ReadWrite`, `Intermediary.Enterprise.ReadWrite`, or the `Everything.ReadWrite` scope (permission). The security class parameter in the URL path corresponds to the same permission in the scope. That means if you are granted a privileged role, you can only call the privilege class URL.",
-                "operationId": "/API/Defend/Marketplace/Type/:securityClass/Offering/:offeringId/Post",
+                "operationId": "/Api/Defend/Marketplace/Type/:securityClass/Offering/:offeringId/Post",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/securityClass"
@@ -2631,12 +2631,12 @@
                             "schema": {
                                 "allOf": [
                                     {
-                                        "$ref": "#/components/schemas/Intermediary"
+                                        "$ref": "#/components/schemas/ManagedObject.Intermediary"
                                     },
                                     {
                                         "properties": {
                                             "properties": {
-                                                "$ref": "#/components/schemas/Intermediary.AVD"
+                                                "$ref": "#/components/schemas/ManagedObject.AvdIntermediary"
                                             }
                                         },
                                         "type": "object"
@@ -2651,7 +2651,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Intermediary.AVD"
+                                    "$ref": "#/components/schemas/ManagedObject.AvdIntermediary"
                                 }
                             }
                         },
@@ -2697,12 +2697,8 @@
     ],
     "servers": [
         {
-            "description": "A secured connection to the app, only secured connections should be used for production.",
-            "url": "https://contoso.local:443/"
-        },
-        {
-            "description": "Used only for local dev, never host this app without network encryption.",
-            "url": "http://contoso.local:80/"
+            "description": "The service",
+            "url": "/"
         }
     ],
     "tags": [
