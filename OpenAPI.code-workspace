@@ -1,0 +1,68 @@
+{
+	"folders": [
+		{
+			"name": "API Specifications",
+			"path": "specs"
+		},
+		{
+			"name": "Data Gateway",
+			"path": "src/dataGateway"
+		},
+		{
+			"name": "SHIELD",
+			"path": "src/shield"
+		},
+		{
+			"name": "GitHub Actions",
+			"path": ".github/workflows"
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"node_modules": true
+		},
+		"cSpell.enabledFileTypes": {
+			"*": true
+		},
+		"editor.formatOnSave": true,
+		"editor.bracketPairColorization.enabled": true,
+		"typescript.format.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": true,
+		"typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
+		"typescript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": true,
+		"typescript.format.insertSpaceBeforeFunctionParenthesis": false,
+		"typescript.format.semicolons": "insert",
+		"typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": false,
+		"typescript.format.insertSpaceAfterTypeAssertion": true,
+		"typescript.implementationsCodeLens.enabled": true,
+		"typescript.inlayHints.enumMemberValues.enabled": true,
+		"typescript.preferences.quoteStyle": "single",
+		"javascript.preferences.quoteStyle": "single",
+		"js/ts.implicitProjectConfig.target": "ES2022",
+		"typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": true,
+		"search.exclude": {
+			"**/*.js": true,
+			"**/*.js.map": true
+		},
+		"files.insertFinalNewline": true,
+		"files.trimFinalNewlines": true,
+		"yaml.format.singleQuote": true,
+		"powershell.codeFormatting.useConstantStrings": true,
+		"typescript.tsdk": "node_modules\\typescript\\lib",
+		"github.copilot.editor.enableAutoCompletions": false,
+		"cSpell.words": [
+			"Entra",
+			"kiota",
+			"typia"
+		]
+	},
+	"extensions": {
+		"recommendations": [
+			"streetsidesoftware.code-spell-checker",
+			"dbaeumer.vscode-eslint",
+			"gruntfuggly.todo-tree",
+			"PKief.material-icon-theme",
+			"SocketSecurity.vscode-socket-security",
+			"42Crunch.vscode-openapi"
+		]
+	}
+}
