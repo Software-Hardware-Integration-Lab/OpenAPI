@@ -44,7 +44,7 @@ jobs:
         with:
           node-version: 22.x
           cache: 'npm'
-          cache-dependency-path: 'package-lock.json'
+          cache-dependency-path: ${{matrix.specifications.sdkPath}}/package-lock.json
 
       # Set up all of the supporting components for SDK generation
       - name: Initialize Kiota Binaries
