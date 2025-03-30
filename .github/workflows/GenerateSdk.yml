@@ -13,10 +13,10 @@ jobs:
       matrix:
         # Spec and SDK root locations
         specifications:
-          - SHIELD:
+          - name: SHIELD
             sdkPath: 'src/shield/TypeScript'
             specPath: 'spec/SHIELD.json'
-          - DataGateway:
+          - name: DataGateway
             sdkPath: 'src/dataGateway/TypeScript'
             specPath: 'spec/Data-Gateway.json'
 
@@ -77,14 +77,14 @@ jobs:
 
       # Create a ZIP archive of the server files to speed up the upload process
       - name: ZIP up SDK Files
-        run: zip -r sdk-${{matrix.specifications}}.zip .
+        run: zip -r sdk-${{matrix.specifications.names}}.zip .
         working-directory: ${{matrix.specifications.sdkPath}}/bin
 
       # Create an attestation for the compiled package and upload it to the internal system for health tracking
       - name: Attest Compiled Package
         uses: actions/attest-build-provenance@v2
         with:
-          subject-path: ${{matrix.specifications.sdkPath}}/bin/sdk-${{matrix.specifications}}.zip
+          subject-path: ${{matrix.specifications.sdkPath}}/bin/sdk-${{matrix.specifications.name}}.zip
 
       # Upload compiled zip file so that other execution sessions can use it
       - name: Upload Artifact for Deployment Job
@@ -92,8 +92,8 @@ jobs:
         with:
           compression-level: 9
           if-no-files-found: error
-          name: sdk-${{matrix.specifications}}
-          path: ${{matrix.specifications.sdkPath}}/bin/sdk-${{matrix.specifications}}.zip
+          name: sdk-${{matrix.specifications.name}}
+          path: ${{matrix.specifications.sdkPath}}/bin/sdk-${{matrix.specifications.name}}.zip
           retention-days: 1
 
   # Isolate publish privileges from the build step to reduce surface area for attack by ensuring only the publish tools have credential access
@@ -137,17 +137,17 @@ jobs:
       - name: Download Artifact From Build Job
         uses: actions/download-artifact@v4
         with:
-          name: sdk-${{matrix.specifications}}
+          name: sdk-${{matrix.specifications.name}}
 
       # Validate the attestation of the downloaded artifact to prevent tamper
       - name: Validate Attestation
         env:
           GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        run: gh attestation verify sdk-${{matrix.specifications}}.zip --repo Software-Hardware-Integration-Lab/OpenAPI --signer-workflow Software-Hardware-Integration-Lab/OpenAPI/.github/workflows/GenerateSdk.yml@refs/heads/main
+        run: gh attestation verify sdk-${{matrix.specifications.name}}.zip --repo Software-Hardware-Integration-Lab/OpenAPI --signer-workflow Software-Hardware-Integration-Lab/OpenAPI/.github/workflows/GenerateSdk.yml@refs/heads/main
 
       # Extract the zip file and remove the container
       - name: Unzip Artifact
-        run: unzip sdk-${{matrix.specifications}}.zip && rm sdk-${{matrix.specifications}}.zip
+        run: unzip sdk-${{matrix.specifications.name}}.zip && rm sdk-${{matrix.specifications.name}}.zip
 
       # Publish the artifact to NPM with attestation
       - name: Upload Package to NPM Registry
