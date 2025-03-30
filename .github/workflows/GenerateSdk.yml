@@ -48,6 +48,8 @@ jobs:
           node-version: 22.x
           cache: 'npm'
           cache-dependency-path: ${{matrix.specifications.sdkPath}}/package-lock.json
+          registry-url: https://registry.npmjs.org/
+          scope: shi-corp
 
       # Set up all of the supporting components for SDK generation
       - name: Initialize Kiota Binaries
