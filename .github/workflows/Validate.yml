@@ -28,7 +28,7 @@ jobs:
     - name: Setup Node.JS Environment
       uses: actions/setup-node@v4
       with:
-        node-version: 20.x
+        node-version: 22.x
 
     # Sets up OpenJDK on the build host
     - name: Set up Microsoft OpenJDK
@@ -44,6 +44,6 @@ jobs:
     # Run the validation of all Specification Files
     - name: Validate OpenAPI Specs
       run: |
-        for file in $(find . -path ./\.vscode -prune -name "*.json"); do
+        for file in $(find ./specs -name "*.json"); do
           openapi-generator-cli validate -i "$file"
         done
