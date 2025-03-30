@@ -24,7 +24,8 @@
   "author": "Elliot Huffman (elliot_huffman@shi.com)",
   "scripts": {
     "generate:Sdk": "kiota generate -l typescript -d ../../../specs/Data-Gateway.json -c DataGatewayClient -o ./sdk/ --exclude-backward-compatible",
-    "build:Prod": "tsc  --sourceMap false",
+    "prebuild:Prod": "tsc --sourceMap false --emitDeclarationOnly false",
+    "build:Prod": "tsc --sourceMap false --removeComments false",
     "prepare": "ts-patch install"
   },
   "devDependencies": {

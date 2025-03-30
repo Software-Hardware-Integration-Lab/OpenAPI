@@ -4,6 +4,9 @@ import { FetchRequestAdapter } from "@microsoft/kiota-http-fetchlibrary";
 import { createShieldClient } from "./sdk/shieldClient.js";
 import { assert, assertGuardEquals, tags } from 'typia';
 
+// Export all of the SDK's types
+export type * from './sdk/models/index.js';
+
 /**
  * Function that initializes the SHIELD SDK.
  * @param credential Configured authentication session from Entra ID.

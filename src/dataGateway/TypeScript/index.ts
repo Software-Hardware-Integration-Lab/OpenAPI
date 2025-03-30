@@ -3,6 +3,9 @@ import { AzureIdentityAuthenticationProvider } from "@microsoft/kiota-authentica
 import { FetchRequestAdapter } from "@microsoft/kiota-http-fetchlibrary";
 import { createDataGatewayClient } from "./sdk/dataGatewayClient.js";
 
+// Export all of the SDK's types
+export type * from './sdk/models/index.js';
+
 /**
  * Function that initializes the Data Gateway SDK.
  * @param credential Configured authentication session.

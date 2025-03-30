@@ -24,7 +24,8 @@
   "author": "Elliot Huffman (elliot_huffman@shi.com)",
   "scripts": {
     "build:Dev": "tsc",
-    "build:Prod": "tsc --sourceMap false",
+    "prebuild:Prod": "tsc --sourceMap false --emitDeclarationOnly false",
+    "build:Prod": "tsc --sourceMap false --emitDeclarationOnly false",
     "generate:Sdk": "kiota generate -l typescript -d ../../../specs/SHIELD.json -c ShieldClient -o ./sdk/ --exclude-backward-compatible",
     "prepare": "ts-patch install"
   },

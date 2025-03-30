@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "emitDeclarationOnly": true,
     "noImplicitAny": false,
     "outDir": "./bin",
     "plugins": [
