@@ -77,7 +77,7 @@ jobs:
 
       # Create a ZIP archive of the server files to speed up the upload process
       - name: ZIP up SDK Files
-        run: zip -r sdk-${{matrix.specifications.names}}.zip .
+        run: zip -r sdk-${{matrix.specifications.name}}.zip .
         working-directory: ${{matrix.specifications.sdkPath}}/bin
 
       # Create an attestation for the compiled package and upload it to the internal system for health tracking
