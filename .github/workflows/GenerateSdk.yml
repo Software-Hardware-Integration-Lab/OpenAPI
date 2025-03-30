@@ -137,17 +137,17 @@ jobs:
       - name: Download Artifact From Build Job
         uses: actions/download-artifact@v4
         with:
-          name: sdk-${{matrix.specifications.name}}
+          name: sdk-${{matrix.specifications}}
 
       # Validate the attestation of the downloaded artifact to prevent tamper
       - name: Validate Attestation
         env:
           GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        run: gh attestation verify sdk-${{matrix.specifications.name}}.zip --repo Software-Hardware-Integration-Lab/OpenAPI --signer-workflow Software-Hardware-Integration-Lab/OpenAPI/.github/workflows/GenerateSdk.yml@refs/heads/main
+        run: gh attestation verify sdk-${{matrix.specifications}}.zip --repo Software-Hardware-Integration-Lab/OpenAPI --signer-workflow Software-Hardware-Integration-Lab/OpenAPI/.github/workflows/GenerateSdk.yml@refs/heads/main
 
       # Extract the zip file and remove the container
       - name: Unzip Artifact
-        run: unzip sdk-${{matrix.specifications.name}}.zip && rm sdk-${{matrix.specifications.name}}.zip
+        run: unzip sdk-${{matrix.specifications}}.zip && rm sdk-${{matrix.specifications}}.zip
 
       # Publish the artifact to NPM with attestation
       - name: Upload Package to NPM Registry
