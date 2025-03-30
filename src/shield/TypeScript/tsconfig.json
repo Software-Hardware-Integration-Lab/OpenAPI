@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "noImplicitAny": false,
+    "outDir": "./bin",
     "plugins": [
       {
         "transform": "typia/lib/transform"
