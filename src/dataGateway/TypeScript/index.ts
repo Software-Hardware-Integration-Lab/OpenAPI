@@ -1,6 +1,7 @@
-import type { TokenCredential } from "@azure/core-auth";
 import { AzureIdentityAuthenticationProvider } from "@microsoft/kiota-authentication-azure";
 import { FetchRequestAdapter } from "@microsoft/kiota-http-fetchlibrary";
+import type { TokenCredential } from "@azure/core-auth";
+import { assert } from 'typia';
 import { createDataGatewayClient } from "./sdk/dataGatewayClient.js";
 
 // Export all of the SDK's types
@@ -11,7 +12,11 @@ export type * from './sdk/models/index.js';
  * @param credential Configured authentication session.
  * @returns Configured API client that is able to make requests against SHI Data Gateway.
  */
-export function dataGatewayClientFactory(credential: TokenCredential) {
+export default function dataGatewayClientFactory(credential: TokenCredential) {
+    // #region Input Validation
+    assert(credential);
+    // #endregion Input Validation
+
     /** List of hosts that are allowed when making API calls, this is used to prevent token leaks to threat actors. */
     const allowedHostList = new Set(['https://api.shilab.com']);
 

@@ -1,8 +1,8 @@
-import type { TokenCredential } from "@azure/core-auth";
+import { assert, assertGuardEquals, tags } from 'typia';
 import { AzureIdentityAuthenticationProvider } from "@microsoft/kiota-authentication-azure";
 import { FetchRequestAdapter } from "@microsoft/kiota-http-fetchlibrary";
+import type { TokenCredential } from "@azure/core-auth";
 import { createShieldClient } from "./sdk/shieldClient.js";
-import { assert, assertGuardEquals, tags } from 'typia';
 
 // Export all of the SDK's types
 export type * from './sdk/models/index.js';
@@ -12,7 +12,7 @@ export type * from './sdk/models/index.js';
  * @param credential Configured authentication session from Entra ID.
  * @returns Configured API client that is able to make requests against the specified SHIELD instance.
  */
-export function shieldClientFactory(credential: TokenCredential, baseUrl: string & tags.Format<'hostname'>) {
+export default function shieldClientFactory(credential: TokenCredential, baseUrl: string & tags.Format<'hostname'>) {
     // #region Input Validation
     assert(credential);
 
