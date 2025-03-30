@@ -26,6 +26,9 @@ jobs:
     # Operating system filter for the runners
     runs-on: ubuntu-latest
 
+    # Publish the package to NPM
+    environment: NPM
+
     # Sets the scopes available to the github_token injected to the GH Actions runner
     permissions:
       attestations: write
@@ -61,7 +64,7 @@ jobs:
         working-directory: ${{matrix.specifications.sdkPath}}
 
       # Generate the TypeScript SDK
-      - name: Update kiota clients in the repository
+      - name: Generate SDK Client Code via Kiota
         run: npm run-script generate:Sdk
         working-directory: ${{matrix.specifications.sdkPath}}
 
@@ -70,87 +73,9 @@ jobs:
         run: npm run-script build:Prod
         working-directory: ${{matrix.specifications.sdkPath}}
 
-      # Ensure all the supporting files are present in the correct directory before publishing them
-      - name: Prep Files for Publish
-        run: cp LICENSE README.md package.json bin/
-        working-directory: ${{matrix.specifications.sdkPath}}
-
-      # Create a ZIP archive of the server files to speed up the upload process
-      - name: ZIP up SDK Files
-        run: zip -r sdk-${{matrix.specifications.name}}.zip .
-        working-directory: ${{matrix.specifications.sdkPath}}/bin
-
-      # Create an attestation for the compiled package and upload it to the internal system for health tracking
-      - name: Attest Compiled Package
-        uses: actions/attest-build-provenance@v2
-        with:
-          subject-path: ${{matrix.specifications.sdkPath}}/bin/sdk-${{matrix.specifications.name}}.zip
-
-      # Upload compiled zip file so that other execution sessions can use it
-      - name: Upload Artifact for Deployment Job
-        uses: actions/upload-artifact@v4
-        with:
-          compression-level: 9
-          if-no-files-found: error
-          name: sdk-${{matrix.specifications.name}}
-          path: ${{matrix.specifications.sdkPath}}/bin/sdk-${{matrix.specifications.name}}.zip
-          retention-days: 1
-
-  # Isolate publish privileges from the build step to reduce surface area for attack by ensuring only the publish tools have credential access
-  TypeScript-Publish:
-    # Display name of the job
-    name: Publish TypeScript SDK
-
-    # Operating system filter for the runners
-    runs-on: ubuntu-latest
-
-    # Publish the package to NPM
-    environment: NPM
-
-    # Sets the scopes available to the github_token injected to the GH Actions runner
-    permissions:
-      attestations: write
-      contents: read
-      id-token: write
-
-    # Generate each SDK client in a separate build process to speed up execution and publishing
-    strategy:
-      matrix:
-        # Specification list
-        specifications: [SHIELD, DataGateway]
-
-    # Only publish the SDK if the build succeeds
-    needs:
-      - TypeScript-Build
-
-    # Set of steps required to generate the API client for TypeScript
-    steps:
-      # Set up NodeJS on the build host with caching support to optimize execution
-      - name: Set up Node.JS Runtime
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          registry-url: https://registry.npmjs.org/
-          scope: shi-corp
-
-      # Download the compiled server binary
-      - name: Download Artifact From Build Job
-        uses: actions/download-artifact@v4
-        with:
-          name: sdk-${{matrix.specifications}}
-
-      # Validate the attestation of the downloaded artifact to prevent tamper
-      - name: Validate Attestation
-        env:
-          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        run: gh attestation verify sdk-${{matrix.specifications}}.zip --repo Software-Hardware-Integration-Lab/OpenAPI --signer-workflow Software-Hardware-Integration-Lab/OpenAPI/.github/workflows/GenerateSdk.yml@refs/heads/main
-
-      # Extract the zip file and remove the container
-      - name: Unzip Artifact
-        run: unzip sdk-${{matrix.specifications}}.zip && rm sdk-${{matrix.specifications}}.zip
-
       # Publish the artifact to NPM with attestation
       - name: Upload Package to NPM Registry
         run: npm publish --access public --provenance
+        working-directory: ${{matrix.specifications.sdkPath}}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH }}
