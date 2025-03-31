@@ -75,8 +75,8 @@ jobs:
         run: npm run-script build:Prod
         working-directory: ${{matrix.specifications.sdkPath}}
 
-      # Log into the Azure fabric with the GitHub federated identity credential (using the OIDC token)
-      - name: Login to Azure
+      # Log into the Entra ID with the GitHub federated identity credential (using the OIDC token)
+      - name: Login to Entra ID
         uses: azure/login@v2
         with:
           enable-AzPSSession: true
