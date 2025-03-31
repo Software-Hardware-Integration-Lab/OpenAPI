@@ -29,7 +29,7 @@ export default function shieldClientFactory(credential: TokenCredential, baseUrl
     const shieldAdapter = new FetchRequestAdapter(authProvider);
 
     // Set the base URL to be what is provided, since the host name is unique every deployment
-    shieldAdapter.baseUrl = `https://${ baseUrl }`;
+    shieldAdapter.baseUrl = baseUrl.startsWith('localhost') ? `http://${ baseUrl }` : `https://${ baseUrl }`;
 
     /** Instance of the API client that can be used for SHIELD access. */
     return createShieldClient(shieldAdapter);
