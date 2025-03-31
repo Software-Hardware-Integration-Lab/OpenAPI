@@ -1,0 +1,43 @@
+{
+  "name": "@shi-corp/sdk-shield",
+  "version": "1.0.2",
+  "type": "module",
+  "main": "bin/index.js",
+  "description": "SDK client used to interface with the SHIELD application.",
+  "keywords": [
+    "OpenAPI",
+    "SHIELD",
+    "SDK",
+    "Automation",
+    "API",
+    "SHI"
+  ],
+  "homepage": "https://github.com/Software-Hardware-Integration-Lab/OpenAPI#readme",
+  "bugs": {
+    "url": "https://github.com/Software-Hardware-Integration-Lab/OpenAPI/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Software-Hardware-Integration-Lab/OpenAPI.git"
+  },
+  "license": "MIT",
+  "author": "Elliot Huffman (elliot_huffman@shi.com)",
+  "scripts": {
+    "build:Dev": "tsc",
+    "prebuild:Prod": "tsc --sourceMap false --emitDeclarationOnly false",
+    "build:Prod": "tsc --sourceMap false --removeComments false",
+    "generate:Sdk": "kiota generate -l typescript -d ../../../specs/SHIELD.json -c ShieldClient -o ./sdk/ --exclude-backward-compatible",
+    "prepare": "ts-patch install"
+  },
+  "devDependencies": {
+    "@azure/core-auth": "~1.9.0",
+    "@types/node": "~22.13.14",
+    "ts-patch": "~3.3.0",
+    "typescript": "~5.8.2"
+  },
+  "dependencies": {
+    "@microsoft/kiota-authentication-azure": "~1.0.0-preview.92",
+    "@microsoft/kiota-bundle": "~1.0.0-preview.92",
+    "typia": "~8.1.0"
+  }
+}

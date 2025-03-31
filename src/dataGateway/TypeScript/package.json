@@ -1,0 +1,42 @@
+{
+  "name": "@shi-corp/sdk-data-gateway",
+  "version": "1.0.2",
+  "type": "module",
+  "main": "bin/index.js",
+  "description": "SDK client used to interface with the SHI Data Gateway service.",
+  "keywords": [
+    "OpenAPI",
+    "Data Gateway",
+    "SDK",
+    "Automation",
+    "API",
+    "SHI"
+  ],
+  "homepage": "https://docs.shilab.com/",
+  "bugs": {
+    "url": "https://github.com/Software-Hardware-Integration-Lab/OpenAPI/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Software-Hardware-Integration-Lab/OpenAPI"
+  },
+  "license": "MIT",
+  "author": "Elliot Huffman (elliot_huffman@shi.com)",
+  "scripts": {
+    "generate:Sdk": "kiota generate -l typescript -d ../../../specs/Data-Gateway.json -c DataGatewayClient -o ./sdk/ --exclude-backward-compatible",
+    "prebuild:Prod": "tsc --sourceMap false --emitDeclarationOnly false",
+    "build:Prod": "tsc --sourceMap false --removeComments false",
+    "prepare": "ts-patch install"
+  },
+  "devDependencies": {
+    "@azure/core-auth": "~1.9.0",
+    "@types/node": "~22.13.14",
+    "ts-patch": "~3.3.0",
+    "typescript": "~5.8.2"
+  },
+  "dependencies": {
+    "@microsoft/kiota-authentication-azure": "~1.0.0-preview.92",
+    "@microsoft/kiota-bundle": "~1.0.0-preview.92",
+    "typia": "~8.1.0"
+  }
+}
