@@ -38,6 +38,6 @@
   "dependencies": {
     "@microsoft/kiota-authentication-azure": "~1.0.0-preview.92",
     "@microsoft/kiota-bundle": "~1.0.0-preview.92",
-    "typia": "~8.1.0"
+    "typia": "~8.1.1"
   }
 }
