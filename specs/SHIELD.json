@@ -1047,7 +1047,7 @@
     },
     "openapi": "3.0.0",
     "paths": {
-        "/Api/Core/SystemRequirements/": {
+        "/Api/Core/SystemRequirements": {
             "get": {
                 "description": "Provides a detailed breakdown of if the system requirements are being met for the various components of the SHIELD.",
                 "operationId": "/Api/Core/SystemRequirements/Get",
@@ -1070,7 +1070,7 @@
                 "summary": "Indicates if the System Requirements are met or not."
             }
         },
-        "/Api/Auth/Id/": {
+        "/Api/Auth/Id": {
             "get": {
                 "description": "Provides the Tenant ID and the Application ID of the service principal that access tokens need to be issued against. This is also useful for configuring public clients to be able to authenticate to for auth code flows.",
                 "operationId": "/Api/Auth/Id/Get",
@@ -1112,7 +1112,7 @@
                 "summary": "Retrieves the IDs required to authenticate."
             }
         },
-        "/Api/Auth/Authenticator/": {
+        "/Api/Auth/Authenticator": {
             "get": {
                 "summary": "Provides Attestation for Authenticator App",
                 "description": "Provides the attestation to the authenticator that this endpoint is authorized for receiving credentials from the authenticator.\n\nThis endpoint requires the `Authentication.Actions.Attest`, or the `Everything.ReadWrite` scope (permission).",
@@ -1136,7 +1136,7 @@
                 ]
             }
         },
-        "/Api/Auth/Authenticator/Cache/Status/": {
+        "/Api/Auth/Authenticator/Cache/Status": {
             "get": {
                 "summary": "Indicates if SHIELD is waiting for any credentials.",
                 "description": "Provides a breakdown view of if SHIELD is waiting for any specific type of credential or credentials.\n\nThis endpoint requires the `Authentication.Read`, `Authentication.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
@@ -1183,7 +1183,7 @@
                 ]
             }
         },
-        "/Api/Auth/Authenticator/Cache/SccAuth/": {
+        "/Api/Auth/Authenticator/Cache/SccAuth": {
             "post": {
                 "description": "Configure SHIELD to use the specific SCC Auth credentials from the authenticator app to run web requests on behalf of the end user.\n\nThis endpoint requires the `Authentication.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
                 "operationId": "/Api/Auth/Authenticator/Cache/SccAuth/Post",
@@ -1207,7 +1207,7 @@
                 ]
             }
         },
-        "/Api/Auth/Authenticator/Cache/AccessToken/": {
+        "/Api/Auth/Authenticator/Cache/AccessToken": {
             "post": {
                 "summary": "Provide Your SHIELD Authenticator Credentials - Access Token",
                 "description": "Configure SHIELD to use the specific Access Token credentials from the authenticator app to run web requests on behalf of the end user.\n\nThis endpoint requires the `Authentication.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
@@ -1245,7 +1245,7 @@
                 ]
             }
         },
-        "/Api/Update/": {
+        "/Api/Update": {
             "get": {
                 "summary": "Check if an Update Is Pending",
                 "description": "Provides the state of the update engine. Where `true` means there is an update detected and `false` means there isn't an update available. This endpoint is available to all authorization levels.",
@@ -1267,7 +1267,7 @@
                 ]
             }
         },
-        "/Api/Update/Check/": {
+        "/Api/Update/Check": {
             "get": {
                 "summary": "Check for a New Version",
                 "description": "Checks with data gateway and compares the reported version to the version that is locally installed. If there is a difference, a new update is marked as available. Always returns the latest version available on data gateway, even if that version is installed locally.\n\nThis endpoint requires the `Update.Read`, `Update.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
@@ -1296,7 +1296,7 @@
                 ]
             }
         },
-        "/Api/Update/Check/Channel/{Update Channel Name}/": {
+        "/Api/Update/Check/Channel/{Update Channel Name}": {
             "get": {
                 "summary": "Check for a New Version in Channel",
                 "description": "Checks with the SHI Data Gateway in the specified update channel and compares the reported version to the version that is locally installed. If there is a difference, a new update is marked as available. Always returns the latest version available on data gateway, even if that version is installed locally.\n\nThis endpoint requires the `Update.Read`, `Update.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
@@ -1330,7 +1330,7 @@
                 ]
             }
         },
-        "/Api/Update/Install/": {
+        "/Api/Update/Install": {
             "post": {
                 "summary": "Installs SHIELD Core Update",
                 "description": "Installs the latest version that is available from SHI Data Gateway. Even if that version is the same that is installed.\n\nThis endpoint requires the `Update.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
@@ -1345,7 +1345,7 @@
                 ]
             }
         },
-        "/Api/Update/Install/Channel/{Update Channel Name}/": {
+        "/Api/Update/Install/Channel/{Update Channel Name}": {
             "post": {
                 "summary": "Installs SHIELD Core Update from Channel",
                 "description": "Installs the latest version that is available from SHI Data Gateway in the specified channel. Even if that version is the same that is installed.\n\nThis endpoint requires the `Update.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
@@ -1365,7 +1365,7 @@
                 ]
             }
         },
-        "/Api/Update/Upload/": {
+        "/Api/Update/Upload": {
             "post": {
                 "summary": "Upload Custom Update Package",
                 "description": "THIS API SHOULD ONLY BE USED IF INSTRUCTED BY SHI EMPLOYEES!\n\nUploads the specified ZIP package, validates signature and installs it if it matches. This ignores version numbers and will allow you to install the same version again if necessary.\n\nThis endpoint requires the `Update.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
@@ -1390,7 +1390,7 @@
                 ]
             }
         },
-        "/Api/Discover/Status/": {
+        "/Api/Discover/Status": {
             "get": {
                 "summary": "State of the Discover Module.",
                 "description": "Provides a detailed breakdown of the current state of the discover module and it progress.\n\nThis endpoint requires the `Discover.Read`, or the `Everything.ReadWrite` scope (permission).",
@@ -1412,7 +1412,7 @@
                 ]
             }
         },
-        "/Api/Discover/Report/": {
+        "/Api/Discover/Report": {
             "get": {
                 "summary": "Start Discover's Report Generation",
                 "description": "Starts the Discover module's report collection engine to create a license report and upload it to the data gateway.\n\nThis endpoint requires the `Discover.Action.Run`, or the `Everything.ReadWrite` scope (permission).",
@@ -1430,7 +1430,7 @@
                 ]
             }
         },
-        "/Api/Discover/LicenseReport/Correlation/": {
+        "/Api/Discover/LicenseReport/Correlation": {
             "get": {
                 "description": "Retrieves the list of correlation records for the authenticated tenant. Correlation records store the metadata for a specific license report.\n\nThis endpoint requires the `Discover.Read`, or the `Everything.ReadWrite` scope (permission).",
                 "operationId": "/Api/Discover/LicenseReport/Correlation/Get",
@@ -1486,7 +1486,7 @@
                 "summary": "Retrieve the List of Correlation Records"
             }
         },
-        "/Api/Discover/LicenseReport/Correlation/{correlationId}/Data/": {
+        "/Api/Discover/LicenseReport/Correlation/{correlationId}/Data": {
             "get": {
                 "description": "Retrieves the full license report for the specified correlation ID in the authenticated tenant. The license report contains all of the license usage and compliance information with the required correlation data.\n\nThis endpoint requires the `Discover.Read`, or the `Everything.ReadWrite` scope (permission).",
                 "operationId": "/Api/Discover/LicenseReport/Correlation/:correlationId/Data/Get",
@@ -1578,7 +1578,7 @@
                 "summary": "Retrieve the Specified License Report"
             }
         },
-        "/Api/Deploy/": {
+        "/Api/Deploy": {
             "get": {
                 "description": "Has the core infrastructure engine check if the config engine can initialize properly.\n\nThis endpoint requires the `Deploy.Read`, `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
                 "operationId": "/Api/Deploy/Get",
@@ -1681,7 +1681,7 @@
                 "security": []
             }
         },
-        "/Api/Deploy/Version/": {
+        "/Api/Deploy/Version": {
             "get": {
                 "description": "Gets the version of the API server and the architecture version deployed as well as the supported version of the architecture spec from the server.\n\nThis endpoint requires the `Deploy.Read`, `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
                 "operationId": "/Api/Deploy/Version/Get",
@@ -1723,7 +1723,7 @@
                 ]
             }
         },
-        "/Api/Defend/Intermediary/Type/{securityClass}/Offering/8a921026-ec06-4e08-af19-8812e161e61f/": {
+        "/Api/Defend/Intermediary/Type/{securityClass}/Offering/8a921026-ec06-4e08-af19-8812e161e61f": {
             "get": {
                 "description": "Retrieves a list of all AVD intermediaries for the specified security class filter. Next links may be provided for pagination to allow for good performance on larger environments. If a nextLink is return, not all data was returned on this query and the next link can be sent back to the API to get the next page of data.\n\nThis endpoint requires the `Intermediary.Privileged.Read`, `Intermediary.Privileged.ReadWrite`, `Intermediary.Specialized.Read`, `Intermediary.Specialized.ReadWrite`, `Intermediary.Enterprise.ReadWrite`, `Intermediary.Enterprise.Read`, or the `Everything.ReadWrite` scope (permission). The security class parameter in the URL path corresponds to the same permission in the scope. That means if you are granted a privileged role, you can only call the privilege class URL.",
                 "operationId": "/Api/Defend/Intermediary/Type/:securityClass/Offering/AVD/Get",
@@ -1762,7 +1762,7 @@
                 ]
             }
         },
-        "/Api/Defend/Intermediary/{intermediaryId}/Type/{securityClass}/Offering/8a921026-ec06-4e08-af19-8812e161e61f/": {
+        "/Api/Defend/Intermediary/{intermediaryId}/Type/{securityClass}/Offering/8a921026-ec06-4e08-af19-8812e161e61f": {
             "delete": {
                 "description": "Deletes the specified intermediary (by the parent group's Entra ID Object ID) using the requested security class as a filter.\n\nThis endpoint requires the `Intermediary.Privileged.ReadWrite`, `Intermediary.Specialized.ReadWrite`, `Intermediary.Enterprise.ReadWrite`, or the `Everything.ReadWrite` scope (permission). The security class parameter in the URL path corresponds to the same permission in the scope. That means if you are granted a privileged role, you can only call the privilege class URL.",
                 "operationId": "/Api/Defend/Intermediary/:intermediaryId/Type/:securityClass/Offering/AVD/Delete",
@@ -1831,7 +1831,7 @@
                 ]
             }
         },
-        "/Api/Defend/Intermediary/{intermediaryId}/Type/{securityClass}/Offering/8a921026-ec06-4e08-af19-8812e161e61f/Assign/": {
+        "/Api/Defend/Intermediary/{intermediaryId}/Type/{securityClass}/Offering/8a921026-ec06-4e08-af19-8812e161e61f/Assign": {
             "delete": {
                 "description": "Removes the specified user(s) as identified by their Object ID from the AVD cluster and deletes their corresponding session host(s).\n\nThis endpoint requires the `Intermediary.Privileged.ReadWrite`, `Intermediary.Specialized.ReadWrite`, `Intermediary.Enterprise.ReadWrite`, or the `Everything.ReadWrite` scope (permission). The security class parameter in the URL path corresponds to the same permission in the scope. That means if you are granted a privileged role, you can only call the privilege class URL.",
                 "operationId": "/Api/Defend/Intermediary/:intermediaryId/Type/:securityClass/Offering/AVD/Assign/Delete",
@@ -2026,7 +2026,7 @@
                 ]
             }
         },
-        "/Api/Defend/Intermediary/{intermediaryId}/Type/{securityClass}/Offering/8a921026-ec06-4e08-af19-8812e161e61f/Assign/{userId}/": {
+        "/Api/Defend/Intermediary/{intermediaryId}/Type/{securityClass}/Offering/8a921026-ec06-4e08-af19-8812e161e61f/Assign/{userId}": {
             "get": {
                 "description": "Get the specified managed user's from the specified AVD intermediary assignment list.\n\nThis endpoint requires the `Intermediary.Privileged.Read`, `Intermediary.Privileged.ReadWrite`, `Intermediary.Specialized.Read`, `Intermediary.Specialized.ReadWrite`, `Intermediary.Enterprise.ReadWrite`, `Intermediary.Enterprise.Read`, or the `Everything.ReadWrite` scope (permission). The security class parameter in the URL path corresponds to the same permission in the scope. That means if you are granted a privileged role, you can only call the privilege class URL.",
                 "operationId": "/Api/Defend/Intermediary/:intermediaryId/Type/:securityClass/Offering/AVD/Assign/:userId/Get",
@@ -2068,7 +2068,7 @@
                 ]
             }
         },
-        "/Api/Defend/Device/{deviceId}/Type/Privileged/Assign/": {
+        "/Api/Defend/Device/{deviceId}/Type/Privileged/Assign": {
             "delete": {
                 "description": "Remove the specified user list from the device.\n\nThis endpoint requires the `Device.Privileged.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
                 "operationId": "/Api/Defend/Device/:deviceId/Type/Privileged/Assign/Delete",
@@ -2253,7 +2253,7 @@
                 ]
             }
         },
-        "/Api/Defend/Device/Type/{securityClass}/": {
+        "/Api/Defend/Device/Type/{securityClass}": {
             "get": {
                 "description": "Returns a list of all devices managed or unmanaged.\n\nThis endpoint requires the `Device.Privileged.Read`, `Device.Privileged.ReadWrite`, `Device.Specialized.Read`, `Device.Specialized.ReadWrite`, `Device.Enterprise.ReadWrite`, `Device.Enterprise.Read`, or the `Everything.ReadWrite` scope (permission). The security class parameter in the URL path corresponds to the same permission in the scope. That means if you are granted a privileged role, you can only call the privilege class URL. When reading the `unmanaged` objects, any security class permission can read them, no need for a specific `unmanaged` class assignment.",
                 "operationId": "/Api/Defend/Device/Type/:securityClass/Get",
@@ -2352,7 +2352,7 @@
                 ]
             }
         },
-        "/Api/Defend/Device/{deviceId}/Type/{securityClass}/": {
+        "/Api/Defend/Device/{deviceId}/Type/{securityClass}": {
             "delete": {
                 "description": "Removes the device from the management hierarchy, removes metadata tagging and issues the wipe command to the devices.\n\nThis endpoint requires the `Device.Privileged.ReadWrite`, `Device.Specialized.ReadWrite`, `Device.Enterprise.ReadWrite`, or the `Everything.ReadWrite` scope (permission). The security class parameter in the URL path corresponds to the same permission in the scope. That means if you are granted a privileged role, you can only call the privilege class URL.",
                 "operationId": "/Api/Defend/Device/:deviceId/Type/:securityClass/Delete",
@@ -2421,7 +2421,7 @@
                 ]
             }
         },
-        "/Api/Defend/User/Type/{securityClass}/": {
+        "/Api/Defend/User/Type/{securityClass}": {
             "get": {
                 "description": "Returns a list of all devices managed or unmanaged.\n\nThis endpoint requires the `User.Privileged.Read`, `User.Privileged.ReadWrite`, `User.Specialized.Read`, `User.Specialized.ReadWrite`, `User.Enterprise.ReadWrite`, `User.Enterprise.Read`, or the `Everything.ReadWrite` scope (permission). The security class parameter in the URL path corresponds to the same permission in the scope. That means if you are granted a privileged role, you can only call the privilege class URL. When reading the `unmanaged` objects, any security class permission can read them, no need for a specific `unmanaged` class assignment.",
                 "operationId": "/Api/Defend/User/Type/:securityClass/Get",
@@ -2523,7 +2523,7 @@
                 ]
             }
         },
-        "/Api/Defend/User/{userId}/Type/{securityClass}/": {
+        "/Api/Defend/User/{userId}/Type/{securityClass}": {
             "delete": {
                 "description": "Deletes the user account and removes the management artifacts.\n\nThis endpoint requires the `User.Privileged.ReadWrite`, `User.Specialized.ReadWrite`, `User.Enterprise.ReadWrite`, or the `Everything.ReadWrite` scope (permission). The security class parameter in the URL path corresponds to the same permission in the scope. That means if you are granted a privileged role, you can only call the privilege class URL.",
                 "operationId": "/Api/Defend/User/:userId/Type/:securityClass/Delete",
@@ -2592,7 +2592,7 @@
                 ]
             }
         },
-        "/Api/Defend/Marketplace/Type/{securityClass}/Offering/{offeringId}/": {
+        "/Api/Defend/Marketplace/Type/{securityClass}/Offering/{offeringId}": {
             "post": {
                 "description": "Creates the offering with the requested settings. In the body payload, the `type` property in the `property` object is ignored. See the AVD example.\n\nThis endpoint requires the `Intermediary.Privileged.ReadWrite`, `Intermediary.Specialized.ReadWrite`, `Intermediary.Enterprise.ReadWrite`, or the `Everything.ReadWrite` scope (permission). The security class parameter in the URL path corresponds to the same permission in the scope. That means if you are granted a privileged role, you can only call the privilege class URL.",
                 "operationId": "/Api/Defend/Marketplace/Type/:securityClass/Offering/:offeringId/Post",
@@ -2671,22 +2671,6 @@
                 "tags": [
                     "Marketplace"
                 ]
-            }
-        },
-        "/Docs": {
-            "get": {
-                "description": "Runs the Swagger UI render to render the OpenAPI spec that you are viewing now. This is only available in debug mode. This route will return a 404 in production mode as the route never gets initialized.",
-                "operationId": "/Docs/Get",
-                "responses": {
-                    "200": {
-                        "description": "Returns the HTML for Swagger UI renderer's output"
-                    }
-                },
-                "summary": "Render a Swagger UI",
-                "tags": [
-                    "Debug Mode"
-                ],
-                "security": []
             }
         }
     },
