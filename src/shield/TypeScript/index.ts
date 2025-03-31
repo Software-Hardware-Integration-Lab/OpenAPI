@@ -11,20 +11,23 @@ export type * from './sdk/models/index.js';
  * Function that initializes the SHIELD SDK.
  * @param credential Configured authentication session from Entra ID.
  * @param baseUrl Root of the URL that should have endpoints appended to it by the query building system.
+ * @param scopeList Where each array item is a different Entra ID standard scope to request on token retrieval. E.g. `['313f3894-325a-4aae-ba2b-bbdfdc1f063b/.default']`
  * @returns Configured API client that is able to make requests against the specified SHIELD instance.
  */
-export function shieldClientFactory(credential: TokenCredential, baseUrl: URL) {
+export function shieldClientFactory(credential: TokenCredential, baseUrl: URL, scopeList: string[]) {
     // #region Input Validation
     assert(credential);
 
     assertGuardEquals(baseUrl);
+
+    assertGuardEquals(scopeList);
     // #endregion Input Validation
 
     /** List of hosts that are allowed when making API calls, this is used to prevent token leaks to threat actors. */
     const allowedHostList = new Set([baseUrl.host]);
 
     /** Authentication system that will be used to configure the SDK client. */
-    const authProvider = new AzureIdentityAuthenticationProvider(credential, void 0, void 0, allowedHostList);
+    const authProvider = new AzureIdentityAuthenticationProvider(credential, scopeList, void 0, allowedHostList);
 
     /** Instance of the SHIELD SDK client initialization configuration. */
     const shieldAdapter = new FetchRequestAdapter(authProvider);
