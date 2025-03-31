@@ -13,7 +13,7 @@ export type * from './sdk/models/index.js';
  * @param baseUrl Root of the URL that should have endpoints appended to it by the query building system.
  * @returns Configured API client that is able to make requests against SHI Data Gateway.
  */
-export default function dataGatewayClientFactory(credential: TokenCredential, baseUrl?: URL) {
+export function dataGatewayClientFactory(credential: TokenCredential, baseUrl?: URL) {
     // #region Input Validation
     assert(credential);
 
