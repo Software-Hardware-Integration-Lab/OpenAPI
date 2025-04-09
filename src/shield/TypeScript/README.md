@@ -1,4 +1,4 @@
-# SHI Data Gateway - TypeScript SDK
+# SHIELD - TypeScript SDK
 
 This SDK provides a convenient TypeScript client for interacting with the SHI SHIELD service. It is automatically generated from the OpenAPI specification located at [`SHIELD.json`](../../../specs/SHIELD.json) using [Kiota](https://github.com/microsoft/kiota).
 
@@ -20,14 +20,18 @@ Here's a basic example of how to use the SDK:
 import { DefaultAzureCredential } from '@azure/identity'
 import { shieldClientFactory } from '@shi-corp/sdk-shield';
 
-/** Authentication session used to authenticate to the SHI Data Gateway. */
+/** Authentication session used to authenticate to SHIELD. */
 const credential = new DefaultAzureCredential();
 
-/** Base URL for your SHIELD instance. No protocol specifier or trailing slash! */
-const baseUrl = 'shield.example.com';
+/** Base URL for your SHIELD instance. Protocol specifier (`http`/`https`) is required, even for localhost. */
+const baseUrl = new URL('https://shield.example.com');
 
-/** Configured client for the data gateway that can make authenticated web requests against SDG. */
-const shieldClient = shieldClientFactory(credential, baseUrl);
+/**
+ * Configured client for SHIELD that can make authenticated web requests against SDG.
+ *
+ * The third param, the scope is the `Application ID` of the `SHIELD - End User Login` app registration. This can also be found on SHIELD's `/Api/Auth/Id` endpoint.
+ */
+const shieldClient = shieldClientFactory(credential, baseUrl, ['b9689d4e-0036-4f2f-8430-07adedb9ae7c/.default']);
 
 /** Flag that indicates if discover is currently running (`true`) or not (`false`). */
 const results = await shieldClient.api.discover.status.get();
@@ -36,6 +40,32 @@ const results = await shieldClient.api.discover.status.get();
 if (results?.running === true) {
     // Do something
 }
+```
+
+### Advanced Usage
+
+You can optionally configure the SDK client with a custom base URL, including support for it being nested deep in a L7 load balancer:
+
+```TypeScript
+/** Custom host and endpoint base to as an example for something behind a layer 7 load balancer, E.g. Azure App Gateway or Azure API Gateway. If in debug mode, run against localhost. */
+const customBaseUrl = debugMode ? new URL('http://localhost:3000') : new URL('https://custom-host.example.com/Ballance/Instance1/');
+
+/** Configured instance of the SHIELD client. */
+const customConfiguredClient = shieldClientFactory(credential, customBaseUrl);
+```
+
+and/or scope (permission) list:
+
+```TypeScript
+/**
+ * `.default` and explicit permissions can't exist in the same custom scope list at the same time, Entra ID doesn't support this.
+ *
+ * If not providing the `.default` scope, you can have any number of scopes (permissions) listed in different array indexes.
+ */
+const customScopes = ['your-custom-scope/something.read.all', 'your-custom-scope/everything.readwrite.all'];
+
+// Initialize the SDK client with custom configuration.
+const customConfiguredClient = shieldClientFactory(credential, void 0, customScopes);
 ```
 
 ## Project Structure
@@ -57,7 +87,7 @@ if (results?.running === true) {
 To regenerate the SDK from the OpenAPI specification, run:
 
 ```bash
-npm run generate:Sdk
+npm run-script generate:Sdk
 ```
 
 ### Building the SDK
@@ -65,7 +95,7 @@ npm run generate:Sdk
 To build the SDK for production, run:
 
 ```bash
-npm run build:Prod
+npm run-script build:Prod
 ```
 
 ## License

@@ -3,6 +3,7 @@
         "Entra",
         "Lockdown",
         "openapi",
+        "readwrite",
         "SSPR"
     ],
     "github.copilot.editor.enableAutoCompletions": false
