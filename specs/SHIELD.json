@@ -123,6 +123,20 @@
                     "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
                     "type": "string"
                 }
+            },
+            "configId": {
+                "description": "Reference of the configuration property in the architecture template used during deploy.",
+                "in": "path",
+                "name": "configId",
+                "required": true,
+                "schema": {
+                    "type": "string",
+                    "format": "uuid",
+                    "maxLength": 36,
+                    "minLength": 36,
+                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                    "example": "42ff150d-2ff0-4b38-849e-fe6aa5eedb49"
+                }
             }
         },
         "responses": {
@@ -1021,6 +1035,110 @@
                 "example": "Privileged",
                 "title": "Type of security class the object(s) belongs to",
                 "type": "string"
+            },
+            "Shield.Deploy.Delta.Response": {
+                "title": "SHIELD - Deploy - Delta - Response",
+                "description": "Object returned as a result of query for cached data or re-evaluation operation.",
+                "type": "object",
+                "properties": {
+                    "invalid": {
+                        "additionalProperties": {
+                            "description": "String with details of the error response.",
+                            "type": "string"
+                        },
+                        "description": "Collection of the configuration items where request for live data responded with error.",
+                        "type": "object"
+                    },
+                    "lastRunTimestamp": {
+                        "description": "Point in time expressed in ISO 8601 format when the evaluation results were generated last. ",
+                        "example": "2025-03-25T14:28:54Z",
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "missing": {
+                        "additionalProperties": {
+                            "description": "String indicating name and description of the configuration item.",
+                            "type": "string"
+                        },
+                        "description": "Collection of the configuration items that are present in the template but do not have reference to indicate they were deployed.",
+                        "type": "object"
+                    },
+                    "results": {
+                        "additionalProperties": {
+                            "items": {
+                                "properties": {
+                                    "actions": {
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "description": "List of operations available to be performed on the entity.",
+                                        "type": "array",
+                                        "minItems": 1
+                                    },
+                                    "message": {
+                                        "description": "Detailed information about the discrepancy for the entity.",
+                                        "type": "string"
+                                    },
+                                    "path": {
+                                        "description": "Location in the object where evaluated property encountered an error.",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [ "actions", "message", "path" ]
+                            },
+                            "type": "array"
+                        },
+                        "description": "Collection of the configuration items where discrepancies where found.",
+                        "type": "object"
+                    }
+                },
+                "required": [ "invalid", "lastRunTimestamp", "missing", "results"],
+                "example": {
+                    "invalid": {
+                        "a14402b8-98c5-41e3-ba99-e5e1a536f68d": "Setting ID '58246273-d366-40d5-ac3d-daacb8bc2655' - Item not found.",
+                        "9af9209d-d191-4b42-9f65-dfd8b7882bba": "Setting ID 'f6f5d07b-230c-4818-93de-e407b8ca9537' - Insufficient access to view this data."
+                    },
+                    "lastRunTimestamp": "2025-03-25T14:28:54Z",
+                    "missing": {
+                        "78afd77c-c2a6-4328-9c61-b9fd44114823": "Microsoft.Policies.PowerToysMicrosoft.Policies.PowerToys - Version 0.86.0"
+                    },
+                    "results": {
+                        "c47c20bd-46fa-4dfe-b971-3e5b1ce34a86": [
+                            {
+                                "actions": [ "ignore", "restore" ],
+                                "message": "Value mismatch for property 'displayName' with current value being 'Audit Platform and Configuration Updates2'",
+                                "path": "displayName"
+                            },
+                            {
+                                "actions": [ "ignore" ],
+                                "message": "Expected object at level 'groupPolicyUploadedLanguageFiles', but encountered 'Array'",
+                                "path": "groupPolicyUploadedLanguageFiles"
+                            }
+                        ],
+                        "4b26b6f6-9cb3-4384-bd1e-6d298455c2c4": [
+                            {
+                                "actions": [ "restore" ],
+                                "message": "Array value at level 'roleScopeTagIds/1' is not found in the returned value",
+                                "path": "roleScopeTagIds/1"
+                            }
+                        ]
+                    }
+                }
+            },
+            "Shield.Deploy.Delta.Action": {
+                "title": "SHIELD - Deploy - Delta - Action",
+                "description": "Payload expected for various operations related to Delta Engine",
+                "type": "object",
+                "properties": {
+                    "path": {
+                        "description": "Location of the item in the object structure of the architecture reference template flattened for predictable navigation.",
+                        "type": "string",
+                        "example": "/roleScopeTagIds"
+                    }
+                },
+                "required": [ "path" ]
             }
         },
         "securitySchemes": {
@@ -1067,7 +1185,7 @@
                     "Core"
                 ],
                 "security": [],
-                "summary": "Indicates if the System Requirements are met or not."
+                "summary": "Indicates if the System Requirements Are Met or Not"
             }
         },
         "/Api/Auth/Id": {
@@ -1109,7 +1227,7 @@
                     "Authentication"
                 ],
                 "security": [],
-                "summary": "Retrieves the IDs required to authenticate."
+                "summary": "Retrieves the IDs Required to Authenticate"
             }
         },
         "/Api/Auth/Authenticator": {
@@ -1138,7 +1256,7 @@
         },
         "/Api/Auth/Authenticator/Cache/Status": {
             "get": {
-                "summary": "Indicates if SHIELD is waiting for any credentials.",
+                "summary": "Indicates if SHIELD Is Waiting for Any Credentials",
                 "description": "Provides a breakdown view of if SHIELD is waiting for any specific type of credential or credentials.\n\nThis endpoint requires the `Authentication.Read`, `Authentication.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
                 "operationId": "/Api/Auth/Authenticator/Cache/Status/Get",
                 "responses": {
@@ -1201,7 +1319,7 @@
                         "description": "Credential was successfully stored"
                     }
                 },
-                "summary": "Provide Your SHIELD Authenticator Credentials - SCC Auth",
+                "summary": "Provide Your SHIELD Authenticator Credentials - Scc Auth",
                 "tags": [
                     "Authentication"
                 ]
@@ -1247,7 +1365,7 @@
         },
         "/Api/Update": {
             "get": {
-                "summary": "Check if an Update Is Pending",
+                "summary": "Checks if an Update Is Pending",
                 "description": "Provides the state of the update engine. Where `true` means there is an update detected and `false` means there isn't an update available. This endpoint is available to all authorization levels.",
                 "operationId": "/Api/Update/Get",
                 "responses": {
@@ -1269,7 +1387,7 @@
         },
         "/Api/Update/Check": {
             "get": {
-                "summary": "Check for a New Version",
+                "summary": "Checks for a New Version",
                 "description": "Checks with data gateway and compares the reported version to the version that is locally installed. If there is a difference, a new update is marked as available. Always returns the latest version available on data gateway, even if that version is installed locally.\n\nThis endpoint requires the `Update.Read`, `Update.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
                 "operationId": "/Api/Update/Check/Get",
                 "responses": {
@@ -1347,7 +1465,7 @@
         },
         "/Api/Update/Install/Channel/{Update Channel Name}": {
             "post": {
-                "summary": "Installs SHIELD Core Update from Channel",
+                "summary": "Installs SHIELD Core Update From Channel",
                 "description": "Installs the latest version that is available from SHI Data Gateway in the specified channel. Even if that version is the same that is installed.\n\nThis endpoint requires the `Update.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
                 "operationId": "/Api/Update/Install/Channel/UpdateChannelName/Post",
                 "parameters": [
@@ -1392,7 +1510,7 @@
         },
         "/Api/Discover/Status": {
             "get": {
-                "summary": "State of the Discover Module.",
+                "summary": "State of the Discover Module",
                 "description": "Provides a detailed breakdown of the current state of the discover module and it progress.\n\nThis endpoint requires the `Discover.Read`, or the `Everything.ReadWrite` scope (permission).",
                 "operationId": "/Api/Discover/Status/Get",
                 "responses": {
@@ -1609,7 +1727,7 @@
                         "$ref": "#/components/responses/401"
                     }
                 },
-                "summary": "Get the current status of the infrastructure deployment",
+                "summary": "Get the Current Status of the Infrastructure Deployment",
                 "tags": [
                     "Infrastructure Deployment"
                 ]
@@ -1674,11 +1792,189 @@
                         "$ref": "#/components/responses/401"
                     }
                 },
-                "summary": "Deploy the core infrastructure architecture specification",
+                "summary": "Deploy the Core Infrastructure Architecture Specification",
                 "tags": [
                     "Infrastructure Deployment"
                 ],
                 "security": []
+            }
+        },
+        "/Api/Deploy/Delta": {
+            "get": {
+                "summary": "Retrieves Cached Evaluation Results",
+                "description": "Retrieves cached results of the comparison between configuration templates and live data to find discrepancies to be addressed. Results split into several categories and include timestamp when the evaluation was performed.\n\nThis endpoint requires the `Deploy.Read`, or `Deploy.ReadWrite` scope (permission).",
+                "operationId": "/API/Deploy/Delta/Get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Shield.Deploy.Delta.Response"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "Delta"
+                ]
+            }
+        },
+        "/Api/Deploy/Delta/Check": {
+            "post": {
+                "summary": "Performs Evaluation and Return Results",
+                "description": "Initiates evaluation process to calculate and return the results of the comparison between configuration templates and live data to find discrepancies to be addressed. Results split into several categories and include timestamp when the evaluation was performed.\n\nThis endpoint requires the `Deploy.ReadWrite` scope (permission).",
+                "operationId": "/API/Deploy/Delta/Check/Post",
+                "requestBody": {
+                    "description": "No payload is expected or needed for this operation",
+                    "content": {
+                        "application/json": {}
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Shield.Deploy.Delta.Response"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "Delta"
+                ]
+            }
+        },
+        "/Api/Deploy/Delta/Restore/{configId}": {
+            "patch": {
+                "summary": "Restores the Intended Structure",
+                "description": "Applies a change to restore configuration item or its property to the value from the template.\n\nThis endpoint requires the `Deploy.ReadWrite` scope (permission).",
+                "operationId": "/API/Deploy/Delta/Restore/:configId/Patch",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/configId"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Shield.Deploy.Delta.Action"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204":{
+                        "description": "Restoration of configuration item or its property is successful"
+                    },
+                    "400": {
+                        "description": "The body does not match expected format!"
+                    }
+                },
+                "tags": [
+                    "Delta"
+                ]
+            }
+        },
+        "/Api/Deploy/Delta/Skip": {
+            "get": {
+                "summary": "Retrieves List of Existing Override Rules",
+                "description": "Retrieves the details of override property in the Settings Engine and returns list grouped by architecture reference.\n\nThis endpoint requires `Deploy.Read`, or `Deploy.ReadWrite` scope (permission).",
+                "operationId": "/API/Deploy/Delta/Skip/Get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "description": "Flat path representing entire item or specific nested property in the architecture configuration template item."
+                                        }
+                                    },
+                                    "description": "Collection of object with UUID string as property name and array of strings as value.",
+                                    "example": {
+                                        "f47ac10b-58cc-4372-a567-0e02b2c3d479": ["/"],
+                                        "9c858901-8a57-4791-81fe-4c455b099bc9": ["/description", "/name"]
+                                    }
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "Delta"
+                ]
+            }
+        },
+        "/Api/Deploy/Delta/Skip/{configId}": {
+            "post": {
+                "summary": "Records Intention to Bypass Evaluation",
+                "description": "Stores the reference to the entity to be skipped during the evaluation process. Could be entire configuration item or a specific property.\n\nThis endpoint requires the `Deploy.ReadWrite` scope (permission).",
+                "operationId": "/API/Deploy/Delta/Skip/:configId/Post",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/configId"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Shield.Deploy.Delta.Action"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204":{
+                        "description": "Recorded successfully"
+                    },
+                    "400": {
+                        "description": "The body does not match expected format!"
+                    }
+                },
+                "tags": [
+                    "Delta"
+                ]
+            },
+            "delete": {
+                "summary": "Removes entry that allowed to bypass evaluation",
+                "description": "Deletes the reference to the entity so that evaluation process does not skip over it.\n\nThis endpoint requires the `Deploy.ReadWrite` scope (permission).",
+                "operationId": "/API/Deploy/Delta/Skip/:configId/Delete",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/configId"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Shield.Deploy.Delta.Action"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204":{
+                        "description": "Record has been removed successfully"
+                    },
+                    "400": {
+                        "description": "Required fields are not found among query parameters!"
+                    }
+                },
+                "tags": [
+                    "Delta"
+                ]
             }
         },
         "/Api/Deploy/Version": {
@@ -1717,7 +2013,7 @@
                         "$ref": "#/components/responses/401"
                     }
                 },
-                "summary": "Gets the version of SHIELDs components",
+                "summary": "Gets the Version of SHIELDs Components",
                 "tags": [
                     "Infrastructure Deployment"
                 ]
@@ -1756,7 +2052,7 @@
                         "$ref": "#/components/responses/525"
                     }
                 },
-                "summary": "Retrieves all AVD Intermediary Instances",
+                "summary": "Retrieves All Avd Intermediary Instances",
                 "tags": [
                     "Intermediary"
                 ]
@@ -1898,7 +2194,7 @@
                         "$ref": "#/components/responses/525"
                     }
                 },
-                "summary": "Removes the assignment of the specified users",
+                "summary": "Removes the Assignment of the Specified Users",
                 "tags": [
                     "Intermediary"
                 ]
@@ -1938,7 +2234,7 @@
                         "$ref": "#/components/responses/525"
                     }
                 },
-                "summary": "List all assigned users (paginated)",
+                "summary": "List All Assigned Users (Paginated)",
                 "tags": [
                     "Intermediary"
                 ]
@@ -2020,7 +2316,7 @@
                         "$ref": "#/components/responses/525"
                     }
                 },
-                "summary": "Assigns the list of specified users",
+                "summary": "Assigns the List of Specified Users",
                 "tags": [
                     "Intermediary"
                 ]
@@ -2062,7 +2358,7 @@
                         "$ref": "#/components/responses/525"
                     }
                 },
-                "summary": "Get a specific assigned user",
+                "summary": "Get a Specific Assigned User",
                 "tags": [
                     "Intermediary"
                 ]
@@ -2725,6 +3021,10 @@
         {
             "description": "WARNING AUTHENTICATION IS DISABLED WHEN DEBUG MODE IS ENABLED!!! Endpoints that are exposed only in debug mode. You can use these to see as the app sees.",
             "name": "Debug Mode"
+        },
+        {
+            "description": "Manages the data and processes involved in identifying discrepancies between the desired architecture template and the deployed infrastructure outcomes.",
+            "name": "Delta"
         }
     ]
 }
