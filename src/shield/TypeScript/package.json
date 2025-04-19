@@ -1,6 +1,6 @@
 {
   "name": "@shi-corp/sdk-shield",
-  "version": "1.0.5",
+  "version": "3.0.0",
   "type": "module",
   "main": "bin/index.js",
   "description": "SDK client used to interface with the SHIELD application.",
