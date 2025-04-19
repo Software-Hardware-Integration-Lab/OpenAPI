@@ -1,6 +1,6 @@
 {
   "name": "@shi-corp/sdk-shield",
-  "version": "1.0.5",
+  "version": "3.0.0",
   "type": "module",
   "main": "bin/index.js",
   "description": "SDK client used to interface with the SHIELD application.",
@@ -31,13 +31,13 @@
   },
   "devDependencies": {
     "@azure/core-auth": "~1.9.0",
-    "@types/node": "~22.13.14",
+    "@types/node": "~22.14.1",
     "ts-patch": "~3.3.0",
-    "typescript": "~5.8.2"
+    "typescript": "~5.8.3"
   },
   "dependencies": {
-    "@microsoft/kiota-authentication-azure": "~1.0.0-preview.92",
-    "@microsoft/kiota-bundle": "~1.0.0-preview.92",
-    "typia": "~8.1.1"
+    "@microsoft/kiota-authentication-azure": "~1.0.0-preview.93",
+    "@microsoft/kiota-bundle": "~1.0.0-preview.93",
+    "typia": "~9.1.1"
   }
 }
