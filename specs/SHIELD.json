@@ -517,7 +517,7 @@
                 ],
                 "description": "Collection of principals that have had their in-use licenses and assigned licenses. Where the key is the principal ID and the value is the insights.",
                 "example": {
-                    "aAssignedLicense": {
+                    "assignedLicense": {
                         "eec0eb4f-6444-4f95-aba0-50c24d67f998": null,
                         "41781fb2-bc02-4b7c-bd55-b576c07bb09d": null,
                         "7159f980-6f83-4b67-bf41-e172b3ae1352": null
