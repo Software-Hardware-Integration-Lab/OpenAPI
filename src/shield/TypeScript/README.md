@@ -1,6 +1,6 @@
 # SHIELD - TypeScript SDK
 
-This SDK provides a convenient TypeScript client for interacting with the SHI SHIELD service. It is automatically generated from the OpenAPI specification located at [`SHIELD.json`](../../../specs/SHIELD.json) using [Kiota](https://github.com/microsoft/kiota).
+This SDK provides a convenient TypeScript client for interacting with the SHI SHIELD service. It is automatically generated from the OpenAPI specification located at [`SHIELD.json`](https://github.com/Software-Hardware-Integration-Lab/OpenAPI/blob/main/specs/SHIELD.json) using [Kiota](https://github.com/microsoft/kiota).
 
 All typing data is included in the package.
 
