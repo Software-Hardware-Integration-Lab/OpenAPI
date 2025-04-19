@@ -1046,7 +1046,7 @@
         },
         "description": "Deprive your threats of practical significance. Deploy the Securing Privilege Access architecture. All in a few seconds.",
         "title": "SHI Environment Lockdown and Defense",
-        "version": "appVersionFromSettingsEngine"
+        "version": "3.0.0"
     },
     "openapi": "3.0.0",
     "paths": {
