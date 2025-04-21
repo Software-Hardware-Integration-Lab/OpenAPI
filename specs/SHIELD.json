@@ -421,7 +421,7 @@
                     "updatedAt": "2024-08-01T21:13:12.821Z"
                 },
                 "properties": {
-                    "aditTenantAccount": {
+                    "auditTenantAccount": {
                         "description": "The user account used to retrieve the license information in the tenant being audited.",
                         "example": "admin-user@example.com",
                         "format": "email",
