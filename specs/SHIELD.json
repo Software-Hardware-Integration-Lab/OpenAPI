@@ -257,7 +257,7 @@
                     },
                     "defender": {
                         "$ref": "#/components/schemas/Authenticator.Container.SccAuthCredentials.CredentialContainer"
-                    }
+                    },
                     "security": {
                         "$ref": "#/components/schemas/Authenticator.Container.SccAuthCredentials.CredentialContainer"
                     },
