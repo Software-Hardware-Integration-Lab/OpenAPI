@@ -29,6 +29,9 @@ jobs:
     # Publish the package to NPM
     environment: NPM
 
+    # Allow single failures for SDK publish, e.g. SDG fail due to not getting an update but SHIELD goes through
+    continue-on-error: true
+
     # Sets the scopes available to the github_token injected to the GH Actions runner
     permissions:
       attestations: write
