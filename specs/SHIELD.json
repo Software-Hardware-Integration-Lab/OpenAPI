@@ -1123,7 +1123,7 @@
                 "responses": {
                     "200": {
                         "content": {
-                            "application/json": {
+                            "text/plain": {
                                 "schema": {
                                     "description": "Access token that SHIELD uses to prove it is a valid recipient of credentials.",
                                     "type": "string",
