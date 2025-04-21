@@ -238,7 +238,7 @@
                     "audience"
                 ]
             },
-            "Authenticator.Container.Credentials": {
+            "Authenticator.Container.SccAuthCredentials": {
                 "title": "SHIELD - Authenticator - SCC Auth",
                 "description": "SHIELD - Defender, and Purview portal Container Credentials",
                 "type": "object",
@@ -255,24 +255,23 @@
                         "type": "string",
                         "format": "date-time"
                     },
+                    "defender": {
+                        "$ref": "#/components/schemas/Authenticator.Container.SccAuthCredentials.CredentialContainer"
+                    }
                     "security": {
-                        "$ref": "#/components/schemas/Authenticator.Container.Credentials.SccAuth"
-                    },
-                    "compliance": {
-                        "$ref": "#/components/schemas/Authenticator.Container.Credentials.SccAuth"
+                        "$ref": "#/components/schemas/Authenticator.Container.SccAuthCredentials.CredentialContainer"
                     },
                     "purview": {
-                        "$ref": "#/components/schemas/Authenticator.Container.Credentials.SccAuth"
+                        "$ref": "#/components/schemas/Authenticator.Container.SccAuthCredentials.CredentialContainer"
                     }
                 },
                 "required": [
                     "authenticatedUpn",
                     "security",
-                    "compliance",
                     "purview"
                 ]
             },
-            "Authenticator.Container.Credentials.SccAuth": {
+            "Authenticator.Container.SccAuthCredentials.CredentialContainer": {
                 "title": "SHIELD - Authenticator - SCC Auth - Credential Container",
                 "description": "Container for the credentials for a single SccAuth authenticated site.",
                 "properties": {
@@ -1046,7 +1045,7 @@
         },
         "description": "Deprive your threats of practical significance. Deploy the Securing Privilege Access architecture. All in a few seconds.",
         "title": "SHI Environment Lockdown and Defense",
-        "version": "3.0.0"
+        "version": "3.0.1"
     },
     "openapi": "3.0.0",
     "paths": {
