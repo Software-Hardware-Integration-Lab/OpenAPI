@@ -1193,7 +1193,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Authenticator.Container.Credentials"
+                                "$ref": "#/components/schemas/Authenticator.Container.SccAuthCredentials"
                             }
                         }
                     }
