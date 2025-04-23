@@ -170,27 +170,27 @@
                 "title": "Core - System Requirements",
                 "description": "Collection of indicators that notify the caller if the system requirements have been met for various sub components to operate.",
                 "properties": {
-                    "AzurePermissions": {
+                    "azurePermissions": {
                         "description": "Flag that indicates if the required Azure RBAC assignment(s) are present or not.",
                         "type": "boolean",
                         "example": true
                     },
-                    "DefendEntitlement": {
+                    "defendEntitlement": {
                         "description": "Flag that indicates if the required defend licenses are present or not.",
                         "type": "boolean",
                         "example": false
                     },
-                    "DiscoverEntitlement": {
+                    "discoverEntitlement": {
                         "description": "Flag that indicates if the required discover licenses are present or not.",
                         "type": "boolean",
                         "example": true
                     },
-                    "EntraPermissions": {
+                    "entraPermissions": {
                         "description": "Flag that indicates if the required Entra ID Role assignment(s) are present or not.",
                         "type": "boolean",
                         "example": true
                     },
-                    "ServicePlans": {
+                    "servicePlans": {
                         "description": "Flag that indicates if the required M365 licenses are present or not.",
                         "type": "boolean",
                         "example": false
@@ -198,11 +198,11 @@
                 },
                 "type": "object",
                 "required": [
-                    "AzurePermissions",
-                    "DefendEntitlement",
-                    "DiscoverEntitlement",
-                    "EntraPermissions",
-                    "ServicePlans"
+                    "azurePermissions",
+                    "defendEntitlement",
+                    "discoverEntitlement",
+                    "entraPermissions",
+                    "servicePlans"
                 ]
             },
             "Authenticator.RequestStatus": {
@@ -241,7 +241,10 @@
                         "description": "Audience ID of the access token that is being requested.",
                         "type": "string",
                         "format": "uuid",
-                        "example": "00000002-0000-0000-c000-000000000000"
+                        "maxLength": 36,
+                        "minLength": 36,
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                        "example": "00000002-0000-0000-b000-000000000000"
                     }
                 },
                 "type": "object",
@@ -249,7 +252,7 @@
                     "audience"
                 ]
             },
-            "Authenticator.Container.Credentials": {
+            "Authenticator.Container.SccAuthCredentials": {
                 "title": "SHIELD - Authenticator - SCC Auth",
                 "description": "SHIELD - Defender, and Purview portal Container Credentials",
                 "type": "object",
@@ -266,24 +269,23 @@
                         "type": "string",
                         "format": "date-time"
                     },
-                    "security": {
-                        "$ref": "#/components/schemas/Authenticator.Container.Credentials.SccAuth"
+                    "defender": {
+                        "$ref": "#/components/schemas/Authenticator.Container.SccAuthCredentials.CredentialContainer"
                     },
-                    "compliance": {
-                        "$ref": "#/components/schemas/Authenticator.Container.Credentials.SccAuth"
+                    "security": {
+                        "$ref": "#/components/schemas/Authenticator.Container.SccAuthCredentials.CredentialContainer"
                     },
                     "purview": {
-                        "$ref": "#/components/schemas/Authenticator.Container.Credentials.SccAuth"
+                        "$ref": "#/components/schemas/Authenticator.Container.SccAuthCredentials.CredentialContainer"
                     }
                 },
                 "required": [
                     "authenticatedUpn",
                     "security",
-                    "compliance",
                     "purview"
                 ]
             },
-            "Authenticator.Container.Credentials.SccAuth": {
+            "Authenticator.Container.SccAuthCredentials.CredentialContainer": {
                 "title": "SHIELD - Authenticator - SCC Auth - Credential Container",
                 "description": "Container for the credentials for a single SccAuth authenticated site.",
                 "properties": {
@@ -424,34 +426,34 @@
             "LicenseReport.CorrelationRecord": {
                 "description": "Metadata that describes the execution session (run) that is used to tie/relate all of the license report together.",
                 "example": {
-                    "AuditTenantAccount": "priv-user@example.com",
-                    "CorrelationId": "9d838115-0868-45d4-b8a5-98adc1af7e42",
-                    "ReportTenantAccount": "ent-user@example.com",
-                    "TenantId": "7e536189-b2dd-4c8b-98b1-9b174777883f",
+                    "auditTenantAccount": "priv-user@example.com",
+                    "correlationId": "9d838115-0868-45d4-b8a5-98adc1af7e42",
+                    "reportTenantAccount": "ent-user@example.com",
+                    "tenantId": "7e536189-b2dd-4c8b-98b1-9b174777883f",
                     "createdAt": "2024-08-01T21:13:12.821Z",
                     "updatedAt": "2024-08-01T21:13:12.821Z"
                 },
                 "properties": {
-                    "AuditTenantAccount": {
+                    "auditTenantAccount": {
                         "description": "The user account used to retrieve the license information in the tenant being audited.",
                         "example": "admin-user@example.com",
                         "format": "email",
                         "type": "string"
                     },
-                    "CorrelationId": {
+                    "correlationId": {
                         "description": "The ID of the execution session (run) that is used to tie/relate all of the data together.",
                         "example": "88da2253-758f-4135-9d37-64448c8b65c1",
                         "format": "uuid",
                         "type": "string",
                         "pattern": "^\\w+-\\w+-\\w+-\\w+-\\w+$"
                     },
-                    "ReportTenantAccount": {
+                    "reportTenantAccount": {
                         "description": "User account used to store/report the license report to the SHI Lab cloud service.",
                         "example": "generic-user@example.com",
                         "format": "email",
                         "type": "string"
                     },
-                    "TenantId": {
+                    "tenantId": {
                         "description": "Unique ID of customer's Microsoft tenant that the license report is for.",
                         "example": "0e1fe83f-a33f-4250-8546-225b8d45ae01",
                         "format": "uuid",
@@ -472,7 +474,7 @@
                     }
                 },
                 "required": [
-                    "AuditTenantAccount"
+                    "auditTenantAccount"
                 ],
                 "title": "License Report - Correlation Record",
                 "type": "object"
@@ -480,7 +482,7 @@
             "LicenseReport.LicenseData": {
                 "type": "object",
                 "properties": {
-                    "AssignedLicense": {
+                    "assignedLicense": {
                         "additionalProperties": {
                             "type": "integer",
                             "nullable": true
@@ -488,7 +490,7 @@
                         "description": "License assignment on the specified principal.",
                         "type": "object"
                     },
-                    "AssignedService": {
+                    "assignedService": {
                         "additionalProperties": {
                             "oneOf": [
                                 {
@@ -504,7 +506,7 @@
                         "description": "Service configuration assignment.  This is used to record the set of principals that are \"benefiting\" from the service, regardless of license status.",
                         "type": "object"
                     },
-                    "ConsumedService": {
+                    "consumedService": {
                         "additionalProperties": {
                             "oneOf": [
                                 {
@@ -522,18 +524,18 @@
                     }
                 },
                 "required": [
-                    "AssignedLicense",
-                    "AssignedService",
-                    "ConsumedService"
+                    "assignedLicense",
+                    "assignedService",
+                    "consumedService"
                 ],
                 "description": "Collection of principals that have had their in-use licenses and assigned licenses. Where the key is the principal ID and the value is the insights.",
                 "example": {
-                    "AssignedLicense": {
+                    "assignedLicense": {
                         "eec0eb4f-6444-4f95-aba0-50c24d67f998": null,
                         "41781fb2-bc02-4b7c-bd55-b576c07bb09d": null,
                         "7159f980-6f83-4b67-bf41-e172b3ae1352": null
                     },
-                    "AssignedService": {
+                    "assignedService": {
                         "eec0eb4f-6444-4f95-aba0-50c24d67f998": {
                             "Conditional Access": false,
                             "Access Review": true,
@@ -551,7 +553,7 @@
                         },
                         "6511755b-c27d-4c66-a59e-b835e6b54e7f": null
                     },
-                    "ConsumedService": {
+                    "consumedService": {
                         "eec0eb4f-6444-4f95-aba0-50c24d67f998": {
                             "Conditional Access": true,
                             "Access Review": false,
@@ -591,27 +593,27 @@
             "LicenseReport": {
                 "description": "Completely calculated license report structure that is the result of a complete run.",
                 "example": {
-                    "AvailableLicense": {
+                    "availableLicense": {
                         "e17b13ee-9749-488b-9289-d31a8fde045d": 123,
                         "2d995b6a-d4aa-4d8d-a03c-372ecb66509d": 456,
                         "cbf6ee7c-c3c1-44a6-9f18-020c65536470": 789
                     },
-                    "Correlation": {
-                        "AuditTenantAccount": "admin-user@example.com",
-                        "CorrelationId": "88da2253-758f-4135-9d37-64448c8b65c1",
-                        "ReportTenantAccount": "generic-user@example.com",
-                        "TenantId": "0e1fe83f-a33f-4250-8546-225b8d45ae01"
+                    "correlation": {
+                        "auditTenantAccount": "admin-user@example.com",
+                        "correlationId": "88da2253-758f-4135-9d37-64448c8b65c1",
+                        "reportTenantAccount": "generic-user@example.com",
+                        "tenantId": "0e1fe83f-a33f-4250-8546-225b8d45ae01"
                     },
-                    "LicenseData": {
+                    "licenseData": {
                         "250844e1-a7ab-4f21-8e3f-58f51b5983a3": {
-                            "AssignedLicense": {
+                            "assignedLicense": {
                                 "e17b13ee-9749-488b-9289-d31a8fde045d": null
                             },
-                            "AssignedService": {
+                            "assignedService": {
                                 "cbf6ee7c-c3c1-44a6-9f18-020c65536470": null,
                                 "c7bcba35-199c-41e5-8c8d-6d4e4aad8964": null
                             },
-                            "ConsumedService": {
+                            "consumedService": {
                                 "fe98c41a-d931-4f6f-a5bc-750ba7144a77": null,
                                 "0474bdf1-ee76-4aff-a65c-6f82e5e1d5a6": {
                                     "Something Here": true,
@@ -623,7 +625,7 @@
                 },
                 "type": "object",
                 "properties": {
-                    "AvailableLicense": {
+                    "availableLicense": {
                         "additionalProperties": {
                             "example": 1234,
                             "type": "integer"
@@ -636,19 +638,19 @@
                         "title": "License Report - Available Licenses",
                         "type": "object"
                     },
-                    "Correlation": {
+                    "correlation": {
                         "$ref": "#/components/schemas/LicenseReport.CorrelationRecord"
                     },
-                    "LicenseData": {
+                    "licenseData": {
                         "additionalProperties": {
                             "$ref": "#/components/schemas/LicenseReport.LicenseData"
                         }
                     }
                 },
                 "required": [
-                    "AvailableLicense",
-                    "Correlation",
-                    "LicenseData"
+                    "availableLicense",
+                    "correlation",
+                    "licenseData"
                 ],
                 "title": "License Report - Complete Object"
             },
@@ -1161,7 +1163,7 @@
         },
         "description": "Deprive your threats of practical significance. Deploy the Securing Privilege Access architecture. All in a few seconds.",
         "title": "SHI Environment Lockdown and Defense",
-        "version": "appVersionFromSettingsEngine"
+        "version": "3.0.1"
     },
     "openapi": "3.0.0",
     "paths": {
@@ -1238,7 +1240,7 @@
                 "responses": {
                     "200": {
                         "content": {
-                            "application/json": {
+                            "text/plain": {
                                 "schema": {
                                     "description": "Access token that SHIELD uses to prove it is a valid recipient of credentials.",
                                     "type": "string",
@@ -1309,7 +1311,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Authenticator.Container.Credentials"
+                                "$ref": "#/components/schemas/Authenticator.Container.SccAuthCredentials"
                             }
                         }
                     }
@@ -1562,18 +1564,18 @@
                                         "summary": "Available Correlation Records",
                                         "value": [
                                             {
-                                                "AuditTenantAccount": "somebodyThatI@example.com",
-                                                "CorrelationId": "6d7c9271-9e68-4bdf-9ae3-f90c4213f74b",
-                                                "ReportTenantAccount": "usedToKnow@example.com",
-                                                "TenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db",
+                                                "auditTenantAccount": "somebodyThatI@example.com",
+                                                "correlationId": "6d7c9271-9e68-4bdf-9ae3-f90c4213f74b",
+                                                "reportTenantAccount": "usedToKnow@example.com",
+                                                "tenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db",
                                                 "createdAt": "2024-08-01T21:14:45.026Z",
                                                 "updatedAt": "2024-08-01T21:14:45.026Z"
                                             },
                                             {
-                                                "AuditTenantAccount": "somebodyThatI@example.com",
-                                                "CorrelationId": "d8095827-a313-40e1-b086-f72636de0edf",
-                                                "ReportTenantAccount": "usedToKnow@example.com",
-                                                "TenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db",
+                                                "auditTenantAccount": "somebodyThatI@example.com",
+                                                "correlationId": "d8095827-a313-40e1-b086-f72636de0edf",
+                                                "reportTenantAccount": "usedToKnow@example.com",
+                                                "tenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db",
                                                 "createdAt": "2024-07-25T21:14:45.026Z",
                                                 "updatedAt": "2024-07-25T21:14:45.026Z"
                                             }
@@ -1622,30 +1624,30 @@
                                         "description": "Sample, truncated report from an example customer environment.",
                                         "summary": "License Report",
                                         "value": {
-                                            "AvailableLicense": {
+                                            "availableLicense": {
                                                 "3d282045-ec7f-4813-88e2-29b74ee609f7": 123456,
                                                 "5888a922-9f5b-45fd-bd5f-de3283d6a79e": 99999999,
                                                 "a4b2e176-d63d-4081-9e21-226e2ac624b9": 5,
                                                 "547404d4-8734-415f-a7ca-e9c1ffb95e48": 25,
                                                 "d76878d6-1495-4243-a334-a82bb9818cd0": 500
                                             },
-                                            "Correlation": {
-                                                "AuditTenantAccount": "somebodyThatI@example.com",
-                                                "CorrelationId": "6d7c9271-9e68-4bdf-9ae3-f90c4213f74b",
-                                                "ReportTenantAccount": "usedToKnow@example.com",
-                                                "TenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db"
+                                            "correlation": {
+                                                "auditTenantAccount": "somebodyThatI@example.com",
+                                                "correlationId": "6d7c9271-9e68-4bdf-9ae3-f90c4213f74b",
+                                                "reportTenantAccount": "usedToKnow@example.com",
+                                                "tenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db"
                                             },
-                                            "LicenseData": {
+                                            "licenseData": {
                                                 "250844e1-a7ab-4f21-8e3f-58f51b5983a3": {
-                                                    "AssignedLicense": {
+                                                    "assignedLicense": {
                                                         "5888a922-9f5b-45fd-bd5f-de3283d6a79e": null,
                                                         "3d282045-ec7f-4813-88e2-29b74ee609f7": null
                                                     },
-                                                    "AssignedService": {
+                                                    "assignedService": {
                                                         "a4b2e176-d63d-4081-9e21-226e2ac624b9": null,
                                                         "d76878d6-1495-4243-a334-a82bb9818cd0": null
                                                     },
-                                                    "ConsumedService": {
+                                                    "consumedService": {
                                                         "e0d101e8-6f1e-40a9-a66f-cad4112c9a59": null,
                                                         "c63b7a2d-6573-4c37-9ca8-e12b954d3198": {
                                                             "Something Here": true,
@@ -1654,14 +1656,14 @@
                                                     }
                                                 },
                                                 "04e88835-771a-482b-9d6f-ba06c32cbb67": {
-                                                    "AssignedLicense": {
+                                                    "assignedLicense": {
                                                         "3d282045-ec7f-4813-88e2-29b74ee609f7": null
                                                     },
-                                                    "AssignedService": {
+                                                    "assignedService": {
                                                         "a4b2e176-d63d-4081-9e21-226e2ac624b9": null,
                                                         "d76878d6-1495-4243-a334-a82bb9818cd0": null
                                                     },
-                                                    "ConsumedService": {
+                                                    "consumedService": {
                                                         "9d3603de-b378-4c4a-adcc-ee133cbef914": null,
                                                         "e9a4e3d3-ebe0-405a-a8f4-35a04c4dba1f": {
                                                             "Something Here": true,
