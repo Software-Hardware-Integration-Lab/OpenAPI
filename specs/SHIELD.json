@@ -1038,9 +1038,9 @@
                 "title": "Type of security class the object(s) belongs to",
                 "type": "string"
             },
-            "Shield.Deploy.Delta.Response": {
-                "title": "SHIELD - Deploy - Delta - Response",
-                "description": "Object returned as a result of query for cached data or re-evaluation operation.",
+            "Shield.Deploy.Delta.State": {
+                "title": "SHIELD - Deploy - Delta - State",
+                "description": "Object with the outcome of live evaluation of the infrastructure or cached data from an earlier run.",
                 "type": "object",
                 "properties": {
                     "invalid": {
@@ -1088,7 +1088,11 @@
                                     }
                                 },
                                 "type": "object",
-                                "required": [ "actions", "message", "path" ]
+                                "required": [
+                                    "actions",
+                                    "message",
+                                    "path"
+                                ]
                             },
                             "type": "array"
                         },
@@ -1096,7 +1100,12 @@
                         "type": "object"
                     }
                 },
-                "required": [ "invalid", "lastRunTimestamp", "missing", "results"],
+                "required": [
+                    "invalid",
+                    "lastRunTimestamp",
+                    "missing",
+                    "results"
+                ],
                 "example": {
                     "invalid": {
                         "a14402b8-98c5-41e3-ba99-e5e1a536f68d": "Setting ID '58246273-d366-40d5-ac3d-daacb8bc2655' - Item not found.",
@@ -1109,19 +1118,26 @@
                     "results": {
                         "c47c20bd-46fa-4dfe-b971-3e5b1ce34a86": [
                             {
-                                "actions": [ "ignore", "restore" ],
+                                "actions": [
+                                    "ignore",
+                                    "restore"
+                                ],
                                 "message": "Value mismatch for property 'displayName' with current value being 'Audit Platform and Configuration Updates2'",
                                 "path": "displayName"
                             },
                             {
-                                "actions": [ "ignore" ],
+                                "actions": [
+                                    "ignore"
+                                ],
                                 "message": "Expected object at level 'groupPolicyUploadedLanguageFiles', but encountered 'Array'",
                                 "path": "groupPolicyUploadedLanguageFiles"
                             }
                         ],
                         "4b26b6f6-9cb3-4384-bd1e-6d298455c2c4": [
                             {
-                                "actions": [ "restore" ],
+                                "actions": [
+                                    "restore"
+                                ],
                                 "message": "Array value at level 'roleScopeTagIds/1' is not found in the returned value",
                                 "path": "roleScopeTagIds/1"
                             }
@@ -1140,7 +1156,9 @@
                         "example": "/roleScopeTagIds"
                     }
                 },
-                "required": [ "path" ]
+                "required": [
+                    "path"
+                ]
             }
         },
         "securitySchemes": {
@@ -1811,7 +1829,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Shield.Deploy.Delta.Response"
+                                    "$ref": "#/components/schemas/Shield.Deploy.Delta.State"
                                 }
                             }
                         },
@@ -1839,7 +1857,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Shield.Deploy.Delta.Response"
+                                    "$ref": "#/components/schemas/Shield.Deploy.Delta.State"
                                 }
                             }
                         },
@@ -1871,7 +1889,7 @@
                     }
                 },
                 "responses": {
-                    "204":{
+                    "204": {
                         "description": "Restoration of configuration item or its property is successful"
                     },
                     "400": {
@@ -1903,8 +1921,13 @@
                                     },
                                     "description": "Collection of object with UUID string as property name and array of strings as value.",
                                     "example": {
-                                        "f47ac10b-58cc-4372-a567-0e02b2c3d479": ["/"],
-                                        "9c858901-8a57-4791-81fe-4c455b099bc9": ["/description", "/name"]
+                                        "f47ac10b-58cc-4372-a567-0e02b2c3d479": [
+                                            "/"
+                                        ],
+                                        "9c858901-8a57-4791-81fe-4c455b099bc9": [
+                                            "/description",
+                                            "/name"
+                                        ]
                                     }
                                 }
                             }
@@ -1937,7 +1960,7 @@
                     }
                 },
                 "responses": {
-                    "204":{
+                    "204": {
                         "description": "Recorded successfully"
                     },
                     "400": {
@@ -1967,7 +1990,7 @@
                     }
                 },
                 "responses": {
-                    "204":{
+                    "204": {
                         "description": "Record has been removed successfully"
                     },
                     "400": {
