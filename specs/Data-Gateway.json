@@ -891,7 +891,7 @@
         },
         "description": "Collects data from the various SHI Lab products and makes it available in a standardized way.",
         "title": "SHI Data Gateway",
-        "version": "2.0.6"
+        "version": "2.1.0"
     },
     "openapi": "3.0.0",
     "paths": {
@@ -1285,6 +1285,33 @@
                     "License Analytics"
                 ],
                 "summary": "Retrieve the Specified License Report"
+            },
+            "delete": {
+                "description": "Deletes the full license report for the specified correlation ID.\n\nThis endpoint requires the `LicenseReport.ReadWrite`, or `LicenseReport.ReadWrite.All` scope (permission).",
+                "operationId": "/Api/LicenseReport/Correlation/:correlationId/Data/delete",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/correlationId"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Deleted successfully"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    }
+                },
+                "tags": [
+                    "License Analytics"
+                ],
+                "summary": "Delete the Specified License Report for the currently authenticated tenant."
             }
         },
         "/Api/LicenseReport/Correlation/{correlationId}/Tenant/{tenantId}/Data": {
