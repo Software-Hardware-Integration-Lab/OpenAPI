@@ -8,12 +8,13 @@ tags:
 apis:
 - name: SHIELD
   description: Simplifying Microsoft Securing Privileged Access for everyone.
-  baseUrl: https://*.azurewebsites.net
+  image: https://www.content.shi.com/SHIcom/images/Global/HeaderFooter/SHI_LOGO_2022_Positive.svg
   properties:
   - type: x-openapi
     url: specs/SHIELD.json
 - name: SHI - Data Gateway
   description: Collects data, validates it and stores it properly. Additionally, it allows access to specific data in a controlled manner.
+  image: https://www.content.shi.com/SHIcom/images/Global/HeaderFooter/SHI_LOGO_2022_Positive.svg
   baseUrl: https://api.shilab.com
   properties:
   - type: x-openapi
