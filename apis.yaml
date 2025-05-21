@@ -1,0 +1,20 @@
+name: SHI - Lab OpenAPI Specification Repository
+description: This repository contains the OpenAPI definitions for SHI Lab's products.
+tags:
+- SHI
+- Security
+- Data
+- Self Service
+apis:
+- name: SHIELD
+  description: Simplifying Microsoft Securing Privileged Access for everyone.
+  baseUrl: https://*.azurewebsites.net
+  properties:
+  - type: x-openapi
+    url: specs/SHIELD.json
+- name: SHI - Data Gateway
+  description: Collects data, validates it and stores it properly. Additionally, it allows access to specific data in a controlled manner.
+  baseUrl: https://api.shilab.com
+  properties:
+  - type: x-openapi
+    url: specs/Data-Gateway.json
