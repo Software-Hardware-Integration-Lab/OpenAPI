@@ -156,39 +156,57 @@
                 "title": "Core - System Requirements",
                 "description": "Collection of indicators that notify the caller if the system requirements have been met for various sub components to operate.",
                 "properties": {
-                    "azurePermissions": {
-                        "description": "Flag that indicates if the required Azure RBAC assignment(s) are present or not.",
+                    "authenticatorPermissions": {
+                        "description": "Flag that indicates if the core permissions for the SHIELD - Authenticator App have been configured properly or not.",
                         "type": "boolean",
                         "example": true
+                    },
+                    "azurePermissions": {
+                        "description": "Flag that indicates if the required core Azure RBAC assignment(s) are present or not.",
+                        "type": "boolean",
+                        "example": false
                     },
                     "defendEntitlement": {
                         "description": "Flag that indicates if the required defend licenses are present or not.",
                         "type": "boolean",
-                        "example": false
+                        "example": true
+                    },
+                    "deployEntitlement": {
+                        "description": "Flag that indicates if the required deploy licenses are present or not.",
+                        "type": "boolean",
+                        "example": true
                     },
                     "discoverEntitlement": {
                         "description": "Flag that indicates if the required discover licenses are present or not.",
                         "type": "boolean",
                         "example": true
                     },
-                    "entraPermissions": {
-                        "description": "Flag that indicates if the required Entra ID Role assignment(s) are present or not.",
+                    "msGraphPermissions": {
+                        "description": "Flag that indicates if the core permissions for the Microsoft Graph API have been configured properly or not.",
                         "type": "boolean",
-                        "example": true
+                        "example": false
                     },
-                    "servicePlans": {
-                        "description": "Flag that indicates if the required M365 licenses are present or not.",
+                    "dataGatewayPermissions": {
+                        "description": "Flag that indicates if the core permissions for the SHI - Data Gateway have been configured properly or not.",
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "entraDirectoryRole": {
+                        "description": "Flag that indicates if the core permissions for Entra Directory Role assignment have been configured properly or not.",
                         "type": "boolean",
                         "example": false
                     }
                 },
                 "type": "object",
                 "required": [
+                    "authenticatorPermissions",
                     "azurePermissions",
                     "defendEntitlement",
+                    "deployEntitlement",
                     "discoverEntitlement",
-                    "entraPermissions",
-                    "servicePlans"
+                    "msGraphPermissions",
+                    "dataGatewayPermissions",
+                    "entraDirectoryRole"
                 ]
             },
             "Authenticator.RequestStatus": {
