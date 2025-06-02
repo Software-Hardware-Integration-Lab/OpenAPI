@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "@azure/core-auth": "~1.9.0",
-    "@types/node": "~22.15.21",
+    "@types/node": "~22.15.29",
     "ts-patch": "~3.3.0",
     "typescript": "~5.8.3"
   },
