@@ -209,6 +209,57 @@
                     "entraDirectoryRole"
                 ]
             },
+            "Core.ProgressBar": {
+                "title": "Core - Progress Bar",
+                "description": "Used to indicate the progress of a long running operation.",
+                "properties": {
+                    "childBar": {
+                        "description": "Sub progress bar that should appear below the current progress bar for a dependent execution branch.",
+                        "type": "array",
+                        "minItems": 0,
+                        "items": {
+                            "$ref": "#/components/schemas/Core.ProgressBar"
+                        }
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Long form text describing the current step.",
+                        "example": "Collecting data from the Microsoft Entra ID system."
+                    },
+                    "displayName": {
+                        "type": "string",
+                        "description": "Text/label to render with the progress bar.",
+                        "example": "Running Entra ID Plugin"
+                    },
+                    "id": {
+                        "description": "Unique identifier to be able to select this specific instance via search.",
+                        "type": "string",
+                        "format": "uuid",
+                        "maxLength": 36,
+                        "minLength": 36,
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                        "example": "b759230f-48cb-496e-ad57-5f079083226b"
+                    },
+                    "currentStep": {
+                        "description": "Current step/value for the progress bar. This is in relation to the `totalStepCount` property. If undefined, an indeterminate/pulsing progress bar is used instead.",
+                        "example": 5,
+                        "type": "number"
+                    },
+                    "totalStepCount": {
+                        "description": "Number of steps before the progress bar is completely filed.",
+                        "example": 7,
+                        "type": "number",
+                        "minimum": 1
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "childBar",
+                    "displayName",
+                    "id",
+                    "totalStepCount"
+                ]
+            },
             "Authenticator.RequestStatus": {
                 "title": "Authentication - Status",
                 "description": "List of credentials that are being waited for by SHIELD's internal authentication engine.",
@@ -1432,6 +1483,28 @@
                 ]
             }
         },
+        "/Api/Discover/Progress": {
+            "get": {
+                "summary": "Current execution progress of the Discover module.",
+                "description": "Provides a detailed breakdown of the current progress of the discover module and it progress.\n\nThis endpoint requires the `Discover.Read`, or the `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Discover/Progress/Get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Core.ProgressBar"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "Discover"
+                ]
+            }
+        },
         "/Api/Discover/Report": {
             "get": {
                 "summary": "Start Discover's Report Generation",
@@ -1501,7 +1574,7 @@
                     }
                 },
                 "tags": [
-                    "License Analytics"
+                    "Discover"
                 ],
                 "summary": "Retrieve the List of Correlation Records"
             }
@@ -1593,7 +1666,7 @@
                     }
                 },
                 "tags": [
-                    "License Analytics"
+                    "Discover"
                 ],
                 "summary": "Retrieve the Specified License Report"
             }
@@ -2715,7 +2788,7 @@
             "name": "Authentication"
         },
         {
-            "description": "License Analytics info.",
+            "description": "License report creation and retrieval.",
             "name": "Discover"
         },
         {
@@ -2741,10 +2814,6 @@
         {
             "description": "Manage the updates for SHIELD and the policies deployed into the managed environment.",
             "name": "Update"
-        },
-        {
-            "description": "WARNING AUTHENTICATION IS DISABLED WHEN DEBUG MODE IS ENABLED!!! Endpoints that are exposed only in debug mode. You can use these to see as the app sees.",
-            "name": "Debug Mode"
         }
     ]
 }
