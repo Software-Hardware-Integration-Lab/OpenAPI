@@ -1163,7 +1163,7 @@
         },
         "/Api/LicenseReport/Correlation/Tenant/{tenantId}": {
             "get": {
-                "description": "Retrieves the list of correlation records for the specified tenant. Can use filters targeting creation date to limit results. Correlation records store the metadata for a specific license report.\n\nThis endpoint requires the `LicenseReport.Read.All`, or `LicenseReport.ReadWrite.All` scope (permission). This endpoint is also only accessible form the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "description": "Retrieves the list of correlation records for the specified tenant. Can use filters targeting creation date to limit results. Correlation records store the metadata for a specific license report.\n\nThis endpoint requires the `LicenseReport.Read.All`, or `LicenseReport.ReadWrite.All` scope (permission). This endpoint is also only accessible from the `SHI` and `SHI Lab` tenants. End user access is restricted.",
                 "operationId": "/Api/LicenseReport/Correlation/Tenant/:tenantId/Get",
                 "parameters": [
                     {
