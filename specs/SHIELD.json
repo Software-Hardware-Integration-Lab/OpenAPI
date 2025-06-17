@@ -1114,7 +1114,7 @@
         },
         "description": "Deprive your threats of practical significance. Deploy the Securing Privilege Access architecture. All in a few seconds.",
         "title": "SHI Environment Lockdown and Defense",
-        "version": "3.0.3"
+        "version": "3.0.4"
     },
     "openapi": "3.0.0",
     "paths": {
@@ -1772,6 +1772,28 @@
                     "Infrastructure Deployment"
                 ],
                 "security": []
+            }
+        },
+        "/Api/Deploy/Progress": {
+            "get": {
+                "summary": "Current execution progress of the Deploy module.",
+                "description": "Provides a detailed breakdown of the current progress of the deploy module and its sub-components, if any.\n\nThis endpoint requires the `Deploy.Read`, or the `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Deploy/Progress/Get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Core.ProgressBar"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "Infrastructure Deployment"
+                ]
             }
         },
         "/Api/Deploy/Version": {
