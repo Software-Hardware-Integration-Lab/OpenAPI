@@ -1,6 +1,6 @@
 {
   "name": "@shi-corp/sdk-data-gateway",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "type": "module",
   "main": "bin/index.js",
   "description": "SDK client used to interface with the SHI Data Gateway service.",
