@@ -151,6 +151,57 @@
                 "title": "Core System - Health Report",
                 "type": "object"
             },
+            "Core.ProgressBar": {
+                "title": "Core - Progress Bar",
+                "description": "Used to indicate the progress of a long running operation.",
+                "properties": {
+                    "childBar": {
+                        "description": "Sub progress bar that should appear below the current progress bar for a dependent execution branch.",
+                        "type": "array",
+                        "minItems": 0,
+                        "items": {
+                            "$ref": "#/components/schemas/Core.ProgressBar"
+                        }
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Long form text describing the current step.",
+                        "example": "Collecting data from the Microsoft Entra ID system."
+                    },
+                    "displayName": {
+                        "type": "string",
+                        "description": "Text/label to render with the progress bar.",
+                        "example": "Running Entra ID Plugin"
+                    },
+                    "id": {
+                        "description": "Unique identifier to be able to select this specific instance via search.",
+                        "type": "string",
+                        "format": "uuid",
+                        "maxLength": 36,
+                        "minLength": 36,
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                        "example": "b759230f-48cb-496e-ad57-5f079083226b"
+                    },
+                    "currentStep": {
+                        "description": "Current step/value for the progress bar. This is in relation to the `totalStepCount` property. If undefined, an indeterminate/pulsing progress bar is used instead.",
+                        "example": 5,
+                        "type": "number"
+                    },
+                    "totalStepCount": {
+                        "description": "Number of steps before the progress bar is completely filed.",
+                        "example": 7,
+                        "type": "number",
+                        "minimum": 1
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "childBar",
+                    "displayName",
+                    "id",
+                    "totalStepCount"
+                ]
+            },
             "LicenseReport.CorrelationRecord": {
                 "description": "Metadata that describes the execution session (run) that is used to tie/relate all of the license report together.",
                 "example": {
