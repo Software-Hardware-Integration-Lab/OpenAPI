@@ -30,14 +30,14 @@
     "prepare": "ts-patch install"
   },
   "devDependencies": {
-    "@azure/core-auth": "~1.9.0",
-    "@types/node": "~24.0.12",
+    "@azure/core-auth": "~1.10.0",
+    "@types/node": "~24.0.14",
     "ts-patch": "~3.3.0",
     "typescript": "~5.8.3"
   },
   "dependencies": {
     "@microsoft/kiota-authentication-azure": "~1.0.0-preview.96",
     "@microsoft/kiota-bundle": "~1.0.0-preview.96",
-    "typia": "~9.4.0"
+    "typia": "~9.5.0"
   }
 }
