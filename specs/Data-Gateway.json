@@ -151,7 +151,7 @@
                 "title": "Core System - Health Report",
                 "type": "object"
             },
-            "Chat.MessageRecord": {
+            "Chat.OpenAIChatMessage": {
                 "title": "Chat - Message Record",
                 "description": "Object representing entity supplied to the AI agent or a response from the AI Agent",
                 "example": {
@@ -1580,7 +1580,7 @@
                                 "description": "Collection of conversation parts provided by user to be ingested by the agent",
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/Chat.MessageRecord"
+                                    "$ref": "#/components/schemas/Chat.OpenAIChatMessage"
                                 }
                             }
                         }
@@ -1633,18 +1633,22 @@
                                     },
                                     "type": "object",
                                     "properties": {
-                                        "responseText": {
-                                            "type": "string",
-                                            "description": "Most recent response text"
-                                        },
                                         "messageList": {
                                             "type": "array",
                                             "description": "List of message objects in current conversation",
                                             "items": {
-                                                "$ref": "#/components/schemas/Chat.MessageRecord"
+                                                "$ref": "#/components/schemas/Chat.OpenAIChatMessage"
                                             }
+                                        },
+                                        "responseText": {
+                                            "type": "string",
+                                            "description": "Most recent response text"
                                         }
-                                    }
+                                    },
+                                    "required": [
+                                        "messageList",
+                                        "responseText"
+                                    ]
                                 }
                             }
                         },
