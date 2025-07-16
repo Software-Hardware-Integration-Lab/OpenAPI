@@ -162,7 +162,7 @@
                             "id": "call_abc123",
                             "type": "function",
                             "function": {
-                                "arguments": "",
+                                "arguments": "{\"startDate\":\"2025-07-01\",\"endDate\":\"2025-07-10\"}",
                                 "name": "getCorrelationIDs"
                             }
                         }
@@ -1607,13 +1607,13 @@
                                             },
                                             {
                                                 "role": "assistant",
-                                                "content": "",
+                                                "content": "What are the available IDs?",
                                                 "tool_calls": [
                                                     {
                                                         "id": "call_abc123",
                                                         "type": "function",
                                                         "function": {
-                                                            "arguments": "",
+                                                            "arguments": "{\"startDate\":\"2025-07-01\",\"endDate\":\"2025-07-10\"}",
                                                             "name": "getCorrelationIDs"
                                                         }
                                                     }
