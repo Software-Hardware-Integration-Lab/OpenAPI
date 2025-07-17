@@ -1957,6 +1957,7 @@
                                         "summary": "Infrastructure is deployed",
                                         "value": {
                                             "deployedArchitecture": "4a7f2e9c-1b3d-4c6a-9f8e-2d5b3e1a7c9f",
+                                            "deployTagInclude": true,
                                             "deployedTags": [
                                                 "5e2a9c1f-8b3d-4f6a-9e7c-2d1f3a6b4c8e",
                                                 "9c7f2e1a-3b6d-4a8e-9f5c-1d2a4b7e6c3f"
@@ -1969,6 +1970,7 @@
                                         "summary": "Infrastructure is not deployed",
                                         "value": {
                                             "deployedArchitecture": null,
+                                            "deployTagInclude": false,
                                             "deployedTags": [],
                                             "isDeploying": false
                                         }
@@ -1984,6 +1986,10 @@
                                             "minLength": 36,
                                             "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
                                             "nullable": true
+                                        },
+                                        "deployTagInclude": {
+                                            "description": "Flag that indicates if the tag list has been set to be in inclusion mode (`true`) or exclusion mode (`false`).",
+                                            "type": "boolean"
                                         },
                                         "deployedTags": {
                                             "description": "Collection of references to the groupings that list related or dependent resources to be deployed.",
@@ -2005,6 +2011,7 @@
                                     "type": "object",
                                     "required": [
                                         "deployedArchitecture",
+                                        "deployTagInclude",
                                         "deployedTags",
                                         "isDeploying"
                                     ]
@@ -2108,6 +2115,69 @@
                     },
                     "409": {
                         "description": "Operation is already in progress"
+                    },
+                    "503": {
+                        "description": "System requirements have not been met!"
+                    }
+                },
+                "tags": [
+                    "Deploy"
+                ]
+            },
+            "patch": {
+                "summary": "Augments the list of tags set as deployed and provisions new resources",
+                "description": "Changes the list of tags based on include flags, calculates the list of matchings resources and deploys all the ones marked as not provisioned.\n\nThis endpoint requires the `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Deploy/Patch",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "examples": {
+                                "Invalid Request": {
+                                    "description": "User submits request with empty list.",
+                                    "summary": "Empty request",
+                                    "value": {
+                                        "tagList": []
+                                    }
+                                },
+                                "Acceptable Request": {
+                                    "description": "User provides one or more values for the list of tags.",
+                                    "summary": "Request with data",
+                                    "value": {
+                                        "tagList": [
+                                            "f3b9c7e2-1a4d-4c2e-9f3e-8b6a1c2d9e7a",
+                                            "a7d2f1c4-3e8b-4b6f-9c1d-2f4e7a9b3c6d"
+                                        ]
+                                    }
+                                }
+                            },
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "tagList": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "uuid",
+                                            "maxLength": 36,
+                                            "minLength": 36,
+                                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                                        },
+                                        "minItems": 1
+                                    }
+                                },
+                                "required": [
+                                    "tagList"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Request for changes is accepted and deployment of the additional resources is running"
+                    },
+                    "400": {
+                        "description": "User information is invalid/incomplete for the operation"
                     },
                     "503": {
                         "description": "System requirements have not been met!"
