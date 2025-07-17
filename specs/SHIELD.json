@@ -574,7 +574,7 @@
                     },
                     "results": {
                         "type": "array",
-                        "description": "Collection of the configuration items where discrepancies where found.",
+                        "description": "Collection of the configuration items where discrepancies were found.",
                         "items": {
                             "type": "object",
                             "properties": {
