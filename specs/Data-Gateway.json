@@ -1006,7 +1006,7 @@
         },
         "description": "Collects data from the various SHI Lab products and makes it available in a standardized way.",
         "title": "SHI Data Gateway",
-        "version": "2.2.1"
+        "version": "2.2.2"
     },
     "openapi": "3.0.0",
     "paths": {
@@ -1571,8 +1571,108 @@
         "/Api/Chat/LicenseGpt": {
             "post": {
                 "summary": "Inquire License Data from AI Agent",
-                "description": "Enables a conversation mode with AI agent to request details of the available license reports for the tenant.\n\nThis endpoint requires the `LicenseReport.Read.All`, or `LicenseReport.ReadWrite.All` scope (permission).  This endpoint is also only accessible from the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "description": "Enables a conversation mode with AI agent to request details of the available license reports for the currently authenticated tenant.\n\nThis endpoint requires the `LicenseReport.Read`, `LicenseReport.ReadWrite`, `LicenseReport.Read.All`, or `LicenseReport.ReadWrite.All` scope (permission).  This endpoint is also only accessible from the `SHI` and `SHI Lab` tenants. End user access is restricted.",
                 "operationId": "/Api/Chat/LicenseGpt/Post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "description": "Collection of conversation parts provided by user to be ingested by the agent",
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Chat.OpenAIChatMessage"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "messageList": [
+                                            {
+                                                "role": "user",
+                                                "content": "Hello"
+                                            },
+                                            {
+                                                "role": "assistant",
+                                                "content": "Hello, how can I assist you today?"
+                                            },
+                                            {
+                                                "role": "user",
+                                                "content": "Can you show me what correlation records I have?"
+                                            },
+                                            {
+                                                "role": "assistant",
+                                                "content": "What are the available IDs?",
+                                                "tool_calls": [
+                                                    {
+                                                        "id": "call_abc123",
+                                                        "type": "function",
+                                                        "function": {
+                                                            "arguments": "{\"startDate\":\"2025-07-01\",\"endDate\":\"2025-07-10\"}",
+                                                            "name": "getCorrelationIDs"
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "role": "tool",
+                                                "content": "{\"825a9d7e-0b62-4392-b8ef-ab6951a46ebd\":\"2025-07-03T18:39:50.828Z\",\"744c0878-3a82-48a7-b239-a1d4b9298a69\":\"2025-07-07T21:01:20.995Z\"}",
+                                                "tool_call_id": "call_abc123"
+                                            },
+                                            {
+                                                "role": "assistant",
+                                                "content": "You have correlation records for the following dates:\n- July 3, 2025\n- July 7, 2025\n\nWould you like to see details from any of these correlation records?"
+                                            }
+                                        ],
+                                        "responseText": "You have correlation records for the following dates:\n- July 3, 2025\n- July 7, 2025\n\nWould you like to see details from any of these correlation records?"
+                                    },
+                                    "type": "object",
+                                    "properties": {
+                                        "messageList": {
+                                            "type": "array",
+                                            "description": "List of message objects in current conversation",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Chat.OpenAIChatMessage"
+                                            }
+                                        },
+                                        "responseText": {
+                                            "type": "string",
+                                            "description": "Most recent response text"
+                                        }
+                                    },
+                                    "required": [
+                                        "messageList",
+                                        "responseText"
+                                    ]
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    }
+                },
+                "tags": [
+                    "Chat"
+                ]
+            }
+        },
+        "/Api/Chat/LicenseGpt/Tenant/{tenantId}": {
+            "post": {
+                "summary": "Inquire License Data from AI Agent",
+                "description": "Enables a conversation mode with AI agent to request details of the available license reports for the specified tenant.\n\nThis endpoint requires the `LicenseReport.Read.All`, or `LicenseReport.ReadWrite.All` scope (permission).  This endpoint is also only accessible from the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "operationId": "/Api/Chat/LicenseGpt/Tenant/:tenantId/Post",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/tenantId"
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
