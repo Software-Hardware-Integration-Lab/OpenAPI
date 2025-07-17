@@ -1006,7 +1006,7 @@
         },
         "description": "Collects data from the various SHI Lab products and makes it available in a standardized way.",
         "title": "SHI Data Gateway",
-        "version": "2.2.0"
+        "version": "2.2.1"
     },
     "openapi": "3.0.0",
     "paths": {
@@ -3090,7 +3090,7 @@
                             "schema": {
                                 "type": "object",
                                 "properties": {
-                                    "displayName": {
+                                    "tenantDisplayName": {
                                         "description": "Human readable name for the tenant record",
                                         "type": "string"
                                     },
