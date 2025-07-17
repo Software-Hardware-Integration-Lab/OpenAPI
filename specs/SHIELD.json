@@ -516,12 +516,29 @@
                 "type": "object",
                 "properties": {
                     "invalid": {
-                        "additionalProperties": {
-                            "description": "String with details of the error response.",
-                            "type": "string"
-                        },
+                        "type": "array",
                         "description": "Collection of the configuration items where request for resource data responded with an error.",
-                        "type": "object"
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "templateId": {
+                                    "type": "string",
+                                    "description": "Internal reference identifier of the resource.",
+                                    "format": "uuid",
+                                    "maxLength": 36,
+                                    "minLength": 36,
+                                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "Text with the details of the error response."
+                                }
+                            },
+                            "required": [
+                                "templateId",
+                                "message"
+                            ]
+                        }
                     },
                     "lastRunTimestamp": {
                         "description": "Point in time expressed in ISO 8601 format when the evaluation results were generated. ",
@@ -531,45 +548,80 @@
                         "nullable": true
                     },
                     "missing": {
-                        "additionalProperties": {
-                            "description": "String indicating name and description of the configuration item.",
-                            "type": "string"
-                        },
+                        "type": "array",
                         "description": "Collection of the configuration items that are expected to be deployed but do not have resource reference id.",
-                        "type": "object"
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "templateId": {
+                                    "type": "string",
+                                    "description": "Internal reference identifier of the resource.",
+                                    "format": "uuid",
+                                    "maxLength": 36,
+                                    "minLength": 36,
+                                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "Text containing details of the original configuration item definition."
+                                }
+                            },
+                            "required": [
+                                "templateId",
+                                "message"
+                            ]
+                        }
                     },
                     "results": {
-                        "additionalProperties": {
-                            "items": {
-                                "properties": {
-                                    "actions": {
-                                        "items": {
-                                            "type": "number"
-                                        },
-                                        "description": "List of operations available to be performed on the entity.",
-                                        "type": "array",
-                                        "minItems": 1
-                                    },
-                                    "errorCode": {
-                                        "description": "Detailed information about the discrepancy for the entity.",
-                                        "type": "number"
-                                    },
-                                    "path": {
-                                        "description": "Location in the object where evaluated property encountered an error.",
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object",
-                                "required": [
-                                    "actions",
-                                    "errorCode",
-                                    "path"
-                                ]
-                            },
-                            "type": "array"
-                        },
+                        "type": "array",
                         "description": "Collection of the configuration items where discrepancies where found.",
-                        "type": "object"
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "templateId": {
+                                    "type": "string",
+                                    "description": "Internal reference identifier of the resource.",
+                                    "format": "uuid",
+                                    "maxLength": 36,
+                                    "minLength": 36,
+                                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                                },
+                                "variants": {
+                                    "type": "array",
+                                    "description": "List of individual parts of the resource where discrepancies were determined.",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "actions": {
+                                                "items": {
+                                                    "type": "number"
+                                                },
+                                                "description": "List of operations available to be performed on the entity.",
+                                                "type": "array",
+                                                "minItems": 1
+                                            },
+                                            "errorCode": {
+                                                "description": "Detailed information about the discrepancy for the entity.",
+                                                "type": "number"
+                                            },
+                                            "path": {
+                                                "description": "Location in the object where evaluated property encountered an error.",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "actions",
+                                            "errorCode",
+                                            "path"
+                                        ]
+                                    }
+                                }
+                            },
+                            "required": [
+                                "templateId",
+                                "variants"
+                            ]
+                        }
                     }
                 },
                 "required": [
@@ -579,42 +631,57 @@
                     "results"
                 ],
                 "example": {
-                    "invalid": {
-                        "a14402b8-98c5-41e3-ba99-e5e1a536f68d": "Setting ID '58246273-d366-40d5-ac3d-daacb8bc2655' - Item not found.",
-                        "9af9209d-d191-4b42-9f65-dfd8b7882bba": "Setting ID 'f6f5d07b-230c-4818-93de-e407b8ca9537' - Insufficient access to view this data."
-                    },
+                    "invalid": [
+                        {
+                            "templateId": "a14402b8-98c5-41e3-ba99-e5e1a536f68d",
+                            "message": "Setting ID '58246273-d366-40d5-ac3d-daacb8bc2655' - Item not found."
+                        },
+                        {
+                            "templateId": "9af9209d-d191-4b42-9f65-dfd8b7882bba",
+                            "message": "Setting ID 'f6f5d07b-230c-4818-93de-e407b8ca9537' - Insufficient access to view this data."
+                        }
+                    ],
                     "lastRunTimestamp": "2025-03-25T14:28:54Z",
-                    "missing": {
-                        "78afd77c-c2a6-4328-9c61-b9fd44114823": "Microsoft.Policies.PowerToysMicrosoft.Policies.PowerToys - Version 0.86.0"
-                    },
-                    "results": {
-                        "c47c20bd-46fa-4dfe-b971-3e5b1ce34a86": [
-                            {
-                                "actions": [
-                                    2,
-                                    3
-                                ],
-                                "errorCode": 5,
-                                "path": "displayName"
-                            },
-                            {
-                                "actions": [
-                                    2
-                                ],
-                                "errorCode": 1,
-                                "path": "groupPolicyUploadedLanguageFiles"
-                            }
-                        ],
-                        "4b26b6f6-9cb3-4384-bd1e-6d298455c2c4": [
-                            {
-                                "actions": [
-                                    3
-                                ],
-                                "errorCode": 3,
-                                "path": "roleScopeTagIds/1"
-                            }
-                        ]
-                    }
+                    "missing": [
+                        {
+                            "templateId": "78afd77c-c2a6-4328-9c61-b9fd44114823",
+                            "message": "{\"displayName\":\"Privileged Objects\",\"description\":\"Privileged objects managed by application.\",\"membershipType\":\"Assigned\"}"
+                        }
+                    ],
+                    "results": [
+                        {
+                            "templateId": "c47c20bd-46fa-4dfe-b971-3e5b1ce34a86",
+                            "variants": [
+                                {
+                                    "actions": [
+                                        2,
+                                        3
+                                    ],
+                                    "errorCode": 5,
+                                    "path": "displayName"
+                                },
+                                {
+                                    "actions": [
+                                        2
+                                    ],
+                                    "errorCode": 1,
+                                    "path": "groupPolicyUploadedLanguageFiles"
+                                }
+                            ]
+                        },
+                        {
+                            "templateId": "4b26b6f6-9cb3-4384-bd1e-6d298455c2c4",
+                            "variants": [
+                                {
+                                    "actions": [
+                                        3
+                                    ],
+                                    "errorCode": 3,
+                                    "path": "roleScopeTagIds/1"
+                                }
+                            ]
+                        }
+                    ]
                 }
             },
             "Deploy.PathIndicator": {
