@@ -21,6 +21,11 @@ jobs:
         pages: write
         id-token: write
 
+    # Allow one concurrent deployment
+    concurrency:
+        group: "pages"
+        cancel-in-progress: true
+
     # List of steps to execute in this job
     steps:
         # Configure the GH pages environment
