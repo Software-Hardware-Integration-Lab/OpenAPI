@@ -24,7 +24,7 @@ jobs:
         # Grab a copy of the latest binaries
         - name: Download Latest Swagger UI Release
           run: |
-            LATEST_URL=$(curl -sL https://api.github.com/repos/swagger-api/swagger-ui/releases/latest | grep "browser_download_url.*tar.gz" | cut -d '"' -f 4)
+            LATEST_URL=$(curl -sL https://api.github.com/repos/swagger-api/swagger-ui/releases/latest | grep "tarball_url" | cut -d '"' -f 4)
             curl -L "$LATEST_URL" -o swagger-ui.tar.gz
 
         # Extract the downloaded archive
