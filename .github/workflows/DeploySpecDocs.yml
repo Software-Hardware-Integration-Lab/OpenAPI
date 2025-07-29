@@ -16,6 +16,12 @@ jobs:
     # Filter for which runners are allowed to execute this job
     runs-on: ubuntu-latest
 
+    # Overwrite the default permissions for this job
+    permissions:
+        # Used to access github pages
+        id-token: write
+
+    # List of steps to execute in this job
     steps:
         # Configure the GH pages environment
         - name: Setup Pages
