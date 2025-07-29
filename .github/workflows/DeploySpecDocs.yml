@@ -16,9 +16,9 @@ jobs:
     # Filter for which runners are allowed to execute this job
     runs-on: ubuntu-latest
 
-    # Overwrite the default permissions for this job
+    # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
     permissions:
-        # Used to access github pages
+        pages: write
         id-token: write
 
     # List of steps to execute in this job
