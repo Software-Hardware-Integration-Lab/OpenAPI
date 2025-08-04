@@ -48,11 +48,15 @@ jobs:
       - name: Setup Node.JS Runtime
         uses: actions/setup-node@v4
         with:
-          node-version: 22.x
+          node-version: 22
           cache: 'npm'
           cache-dependency-path: ${{matrix.specifications.sdkPath}}/package-lock.json
-          registry-url: https://registry.npmjs.org/
+          registry-url: https://registry.npmjs.org
           scope: shi-corp
+
+      # Update the NPM CLI to the latest available version
+      - name: Update NPM CLI
+        run: npm install -g npm
 
       # Set up all of the supporting components for SDK generation
       - name: Initialize Kiota Binaries
@@ -78,31 +82,7 @@ jobs:
         run: npm run-script build:Prod
         working-directory: ${{matrix.specifications.sdkPath}}
 
-      # Log into the Entra ID with the GitHub federated identity credential (using the OIDC token)
-      - name: Login to Entra ID
-        uses: azure/login@v2
-        with:
-          enable-AzPSSession: true
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-
-      # Deploys the zip package to the specified azure web app
-      - name: Get NPM Publish Token
-        uses: azure/powershell@v2
-        id: NPM-Publish-Token
-        with:
-          azPSVersion: latest
-          inlineScript: |
-            # Get the publish token from the specified Azure KeyVault
-            [System.String]$PublishToken = Get-AzKeyVaultSecret -VaultName ${{secrets.KEYVAULT_NAME}} -Name ${{secrets.KEYVAULT_SECRET_NAME}} -AsPlainText
-            
-            # Write the token to GitHub Actions Output to be accessible to subsequent steps
-            echo "npmToken=$PublishToken" >> $env:GITHUB_OUTPUT
-
       # Publish the artifact to NPM with attestation
       - name: Upload Package to NPM Registry
-        run: npm publish --access public --provenance
+        run: npm publish
         working-directory: ${{matrix.specifications.sdkPath}}
-        env:
-          NODE_AUTH_TOKEN: ${{ steps.NPM-Publish-Token.outputs.npmToken }}
