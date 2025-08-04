@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
 
     # Publish the package to NPM
-    environment: NPM
+    environment: NPM-OIDC
 
     # Allow single failures for SDK publish, e.g. SDG fail due to not getting an update but SHIELD goes through
     continue-on-error: true
