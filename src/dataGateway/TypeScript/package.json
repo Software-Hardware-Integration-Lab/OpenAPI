@@ -1,6 +1,6 @@
 {
   "name": "@shi-corp/sdk-data-gateway",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "type": "module",
   "main": "bin/index.js",
   "description": "SDK client used to interface with the SHI Data Gateway service.",
@@ -30,13 +30,13 @@
   },
   "devDependencies": {
     "@azure/core-auth": "~1.10.0",
-    "@types/node": "~24.0.14",
+    "@types/node": "~24.1.0",
     "ts-patch": "~3.3.0",
-    "typescript": "~5.8.3"
+    "typescript": "~5.9.2"
   },
   "dependencies": {
     "@microsoft/kiota-authentication-azure": "~1.0.0-preview.96",
     "@microsoft/kiota-bundle": "~1.0.0-preview.96",
-    "typia": "~9.5.0"
+    "typia": "~9.6.1"
   }
 }
