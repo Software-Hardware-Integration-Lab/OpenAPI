@@ -27,7 +27,7 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE
     - name: Download Source Files
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
 
       # Set up NodeJS on the build host
     - name: Setup Node.JS Environment
