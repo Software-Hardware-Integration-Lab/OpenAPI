@@ -30,13 +30,13 @@
   },
   "devDependencies": {
     "@azure/core-auth": "~1.10.0",
-    "@types/node": "~24.1.0",
+    "@types/node": "~24.2.1",
     "ts-patch": "~3.3.0",
     "typescript": "~5.9.2"
   },
   "dependencies": {
-    "@microsoft/kiota-authentication-azure": "~1.0.0-preview.96",
-    "@microsoft/kiota-bundle": "~1.0.0-preview.96",
-    "typia": "~9.6.1"
+    "@microsoft/kiota-authentication-azure": "~1.0.0-preview.97",
+    "@microsoft/kiota-bundle": "~1.0.0-preview.97",
+    "typia": "~9.7.1"
   }
 }
