@@ -190,7 +190,11 @@
                                             "type": "string",
                                             "description": "The type of the content part"
                                         }
-                                    }
+                                    },
+                                    "required": [
+                                        "text",
+                                        "type"
+                                    ]
                                 }
                             }
                         ]
@@ -305,8 +309,7 @@
                 "properties": {
                     "assignedLicense": {
                         "additionalProperties": {
-                            "type": "integer",
-                            "nullable": true
+                            "type": "integer"
                         },
                         "description": "License assignment on the specified principal.",
                         "type": "object"
@@ -321,8 +324,7 @@
                                     "type": "integer",
                                     "format": "int32"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         },
                         "description": "Service configuration assignment.  This is used to record the set of principals that are \"benefiting\" from the service, regardless of license status.",
                         "type": "object"
@@ -337,8 +339,7 @@
                                     "type": "integer",
                                     "format": "int32"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         },
                         "description": "Usage telemetry retrieved for the service to indicate if the specific principal is consuming the service or not, regardless of license status.",
                         "type": "object"
@@ -1008,7 +1009,7 @@
         "title": "SHI Data Gateway",
         "version": "2.2.2"
     },
-    "openapi": "3.0.0",
+    "openapi": "3.1.0",
     "paths": {
         "/Api/Core/Health": {
             "get": {

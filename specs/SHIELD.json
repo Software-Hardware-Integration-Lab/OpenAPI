@@ -7,7 +7,12 @@
                 "name": "correlationId",
                 "required": true,
                 "schema": {
-                    "example": "1d71e0fe-6e4a-464d-a690-80addf3bda55",
+                    "examples": [
+                        {
+                            "value": "1d71e0fe-6e4a-464d-a690-80addf3bda55",
+                            "summary": "Example of a correlation ID"
+                        }
+                    ],
                     "format": "uuid",
                     "maxLength": 36,
                     "minLength": 36,
@@ -21,7 +26,12 @@
                 "name": "deviceId",
                 "required": true,
                 "schema": {
-                    "example": "75da7fa4-4a04-44c8-8f2c-c1b2fa29aa51",
+                    "examples": [
+                        {
+                            "value": "75da7fa4-4a04-44c8-8f2c-c1b2fa29aa51",
+                            "summary": "Example of a device ID"
+                        }
+                    ],
                     "format": "uuid",
                     "maxLength": 36,
                     "minLength": 36,
@@ -35,7 +45,12 @@
                 "name": "intermediaryId",
                 "required": true,
                 "schema": {
-                    "example": "25d4d9da-28ea-42f8-b3df-23c3969abffa",
+                    "examples": [
+                        {
+                            "value": "25d4d9da-28ea-42f8-b3df-23c3969abffa",
+                            "summary": "Example of an intermediary ID"
+                        }
+                    ],
                     "format": "uuid",
                     "maxLength": 36,
                     "minLength": 36,
@@ -69,7 +84,12 @@
                 "required": true,
                 "schema": {
                     "description": "Unique identifier of the marketplace offering.",
-                    "example": "271ab834-7469-4f2d-a705-549972c4f325",
+                    "examples": [
+                        {
+                            "value": "271ab834-7469-4f2d-a705-549972c4f325",
+                            "summary": "Example of an offering ID"
+                        }
+                    ],
                     "format": "uuid",
                     "maxLength": 36,
                     "minLength": 36,
@@ -82,7 +102,12 @@
                 "in": "query",
                 "name": "search",
                 "schema": {
-                    "example": "finance",
+                    "examples": [
+                        {
+                            "value": "finance",
+                            "summary": "Example of a search term"
+                        }
+                    ],
                     "type": "string"
                 }
             },
@@ -101,7 +126,12 @@
                 "name": "Update Channel Name",
                 "required": true,
                 "schema": {
-                    "example": "stable",
+                    "examples": [
+                        {
+                            "value": "stable",
+                            "summary": "Example of an update channel name"
+                        }
+                    ],
                     "type": "string",
                     "enum": [
                         "alpha",
@@ -116,7 +146,12 @@
                 "name": "userId",
                 "required": true,
                 "schema": {
-                    "example": "264a8bed-0714-48fd-8b9d-0e4c4715cee5",
+                    "examples": [
+                        {
+                            "value": "264a8bed-0714-48fd-8b9d-0e4c4715cee5",
+                            "summary": "Example of a user ID"
+                        }
+                    ],
                     "format": "uuid",
                     "maxLength": 36,
                     "minLength": 36,
@@ -159,7 +194,12 @@
                     "authenticatorPermissions": {
                         "description": "Flag that indicates if the core permissions for the SHIELD - Authenticator App have been configured properly or not.",
                         "type": "boolean",
-                        "example": true
+                        "examples": [
+                            {
+                                "value": true,
+                                "summary": "Example of authenticator permission being present"
+                            }
+                        ]
                     },
                     "azurePermissions": {
                         "description": "Flag that indicates if the required core Azure RBAC assignment(s) are present or not.",
@@ -431,7 +471,6 @@
                     "index": {
                         "description": "Used to uniquely name multiple session hosts in a single host pool.",
                         "minimum": 0,
-                        "nullable": false,
                         "type": "number"
                     },
                     "location": {
@@ -539,8 +578,7 @@
                 "properties": {
                     "assignedLicense": {
                         "additionalProperties": {
-                            "type": "integer",
-                            "nullable": true
+                            "type": "integer"
                         },
                         "description": "License assignment on the specified principal.",
                         "type": "object"
@@ -555,8 +593,7 @@
                                     "type": "integer",
                                     "format": "int32"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         },
                         "description": "Service configuration assignment.  This is used to record the set of principals that are \"benefiting\" from the service, regardless of license status.",
                         "type": "object"
@@ -571,8 +608,7 @@
                                     "type": "integer",
                                     "format": "int32"
                                 }
-                            ],
-                            "nullable": true
+                            ]
                         },
                         "description": "Usage telemetry retrieved for the service to indicate if the specific principal is consuming the service or not, regardless of license status.",
                         "type": "object"
@@ -740,7 +776,6 @@
                     "parentDeviceId": {
                         "description": "DeviceID of the parent PAW device.",
                         "example": "81682cf5-0405-491d-8ab8-e07c778d7eaf",
-                        "nullable": true,
                         "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
                         "type": "string"
                     },
@@ -833,13 +868,11 @@
                         "description": "The name shown on UIs for the privileged user according to Entra ID.",
                         "example": "Example User (Priv)",
                         "maxLength": 256,
-                        "nullable": true,
                         "type": "string"
                     },
                     "firstName": {
                         "description": "Given name of the privileged user according to Entra ID.",
                         "maxLength": 64,
-                        "nullable": true,
                         "type": "string"
                     },
                     "id": {
@@ -868,7 +901,6 @@
                     "lastName": {
                         "description": "Surname/family name of the privileged user according to Entra ID.",
                         "maxLength": 64,
-                        "nullable": true,
                         "type": "string"
                     },
                     "upn": {
@@ -986,11 +1018,9 @@
             "ObjectPage.Intermediary.Avd": {
                 "properties": {
                     "@odata.count": {
-                        "nullable": true,
                         "type": "number"
                     },
                     "@odata.nextLink": {
-                        "nullable": true,
                         "type": "string"
                     },
                     "value": {
@@ -1022,11 +1052,9 @@
             "ObjectPage.ManagedDevice": {
                 "properties": {
                     "@odata.count": {
-                        "nullable": true,
                         "type": "number"
                     },
                     "@odata.nextLink": {
-                        "nullable": true,
                         "type": "string"
                     },
                     "value": {
@@ -1053,11 +1081,9 @@
             "ObjectPage.ManagedUser": {
                 "properties": {
                     "@odata.count": {
-                        "nullable": true,
                         "type": "number"
                     },
                     "@odata.nextLink": {
-                        "nullable": true,
                         "type": "string"
                     },
                     "value": {
@@ -1116,7 +1142,7 @@
         "title": "SHI Environment Lockdown and Defense",
         "version": "3.0.4"
     },
-    "openapi": "3.0.0",
+    "openapi": "3.1.0",
     "paths": {
         "/Api/Core/SystemRequirements": {
             "get": {
