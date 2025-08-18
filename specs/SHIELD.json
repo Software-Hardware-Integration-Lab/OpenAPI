@@ -7,12 +7,12 @@
                 "name": "correlationId",
                 "required": true,
                 "schema": {
-                    "examples": [[
+                    "examples": [
                         {
                             "value": "1d71e0fe-6e4a-464d-a690-80addf3bda55",
                             "summary": "Example of a correlation ID"
                         }
-                    ]],
+                    ],
                     "format": "uuid",
                     "maxLength": 36,
                     "minLength": 36,
@@ -26,12 +26,12 @@
                 "name": "deviceId",
                 "required": true,
                 "schema": {
-                    "examples": [[
+                    "examples": [
                         {
                             "value": "75da7fa4-4a04-44c8-8f2c-c1b2fa29aa51",
                             "summary": "Example of a device ID"
                         }
-                    ]],
+                    ],
                     "format": "uuid",
                     "maxLength": 36,
                     "minLength": 36,
@@ -45,12 +45,12 @@
                 "name": "intermediaryId",
                 "required": true,
                 "schema": {
-                    "examples": [[
+                    "examples": [
                         {
                             "value": "25d4d9da-28ea-42f8-b3df-23c3969abffa",
                             "summary": "Example of an intermediary ID"
                         }
-                    ]],
+                    ],
                     "format": "uuid",
                     "maxLength": 36,
                     "minLength": 36,
@@ -84,12 +84,12 @@
                 "required": true,
                 "schema": {
                     "description": "Unique identifier of the marketplace offering.",
-                    "examples": [[
+                    "examples": [
                         {
                             "value": "271ab834-7469-4f2d-a705-549972c4f325",
                             "summary": "Example of an offering ID"
                         }
-                    ]],
+                    ],
                     "format": "uuid",
                     "maxLength": 36,
                     "minLength": 36,
@@ -102,12 +102,12 @@
                 "in": "query",
                 "name": "search",
                 "schema": {
-                    "examples": [[
+                    "examples": [
                         {
                             "value": "finance",
                             "summary": "Example of a search term"
                         }
-                    ]],
+                    ],
                     "type": "string"
                 }
             },
@@ -126,12 +126,12 @@
                 "name": "Update Channel Name",
                 "required": true,
                 "schema": {
-                    "examples": [[
+                    "examples": [
                         {
                             "value": "stable",
                             "summary": "Example of an update channel name"
                         }
-                    ]],
+                    ],
                     "type": "string",
                     "enum": [
                         "alpha",
@@ -146,12 +146,12 @@
                 "name": "userId",
                 "required": true,
                 "schema": {
-                    "examples": [[
+                    "examples": [
                         {
                             "value": "264a8bed-0714-48fd-8b9d-0e4c4715cee5",
                             "summary": "Example of a user ID"
                         }
-                    ]],
+                    ],
                     "format": "uuid",
                     "maxLength": 36,
                     "minLength": 36,
@@ -194,12 +194,12 @@
                     "authenticatorPermissions": {
                         "description": "Flag that indicates if the core permissions for the SHIELD - Authenticator App have been configured properly or not.",
                         "type": "boolean",
-                        "examples": [[
+                        "examples": [
                             {
                                 "value": true,
                                 "summary": "Example of authenticator permission being present"
                             }
-                        ]]
+                        ]
                     },
                     "azurePermissions": {
                         "description": "Flag that indicates if the required core Azure RBAC assignment(s) are present or not.",
