@@ -7,7 +7,7 @@
                 "name": "correlationId",
                 "required": true,
                 "schema": {
-                    "examples": "1d71e0fe-6e4a-464d-a690-80addf3bda55",
+                    "examples": ["1d71e0fe-6e4a-464d-a690-80addf3bda55"],
                     "format": "uuid",
                     "maxLength": 36,
                     "minLength": 36,
@@ -21,7 +21,7 @@
                 "name": "tenantId",
                 "required": true,
                 "schema": {
-                    "examples": "b2fd105a-2594-437e-b934-1a62a51c28b4",
+                    "examples": ["b2fd105a-2594-437e-b934-1a62a51c28b4"],
                     "format": "uuid",
                     "maxLength": 36,
                     "minLength": 36,
@@ -35,7 +35,7 @@
                 "name": "channelName",
                 "required": true,
                 "schema": {
-                    "examples": "beta",
+                    "examples": ["beta"],
                     "type": "string"
                 }
             },
@@ -45,7 +45,7 @@
                 "name": "number",
                 "required": true,
                 "schema": {
-                    "examples": 1,
+                    "examples": [1],
                     "type": "integer",
                     "minimum": 0
                 }
@@ -56,7 +56,7 @@
                 "name": "version",
                 "required": true,
                 "schema": {
-                    "examples": "1.12.5",
+                    "examples": ["1.12.5"],
                     "type": "string"
                 }
             },
@@ -66,7 +66,7 @@
                 "name": "parentId",
                 "required": false,
                 "schema": {
-                    "examples": "3b241101-e2bb-4255-8caf-4136c566a962",
+                    "examples": ["3b241101-e2bb-4255-8caf-4136c566a962"],
                     "format": "uuid",
                     "maxLength": 36,
                     "minLength": 36,
@@ -80,7 +80,7 @@
                 "name": "dateStart",
                 "required": false,
                 "schema": {
-                    "examples": "2025-01-01T00:00:00Z",
+                    "examples": ["2025-01-01T00:00:00Z"],
                     "format": "date-time",
                     "type": "string"
                 }
@@ -91,7 +91,7 @@
                 "name": "dateEnd",
                 "required": false,
                 "schema": {
-                    "examples": "2025-02-05T23:59:59Z",
+                    "examples": ["2025-02-05T23:59:59Z"],
                     "format": "date-time",
                     "type": "string"
                 }
@@ -123,22 +123,22 @@
                 "properties": {
                     "authClient": {
                         "description": "Flag that indicates if the client side authentication validation is working or not.",
-                        "examples": false,
+                        "examples": [false],
                         "type": "boolean"
                     },
                     "authServer": {
                         "description": "Flag that indicates if the server side authentication is working or not.",
-                        "examples": true,
+                        "examples": [true],
                         "type": "boolean"
                     },
                     "bulkStorage": {
                         "description": "Flag that indicates if the bulk storage system is down (`false`) or not (`true`). False indicate the service is not working, true indicates the service is working.",
-                        "examples": true,
+                        "examples": [true],
                         "type": "boolean"
                     },
                     "database": {
                         "description": "Flag that indicates if the ORM (Database) system is down (`false`) or not (`true`). False indicate the service is not working, true indicates the service is working.",
-                        "examples": false,
+                        "examples": [false],
                         "type": "boolean"
                     }
                 },
@@ -154,7 +154,7 @@
             "Chat.OpenAIChatMessage": {
                 "title": "Chat - Message Record",
                 "description": "Object representing entity supplied to the AI agent or a response from the AI Agent",
-                "examples": {
+                "examples": [{
                     "role": "assistant",
                     "content": "What are the available IDs?",
                     "tool_calls": [
@@ -167,7 +167,7 @@
                             }
                         }
                     ]
-                },
+                }],
                 "type": "object",
                 "properties": {
                     "content": {
@@ -250,50 +250,50 @@
             },
             "LicenseReport.CorrelationRecord": {
                 "description": "Metadata that describes the execution session (run) that is used to tie/relate all of the license report together.",
-                "examples": {
+                "examples": [{
                     "auditTenantAccount": "priv-user@example.com",
                     "correlationId": "9d838115-0868-45d4-b8a5-98adc1af7e42",
                     "reportTenantAccount": "ent-user@example.com",
                     "tenantId": "7e536189-b2dd-4c8b-98b1-9b174777883f",
                     "createdAt": "2024-08-01T21:13:12.821Z",
                     "updatedAt": "2024-08-01T21:13:12.821Z"
-                },
+                }],
                 "properties": {
                     "auditTenantAccount": {
                         "description": "The user account used to retrieve the license information in the tenant being audited.",
-                        "examples": "admin-user@example.com",
+                        "examples": ["admin-user@example.com"],
                         "format": "email",
                         "type": "string"
                     },
                     "correlationId": {
                         "description": "The ID of the execution session (run) that is used to tie/relate all of the data together.",
-                        "examples": "88da2253-758f-4135-9d37-64448c8b65c1",
+                        "examples": ["88da2253-758f-4135-9d37-64448c8b65c1"],
                         "format": "uuid",
                         "type": "string",
                         "pattern": "^\\w+-\\w+-\\w+-\\w+-\\w+$"
                     },
                     "reportTenantAccount": {
                         "description": "User account used to store/report the license report to the SHI Lab cloud service.",
-                        "examples": "generic-user@example.com",
+                        "examples": ["generic-user@example.com"],
                         "format": "email",
                         "type": "string"
                     },
                     "tenantId": {
                         "description": "Unique ID of customer's Microsoft tenant that the license report is for.",
-                        "examples": "0e1fe83f-a33f-4250-8546-225b8d45ae01",
+                        "examples": ["0e1fe83f-a33f-4250-8546-225b8d45ae01"],
                         "format": "uuid",
                         "type": "string",
                         "pattern": "^\\w+-\\w+-\\w+-\\w+-\\w+$"
                     },
                     "createdAt": {
                         "description": "Timestamp of when the report was created.",
-                        "examples": "2024-08-01T21:12:22.148Z",
+                        "examples": ["2024-08-01T21:12:22.148Z"],
                         "format": "date-time",
                         "type": "string"
                     },
                     "updatedAt": {
                         "description": "Timestamp of when the report was last updated.",
-                        "examples": "2024-08-01T21:12:22.148Z",
+                        "examples": ["2024-08-01T21:12:22.148Z"],
                         "format": "date-time",
                         "type": "string"
                     }
@@ -351,7 +351,7 @@
                     "consumedService"
                 ],
                 "description": "Collection of principals that have had their in-use licenses and assigned licenses. Where the key is the principal ID and the value is the insights.",
-                "examples": {
+                "examples": [{
                     "assignedLicense": {
                         "eec0eb4f-6444-4f95-aba0-50c24d67f998": null,
                         "41781fb2-bc02-4b7c-bd55-b576c07bb09d": null,
@@ -394,7 +394,7 @@
                         "4b0d28f2-c1ce-48ae-a7d2-1caaa7825891": null,
                         "c90f1a25-e6cd-4163-ac6c-ca7616c585a9": null
                     }
-                },
+                }],
                 "title": "License Report - License Data"
             },
             "LicenseReport.FeatureBreakdown": {
@@ -402,19 +402,19 @@
                     "type": "boolean"
                 },
                 "description": "List of features that are configured for the specific service plan's service configuration for the related principal.\nThe key is the name of the feature that is being described.\nThe value is the state of the feature configuration, `true` is in scope and `false` meaning not in scope.",
-                "examples": {
+                "examples": [{
                     "Conditional Access": true,
                     "Access Reviews": true,
                     "Dynamic Groups": false,
                     "On-Prem Password Rest": true,
                     "On-Prem Password Protection": false
-                },
+                }],
                 "title": "License Report - Feature Breakdown",
                 "type": "object"
             },
             "LicenseReport": {
                 "description": "Completely calculated license report structure that is the result of a complete run.",
-                "examples": {
+                "examples": [{
                     "availableLicense": {
                         "e17b13ee-9749-488b-9289-d31a8fde045d": 123,
                         "2d995b6a-d4aa-4d8d-a03c-372ecb66509d": 456,
@@ -444,19 +444,19 @@
                             }
                         }
                     }
-                },
+                }],
                 "type": "object",
                 "properties": {
                     "availableLicense": {
                         "additionalProperties": {
-                            "examples": 1234,
+                            "examples": [1234],
                             "type": "integer"
                         },
                         "description": "Breakdown of the purchased licenses/service plans available in the tenant being audited for this run. Where the key is the ID of the service plan and the value is how many licenses are available/purchase for it.",
-                        "examples": {
+                        "examples": [{
                             "eec0eb4f-6444-4f95-aba0-50c24d67f998": 1234,
                             "41781fb2-bc02-4b7c-bd55-b576c07bb09d": 123
-                        },
+                        }],
                         "title": "License Report - Available Licenses",
                         "type": "object"
                     },
@@ -481,7 +481,7 @@
                 "properties": {
                     "correlationId": {
                         "description": "Used to correlate the license entitlements with other records.",
-                        "examples": "e097a3f5-9599-44a2-8923-fd3276c83ae1",
+                        "examples": ["e097a3f5-9599-44a2-8923-fd3276c83ae1"],
                         "format": "uuid",
                         "maxLength": 36,
                         "minLength": 36,
@@ -491,96 +491,96 @@
                     },
                     "enterpriseDeviceCount": {
                         "description": "Count of Enterprise Devices that are allowed to be managed.",
-                        "examples": 5,
+                        "examples": [5],
                         "format": "int32",
                         "type": "integer"
                     },
                     "enterpriseInterfaceCount": {
                         "description": "Count of Enterprise Interfaces that are allowed to be managed.",
-                        "examples": 6,
+                        "examples": [6],
                         "format": "int32",
                         "type": "integer"
                     },
                     "enterpriseIntermediaryCount": {
                         "description": "Count of Enterprise Intermediaries that are allowed to be managed.",
-                        "examples": 7,
+                        "examples": [7],
                         "format": "int32",
                         "type": "integer"
                     },
                     "enterpriseUserCount": {
                         "description": "Count of Enterprise Users that are allowed to be managed.",
-                        "examples": 8,
+                        "examples": [8],
                         "format": "int32",
                         "type": "integer"
                     },
                     "notValidAfter": {
                         "description": "Date that the entitlement expires at.",
-                        "examples": "2024-07-30T17:35:24.044Z",
+                        "examples": ["2024-07-30T17:35:24.044Z"],
                         "format": "date-time",
                         "type": "string"
                     },
                     "notValidBefore": {
                         "description": "Date that the entitlement becomes active at.",
-                        "examples": "2024-07-30T17:37:15.300Z",
+                        "examples": ["2024-07-30T17:37:15.300Z"],
                         "format": "date-time",
                         "type": "string"
                     },
                     "privilegedDeviceCount": {
                         "description": "Count of Privileged Devices (PAW) that are allowed to be managed.",
-                        "examples": 9,
+                        "examples": [9],
                         "format": "int32",
                         "type": "integer"
                     },
                     "privilegedInterfaceCount": {
                         "description": "Count of Privileged Interfaces that are allowed to be managed.",
-                        "examples": 10,
+                        "examples": [10],
                         "format": "int32",
                         "type": "integer"
                     },
                     "privilegedIntermediaryCount": {
                         "description": "Count of Privileged Intermediaries that are allowed to be managed.",
-                        "examples": 11,
+                        "examples": [11],
                         "format": "int32",
                         "type": "integer"
                     },
                     "privilegedUserCount": {
                         "description": "Count of Privileged Users that are allowed to be managed.",
-                        "examples": 12,
+                        "examples": [12],
                         "format": "int32",
                         "type": "integer"
                     },
                     "purchaseId": {
                         "description": "This could be any value used to correlate the purchase operation to this entitlement record.",
-                        "examples": "Bob's your uncle.",
+                        "examples": ["Bob's your uncle."],
                         "type": "string"
                     },
                     "specializedDeviceCount": {
                         "description": "Count of Specialized Devices that are allowed to be managed.",
-                        "examples": 13,
+                        "examples": [13],
                         "format": "int32",
                         "type": "integer"
                     },
                     "specializedInterfaceCount": {
                         "description": "Count of Specialized Interfaces that are allowed to be managed.",
-                        "examples": 14,
+                        "examples": [14],
                         "format": "int32",
                         "type": "integer"
                     },
                     "specializedIntermediaryCount": {
                         "description": "Count of Specialized Intermediaries that are allowed to be managed.",
-                        "examples": 15,
+                        "examples": [15],
                         "format": "int32",
                         "type": "integer"
                     },
                     "specializedUserCount": {
                         "description": "Count of Specialized Users that are allowed to be managed.",
-                        "examples": 15,
+                        "examples": [15],
                         "format": "int32",
                         "type": "integer"
                     },
                     "tenantId": {
                         "description": "Tenant that this license entitlement is valid for.",
-                        "examples": "a2a1698d-a3e0-42d3-96a4-47eb3e8f7dd1",
+                        "examples": ["a2a1698d-a3e0-42d3-96a4-47eb3e8f7dd1"],
                         "format": "uuid",
                         "maxLength": 36,
                         "minLength": 36,
@@ -613,73 +613,73 @@
                 "properties": {
                     "enterpriseDeviceCount": {
                         "description": "Count of Enterprise Devices that are allowed to be managed.",
-                        "examples": 5,
+                        "examples": [5],
                         "format": "int32",
                         "type": "integer"
                     },
                     "enterpriseInterfaceCount": {
                         "description": "Count of Enterprise Interfaces that are allowed to be managed.",
-                        "examples": 6,
+                        "examples": [3],
                         "format": "int32",
                         "type": "integer"
                     },
                     "enterpriseIntermediaryCount": {
                         "description": "Count of Enterprise Intermediaries that are allowed to be managed.",
-                        "examples": 7,
+                        "examples": [7],
                         "format": "int32",
                         "type": "integer"
                     },
                     "enterpriseUserCount": {
                         "description": "Count of Enterprise Users that are allowed to be managed.",
-                        "examples": 8,
+                        "examples": [8],
                         "format": "int32",
                         "type": "integer"
                     },
                     "privilegedDeviceCount": {
                         "description": "Count of Privileged Devices (PAW) that are allowed to be managed.",
-                        "examples": 9,
+                        "examples": [9],
                         "format": "int32",
                         "type": "integer"
                     },
                     "privilegedInterfaceCount": {
                         "description": "Count of Privileged Interfaces that are allowed to be managed.",
-                        "examples": 10,
+                        "examples": [10],
                         "format": "int32",
                         "type": "integer"
                     },
                     "privilegedIntermediaryCount": {
                         "description": "Count of Privileged Intermediaries that are allowed to be managed.",
-                        "examples": 11,
+                        "examples": [11],
                         "format": "int32",
                         "type": "integer"
                     },
                     "privilegedUserCount": {
                         "description": "Count of Privileged Users that are allowed to be managed.",
-                        "examples": 12,
+                        "examples": [12],
                         "format": "int32",
                         "type": "integer"
                     },
                     "specializedDeviceCount": {
                         "description": "Count of Specialized Devices that are allowed to be managed.",
-                        "examples": 13,
+                        "examples": [13],
                         "format": "int32",
                         "type": "integer"
                     },
                     "specializedInterfaceCount": {
                         "description": "Count of Specialized Interfaces that are allowed to be managed.",
-                        "examples": 14,
+                        "examples": [14],
                         "format": "int32",
                         "type": "integer"
                     },
                     "specializedIntermediaryCount": {
                         "description": "Count of Specialized Intermediaries that are allowed to be managed.",
-                        "examples": 15,
+                        "examples": [15],
                         "format": "int32",
                         "type": "integer"
                     },
                     "specializedUserCount": {
                         "description": "Count of Specialized Users that are allowed to be managed.",
-                        "examples": 15,
+                        "examples": [15],
                         "format": "int32",
                         "type": "integer"
                     }
@@ -765,13 +765,13 @@
                     },
                     "shieldArchitectureVersion": {
                         "description": "Version number of the architecture that is deployed.",
-                        "examples": "27",
+                        "examples": ["27"],
                         "type": "string",
                         "minimum": 1
                     },
                     "shieldCoreVersion": {
                         "description": "Version number of the product that the product is running.",
-                        "examples": "2.5.6",
+                        "examples": ["2.5.6"],
                         "type": "string"
                     },
                     "specializedDeviceCount": {
@@ -796,18 +796,18 @@
                     },
                     "tenantId": {
                         "description": "Tenant ID for the CX in question.",
-                        "examples": "5ae80362-6fe8-4ab1-9b6d-8dfa99d91657",
+                        "examples": ["5ae80362-6fe8-4ab1-9b6d-8dfa99d91657"],
                         "type": "string"
                     },
                     "createdAt": {
                         "description": "Timestamp on when the record was created. This is auto managed by sequelize.",
-                        "examples": "2024-08-02T23:48:50.231Z",
+                        "examples": ["2024-08-02T23:48:50.231Z"],
                         "format": "date-time",
                         "type": "string"
                     },
                     "updatedAt": {
                         "description": "Timestamp on when the record was last updated. This is auto managed by sequelize.",
-                        "examples": "2024-08-02T23:48:50.231Z",
+                        "examples": ["2024-08-02T23:48:50.231Z"],
                         "format": "date-time",
                         "type": "string"
                     }
@@ -839,7 +839,7 @@
                 "properties": {
                     "updateVersion": {
                         "description": "Latest found version of the application package.",
-                        "examples": "1.12.5",
+                        "examples": ["1.12.5"],
                         "type": "string"
                     }
                 },
@@ -854,17 +854,17 @@
                 "properties": {
                     "latest": {
                         "description": "Version number of the latest update available to the chanel.",
-                        "examples": "1.12.5",
+                        "examples": ["1.12.5"],
                         "type": "string"
                     },
                     "name": {
                         "description": "(Unique) Name of the update channel that this configuration belongs to.",
-                        "examples": "stable",
+                        "examples": ["stable"],
                         "type": "string"
                     },
                     "previous": {
                         "description": "Version number of the number that is being replaced via ring deployment, available to all rings at the minimum.",
-                        "examples": "1.12.4",
+                        "examples": ["1.12.4"],
                         "type": "string"
                     }
                 },
@@ -881,12 +881,12 @@
                 "properties": {
                     "latest": {
                         "description": "Flag that indicates if the ring should be operating off of the latest version number provided by the channel (`true`) or the previous (`false`).",
-                        "examples": true,
+                        "examples": [true],
                         "type": "boolean"
                     },
                     "number": {
                         "description": "Ring number that this configuration belongs to.",
-                        "examples": 1,
+                        "examples": [1],
                         "type": "integer",
                         "minimum": 0
                     }
@@ -903,22 +903,22 @@
                 "properties": {
                     "alphaEnabled": {
                         "description": "Flag that indicates if the current tenant is allowed to request alpha builds (`true`) or not (`false`).",
-                        "examples": false,
+                        "examples": [false],
                         "type": "boolean"
                     },
                     "channel": {
                         "description": "Name of the deploy channel.",
-                        "examples": "stable",
+                        "examples": ["stable"],
                         "type": "string"
                     },
                     "ring": {
                         "description": "Ring number that the client is a member of for the current chanel.",
-                        "examples": 1,
+                        "examples": [1],
                         "type": "integer"
                     },
                     "tenantId": {
                         "description": "Tenant ID that the configuration belongs to.",
-                        "examples": "a2a1698d-a3e0-42d3-96a4-47eb3e8f7dd1",
+                        "examples": ["a2a1698d-a3e0-42d3-96a4-47eb3e8f7dd1"],
                         "format": "uuid",
                         "maxLength": 36,
                         "minLength": 36,
@@ -941,7 +941,7 @@
                 "properties": {
                     "tenantId": {
                         "description": "The object ID of the tenant record",
-                        "examples": "1c4d2f3b-2e4b-4a5b-8c6d-7e8f9a0b1c2d",
+                        "examples": ["1c4d2f3b-2e4b-4a5b-8c6d-7e8f9a0b1c2d"],
                         "format": "uuid",
                         "maxLength": 36,
                         "minLength": 36,
@@ -950,12 +950,12 @@
                     },
                     "tenantDisplayName": {
                         "description": "Human readable name for the tenant record",
-                        "examples": "Contoso - Prod",
+                        "examples": ["Contoso - Prod"],
                         "type": "string"
                     },
                     "parentId": {
                         "description": "The object ID of the tenant that is considered a parent to this record",
-                        "examples": "22354a3f-2e21-4bd2-8327-dc842cfa80c8",
+                        "examples": ["22354a3f-2e21-4bd2-8327-dc842cfa80c8"],
                         "format": "uuid",
                         "maxLength": 36,
                         "minLength": 36,
@@ -972,10 +972,10 @@
                             "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
                             "type": "string"
                         },
-                        "examples": [
+                        "examples": [[
                             "fd9a6a53-594d-41aa-950a-b21ff41d4688",
                             "54fc12cd-403d-4c48-be12-86b807e958d3"
-                        ]
+                        ]]
                     }
                 },
                 "type": "object",
@@ -1044,7 +1044,7 @@
                 "requestBody": {
                     "content": {
                         "application/json": {
-                            "examples": {
+                            "examples": [{
                                 "License Report": {
                                     "description": "Sample, truncated report from an example customer environment.",
                                     "summary": "License Report",
@@ -1101,7 +1101,7 @@
                                     "summary": "Ignorant License Report Request",
                                     "value": {}
                                 }
-                            },
+                            }],
                             "schema": {
                                 "$ref": "#/components/schemas/LicenseReport"
                             }
@@ -1112,7 +1112,7 @@
                     "200": {
                         "content": {
                             "application/json": {
-                                "examples": {
+                                "examples": [{
                                     "License Report": {
                                         "description": "Sample, truncated report from an example customer environment.",
                                         "summary": "License Report",
@@ -1167,7 +1167,7 @@
                                             }
                                         }
                                     }
-                                },
+                                }],
                                 "schema": {
                                     "$ref": "#/components/schemas/LicenseReport"
                                 }
@@ -1207,7 +1207,7 @@
                     "200": {
                         "content": {
                             "application/json": {
-                                "examples": {
+                                "examples": [{
                                     "Example License Report": {
                                         "description": "Sample list of correlation records for the authenticated tenant.",
                                         "summary": "Available Correlation Records",
@@ -1230,7 +1230,7 @@
                                             }
                                         ]
                                     }
-                                },
+                                }],
                                 "schema": {
                                     "type": "array",
                                     "minItems": 0,
@@ -1274,7 +1274,7 @@
                     "200": {
                         "content": {
                             "application/json": {
-                                "examples": {
+                                "examples": [{
                                     "Example License Report": {
                                         "description": "Sample list of correlation records for the authenticated tenant.",
                                         "summary": "Available Correlation Records",
@@ -1297,7 +1297,7 @@
                                             }
                                         ]
                                     }
-                                },
+                                }],
                                 "schema": {
                                     "type": "array",
                                     "minItems": 0,
@@ -1338,7 +1338,7 @@
                     "200": {
                         "content": {
                             "application/json": {
-                                "examples": {
+                                "examples": [{
                                     "License Report": {
                                         "description": "Sample, truncated report from an example customer environment.",
                                         "summary": "License Report",
@@ -1393,7 +1393,7 @@
                                             }
                                         }
                                     }
-                                },
+                                }],
                                 "schema": {
                                     "$ref": "#/components/schemas/LicenseReport"
                                 }
@@ -1460,7 +1460,7 @@
                     "200": {
                         "content": {
                             "application/json": {
-                                "examples": {
+                                "examples": [{
                                     "License Report": {
                                         "description": "Sample, truncated report from an example customer environment.",
                                         "summary": "License Report",
@@ -1515,7 +1515,7 @@
                                             }
                                         }
                                     }
-                                },
+                                }],
                                 "schema": {
                                     "$ref": "#/components/schemas/LicenseReport"
                                 }
@@ -1592,7 +1592,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "examples": {
+                                    "examples": [{
                                         "messageList": [
                                             {
                                                 "role": "user",
@@ -1631,7 +1631,7 @@
                                             }
                                         ],
                                         "responseText": "You have correlation records for the following dates:\n- July 3, 2025\n- July 7, 2025\n\nWould you like to see details from any of these correlation records?"
-                                    },
+                                    }],
                                     "type": "object",
                                     "properties": {
                                         "messageList": {
@@ -1692,7 +1692,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "examples": {
+                                    "examples": [{
                                         "messageList": [
                                             {
                                                 "role": "user",
@@ -1731,7 +1731,7 @@
                                             }
                                         ],
                                         "responseText": "You have correlation records for the following dates:\n- July 3, 2025\n- July 7, 2025\n\nWould you like to see details from any of these correlation records?"
-                                    },
+                                    }],
                                     "type": "object",
                                     "properties": {
                                         "messageList": {
@@ -1771,7 +1771,7 @@
                 "requestBody": {
                     "content": {
                         "application/json": {
-                            "examples": {
+                            "examples": [{
                                 "Specialized Purchase": {
                                     "description": "Add-on purchase for the specified customer for some additional specialized licenses.",
                                     "summary": "Specialized Purchase",
@@ -1821,7 +1821,7 @@
                                     "summary": "Ignorant Entitlement Creation Request",
                                     "value": {}
                                 }
-                            },
+                            }],
                             "schema": {
                                 "$ref": "#/components/schemas/LicenseEntitlement.Shield"
                             }
@@ -1832,7 +1832,7 @@
                     "200": {
                         "content": {
                             "application/json": {
-                                "examples": {
+                                "examples": [{
                                     "Small MSP": {
                                         "description": "Example license entitlement for a small MSP.",
                                         "summary": "Local MSP",
@@ -1879,7 +1879,7 @@
                                             "tenantId": "bf78263c-6cec-44bc-9893-024dde25a486"
                                         }
                                     }
-                                },
+                                }],
                                 "schema": {
                                     "$ref": "#/components/schemas/LicenseEntitlement.Shield"
                                 }
@@ -1908,7 +1908,7 @@
                     "200": {
                         "content": {
                             "application/json": {
-                                "examples": {
+                                "examples": [{
                                     "Small MSP": {
                                         "description": "Example active license count for a small MSP.",
                                         "summary": "Local MSP",
@@ -1963,7 +1963,7 @@
                                             "specializedUserCount": 1000
                                         }
                                     }
-                                },
+                                }],
                                 "schema": {
                                     "$ref": "#/components/schemas/LicenseEntitlement.Shield.Count"
                                 }
@@ -2063,7 +2063,7 @@
                 "requestBody": {
                     "content": {
                         "application/json": {
-                            "examples": {
+                            "examples": [{
                                 "Monthly Report": {
                                     "description": "Example monthly telemetry report for an enterprise organization.",
                                     "summary": "Monthly Report",
@@ -2087,7 +2087,7 @@
                                         "specializedUserCount": 5238
                                     }
                                 }
-                            },
+                            }],
                             "schema": {
                                 "$ref": "#/components/schemas/Telemetry.Shield"
                             }
@@ -2098,7 +2098,7 @@
                     "200": {
                         "content": {
                             "application/json": {
-                                "examples": {
+                                "examples": [{
                                     "Monthly Report": {
                                         "description": "Example monthly telemetry report for an enterprise organization.",
                                         "summary": "Monthly Report",
@@ -2126,7 +2126,7 @@
                                             "updatedAt": "2024-08-05T15:25:55.525Z"
                                         }
                                     }
-                                },
+                                }],
                                 "schema": {
                                     "$ref": "#/components/schemas/Telemetry.Shield"
                                 }
@@ -2153,7 +2153,7 @@
                     "200": {
                         "content": {
                             "application/json": {
-                                "examples": {
+                                "examples": [{
                                     "List of Reports": {
                                         "description": "List of all available telemetry reports for the authenticated tenant.",
                                         "summary": "List of Reports",
@@ -2206,7 +2206,7 @@
                                             }
                                         ]
                                     }
-                                },
+                                }],
                                 "schema": {
                                     "type": "array",
                                     "items": {
@@ -2244,7 +2244,7 @@
                     "200": {
                         "content": {
                             "application/json": {
-                                "examples": {
+                                "examples": [{
                                     "List of Reports": {
                                         "description": "List of all available telemetry reports for the authenticated tenant.",
                                         "summary": "List of Reports",
@@ -2297,7 +2297,7 @@
                                             }
                                         ]
                                     }
-                                },
+                                }],
                                 "schema": {
                                     "type": "array",
                                     "items": {
@@ -2443,7 +2443,7 @@
                 "requestBody": {
                     "content": {
                         "application/json": {
-                            "examples": {
+                            "examples": [{
                                 "Channel Configuration Details": {
                                     "description": "Example channel configuration object.",
                                     "summary": "Channel Configuration",
@@ -2452,18 +2452,18 @@
                                         "previous": "1.12.4"
                                     }
                                 }
-                            },
+                            }],
                             "schema": {
                                 "type": "object",
                                 "properties": {
                                     "latest": {
                                         "description": "Flag that indicates if the ring should be operating off of the latest version number provided by the channel (`true`) or the previous (`false`).",
-                                        "examples": "true",
+                                        "examples": ["true"],
                                         "type": "boolean"
                                     },
                                     "number": {
                                         "description": "Ring number that this configuration belongs to.",
-                                        "examples": 1,
+                                        "examples": [1],
                                         "type": "integer",
                                         "minimum": 0
                                     }
@@ -2476,7 +2476,7 @@
                     "200": {
                         "content": {
                             "application/json": {
-                                "examples": {
+                                "examples": [{
                                     "Channel Configuration Details": {
                                         "description": "Example object returned on creation or update.",
                                         "summary": "Channel Configuration",
@@ -2486,7 +2486,7 @@
                                             "previous": "1.12.4"
                                         }
                                     }
-                                },
+                                }],
                                 "schema": {
                                     "$ref": "#/components/schemas/Update.Shield.Channel"
                                 }
@@ -2631,7 +2631,7 @@
                 "requestBody": {
                     "content": {
                         "application/json": {
-                            "examples": {
+                            "examples": [{
                                 "Channel Ring Configuration Details": {
                                     "description": "Example channel ring configuration object.",
                                     "summary": "Channel Ring Configuration",
@@ -2639,13 +2639,13 @@
                                         "latest": true
                                     }
                                 }
-                            },
+                            }],
                             "schema": {
                                 "type": "object",
                                 "properties": {
                                     "latest": {
                                         "description": "Flag that indicates if the ring should be operating off of the latest version number provided by the channel (`true`) or the previous (`false`).",
-                                        "examples": true,
+                                        "examples": [true],
                                         "type": "boolean"
                                     }
                                 }
@@ -2657,7 +2657,7 @@
                     "200": {
                         "content": {
                             "application/json": {
-                                "examples": {
+                                "examples": [{
                                     "Channel Ring Configuration Details": {
                                         "description": "Example object returned on creation or update.",
                                         "summary": "Channel Ring Configuration",
@@ -2666,7 +2666,7 @@
                                             "number": 1
                                         }
                                     }
-                                },
+                                }],
                                 "schema": {
                                     "$ref": "#/components/schemas/Update.Shield.Channel.Ring"
                                 }
@@ -2963,7 +2963,7 @@
                 "requestBody": {
                     "content": {
                         "application/json": {
-                            "examples": {
+                            "examples": [{
                                 "Tenant Configuration Details": {
                                     "description": "Example tenant configuration object.",
                                     "summary": "Tenant Configuration",
@@ -2973,23 +2973,23 @@
                                         "ring": 1
                                     }
                                 }
-                            },
+                            }],
                             "schema": {
                                 "type": "object",
                                 "properties": {
                                     "alphaEnabled": {
                                         "description": "Flag that indicates if the current tenant is allowed to request alpha builds (`true`) or not (`false`).",
-                                        "examples": false,
+                                        "examples": [false],
                                         "type": "boolean"
                                     },
                                     "channel": {
                                         "description": "Name of the deploy channel.",
-                                        "examples": "stable",
+                                        "examples": ["stable"],
                                         "type": "string"
                                     },
                                     "ring": {
                                         "description": "Ring number that the client is a member of for the current chanel.",
-                                        "examples": 1,
+                                        "examples": [1],
                                         "type": "integer"
                                     }
                                 }
@@ -3001,7 +3001,7 @@
                     "200": {
                         "content": {
                             "application/json": {
-                                "examples": {
+                                "examples": [{
                                     "Tenant Configuration Details": {
                                         "description": "Example object returned on creation or update.",
                                         "summary": "Tenant Configuration",
@@ -3012,7 +3012,7 @@
                                             "tenantId": "a2a1698d-a3e0-42d3-96a4-47eb3e8f7dd1"
                                         }
                                     }
-                                },
+                                }],
                                 "schema": {
                                     "$ref": "#/components/schemas/Update.Shield.Tenant"
                                 }
@@ -3086,7 +3086,7 @@
                                         "$ref": "#/components/schemas/TenantDetails"
                                     }
                                 },
-                                "examples": {
+                                "examples": [{
                                     "Example List Of Tenant Records": {
                                         "description": "Sample list of tenant records in the database",
                                         "summary": "Existing Tenant Records",
@@ -3108,7 +3108,7 @@
                                             }
                                         ]
                                     }
-                                }
+                                }]
                             }
                         },
                         "description": "OK"
@@ -3145,7 +3145,7 @@
                                 "schema": {
                                     "$ref": "#/components/schemas/TenantDetails"
                                 },
-                                "examples": {
+                                "examples": [{
                                     "Example Complete Tenant Record": {
                                         "description": "Sample details of one tenant record",
                                         "summary": "Existing Tenant Record",
@@ -3160,7 +3160,7 @@
                                             ]
                                         }
                                     }
-                                }
+                                }]
                             }
                         },
                         "description": "OK"
@@ -3233,7 +3233,7 @@
                                     }
                                 ]
                             },
-                            "examples": {
+                            "examples": [{
                                 "Example Request to Update Tenant Parent": {
                                     "description": "Sample payload requesting adjustment to the parent value",
                                     "summary": "Update Parent Information for Tenant",
@@ -3259,7 +3259,7 @@
                                         ]
                                     }
                                 }
-                            }
+                            }]
                         }
                     }
                 },
@@ -3270,7 +3270,7 @@
                                 "schema": {
                                     "$ref": "#/components/schemas/TenantDetails"
                                 },
-                                "examples": {
+                                "examples": [{
                                     "Example Complete Tenant Record": {
                                         "description": "Sample response after updating a tenant record",
                                         "summary": "Updated Tenant Record",
@@ -3283,7 +3283,7 @@
                                             ]
                                         }
                                     }
-                                }
+                                }]
                             }
                         },
                         "description": "OK"
