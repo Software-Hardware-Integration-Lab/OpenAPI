@@ -1548,7 +1548,7 @@
                 "requestBody": {
                     "content": {
                         "application/json": {
-                            "examples": {
+                            "examples": [{
                                 "License Report": {
                                     "description": "Sample, truncated report from an example customer environment. The request body is the License Report that to be stored.",
                                     "summary": "Example License Report Request",
@@ -1605,7 +1605,7 @@
                                     "summary": "Ignorant License Report Request",
                                     "value": {}
                                 }
-                            },
+                            }],
                             "schema": {
                                 "$ref": "#/components/schemas/LicenseReport"
                             }
@@ -1616,7 +1616,7 @@
                     "200": {
                         "content": {
                             "application/json": {
-                                "examples": {
+                                "examples": [{
                                     "License Report": {
                                         "description": "Sample, truncated report from an example customer environment. This will return the same report as the request input.",
                                         "summary": "Example of license report stored.",
@@ -1671,7 +1671,7 @@
                                             }
                                         }
                                     }
-                                },
+                                }],
                                 "schema": {
                                     "$ref": "#/components/schemas/LicenseReport"
                                 }
@@ -1734,7 +1734,7 @@
                                             }
                                         ]
                                     }
-                                },
+                                }],
                                 "schema": {
                                     "type": "array",
                                     "minItems": 0,
@@ -1821,7 +1821,7 @@
                                             }
                                         ]
                                     }
-                                },
+                                }],
                                 "schema": {
                                     "type": "array",
                                     "minItems": 0,
@@ -1937,7 +1937,7 @@
                                             }
                                         }
                                     }
-                                },
+                                }],
                                 "schema": {
                                     "$ref": "#/components/schemas/LicenseReport"
                                 }
@@ -2004,7 +2004,7 @@
                     "200": {
                         "content": {
                             "application/json": {
-                                "examples": {
+                                "examples": [{
                                     "License Report": {
                                         "description": "Sample, truncated report from an example customer environment for a correlation record of the specified tenant.",
                                         "summary": "Example License Report",
@@ -2059,7 +2059,7 @@
                                             }
                                         }
                                     }
-                                },
+                                }],
                                 "schema": {
                                     "$ref": "#/components/schemas/LicenseReport"
                                 }
@@ -2555,7 +2555,7 @@
                 "requestBody": {
                     "content": {
                         "application/json": {
-                            "examples": {
+                            "examples": [{
                                 "Specialized Purchase": {
                                     "description": "Add-on purchase for the specified customer for some additional specialized licenses.",
                                     "summary": "Specialized Purchase",
@@ -2605,7 +2605,7 @@
                                     "summary": "Ignorant Entitlement Creation Request",
                                     "value": {}
                                 }
-                            },
+                            }],
                             "schema": {
                                 "$ref": "#/components/schemas/LicenseEntitlement.Shield"
                             }
@@ -2616,7 +2616,7 @@
                     "200": {
                         "content": {
                             "application/json": {
-                                "examples": {
+                                "examples": [{
                                     "Small MSP": {
                                         "description": "Example license entitlement for a small MSP.",
                                         "summary": "Local MSP",
@@ -2663,7 +2663,7 @@
                                             "tenantId": "bf78263c-6cec-44bc-9893-024dde25a486"
                                         }
                                     }
-                                },
+                                }],
                                 "schema": {
                                     "$ref": "#/components/schemas/LicenseEntitlement.Shield"
                                 }
@@ -2692,7 +2692,7 @@
                     "200": {
                         "content": {
                             "application/json": {
-                                "examples": {
+                                "examples": [{
                                     "Small MSP": {
                                         "description": "Example active license count for a small MSP for the currently authenticated tenant.",
                                         "summary": "Local MSP",
@@ -2747,7 +2747,7 @@
                                             "specializedUserCount": 1000
                                         }
                                     }
-                                },
+                                }],
                                 "schema": {
                                     "$ref": "#/components/schemas/LicenseEntitlement.Shield.Count"
                                 }
@@ -2897,7 +2897,7 @@
                 "requestBody": {
                     "content": {
                         "application/json": {
-                            "examples": {
+                            "examples": [{
                                 "Monthly Report": {
                                     "description": "Example monthly telemetry report for an enterprise organization.",
                                     "summary": "Monthly Report",
@@ -2921,7 +2921,7 @@
                                         "specializedUserCount": 5238
                                     }
                                 }
-                            },
+                            }],
                             "schema": {
                                 "$ref": "#/components/schemas/Telemetry.Shield"
                             }
@@ -2932,7 +2932,7 @@
                     "200": {
                         "content": {
                             "application/json": {
-                                "examples": {
+                                "examples": [{
                                     "Monthly Report": {
                                         "description": "An example of latest monthly telemetry report for an enterprise organization after the latest telemetry input.",
                                         "summary": "Updated Monthly Report",
@@ -2960,7 +2960,7 @@
                                             "updatedAt": "2024-08-05T15:25:55.525Z"
                                         }
                                     }
-                                },
+                                }],
                                 "schema": {
                                     "$ref": "#/components/schemas/Telemetry.Shield"
                                 }
@@ -2987,7 +2987,7 @@
                     "200": {
                         "content": {
                             "application/json": {
-                                "examples": {
+                                "examples": [{
                                     "List of Reports": {
                                         "description": "List of all available SHIELD telemetry reports for the current authenticated tenant.",
                                         "summary": "List of SHIELD telemetry reports",
@@ -3040,7 +3040,7 @@
                                             }
                                         ]
                                     }
-                                },
+                                }],
                                 "schema": {
                                     "type": "array",
                                     "items": {
@@ -3128,7 +3128,7 @@
                     "200": {
                         "content": {
                             "application/json": {
-                                "examples": {
+                                "examples": [{
                                     "List of Reports": {
                                         "description": "List of all available SHIELD telemetry reports for the specified tenant.",
                                         "summary": "List of SHIELD telemetry reports",
@@ -3181,7 +3181,7 @@
                                             }
                                         ]
                                     }
-                                },
+                                }],
                                 "schema": {
                                     "type": "array",
                                     "items": {
@@ -3429,7 +3429,7 @@
                 "requestBody": {
                     "content": {
                         "application/json": {
-                            "examples": {
+                            "examples": [{
                                 "Channel Configuration Details": {
                                     "description": "Example channel configuration object that will add/update for specified channel.",
                                     "summary": "Channel Configuration",
@@ -3438,7 +3438,7 @@
                                         "previous": "1.12.4"
                                     }
                                 }
-                            },
+                            }],
                             "schema": {
                                 "type": "object",
                                 "properties": {
@@ -3471,7 +3471,7 @@
                     "200": {
                         "content": {
                             "application/json": {
-                                "examples": {
+                                "examples": [{
                                     "Channel Configuration Details": {
                                         "description": "Example object returned on creation or update.",
                                         "summary": "Channel Configuration",
@@ -3481,7 +3481,7 @@
                                             "previous": "1.12.4"
                                         }
                                     }
-                                },
+                                }],
                                 "schema": {
                                     "$ref": "#/components/schemas/Update.Shield.Channel"
                                 }
@@ -3660,7 +3660,7 @@
                 "requestBody": {
                     "content": {
                         "application/json": {
-                            "examples": {
+                            "examples": [{
                                 "Channel Ring Configuration Details": {
                                     "description": "Example channel ring configuration object.",
                                     "summary": "Channel Ring Configuration",
@@ -3668,7 +3668,7 @@
                                         "latest": true
                                     }
                                 }
-                            },
+                            }],
                             "schema": {
                                 "type": "object",
                                 "properties": {
@@ -3693,7 +3693,7 @@
                     "200": {
                         "content": {
                             "application/json": {
-                                "examples": {
+                                "examples": [{
                                     "Channel Ring Configuration Details": {
                                         "description": "Example object returned on creation or update.",
                                         "summary": "Channel Ring Configuration",
@@ -3702,7 +3702,7 @@
                                             "number": 1
                                         }
                                     }
-                                },
+                                }],
                                 "schema": {
                                     "$ref": "#/components/schemas/Update.Shield.Channel.Ring"
                                 }
@@ -4073,7 +4073,7 @@
                 "requestBody": {
                     "content": {
                         "application/json": {
-                            "examples": {
+                            "examples": [{
                                 "Tenant Configuration Details": {
                                     "description": "Example tenant configuration object.",
                                     "summary": "Tenant Configuration",
@@ -4083,7 +4083,7 @@
                                         "ring": 1
                                     }
                                 }
-                            },
+                            }],
                             "schema": {
                                 "type": "object",
                                 "properties": {
@@ -4124,7 +4124,7 @@
                     "200": {
                         "content": {
                             "application/json": {
-                                "examples": {
+                                "examples": [{
                                     "Tenant Configuration Details": {
                                         "description": "Example object returned on creation or update with tenantId set.",
                                         "summary": "Tenant Configuration",
@@ -4135,7 +4135,7 @@
                                             "tenantId": "a2a1698d-a3e0-42d3-96a4-47eb3e8f7dd1"
                                         }
                                     }
-                                },
+                                }],
                                 "schema": {
                                     "$ref": "#/components/schemas/Update.Shield.Tenant"
                                 }
@@ -4255,7 +4255,7 @@
                                             }
                                         ]
                                     }
-                                }
+                                }]
                             }
                         },
                         "description": "OK"
@@ -4292,7 +4292,7 @@
                                 "schema": {
                                     "$ref": "#/components/schemas/TenantDetails"
                                 },
-                                "examples": {
+                                "examples": [{
                                     "Example Complete Tenant Record": {
                                         "description": "An example showing a single existing tenant record.",
                                         "summary": "Existing Tenant Record",
@@ -4307,7 +4307,7 @@
                                             ]
                                         }
                                     }
-                                }
+                                }]
                             }
                         },
                         "description": "OK"
@@ -4405,7 +4405,7 @@
                                     }
                                 ]
                             },
-                            "examples": {
+                            "examples": [{
                                 "Example Request to Update Tenant Parent": {
                                     "description": "Sample payload requesting adjustment to the parent value.",
                                     "summary": "Update Parent Information for Tenant",
@@ -4431,7 +4431,7 @@
                                         ]
                                     }
                                 }
-                            }
+                            }]
                         }
                     }
                 },
@@ -4442,7 +4442,7 @@
                                 "schema": {
                                     "$ref": "#/components/schemas/TenantDetails"
                                 },
-                                "examples": {
+                                "examples": [{
                                     "Example Complete Tenant Record": {
                                         "description": "Sample response after updating a tenant record.",
                                         "summary": "Updated Tenant Record",
@@ -4455,7 +4455,7 @@
                                             ]
                                         }
                                     }
-                                }
+                                }]
                             }
                         },
                         "description": "OK"
