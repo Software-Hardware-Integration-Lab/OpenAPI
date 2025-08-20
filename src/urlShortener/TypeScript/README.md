@@ -24,7 +24,7 @@ import { urlShortenerClientFactory } from '@shi-corp/sdk-url-shortener';
 const credential = new DefaultAzureCredential();
 
 /** Base URL for your URL Shortener instance. Protocol specifier (`http`/`https`) is required, even for localhost. */
-const baseUrl = new URL('https://url-shortner.example.com');
+const baseUrl = new URL('https://url-shortener.example.com');
 
 /**
  * Configured client for URL Shortener that can make authenticated web requests against backend.
