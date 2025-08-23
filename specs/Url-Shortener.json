@@ -27,6 +27,9 @@
             },
             "404": {
                 "description": "The requested object was not found."
+            },
+            "500": {
+                "description": "Internal Server Error"
             }
         },
         "schemas": {
@@ -408,6 +411,56 @@
     },
     "openapi": "3.1.1",
     "paths": {
+        "/Api/Auth/Id": {
+            "get": {
+                "description": "Provides the Tenant ID and the Application ID of the service principal that access tokens need to be issued against. This is also useful for configuring public clients to be able to authenticate to for auth code flows.",
+                "operationId": "/Api/Auth/Id/Get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "appId": {
+                                            "description": "Application ID that should be used in Access Tokens as the audience and the endpoint necessary for auth code flows.",
+                                            "type": "string",
+                                            "format": "uuid",
+                                            "maxLength": 36,
+                                            "minLength": 36,
+                                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                                            "readOnly": true
+                                        },
+                                        "tenantId": {
+                                            "description": "Tenant ID necessary for authority host URL configuration and UI customization.",
+                                            "type": "string",
+                                            "format": "uuid",
+                                            "maxLength": 36,
+                                            "minLength": 36,
+                                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                                            "readOnly": true
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "appId",
+                                        "tenantId"
+                                    ]
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "tags": [
+                    "Core"
+                ],
+                "security": [],
+                "summary": "Retrieves the IDs required to authenticate."
+            }
+        },
         "/Api/Core/Health": {
             "get": {
                 "summary": "Health of the Service for Probing",
