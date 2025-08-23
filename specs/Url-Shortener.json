@@ -72,7 +72,7 @@
                         "customUserAgentMatcher": null,
                         "domainConfigId": "9a1e7b2c-5d3f-4a8b-9c2e-6f1a3d7e8b54",
                         "updatedBy": "3c5a9b7e-2d4f-4c1b-8e6a-7f2b3d1c9e45",
-                        "targetUrl": "https://www.example.com/very-long-and-complex-url-with plenty-of-special-characters-and-non-repeated-words",
+                        "targetUrl": "https://www.example.com/very-long-and-complex-url-with_plenty-of-special-characters-and-non-repeated-words",
                         "targetUrlCustom": null,
                         "targetUrlMobile": null,
                         "targetUrlNodeJs": null,
