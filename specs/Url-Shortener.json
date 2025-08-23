@@ -404,7 +404,7 @@
         },
         "description": "Create vanity or numeric short version of your desired URL. Share it digitally, as QR code, or print it.",
         "title": "SHI URL Shortener",
-        "version": "1.0.0"
+        "version": "0.0.1"
     },
     "openapi": "3.1.1",
     "paths": {
