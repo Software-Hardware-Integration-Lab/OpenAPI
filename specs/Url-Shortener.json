@@ -511,7 +511,7 @@
         "/Api/Redirect": {
             "get": {
                 "summary": "Retrieves All Redirect Configuration Records",
-                "description": "Retrieves all redirect records matching the requested filters, if any.\n\nThis endpoint does not have implicit scope (permission) restrictions but includes an internal check on user's access level.",
+                "description": "Retrieves all redirect records matching the requested filters, if any.\n\nThis endpoint requires that the principal has an RBAC assignment to view the associated records or have the role `Everything.ReadWrite.All`, or `Redirect.ReadWrite.All` assigned in Entra to view all regardless of RBAC.",
                 "operationId": "/Api/Redirect/Get",
                 "parameters": [
                     {
@@ -662,7 +662,7 @@
             },
             "post": {
                 "summary": "Creates New Redirect Configuration Record",
-                "description": "Creates new URL redirect record in the database and returns information enriched with created metadata.\n\nThis endpoint does not have scope (permission) restrictions.",
+                "description": "Creates new URL redirect record in the database and returns information enriched with created metadata.\n\nThis endpoint does not have scope (permission) restrictions. Creating principal is set as RBAC owner of the newly created URL.",
                 "operationId": "/Api/Redirect/Post",
                 "requestBody": {
                     "required": true,
@@ -782,7 +782,7 @@
         "/Api/Redirect/{id}": {
             "get": {
                 "summary": "Retrieves Specific Redirect Configuration Record",
-                "description": "Retrieves all information from the database of the redirect record.\n\nThis endpoint does not have implicit scope (permission) restrictions but includes an internal check on user's access level.",
+                "description": "Retrieves all information from the database of the redirect record.\n\nTo view the specific record, the principal has to be a part of an RBAC assignment or one of the following Entra roles: `Everything.ReadWrite.All`, or `Redirect.ReadWrite.All`.",
                 "operationId": "/Api/Redirect/:id/Get",
                 "parameters": [
                     {
@@ -813,7 +813,7 @@
             },
             "patch": {
                 "summary": "Updates Specific Redirect Configuration Record",
-                "description": "Updates one or more properties of the redirect record based on which fields are provided.\n\nThis endpoint does not have implicit scope (permission) restrictions but includes an internal check on user's access level.",
+                "description": "Updates one or more properties of the redirect record based on which fields are provided.\n\nThis endpoint requires either of the following RBAC assignments: `Owner` or `Contributor` on the specific record, or have the role `Everything.ReadWrite.All`, or `Redirect.ReadWrite.All` assigned in Entra to update regardless of RBAC.",
                 "operationId": "/Api/Redirect/:id/Patch",
                 "parameters": [
                     {
@@ -863,7 +863,7 @@
             },
             "delete": {
                 "summary": "Removes Specific Redirect Configuration Record",
-                "description": "Deletes the redirect record from the database.\n\nThis endpoint does not have implicit scope (permission) restrictions but includes an internal check on user's access level.",
+                "description": "Deletes the redirect record from the database.\n\nThis endpoint requires an RBAC assignment of `Owner` or `Contributor` on the specific record, or the `Everything.ReadWrite.All`, or `Redirect.ReadWrite.All` scope (permission) regardless of permissions.",
                 "operationId": "/Api/Redirect/:id/Delete",
                 "parameters": [
                     {
@@ -886,7 +886,7 @@
         "/Api/BannedName": {
             "get": {
                 "summary": "Retrieves All Banned Name Records",
-                "description": "Retrieves all records of the banned terms that are not allowed to be used as targets.\n\nThis endpoint does not have implicit scope (permission) restrictions but includes an internal check on user's access level.",
+                "description": "Retrieves all records of the banned terms that are not allowed to be used as targets.\n\nThis endpoint does not have implicit scope (permission) restrictions but includes an internal check on user's RBAC assignments to be able to view bans.",
                 "operationId": "/Api/BannedName/Get",
                 "parameters": [
                     {
@@ -987,7 +987,7 @@
         "/Api/BannedName/{id}": {
             "get": {
                 "summary": "Retrieves Specific Banned Name Record",
-                "description": "Retrieves all information from the database of the banned name record.\n\nThis endpoint does not have implicit scope (permission) restrictions but includes an internal check on user's access level.",
+                "description": "Retrieves all information from the database of the banned name record.\n\nThis endpoint does not have implicit scope (permission) restrictions but includes an internal check on user's RBAC assignments to view the specific ban.",
                 "operationId": "/Api/BannedName/:id/Get",
                 "parameters": [
                     {
@@ -1018,7 +1018,7 @@
             },
             "delete": {
                 "summary": "Removes Specific Banned Name Record",
-                "description": "Deletes the banned name record from the database.\n\nThis endpoint requires an RBAC assignment or the `BanList.ReadWrite.All` or `Everything.ReadWrite.All` scope (permission).",
+                "description": "Deletes the banned name record from the database.\n\nThis endpoint requires an RBAC assignment and the `BanList.ReadWrite.All` or `Everything.ReadWrite.All` scope (permission).",
                 "operationId": "/Api/BannedName/:id/Delete",
                 "parameters": [
                     {
@@ -1041,7 +1041,7 @@
         "/Api/Domain": {
             "get": {
                 "summary": "Retrieves All Domain Name Records",
-                "description": "Retrieves all domain name records from the database.\n\nThis endpoint does not have implicit scope (permission) restrictions but includes an internal check on user's access level.",
+                "description": "Retrieves all domain name records from the database.\n\nThis endpoint does not have implicit scope (permission) restrictions but includes an internal check on user's RBAC assignments.",
                 "operationId": "/Api/Domain/Get",
                 "parameters": [
                     {
@@ -1172,7 +1172,7 @@
         "/Api/Domain/{id}": {
             "get": {
                 "summary": "Retrieves Specific Domain Name Record",
-                "description": "Retrieves all information from the database of the domain name record.\n\nThis endpoint does not have implicit scope (permission) restrictions but includes an internal check on user's access level.",
+                "description": "Retrieves all information from the database of the domain name record.\n\nThis endpoint does not have implicit scope (permission) restrictions but includes an internal check on user's RBAC assignments.",
                 "operationId": "/Api/Domain/:id/Get",
                 "parameters": [
                     {
@@ -1275,7 +1275,7 @@
         "/Api/Rbac": {
             "get": {
                 "summary": "Retrieves All RBAC Assignment Records",
-                "description": "Retrieves all RBAC assignment records from the database.\n\nThis endpoint does not have implicit scope (permission) restrictions but includes an internal check on user's access level.",
+                "description": "Retrieves all RBAC assignment records from the database.\n\nThis endpoint does not have implicit scope (permission) restrictions but includes an internal check on user's RBAC assignments.",
                 "operationId": "/Api/Rbac/Get",
                 "parameters": [
                     {
@@ -1376,7 +1376,7 @@
             },
             "post": {
                 "summary": "Creates New RBAC Assignment Record",
-                "description": "Create new RBAC assignment record in the database and returns information enriched with created metadata.\n\nThis endpoint does not have implicit scope (permission) restrictions but includes an internal check on user's access level.",
+                "description": "Create new RBAC assignment record in the database and returns information enriched with created metadata.\n\nThis endpoint does not have implicit scope (permission) restrictions but includes an internal check on user's RBAC assignments.",
                 "operationId": "/Api/Rbac/Post",
                 "requestBody": {
                     "required": true,
@@ -1462,7 +1462,7 @@
             },
             "delete": {
                 "summary": "Removes Specific RBAC Assignment Record",
-                "description": "Deletes the RBAC assignment record from the database.\n\nThis endpoint does not have implicit scope (permission) restrictions but includes an internal check on user's access level.",
+                "description": "Deletes the RBAC assignment record from the database.\n\nThis endpoint does not have implicit scope (permission) restrictions but includes an internal check on user's RBAC assignments.",
                 "operationId": "/Api/Rbac/:id/Delete",
                 "parameters": [
                     {
