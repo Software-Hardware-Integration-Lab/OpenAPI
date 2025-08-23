@@ -49,7 +49,7 @@ jobs:
           run: |
             DIST_FILE="swagger-ui/dist/swagger-initializer.js"
             # Remove the 'url:' property and insert the 'urls:' array
-            sed -i '/url: /c\    urls: [\n      {\n        "url": "https://raw.githubusercontent.com/Software-Hardware-Integration-Lab/OpenAPI/refs/heads/main/specs/Data-Gateway.json",\n        "name": "Data Gateway"\n      },\n      {\n        "url": "https://raw.githubusercontent.com/Software-Hardware-Integration-Lab/OpenAPI/refs/heads/main/specs/SHIELD.json",\n        "name": "SHIELD"\n      }\n    ],' "$DIST_FILE"
+            sed -i '/url: /c\    urls: [\n{\n"url": "https://raw.githubusercontent.com/Software-Hardware-Integration-Lab/OpenAPI/refs/heads/main/specs/Data-Gateway.json",\n"name": "Data Gateway"\n},\n{\n"url": "https://raw.githubusercontent.com/Software-Hardware-Integration-Lab/OpenAPI/refs/heads/main/specs/SHIELD.json",\n"name": "SHIELD"\n}\n{\n"url": "https://raw.githubusercontent.com/Software-Hardware-Integration-Lab/OpenAPI/refs/heads/main/specs/Url-Shortener.json",\n"name": "Data Gateway"\n}\n],' "$DIST_FILE"
 
         # Uploads the built artifact to github pages
         - name: Upload Artifact

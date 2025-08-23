@@ -13,6 +13,10 @@
 			"path": "src/shield"
 		},
 		{
+			"name": "URL Shortener",
+			"path": "src/urlShortener"
+		},
+		{
 			"name": "GitHub Actions",
 			"path": ".github/workflows"
 		}
