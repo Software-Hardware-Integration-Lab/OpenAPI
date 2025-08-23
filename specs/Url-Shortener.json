@@ -273,8 +273,9 @@
                     },
                     "count": {
                         "description": "Current increment for the id number if the domain is in ID number mode. Always incremented even if not in ID mode so as to be able to swap to ID mode if requested with no risk for collision.",
-                        "type": "number",
+                        "type": "integer",
                         "format": "int32",
+                        "minimum": 0,
                         "readOnly": true
                     },
                     "hidden": {
@@ -283,7 +284,8 @@
                     },
                     "hostName": {
                         "description": "String to be used in matching the host name. Subdomains need to have their own record to be usable.",
-                        "type": "string"
+                        "type": "string",
+                        "format": "hostname"
                     },
                     "type": {
                         "description": "Flag that indicates the type of shortened URL that can be generated on the domain: `vanity` allows any user structure as long as it is unique. Example: `https://example.com/myUrl`, `idNumber` locks out user control of the vanity URL and hard codes it to an ID number. Example: `https://example.com/managedLink?id=123`.",
@@ -340,7 +342,8 @@
                     "createdAt": {
                         "description": "Time stamp of when the assignment was created.",
                         "type": "string",
-                        "format": "date-time"
+                        "format": "date-time",
+                        "readOnly": true
                     },
                     "targetId": {
                         "description": "Unique ID of the system that this assignment describes.",
@@ -467,7 +470,7 @@
                 "description": "Check the health of the various components of the URL Shortener and report back. Useful for automated health probing.",
                 "operationId": "/Api/Core/Health/Get",
                 "responses": {
-                    "201": {
+                    "204": {
                         "description": "Service is operational!"
                     },
                     "500": {
@@ -662,6 +665,7 @@
                 "description": "Creates new URL redirect record in the database and returns information enriched with created metadata.\n\nThis endpoint does not have scope (permission) restrictions.",
                 "operationId": "/Api/Redirect/Post",
                 "requestBody": {
+                    "required": true,
                     "content": {
                         "application/json": {
                             "examples": {
@@ -694,24 +698,7 @@
                                 }
                             },
                             "schema": {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/components/schemas/Redirect.UrlConfiguration"
-                                    },
-                                    {
-                                        "required": [
-                                            "sourceUrl",
-                                            "customUserAgentMatcher",
-                                            "targetUrl",
-                                            "targetUrlCustom",
-                                            "targetUrlMobile",
-                                            "targetUrlNodeJs",
-                                            "targetUrlPowershell",
-                                            "targetUrlPython",
-                                            "type"
-                                        ]
-                                    }
-                                ]
+                                "$ref": "#/components/schemas/Redirect.UrlConfiguration"
                             }
                         }
                     }
@@ -742,6 +729,7 @@
                 "description": "Validates if provided target name is available to be requested. Returns boolean `true` if the name is available, `false` if the name is already recorded.\n\nThis endpoint does not have scope (permission) restrictions.",
                 "operationId": "/Api/Redirect/Check/Post",
                 "requestBody": {
+                    "required": true,
                     "content": {
                         "application/json": {
                             "examples": {
@@ -763,7 +751,10 @@
                                         "description": "URL to check if is taken or not.",
                                         "type": "string"
                                     }
-                                }
+                                },
+                                "required": [
+                                    "sourceName"
+                                ]
                             }
                         }
                     }
@@ -843,14 +834,7 @@
                                 }
                             },
                             "schema": {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/components/schemas/Redirect.UrlConfiguration"
-                                    },
-                                    {
-                                        "required": []
-                                    }
-                                ]
+                                "$ref": "#/components/schemas/Redirect.UrlConfiguration"
                             }
                         }
                     }
@@ -956,6 +940,7 @@
                 "description": "Create new record of the banned term.\n\nThis endpoint requires the `BanList.ReadWrite.All` or `Everything.ReadWrite.All` scope (permission).",
                 "operationId": "/Api/BannedName/Post",
                 "requestBody": {
+                    "required": true,
                     "content": {
                         "application/json": {
                             "examples": {
@@ -974,17 +959,7 @@
                                 }
                             },
                             "schema": {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/components/schemas/Redirect.BannedTerm"
-                                    },
-                                    {
-                                        "required": [
-                                            "name",
-                                            "type"
-                                        ]
-                                    }
-                                ]
+                                "$ref": "#/components/schemas/Redirect.BannedTerm"
                             }
                         }
                     }
@@ -1043,7 +1018,7 @@
             },
             "delete": {
                 "summary": "Removes Specific Banned Name Record",
-                "description": "Deletes the banned name record from the database.\n\nThis endpoint requires the `BanList.ReadWrite.All` or `Everything.ReadWrite.All` scope (permission).",
+                "description": "Deletes the banned name record from the database.\n\nThis endpoint requires an RBAC assignment or the `BanList.ReadWrite.All` or `Everything.ReadWrite.All` scope (permission).",
                 "operationId": "/Api/BannedName/:id/Delete",
                 "parameters": [
                     {
@@ -1083,7 +1058,8 @@
                         "description": "Filter by the `count` field.",
                         "schema": {
                             "type": "integer",
-                            "format": "int32"
+                            "format": "int32",
+                            "minimum": 0
                         }
                     },
                     {
@@ -1145,6 +1121,7 @@
                 "description": "Creates new domain name record in the database and returns information enriched with created metadata.\n\nThis endpoint requires the `Domain.ReadWrite.All` or `Everything.ReadWrite.All` scope (permission).",
                 "operationId": "/Api/Domain/Post",
                 "requestBody": {
+                    "required": true,
                     "content": {
                         "application/json": {
                             "examples": {
@@ -1167,20 +1144,7 @@
                                 }
                             },
                             "schema": {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/components/schemas/Redirect.DomainName"
-                                    },
-                                    {
-                                        "required": [
-                                            "allowHttp",
-                                            "count",
-                                            "hidden",
-                                            "hostName",
-                                            "type"
-                                        ]
-                                    }
-                                ]
+                                "$ref": "#/components/schemas/Redirect.DomainName"
                             }
                         }
                     }
@@ -1254,20 +1218,12 @@
                                     "description": "Payload contains one or more fields that need update in the database.",
                                     "value": {
                                         "allowHttp": false,
-                                        "count": 18,
                                         "type": "idNumber"
                                     }
                                 }
                             },
                             "schema": {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/components/schemas/Redirect.DomainName"
-                                    },
-                                    {
-                                        "required": []
-                                    }
-                                ]
+                                "$ref": "#/components/schemas/Redirect.DomainName"
                             }
                         }
                     }
@@ -1423,6 +1379,7 @@
                 "description": "Create new RBAC assignment record in the database and returns information enriched with created metadata.\n\nThis endpoint does not have implicit scope (permission) restrictions but includes an internal check on user's access level.",
                 "operationId": "/Api/Rbac/Post",
                 "requestBody": {
+                    "required": true,
                     "content": {
                         "application/json": {
                             "examples": {
@@ -1446,20 +1403,7 @@
                                 }
                             },
                             "schema": {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/components/schemas/Redirect.RbacAssignment"
-                                    },
-                                    {
-                                        "required": [
-                                            "assignmentTargetType",
-                                            "targetId",
-                                            "principalId",
-                                            "principalType",
-                                            "role"
-                                        ]
-                                    }
-                                ]
+                                "$ref": "#/components/schemas/Redirect.RbacAssignment"
                             }
                         }
                     }
