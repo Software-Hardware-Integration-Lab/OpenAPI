@@ -601,7 +601,7 @@
                     }
                 },
                 "tags": [
-                    "Redirect Management"
+                    "URL Redirect"
                 ]
             },
             "post": {
@@ -679,7 +679,7 @@
                     }
                 },
                 "tags": [
-                    "Redirect Management"
+                    "URL Redirect"
                 ]
             }
         },
@@ -731,7 +731,7 @@
                     }
                 },
                 "tags": [
-                    "Redirect Management"
+                    "URL Redirect"
                 ]
             }
         },
@@ -764,7 +764,7 @@
                     }
                 },
                 "tags": [
-                    "Redirect Management"
+                    "URL Redirect"
                 ]
             },
             "patch": {
@@ -821,7 +821,7 @@
                     }
                 },
                 "tags": [
-                    "Redirect Management"
+                    "URL Redirect"
                 ]
             },
             "delete": {
@@ -842,7 +842,7 @@
                     }
                 },
                 "tags": [
-                    "Redirect Management"
+                    "URL Redirect"
                 ]
             }
         },
@@ -895,7 +895,7 @@
                     }
                 },
                 "tags": [
-                    "Redirect Management"
+                    "Banned Name"
                 ]
             },
             "post": {
@@ -952,7 +952,7 @@
                     }
                 },
                 "tags": [
-                    "Redirect Management"
+                    "Banned Name"
                 ]
             }
         },
@@ -985,7 +985,7 @@
                     }
                 },
                 "tags": [
-                    "Redirect Management"
+                    "Banned Name"
                 ]
             },
             "delete": {
@@ -1006,7 +1006,7 @@
                     }
                 },
                 "tags": [
-                    "Redirect Management"
+                    "Banned Name"
                 ]
             }
         },
@@ -1084,7 +1084,7 @@
                     }
                 },
                 "tags": [
-                    "Redirect Management"
+                    "Domain Configuration"
                 ]
             },
             "post": {
@@ -1148,7 +1148,7 @@
                     }
                 },
                 "tags": [
-                    "Redirect Management"
+                    "Domain Configuration"
                 ]
             }
         },
@@ -1181,7 +1181,7 @@
                     }
                 },
                 "tags": [
-                    "Redirect Management"
+                    "Domain Configuration"
                 ]
             },
             "patch": {
@@ -1238,7 +1238,7 @@
                     }
                 },
                 "tags": [
-                    "Redirect Management"
+                    "Domain Configuration"
                 ]
             },
             "delete": {
@@ -1259,7 +1259,7 @@
                     }
                 },
                 "tags": [
-                    "Redirect Management"
+                    "Domain Configuration"
                 ]
             }
         },
@@ -1362,7 +1362,7 @@
                     }
                 },
                 "tags": [
-                    "Redirect Management"
+                    "RBAC Assignment"
                 ]
             },
             "post": {
@@ -1427,7 +1427,7 @@
                     }
                 },
                 "tags": [
-                    "Redirect Management"
+                    "RBAC Assignment"
                 ]
             }
         },
@@ -1460,7 +1460,7 @@
                     }
                 },
                 "tags": [
-                    "Redirect Management"
+                    "RBAC Assignment"
                 ]
             },
             "delete": {
@@ -1481,7 +1481,7 @@
                     }
                 },
                 "tags": [
-                    "Redirect Management"
+                    "RBAC Assignment"
                 ]
             }
         }
@@ -1503,8 +1503,20 @@
             "name": "Core"
         },
         {
-            "description": "Collection of CRUD operations to manage all aspects of the redirect system: redirect themselves, banned terms, domains, and rbac controls.",
-            "name": "Redirect Management"
+            "description": "Handles the redirection of short URLs to their target destinations, including support for different types of redirects and tracking.",
+            "name": "URL Redirect"
+        },
+        {
+            "description": "Manages the list of terms that are prohibited from being used as targets in short URLs to prevent misuse or inappropriate content.",
+            "name": "Banned Name"
+        },
+        {
+            "description": "Manages domain names used for generating short URLs, including support for vanity domains and domain-specific settings.",
+            "name": "Domain Configuration"
+        },
+        {
+            "description": "Manages role-based access control (RBAC) assignments, allowing for fine-grained permissions and access management for users and groups within the URL shortening service.",
+            "name": "RBAC Assignment"
         }
     ]
 }
