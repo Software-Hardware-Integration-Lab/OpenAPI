@@ -61,18 +61,18 @@
                     "database"
                 ]
             },
-            "Redirect.ConfigurationRecord": {
+            "Redirect.UrlConfiguration": {
                 "title": "Redirect - Configuration Record",
                 "description": "Object representing table entity with all available metadata.",
                 "examples": [
                     {
                         "id": "7e2b1c8a-4f3d-4e2a-9b1a-2c6e8d7f1a23",
-                        "sourceUrl": "https://www.example.com/very-long-and-complex-url-with plenty-of-special-characters-and-non-repeated-words",
+                        "sourceUrl": "https://www.example.com/vanityUrl",
                         "createdBy": "3c5a9b7e-2d4f-4c1b-8e6a-7f2b3d1c9e45",
                         "customUserAgentMatcher": null,
                         "domainConfigId": "9a1e7b2c-5d3f-4a8b-9c2e-6f1a3d7e8b54",
                         "updatedBy": "3c5a9b7e-2d4f-4c1b-8e6a-7f2b3d1c9e45",
-                        "targetUrl": "https://www.example.com/target",
+                        "targetUrl": "https://www.example.com/very-long-and-complex-url-with plenty-of-special-characters-and-non-repeated-words",
                         "targetUrlCustom": null,
                         "targetUrlMobile": null,
                         "targetUrlNodeJs": null,
@@ -198,7 +198,7 @@
                     "type"
                 ]
             },
-            "Redirect.BannedTermRecord": {
+            "Redirect.BannedTerm": {
                 "title": "Redirect - Banned Term Record",
                 "description": "Object representing a banned term that cannot be used in the vanity URLs.",
                 "examples": [
@@ -237,7 +237,7 @@
                     "type"
                 ]
             },
-            "Redirect.DomainNameRecord": {
+            "Redirect.DomainName": {
                 "title": "Redirect - Domain Name Record",
                 "description": "Object representing a domain name entry that will serve as a base for vanity URLs.",
                 "examples": [
@@ -295,7 +295,7 @@
                     "type"
                 ]
             },
-            "Redirect.RbacAssignmentRecord": {
+            "Redirect.RbacAssignment": {
                 "title": "Redirect - RBAC Assignment Record",
                 "description": "Object representing an RBAC assignment entry to control user's AuthZ abilities when dealing with redirects/domains/banned terms records.",
                 "examples": [
@@ -395,7 +395,7 @@
             "email": "elliot_huffman@shi.com",
             "name": "SHI - Lab"
         },
-        "description": "Create vanity or numeric short version of your desired URL. Share it digitally, as QR code or print it.",
+        "description": "Create vanity or numeric short version of your desired URL. Share it digitally, as QR code, or print it.",
         "title": "SHI URL Shortener",
         "version": "1.0.0"
     },
@@ -580,7 +580,7 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/Redirect.ConfigurationRecord"
+                                        "$ref": "#/components/schemas/Redirect.UrlConfiguration"
                                     }
                                 }
                             }
@@ -636,7 +636,7 @@
                             "schema": {
                                 "allOf": [
                                     {
-                                        "$ref": "#/components/schemas/Redirect.ConfigurationRecord"
+                                        "$ref": "#/components/schemas/Redirect.UrlConfiguration"
                                     },
                                     {
                                         "required": [
@@ -662,7 +662,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Redirect.ConfigurationRecord"
+                                    "$ref": "#/components/schemas/Redirect.UrlConfiguration"
                                 }
                             }
                         }
@@ -744,7 +744,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Redirect.ConfigurationRecord"
+                                    "$ref": "#/components/schemas/Redirect.UrlConfiguration"
                                 }
                             }
                         }
@@ -785,7 +785,7 @@
                             "schema": {
                                 "allOf": [
                                     {
-                                        "$ref": "#/components/schemas/Redirect.ConfigurationRecord"
+                                        "$ref": "#/components/schemas/Redirect.UrlConfiguration"
                                     },
                                     {
                                         "required": []
@@ -801,7 +801,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Redirect.ConfigurationRecord"
+                                    "$ref": "#/components/schemas/Redirect.UrlConfiguration"
                                 }
                             }
                         }
@@ -874,7 +874,7 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/Redirect.BannedTermRecord"
+                                        "$ref": "#/components/schemas/Redirect.BannedTerm"
                                     }
                                 }
                             }
@@ -916,7 +916,7 @@
                             "schema": {
                                 "allOf": [
                                     {
-                                        "$ref": "#/components/schemas/Redirect.BannedTermRecord"
+                                        "$ref": "#/components/schemas/Redirect.BannedTerm"
                                     },
                                     {
                                         "required": [
@@ -935,7 +935,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Redirect.BannedTermRecord"
+                                    "$ref": "#/components/schemas/Redirect.BannedTerm"
                                 }
                             }
                         }
@@ -965,7 +965,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Redirect.BannedTermRecord"
+                                    "$ref": "#/components/schemas/Redirect.BannedTerm"
                                 }
                             }
                         }
@@ -1063,7 +1063,7 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/Redirect.DomainNameRecord"
+                                        "$ref": "#/components/schemas/Redirect.DomainName"
                                     }
                                 }
                             }
@@ -1109,7 +1109,7 @@
                             "schema": {
                                 "allOf": [
                                     {
-                                        "$ref": "#/components/schemas/Redirect.DomainNameRecord"
+                                        "$ref": "#/components/schemas/Redirect.DomainName"
                                     },
                                     {
                                         "required": [
@@ -1131,7 +1131,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Redirect.DomainNameRecord"
+                                    "$ref": "#/components/schemas/Redirect.DomainName"
                                 }
                             }
                         }
@@ -1161,7 +1161,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Redirect.DomainNameRecord"
+                                    "$ref": "#/components/schemas/Redirect.DomainName"
                                 }
                             }
                         }
@@ -1202,7 +1202,7 @@
                             "schema": {
                                 "allOf": [
                                     {
-                                        "$ref": "#/components/schemas/Redirect.DomainNameRecord"
+                                        "$ref": "#/components/schemas/Redirect.DomainName"
                                     },
                                     {
                                         "required": []
@@ -1218,7 +1218,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Redirect.DomainNameRecord"
+                                    "$ref": "#/components/schemas/Redirect.DomainName"
                                 }
                             }
                         }
@@ -1341,7 +1341,7 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/Redirect.RbacAssignmentRecord"
+                                        "$ref": "#/components/schemas/Redirect.RbacAssignment"
                                     }
                                 }
                             }
@@ -1388,7 +1388,7 @@
                             "schema": {
                                 "allOf": [
                                     {
-                                        "$ref": "#/components/schemas/Redirect.RbacAssignmentRecord"
+                                        "$ref": "#/components/schemas/Redirect.RbacAssignment"
                                     },
                                     {
                                         "required": [
@@ -1410,7 +1410,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Redirect.RbacAssignmentRecord"
+                                    "$ref": "#/components/schemas/Redirect.RbacAssignment"
                                 }
                             }
                         }
@@ -1440,7 +1440,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Redirect.RbacAssignmentRecord"
+                                    "$ref": "#/components/schemas/Redirect.RbacAssignment"
                                 }
                             }
                         }
