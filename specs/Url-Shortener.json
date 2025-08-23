@@ -88,7 +88,8 @@
                         "format": "uuid",
                         "maxLength": 36,
                         "minLength": 36,
-                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                        "readOnly": true
                     },
                     "sourceUrl": {
                         "description": "The codified version of the full URL that a user would be navigating to. It has to be unique in the table as it will be used during lookup.",
@@ -101,7 +102,8 @@
                         "format": "uuid",
                         "maxLength": 36,
                         "minLength": 36,
-                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                        "readOnly": true
                     },
                     "customUserAgentMatcher": {
                         "description": "Custom user agent matcher to be used with the custom target url. Custom target url is non-operable if this is not set. String max char count is 512.",
@@ -112,12 +114,13 @@
                         "maxLength": 512
                     },
                     "domainConfigId": {
-                        "description": "Object ID of the domain configuration that this redirect record is associated with. Used for relationship mapping.",
+                        "description": "Object ID of the domain configuration that this redirect record is associated with.",
                         "type": "string",
                         "format": "uuid",
                         "maxLength": 36,
                         "minLength": 36,
-                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                        "readOnly": true
                     },
                     "updatedBy": {
                         "description": "Object ID of the last user who updated this record.",
@@ -215,7 +218,8 @@
                         "format": "uuid",
                         "maxLength": 36,
                         "minLength": 36,
-                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                        "readOnly": true
                     },
                     "name": {
                         "description": "Term or component that is banned in any of the vanity URLs that users can create.",
@@ -257,7 +261,8 @@
                         "format": "uuid",
                         "maxLength": 36,
                         "minLength": 36,
-                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                        "readOnly": true
                     },
                     "allowHttp": {
                         "description": "Flag that indicates if the domain accepts unencrypted traffic (`true`) or not (`false`).",
@@ -266,7 +271,8 @@
                     "count": {
                         "description": "Current increment for the id number if the domain is in ID number mode. Always incremented even if not in ID mode so as to be able to swap to ID mode if requested with no risk for collision.",
                         "type": "number",
-                        "format": "int32"
+                        "format": "int32",
+                        "readOnly": true
                     },
                     "hidden": {
                         "description": "Flag that indicates if the domain name is hidden from the user interface. The domain will always be visible on the domain name admin config page. This flag is useful for hiding names that are behind load balancers from end users to reduce confusion. Can also be used to `enable` or `disable` end user interaction in the UI with the specified names.",
@@ -316,7 +322,8 @@
                         "format": "uuid",
                         "maxLength": 36,
                         "minLength": 36,
-                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                        "readOnly": true
                     },
                     "assignmentTargetType": {
                         "description": "Type of object that this RBAC assignment is for.",
