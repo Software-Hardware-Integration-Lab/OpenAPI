@@ -48,7 +48,7 @@ You can optionally configure the SDK client with a custom base URL, including su
 
 ```TypeScript
 /** Custom host and endpoint base to as an example for something behind a layer 7 load balancer, E.g. Azure App Gateway or Azure API Gateway. If in debug mode, run against localhost. */
-const customBaseUrl = debugMode ? new URL('http://localhost:3000') : new URL('https://custom-host.example.com/Ballance/Instance1/');
+const customBaseUrl = debugMode ? new URL('http://localhost:3004') : new URL('https://custom-host.example.com/Ballance/Instance1/');
 
 /** Configured instance of the URL Shortener client. */
 const customConfiguredClient = urlShortenerClientFactory(credential, customBaseUrl);
