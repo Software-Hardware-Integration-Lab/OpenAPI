@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "emitDeclarationOnly": true,
+    "noImplicitAny": false,
+    "outDir": "./bin",
+    "plugins": [
+      {
+        "transform": "typia/lib/transform"
+      }
+    ]
+  },
+  "extends": "../../../tsconfig.base.json",
+  "include": [
+    "./**/*"
+  ]
+}

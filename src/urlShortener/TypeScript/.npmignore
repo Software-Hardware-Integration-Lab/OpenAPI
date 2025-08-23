@@ -1,0 +1,9 @@
+# Ignore TypeScript source files while allowing library type descriptions
+*.ts
+!*.d.ts
+
+# Ignore the TypeScript config
+tsconfig.json
+
+# Ignore the generated SDK source code
+/sdk/
