@@ -98,6 +98,9 @@
             }
         },
         "responses": {
+            "204": {
+                "description": "No content, operation was successful."
+            },
             "400": {
                 "description": "Invalid input!"
             },
@@ -1006,7 +1009,7 @@
         },
         "description": "Collects data from the various SHI Lab products and makes it available in a standardized way.",
         "title": "SHI Data Gateway",
-        "version": "2.2.2"
+        "version": "2.3.0"
     },
     "openapi": "3.0.0",
     "paths": {
@@ -1756,6 +1759,21 @@
                     },
                     "400": {
                         "$ref": "#/components/responses/400"
+                    }
+                },
+                "tags": [
+                    "Chat"
+                ]
+            }
+        },
+        "/Api/Chat/UpdateDocs": {
+            "post": {
+                "summary": "Update the RAG DB Used by AI",
+                "description": "Triggers a refresh of the RAG (Retrieval-Augmented Generation) database used by the AI agent to provide up-to-date information.\n\nThis endpoint requires the `LicenseGptCache.ReadWrite` scope (permission). This endpoint is also only accessible from the `SHI Lab` tenant. End user access is restricted.",
+                "operationId": "/Api/Chat/UpdateDoc/Post",
+                "responses": {
+                    "204": {
+                        "$ref": "#/components/responses/204"
                     }
                 },
                 "tags": [

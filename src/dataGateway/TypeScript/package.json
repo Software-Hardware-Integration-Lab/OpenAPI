@@ -1,6 +1,6 @@
 {
   "name": "@shi-corp/sdk-data-gateway",
-  "version": "2.2.3",
+  "version": "2.3.0",
   "type": "module",
   "main": "bin/index.js",
   "description": "SDK client used to interface with the SHI Data Gateway service.",
@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@azure/core-auth": "~1.10.0",
-    "@types/node": "~24.2.1",
+    "@types/node": "~24.3.0",
     "ts-patch": "~3.3.0",
     "typescript": "~5.9.2"
   },
