@@ -54,7 +54,7 @@ jobs:
 
         # Uploads the built artifact to github pages
         - name: Upload Artifact
-          uses: actions/upload-pages-artifact@v3
+          uses: actions/upload-pages-artifact@v4
           with:
             # Upload static files
             path: "swagger-ui/dist/"
