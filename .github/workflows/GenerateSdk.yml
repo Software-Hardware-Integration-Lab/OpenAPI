@@ -19,6 +19,9 @@ jobs:
           - name: DataGateway
             sdkPath: 'src/dataGateway/TypeScript'
             specPath: 'spec/Data-Gateway.json'
+          - name: UrlShortener
+            sdkPath: 'src/urlShortener/TypeScript'
+            specPath: 'spec/Url-Shortener.json'
 
     # Display name of the job
     name: Generate TypeScript SDK
