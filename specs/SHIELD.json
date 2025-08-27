@@ -92,7 +92,7 @@
                         "summary": "Complete URL with details of the request and a skip token for MS Graph to parse and respond.",
                         "description": "The uri representation for the next page in the navigation flow. This example shows the complete URL with details of the request and a skip token for MS Graph to parse and respond."
                     }
-                }]
+                }
             },
             "offeringId": {
                 "description": "Unique identifier of the marketplace offering",
