@@ -7,12 +7,13 @@
                 "name": "correlationId",
                 "required": true,
                 "schema": {
-                    "examples": [
-                        {
+                    "examples": {
+                        "uuid": {
                             "value": "1d71e0fe-6e4a-464d-a690-80addf3bda55",
-                            "summary": "Example of a correlation ID"
+                            "summary": "Example of a valid correlation ID.",
+                            "description": "An example of a valid correlation ID in type UUID."
                         }
-                    ],
+                    },
                     "format": "uuid",
                     "maxLength": 36,
                     "minLength": 36,
@@ -26,12 +27,13 @@
                 "name": "deviceId",
                 "required": true,
                 "schema": {
-                    "examples": [
-                        {
+                    "uuid": {
+                        "valid-deviceId": {
                             "value": "75da7fa4-4a04-44c8-8f2c-c1b2fa29aa51",
-                            "summary": "Example of a device ID"
+                            "summary": "Example of a device ID.",
+                            "description": "An example of a valid managed EntraID device ID in type UUID."
                         }
-                    ],
+                     },
                     "format": "uuid",
                     "maxLength": 36,
                     "minLength": 36,
@@ -45,12 +47,13 @@
                 "name": "intermediaryId",
                 "required": true,
                 "schema": {
-                    "examples": [
-                        {
+                    "examples": {
+                        "uuid" : {
                             "value": "25d4d9da-28ea-42f8-b3df-23c3969abffa",
-                            "summary": "Example of an intermediary ID"
+                            "summary": "Example of an intermediary ID.",
+                            "description": "An example of a valid parent group ID in type UUID."
                         }
-                    ],
+                    },
                     "format": "uuid",
                     "maxLength": 36,
                     "minLength": 36,
@@ -66,16 +69,18 @@
                     "minLength": 1,
                     "type": "string"
                 },
-                "examples": [{
+                "examples": {
                     "number": {
                         "value": "3",
-                        "summary": "Number for the next page in the navigation flow"
+                        "summary": "Number for the next page in the navigation flow.",
+                        "description": "The number representation with minimal length for the next page in the navigation flow."
                     },
                     "uri": {
                         "value": "https://graph.microsoft.com/beta/devices?$top=20&$skiptoken=RFNwdCtEZXZpY2VfMThkNGY4OTAtMDA2YS00ZWM1LWI2OWYtY2VmNDY4ZjczNzQ4K0RldmljZV8xOGQ0Zjg5MC0wMDZhLTRlYzUtYjY5Zi1jZWY0NjhmNzM3NDg",
-                        "summary": "Complete URL with details of the request and a skip token for MS Graph to parse and respond"
+                        "summary": "Complete URL with details of the request and a skip token for MS Graph to parse and respond.",
+                        "description": "The uri representation for the next page in the navigation flow. This example shows the complete URL with details of the request and a skip token for MS Graph to parse and respond."
                     }
-                }]
+                }
             },
             "offeringId": {
                 "description": "Unique identifier of the marketplace offering",
@@ -84,12 +89,13 @@
                 "required": true,
                 "schema": {
                     "description": "Unique identifier of the marketplace offering.",
-                    "examples": [
-                        {
+                    "examples": {
+                        "uuid": {
                             "value": "271ab834-7469-4f2d-a705-549972c4f325",
-                            "summary": "Example of an offering ID"
+                            "summary": "Example of an offering ID.",
+                            "description": "An example of an valid marketplace offering ID in type UUID."
                         }
-                    ],
+                    },
                     "format": "uuid",
                     "maxLength": 36,
                     "minLength": 36,
@@ -102,12 +108,13 @@
                 "in": "query",
                 "name": "search",
                 "schema": {
-                    "examples": [
-                        {
+                    "examples": {
+                        "string": {
                             "value": "finance",
-                            "summary": "Example of a search term"
+                            "summary": "Example of a search term.",
+                            "description": "An example of a valid search term used in object filtering in a query."
                         }
-                    ],
+                    },
                     "type": "string"
                 }
             },
@@ -126,12 +133,13 @@
                 "name": "Update Channel Name",
                 "required": true,
                 "schema": {
-                    "examples": [
-                        {
+                    "examples": {
+                        "enum-string": {
                             "value": "stable",
-                            "summary": "Example of an update channel name"
+                            "summary": "Example of an update channel name.",
+                            "description": "An example of an valid update channel name that should be used when querying or downloading updates."
                         }
-                    ],
+                    },
                     "type": "string",
                     "enum": [
                         "alpha",
@@ -146,12 +154,13 @@
                 "name": "userId",
                 "required": true,
                 "schema": {
-                    "examples": [
-                        {
+                    "examples": {
+                        "uuid": {
                             "value": "264a8bed-0714-48fd-8b9d-0e4c4715cee5",
-                            "summary": "Example of a user ID"
+                            "summary": "Example of a user ID.",
+                            "description": "An example of valid EntraID managed user ID in type UUID."
                         }
-                    ],
+                    },
                     "format": "uuid",
                     "maxLength": 36,
                     "minLength": 36,
@@ -194,47 +203,92 @@
                     "authenticatorPermissions": {
                         "description": "Flag that indicates if the core permissions for the SHIELD - Authenticator App have been configured properly or not.",
                         "type": "boolean",
-                        "examples": [
+                        "examples": 
+                        {
+                            "present":
                             {
                                 "value": true,
-                                "summary": "Example of authenticator permission being present"
+                                "summary": "Example of authenticator permission being present.",
+                                "description": "An example indicates the SHIELD - Authenticator App permissions have been configured properly."
                             }
-                        ]
+                        }
                     },
                     "azurePermissions": {
                         "description": "Flag that indicates if the required core Azure RBAC assignment(s) are present or not.",
                         "type": "boolean",
-                        "examples": [false]
+                        "examples": {
+                            "not-present": {
+                                "value": false,
+                                "summary": "Example of Azure RBAC assignment(s) are not present.",
+                                "description": "An example indicates the required core Azure RBAC assignment(s) are not present."
+                            }
+                        }
                     },
                     "defendEntitlement": {
                         "description": "Flag that indicates if the required defend licenses are present or not.",
                         "type": "boolean",
-                        "examples": [true]
+                        "examples": {
+                            "present": {
+                                "value": true,
+                                "summary": "Example of defend licenses are present.",
+                                "description": "An example indicates the required SHIELD Defend licenses are present."
+                            }
+                        }
                     },
                     "deployEntitlement": {
                         "description": "Flag that indicates if the required deploy licenses are present or not.",
                         "type": "boolean",
-                        "examples": [true]
+                        "examples": {
+                            "present": {
+                                "value": true,
+                                "summary": "Example of deploy licenses are present.",
+                                "description": "An example indicates the required SHIELD Deploy licenses are present."
+                            }
+                        }
                     },
                     "discoverEntitlement": {
                         "description": "Flag that indicates if the required discover licenses are present or not.",
                         "type": "boolean",
-                        "examples": [true]
+                        "examples": {
+                            "present": {
+                                "value": true,
+                                "summary": "Example of discover licenses are present.",
+                                "description": "An example indicates the required SHIELD Discover licenses are present."
+                            }
+                        }
                     },
                     "msGraphPermissions": {
                         "description": "Flag that indicates if the core permissions for the Microsoft Graph API have been configured properly or not.",
                         "type": "boolean",
-                        "examples": [false]
+                        "examples": {
+                            "not-configured": {
+                                "value": false,
+                                "summary": "Example of Microsoft Graph API permissions are not configured.",
+                                "description": "An example indicates the core permissions for the Microsoft Graph API have not been configured properly."
+                            }
+                        }
                     },
                     "dataGatewayPermissions": {
                         "description": "Flag that indicates if the core permissions for the SHI - Data Gateway have been configured properly or not.",
                         "type": "boolean",
-                        "examples": [false]
+                        "examples": {
+                            "not-configured": {
+                                "value": false,
+                                "summary": "Example of Data Gateway permission have not been configured properly.",
+                                "description": "An example indicates the core permissions for the SHI - Data Gateway have not been configured properly."
+                            }
+                        }
                     },
                     "entraDirectoryRole": {
                         "description": "Flag that indicates if the core permissions for Entra Directory Role assignment have been configured properly or not.",
                         "type": "boolean",
-                        "examples": [false]
+                        "examples": {
+                            "not-configured": {
+                                "value": false,
+                                "summary": "Example of Entra Directory Role assignment have not been configured properly.",
+                                "description": "An example indicates the core permissions for Entra Directory Role assignment have not been configured properly."
+                            }
+                        }
                     }
                 },
                 "type": "object",
