@@ -318,12 +318,24 @@
                     "description": {
                         "type": "string",
                         "description": "Long form text describing the current step.",
-                        "examples": ["Collecting data from the Microsoft Entra ID system."]
+                        "examples": {
+                            "description": {
+                                "value": "Collecting data from the Microsoft Entra ID system.",
+                                "summary": "Example description of the progress bar.",
+                                "description": "An example string that describe the purpose of a progress bar."
+                            }
+                        }
                     },
                     "displayName": {
                         "type": "string",
                         "description": "Text/label to render with the progress bar.",
-                        "examples": ["Running Entra ID Plugin"]
+                        "examples": {
+                            "text-label": {
+                                "value": "Running Entra ID Plugin",
+                                "summary": "Example label text of the progress bar.",
+                                "description": "An example string that render as the text label of a progress bar."
+                            }
+                        }
                     },
                     "id": {
                         "description": "Unique identifier to be able to select this specific instance via search.",
@@ -332,16 +344,39 @@
                         "maxLength": 36,
                         "minLength": 36,
                         "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
-                        "examples": ["b759230f-48cb-496e-ad57-5f079083226b"]
+                        "examples": {
+                            "uuid": {
+                                "value": "b759230f-48cb-496e-ad57-5f079083226b",
+                                "summary": "Example ID of a specific SHIELD instance.",
+                                "description": "An example of the unique identifier in type UUID to select a specific SHIELD instance via search."
+                            }
+                        }
                     },
                     "currentStep": {
                         "description": "Current step/value for the progress bar. This is in relation to the `totalStepCount` property. If undefined, an indeterminate/pulsing progress bar is used instead.",
-                        "examples": [5],
+                        "examples": {
+                            "step": {
+                                "value": 5,
+                                "summary": "Example step number for a progress bar.",
+                                "description" : "An example step number indicates the current step/value of a progress bar in relation to the `totalStepCount` property."
+                            }
+                        },
                         "type": "number"
                     },
                     "totalStepCount": {
                         "description": "Number of steps before the progress bar is completely filed.",
-                        "examples": [7],
+                        "examples": {
+                            "total-steps": {
+                                "value": 7,
+                                "summary": "Example total number of steps of a progress bar.",
+                                "description": "An example of number indicates the total number of steps of a progress bar in relation to the `currentStep` property."
+                            },
+                            "minimum-steps": {
+                                "value": 1,
+                                "summary": "Example minimal number of total steps of a progress bar.",
+                                "description": "An example number indicates the minimal valid number of total steps of a progress bar. Which is 1."
+                            }
+                        },
                         "type": "number",
                         "minimum": 1
                     }
