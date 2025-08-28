@@ -2489,7 +2489,7 @@
                                         "summary": "Infrastructure is not deployed",
                                         "value": false
                                     }
-                                }],
+                                },
                                 "schema": {
                                     "type": "boolean",
                                     "examples": [
@@ -2515,7 +2515,7 @@
                 "requestBody": {
                     "content": {
                         "application/json": {
-                            "examples": [{
+                            "examples": {
                                 "Ignorant Deploy Request": {
                                     "description": "Clueless dev trying to automate this application without reading the docs. RTFM!",
                                     "summary": "Ignorant Deploy Request",
@@ -2535,7 +2535,7 @@
                                         "deploymentConsent": true
                                     }
                                 }
-                            }],
+                            },
                             "schema": {
                                 "properties": {
                                     "deploymentConsent": {
@@ -2559,13 +2559,13 @@
                     "204": {
                         "content": {
                             "application/json": {
-                                "examples": [{
+                                "examples": {
                                     "Successful Deployment": {
                                         "description": "When a deployment request is successfully executed, a boolean true is returned.",
                                         "summary": "Successful Deployment",
                                         "value": true
                                     }
-                                }],
+                                },
                                 "schema": {
                                     "type": "boolean",
                                     "examples": [
@@ -2874,7 +2874,7 @@
                 "requestBody": {
                     "content": {
                         "application/json": {
-                            "examples": [{
+                            "examples": {
                                 "One user": {
                                     "description": "Removes 1 session host, and removed the requested user from the assignments security group.",
                                     "summary": "Remove Single User",
@@ -2895,7 +2895,7 @@
                                         ]
                                     }
                                 }
-                            }],
+                            },
                             "schema": {
                                 "properties": {
                                     "userList": {
@@ -3047,7 +3047,7 @@
                 "requestBody": {
                     "content": {
                         "application/json": {
-                            "examples": [{
+                            "examples": {
                                 "One user": {
                                     "description": "Creates 1 session host, and added the requested user to the assignments security group.",
                                     "summary": "Assign Single User",
@@ -3068,7 +3068,7 @@
                                         ]
                                     }
                                 }
-                            }],
+                            },
                             "schema": {
                                 "properties": {
                                     "userList": {
@@ -3276,7 +3276,7 @@
                 "requestBody": {
                     "content": {
                         "application/json": {
-                            "examples": [{
+                            "examples": {
                                 "Multiple Users": {
                                     "description": "Remove multiple user assignments from a managed device.",
                                     "summary": "Unassign multiple users",
@@ -3296,7 +3296,7 @@
                                         ]
                                     }
                                 }
-                            }],
+                            },
                             "schema": {
                                 "properties": {
                                     "userList": {
@@ -3488,7 +3488,7 @@
                 "requestBody": {
                     "content": {
                         "application/json": {
-                            "examples": [{
+                            "examples": {
                                 "1:1 map": {
                                     "description": "This example is the security best practice of having only one user mapped to a managed device.",
                                     "summary": "1:1 User Mapping",
@@ -3508,7 +3508,7 @@
                                         ]
                                     }
                                 }
-                            }],
+                            },
                             "schema": {
                                 "properties": {
                                     "userList": {
