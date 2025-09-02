@@ -7,18 +7,19 @@
         "name": "correlationId",
         "required": true,
         "schema": {
-          "examples": [
-            {
-              "value": "1d71e0fe-6e4a-464d-a690-80addf3bda55",
-              "summary": "Example valid correlation ID",
-              "description": "An example of a valid correlation ID in type UUID."
-            }
-          ],
+          "examples": ["1d71e0fe-6e4a-464d-a690-80addf3bda55"],
           "format": "uuid",
           "maxLength": 36,
           "minLength": 36,
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
+        },
+        "examples": {
+          "valid correlation Id": {
+            "value": "1d71e0fe-6e4a-464d-a690-80addf3bda55",
+            "summary": "Example valid correlation ID",
+            "description": "An example of a valid correlation ID in type UUID."
+          }
         }
       },
       "deviceId": {
@@ -27,18 +28,19 @@
         "name": "deviceId",
         "required": true,
         "schema": {
-          "examples": [
-            {
-              "value": "75da7fa4-4a04-44c8-8f2c-c1b2fa29aa51",
-              "summary": "Example valid device ID",
-              "description": "An example of a valid managed Entra ID device ID in type UUID."
-            }
-          ],
+          "examples": ["75da7fa4-4a04-44c8-8f2c-c1b2fa29aa51"],
           "format": "uuid",
           "maxLength": 36,
           "minLength": 36,
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
+        },
+        "examples": {
+          "valid device ID": {
+            "value": "75da7fa4-4a04-44c8-8f2c-c1b2fa29aa51",
+            "summary": "Example valid device ID",
+            "description": "An example of a valid managed Entra ID device ID in type UUID."
+          }
         }
       },
       "intermediaryId": {
@@ -47,18 +49,19 @@
         "name": "intermediaryId",
         "required": true,
         "schema": {
-          "examples": [
-            {
-              "value": "25d4d9da-28ea-42f8-b3df-23c3969abffa",
-              "summary": "Example intermediary ID",
-              "description": "An example of a valid parent group ID in type UUID."
-            }
-          ],
+          "examples": ["25d4d9da-28ea-42f8-b3df-23c3969abffa"],
           "format": "uuid",
           "maxLength": 36,
           "minLength": 36,
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
+        },
+        "examples": {
+          "valid": {
+            "value": "25d4d9da-28ea-42f8-b3df-23c3969abffa",
+            "summary": "Example intermediary ID",
+            "description": "An example of a valid parent group ID in type UUID."
+          }
         }
       },
       "nextLink": {
@@ -66,6 +69,7 @@
         "in": "query",
         "name": "nextLink",
         "schema": {
+          "examples": [3],
           "minLength": 1,
           "type": "string"
         },
@@ -89,18 +93,19 @@
         "required": true,
         "schema": {
           "description": "Unique identifier of the marketplace offering.",
-          "examples": [
-            {
-              "value": "271ab834-7469-4f2d-a705-549972c4f325",
-              "summary": "Example of an offering ID",
-              "description": "An example of an valid marketplace offering ID in type UUID."
-            }
-          ],
+          "examples": ["271ab834-7469-4f2d-a705-549972c4f325"],
           "format": "uuid",
           "maxLength": 36,
           "minLength": 36,
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
+        },
+        "examples": {
+          "valid offering ID": {
+            "value": "271ab834-7469-4f2d-a705-549972c4f325",
+            "summary": "Example of an offering ID",
+            "description": "An example of an valid marketplace offering ID in type UUID."
+          }
         }
       },
       "search": {
@@ -108,14 +113,15 @@
         "in": "query",
         "name": "search",
         "schema": {
-          "examples": [
-            {
-              "value": "finance",
-              "summary": "Example search term",
-              "description": "An example valid search term used in object filtering in a query."
-            }
-          ],
+          "examples": ["finance"],
           "type": "string"
+        },
+        "examples": {
+          "valid search term": {
+            "value": "finance",
+            "summary": "Example search term",
+            "description": "An example valid search term used in object filtering in a query."
+          }
         }
       },
       "securityClass": {
@@ -133,15 +139,16 @@
         "name": "Update Channel Name",
         "required": true,
         "schema": {
-          "examples": [
-            {
-              "value": "stable",
-              "summary": "Example of an update channel name",
-              "description": "An example of an valid update channel name that should be used when querying or downloading updates."
-            }
-          ],
+          "examples": ["stable"],
           "type": "string",
           "enum": ["alpha", "beta", "stable"]
+        },
+        "examples": {
+          "valid channel name": {
+            "value": "stable",
+            "summary": "Example of an update channel name",
+            "description": "An example of an valid update channel name that should be used when querying or downloading updates."
+          }
         }
       },
       "userId": {
@@ -150,18 +157,19 @@
         "name": "userId",
         "required": true,
         "schema": {
-          "examples": [
-            {
-              "value": "264a8bed-0714-48fd-8b9d-0e4c4715cee5",
-              "summary": "Example of a user ID",
-              "description": "An example of valid EntraID managed user ID in type UUID."
-            }
-          ],
+          "examples": ["264a8bed-0714-48fd-8b9d-0e4c4715cee5"],
           "format": "uuid",
           "maxLength": 36,
           "minLength": 36,
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
+        },
+        "examples": {
+          "valid user ID": {
+            "value": "264a8bed-0714-48fd-8b9d-0e4c4715cee5",
+            "summary": "Example of a user ID",
+            "description": "An example of valid EntraID managed user ID in type UUID."
+          }
         }
       }
     },
@@ -199,90 +207,42 @@
           "authenticatorPermissions": {
             "description": "Flag that indicates if the core permissions for the SHIELD - Authenticator App have been configured properly or not.",
             "type": "boolean",
-            "examples": [
-              {
-                "value": true,
-                "summary": "Example of authenticator permission being present",
-                "description": "An example indicates the SHIELD - Authenticator App permissions have been configured properly."
-              }
-            ]
+            "examples": [true]
           },
           "azurePermissions": {
             "description": "Flag that indicates if the required core Azure RBAC assignment(s) are present or not.",
             "type": "boolean",
-            "examples": [
-              {
-                "value": false,
-                "summary": "Example of Azure RBAC assignment(s) are not present",
-                "description": "An example indicates the required core Azure RBAC assignment(s) are not present."
-              }
-            ]
+            "examples": [false]
           },
           "defendEntitlement": {
             "description": "Flag that indicates if the required defend licenses are present or not.",
             "type": "boolean",
-            "examples": [
-              {
-                "value": true,
-                "summary": "Example of defend licenses are present",
-                "description": "An example indicates the required SHIELD Defend licenses are present."
-              }
-            ]
+            "examples": [true]
           },
           "deployEntitlement": {
             "description": "Flag that indicates if the required deploy licenses are present or not.",
             "type": "boolean",
-            "examples": [
-              {
-                "value": true,
-                "summary": "Example of deploy licenses are present",
-                "description": "An example indicates the required SHIELD Deploy licenses are present."
-              }
-            ]
+            "examples": [true]
           },
           "discoverEntitlement": {
             "description": "Flag that indicates if the required discover licenses are present or not.",
             "type": "boolean",
-            "examples": [
-              {
-                "value": true,
-                "summary": "Example of discover licenses are present",
-                "description": "An example indicates the required SHIELD Discover licenses are present."
-              }
-            ]
+            "examples": [true]
           },
           "msGraphPermissions": {
             "description": "Flag that indicates if the core permissions for the Microsoft Graph API have been configured properly or not.",
             "type": "boolean",
-            "examples": [
-              {
-                "value": false,
-                "summary": "Example of Microsoft Graph API permissions are not configured",
-                "description": "An example indicates the core permissions for the Microsoft Graph API have not been configured properly."
-              }
-            ]
+            "examples": [false]
           },
           "dataGatewayPermissions": {
             "description": "Flag that indicates if the core permissions for the SHI - Data Gateway have been configured properly or not.",
             "type": "boolean",
-            "examples": [
-              {
-                "value": false,
-                "summary": "Example of Data Gateway permission have not been configured properly",
-                "description": "An example indicates the core permissions for the SHI - Data Gateway have not been configured properly."
-              }
-            ]
+            "examples": [false]
           },
           "entraDirectoryRole": {
             "description": "Flag that indicates if the core permissions for Entra Directory Role assignment have been configured properly or not.",
             "type": "boolean",
-            "examples": [
-              {
-                "value": false,
-                "summary": "Example of Entra Directory Role assignment have not been configured properly",
-                "description": "An example indicates the core permissions for Entra Directory Role assignment have not been configured properly."
-              }
-            ]
+            "examples": [false]
           }
         },
         "type": "object",
@@ -295,6 +255,18 @@
           "msGraphPermissions",
           "dataGatewayPermissions",
           "entraDirectoryRole"
+        ],
+        "examples": [
+          {
+            "authenticatorPermissions": true,
+            "azurePermissions": false,
+            "defendEntitlement": true,
+            "deployEntitlement": false,
+            "discoverEntitlement": true,
+            "msGraphPermissions": false,
+            "dataGatewayPermissions": false,
+            "entraDirectoryRole": false
+          }
         ]
       },
       "Core.ProgressBar": {
@@ -312,24 +284,12 @@
           "description": {
             "type": "string",
             "description": "Long form text describing the current step.",
-            "examples": [
-              {
-                "value": "Collecting data from the Microsoft Entra ID system.",
-                "summary": "Example description of the progress bar",
-                "description": "An example string that describe the purpose of a progress bar."
-              }
-            ]
+            "examples": ["Collecting data from the Microsoft Entra ID system."]
           },
           "displayName": {
             "type": "string",
             "description": "Text/label to render with the progress bar.",
-            "examples": [
-              {
-                "value": "Running Entra ID Plugin",
-                "summary": "Example label text of the progress bar",
-                "description": "An example string that render as the text label of a progress bar."
-              }
-            ]
+            "examples": ["Running Entra ID Plugin"]
           },
           "id": {
             "description": "Unique identifier to be able to select this specific instance via search.",
@@ -338,39 +298,16 @@
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
-            "examples": [
-              {
-                "value": "b759230f-48cb-496e-ad57-5f079083226b",
-                "summary": "Example ID of a specific SHIELD instance",
-                "description": "An example of the unique identifier in type UUID to select a specific SHIELD instance via search."
-              }
-            ]
+            "examples": ["b759230f-48cb-496e-ad57-5f079083226b"]
           },
           "currentStep": {
             "description": "Current step/value for the progress bar. This is in relation to the `totalStepCount` property. If undefined, an indeterminate/pulsing progress bar is used instead.",
-            "examples": [
-              {
-                "value": 5,
-                "summary": "Example step number for a progress bar",
-                "description": "An example step number indicates the current step/value of a progress bar in relation to the `totalStepCount` property."
-              }
-            ],
+            "examples": [5],
             "type": "number"
           },
           "totalStepCount": {
             "description": "Number of steps before the progress bar is completely filed.",
-            "examples": [
-              {
-                "value": 7,
-                "summary": "Example total number of steps of a progress bar",
-                "description": "An example of number indicates the total number of steps of a progress bar in relation to the `currentStep` property."
-              },
-              {
-                "value": 1,
-                "summary": "Example minimal number of total steps of a progress bar",
-                "description": "An example number indicates the minimal valid number of total steps of a progress bar. Which is one."
-              }
-            ],
+            "examples": [7],
             "type": "number",
             "minimum": 1
           }
@@ -387,13 +324,7 @@
               {
                 "description": "Flag that represents if the server is not waiting for a specific access token.",
                 "type": "boolean",
-                "examples": [
-                  {
-                    "value": false,
-                    "summary": "Example value of wait for specific access token",
-                    "description": "An example boolean value of a request status that indicates the server is waiting for a specific access token for a request."
-                  }
-                ]
+                "examples": [false]
               },
               {
                 "$ref": "#/components/schemas/Authenticator.Status.TokenAudience"
@@ -403,13 +334,7 @@
           "sccAuth": {
             "description": "Flag that represents if the server is waiting for SCC Auth credentials.",
             "type": "boolean",
-            "examples": [
-              {
-                "value": true,
-                "summary": "Example value of server is waiting for SCC Auth credentials",
-                "description": "An example boolean value of a request status that indicates the server is waiting for SCC Auth credentials."
-              }
-            ]
+            "examples": [true]
           }
         },
         "type": "object",
@@ -426,13 +351,7 @@
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
-            "examples": [
-              {
-                "value": "00000002-0000-0000-b000-000000000000",
-                "summary": "Example audience ID",
-                "description": "An example unique identifier in type UUID as audience of a access token."
-              }
-            ]
+            "examples": ["00000002-0000-0000-b000-000000000000"]
           }
         },
         "type": "object",
@@ -445,25 +364,13 @@
         "properties": {
           "authenticatedUpn": {
             "description": "User principal name of the user that authenticated to the portals.",
-            "examples": [
-              {
-                "value": "user@example.com",
-                "summary": "Example email address as user principal name",
-                "description": "An example email address as the user principal name of the user that authenticated to the portals of SHIELD."
-              }
-            ],
+            "examples": ["user@example.com"],
             "type": "string",
             "format": "email"
           },
           "expiration": {
             "description": "Point in time at which the whole authentication structure has an expired state and is un-useable.",
-            "examples": [
-              {
-                "value": "2024-09-26T18:16:29.340Z",
-                "summary": "Example SCC credential expiry point in time",
-                "description": "An example date time string that indicates the expiry point in time of a SHIELD portal credential."
-              }
-            ],
+            "examples": ["2024-09-26T18:16:29.340Z"],
             "type": "string",
             "format": "date-time"
           },
@@ -477,7 +384,23 @@
             "$ref": "#/components/schemas/Authenticator.Container.SccAuthCredentials.CredentialContainer"
           }
         },
-        "required": ["authenticatedUpn", "security", "purview"]
+        "required": ["authenticatedUpn", "security", "purview"],
+        "examples": [{
+            "authenticatedUpn": "user@example.com",
+            "security": {
+                "sccAuth": "54BKPtTL-eSMFp5cqYTMMSblm2U80cUJqQgmbe4f_sRn4ammMmU1NKNurn9HqpsUtS4FrMJRTKa3Or_pFbedM_57R0fVBfNJ-m2Pvey9OweWIDradzT0dB1WnufPTJiT2y7zSQy91Y9wJIn1_aY5q-MNh75qwjM84Dng-mYzbd9KqUfyPUolOo-j-... (Truncated)",
+                "xsrf": "PEDwTvWdm2qSTe-n8h-1praK4OcQK1ELTJ08DWYqBRzQiyA2MIuEKEMNLu4ExjDNpAOUnAxmsqOeuGzb82MJYkegOE6hW8BzpSM6k9nbTbJ4yjNGzMSQvWUnyqrBvGa8JfSRiSeaKdXGBnxGd90Spw2:... (truncated)"
+            },
+            "purview": {
+                "sccAuth": "54BKPtTL-eSMFp5cqYTMMSblm2U80cUJqQgmbe4f_sRn4ammMmU1NKNurn9HqpsUtS4FrMJRTKa3Or_pFbedM_57R0fVBfNJ-m2Pvey9OweWIDradzT0dB1WnufPTJiT2y7zSQy91Y9wJIn1_aY5q-MNh75qwjM84Dng-mYzbd9KqUfyPUolOo-j-... (Truncated)",
+                "xsrf": "PEDwTvWdm2qSTe-n8h-1praK4OcQK1ELTJ08DWYqBRzQiyA2MIuEKEMNLu4ExjDNpAOUnAxmsqOeuGzb82MJYkegOE6hW8BzpSM6k9nbTbJ4yjNGzMSQvWUnyqrBvGa8JfSRiSeaKdXGBnxGd90Spw2:... (truncated)"
+            },
+            "expiration": "2024-09-26T18:16:29.340Z",
+            "defender": {
+                "sccAuth": "54BKPtTL-eSMFp5cqYTMMSblm2U80cUJqQgmbe4f_sRn4ammMmU1NKNurn9HqpsUtS4FrMJRTKa3Or_pFbedM_57R0fVBfNJ-m2Pvey9OweWIDradzT0dB1WnufPTJiT2y7zSQy91Y9wJIn1_aY5q-MNh75qwjM84Dng-mYzbd9KqUfyPUolOo-j-... (Truncated)",
+                "xsrf": "PEDwTvWdm2qSTe-n8h-1praK4OcQK1ELTJ08DWYqBRzQiyA2MIuEKEMNLu4ExjDNpAOUnAxmsqOeuGzb82MJYkegOE6hW8BzpSM6k9nbTbJ4yjNGzMSQvWUnyqrBvGa8JfSRiSeaKdXGBnxGd90Spw2:... (truncated)"
+            }
+        }]
       },
       "Authenticator.Container.SccAuthCredentials.CredentialContainer": {
         "title": "SHIELD - Authenticator - SCC Auth - Credential Container",
@@ -485,29 +408,23 @@
         "properties": {
           "sccAuth": {
             "description": "Authentication token.",
-            "examples": [
-              {
-                "value": "54BKPtTL-eSMFp5cqYTMMSblm2U80cUJqQgmbe4f_sRn4ammMmU1NKNurn9HqpsUtS4FrMJRTKa3Or_pFbedM_57R0fVBfNJ-m2Pvey9OweWIDradzT0dB1WnufPTJiT2y7zSQy91Y9wJIn1_aY5q-MNh75qwjM84Dng-mYzbd9KqUfyPUolOo-j-... (Truncated)",
-                "summary": "Example SCC Auth Token",
-                "description": "An example SCC Authentication Token string for a single SccAuth authenticated site. The value is truncated for brevity."
-              }
-            ],
+            "examples": ["54BKPtTL-eSMFp5cqYTMMSblm2U80cUJqQgmbe4f_sRn4ammMmU1NKNurn9HqpsUtS4FrMJRTKa3Or_pFbedM_57R0fVBfNJ-m2Pvey9OweWIDradzT0dB1WnufPTJiT2y7zSQy91Y9wJIn1_aY5q-MNh75qwjM84Dng-mYzbd9KqUfyPUolOo-j-... (Truncated)"],
             "type": "string"
           },
           "xsrf": {
             "description": "Cross Site Request Forgery Prevention Token.",
-            "examples": [
-              {
-                "value": "PEDwTvWdm2qSTe-n8h-1praK4OcQK1ELTJ08DWYqBRzQiyA2MIuEKEMNLu4ExjDNpAOUnAxmsqOeuGzb82MJYkegOE6hW8BzpSM6k9nbTbJ4yjNGzMSQvWUnyqrBvGa8JfSRiSeaKdXGBnxGd90Spw2:... (truncated)",
-                "summary": "Example CSRF Prevention Token",
-                "description": "An example Cross Site Request Forgery Prevention Token string for a single SccAuth authenticated site. The value is truncated for brevity."
-              }
-            ],
+            "examples": ["PEDwTvWdm2qSTe-n8h-1praK4OcQK1ELTJ08DWYqBRzQiyA2MIuEKEMNLu4ExjDNpAOUnAxmsqOeuGzb82MJYkegOE6hW8BzpSM6k9nbTbJ4yjNGzMSQvWUnyqrBvGa8JfSRiSeaKdXGBnxGd90Spw2:... (truncated)"],
             "type": "string"
           }
         },
         "required": ["sccAuth", "xsrf"],
-        "type": "object"
+        "type": "object",
+        "examples": [
+            {
+                "sccAuth": "54BKPtTL-eSMFp5cqYTMMSblm2U80cUJqQgmbe4f_sRn4ammMmU1NKNurn9HqpsUtS4FrMJRTKa3Or_pFbedM_57R0fVBfNJ-m2Pvey9OweWIDradzT0dB1WnufPTJiT2y7zSQy91Y9wJIn1_aY5q-MNh75qwjM84Dng-mYzbd9KqUfyPUolOo-j-... (Truncated)",
+                "xsrf": "PEDwTvWdm2qSTe-n8h-1praK4OcQK1ELTJ08DWYqBRzQiyA2MIuEKEMNLu4ExjDNpAOUnAxmsqOeuGzb82MJYkegOE6hW8BzpSM6k9nbTbJ4yjNGzMSQvWUnyqrBvGa8JfSRiSeaKdXGBnxGd90Spw2:... (truncated)"
+            }
+        ]
       },
       "Discover.ExecutionStatus": {
         "title": "Discover - Status",
@@ -517,16 +434,13 @@
           "running": {
             "description": "Flag that indicates if another run is already in progress or not.",
             "type": "boolean",
-            "examples": [
-              {
-                "value": true,
-                "summary": "Example Discover in-progress status value",
-                "description": "An example boolean that indicates another SHIELD Discover run is already in progress."
-              }
-            ]
+            "examples": [true]
           }
         },
-        "required": ["running"]
+        "required": ["running"],
+        "examples": [{
+            "running": true
+        }]
       },
       "ManagedObject.Intermediary": {
         "description": "Base template for all intermediary objects to inherit from.",
@@ -1500,6 +1414,22 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Core.SystemRequirements"
+                },
+                "examples": {
+                  "System Requirement": {
+                    "value": {
+                      "authenticatorPermissions": true,
+                      "azurePermissions": false,
+                      "defendEntitlement": true,
+                      "deployEntitlement": false,
+                      "discoverEntitlement": true,
+                      "msGraphPermissions": false,
+                      "dataGatewayPermissions": false,
+                      "entraDirectoryRole": false
+                    },
+                    "summary": "Example system requirement object returned form the API endpoint",
+                    "description": "An example that indicates: <br/> - Azure RBAC assignment(s) are not present. <br/> - SHIELD Defend licenses are present. <br/> - SHIELD Deploy licenses are present. <br/> - SHIELD Discover licenses are present. <br/> - Permissions for the Microsoft Graph API have not been configured properly. <br/> - Permissions for the SHI - Data Gateway have not been configured properly. <br/> - Permissions for Entra Directory Role assignment have not been configured properly."
+                  }
                 }
               }
             },
@@ -1850,6 +1780,15 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Discover.ExecutionStatus"
+                },
+                "examples": {
+                    "Execution Status": {
+                        "value": {
+                            "running": true
+                        },
+                        "summary": "Example execution status",
+                        "description": "An example execution status object that indicates a SHIELD Discover run is already in progress."
+                    }
                 }
               }
             },
@@ -1870,6 +1809,20 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Core.ProgressBar"
+                },
+                "examples": {
+                    "Progress Bar": {
+                        "value": {
+                            "childBar": [],
+                            "description": "Collecting data from the Microsoft Entra ID system.",
+                            "displayName": "Running Entra ID Plugin",
+                            "id": "b759230f-48cb-496e-ad57-5f079083226b",
+                            "currentStep": 5,
+                            "totalStepCount": 7
+                        },
+                        "summary": "Example progress bar object",
+                        "description": "An example progress bar object returned from the endpoint. It indicates: <br/> - The purpose of a progress bar. <br/> - The text label of a progress bar. <br/> - The unique identifier in type UUID of a specific SHIELD instance for search. <br/> - The total number of steps of a progress bar. <br/> - The current step/value of a progress bar. <br/> - No child progress bar."
+                    }
                 }
               }
             },
@@ -1904,7 +1857,7 @@
             "content": {
               "application/json": {
                 "examples": {
-                  "Example License Report": {
+                  "anything": {
                     "description": "Sample list of correlation records for the authenticated tenant.",
                     "summary": "Available Correlation Records",
                     "value": [
@@ -2149,7 +2102,27 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Core.ProgressBar"
-                }
+                },
+                "examples": {
+                    "Progress Bar": {
+                        "value": {
+                            "childBar": [{
+                                "description": "Collecting data from the Microsoft Purview.",
+                                "displayName": "Running SHIELD Deploy - Purview",
+                                "id": "b759230f-48cb-496e-ad57-5f079083226c",
+                                "currentStep": 1,
+                                "totalStepCount": 3                                
+                            }],
+                            "description": "Collecting data from the Microsoft Entra ID system.",
+                            "displayName": "Running SHIELD Deploy",
+                            "id": "b759230f-48cb-496e-ad57-5f079083226b",
+                            "currentStep": 5,
+                            "totalStepCount": 7
+                        },
+                        "summary": "Example progress bar object",
+                        "description": "An example progress bar object returned from the endpoint. It indicates: <br/> - The purpose of a progress bar. <br/> - The text label of a progress bar. <br/> - The unique identifier in type UUID of a specific SHIELD instance for search. <br/> - The total number of steps of a progress bar. <br/> - The current step/value of a progress bar. <br/> - With a child progress bar."
+                    }
+                }                
               }
             },
             "description": "OK"
@@ -3085,29 +3058,6 @@
         "requestBody": {
           "content": {
             "application/json": {
-              "examples": {
-                "Azure Bastion": {
-                  "description": "An example object that represents the minimal requirement of intermediary type, which requires a name.",
-                  "summary": "Azure Bastion",
-                  "value": {
-                    "name": "Azure Bastion"
-                  }
-                },
-                "Azure Virtual Desktop": {
-                  "description": "Deploys an AVD cluster that is connected to the device configurations system in SHIELD. The type property can be omitted because it is passed via path parameter.",
-                  "summary": "Azure Virtual Desktop",
-                  "value": {
-                    "name": "Legacy Reach Back",
-                    "properties": {
-                      "addressRangeCIDR": "172.16.1.0/24",
-                      "index": 0,
-                      "location": "East US 2",
-                      "sessionHostPrefix": "Reach",
-                      "vmSku": "Standard_D2s_v5"
-                    }
-                  }
-                }
-              },
               "schema": {
                 "allOf": [
                   {
@@ -3120,6 +3070,29 @@
                       }
                     },
                     "type": "object"
+                  }
+                ],
+                "examples": [
+                  {
+                    "description": "An example object that represents the minimal requirement of intermediary type, which requires a name.",
+                    "summary": "Azure Bastion",
+                    "value": {
+                      "name": "Azure Bastion"
+                    }
+                  },
+                  {
+                    "description": "Deploys an AVD cluster that is connected to the device configurations system in SHIELD. The type property can be omitted because it is passed via path parameter.",
+                    "summary": "Azure Virtual Desktop",
+                    "value": {
+                      "name": "Legacy Reach Back",
+                      "properties": {
+                        "addressRangeCIDR": "172.16.1.0/24",
+                        "index": 0,
+                        "location": "East US 2",
+                        "sessionHostPrefix": "Reach",
+                        "vmSku": "Standard_D2s_v5"
+                      }
+                    }
                   }
                 ]
               }
