@@ -15,7 +15,7 @@
           "type": "string"
         },
         "examples": {
-          "valid correlation Id": {
+          "valid correlation ID": {
             "value": "1d71e0fe-6e4a-464d-a690-80addf3bda55",
             "summary": "Example valid correlation ID",
             "description": "An example of a valid correlation ID in type UUID."
@@ -57,7 +57,7 @@
           "type": "string"
         },
         "examples": {
-          "valid": {
+          "valid intermediary ID": {
             "value": "25d4d9da-28ea-42f8-b3df-23c3969abffa",
             "summary": "Example intermediary ID",
             "description": "An example of a valid parent group ID in type UUID."
@@ -69,7 +69,7 @@
         "in": "query",
         "name": "nextLink",
         "schema": {
-          "examples": [3],
+          "examples": ["3"],
           "minLength": 1,
           "type": "string"
         },
@@ -131,6 +131,13 @@
         "required": true,
         "schema": {
           "$ref": "#/components/schemas/SecurityClassList"
+        },
+        "examples": {
+            "Privileged": {
+                "value": "Privileged",
+                "summary": "Example securityClass",
+                "description": "An example enum string that indicates the security class of an managed object is privileged."
+            }
         }
       },
       "updateChannelName": {
@@ -279,7 +286,14 @@
             "minItems": 0,
             "items": {
               "$ref": "#/components/schemas/Core.ProgressBar"
-            }
+            },
+            "examples": [[{
+                "description": "Collecting data from the Microsoft Entra ID system.",
+                "displayName": "Running Entra ID Plugin",
+                "id": "b759230f-48cb-496e-ad57-5f079083226b",
+                "currentStep": 5,
+                "totalStepCount": 7
+            }]]
           },
           "description": {
             "type": "string",
@@ -313,7 +327,15 @@
           }
         },
         "type": "object",
-        "required": ["childBar", "displayName", "id", "totalStepCount"]
+        "required": ["childBar", "displayName", "id", "totalStepCount"],
+        "examples": [{
+            "childBar": [],
+            "description": "Collecting data from the Microsoft Entra ID system.",
+            "displayName": "Running Entra ID Plugin",
+            "id": "b759230f-48cb-496e-ad57-5f079083226b",
+            "currentStep": 5,
+            "totalStepCount": 7
+        }]
       },
       "Authenticator.RequestStatus": {
         "title": "Authentication - Status",
@@ -329,7 +351,8 @@
               {
                 "$ref": "#/components/schemas/Authenticator.Status.TokenAudience"
               }
-            ]
+            ],
+            "examples": [false, {"audience":"00000002-0000-0000-b000-000000000000"}]
           },
           "sccAuth": {
             "description": "Flag that represents if the server is waiting for SCC Auth credentials.",
@@ -338,7 +361,13 @@
           }
         },
         "type": "object",
-        "required": ["accessToken", "sccAuth"]
+        "required": ["accessToken", "sccAuth"],
+        "examples": [{
+            "accessToken": {
+                "audience":"00000002-0000-0000-b000-000000000000"
+            },
+            "sccAuth": true
+        }]
       },
       "Authenticator.Status.TokenAudience": {
         "title": "SHIELD - Authenticator - Status - Token Audience",
@@ -355,7 +384,10 @@
           }
         },
         "type": "object",
-        "required": ["audience"]
+        "required": ["audience"],
+        "examples": [{
+            "audience":"00000002-0000-0000-b000-000000000000"
+        }]
       },
       "Authenticator.Container.SccAuthCredentials": {
         "title": "SHIELD - Authenticator - SCC Auth",
@@ -385,22 +417,24 @@
           }
         },
         "required": ["authenticatedUpn", "security", "purview"],
-        "examples": [{
+        "examples": [
+          {
             "authenticatedUpn": "user@example.com",
             "security": {
-                "sccAuth": "54BKPtTL-eSMFp5cqYTMMSblm2U80cUJqQgmbe4f_sRn4ammMmU1NKNurn9HqpsUtS4FrMJRTKa3Or_pFbedM_57R0fVBfNJ-m2Pvey9OweWIDradzT0dB1WnufPTJiT2y7zSQy91Y9wJIn1_aY5q-MNh75qwjM84Dng-mYzbd9KqUfyPUolOo-j-... (Truncated)",
-                "xsrf": "PEDwTvWdm2qSTe-n8h-1praK4OcQK1ELTJ08DWYqBRzQiyA2MIuEKEMNLu4ExjDNpAOUnAxmsqOeuGzb82MJYkegOE6hW8BzpSM6k9nbTbJ4yjNGzMSQvWUnyqrBvGa8JfSRiSeaKdXGBnxGd90Spw2:... (truncated)"
+              "sccAuth": "54BKPtTL-eSMFp5cqYTMMSblm2U80cUJqQgmbe4f_sRn4ammMmU1NKNurn9HqpsUtS4FrMJRTKa3Or_pFbedM_57R0fVBfNJ-m2Pvey9OweWIDradzT0dB1WnufPTJiT2y7zSQy91Y9wJIn1_aY5q-MNh75qwjM84Dng-mYzbd9KqUfyPUolOo-j-... (Truncated)",
+              "xsrf": "PEDwTvWdm2qSTe-n8h-1praK4OcQK1ELTJ08DWYqBRzQiyA2MIuEKEMNLu4ExjDNpAOUnAxmsqOeuGzb82MJYkegOE6hW8BzpSM6k9nbTbJ4yjNGzMSQvWUnyqrBvGa8JfSRiSeaKdXGBnxGd90Spw2:... (truncated)"
             },
             "purview": {
-                "sccAuth": "54BKPtTL-eSMFp5cqYTMMSblm2U80cUJqQgmbe4f_sRn4ammMmU1NKNurn9HqpsUtS4FrMJRTKa3Or_pFbedM_57R0fVBfNJ-m2Pvey9OweWIDradzT0dB1WnufPTJiT2y7zSQy91Y9wJIn1_aY5q-MNh75qwjM84Dng-mYzbd9KqUfyPUolOo-j-... (Truncated)",
-                "xsrf": "PEDwTvWdm2qSTe-n8h-1praK4OcQK1ELTJ08DWYqBRzQiyA2MIuEKEMNLu4ExjDNpAOUnAxmsqOeuGzb82MJYkegOE6hW8BzpSM6k9nbTbJ4yjNGzMSQvWUnyqrBvGa8JfSRiSeaKdXGBnxGd90Spw2:... (truncated)"
+              "sccAuth": "54BKPtTL-eSMFp5cqYTMMSblm2U80cUJqQgmbe4f_sRn4ammMmU1NKNurn9HqpsUtS4FrMJRTKa3Or_pFbedM_57R0fVBfNJ-m2Pvey9OweWIDradzT0dB1WnufPTJiT2y7zSQy91Y9wJIn1_aY5q-MNh75qwjM84Dng-mYzbd9KqUfyPUolOo-j-... (Truncated)",
+              "xsrf": "PEDwTvWdm2qSTe-n8h-1praK4OcQK1ELTJ08DWYqBRzQiyA2MIuEKEMNLu4ExjDNpAOUnAxmsqOeuGzb82MJYkegOE6hW8BzpSM6k9nbTbJ4yjNGzMSQvWUnyqrBvGa8JfSRiSeaKdXGBnxGd90Spw2:... (truncated)"
             },
             "expiration": "2024-09-26T18:16:29.340Z",
             "defender": {
-                "sccAuth": "54BKPtTL-eSMFp5cqYTMMSblm2U80cUJqQgmbe4f_sRn4ammMmU1NKNurn9HqpsUtS4FrMJRTKa3Or_pFbedM_57R0fVBfNJ-m2Pvey9OweWIDradzT0dB1WnufPTJiT2y7zSQy91Y9wJIn1_aY5q-MNh75qwjM84Dng-mYzbd9KqUfyPUolOo-j-... (Truncated)",
-                "xsrf": "PEDwTvWdm2qSTe-n8h-1praK4OcQK1ELTJ08DWYqBRzQiyA2MIuEKEMNLu4ExjDNpAOUnAxmsqOeuGzb82MJYkegOE6hW8BzpSM6k9nbTbJ4yjNGzMSQvWUnyqrBvGa8JfSRiSeaKdXGBnxGd90Spw2:... (truncated)"
+              "sccAuth": "54BKPtTL-eSMFp5cqYTMMSblm2U80cUJqQgmbe4f_sRn4ammMmU1NKNurn9HqpsUtS4FrMJRTKa3Or_pFbedM_57R0fVBfNJ-m2Pvey9OweWIDradzT0dB1WnufPTJiT2y7zSQy91Y9wJIn1_aY5q-MNh75qwjM84Dng-mYzbd9KqUfyPUolOo-j-... (Truncated)",
+              "xsrf": "PEDwTvWdm2qSTe-n8h-1praK4OcQK1ELTJ08DWYqBRzQiyA2MIuEKEMNLu4ExjDNpAOUnAxmsqOeuGzb82MJYkegOE6hW8BzpSM6k9nbTbJ4yjNGzMSQvWUnyqrBvGa8JfSRiSeaKdXGBnxGd90Spw2:... (truncated)"
             }
-        }]
+          }
+        ]
       },
       "Authenticator.Container.SccAuthCredentials.CredentialContainer": {
         "title": "SHIELD - Authenticator - SCC Auth - Credential Container",
@@ -408,22 +442,26 @@
         "properties": {
           "sccAuth": {
             "description": "Authentication token.",
-            "examples": ["54BKPtTL-eSMFp5cqYTMMSblm2U80cUJqQgmbe4f_sRn4ammMmU1NKNurn9HqpsUtS4FrMJRTKa3Or_pFbedM_57R0fVBfNJ-m2Pvey9OweWIDradzT0dB1WnufPTJiT2y7zSQy91Y9wJIn1_aY5q-MNh75qwjM84Dng-mYzbd9KqUfyPUolOo-j-... (Truncated)"],
+            "examples": [
+              "54BKPtTL-eSMFp5cqYTMMSblm2U80cUJqQgmbe4f_sRn4ammMmU1NKNurn9HqpsUtS4FrMJRTKa3Or_pFbedM_57R0fVBfNJ-m2Pvey9OweWIDradzT0dB1WnufPTJiT2y7zSQy91Y9wJIn1_aY5q-MNh75qwjM84Dng-mYzbd9KqUfyPUolOo-j-... (Truncated)"
+            ],
             "type": "string"
           },
           "xsrf": {
             "description": "Cross Site Request Forgery Prevention Token.",
-            "examples": ["PEDwTvWdm2qSTe-n8h-1praK4OcQK1ELTJ08DWYqBRzQiyA2MIuEKEMNLu4ExjDNpAOUnAxmsqOeuGzb82MJYkegOE6hW8BzpSM6k9nbTbJ4yjNGzMSQvWUnyqrBvGa8JfSRiSeaKdXGBnxGd90Spw2:... (truncated)"],
+            "examples": [
+              "PEDwTvWdm2qSTe-n8h-1praK4OcQK1ELTJ08DWYqBRzQiyA2MIuEKEMNLu4ExjDNpAOUnAxmsqOeuGzb82MJYkegOE6hW8BzpSM6k9nbTbJ4yjNGzMSQvWUnyqrBvGa8JfSRiSeaKdXGBnxGd90Spw2:... (truncated)"
+            ],
             "type": "string"
           }
         },
         "required": ["sccAuth", "xsrf"],
         "type": "object",
         "examples": [
-            {
-                "sccAuth": "54BKPtTL-eSMFp5cqYTMMSblm2U80cUJqQgmbe4f_sRn4ammMmU1NKNurn9HqpsUtS4FrMJRTKa3Or_pFbedM_57R0fVBfNJ-m2Pvey9OweWIDradzT0dB1WnufPTJiT2y7zSQy91Y9wJIn1_aY5q-MNh75qwjM84Dng-mYzbd9KqUfyPUolOo-j-... (Truncated)",
-                "xsrf": "PEDwTvWdm2qSTe-n8h-1praK4OcQK1ELTJ08DWYqBRzQiyA2MIuEKEMNLu4ExjDNpAOUnAxmsqOeuGzb82MJYkegOE6hW8BzpSM6k9nbTbJ4yjNGzMSQvWUnyqrBvGa8JfSRiSeaKdXGBnxGd90Spw2:... (truncated)"
-            }
+          {
+            "sccAuth": "54BKPtTL-eSMFp5cqYTMMSblm2U80cUJqQgmbe4f_sRn4ammMmU1NKNurn9HqpsUtS4FrMJRTKa3Or_pFbedM_57R0fVBfNJ-m2Pvey9OweWIDradzT0dB1WnufPTJiT2y7zSQy91Y9wJIn1_aY5q-MNh75qwjM84Dng-mYzbd9KqUfyPUolOo-j-... (Truncated)",
+            "xsrf": "PEDwTvWdm2qSTe-n8h-1praK4OcQK1ELTJ08DWYqBRzQiyA2MIuEKEMNLu4ExjDNpAOUnAxmsqOeuGzb82MJYkegOE6hW8BzpSM6k9nbTbJ4yjNGzMSQvWUnyqrBvGa8JfSRiSeaKdXGBnxGd90Spw2:... (truncated)"
+          }
         ]
       },
       "Discover.ExecutionStatus": {
@@ -438,22 +476,18 @@
           }
         },
         "required": ["running"],
-        "examples": [{
+        "examples": [
+          {
             "running": true
-        }]
+          }
+        ]
       },
       "ManagedObject.Intermediary": {
         "description": "Base template for all intermediary objects to inherit from.",
         "properties": {
           "id": {
             "description": "Read-only.",
-            "examples": [
-              {
-                "value": "e097a3f5-9599-44a2-8923-fd3276c83ae1",
-                "summary": "Example object ID",
-                "description": "An example unique identifier in type UUID as the ID of an managed intermediary object."
-              }
-            ],
+            "examples": ["e097a3f5-9599-44a2-8923-fd3276c83ae1"],
             "format": "uuid",
             "maxLength": 36,
             "minLength": 36,
@@ -463,24 +497,12 @@
           },
           "kind": {
             "description": "Type of Intermediary that the properties are describing.",
-            "examples": [
-              {
-                "value": "AVD",
-                "summary": "Example intermediary type",
-                "description": "An example string that indicates the type of intermediary object."
-              }
-            ],
+            "examples": ["AVD"],
             "type": "string"
           },
           "name": {
             "description": "Human friendly name of the AVD cluster. This will be displayed to end users in the remote desktop app and web portals.",
-            "examples": [
-              {
-                "value": "Legacy Reach Back",
-                "summary": "Example friendly cluster name",
-                "description": "An example string that indicates a friendly name of the AVD cluster of an managed intermediary object."
-              }
-            ],
+            "examples": ["Legacy Reach Back"],
             "maxLength": 42,
             "minLength": 1,
             "type": "string"
@@ -491,30 +513,26 @@
         },
         "required": ["name"],
         "title": "Intermediary - Base Type",
-        "type": "object"
+        "type": "object",
+        "examples": [
+          {
+            "id": "e097a3f5-9599-44a2-8923-fd3276c83ae1",
+            "kind": "AVD",
+            "name": "Legacy Reach Back",
+            "securityClass": "Privileged"
+          }
+        ]
       },
       "ManagedObject.AvdIntermediary": {
         "properties": {
           "addressRangeCIDR": {
             "description": "Optional Virtual Network IP Address range, defaults to 10.0.0.0/16.",
-            "examples": [
-              {
-                "value": "172.16.1.0/24",
-                "summary": "Example CIDR address range",
-                "description": "An example string indicates the optional virtual network Classless Inter-Domain Routing IP address range."
-              }
-            ],
+            "examples": ["172.16.1.0/24"],
             "type": "string"
           },
           "assignmentGroup": {
             "description": "Read-only value that the server generates that is the Object ID of the user assignment security group for the current instance of the AVD intermediary.",
-            "examples": [
-              {
-                "value": "68873e26-3c35-465c-9422-0884a00beb36",
-                "summary": "Example assignment group ID",
-                "description": "An example string indicates the object unique identifier in type UUID of a user assignment security group for the current instance of the AVD intermediary."
-              }
-            ],
+            "examples": ["68873e26-3c35-465c-9422-0884a00beb36"],
             "format": "uuid",
             "maxLength": 36,
             "minLength": 36,
@@ -525,27 +543,18 @@
           "index": {
             "description": "Used to uniquely name multiple session hosts in a single host pool.",
             "minimum": 0,
-            "type": "number"
+            "type": "number",
+            "examples": [0]
           },
           "location": {
             "description": "Azure Regions that are available for the configured subscription. Resources will be deployed to the region specified here.",
-            "examples": [
-              {
-                "value": "East US 2",
-                "summary": "Example Azure region",
-                "description": "An example string that indicates the Azure Regions that are available for the configured subscription."
-              }
-            ],
+            "examples": ["East US 2"],
             "type": "string"
           },
           "resourceId": {
             "description": "ID of the Host Pool. This is generated by the server and can't be set, hence the read only flag.",
             "examples": [
-              {
-                "value": "/subscriptions/742f0d26-daa0-4f84-8d4f-fb052f89f639/resourceGroups/SHIELD_-_PSM-Legacy_Reach_Back/providers/Microsoft.DesktopVirtualization/hostpools/SHIELD_-_PSM-Cluster-Legacy_Reach_Back",
-                "summary": "Example host pool ID",
-                "description": "An example readonly string that indicates the ID of a Host Pool."
-              }
+              "/subscriptions/742f0d26-daa0-4f84-8d4f-fb052f89f639/resourceGroups/SHIELD_-_PSM-Legacy_Reach_Back/providers/Microsoft.DesktopVirtualization/hostpools/SHIELD_-_PSM-Cluster-Legacy_Reach_Back"
             ],
             "minLength": 122,
             "readOnly": true,
@@ -553,13 +562,7 @@
           },
           "sessionHostGroup": {
             "description": "Read-only value that the server generates that is the Object ID of the session host security group for the current instance of the AVD intermediary.",
-            "examples": [
-              {
-                "value": "f99f0918-da9b-4c58-9a8d-9346abc5d9ec",
-                "summary": "Example session host group ID",
-                "description": "An example readonly string in type UUID that indicates the unique object identifier of the session host security group for the current instance of the AVD intermediary."
-              }
-            ],
+            "examples": ["f99f0918-da9b-4c58-9a8d-9346abc5d9ec"],
             "format": "uuid",
             "maxLength": 36,
             "minLength": 36,
@@ -569,121 +572,79 @@
           },
           "sessionHostPrefix": {
             "description": "Short name to append to the beginning of the session host VMs. The max computer name length is 15, 4 chars are reserved for indexing and 4 for prefixing.",
-            "examples": [
-              {
-                "value": "Reach",
-                "summary": "Example session host prefix",
-                "description": "An example string which represents a short name append to the beginning of the session host VMs."
-              }
-            ],
+            "examples": ["Reach"],
             "maxLength": 7,
             "minLength": 1,
             "type": "string"
           },
           "vmSku": {
             "description": "SKU ID in Azure of the VM session host set that is to be deployed.",
-            "examples": [
-              {
-                "value": "Standard_D2s_v5",
-                "summary": "Example Azure VM SKU ID",
-                "description": "An example string which represents the Azure VM SKU ID of a VM session host."
-              }
-            ],
+            "examples": ["Standard_D2s_v5"],
             "type": "string"
           }
         },
         "required": ["index", "location", "sessionHostPrefix", "vmSku"],
         "title": "Intermediary - Azure Virtual Desktop",
-        "type": "object"
+        "type": "object",
+        "examples": [{
+              "addressRangeCIDR": "172.16.1.0/24",
+              "assignmentGroup": "68873e26-3c35-465c-9422-0884a00beb36",
+              "index": 0,
+              "location": "East US 2",
+              "resourceId": "/subscriptions/742f0d26-daa0-4f84-8d4f-fb052f89f639/resourceGroups/SHIELD_-_PSM-Legacy_Reach_Back/providers/Microsoft.DesktopVirtualization/hostpools/SHIELD_-_PSM-Cluster-Legacy_Reach_Back",
+              "sessionHostGroup": "f99f0918-da9b-4c58-9a8d-9346abc5d9ec",
+              "sessionHostPrefix": "Reach",
+              "vmSku": "Standard_D2s_v5"
+            }
+        ]
       },
       "LicenseReport.CorrelationRecord": {
         "description": "Metadata that describes the execution session (run) that is used to tie/relate all of the license report together.",
-        "examples": [
-          {
-            "value": {
+        "examples": [{
               "auditTenantAccount": "priv-user@example.com",
               "correlationId": "9d838115-0868-45d4-b8a5-98adc1af7e42",
               "reportTenantAccount": "ent-user@example.com",
               "tenantId": "7e536189-b2dd-4c8b-98b1-9b174777883f",
               "createdAt": "2024-08-01T21:13:12.821Z",
               "updatedAt": "2024-08-01T21:13:12.821Z"
-            },
-            "summary": "Example correlation record",
-            "description": "An example object that represents the metadata that describes the license report execution session (run) that is used to tie/relate all of the license report together."
-          }
+            }
         ],
         "properties": {
           "auditTenantAccount": {
             "description": "The user account used to retrieve the license information in the tenant being audited.",
-            "examples": [
-              {
-                "value": "admin-user@example.com",
-                "summary": "Example user account email",
-                "description": "An example email string of a user account used to retrieve the license information in the tenant being audited."
-              }
-            ],
+            "examples": ["admin-user@example.com"],
             "format": "email",
             "type": "string"
           },
           "correlationId": {
             "description": "The ID of the execution session (run) that is used to tie/relate all of the data together.",
-            "examples": [
-              {
-                "value": "88da2253-758f-4135-9d37-64448c8b65c1",
-                "summary": "Example correlation ID",
-                "description": "An example UUID string that represents the correlation ID of an license report execution session."
-              }
-            ],
+            "examples": ["88da2253-758f-4135-9d37-64448c8b65c1"],
             "format": "uuid",
             "type": "string",
             "pattern": "^\\w+-\\w+-\\w+-\\w+-\\w+$"
           },
           "reportTenantAccount": {
             "description": "User account used to store/report the license report to the SHI Lab cloud service.",
-            "examples": [
-              {
-                "value": "generic-user@example.com",
-                "summary": "Example report tenant account",
-                "description": "An example email string that represents the report tenant account used to store/report the license report to the SHI Lab cloud service."
-              }
-            ],
+            "examples": ["generic-user@example.com"],
             "format": "email",
             "type": "string"
           },
           "tenantId": {
             "description": "Unique ID of customer's Microsoft tenant that the license report is for.",
-            "examples": [
-              {
-                "value": "0e1fe83f-a33f-4250-8546-225b8d45ae01",
-                "summary": "Example tenant ID",
-                "description": "An example UUID string that represents the unique identifier of customer's Microsoft tenant that the license report is for."
-              }
-            ],
+            "examples": ["0e1fe83f-a33f-4250-8546-225b8d45ae01"],
             "format": "uuid",
             "type": "string",
             "pattern": "^\\w+-\\w+-\\w+-\\w+-\\w+$"
           },
           "createdAt": {
             "description": "Timestamp of when the report was created.",
-            "examples": [
-              {
-                "value": "2024-08-01T21:12:22.148Z",
-                "summary": "Example created date time",
-                "description": "An example datetime string that represents the timestamp of a license report creation."
-              }
-            ],
+            "examples": ["2024-08-01T21:12:22.148Z"],
             "format": "date-time",
             "type": "string"
           },
           "updatedAt": {
             "description": "Timestamp of when the report was last updated.",
-            "examples": [
-              {
-                "value": "2024-08-01T21:12:22.148Z",
-                "summary": "Example last update date time",
-                "description": "An example datetime string that represents the timestamp of the last update date of a license report."
-              }
-            ],
+            "examples": ["2024-08-01T21:12:22.148Z"],
             "format": "date-time",
             "type": "string"
           }
@@ -697,10 +658,16 @@
         "properties": {
           "assignedLicense": {
             "additionalProperties": {
-              "type": "integer"
+              "type": "integer",
+              "examples": [1]
             },
             "description": "License assignment on the specified principal.",
-            "type": "object"
+            "type": "object",
+            "examples": [
+              {
+                "eec0eb4f-6444-4f95-aba0-50c24d67f998": 1
+              }
+            ]
           },
           "assignedService": {
             "additionalProperties": {
@@ -710,12 +677,26 @@
                 },
                 {
                   "type": "integer",
-                  "format": "int32"
+                  "format": "int32",
+                  "examples": [0]
                 }
               ]
             },
             "description": "Service configuration assignment.  This is used to record the set of principals that are \"benefiting\" from the service, regardless of license status.",
-            "type": "object"
+            "type": "object",
+            "examples": [
+              {
+                "eec0eb4f-6444-4f95-aba0-50c24d67f998": {
+                  "Conditional Access": false,
+                  "Access Review": true,
+                  "Entitlement Management": false,
+                  "Identity Protection": true
+                }
+              },
+              {
+                "eec0eb4f-6444-4f95-aba0-50c24d67f998": 0
+              }
+            ]
           },
           "consumedService": {
             "additionalProperties": {
@@ -725,19 +706,31 @@
                 },
                 {
                   "type": "integer",
-                  "format": "int32"
+                  "format": "int32",
+                  "examples": [0]
                 }
               ]
             },
             "description": "Usage telemetry retrieved for the service to indicate if the specific principal is consuming the service or not, regardless of license status.",
-            "type": "object"
+            "type": "object",
+            "examples": [
+              {
+                "4b0d28f2-c1ce-48ae-a7d2-1caaa7825891": null
+              },
+              {
+                "eec0eb4f-6444-4f95-aba0-50c24d67f998": {
+                  "Conditional Access": true,
+                  "Access Review": false,
+                  "Entitlement Management": false,
+                  "Identity Protection": true
+                }
+              }
+            ]
           }
         },
         "required": ["assignedLicense", "assignedService", "consumedService"],
         "description": "Collection of principals that have had their in-use licenses and assigned licenses. Where the key is the principal ID and the value is the insights.",
-        "examples": [
-          {
-            "value": {
+        "examples": [{
               "assignedLicense": {
                 "eec0eb4f-6444-4f95-aba0-50c24d67f998": null,
                 "41781fb2-bc02-4b7c-bd55-b576c07bb09d": null,
@@ -780,29 +773,23 @@
                 "4b0d28f2-c1ce-48ae-a7d2-1caaa7825891": null,
                 "c90f1a25-e6cd-4163-ac6c-ca7616c585a9": null
               }
-            },
-            "summary": "Example license data",
-            "description": "An example license data object that represents a collection of principals that have had their in-use licenses and assigned licenses."
-          }
+            }
         ],
         "title": "License Report - License Data"
       },
       "LicenseReport.FeatureBreakdown": {
         "additionalProperties": {
-          "type": "boolean"
+          "type": "boolean",
+          "examples": [true]
         },
         "description": "List of features that are configured for the specific service plan's service configuration for the related principal.\nThe key is the name of the feature that is being described.\nThe value is the state of the feature configuration, `true` is in scope and `false` meaning not in scope.",
         "examples": [
           {
-            "value": {
-              "Conditional Access": true,
-              "Access Reviews": true,
-              "Dynamic Groups": false,
-              "On-Prem Password Rest": true,
-              "On-Prem Password Protection": false
-            },
-            "summary": "Example feature breakdown",
-            "description": "An example feature breakdown object that list the features that are configured for the specific service plan's service configuration for the related principal."
+            "Conditional Access": true,
+            "Access Reviews": true,
+            "Dynamic Groups": false,
+            "On-Prem Password Rest": true,
+            "On-Prem Password Protection": false
           }
         ],
         "title": "License Report - Feature Breakdown",
@@ -812,63 +799,49 @@
         "description": "Completely calculated license report structure that is the result of a complete run.",
         "examples": [
           {
-            "value": {
-              "availableLicense": {
-                "e17b13ee-9749-488b-9289-d31a8fde045d": 123,
-                "2d995b6a-d4aa-4d8d-a03c-372ecb66509d": 456,
-                "cbf6ee7c-c3c1-44a6-9f18-020c65536470": 789
-              },
-              "correlation": {
-                "auditTenantAccount": "admin-user@example.com",
-                "correlationId": "88da2253-758f-4135-9d37-64448c8b65c1",
-                "reportTenantAccount": "generic-user@example.com",
-                "tenantId": "0e1fe83f-a33f-4250-8546-225b8d45ae01"
-              },
-              "licenseData": {
-                "250844e1-a7ab-4f21-8e3f-58f51b5983a3": {
-                  "assignedLicense": {
-                    "e17b13ee-9749-488b-9289-d31a8fde045d": null
-                  },
-                  "assignedService": {
-                    "cbf6ee7c-c3c1-44a6-9f18-020c65536470": null,
-                    "c7bcba35-199c-41e5-8c8d-6d4e4aad8964": null
-                  },
-                  "consumedService": {
-                    "fe98c41a-d931-4f6f-a5bc-750ba7144a77": null,
-                    "0474bdf1-ee76-4aff-a65c-6f82e5e1d5a6": {
-                      "Something Here": true,
-                      "Other Obscure feature": false
-                    }
+            "availableLicense": {
+              "e17b13ee-9749-488b-9289-d31a8fde045d": 123,
+              "2d995b6a-d4aa-4d8d-a03c-372ecb66509d": 456,
+              "cbf6ee7c-c3c1-44a6-9f18-020c65536470": 789
+            },
+            "correlation": {
+              "auditTenantAccount": "admin-user@example.com",
+              "correlationId": "88da2253-758f-4135-9d37-64448c8b65c1",
+              "reportTenantAccount": "generic-user@example.com",
+              "tenantId": "0e1fe83f-a33f-4250-8546-225b8d45ae01"
+            },
+            "licenseData": {
+              "250844e1-a7ab-4f21-8e3f-58f51b5983a3": {
+                "assignedLicense": {
+                  "e17b13ee-9749-488b-9289-d31a8fde045d": null
+                },
+                "assignedService": {
+                  "cbf6ee7c-c3c1-44a6-9f18-020c65536470": null,
+                  "c7bcba35-199c-41e5-8c8d-6d4e4aad8964": null
+                },
+                "consumedService": {
+                  "fe98c41a-d931-4f6f-a5bc-750ba7144a77": null,
+                  "0474bdf1-ee76-4aff-a65c-6f82e5e1d5a6": {
+                    "Something Here": true,
+                    "Other Obscure feature": false
                   }
                 }
               }
-            },
-            "summary": "Example license report",
-            "description": "An example license report object that has the completely calculated license report structure from a complete license report run."
+            }
           }
         ],
         "type": "object",
         "properties": {
           "availableLicense": {
             "additionalProperties": {
-              "examples": [
-                {
-                  "value": 1234,
-                  "summary": "Example available license count",
-                  "description": "An example integer number that represents the available license count."
-                }
-              ],
+              "examples": [1234],
               "type": "integer"
             },
             "description": "Breakdown of the purchased licenses/service plans available in the tenant being audited for this run. Where the key is the ID of the service plan and the value is how many licenses are available/purchase for it.",
             "examples": [
               {
-                "value": {
-                  "eec0eb4f-6444-4f95-aba0-50c24d67f998": 1234,
-                  "41781fb2-bc02-4b7c-bd55-b576c07bb09d": 123
-                },
-                "summary": "Example available license object",
-                "description": "An example object that lists the breakdown of the purchased licenses/service plans available in the tenant being audited for this run."
+                "eec0eb4f-6444-4f95-aba0-50c24d67f998": 1234,
+                "41781fb2-bc02-4b7c-bd55-b576c07bb09d": 123
               }
             ],
             "title": "License Report - Available Licenses",
@@ -890,41 +863,33 @@
         "title": "Managed Device",
         "description": "Structure that represents a all of the states a managed device could be in.",
         "type": "object",
+        "examples": [
+          {
+            "commissionedDate": "2023-02-04T05:06:09.601Z",
+            "displayName": "Priv-01534962354",
+            "id": "9f237e13-9a04-4daf-b3d4-6d2beec3c2bf",
+            "parentDeviceId": "81682cf5-0405-491d-8ab8-e07c778d7eaf",
+            "securityClass": "Privileged",
+            "uniqueGroupId": "146964e0-8ca4-4af0-9c2a-894b32912463"
+          }
+        ],
         "properties": {
           "commissionedDate": {
             "description": "This is the ISO 8601 string format of the time representing the commission date of the PAW.",
-            "examples": [
-              {
-                "value": "2023-02-04T05:06:09.601Z",
-                "summary": "Example commission date",
-                "description": "An example ISO 8601 datetime string that represents the commission date of a PAW (Privileged Access Workstation)."
-              }
-            ],
+            "examples": ["2023-02-04T05:06:09.601Z"],
             "format": "date-time",
             "type": "string"
           },
           "displayName": {
             "description": "Current computer name of the device according to Entra ID. Empty string indicates that the device has not joined Entra ID yet.",
-            "examples": [
-              {
-                "value": "Priv-01534962354",
-                "summary": "Example display name",
-                "description": "Example string that represents the current computer name of a device according to Entra ID."
-              }
-            ],
+            "examples": ["Priv-01534962354"],
             "maxLength": 15,
             "minLength": 0,
             "type": "string"
           },
           "id": {
             "description": "Entra ID Device ID (Not Object ID) of the specified device.",
-            "examples": [
-              {
-                "value": "9f237e13-9a04-4daf-b3d4-6d2beec3c2bf",
-                "summary": "Example device ID",
-                "description": "An example UUID string that represents the Entra ID device ID of a specified device."
-              }
-            ],
+            "examples": ["9f237e13-9a04-4daf-b3d4-6d2beec3c2bf"],
             "format": "uuid",
             "maxLength": 36,
             "minLength": 36,
@@ -934,13 +899,7 @@
           },
           "parentDeviceId": {
             "description": "DeviceID of the parent PAW device.",
-            "examples": [
-              {
-                "value": "81682cf5-0405-491d-8ab8-e07c778d7eaf",
-                "summary": "Example parent device ID",
-                "description": "An example UUID string that represents the device ID of the parent PAW device."
-              }
-            ],
+            "examples": ["81682cf5-0405-491d-8ab8-e07c778d7eaf"],
             "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
             "type": "string"
           },
@@ -949,13 +908,7 @@
           },
           "uniqueGroupId": {
             "description": "The object ID of the unique security group that contains the managed Entra ID Device Identity.",
-            "examples": [
-              {
-                "value": "146964e0-8ca4-4af0-9c2a-894b32912463",
-                "summary": "Example security group ID",
-                "description": "An example UUID string that represents the object ID of a unique security group that contains a managed Entra ID Device Identity."
-              }
-            ],
+            "examples": ["146964e0-8ca4-4af0-9c2a-894b32912463"],
             "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
             "readOnly": true,
             "type": "string"
@@ -1782,13 +1735,13 @@
                   "$ref": "#/components/schemas/Discover.ExecutionStatus"
                 },
                 "examples": {
-                    "Execution Status": {
-                        "value": {
-                            "running": true
-                        },
-                        "summary": "Example execution status",
-                        "description": "An example execution status object that indicates a SHIELD Discover run is already in progress."
-                    }
+                  "Execution Status": {
+                    "value": {
+                      "running": true
+                    },
+                    "summary": "Example execution status",
+                    "description": "An example execution status object that indicates a SHIELD Discover run is already in progress."
+                  }
                 }
               }
             },
@@ -1811,18 +1764,18 @@
                   "$ref": "#/components/schemas/Core.ProgressBar"
                 },
                 "examples": {
-                    "Progress Bar": {
-                        "value": {
-                            "childBar": [],
-                            "description": "Collecting data from the Microsoft Entra ID system.",
-                            "displayName": "Running Entra ID Plugin",
-                            "id": "b759230f-48cb-496e-ad57-5f079083226b",
-                            "currentStep": 5,
-                            "totalStepCount": 7
-                        },
-                        "summary": "Example progress bar object",
-                        "description": "An example progress bar object returned from the endpoint. It indicates: <br/> - The purpose of a progress bar. <br/> - The text label of a progress bar. <br/> - The unique identifier in type UUID of a specific SHIELD instance for search. <br/> - The total number of steps of a progress bar. <br/> - The current step/value of a progress bar. <br/> - No child progress bar."
-                    }
+                  "Progress Bar": {
+                    "value": {
+                      "childBar": [],
+                      "description": "Collecting data from the Microsoft Entra ID system.",
+                      "displayName": "Running Entra ID Plugin",
+                      "id": "b759230f-48cb-496e-ad57-5f079083226b",
+                      "currentStep": 5,
+                      "totalStepCount": 7
+                    },
+                    "summary": "Example progress bar object",
+                    "description": "An example progress bar object returned from the endpoint. It indicates: <br/> - The purpose of a progress bar. <br/> - The text label of a progress bar. <br/> - The unique identifier in type UUID of a specific SHIELD instance for search. <br/> - The total number of steps of a progress bar. <br/> - The current step/value of a progress bar. <br/> - No child progress bar."
+                  }
                 }
               }
             },
@@ -2104,25 +2057,27 @@
                   "$ref": "#/components/schemas/Core.ProgressBar"
                 },
                 "examples": {
-                    "Progress Bar": {
-                        "value": {
-                            "childBar": [{
-                                "description": "Collecting data from the Microsoft Purview.",
-                                "displayName": "Running SHIELD Deploy - Purview",
-                                "id": "b759230f-48cb-496e-ad57-5f079083226c",
-                                "currentStep": 1,
-                                "totalStepCount": 3                                
-                            }],
-                            "description": "Collecting data from the Microsoft Entra ID system.",
-                            "displayName": "Running SHIELD Deploy",
-                            "id": "b759230f-48cb-496e-ad57-5f079083226b",
-                            "currentStep": 5,
-                            "totalStepCount": 7
-                        },
-                        "summary": "Example progress bar object",
-                        "description": "An example progress bar object returned from the endpoint. It indicates: <br/> - The purpose of a progress bar. <br/> - The text label of a progress bar. <br/> - The unique identifier in type UUID of a specific SHIELD instance for search. <br/> - The total number of steps of a progress bar. <br/> - The current step/value of a progress bar. <br/> - With a child progress bar."
-                    }
-                }                
+                  "Progress Bar": {
+                    "value": {
+                      "childBar": [
+                        {
+                          "description": "Collecting data from the Microsoft Purview.",
+                          "displayName": "Running SHIELD Deploy - Purview",
+                          "id": "b759230f-48cb-496e-ad57-5f079083226c",
+                          "currentStep": 1,
+                          "totalStepCount": 3
+                        }
+                      ],
+                      "description": "Collecting data from the Microsoft Entra ID system.",
+                      "displayName": "Running SHIELD Deploy",
+                      "id": "b759230f-48cb-496e-ad57-5f079083226b",
+                      "currentStep": 5,
+                      "totalStepCount": 7
+                    },
+                    "summary": "Example progress bar object",
+                    "description": "An example progress bar object returned from the endpoint. It indicates: <br/> - The purpose of a progress bar. <br/> - The text label of a progress bar. <br/> - The unique identifier in type UUID of a specific SHIELD instance for search. <br/> - The total number of steps of a progress bar. <br/> - The current step/value of a progress bar. <br/> - With a child progress bar."
+                  }
+                }
               }
             },
             "description": "OK"
@@ -3095,6 +3050,18 @@
                     }
                   }
                 ]
+              },
+              "examples": {
+                "Example intermediary object request": {
+                  "description": "",
+                  "summary": "Intermediary object request",
+                  "value": {
+                    "id": "e097a3f5-9599-44a2-8923-fd3276c83ae1",
+                    "kind": "AVD",
+                    "name": "Legacy Reach Back",
+                    "securityClass": "Privileged"
+                  }
+                }
               }
             }
           }
