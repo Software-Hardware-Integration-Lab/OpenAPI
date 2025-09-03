@@ -1600,16 +1600,28 @@
                     "appId": {
                       "description": "Application ID that should be used in Access Tokens as the audience and the endpoint necessary for auth code flows.",
                       "type": "string",
-                      "format": "uuid"
+                      "format": "uuid",
+                      "examples": ["85cbe72b-3215-48bc-9eeb-fa7896c31498"]
                     },
                     "tenantId": {
                       "description": "Tenant ID necessary for authority host URL configuration and UI customization.",
                       "type": "string",
-                      "format": "uuid"
+                      "format": "uuid",
+                      "examples": ["3fa85f64-5717-4562-b3fc-2c963f66afa6"]
                     }
                   },
                   "type": "object",
                   "required": ["appId", "tenantId"]
+                },
+                "examples": {
+                    "valid request": {
+                        "value": {
+                            "appId": "85cbe72b-3215-48bc-9eeb-fa7896c31498",
+                            "tenantId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                        },
+                        "summary": "Example request object",
+                        "description": "An example request object to retrieve the IDs required to authenticate."
+                    }
                 }
               }
             },
@@ -1636,13 +1648,14 @@
                 "schema": {
                   "description": "Access token that SHIELD uses to prove it is a valid recipient of credentials.",
                   "type": "string",
-                  "examples": [
-                    {
-                      "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik1jN2wzSXo5M2c3dXdnTmVFbW13X1dZR1BrbyJ9.eyJhdWQiOiJjYjU5ZjIyOC0wNjkwLTRhY2ItOWE3Yi0wMGMzNmEyZjRlOGQiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vMmQxMDJkYTktZDExZS00YTgwLTkwMjItYzQxOGZhNDg1NGM3L3YyLjAiLCJpYXQiOjE3MjczNjgzODQsIm5iZiI6MTcyNzM2ODM4NCwiZXhwIjoxNzI3MzcyMjg0LCJhaW8iOiJBU1FBMi84WUFBQUFSN0hyaW5XTmRwcisvdnoreWlkZER6WVExeFRpc3BSZGY4TG1XNjhRaE0wPSIsImF6cCI6IjRlODU5MTQ2LWY5M2UtNDlmMi05ODZmLWI3MjIyNmZjZDViOSIsImF6cGFjciI6IjEiLCJvaWQiOiJlMmRlNzQ0ZC1hZjVlLTQ4NDEtYmI4Zi02OTRkZDI1ZmVmNGQiLCJyaCI6IjAuQWNvQXFTMFFMUjdSZ0VxUUlzUVkta2hVeHlqeVdjdVFCc3RLbW5zQXcyb3ZUbzM2QUFBLiIsInJvbGVzIjpbIkF1dGhlbnRpY2F0b3IuQXR0ZXN0Il0sInN1YiI6ImUyZGU3NDRkLWFmNWUtNDg0MS1iYjhmLTY5NGRkMjVmZWY0ZCIsInRpZCI6IjJkMTAyZGE5LWQxMWUtNGE4MC05MDIyLWM0MThmYTQ4NTRjNyIsInV0aSI6Il9MaUdVWWxmS2txNFZoR09NeGw4QUEiLCJ2ZXIiOiIyLjAifQ.xlXZfOnDoOVW3_aOiSIZH8uiySeohro-HVnDzDEff2EjmOk9adrTOP5Sw1av6g3vy38r6dSu4tViwNGrb7Z2krgRKKvp-4A9rkPqeJjjd2rhFl2KiOlxL0mmykbroZZ70RJzwHy2GC7wfuLwJwr-5m7POV2grbxIAlTsMdZWDFXYi-AahfDVtLugarWG5-tXAqiPBKjaU6ntAJIbu7Ol1vYZaeYMsNKTs8O1P10YM460zN9OkfoI1gV7_InHEr8RSyQnEPCJ2W1Or4lDhqdey4ohMoP9EzLgMsn9Ckss5g5C6vVE0GQawUoeGozPOBpgb31J8JzZUyB1JyVfi-vKkQ",
-                      "summary": "Example valid access token",
-                      "description": "An example string that represents the access token that SHIELD uses to prove it is a valid recipient of credentials."
+                  "examples": ["eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik1jN2wzSXo5M2c3dXdnTmVFbW13X1dZR1BrbyJ9.eyJhdWQiOiJjYjU5ZjIyOC0wNjkwLTRhY2ItOWE3Yi0wMGMzNmEyZjRlOGQiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vMmQxMDJkYTktZDExZS00YTgwLTkwMjItYzQxOGZhNDg1NGM3L3YyLjAiLCJpYXQiOjE3MjczNjgzODQsIm5iZiI6MTcyNzM2ODM4NCwiZXhwIjoxNzI3MzcyMjg0LCJhaW8iOiJBU1FBMi84WUFBQUFSN0hyaW5XTmRwcisvdnoreWlkZER6WVExeFRpc3BSZGY4TG1XNjhRaE0wPSIsImF6cCI6IjRlODU5MTQ2LWY5M2UtNDlmMi05ODZmLWI3MjIyNmZjZDViOSIsImF6cGFjciI6IjEiLCJvaWQiOiJlMmRlNzQ0ZC1hZjVlLTQ4NDEtYmI4Zi02OTRkZDI1ZmVmNGQiLCJyaCI6IjAuQWNvQXFTMFFMUjdSZ0VxUUlzUVkta2hVeHlqeVdjdVFCc3RLbW5zQXcyb3ZUbzM2QUFBLiIsInJvbGVzIjpbIkF1dGhlbnRpY2F0b3IuQXR0ZXN0Il0sInN1YiI6ImUyZGU3NDRkLWFmNWUtNDg0MS1iYjhmLTY5NGRkMjVmZWY0ZCIsInRpZCI6IjJkMTAyZGE5LWQxMWUtNGE4MC05MDIyLWM0MThmYTQ4NTRjNyIsInV0aSI6Il9MaUdVWWxmS2txNFZoR09NeGw4QUEiLCJ2ZXIiOiIyLjAifQ.xlXZfOnDoOVW3_aOiSIZH8uiySeohro-HVnDzDEff2EjmOk9adrTOP5Sw1av6g3vy38r6dSu4tViwNGrb7Z2krgRKKvp-4A9rkPqeJjjd2rhFl2KiOlxL0mmykbroZZ70RJzwHy2GC7wfuLwJwr-5m7POV2grbxIAlTsMdZWDFXYi-AahfDVtLugarWG5-tXAqiPBKjaU6ntAJIbu7Ol1vYZaeYMsNKTs8O1P10YM460zN9OkfoI1gV7_InHEr8RSyQnEPCJ2W1Or4lDhqdey4ohMoP9EzLgMsn9Ckss5g5C6vVE0GQawUoeGozPOBpgb31J8JzZUyB1JyVfi-vKkQ"]
+                },
+                "examples": {
+                    "valid access token" : {
+                        "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik1jN2wzSXo5M2c3dXdnTmVFbW13X1dZR1BrbyJ9.eyJhdWQiOiJjYjU5ZjIyOC0wNjkwLTRhY2ItOWE3Yi0wMGMzNmEyZjRlOGQiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vMmQxMDJkYTktZDExZS00YTgwLTkwMjItYzQxOGZhNDg1NGM3L3YyLjAiLCJpYXQiOjE3MjczNjgzODQsIm5iZiI6MTcyNzM2ODM4NCwiZXhwIjoxNzI3MzcyMjg0LCJhaW8iOiJBU1FBMi84WUFBQUFSN0hyaW5XTmRwcisvdnoreWlkZER6WVExeFRpc3BSZGY4TG1XNjhRaE0wPSIsImF6cCI6IjRlODU5MTQ2LWY5M2UtNDlmMi05ODZmLWI3MjIyNmZjZDViOSIsImF6cGFjciI6IjEiLCJvaWQiOiJlMmRlNzQ0ZC1hZjVlLTQ4NDEtYmI4Zi02OTRkZDI1ZmVmNGQiLCJyaCI6IjAuQWNvQXFTMFFMUjdSZ0VxUUlzUVkta2hVeHlqeVdjdVFCc3RLbW5zQXcyb3ZUbzM2QUFBLiIsInJvbGVzIjpbIkF1dGhlbnRpY2F0b3IuQXR0ZXN0Il0sInN1YiI6ImUyZGU3NDRkLWFmNWUtNDg0MS1iYjhmLTY5NGRkMjVmZWY0ZCIsInRpZCI6IjJkMTAyZGE5LWQxMWUtNGE4MC05MDIyLWM0MThmYTQ4NTRjNyIsInV0aSI6Il9MaUdVWWxmS2txNFZoR09NeGw4QUEiLCJ2ZXIiOiIyLjAifQ.xlXZfOnDoOVW3_aOiSIZH8uiySeohro-HVnDzDEff2EjmOk9adrTOP5Sw1av6g3vy38r6dSu4tViwNGrb7Z2krgRKKvp-4A9rkPqeJjjd2rhFl2KiOlxL0mmykbroZZ70RJzwHy2GC7wfuLwJwr-5m7POV2grbxIAlTsMdZWDFXYi-AahfDVtLugarWG5-tXAqiPBKjaU6ntAJIbu7Ol1vYZaeYMsNKTs8O1P10YM460zN9OkfoI1gV7_InHEr8RSyQnEPCJ2W1Or4lDhqdey4ohMoP9EzLgMsn9Ckss5g5C6vVE0GQawUoeGozPOBpgb31J8JzZUyB1JyVfi-vKkQ",
+                        "summary": "Example valid access token",
+                        "description": "An example string that represents the access token that SHIELD uses to prove it is a valid recipient of credentials."                                            
                     }
-                  ]
                 }
               }
             },
@@ -1709,7 +1722,29 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/Authenticator.Container.SccAuthCredentials"
-              }
+              },
+              "examples": {
+                "valid Scc Auth credentials": {
+                    "value": {
+                        "authenticatedUpn": "user@example.com",
+                        "security": {
+                            "sccAuth": "54BKPtTL-eSMFp5cqYTMMSblm2U80cUJqQgmbe4f_sRn4ammMmU1NKNurn9HqpsUtS4FrMJRTKa3Or_pFbedM_57R0fVBfNJ-m2Pvey9OweWIDradzT0dB1WnufPTJiT2y7zSQy91Y9wJIn1_aY5q-MNh75qwjM84Dng-mYzbd9KqUfyPUolOo-j-... (Truncated)",
+                            "xsrf": "PEDwTvWdm2qSTe-n8h-1praK4OcQK1ELTJ08DWYqBRzQiyA2MIuEKEMNLu4ExjDNpAOUnAxmsqOeuGzb82MJYkegOE6hW8BzpSM6k9nbTbJ4yjNGzMSQvWUnyqrBvGa8JfSRiSeaKdXGBnxGd90Spw2:... (truncated)"
+                        },
+                        "purview": {
+                            "sccAuth": "54BKPtTL-eSMFp5cqYTMMSblm2U80cUJqQgmbe4f_sRn4ammMmU1NKNurn9HqpsUtS4FrMJRTKa3Or_pFbedM_57R0fVBfNJ-m2Pvey9OweWIDradzT0dB1WnufPTJiT2y7zSQy91Y9wJIn1_aY5q-MNh75qwjM84Dng-mYzbd9KqUfyPUolOo-j-... (Truncated)",
+                            "xsrf": "PEDwTvWdm2qSTe-n8h-1praK4OcQK1ELTJ08DWYqBRzQiyA2MIuEKEMNLu4ExjDNpAOUnAxmsqOeuGzb82MJYkegOE6hW8BzpSM6k9nbTbJ4yjNGzMSQvWUnyqrBvGa8JfSRiSeaKdXGBnxGd90Spw2:... (truncated)"
+                        },
+                        "expiration": "2024-09-26T18:16:29.340Z",
+                        "defender": {
+                            "sccAuth": "54BKPtTL-eSMFp5cqYTMMSblm2U80cUJqQgmbe4f_sRn4ammMmU1NKNurn9HqpsUtS4FrMJRTKa3Or_pFbedM_57R0fVBfNJ-m2Pvey9OweWIDradzT0dB1WnufPTJiT2y7zSQy91Y9wJIn1_aY5q-MNh75qwjM84Dng-mYzbd9KqUfyPUolOo-j-... (Truncated)",
+                            "xsrf": "PEDwTvWdm2qSTe-n8h-1praK4OcQK1ELTJ08DWYqBRzQiyA2MIuEKEMNLu4ExjDNpAOUnAxmsqOeuGzb82MJYkegOE6hW8BzpSM6k9nbTbJ4yjNGzMSQvWUnyqrBvGa8JfSRiSeaKdXGBnxGd90Spw2:... (truncated)"
+                        }
+                    },
+                    "summary": "Example Scc Auth credentials",
+                    "description": "An example of valid Scc Auth credentials used to configure SHIELD."
+                }
+              } 
             }
           }
         },
@@ -1737,25 +1772,22 @@
                   "token": {
                     "description": "This is transmitted as a property instead of a raw string as the body parser ignores it in Express.JS. Functionally identical though.",
                     "type": "string",
-                    "examples": [
-                      {
-                        "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik1jN2wzSXo5M2c3dXdnTmVFbW13X1dZR1BrbyJ9.eyJhdWQiOiI0YzQwMjgxYi1hMzA1LTRhYWYtOTBhNC1kNWJiZWU2ZWI4ZWQiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vMmQxMDJkYTktZDExZS00YTgwLTkwMjItYzQxOGZhNDg1NGM3L3YyLjAiLCJpYXQiOjE3MjczNzUzNzMsIm5iZiI6MTcyNzM3NTM3MywiZXhwIjoxNzI3Mzc5MjczLCJhaW8iOiJrMkJnWU9BM1ByL2lTc2loRmYzeU9uVk40UTZOc1dsZnRnWEhoMW5HYm5saWVuS1hRZ2tBIiwiYXpwIjoiNGU4NTkxNDYtZjkzZS00OWYyLTk4NmYtYjcyMjI2ZmNkNWI5IiwiYXpwYWNyIjoiMSIsIm9pZCI6ImUyZGU3NDRkLWFmNWUtNDg0MS1iYjhmLTY5NGRkMjVmZWY0ZCIsInJoIjoiMC5BY29BcVMwUUxSN1JnRXFRSXNRWS1raFV4eHNvUUV3Rm82OUtrS1RWdS01dXVPMzZBQUEuIiwicm9sZXMiOlsiVGVsZW1ldHJ5LlNvcC5SZWFkV3JpdGUiLCJMaWNlbnNlUmVwb3J0LlJlYWRXcml0ZSJdLCJzdWIiOiJlMmRlNzQ0ZC1hZjVlLTQ4NDEtYmI4Zi02OTRkZDI1ZmVmNGQiLCJ0aWQiOiIyZDEwMmRhOS1kMTFlLTRhODAtOTAyMi1jNDE4ZmE0ODU0YzciLCJ1dGkiOiJfTGlHVVlsZktrcTRWaEdPXzNpRkFBIiwidmVyIjoiMi4wIn0.CZMOfyo5Lo1Km8bgWtOw8f30n1AZ5HJQ-StyIPr_P_eEjanzHVSEiRsHweNATW0GQFfLs0lGH43xztFcNNepu7CctyEzoktJ-9De2mMLIMJviF1rlB19mxH3a3hUSPZuPeYPPONkYtjL4fZj0mCYcALoq-orc0Oswg0l3fatbS7a-DAgxZdLHa6M7OtXksMlMXwooxmocOQeg_zhpko1zyuzSsVwNrz1uMZYpivwaM1ImWZiqgjMc1NWCN2Co1nYNuvxg6Chcr0OOsPRaXayfzrP7IlsZIg5Itg9lrqN0cjT3t8GSejL2P8HmfPcYftlqOobCesjSfBthir5hGUoNA",
-                        "summary": "Example access token",
-                        "description": "An example string that represents an access token to be stored in the SHIELD authentication engine."
-                      }
-                    ]
+                    "examples": ["eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik1jN2wzSXo5M2c3dXdnTmVFbW13X1dZR1BrbyJ9.eyJhdWQiOiI0YzQwMjgxYi1hMzA1LTRhYWYtOTBhNC1kNWJiZWU2ZWI4ZWQiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vMmQxMDJkYTktZDExZS00YTgwLTkwMjItYzQxOGZhNDg1NGM3L3YyLjAiLCJpYXQiOjE3MjczNzUzNzMsIm5iZiI6MTcyNzM3NTM3MywiZXhwIjoxNzI3Mzc5MjczLCJhaW8iOiJrMkJnWU9BM1ByL2lTc2loRmYzeU9uVk40UTZOc1dsZnRnWEhoMW5HYm5saWVuS1hRZ2tBIiwiYXpwIjoiNGU4NTkxNDYtZjkzZS00OWYyLTk4NmYtYjcyMjI2ZmNkNWI5IiwiYXpwYWNyIjoiMSIsIm9pZCI6ImUyZGU3NDRkLWFmNWUtNDg0MS1iYjhmLTY5NGRkMjVmZWY0ZCIsInJoIjoiMC5BY29BcVMwUUxSN1JnRXFRSXNRWS1raFV4eHNvUUV3Rm82OUtrS1RWdS01dXVPMzZBQUEuIiwicm9sZXMiOlsiVGVsZW1ldHJ5LlNvcC5SZWFkV3JpdGUiLCJMaWNlbnNlUmVwb3J0LlJlYWRXcml0ZSJdLCJzdWIiOiJlMmRlNzQ0ZC1hZjVlLTQ4NDEtYmI4Zi02OTRkZDI1ZmVmNGQiLCJ0aWQiOiIyZDEwMmRhOS1kMTFlLTRhODAtOTAyMi1jNDE4ZmE0ODU0YzciLCJ1dGkiOiJfTGlHVVlsZktrcTRWaEdPXzNpRkFBIiwidmVyIjoiMi4wIn0.CZMOfyo5Lo1Km8bgWtOw8f30n1AZ5HJQ-StyIPr_P_eEjanzHVSEiRsHweNATW0GQFfLs0lGH43xztFcNNepu7CctyEzoktJ-9De2mMLIMJviF1rlB19mxH3a3hUSPZuPeYPPONkYtjL4fZj0mCYcALoq-orc0Oswg0l3fatbS7a-DAgxZdLHa6M7OtXksMlMXwooxmocOQeg_zhpko1zyuzSsVwNrz1uMZYpivwaM1ImWZiqgjMc1NWCN2Co1nYNuvxg6Chcr0OOsPRaXayfzrP7IlsZIg5Itg9lrqN0cjT3t8GSejL2P8HmfPcYftlqOobCesjSfBthir5hGUoNA"]
                   }
                 },
-                "examples": [
-                  {
+                "examples": [{
+                      "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik1jN2wzSXo5M2c3dXdnTmVFbW13X1dZR1BrbyJ9.eyJhdWQiOiI0YzQwMjgxYi1hMzA1LTRhYWYtOTBhNC1kNWJiZWU2ZWI4ZWQiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vMmQxMDJkYTktZDExZS00YTgwLTkwMjItYzQxOGZhNDg1NGM3L3YyLjAiLCJpYXQiOjE3MjczNzUzNzMsIm5iZiI6MTcyNzM3NTM3MywiZXhwIjoxNzI3Mzc5MjczLCJhaW8iOiJrMkJnWU9BM1ByL2lTc2loRmYzeU9uVk40UTZOc1dsZnRnWEhoMW5HYm5saWVuS1hRZ2tBIiwiYXpwIjoiNGU4NTkxNDYtZjkzZS00OWYyLTk4NmYtYjcyMjI2ZmNkNWI5IiwiYXpwYWNyIjoiMSIsIm9pZCI6ImUyZGU3NDRkLWFmNWUtNDg0MS1iYjhmLTY5NGRkMjVmZWY0ZCIsInJoIjoiMC5BY29BcVMwUUxSN1JnRXFRSXNRWS1raFV4eHNvUUV3Rm82OUtrS1RWdS01dXVPMzZBQUEuIiwicm9sZXMiOlsiVGVsZW1ldHJ5LlNvcC5SZWFkV3JpdGUiLCJMaWNlbnNlUmVwb3J0LlJlYWRXcml0ZSJdLCJzdWIiOiJlMmRlNzQ0ZC1hZjVlLTQ4NDEtYmI4Zi02OTRkZDI1ZmVmNGQiLCJ0aWQiOiIyZDEwMmRhOS1kMTFlLTRhODAtOTAyMi1jNDE4ZmE0ODU0YzciLCJ1dGkiOiJfTGlHVVlsZktrcTRWaEdPXzNpRkFBIiwidmVyIjoiMi4wIn0.CZMOfyo5Lo1Km8bgWtOw8f30n1AZ5HJQ-StyIPr_P_eEjanzHVSEiRsHweNATW0GQFfLs0lGH43xztFcNNepu7CctyEzoktJ-9De2mMLIMJviF1rlB19mxH3a3hUSPZuPeYPPONkYtjL4fZj0mCYcALoq-orc0Oswg0l3fatbS7a-DAgxZdLHa6M7OtXksMlMXwooxmocOQeg_zhpko1zyuzSsVwNrz1uMZYpivwaM1ImWZiqgjMc1NWCN2Co1nYNuvxg6Chcr0OOsPRaXayfzrP7IlsZIg5Itg9lrqN0cjT3t8GSejL2P8HmfPcYftlqOobCesjSfBthir5hGUoNA"
+                    }]
+              },
+              "examples": {
+                  "Valid request body" : {
                     "value": {
                       "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik1jN2wzSXo5M2c3dXdnTmVFbW13X1dZR1BrbyJ9.eyJhdWQiOiI0YzQwMjgxYi1hMzA1LTRhYWYtOTBhNC1kNWJiZWU2ZWI4ZWQiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vMmQxMDJkYTktZDExZS00YTgwLTkwMjItYzQxOGZhNDg1NGM3L3YyLjAiLCJpYXQiOjE3MjczNzUzNzMsIm5iZiI6MTcyNzM3NTM3MywiZXhwIjoxNzI3Mzc5MjczLCJhaW8iOiJrMkJnWU9BM1ByL2lTc2loRmYzeU9uVk40UTZOc1dsZnRnWEhoMW5HYm5saWVuS1hRZ2tBIiwiYXpwIjoiNGU4NTkxNDYtZjkzZS00OWYyLTk4NmYtYjcyMjI2ZmNkNWI5IiwiYXpwYWNyIjoiMSIsIm9pZCI6ImUyZGU3NDRkLWFmNWUtNDg0MS1iYjhmLTY5NGRkMjVmZWY0ZCIsInJoIjoiMC5BY29BcVMwUUxSN1JnRXFRSXNRWS1raFV4eHNvUUV3Rm82OUtrS1RWdS01dXVPMzZBQUEuIiwicm9sZXMiOlsiVGVsZW1ldHJ5LlNvcC5SZWFkV3JpdGUiLCJMaWNlbnNlUmVwb3J0LlJlYWRXcml0ZSJdLCJzdWIiOiJlMmRlNzQ0ZC1hZjVlLTQ4NDEtYmI4Zi02OTRkZDI1ZmVmNGQiLCJ0aWQiOiIyZDEwMmRhOS1kMTFlLTRhODAtOTAyMi1jNDE4ZmE0ODU0YzciLCJ1dGkiOiJfTGlHVVlsZktrcTRWaEdPXzNpRkFBIiwidmVyIjoiMi4wIn0.CZMOfyo5Lo1Km8bgWtOw8f30n1AZ5HJQ-StyIPr_P_eEjanzHVSEiRsHweNATW0GQFfLs0lGH43xztFcNNepu7CctyEzoktJ-9De2mMLIMJviF1rlB19mxH3a3hUSPZuPeYPPONkYtjL4fZj0mCYcALoq-orc0Oswg0l3fatbS7a-DAgxZdLHa6M7OtXksMlMXwooxmocOQeg_zhpko1zyuzSsVwNrz1uMZYpivwaM1ImWZiqgjMc1NWCN2Co1nYNuvxg6Chcr0OOsPRaXayfzrP7IlsZIg5Itg9lrqN0cjT3t8GSejL2P8HmfPcYftlqOobCesjSfBthir5hGUoNA"
                     },
                     "summary": "Example request body",
                     "description": "An example object that represents the request body to be sent to the API endpoint."
                   }
-                ]
-              }
+                }
             }
           }
         },
@@ -2031,7 +2063,25 @@
                   "minItems": 0,
                   "items": {
                     "$ref": "#/components/schemas/LicenseReport.CorrelationRecord"
-                  }
+                  },
+                  "examples": [[
+                      {
+                        "auditTenantAccount": "somebodyThatI@example.com",
+                        "correlationId": "6d7c9271-9e68-4bdf-9ae3-f90c4213f74b",
+                        "reportTenantAccount": "usedToKnow@example.com",
+                        "tenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db",
+                        "createdAt": "2024-08-01T21:14:45.026Z",
+                        "updatedAt": "2024-08-01T21:14:45.026Z"
+                      },
+                      {
+                        "auditTenantAccount": "somebodyThatI@example.com",
+                        "correlationId": "d8095827-a313-40e1-b086-f72636de0edf",
+                        "reportTenantAccount": "usedToKnow@example.com",
+                        "tenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db",
+                        "createdAt": "2024-07-25T21:14:45.026Z",
+                        "updatedAt": "2024-07-25T21:14:45.026Z"
+                      }
+                    ]]
                 }
               }
             },
@@ -2064,7 +2114,7 @@
                 "examples": {
                   "License Report": {
                     "description": "Sample, truncated report from an example customer environment.",
-                    "summary": "License Report",
+                    "summary": "Example License Report",
                     "value": {
                       "availableLicense": {
                         "3d282045-ec7f-4813-88e2-29b74ee609f7": 123456,
