@@ -133,11 +133,11 @@
           "$ref": "#/components/schemas/SecurityClassList"
         },
         "examples": {
-            "Privileged": {
-                "value": "Privileged",
-                "summary": "Example securityClass",
-                "description": "An example enum string that indicates the security class of an managed object is privileged."
-            }
+          "Privileged": {
+            "value": "Privileged",
+            "summary": "Example securityClass",
+            "description": "An example enum string that indicates the security class of an managed object is privileged."
+          }
         }
       },
       "updateChannelName": {
@@ -287,13 +287,17 @@
             "items": {
               "$ref": "#/components/schemas/Core.ProgressBar"
             },
-            "examples": [[{
-                "description": "Collecting data from the Microsoft Entra ID system.",
-                "displayName": "Running Entra ID Plugin",
-                "id": "b759230f-48cb-496e-ad57-5f079083226b",
-                "currentStep": 5,
-                "totalStepCount": 7
-            }]]
+            "examples": [
+              [
+                {
+                  "description": "Collecting data from the Microsoft Entra ID system.",
+                  "displayName": "Running Entra ID Plugin",
+                  "id": "b759230f-48cb-496e-ad57-5f079083226b",
+                  "currentStep": 5,
+                  "totalStepCount": 7
+                }
+              ]
+            ]
           },
           "description": {
             "type": "string",
@@ -328,14 +332,16 @@
         },
         "type": "object",
         "required": ["childBar", "displayName", "id", "totalStepCount"],
-        "examples": [{
+        "examples": [
+          {
             "childBar": [],
             "description": "Collecting data from the Microsoft Entra ID system.",
             "displayName": "Running Entra ID Plugin",
             "id": "b759230f-48cb-496e-ad57-5f079083226b",
             "currentStep": 5,
             "totalStepCount": 7
-        }]
+          }
+        ]
       },
       "Authenticator.RequestStatus": {
         "title": "Authentication - Status",
@@ -352,7 +358,10 @@
                 "$ref": "#/components/schemas/Authenticator.Status.TokenAudience"
               }
             ],
-            "examples": [false, {"audience":"00000002-0000-0000-b000-000000000000"}]
+            "examples": [
+              false,
+              { "audience": "00000002-0000-0000-b000-000000000000" }
+            ]
           },
           "sccAuth": {
             "description": "Flag that represents if the server is waiting for SCC Auth credentials.",
@@ -362,12 +371,14 @@
         },
         "type": "object",
         "required": ["accessToken", "sccAuth"],
-        "examples": [{
+        "examples": [
+          {
             "accessToken": {
-                "audience":"00000002-0000-0000-b000-000000000000"
+              "audience": "00000002-0000-0000-b000-000000000000"
             },
             "sccAuth": true
-        }]
+          }
+        ]
       },
       "Authenticator.Status.TokenAudience": {
         "title": "SHIELD - Authenticator - Status - Token Audience",
@@ -385,9 +396,11 @@
         },
         "type": "object",
         "required": ["audience"],
-        "examples": [{
-            "audience":"00000002-0000-0000-b000-000000000000"
-        }]
+        "examples": [
+          {
+            "audience": "00000002-0000-0000-b000-000000000000"
+          }
+        ]
       },
       "Authenticator.Container.SccAuthCredentials": {
         "title": "SHIELD - Authenticator - SCC Auth",
@@ -586,28 +599,30 @@
         "required": ["index", "location", "sessionHostPrefix", "vmSku"],
         "title": "Intermediary - Azure Virtual Desktop",
         "type": "object",
-        "examples": [{
-              "addressRangeCIDR": "172.16.1.0/24",
-              "assignmentGroup": "68873e26-3c35-465c-9422-0884a00beb36",
-              "index": 0,
-              "location": "East US 2",
-              "resourceId": "/subscriptions/742f0d26-daa0-4f84-8d4f-fb052f89f639/resourceGroups/SHIELD_-_PSM-Legacy_Reach_Back/providers/Microsoft.DesktopVirtualization/hostpools/SHIELD_-_PSM-Cluster-Legacy_Reach_Back",
-              "sessionHostGroup": "f99f0918-da9b-4c58-9a8d-9346abc5d9ec",
-              "sessionHostPrefix": "Reach",
-              "vmSku": "Standard_D2s_v5"
-            }
+        "examples": [
+          {
+            "addressRangeCIDR": "172.16.1.0/24",
+            "assignmentGroup": "68873e26-3c35-465c-9422-0884a00beb36",
+            "index": 0,
+            "location": "East US 2",
+            "resourceId": "/subscriptions/742f0d26-daa0-4f84-8d4f-fb052f89f639/resourceGroups/SHIELD_-_PSM-Legacy_Reach_Back/providers/Microsoft.DesktopVirtualization/hostpools/SHIELD_-_PSM-Cluster-Legacy_Reach_Back",
+            "sessionHostGroup": "f99f0918-da9b-4c58-9a8d-9346abc5d9ec",
+            "sessionHostPrefix": "Reach",
+            "vmSku": "Standard_D2s_v5"
+          }
         ]
       },
       "LicenseReport.CorrelationRecord": {
         "description": "Metadata that describes the execution session (run) that is used to tie/relate all of the license report together.",
-        "examples": [{
-              "auditTenantAccount": "priv-user@example.com",
-              "correlationId": "9d838115-0868-45d4-b8a5-98adc1af7e42",
-              "reportTenantAccount": "ent-user@example.com",
-              "tenantId": "7e536189-b2dd-4c8b-98b1-9b174777883f",
-              "createdAt": "2024-08-01T21:13:12.821Z",
-              "updatedAt": "2024-08-01T21:13:12.821Z"
-            }
+        "examples": [
+          {
+            "auditTenantAccount": "priv-user@example.com",
+            "correlationId": "9d838115-0868-45d4-b8a5-98adc1af7e42",
+            "reportTenantAccount": "ent-user@example.com",
+            "tenantId": "7e536189-b2dd-4c8b-98b1-9b174777883f",
+            "createdAt": "2024-08-01T21:13:12.821Z",
+            "updatedAt": "2024-08-01T21:13:12.821Z"
+          }
         ],
         "properties": {
           "auditTenantAccount": {
@@ -730,50 +745,51 @@
         },
         "required": ["assignedLicense", "assignedService", "consumedService"],
         "description": "Collection of principals that have had their in-use licenses and assigned licenses. Where the key is the principal ID and the value is the insights.",
-        "examples": [{
-              "assignedLicense": {
-                "eec0eb4f-6444-4f95-aba0-50c24d67f998": null,
-                "41781fb2-bc02-4b7c-bd55-b576c07bb09d": null,
-                "7159f980-6f83-4b67-bf41-e172b3ae1352": null
+        "examples": [
+          {
+            "assignedLicense": {
+              "eec0eb4f-6444-4f95-aba0-50c24d67f998": null,
+              "41781fb2-bc02-4b7c-bd55-b576c07bb09d": null,
+              "7159f980-6f83-4b67-bf41-e172b3ae1352": null
+            },
+            "assignedService": {
+              "eec0eb4f-6444-4f95-aba0-50c24d67f998": {
+                "Conditional Access": false,
+                "Access Review": true,
+                "Entitlement Management": false,
+                "Identity Protection": true
               },
-              "assignedService": {
-                "eec0eb4f-6444-4f95-aba0-50c24d67f998": {
-                  "Conditional Access": false,
-                  "Access Review": true,
-                  "Entitlement Management": false,
-                  "Identity Protection": true
-                },
-                "41781fb2-bc02-4b7c-bd55-b576c07bb09d": {
-                  "Conditional Access": true,
-                  "Dynamic Group": false,
-                  "Group Naming": true,
-                  "On-Prem SSPR": false,
-                  "Group Expiration": true,
-                  "Provisioning Engine": true,
-                  "Enterprise State Roaming": false
-                },
-                "6511755b-c27d-4c66-a59e-b835e6b54e7f": null
+              "41781fb2-bc02-4b7c-bd55-b576c07bb09d": {
+                "Conditional Access": true,
+                "Dynamic Group": false,
+                "Group Naming": true,
+                "On-Prem SSPR": false,
+                "Group Expiration": true,
+                "Provisioning Engine": true,
+                "Enterprise State Roaming": false
               },
-              "consumedService": {
-                "eec0eb4f-6444-4f95-aba0-50c24d67f998": {
-                  "Conditional Access": true,
-                  "Access Review": false,
-                  "Entitlement Management": false,
-                  "Identity Protection": true
-                },
-                "41781fb2-bc02-4b7c-bd55-b576c07bb09d": {
-                  "Conditional Access": true,
-                  "Dynamic Group": false,
-                  "Group Naming": true,
-                  "On-Prem SSPR": false,
-                  "Group Expiration": true,
-                  "Provisioning Engine": true,
-                  "Enterprise State Roaming": false
-                },
-                "4b0d28f2-c1ce-48ae-a7d2-1caaa7825891": null,
-                "c90f1a25-e6cd-4163-ac6c-ca7616c585a9": null
-              }
+              "6511755b-c27d-4c66-a59e-b835e6b54e7f": null
+            },
+            "consumedService": {
+              "eec0eb4f-6444-4f95-aba0-50c24d67f998": {
+                "Conditional Access": true,
+                "Access Review": false,
+                "Entitlement Management": false,
+                "Identity Protection": true
+              },
+              "41781fb2-bc02-4b7c-bd55-b576c07bb09d": {
+                "Conditional Access": true,
+                "Dynamic Group": false,
+                "Group Naming": true,
+                "On-Prem SSPR": false,
+                "Group Expiration": true,
+                "Provisioning Engine": true,
+                "Enterprise State Roaming": false
+              },
+              "4b0d28f2-c1ce-48ae-a7d2-1caaa7825891": null,
+              "c90f1a25-e6cd-4163-ac6c-ca7616c585a9": null
             }
+          }
         ],
         "title": "License Report - License Data"
       },
@@ -935,37 +951,16 @@
             "properties": {
               "groupAssignmentId": {
                 "description": "This is the ID of the Custom CSP Device Configuration that configures the local admin and local hyper-v group memberships.",
-                "examples": [
-                  {
-                    "value": "830d8b6f-2f6f-41f7-8800-0c07445abd36",
-                    "summary": "Example group assignment ID",
-                    "description": "An example UUID string that represents the unique identifier of the Custom CSP Device Configuration that configures the local admin and local hyper-v group memberships assignment."
-                  }
-                ],
+                "examples": ["830d8b6f-2f6f-41f7-8800-0c07445abd36"],
                 "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
                 "type": "string"
               },
               "securityClass": {
-                "description": "Security class that indicates this device is a privileged device.",
-                "examples": [
-                  {
-                    "value": "Privileged",
-                    "summary": "Example security class",
-                    "description": "An example enum string that represents the security class of a device and indicates the device is a privileged device."
-                  }
-                ],
-                "type": "string",
-                "enum": ["Privileged"]
+                "$ref": "#/components/schemas/SecurityClassList"
               },
               "userAssignmentId": {
                 "description": "The ID of the Settings Catalog that contains the user rights assignment of the specified PAW device.",
-                "examples": [
-                  {
-                    "value": "146964e0-8ca4-4af0-9c2a-894b32912463",
-                    "summary": "Example user assignment ID",
-                    "description": "An example UUID string that represents the unique identifier of a settings catalog that contains the user rights assignment of a specified PAW device."
-                  }
-                ],
+                "examples": ["146964e0-8ca4-4af0-9c2a-894b32912463"],
                 "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
                 "readOnly": true,
                 "type": "string"
@@ -973,15 +968,11 @@
               "userAssignmentList": {
                 "description": "List of Object IDs for the privileged user accounts that are assigned to this device.",
                 "examples": [
-                  {
-                    "value": [
-                      "56d0d4e1-96f6-4cfb-a5e9-a4ee923169a8",
-                      "94a9d681-a8d2-43eb-a83b-d4bfe90259ff",
-                      "c54d4854-9254-4689-8a22-1cc80a3dae4e"
-                    ],
-                    "summary": "Example list of privileged user accounts",
-                    "description": "An example UUID string array that represents a list of privileged user account unique object identifiers that are assigned to a device."
-                  }
+                  [
+                    "56d0d4e1-96f6-4cfb-a5e9-a4ee923169a8",
+                    "94a9d681-a8d2-43eb-a83b-d4bfe90259ff",
+                    "c54d4854-9254-4689-8a22-1cc80a3dae4e"
+                  ]
                 ],
                 "type": "array",
                 "items": {
@@ -995,6 +986,23 @@
               "securityClass",
               "userAssignmentId",
               "userAssignmentList"
+            ],
+            "examples": [
+              {
+                "commissionedDate": "2023-02-04T05:06:09.601Z",
+                "displayName": "Priv-01534962354",
+                "id": "9f237e13-9a04-4daf-b3d4-6d2beec3c2bf",
+                "parentDeviceId": "81682cf5-0405-491d-8ab8-e07c778d7eaf",
+                "uniqueGroupId": "146964e0-8ca4-4af0-9c2a-894b32912463",
+                "groupAssignmentId": "830d8b6f-2f6f-41f7-8800-0c07445abd36",
+                "securityClass": "Privileged",
+                "userAssignmentId": "146964e0-8ca4-4af0-9c2a-894b32912463",
+                "userAssignmentList": [
+                  "56d0d4e1-96f6-4cfb-a5e9-a4ee923169a8",
+                  "94a9d681-a8d2-43eb-a83b-d4bfe90259ff",
+                  "c54d4854-9254-4689-8a22-1cc80a3dae4e"
+                ]
+              }
             ]
           }
         ]
@@ -1005,43 +1013,26 @@
         "properties": {
           "creationDate": {
             "description": "A date object representing when the user managed by SHIELD.",
-            "examples": [
-              {
-                "value": "2023-10-21T15:24:47.970Z",
-                "summary": "Example user creation date",
-                "description": "An example date-time string that represents the timestamp when the user start managed by SHIELD."
-              }
-            ],
+            "examples": ["2023-10-21T15:24:47.970Z"],
             "format": "date-time",
             "readOnly": true,
             "type": "string"
           },
           "displayName": {
             "description": "The name shown on UIs for the privileged user according to Entra ID.",
-            "examples": [
-              {
-                "value": "Example User (Priv)",
-                "summary": "Example user display name",
-                "description": "An example string that represents the display name shown on UIs for a privileged user."
-              }
-            ],
+            "examples": ["Example User (Priv)"],
             "maxLength": 256,
             "type": "string"
           },
           "firstName": {
             "description": "Given name of the privileged user according to Entra ID.",
             "maxLength": 64,
-            "type": "string"
+            "type": "string",
+            "examples": ["John"]
           },
           "id": {
             "description": "The Entra ID Object ID of the managed user. This is the one property that is stored in the settings engine. This is the key in the storage systems to uniquely separate the managed user's data from others.",
-            "examples": [
-              {
-                "value": "9f237e13-9a04-4daf-b3d4-6d2beec3c2bf",
-                "summary": "Example managed user ID",
-                "description": "An example UUID string that represents the unique object identifier of a managed user."
-              }
-            ],
+            "examples": ["9f237e13-9a04-4daf-b3d4-6d2beec3c2bf"],
             "format": "uuid",
             "maxLength": 36,
             "minLength": 36,
@@ -1057,31 +1048,22 @@
               "format": "uuid"
             },
             "examples": [
-              {
-                "value": [
-                  "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
-                  "593d97dc-9a43-4bc7-9d79-ecde407d7782",
-                  "995f3b39-1e01-40d4-9368-ee956343e97c"
-                ],
-                "summary": "Example list of intermediary assignment",
-                "description": "An example UUID string array that represents the list of intermediaries that a user is assigned to."
-              }
+              [
+                "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                "995f3b39-1e01-40d4-9368-ee956343e97c"
+              ]
             ]
           },
           "lastName": {
             "description": "Surname/family name of the privileged user according to Entra ID.",
             "maxLength": 64,
-            "type": "string"
+            "type": "string",
+            "examples": ["Doe"]
           },
           "upn": {
             "description": "User principal name of the user object according to Azure Active Directory.",
-            "examples": [
-              {
-                "value": "priv-user@example.com",
-                "summary": "Example user principal name",
-                "description": "An example email string that represents the user principal name of an user object according to Azure Active Directory."
-              }
-            ],
+            "examples": ["priv-user@example.com"],
             "format": "email",
             "maxLength": 113,
             "minLength": 6,
@@ -1098,37 +1080,21 @@
               "format": "uuid"
             },
             "examples": [
-              {
-                "value": [
-                  "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
-                  "593d97dc-9a43-4bc7-9d79-ecde407d7782",
-                  "995f3b39-1e01-40d4-9368-ee956343e97c"
-                ],
-                "summary": "Example list of silo assignment",
-                "description": "An example UUID string array that represents the list of unique identifier of the silo that a user is assigned to."
-              }
+              [
+                "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                "995f3b39-1e01-40d4-9368-ee956343e97c"
+              ]
             ]
           },
           "uiEducation": {
             "description": "Indicates if user education is enabled in the UI for the specified user. True is on, false is off.",
-            "examples": [
-              {
-                "value": false,
-                "summary": "Example education UI config",
-                "description": "An example boolean that indicates the user education UI is disabled for a specified user."
-              }
-            ],
+            "examples": [false],
             "type": "boolean"
           },
           "uniqueGroupId": {
             "description": "ObjectID of the unique user group that the managed user is a member of.",
-            "examples": [
-              {
-                "value": "ad402c42-1bc9-4ba5-9419-7dbfb46a9c4d",
-                "summary": "Example group ID",
-                "description": "An example UUID string that represents the unique user group object identifier that a managed user is a member of."
-              }
-            ],
+            "examples": ["ad402c42-1bc9-4ba5-9419-7dbfb46a9c4d"],
             "format": "uuid",
             "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
             "readOnly": true,
@@ -1145,7 +1111,30 @@
           "uniqueGroupId",
           "upn"
         ],
-        "type": "object"
+        "type": "object",
+        "examples": [
+          {
+            "creationDate": "2023-10-21T15:24:47.970Z",
+            "displayName": "Example User (Priv)",
+            "firstName": "John",
+            "lastName": "Doe",
+            "id": "9f237e13-9a04-4daf-b3d4-6d2beec3c2bf",
+            "upn": "priv-user@example.com",
+            "securityClass": "Privileged",
+            "uiEducation": false,
+            "uniqueGroupId": "ad402c42-1bc9-4ba5-9419-7dbfb46a9c4d",
+            "intermediaryAssignmentList": [
+              "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+              "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+              "995f3b39-1e01-40d4-9368-ee956343e97c"
+            ],
+            "siloAssignmentList": [
+              "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+              "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+              "995f3b39-1e01-40d4-9368-ee956343e97c"
+            ]
+          }
+        ]
       },
       "ManagedObject.PrivilegedUser": {
         "title": "Managed User - Privileged",
@@ -1164,38 +1153,22 @@
                   "format": "uuid"
                 },
                 "examples": [
-                  {
-                    "value": [
-                      "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
-                      "593d97dc-9a43-4bc7-9d79-ecde407d7782",
-                      "995f3b39-1e01-40d4-9368-ee956343e97c"
-                    ],
-                    "summary": "Example list of device assignment",
-                    "description": "An example UUID string array that represents a list of device unique identifiers that privileged users are able to use as endpoints."
-                  }
+                  [
+                    "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                    "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                    "995f3b39-1e01-40d4-9368-ee956343e97c"
+                  ]
                 ]
               },
               "generatedPassword": {
                 "description": "The password that was created for the managed user upon managed user creation, this is not stored. This is only available once during user creation. If the password is lost, reset the PWD in Entra ID or have the user perform SSPR.",
-                "examples": [
-                  {
-                    "value": "GY_w7bZUKRgpIXctD0S2wg",
-                    "summary": "Example password",
-                    "description": "An example string that represents the password created for a managed user upon user creation."
-                  }
-                ],
+                "examples": ["GY_w7bZUKRgpIXctD0S2wg"],
                 "readOnly": true,
                 "type": "string"
               },
               "parentId": {
                 "description": "The Entra ID Object ID of the object that the manged user is tied to. This value is only present on privileged users.",
-                "examples": [
-                  {
-                    "value": "e59a3a64-dc36-4368-80ec-c205eb176ef6",
-                    "summary": "Example parent object ID",
-                    "description": "An example UUID string that represents the Entra ID Object ID of the object that a manged user is tied to."
-                  }
-                ],
+                "examples": ["e59a3a64-dc36-4368-80ec-c205eb176ef6"],
                 "format": "uuid",
                 "maxLength": 36,
                 "minLength": 36,
@@ -1204,26 +1177,11 @@
                 "type": "string"
               },
               "securityClass": {
-                "description": "Security class that indicates this user is a privileged user.",
-                "examples": [
-                  {
-                    "value": "Privileged",
-                    "summary": "Example security class",
-                    "description": "An example enum string that represents the security class of a user and indicates the user is a privileged user."
-                  }
-                ],
-                "type": "string",
-                "enum": ["Privileged"]
+                "$ref": "#/components/schemas/SecurityClassList"
               },
               "temporaryAccessPass": {
                 "description": "A TAP that was created for the managed user upon managed user creation, this is not stored. This is only available once during user creation. TAP expires at the configured tenant expiration time.",
-                "examples": [
-                  {
-                    "value": "BCKTSN#E2R&5",
-                    "summary": "Example temporary access pass",
-                    "description": "An example string that represents the temporary access pass created for a managed user upon managed user creation."
-                  }
-                ],
+                "examples": ["BCKTSN#E2R&5"],
                 "readOnly": true,
                 "type": "string"
               }
@@ -1231,15 +1189,48 @@
             "required": ["deviceAssignmentList", "parentId", "securityClass"],
             "type": "object"
           }
+        ],
+        "examples": [
+          {
+            "creationDate": "2023-10-21T15:24:47.970Z",
+            "displayName": "Example User (Priv)",
+            "firstName": "John",
+            "lastName": "Doe",
+            "id": "9f237e13-9a04-4daf-b3d4-6d2beec3c2bf",
+            "upn": "priv-user@example.com",
+            "securityClass": "Privileged",
+            "uiEducation": false,
+            "uniqueGroupId": "ad402c42-1bc9-4ba5-9419-7dbfb46a9c4d",
+            "intermediaryAssignmentList": [
+              "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+              "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+              "995f3b39-1e01-40d4-9368-ee956343e97c"
+            ],
+            "siloAssignmentList": [
+              "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+              "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+              "995f3b39-1e01-40d4-9368-ee956343e97c"
+            ],
+            "deviceAssignmentList": [
+              "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+              "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+              "995f3b39-1e01-40d4-9368-ee956343e97c"
+            ],
+            "generatedPassword": "GY_w7bZUKRgpIXctD0S2wg",
+            "parentId": "e59a3a64-dc36-4368-80ec-c205eb176ef6",
+            "temporaryAccessPass": "BCKTSN#E2R&5"
+          }
         ]
       },
       "ObjectPage.Intermediary.Avd": {
         "properties": {
           "@odata.count": {
-            "type": "number"
+            "type": "number",
+            "examples": [0]
           },
           "@odata.nextLink": {
-            "type": "string"
+            "type": "string",
+            "examples": ["3"]
           },
           "value": {
             "items": {
@@ -1258,9 +1249,47 @@
               ]
             },
             "minItems": 0,
-            "type": "array"
+            "type": "array",
+            "examples": [
+              {
+                "id": "e097a3f5-9599-44a2-8923-fd3276c83ae1",
+                "kind": "AVD",
+                "name": "Legacy Reach Back",
+                "securityClass": "Privileged",
+                "addressRangeCIDR": "172.16.1.0/24",
+                "assignmentGroup": "68873e26-3c35-465c-9422-0884a00beb36",
+                "index": 0,
+                "location": "East US 2",
+                "resourceId": "/subscriptions/742f0d26-daa0-4f84-8d4f-fb052f89f639/resourceGroups/SHIELD_-_PSM-Legacy_Reach_Back/providers/Microsoft.DesktopVirtualization/hostpools/SHIELD_-_PSM-Cluster-Legacy_Reach_Back",
+                "sessionHostGroup": "f99f0918-da9b-4c58-9a8d-9346abc5d9ec",
+                "sessionHostPrefix": "Reach",
+                "vmSku": "Standard_D2s_v5"
+              }
+            ]
           }
         },
+        "examples": [
+          {
+            "@odata.count": 1,
+            "@odata.nextLink": "1",
+            "value": [
+              {
+                "id": "e097a3f5-9599-44a2-8923-fd3276c83ae1",
+                "kind": "AVD",
+                "name": "Legacy Reach Back",
+                "securityClass": "Privileged",
+                "addressRangeCIDR": "172.16.1.0/24",
+                "assignmentGroup": "68873e26-3c35-465c-9422-0884a00beb36",
+                "index": 0,
+                "location": "East US 2",
+                "resourceId": "/subscriptions/742f0d26-daa0-4f84-8d4f-fb052f89f639/resourceGroups/SHIELD_-_PSM-Legacy_Reach_Back/providers/Microsoft.DesktopVirtualization/hostpools/SHIELD_-_PSM-Cluster-Legacy_Reach_Back",
+                "sessionHostGroup": "f99f0918-da9b-4c58-9a8d-9346abc5d9ec",
+                "sessionHostPrefix": "Reach",
+                "vmSku": "Standard_D2s_v5"
+              }
+            ]
+          }
+        ],
         "required": ["value"],
         "title": "Page of AVD Intermediary Objects",
         "type": "object"
@@ -1268,10 +1297,12 @@
       "ObjectPage.ManagedDevice": {
         "properties": {
           "@odata.count": {
-            "type": "number"
+            "type": "number",
+            "examples": [3]
           },
           "@odata.nextLink": {
-            "type": "string"
+            "type": "string",
+            "examples": ["2"]
           },
           "value": {
             "items": {
@@ -1285,20 +1316,78 @@
               ]
             },
             "minItems": 0,
-            "type": "array"
+            "type": "array",
+            "examples": [
+              {
+                "commissionedDate": "2023-02-04T05:06:09.601Z",
+                "displayName": "Priv-01534962354",
+                "id": "9f237e13-9a04-4daf-b3d4-6d2beec3c2bf",
+                "parentDeviceId": "81682cf5-0405-491d-8ab8-e07c778d7eaf",
+                "securityClass": "Privileged",
+                "uniqueGroupId": "146964e0-8ca4-4af0-9c2a-894b32912463"
+              },
+              {
+                "commissionedDate": "2023-02-04T05:06:09.601Z",
+                "displayName": "Priv-01534962354",
+                "id": "9f237e13-9a04-4daf-b3d4-6d2beec3c2bf",
+                "parentDeviceId": "81682cf5-0405-491d-8ab8-e07c778d7eaf",
+                "uniqueGroupId": "146964e0-8ca4-4af0-9c2a-894b32912463",
+                "groupAssignmentId": "830d8b6f-2f6f-41f7-8800-0c07445abd36",
+                "securityClass": "Privileged",
+                "userAssignmentId": "146964e0-8ca4-4af0-9c2a-894b32912463",
+                "userAssignmentList": [
+                  "56d0d4e1-96f6-4cfb-a5e9-a4ee923169a8",
+                  "94a9d681-a8d2-43eb-a83b-d4bfe90259ff",
+                  "c54d4854-9254-4689-8a22-1cc80a3dae4e"
+                ]
+              }
+            ]
           }
         },
         "required": ["value"],
         "title": "Page of Managed Device Objects",
-        "type": "object"
+        "type": "object",
+        "examples": [
+          {
+            "@odata.count": 3,
+            "@odata.nextLink": "2",
+            "value": [
+              {
+                "commissionedDate": "2023-02-04T05:06:09.601Z",
+                "displayName": "Priv-01534962354",
+                "id": "9f237e13-9a04-4daf-b3d4-6d2beec3c2bf",
+                "parentDeviceId": "81682cf5-0405-491d-8ab8-e07c778d7eaf",
+                "securityClass": "Privileged",
+                "uniqueGroupId": "146964e0-8ca4-4af0-9c2a-894b32912463"
+              },
+              {
+                "commissionedDate": "2023-02-04T05:06:09.601Z",
+                "displayName": "Priv-01534962354",
+                "id": "9f237e13-9a04-4daf-b3d4-6d2beec3c2bf",
+                "parentDeviceId": "81682cf5-0405-491d-8ab8-e07c778d7eaf",
+                "uniqueGroupId": "146964e0-8ca4-4af0-9c2a-894b32912463",
+                "groupAssignmentId": "830d8b6f-2f6f-41f7-8800-0c07445abd36",
+                "securityClass": "Privileged",
+                "userAssignmentId": "146964e0-8ca4-4af0-9c2a-894b32912463",
+                "userAssignmentList": [
+                  "56d0d4e1-96f6-4cfb-a5e9-a4ee923169a8",
+                  "94a9d681-a8d2-43eb-a83b-d4bfe90259ff",
+                  "c54d4854-9254-4689-8a22-1cc80a3dae4e"
+                ]
+              }
+            ]
+          }
+        ]
       },
       "ObjectPage.ManagedUser": {
         "properties": {
           "@odata.count": {
-            "type": "number"
+            "type": "number",
+            "examples": [3]
           },
           "@odata.nextLink": {
-            "type": "string"
+            "type": "string",
+            "examples": ["2"]
           },
           "value": {
             "items": {
@@ -1312,23 +1401,127 @@
               ]
             },
             "minItems": 0,
-            "type": "array"
+            "type": "array",
+            "examples": [
+              {
+                "creationDate": "2023-10-21T15:24:47.970Z",
+                "displayName": "Example User (Priv)",
+                "firstName": "John",
+                "lastName": "Doe",
+                "id": "9f237e13-9a04-4daf-b3d4-6d2beec3c2bf",
+                "upn": "priv-user@example.com",
+                "securityClass": "Privileged",
+                "uiEducation": false,
+                "uniqueGroupId": "ad402c42-1bc9-4ba5-9419-7dbfb46a9c4d",
+                "intermediaryAssignmentList": [
+                  "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                  "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                  "995f3b39-1e01-40d4-9368-ee956343e97c"
+                ],
+                "siloAssignmentList": [
+                  "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                  "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                  "995f3b39-1e01-40d4-9368-ee956343e97c"
+                ]
+              },
+              {
+                "creationDate": "2023-10-21T15:24:47.970Z",
+                "displayName": "Example User (Priv)",
+                "firstName": "John",
+                "lastName": "Doe",
+                "id": "9f237e13-9a04-4daf-b3d4-6d2beec3c2bf",
+                "upn": "priv-user@example.com",
+                "securityClass": "Privileged",
+                "uiEducation": false,
+                "uniqueGroupId": "ad402c42-1bc9-4ba5-9419-7dbfb46a9c4d",
+                "intermediaryAssignmentList": [
+                  "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                  "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                  "995f3b39-1e01-40d4-9368-ee956343e97c"
+                ],
+                "siloAssignmentList": [
+                  "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                  "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                  "995f3b39-1e01-40d4-9368-ee956343e97c"
+                ],
+                "deviceAssignmentList": [
+                  "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                  "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                  "995f3b39-1e01-40d4-9368-ee956343e97c"
+                ],
+                "generatedPassword": "GY_w7bZUKRgpIXctD0S2wg",
+                "parentId": "e59a3a64-dc36-4368-80ec-c205eb176ef6",
+                "temporaryAccessPass": "BCKTSN#E2R&5"
+              }
+            ]
           }
         },
         "required": ["value"],
         "title": "Page of Managed User Objects",
-        "type": "object"
+        "type": "object",
+        "examples": [
+          {
+            "@odata.count": 3,
+            "@odata.nextLink": "2",
+            "value": [
+              {
+                "creationDate": "2023-10-21T15:24:47.970Z",
+                "displayName": "Example User (Priv)",
+                "firstName": "John",
+                "lastName": "Doe",
+                "id": "9f237e13-9a04-4daf-b3d4-6d2beec3c2bf",
+                "upn": "priv-user@example.com",
+                "securityClass": "Privileged",
+                "uiEducation": false,
+                "uniqueGroupId": "ad402c42-1bc9-4ba5-9419-7dbfb46a9c4d",
+                "intermediaryAssignmentList": [
+                  "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                  "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                  "995f3b39-1e01-40d4-9368-ee956343e97c"
+                ],
+                "siloAssignmentList": [
+                  "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                  "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                  "995f3b39-1e01-40d4-9368-ee956343e97c"
+                ]
+              },
+              {
+                "creationDate": "2023-10-21T15:24:47.970Z",
+                "displayName": "Example User (Priv)",
+                "firstName": "John",
+                "lastName": "Doe",
+                "id": "9f237e13-9a04-4daf-b3d4-6d2beec3c2bf",
+                "upn": "priv-user@example.com",
+                "securityClass": "Privileged",
+                "uiEducation": false,
+                "uniqueGroupId": "ad402c42-1bc9-4ba5-9419-7dbfb46a9c4d",
+                "intermediaryAssignmentList": [
+                  "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                  "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                  "995f3b39-1e01-40d4-9368-ee956343e97c"
+                ],
+                "siloAssignmentList": [
+                  "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                  "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                  "995f3b39-1e01-40d4-9368-ee956343e97c"
+                ],
+                "deviceAssignmentList": [
+                  "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                  "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                  "995f3b39-1e01-40d4-9368-ee956343e97c"
+                ],
+                "generatedPassword": "GY_w7bZUKRgpIXctD0S2wg",
+                "parentId": "e59a3a64-dc36-4368-80ec-c205eb176ef6",
+                "temporaryAccessPass": "BCKTSN#E2R&5"
+              }
+            ]
+          }
+        ]
       },
       "SecurityClassList": {
         "description": "Security class types as described in https://learn.microsoft.com/en-us/security/compass/privileged-access-security-levels.",
         "enum": ["Privileged", "Specialized", "Enterprise", "Unmanaged"],
-        "examples": [
-          {
-            "value": "Privileged",
-            "summary": "Example of security class",
-            "description": "An example enum string that represent an object belongs to the Privileged security class."
-          }
-        ],
+        "examples": ["Privileged"],
         "title": "Type of security class the object(s) belongs to",
         "type": "string"
       }
