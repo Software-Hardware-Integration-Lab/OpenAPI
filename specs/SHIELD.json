@@ -1050,6 +1050,30 @@
                 "title": "Page of Managed Device Objects",
                 "type": "object"
             },
+            "ObjectPage.ManagedPrivilegedDevice": {
+                "properties": {
+                    "@odata.count": {
+                        "nullable": true,
+                        "type": "number"
+                    },
+                    "@odata.nextLink": {
+                        "nullable": true,
+                        "type": "string"
+                    },
+                    "value": {
+                        "items": {
+                            "$ref": "#/components/schemas/ManagedObject.PrivilegedDevice"
+                        },
+                        "minItems": 0,
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "value"
+                ],
+                "title": "Page of Managed Privileged Device Objects",
+                "type": "object"
+            },
             "ObjectPage.ManagedUser": {
                 "properties": {
                     "@odata.count": {
@@ -1079,6 +1103,30 @@
                     "value"
                 ],
                 "title": "Page of Managed User Objects",
+                "type": "object"
+            },
+            "ObjectPage.ManagedPrivilegedUser": {
+                "properties": {
+                    "@odata.count": {
+                        "nullable": true,
+                        "type": "number"
+                    },
+                    "@odata.nextLink": {
+                        "nullable": true,
+                        "type": "string"
+                    },
+                    "value": {
+                        "items": {
+                            "$ref": "#/components/schemas/ManagedObject.PrivilegedUser"
+                        },
+                        "minItems": 0,
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "value"
+                ],
+                "title": "Page of Managed Privileged User Objects",
                 "type": "object"
             },
             "SecurityClassList": {
@@ -2368,6 +2416,42 @@
                 ]
             }
         },
+        "/Api/Defend/Device/Type/Privileged": {
+            "get": {
+                "description": "Returns a list of all privileged managed devices.\n\nThis endpoint requires the `Device.Privileged.Read`, `Device.Privileged.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Defend/Device/Type/Privileged/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/nextLink"
+                    },
+                    {
+                        "$ref": "#/components/parameters/search"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ObjectPage.ManagedPrivilegedDevice"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "525": {
+                        "$ref": "#/components/responses/525"
+                    }
+                },
+                "summary": "Get All Privileged Devices",
+                "tags": [
+                    "Device Management"
+                ]
+            }
+        },
         "/Api/Defend/Device/Type/{securityClass}": {
             "get": {
                 "description": "Returns a list of all devices managed or unmanaged.\n\nThis endpoint requires the `Device.Privileged.Read`, `Device.Privileged.ReadWrite`, `Device.Specialized.Read`, `Device.Specialized.ReadWrite`, `Device.Enterprise.ReadWrite`, `Device.Enterprise.Read`, or the `Everything.ReadWrite` scope (permission). The security class parameter in the URL path corresponds to the same permission in the scope. That means if you are granted a privileged role, you can only call the privilege class URL. When reading the `unmanaged` objects, any security class permission can read them, no need for a specific `unmanaged` class assignment.",
@@ -2633,6 +2717,42 @@
                     }
                 },
                 "summary": "Create/Bring User Into Management",
+                "tags": [
+                    "User Management"
+                ]
+            }
+        },
+        "/Api/Defend/User/Type/Privileged": {
+            "get": {
+                "description": "Returns a list of all privileged managed users.\n\nThis endpoint requires the `User.Privileged.Read`, `User.Privileged.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Defend/User/Type/Privileged/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/nextLink"
+                    },
+                    {
+                        "$ref": "#/components/parameters/search"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ObjectPage.ManagedPrivilegedUser"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "525": {
+                        "$ref": "#/components/responses/525"
+                    }
+                },
+                "summary": "Get All Privileged Users",
                 "tags": [
                     "User Management"
                 ]
