@@ -31,14 +31,14 @@
   },
   "devDependencies": {
     "@azure/core-auth": "~1.10.0",
-    "@types/node": "~24.2.1",
+    "@types/node": "~24.3.1",
     "ts-patch": "~3.3.0",
     "typescript": "~5.9.2"
   },
   "dependencies": {
     "@microsoft/kiota-authentication-azure": "~1.0.0-preview.97",
     "@microsoft/kiota-bundle": "~1.0.0-preview.97",
-    "typia": "~9.7.1"
+    "typia": "~9.7.2"
   },
   "overrides": {
     "function-bind": "npm:@socketregistry/function-bind@^1",
