@@ -3050,6 +3050,41 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ObjectPage.ManagedDevice"
+                },
+                "examples": {
+                  "Managed device list": {
+                    "summary": "Example list of managed devices",
+                    "description": "An example paged result returned that represents a specific page of managed device list.",
+                    "value": {
+                      "@odata.count": 3,
+                      "@odata.nextLink": "2",
+                      "value": [
+                        {
+                          "commissionedDate": "2023-02-04T05:06:09.601Z",
+                          "displayName": "Priv-01534962354",
+                          "id": "9f237e13-9a04-4daf-b3d4-6d2beec3c2bf",
+                          "parentDeviceId": "81682cf5-0405-491d-8ab8-e07c778d7eaf",
+                          "securityClass": "Privileged",
+                          "uniqueGroupId": "146964e0-8ca4-4af0-9c2a-894b32912463"
+                        },
+                        {
+                          "commissionedDate": "2023-02-04T05:06:09.601Z",
+                          "displayName": "Priv-01534962354",
+                          "id": "9f237e13-9a04-4daf-b3d4-6d2beec3c2bf",
+                          "parentDeviceId": "81682cf5-0405-491d-8ab8-e07c778d7eaf",
+                          "uniqueGroupId": "146964e0-8ca4-4af0-9c2a-894b32912463",
+                          "groupAssignmentId": "830d8b6f-2f6f-41f7-8800-0c07445abd36",
+                          "securityClass": "Privileged",
+                          "userAssignmentId": "146964e0-8ca4-4af0-9c2a-894b32912463",
+                          "userAssignmentList": [
+                            "56d0d4e1-96f6-4cfb-a5e9-a4ee923169a8",
+                            "94a9d681-a8d2-43eb-a83b-d4bfe90259ff",
+                            "c54d4854-9254-4689-8a22-1cc80a3dae4e"
+                          ]
+                        }
+                      ]
+                    }
+                  }
                 }
               }
             },
@@ -3082,20 +3117,14 @@
                     "deviceId": "f7e1a66f-ce2e-4351-83df-2776813ef95d"
                   },
                   "summary": "Example request body",
-                  "description": "An example request body object that represents the post request body."
+                  "description": "An example request body object that represents a request to commission the device specified in the deviceId field."
                 }
               },
               "schema": {
                 "properties": {
                   "deviceId": {
                     "description": "The SHIELD ID (Entra ID Device ID) of the device to target.",
-                    "examples": [
-                      {
-                        "value": "75da7fa4-4a04-44c8-8f2c-c1b2fa29aa51",
-                        "summary": "Example device ID",
-                        "description": "An example UUID string that represents the unique Entra ID device identifier of a device for commission."
-                      }
-                    ],
+                    "examples": ["75da7fa4-4a04-44c8-8f2c-c1b2fa29aa51"],
                     "format": "uuid",
                     "maxLength": 36,
                     "minLength": 36,
@@ -3104,7 +3133,12 @@
                   }
                 },
                 "required": ["deviceId"],
-                "type": "object"
+                "type": "object",
+                "examples": [
+                  {
+                    "deviceId": "f7e1a66f-ce2e-4351-83df-2776813ef95d"
+                  }
+                ]
               }
             }
           }
@@ -3115,6 +3149,20 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ManagedObject.Device"
+                },
+                "examples": {
+                  "Commissioned managed device": {
+                    "summary": "Example managed device info",
+                    "description": "An example managed device object returned that represents a successfully commissioned device.",
+                    "value": {
+                      "commissionedDate": "2023-02-04T05:06:09.601Z",
+                      "displayName": "Priv-01534962354",
+                      "id": "9f237e13-9a04-4daf-b3d4-6d2beec3c2bf",
+                      "parentDeviceId": "81682cf5-0405-491d-8ab8-e07c778d7eaf",
+                      "securityClass": "Privileged",
+                      "uniqueGroupId": "146964e0-8ca4-4af0-9c2a-894b32912463"
+                    }
+                  }
                 }
               }
             },
@@ -3180,6 +3228,20 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ManagedObject.Device"
+                },
+                "examples": {
+                  "Managed device": {
+                    "summary": "Example managed device",
+                    "description": "An example of ManagedObject.Device object returned that represents a managed device queried by a device ID with specified security class.",
+                    "value": {
+                      "commissionedDate": "2023-02-04T05:06:09.601Z",
+                      "displayName": "Priv-01534962354",
+                      "id": "9f237e13-9a04-4daf-b3d4-6d2beec3c2bf",
+                      "parentDeviceId": "81682cf5-0405-491d-8ab8-e07c778d7eaf",
+                      "securityClass": "Privileged",
+                      "uniqueGroupId": "146964e0-8ca4-4af0-9c2a-894b32912463"
+                    }
+                  }
                 }
               }
             },
@@ -3220,6 +3282,68 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ObjectPage.ManagedUser"
+                },
+                "examples": {
+                  "Managed user": {
+                    "summary": "Example paged user list",
+                    "description": "An examples of ObjectPage.ManagedUser returned that represents a page of a managed user list.",
+                    "value": {
+                      "@odata.count": 3,
+                      "@odata.nextLink": "2",
+                      "value": [
+                        {
+                          "creationDate": "2023-10-21T15:24:47.970Z",
+                          "displayName": "Example User (Priv)",
+                          "firstName": "John",
+                          "lastName": "Doe",
+                          "id": "9f237e13-9a04-4daf-b3d4-6d2beec3c2bf",
+                          "upn": "priv-user@example.com",
+                          "securityClass": "Privileged",
+                          "uiEducation": false,
+                          "uniqueGroupId": "ad402c42-1bc9-4ba5-9419-7dbfb46a9c4d",
+                          "intermediaryAssignmentList": [
+                            "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                            "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                            "995f3b39-1e01-40d4-9368-ee956343e97c"
+                          ],
+                          "siloAssignmentList": [
+                            "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                            "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                            "995f3b39-1e01-40d4-9368-ee956343e97c"
+                          ]
+                        },
+                        {
+                          "creationDate": "2023-10-21T15:24:47.970Z",
+                          "displayName": "Example User (Priv)",
+                          "firstName": "John",
+                          "lastName": "Doe",
+                          "id": "9f237e13-9a04-4daf-b3d4-6d2beec3c2bf",
+                          "upn": "priv-user@example.com",
+                          "securityClass": "Privileged",
+                          "uiEducation": false,
+                          "uniqueGroupId": "ad402c42-1bc9-4ba5-9419-7dbfb46a9c4d",
+                          "intermediaryAssignmentList": [
+                            "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                            "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                            "995f3b39-1e01-40d4-9368-ee956343e97c"
+                          ],
+                          "siloAssignmentList": [
+                            "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                            "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                            "995f3b39-1e01-40d4-9368-ee956343e97c"
+                          ],
+                          "deviceAssignmentList": [
+                            "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                            "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                            "995f3b39-1e01-40d4-9368-ee956343e97c"
+                          ],
+                          "generatedPassword": "GY_w7bZUKRgpIXctD0S2wg",
+                          "parentId": "e59a3a64-dc36-4368-80ec-c205eb176ef6",
+                          "temporaryAccessPass": "BCKTSN#E2R&5"
+                        }
+                      ]
+                    }
+                  }
                 }
               }
             },
@@ -3252,20 +3376,14 @@
                     "userId": "d886680d-a283-4fc2-803f-370d81d62366"
                   },
                   "summary": "Example request body",
-                  "description": "An example object that represents the request body sent to the POST endpoint."
+                  "description": "An example object that represents a request to assign the specified user to target security class."
                 }
               },
               "schema": {
                 "properties": {
                   "userId": {
                     "description": "The Entra ID object ID of the user to clone.",
-                    "examples": [
-                      {
-                        "value": "264a8bed-0714-48fd-8b9d-0e4c4715cee5",
-                        "summary": "Example user object ID",
-                        "description": "An example of UUID string that represents the Entra ID object ID of the user to clone."
-                      }
-                    ],
+                    "examples": ["264a8bed-0714-48fd-8b9d-0e4c4715cee5"],
                     "format": "uuid",
                     "maxLength": 36,
                     "minLength": 36,
@@ -3274,7 +3392,12 @@
                   }
                 },
                 "required": ["userId"],
-                "type": "object"
+                "type": "object",
+                "examples": [
+                  {
+                    "userId": "264a8bed-0714-48fd-8b9d-0e4c4715cee5"
+                  }
+                ]
               }
             }
           }
@@ -3353,6 +3476,33 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ManagedObject.User"
+                },
+                "examples": {
+                  "Removed user": {
+                    "summary": "Example removed user",
+                    "description": "An example of managed user returned that represents the user has been removed from specified security class successfully.",
+                    "value": {
+                      "creationDate": "2023-10-21T15:24:47.970Z",
+                      "displayName": "Example User (Priv)",
+                      "firstName": "John",
+                      "lastName": "Doe",
+                      "id": "9f237e13-9a04-4daf-b3d4-6d2beec3c2bf",
+                      "upn": "priv-user@example.com",
+                      "securityClass": "Privileged",
+                      "uiEducation": false,
+                      "uniqueGroupId": "ad402c42-1bc9-4ba5-9419-7dbfb46a9c4d",
+                      "intermediaryAssignmentList": [
+                        "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                        "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                        "995f3b39-1e01-40d4-9368-ee956343e97c"
+                      ],
+                      "siloAssignmentList": [
+                        "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                        "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                        "995f3b39-1e01-40d4-9368-ee956343e97c"
+                      ]
+                    }
+                  }
                 }
               }
             },
