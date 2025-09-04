@@ -1818,7 +1818,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "boolean"
+                  "type": "boolean",
+                  "examples": [true]
+                },
+                "examples": {
+                  "Example value": {
+                    "summary": "Example value",
+                    "description": "An example boolean value that represents an update to SHIELD is pending.",
+                    "value": true
+                  }
                 }
               }
             },
@@ -1841,17 +1849,25 @@
                   "properties": {
                     "appVersion": {
                       "description": "Follows symantec versioning as laid out here: https://semver.org/. This number is the version of the application package.",
-                      "examples": [
-                        {
-                          "value": "1.2.3",
-                          "summary": "Example semantic version",
-                          "description": "An example string that represents the semantic version of the Data Gateway application package reported."
-                        }
-                      ],
+                      "examples": ["1.2.3"],
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "examples": [
+                    {
+                      "appVersion": "1.2.3"
+                    }
+                  ]
+                },
+                "examples": {
+                  "Example response": {
+                    "summary": "Example reported SHIELD version",
+                    "description": "An example of latest semantic version of the SHIELD available.",
+                    "value": {
+                      "appVersion": "1.2.3"
+                    }
+                  }
                 }
               }
             },
@@ -1879,17 +1895,25 @@
                   "properties": {
                     "appVersion": {
                       "description": "Follows symantec versioning as laid out here: https://semver.org/. This number is the version of the application package.",
-                      "examples": [
-                        {
-                          "value": "1.2.3",
-                          "summary": "Example semantic version",
-                          "description": "An example string that represents the semantic version of Data Gateway application package in specific channel."
-                        }
-                      ],
+                      "examples": ["1.2.3"],
                       "type": "string"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "examples": [
+                    {
+                      "appVersion": "1.2.3"
+                    }
+                  ]
+                },
+                "examples": {
+                  "SHIELD version": {
+                    "summary": "Example semantic version",
+                    "description": "An example string that represents the latest semantic version of SHIELD available in specific channel.",
+                    "value": {
+                      "appVersion": "1.2.3"
+                    }
+                  }
                 }
               }
             },
@@ -2217,7 +2241,8 @@
                   }
                 },
                 "schema": {
-                  "type": "boolean"
+                  "type": "boolean",
+                  "examples": [true]
                 }
               }
             },
@@ -2260,10 +2285,16 @@
               "schema": {
                 "properties": {
                   "deploymentConsent": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "examples": [true]
                   }
                 },
-                "type": "object"
+                "type": "object",
+                "examples": [
+                  {
+                    "deploymentConsent": true
+                  }
+                ]
               }
             }
           }
@@ -2280,7 +2311,8 @@
                   }
                 },
                 "schema": {
-                  "type": "boolean"
+                  "type": "boolean",
+                  "examples": [true]
                 }
               }
             },
@@ -2349,39 +2381,39 @@
                   "properties": {
                     "apiVersion": {
                       "description": "Follows symantec versioning as laid out here: https://semver.org/. This number is the version of the API server.",
-                      "examples": [
-                        {
-                          "value": "1.2.3",
-                          "summary": "Example API version",
-                          "description": "An example string that represents the semantic version of the API server."
-                        }
-                      ],
+                      "examples": ["1.2.3"],
                       "type": "string"
                     },
                     "archSpecVersion": {
                       "description": "An incrementing number that describes the version of the architecture specification that the API supports.",
-                      "examples": [
-                        {
-                          "value": 123,
-                          "summary": "Example supported architecture version",
-                          "description": "An example number that represents the incrementing architecture specification version that the API supports."
-                        }
-                      ],
+                      "examples": [123],
                       "type": "number"
                     },
                     "deployedArchVersion": {
                       "description": "The version of the architecture specification that is currently deployed.",
-                      "examples": [
-                        {
-                          "value": 25,
-                          "summary": "Example deployed architecture version",
-                          "description": "An example number that represents the incrementing architecture specification version that is currently deployed."
-                        }
-                      ],
+                      "examples": [25],
                       "type": "number"
                     }
                   },
-                  "type": "object"
+                  "type": "object",
+                  "examples": [
+                    {
+                      "apiVersion": "1.2.3",
+                      "archSpecVersion": 123,
+                      "deployedArchVersion": 100
+                    }
+                  ]
+                },
+                "examples": {
+                  "Versions response": {
+                    "summary": "Example versions response",
+                    "description": "An example object that represents the aggregation of versioning information of all SHIELDs components. including:<br/> - Semantic version of the API server.<br/> - The incrementing architecture specification version that the API supports.<br/> - The incrementing architecture specification version that is currently deployed.",
+                    "value": {
+                      "apiVersion": "1.2.3",
+                      "archSpecVersion": 123,
+                      "deployedArchVersion": 100
+                    }
+                  }
                 }
               }
             },
@@ -3765,37 +3797,33 @@
                 ],
                 "examples": [
                   {
-                    "description": "An example object that represents the minimal requirement of intermediary type, which requires a name.",
-                    "summary": "Azure Bastion",
-                    "value": {
-                      "name": "Azure Bastion"
-                    }
-                  },
-                  {
-                    "description": "Deploys an AVD cluster that is connected to the device configurations system in SHIELD. The type property can be omitted because it is passed via path parameter.",
-                    "summary": "Azure Virtual Desktop",
-                    "value": {
-                      "name": "Legacy Reach Back",
-                      "properties": {
-                        "addressRangeCIDR": "172.16.1.0/24",
-                        "index": 0,
-                        "location": "East US 2",
-                        "sessionHostPrefix": "Reach",
-                        "vmSku": "Standard_D2s_v5"
-                      }
+                    "name": "Legacy Reach Back",
+                    "properties": {
+                      "addressRangeCIDR": "172.16.1.0/24",
+                      "index": 0,
+                      "location": "East US 2",
+                      "sessionHostPrefix": "Reach",
+                      "vmSku": "Standard_D2s_v5"
                     }
                   }
                 ]
               },
               "examples": {
                 "Example intermediary object request": {
-                  "description": "",
-                  "summary": "Intermediary object request",
+                  "summary": "Example Intermediary object request",
+                  "description": "An example of create offering request body with minimal fields.",
                   "value": {
                     "id": "e097a3f5-9599-44a2-8923-fd3276c83ae1",
                     "kind": "AVD",
                     "name": "Legacy Reach Back",
-                    "securityClass": "Privileged"
+                    "securityClass": "Privileged",
+                    "properties": {
+                      "addressRangeCIDR": "172.16.1.0/24",
+                      "index": 0,
+                      "location": "East US 2",
+                      "sessionHostPrefix": "Reach",
+                      "vmSku": "Standard_D2s_v5"
+                    }
                   }
                 }
               }
@@ -3808,6 +3836,22 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ManagedObject.AvdIntermediary"
+                },
+                "examples": {
+                  "Returned AVD intermediary": {
+                    "summary": "Example AVD intermediary returned",
+                    "description": "An example of AVD intermediary object returned that represents an successfully deployed offering.",
+                    "value": {
+                      "addressRangeCIDR": "172.16.1.0/24",
+                      "assignmentGroup": "68873e26-3c35-465c-9422-0884a00beb36",
+                      "index": 0,
+                      "location": "East US 2",
+                      "resourceId": "/subscriptions/742f0d26-daa0-4f84-8d4f-fb052f89f639/resourceGroups/SHIELD_-_PSM-Legacy_Reach_Back/providers/Microsoft.DesktopVirtualization/hostpools/SHIELD_-_PSM-Cluster-Legacy_Reach_Back",
+                      "sessionHostGroup": "f99f0918-da9b-4c58-9a8d-9346abc5d9ec",
+                      "sessionHostPrefix": "Reach",
+                      "vmSku": "Standard_D2s_v5"
+                    }
+                  }
                 }
               }
             },
