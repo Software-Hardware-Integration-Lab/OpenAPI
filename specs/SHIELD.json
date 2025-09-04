@@ -135,7 +135,7 @@
         "examples": {
           "Privileged": {
             "value": "Privileged",
-            "summary": "Example securityClass",
+            "summary": "Example security class",
             "description": "An example enum string that indicates the security class of an managed object is privileged."
           }
         }
@@ -3652,6 +3652,33 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ManagedObject.User"
+                },
+                "examples": {
+                  "Created or cloned user": {
+                    "summary": "Example user created/cloned",
+                    "description": "An example managed user object returned that represents the user brought into management successfully.",
+                    "value": {
+                      "creationDate": "2023-10-21T15:24:47.970Z",
+                      "displayName": "Example User (Priv)",
+                      "firstName": "John",
+                      "lastName": "Doe",
+                      "id": "9f237e13-9a04-4daf-b3d4-6d2beec3c2bf",
+                      "upn": "priv-user@example.com",
+                      "securityClass": "Privileged",
+                      "uiEducation": false,
+                      "uniqueGroupId": "ad402c42-1bc9-4ba5-9419-7dbfb46a9c4d",
+                      "intermediaryAssignmentList": [
+                        "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                        "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                        "995f3b39-1e01-40d4-9368-ee956343e97c"
+                      ],
+                      "siloAssignmentList": [
+                        "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                        "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                        "995f3b39-1e01-40d4-9368-ee956343e97c"
+                      ]
+                    }
+                  }
                 }
               }
             },
