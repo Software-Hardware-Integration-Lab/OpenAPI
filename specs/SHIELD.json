@@ -1614,14 +1614,14 @@
                   "required": ["appId", "tenantId"]
                 },
                 "examples": {
-                    "valid request": {
-                        "value": {
-                            "appId": "85cbe72b-3215-48bc-9eeb-fa7896c31498",
-                            "tenantId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
-                        },
-                        "summary": "Example request object",
-                        "description": "An example request object to retrieve the IDs required to authenticate."
-                    }
+                  "valid request": {
+                    "value": {
+                      "appId": "85cbe72b-3215-48bc-9eeb-fa7896c31498",
+                      "tenantId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                    },
+                    "summary": "Example request object",
+                    "description": "An example request object to retrieve the IDs required to authenticate."
+                  }
                 }
               }
             },
@@ -1648,14 +1648,16 @@
                 "schema": {
                   "description": "Access token that SHIELD uses to prove it is a valid recipient of credentials.",
                   "type": "string",
-                  "examples": ["eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik1jN2wzSXo5M2c3dXdnTmVFbW13X1dZR1BrbyJ9.eyJhdWQiOiJjYjU5ZjIyOC0wNjkwLTRhY2ItOWE3Yi0wMGMzNmEyZjRlOGQiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vMmQxMDJkYTktZDExZS00YTgwLTkwMjItYzQxOGZhNDg1NGM3L3YyLjAiLCJpYXQiOjE3MjczNjgzODQsIm5iZiI6MTcyNzM2ODM4NCwiZXhwIjoxNzI3MzcyMjg0LCJhaW8iOiJBU1FBMi84WUFBQUFSN0hyaW5XTmRwcisvdnoreWlkZER6WVExeFRpc3BSZGY4TG1XNjhRaE0wPSIsImF6cCI6IjRlODU5MTQ2LWY5M2UtNDlmMi05ODZmLWI3MjIyNmZjZDViOSIsImF6cGFjciI6IjEiLCJvaWQiOiJlMmRlNzQ0ZC1hZjVlLTQ4NDEtYmI4Zi02OTRkZDI1ZmVmNGQiLCJyaCI6IjAuQWNvQXFTMFFMUjdSZ0VxUUlzUVkta2hVeHlqeVdjdVFCc3RLbW5zQXcyb3ZUbzM2QUFBLiIsInJvbGVzIjpbIkF1dGhlbnRpY2F0b3IuQXR0ZXN0Il0sInN1YiI6ImUyZGU3NDRkLWFmNWUtNDg0MS1iYjhmLTY5NGRkMjVmZWY0ZCIsInRpZCI6IjJkMTAyZGE5LWQxMWUtNGE4MC05MDIyLWM0MThmYTQ4NTRjNyIsInV0aSI6Il9MaUdVWWxmS2txNFZoR09NeGw4QUEiLCJ2ZXIiOiIyLjAifQ.xlXZfOnDoOVW3_aOiSIZH8uiySeohro-HVnDzDEff2EjmOk9adrTOP5Sw1av6g3vy38r6dSu4tViwNGrb7Z2krgRKKvp-4A9rkPqeJjjd2rhFl2KiOlxL0mmykbroZZ70RJzwHy2GC7wfuLwJwr-5m7POV2grbxIAlTsMdZWDFXYi-AahfDVtLugarWG5-tXAqiPBKjaU6ntAJIbu7Ol1vYZaeYMsNKTs8O1P10YM460zN9OkfoI1gV7_InHEr8RSyQnEPCJ2W1Or4lDhqdey4ohMoP9EzLgMsn9Ckss5g5C6vVE0GQawUoeGozPOBpgb31J8JzZUyB1JyVfi-vKkQ"]
+                  "examples": [
+                    "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik1jN2wzSXo5M2c3dXdnTmVFbW13X1dZR1BrbyJ9.eyJhdWQiOiJjYjU5ZjIyOC0wNjkwLTRhY2ItOWE3Yi0wMGMzNmEyZjRlOGQiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vMmQxMDJkYTktZDExZS00YTgwLTkwMjItYzQxOGZhNDg1NGM3L3YyLjAiLCJpYXQiOjE3MjczNjgzODQsIm5iZiI6MTcyNzM2ODM4NCwiZXhwIjoxNzI3MzcyMjg0LCJhaW8iOiJBU1FBMi84WUFBQUFSN0hyaW5XTmRwcisvdnoreWlkZER6WVExeFRpc3BSZGY4TG1XNjhRaE0wPSIsImF6cCI6IjRlODU5MTQ2LWY5M2UtNDlmMi05ODZmLWI3MjIyNmZjZDViOSIsImF6cGFjciI6IjEiLCJvaWQiOiJlMmRlNzQ0ZC1hZjVlLTQ4NDEtYmI4Zi02OTRkZDI1ZmVmNGQiLCJyaCI6IjAuQWNvQXFTMFFMUjdSZ0VxUUlzUVkta2hVeHlqeVdjdVFCc3RLbW5zQXcyb3ZUbzM2QUFBLiIsInJvbGVzIjpbIkF1dGhlbnRpY2F0b3IuQXR0ZXN0Il0sInN1YiI6ImUyZGU3NDRkLWFmNWUtNDg0MS1iYjhmLTY5NGRkMjVmZWY0ZCIsInRpZCI6IjJkMTAyZGE5LWQxMWUtNGE4MC05MDIyLWM0MThmYTQ4NTRjNyIsInV0aSI6Il9MaUdVWWxmS2txNFZoR09NeGw4QUEiLCJ2ZXIiOiIyLjAifQ.xlXZfOnDoOVW3_aOiSIZH8uiySeohro-HVnDzDEff2EjmOk9adrTOP5Sw1av6g3vy38r6dSu4tViwNGrb7Z2krgRKKvp-4A9rkPqeJjjd2rhFl2KiOlxL0mmykbroZZ70RJzwHy2GC7wfuLwJwr-5m7POV2grbxIAlTsMdZWDFXYi-AahfDVtLugarWG5-tXAqiPBKjaU6ntAJIbu7Ol1vYZaeYMsNKTs8O1P10YM460zN9OkfoI1gV7_InHEr8RSyQnEPCJ2W1Or4lDhqdey4ohMoP9EzLgMsn9Ckss5g5C6vVE0GQawUoeGozPOBpgb31J8JzZUyB1JyVfi-vKkQ"
+                  ]
                 },
                 "examples": {
-                    "valid access token" : {
-                        "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik1jN2wzSXo5M2c3dXdnTmVFbW13X1dZR1BrbyJ9.eyJhdWQiOiJjYjU5ZjIyOC0wNjkwLTRhY2ItOWE3Yi0wMGMzNmEyZjRlOGQiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vMmQxMDJkYTktZDExZS00YTgwLTkwMjItYzQxOGZhNDg1NGM3L3YyLjAiLCJpYXQiOjE3MjczNjgzODQsIm5iZiI6MTcyNzM2ODM4NCwiZXhwIjoxNzI3MzcyMjg0LCJhaW8iOiJBU1FBMi84WUFBQUFSN0hyaW5XTmRwcisvdnoreWlkZER6WVExeFRpc3BSZGY4TG1XNjhRaE0wPSIsImF6cCI6IjRlODU5MTQ2LWY5M2UtNDlmMi05ODZmLWI3MjIyNmZjZDViOSIsImF6cGFjciI6IjEiLCJvaWQiOiJlMmRlNzQ0ZC1hZjVlLTQ4NDEtYmI4Zi02OTRkZDI1ZmVmNGQiLCJyaCI6IjAuQWNvQXFTMFFMUjdSZ0VxUUlzUVkta2hVeHlqeVdjdVFCc3RLbW5zQXcyb3ZUbzM2QUFBLiIsInJvbGVzIjpbIkF1dGhlbnRpY2F0b3IuQXR0ZXN0Il0sInN1YiI6ImUyZGU3NDRkLWFmNWUtNDg0MS1iYjhmLTY5NGRkMjVmZWY0ZCIsInRpZCI6IjJkMTAyZGE5LWQxMWUtNGE4MC05MDIyLWM0MThmYTQ4NTRjNyIsInV0aSI6Il9MaUdVWWxmS2txNFZoR09NeGw4QUEiLCJ2ZXIiOiIyLjAifQ.xlXZfOnDoOVW3_aOiSIZH8uiySeohro-HVnDzDEff2EjmOk9adrTOP5Sw1av6g3vy38r6dSu4tViwNGrb7Z2krgRKKvp-4A9rkPqeJjjd2rhFl2KiOlxL0mmykbroZZ70RJzwHy2GC7wfuLwJwr-5m7POV2grbxIAlTsMdZWDFXYi-AahfDVtLugarWG5-tXAqiPBKjaU6ntAJIbu7Ol1vYZaeYMsNKTs8O1P10YM460zN9OkfoI1gV7_InHEr8RSyQnEPCJ2W1Or4lDhqdey4ohMoP9EzLgMsn9Ckss5g5C6vVE0GQawUoeGozPOBpgb31J8JzZUyB1JyVfi-vKkQ",
-                        "summary": "Example valid access token",
-                        "description": "An example string that represents the access token that SHIELD uses to prove it is a valid recipient of credentials."                                            
-                    }
+                  "valid access token": {
+                    "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik1jN2wzSXo5M2c3dXdnTmVFbW13X1dZR1BrbyJ9.eyJhdWQiOiJjYjU5ZjIyOC0wNjkwLTRhY2ItOWE3Yi0wMGMzNmEyZjRlOGQiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vMmQxMDJkYTktZDExZS00YTgwLTkwMjItYzQxOGZhNDg1NGM3L3YyLjAiLCJpYXQiOjE3MjczNjgzODQsIm5iZiI6MTcyNzM2ODM4NCwiZXhwIjoxNzI3MzcyMjg0LCJhaW8iOiJBU1FBMi84WUFBQUFSN0hyaW5XTmRwcisvdnoreWlkZER6WVExeFRpc3BSZGY4TG1XNjhRaE0wPSIsImF6cCI6IjRlODU5MTQ2LWY5M2UtNDlmMi05ODZmLWI3MjIyNmZjZDViOSIsImF6cGFjciI6IjEiLCJvaWQiOiJlMmRlNzQ0ZC1hZjVlLTQ4NDEtYmI4Zi02OTRkZDI1ZmVmNGQiLCJyaCI6IjAuQWNvQXFTMFFMUjdSZ0VxUUlzUVkta2hVeHlqeVdjdVFCc3RLbW5zQXcyb3ZUbzM2QUFBLiIsInJvbGVzIjpbIkF1dGhlbnRpY2F0b3IuQXR0ZXN0Il0sInN1YiI6ImUyZGU3NDRkLWFmNWUtNDg0MS1iYjhmLTY5NGRkMjVmZWY0ZCIsInRpZCI6IjJkMTAyZGE5LWQxMWUtNGE4MC05MDIyLWM0MThmYTQ4NTRjNyIsInV0aSI6Il9MaUdVWWxmS2txNFZoR09NeGw4QUEiLCJ2ZXIiOiIyLjAifQ.xlXZfOnDoOVW3_aOiSIZH8uiySeohro-HVnDzDEff2EjmOk9adrTOP5Sw1av6g3vy38r6dSu4tViwNGrb7Z2krgRKKvp-4A9rkPqeJjjd2rhFl2KiOlxL0mmykbroZZ70RJzwHy2GC7wfuLwJwr-5m7POV2grbxIAlTsMdZWDFXYi-AahfDVtLugarWG5-tXAqiPBKjaU6ntAJIbu7Ol1vYZaeYMsNKTs8O1P10YM460zN9OkfoI1gV7_InHEr8RSyQnEPCJ2W1Or4lDhqdey4ohMoP9EzLgMsn9Ckss5g5C6vVE0GQawUoeGozPOBpgb31J8JzZUyB1JyVfi-vKkQ",
+                    "summary": "Example valid access token",
+                    "description": "An example string that represents the access token that SHIELD uses to prove it is a valid recipient of credentials."
+                  }
                 }
               }
             },
@@ -1725,26 +1727,26 @@
               },
               "examples": {
                 "valid Scc Auth credentials": {
-                    "value": {
-                        "authenticatedUpn": "user@example.com",
-                        "security": {
-                            "sccAuth": "54BKPtTL-eSMFp5cqYTMMSblm2U80cUJqQgmbe4f_sRn4ammMmU1NKNurn9HqpsUtS4FrMJRTKa3Or_pFbedM_57R0fVBfNJ-m2Pvey9OweWIDradzT0dB1WnufPTJiT2y7zSQy91Y9wJIn1_aY5q-MNh75qwjM84Dng-mYzbd9KqUfyPUolOo-j-... (Truncated)",
-                            "xsrf": "PEDwTvWdm2qSTe-n8h-1praK4OcQK1ELTJ08DWYqBRzQiyA2MIuEKEMNLu4ExjDNpAOUnAxmsqOeuGzb82MJYkegOE6hW8BzpSM6k9nbTbJ4yjNGzMSQvWUnyqrBvGa8JfSRiSeaKdXGBnxGd90Spw2:... (truncated)"
-                        },
-                        "purview": {
-                            "sccAuth": "54BKPtTL-eSMFp5cqYTMMSblm2U80cUJqQgmbe4f_sRn4ammMmU1NKNurn9HqpsUtS4FrMJRTKa3Or_pFbedM_57R0fVBfNJ-m2Pvey9OweWIDradzT0dB1WnufPTJiT2y7zSQy91Y9wJIn1_aY5q-MNh75qwjM84Dng-mYzbd9KqUfyPUolOo-j-... (Truncated)",
-                            "xsrf": "PEDwTvWdm2qSTe-n8h-1praK4OcQK1ELTJ08DWYqBRzQiyA2MIuEKEMNLu4ExjDNpAOUnAxmsqOeuGzb82MJYkegOE6hW8BzpSM6k9nbTbJ4yjNGzMSQvWUnyqrBvGa8JfSRiSeaKdXGBnxGd90Spw2:... (truncated)"
-                        },
-                        "expiration": "2024-09-26T18:16:29.340Z",
-                        "defender": {
-                            "sccAuth": "54BKPtTL-eSMFp5cqYTMMSblm2U80cUJqQgmbe4f_sRn4ammMmU1NKNurn9HqpsUtS4FrMJRTKa3Or_pFbedM_57R0fVBfNJ-m2Pvey9OweWIDradzT0dB1WnufPTJiT2y7zSQy91Y9wJIn1_aY5q-MNh75qwjM84Dng-mYzbd9KqUfyPUolOo-j-... (Truncated)",
-                            "xsrf": "PEDwTvWdm2qSTe-n8h-1praK4OcQK1ELTJ08DWYqBRzQiyA2MIuEKEMNLu4ExjDNpAOUnAxmsqOeuGzb82MJYkegOE6hW8BzpSM6k9nbTbJ4yjNGzMSQvWUnyqrBvGa8JfSRiSeaKdXGBnxGd90Spw2:... (truncated)"
-                        }
+                  "value": {
+                    "authenticatedUpn": "user@example.com",
+                    "security": {
+                      "sccAuth": "54BKPtTL-eSMFp5cqYTMMSblm2U80cUJqQgmbe4f_sRn4ammMmU1NKNurn9HqpsUtS4FrMJRTKa3Or_pFbedM_57R0fVBfNJ-m2Pvey9OweWIDradzT0dB1WnufPTJiT2y7zSQy91Y9wJIn1_aY5q-MNh75qwjM84Dng-mYzbd9KqUfyPUolOo-j-... (Truncated)",
+                      "xsrf": "PEDwTvWdm2qSTe-n8h-1praK4OcQK1ELTJ08DWYqBRzQiyA2MIuEKEMNLu4ExjDNpAOUnAxmsqOeuGzb82MJYkegOE6hW8BzpSM6k9nbTbJ4yjNGzMSQvWUnyqrBvGa8JfSRiSeaKdXGBnxGd90Spw2:... (truncated)"
                     },
-                    "summary": "Example Scc Auth credentials",
-                    "description": "An example of valid Scc Auth credentials used to configure SHIELD."
+                    "purview": {
+                      "sccAuth": "54BKPtTL-eSMFp5cqYTMMSblm2U80cUJqQgmbe4f_sRn4ammMmU1NKNurn9HqpsUtS4FrMJRTKa3Or_pFbedM_57R0fVBfNJ-m2Pvey9OweWIDradzT0dB1WnufPTJiT2y7zSQy91Y9wJIn1_aY5q-MNh75qwjM84Dng-mYzbd9KqUfyPUolOo-j-... (Truncated)",
+                      "xsrf": "PEDwTvWdm2qSTe-n8h-1praK4OcQK1ELTJ08DWYqBRzQiyA2MIuEKEMNLu4ExjDNpAOUnAxmsqOeuGzb82MJYkegOE6hW8BzpSM6k9nbTbJ4yjNGzMSQvWUnyqrBvGa8JfSRiSeaKdXGBnxGd90Spw2:... (truncated)"
+                    },
+                    "expiration": "2024-09-26T18:16:29.340Z",
+                    "defender": {
+                      "sccAuth": "54BKPtTL-eSMFp5cqYTMMSblm2U80cUJqQgmbe4f_sRn4ammMmU1NKNurn9HqpsUtS4FrMJRTKa3Or_pFbedM_57R0fVBfNJ-m2Pvey9OweWIDradzT0dB1WnufPTJiT2y7zSQy91Y9wJIn1_aY5q-MNh75qwjM84Dng-mYzbd9KqUfyPUolOo-j-... (Truncated)",
+                      "xsrf": "PEDwTvWdm2qSTe-n8h-1praK4OcQK1ELTJ08DWYqBRzQiyA2MIuEKEMNLu4ExjDNpAOUnAxmsqOeuGzb82MJYkegOE6hW8BzpSM6k9nbTbJ4yjNGzMSQvWUnyqrBvGa8JfSRiSeaKdXGBnxGd90Spw2:... (truncated)"
+                    }
+                  },
+                  "summary": "Example Scc Auth credentials",
+                  "description": "An example of valid Scc Auth credentials used to configure SHIELD."
                 }
-              } 
+              }
             }
           }
         },
@@ -1772,22 +1774,26 @@
                   "token": {
                     "description": "This is transmitted as a property instead of a raw string as the body parser ignores it in Express.JS. Functionally identical though.",
                     "type": "string",
-                    "examples": ["eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik1jN2wzSXo5M2c3dXdnTmVFbW13X1dZR1BrbyJ9.eyJhdWQiOiI0YzQwMjgxYi1hMzA1LTRhYWYtOTBhNC1kNWJiZWU2ZWI4ZWQiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vMmQxMDJkYTktZDExZS00YTgwLTkwMjItYzQxOGZhNDg1NGM3L3YyLjAiLCJpYXQiOjE3MjczNzUzNzMsIm5iZiI6MTcyNzM3NTM3MywiZXhwIjoxNzI3Mzc5MjczLCJhaW8iOiJrMkJnWU9BM1ByL2lTc2loRmYzeU9uVk40UTZOc1dsZnRnWEhoMW5HYm5saWVuS1hRZ2tBIiwiYXpwIjoiNGU4NTkxNDYtZjkzZS00OWYyLTk4NmYtYjcyMjI2ZmNkNWI5IiwiYXpwYWNyIjoiMSIsIm9pZCI6ImUyZGU3NDRkLWFmNWUtNDg0MS1iYjhmLTY5NGRkMjVmZWY0ZCIsInJoIjoiMC5BY29BcVMwUUxSN1JnRXFRSXNRWS1raFV4eHNvUUV3Rm82OUtrS1RWdS01dXVPMzZBQUEuIiwicm9sZXMiOlsiVGVsZW1ldHJ5LlNvcC5SZWFkV3JpdGUiLCJMaWNlbnNlUmVwb3J0LlJlYWRXcml0ZSJdLCJzdWIiOiJlMmRlNzQ0ZC1hZjVlLTQ4NDEtYmI4Zi02OTRkZDI1ZmVmNGQiLCJ0aWQiOiIyZDEwMmRhOS1kMTFlLTRhODAtOTAyMi1jNDE4ZmE0ODU0YzciLCJ1dGkiOiJfTGlHVVlsZktrcTRWaEdPXzNpRkFBIiwidmVyIjoiMi4wIn0.CZMOfyo5Lo1Km8bgWtOw8f30n1AZ5HJQ-StyIPr_P_eEjanzHVSEiRsHweNATW0GQFfLs0lGH43xztFcNNepu7CctyEzoktJ-9De2mMLIMJviF1rlB19mxH3a3hUSPZuPeYPPONkYtjL4fZj0mCYcALoq-orc0Oswg0l3fatbS7a-DAgxZdLHa6M7OtXksMlMXwooxmocOQeg_zhpko1zyuzSsVwNrz1uMZYpivwaM1ImWZiqgjMc1NWCN2Co1nYNuvxg6Chcr0OOsPRaXayfzrP7IlsZIg5Itg9lrqN0cjT3t8GSejL2P8HmfPcYftlqOobCesjSfBthir5hGUoNA"]
+                    "examples": [
+                      "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik1jN2wzSXo5M2c3dXdnTmVFbW13X1dZR1BrbyJ9.eyJhdWQiOiI0YzQwMjgxYi1hMzA1LTRhYWYtOTBhNC1kNWJiZWU2ZWI4ZWQiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vMmQxMDJkYTktZDExZS00YTgwLTkwMjItYzQxOGZhNDg1NGM3L3YyLjAiLCJpYXQiOjE3MjczNzUzNzMsIm5iZiI6MTcyNzM3NTM3MywiZXhwIjoxNzI3Mzc5MjczLCJhaW8iOiJrMkJnWU9BM1ByL2lTc2loRmYzeU9uVk40UTZOc1dsZnRnWEhoMW5HYm5saWVuS1hRZ2tBIiwiYXpwIjoiNGU4NTkxNDYtZjkzZS00OWYyLTk4NmYtYjcyMjI2ZmNkNWI5IiwiYXpwYWNyIjoiMSIsIm9pZCI6ImUyZGU3NDRkLWFmNWUtNDg0MS1iYjhmLTY5NGRkMjVmZWY0ZCIsInJoIjoiMC5BY29BcVMwUUxSN1JnRXFRSXNRWS1raFV4eHNvUUV3Rm82OUtrS1RWdS01dXVPMzZBQUEuIiwicm9sZXMiOlsiVGVsZW1ldHJ5LlNvcC5SZWFkV3JpdGUiLCJMaWNlbnNlUmVwb3J0LlJlYWRXcml0ZSJdLCJzdWIiOiJlMmRlNzQ0ZC1hZjVlLTQ4NDEtYmI4Zi02OTRkZDI1ZmVmNGQiLCJ0aWQiOiIyZDEwMmRhOS1kMTFlLTRhODAtOTAyMi1jNDE4ZmE0ODU0YzciLCJ1dGkiOiJfTGlHVVlsZktrcTRWaEdPXzNpRkFBIiwidmVyIjoiMi4wIn0.CZMOfyo5Lo1Km8bgWtOw8f30n1AZ5HJQ-StyIPr_P_eEjanzHVSEiRsHweNATW0GQFfLs0lGH43xztFcNNepu7CctyEzoktJ-9De2mMLIMJviF1rlB19mxH3a3hUSPZuPeYPPONkYtjL4fZj0mCYcALoq-orc0Oswg0l3fatbS7a-DAgxZdLHa6M7OtXksMlMXwooxmocOQeg_zhpko1zyuzSsVwNrz1uMZYpivwaM1ImWZiqgjMc1NWCN2Co1nYNuvxg6Chcr0OOsPRaXayfzrP7IlsZIg5Itg9lrqN0cjT3t8GSejL2P8HmfPcYftlqOobCesjSfBthir5hGUoNA"
+                    ]
                   }
                 },
-                "examples": [{
-                      "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik1jN2wzSXo5M2c3dXdnTmVFbW13X1dZR1BrbyJ9.eyJhdWQiOiI0YzQwMjgxYi1hMzA1LTRhYWYtOTBhNC1kNWJiZWU2ZWI4ZWQiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vMmQxMDJkYTktZDExZS00YTgwLTkwMjItYzQxOGZhNDg1NGM3L3YyLjAiLCJpYXQiOjE3MjczNzUzNzMsIm5iZiI6MTcyNzM3NTM3MywiZXhwIjoxNzI3Mzc5MjczLCJhaW8iOiJrMkJnWU9BM1ByL2lTc2loRmYzeU9uVk40UTZOc1dsZnRnWEhoMW5HYm5saWVuS1hRZ2tBIiwiYXpwIjoiNGU4NTkxNDYtZjkzZS00OWYyLTk4NmYtYjcyMjI2ZmNkNWI5IiwiYXpwYWNyIjoiMSIsIm9pZCI6ImUyZGU3NDRkLWFmNWUtNDg0MS1iYjhmLTY5NGRkMjVmZWY0ZCIsInJoIjoiMC5BY29BcVMwUUxSN1JnRXFRSXNRWS1raFV4eHNvUUV3Rm82OUtrS1RWdS01dXVPMzZBQUEuIiwicm9sZXMiOlsiVGVsZW1ldHJ5LlNvcC5SZWFkV3JpdGUiLCJMaWNlbnNlUmVwb3J0LlJlYWRXcml0ZSJdLCJzdWIiOiJlMmRlNzQ0ZC1hZjVlLTQ4NDEtYmI4Zi02OTRkZDI1ZmVmNGQiLCJ0aWQiOiIyZDEwMmRhOS1kMTFlLTRhODAtOTAyMi1jNDE4ZmE0ODU0YzciLCJ1dGkiOiJfTGlHVVlsZktrcTRWaEdPXzNpRkFBIiwidmVyIjoiMi4wIn0.CZMOfyo5Lo1Km8bgWtOw8f30n1AZ5HJQ-StyIPr_P_eEjanzHVSEiRsHweNATW0GQFfLs0lGH43xztFcNNepu7CctyEzoktJ-9De2mMLIMJviF1rlB19mxH3a3hUSPZuPeYPPONkYtjL4fZj0mCYcALoq-orc0Oswg0l3fatbS7a-DAgxZdLHa6M7OtXksMlMXwooxmocOQeg_zhpko1zyuzSsVwNrz1uMZYpivwaM1ImWZiqgjMc1NWCN2Co1nYNuvxg6Chcr0OOsPRaXayfzrP7IlsZIg5Itg9lrqN0cjT3t8GSejL2P8HmfPcYftlqOobCesjSfBthir5hGUoNA"
-                    }]
+                "examples": [
+                  {
+                    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik1jN2wzSXo5M2c3dXdnTmVFbW13X1dZR1BrbyJ9.eyJhdWQiOiI0YzQwMjgxYi1hMzA1LTRhYWYtOTBhNC1kNWJiZWU2ZWI4ZWQiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vMmQxMDJkYTktZDExZS00YTgwLTkwMjItYzQxOGZhNDg1NGM3L3YyLjAiLCJpYXQiOjE3MjczNzUzNzMsIm5iZiI6MTcyNzM3NTM3MywiZXhwIjoxNzI3Mzc5MjczLCJhaW8iOiJrMkJnWU9BM1ByL2lTc2loRmYzeU9uVk40UTZOc1dsZnRnWEhoMW5HYm5saWVuS1hRZ2tBIiwiYXpwIjoiNGU4NTkxNDYtZjkzZS00OWYyLTk4NmYtYjcyMjI2ZmNkNWI5IiwiYXpwYWNyIjoiMSIsIm9pZCI6ImUyZGU3NDRkLWFmNWUtNDg0MS1iYjhmLTY5NGRkMjVmZWY0ZCIsInJoIjoiMC5BY29BcVMwUUxSN1JnRXFRSXNRWS1raFV4eHNvUUV3Rm82OUtrS1RWdS01dXVPMzZBQUEuIiwicm9sZXMiOlsiVGVsZW1ldHJ5LlNvcC5SZWFkV3JpdGUiLCJMaWNlbnNlUmVwb3J0LlJlYWRXcml0ZSJdLCJzdWIiOiJlMmRlNzQ0ZC1hZjVlLTQ4NDEtYmI4Zi02OTRkZDI1ZmVmNGQiLCJ0aWQiOiIyZDEwMmRhOS1kMTFlLTRhODAtOTAyMi1jNDE4ZmE0ODU0YzciLCJ1dGkiOiJfTGlHVVlsZktrcTRWaEdPXzNpRkFBIiwidmVyIjoiMi4wIn0.CZMOfyo5Lo1Km8bgWtOw8f30n1AZ5HJQ-StyIPr_P_eEjanzHVSEiRsHweNATW0GQFfLs0lGH43xztFcNNepu7CctyEzoktJ-9De2mMLIMJviF1rlB19mxH3a3hUSPZuPeYPPONkYtjL4fZj0mCYcALoq-orc0Oswg0l3fatbS7a-DAgxZdLHa6M7OtXksMlMXwooxmocOQeg_zhpko1zyuzSsVwNrz1uMZYpivwaM1ImWZiqgjMc1NWCN2Co1nYNuvxg6Chcr0OOsPRaXayfzrP7IlsZIg5Itg9lrqN0cjT3t8GSejL2P8HmfPcYftlqOobCesjSfBthir5hGUoNA"
+                  }
+                ]
               },
               "examples": {
-                  "Valid request body" : {
-                    "value": {
-                      "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik1jN2wzSXo5M2c3dXdnTmVFbW13X1dZR1BrbyJ9.eyJhdWQiOiI0YzQwMjgxYi1hMzA1LTRhYWYtOTBhNC1kNWJiZWU2ZWI4ZWQiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vMmQxMDJkYTktZDExZS00YTgwLTkwMjItYzQxOGZhNDg1NGM3L3YyLjAiLCJpYXQiOjE3MjczNzUzNzMsIm5iZiI6MTcyNzM3NTM3MywiZXhwIjoxNzI3Mzc5MjczLCJhaW8iOiJrMkJnWU9BM1ByL2lTc2loRmYzeU9uVk40UTZOc1dsZnRnWEhoMW5HYm5saWVuS1hRZ2tBIiwiYXpwIjoiNGU4NTkxNDYtZjkzZS00OWYyLTk4NmYtYjcyMjI2ZmNkNWI5IiwiYXpwYWNyIjoiMSIsIm9pZCI6ImUyZGU3NDRkLWFmNWUtNDg0MS1iYjhmLTY5NGRkMjVmZWY0ZCIsInJoIjoiMC5BY29BcVMwUUxSN1JnRXFRSXNRWS1raFV4eHNvUUV3Rm82OUtrS1RWdS01dXVPMzZBQUEuIiwicm9sZXMiOlsiVGVsZW1ldHJ5LlNvcC5SZWFkV3JpdGUiLCJMaWNlbnNlUmVwb3J0LlJlYWRXcml0ZSJdLCJzdWIiOiJlMmRlNzQ0ZC1hZjVlLTQ4NDEtYmI4Zi02OTRkZDI1ZmVmNGQiLCJ0aWQiOiIyZDEwMmRhOS1kMTFlLTRhODAtOTAyMi1jNDE4ZmE0ODU0YzciLCJ1dGkiOiJfTGlHVVlsZktrcTRWaEdPXzNpRkFBIiwidmVyIjoiMi4wIn0.CZMOfyo5Lo1Km8bgWtOw8f30n1AZ5HJQ-StyIPr_P_eEjanzHVSEiRsHweNATW0GQFfLs0lGH43xztFcNNepu7CctyEzoktJ-9De2mMLIMJviF1rlB19mxH3a3hUSPZuPeYPPONkYtjL4fZj0mCYcALoq-orc0Oswg0l3fatbS7a-DAgxZdLHa6M7OtXksMlMXwooxmocOQeg_zhpko1zyuzSsVwNrz1uMZYpivwaM1ImWZiqgjMc1NWCN2Co1nYNuvxg6Chcr0OOsPRaXayfzrP7IlsZIg5Itg9lrqN0cjT3t8GSejL2P8HmfPcYftlqOobCesjSfBthir5hGUoNA"
-                    },
-                    "summary": "Example request body",
-                    "description": "An example object that represents the request body to be sent to the API endpoint."
-                  }
+                "Valid request body": {
+                  "value": {
+                    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik1jN2wzSXo5M2c3dXdnTmVFbW13X1dZR1BrbyJ9.eyJhdWQiOiI0YzQwMjgxYi1hMzA1LTRhYWYtOTBhNC1kNWJiZWU2ZWI4ZWQiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vMmQxMDJkYTktZDExZS00YTgwLTkwMjItYzQxOGZhNDg1NGM3L3YyLjAiLCJpYXQiOjE3MjczNzUzNzMsIm5iZiI6MTcyNzM3NTM3MywiZXhwIjoxNzI3Mzc5MjczLCJhaW8iOiJrMkJnWU9BM1ByL2lTc2loRmYzeU9uVk40UTZOc1dsZnRnWEhoMW5HYm5saWVuS1hRZ2tBIiwiYXpwIjoiNGU4NTkxNDYtZjkzZS00OWYyLTk4NmYtYjcyMjI2ZmNkNWI5IiwiYXpwYWNyIjoiMSIsIm9pZCI6ImUyZGU3NDRkLWFmNWUtNDg0MS1iYjhmLTY5NGRkMjVmZWY0ZCIsInJoIjoiMC5BY29BcVMwUUxSN1JnRXFRSXNRWS1raFV4eHNvUUV3Rm82OUtrS1RWdS01dXVPMzZBQUEuIiwicm9sZXMiOlsiVGVsZW1ldHJ5LlNvcC5SZWFkV3JpdGUiLCJMaWNlbnNlUmVwb3J0LlJlYWRXcml0ZSJdLCJzdWIiOiJlMmRlNzQ0ZC1hZjVlLTQ4NDEtYmI4Zi02OTRkZDI1ZmVmNGQiLCJ0aWQiOiIyZDEwMmRhOS1kMTFlLTRhODAtOTAyMi1jNDE4ZmE0ODU0YzciLCJ1dGkiOiJfTGlHVVlsZktrcTRWaEdPXzNpRkFBIiwidmVyIjoiMi4wIn0.CZMOfyo5Lo1Km8bgWtOw8f30n1AZ5HJQ-StyIPr_P_eEjanzHVSEiRsHweNATW0GQFfLs0lGH43xztFcNNepu7CctyEzoktJ-9De2mMLIMJviF1rlB19mxH3a3hUSPZuPeYPPONkYtjL4fZj0mCYcALoq-orc0Oswg0l3fatbS7a-DAgxZdLHa6M7OtXksMlMXwooxmocOQeg_zhpko1zyuzSsVwNrz1uMZYpivwaM1ImWZiqgjMc1NWCN2Co1nYNuvxg6Chcr0OOsPRaXayfzrP7IlsZIg5Itg9lrqN0cjT3t8GSejL2P8HmfPcYftlqOobCesjSfBthir5hGUoNA"
+                  },
+                  "summary": "Example request body",
+                  "description": "An example object that represents the request body to be sent to the API endpoint."
                 }
+              }
             }
           }
         },
@@ -2064,7 +2070,8 @@
                   "items": {
                     "$ref": "#/components/schemas/LicenseReport.CorrelationRecord"
                   },
-                  "examples": [[
+                  "examples": [
+                    [
                       {
                         "auditTenantAccount": "somebodyThatI@example.com",
                         "correlationId": "6d7c9271-9e68-4bdf-9ae3-f90c4213f74b",
@@ -2081,7 +2088,8 @@
                         "createdAt": "2024-07-25T21:14:45.026Z",
                         "updatedAt": "2024-07-25T21:14:45.026Z"
                       }
-                    ]]
+                    ]
+                  ]
                 }
               }
             },
@@ -2749,21 +2757,21 @@
                 "properties": {
                   "userList": {
                     "items": {
-                      "examples": [
-                        {
-                          "value": "d1bc9d1a-5a30-4d66-898a-1dd300e707bc",
-                          "summary": "Example user ID",
-                          "description": "An example UUID string that represent the unique identifier of a user to be removed from a managed device assignment."
-                        }
-                      ],
+                      "examples": ["d1bc9d1a-5a30-4d66-898a-1dd300e707bc"],
                       "format": "uuid",
                       "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
                       "type": "string"
                     },
-                    "type": "array"
+                    "type": "array",
+                    "examples": [["d1bc9d1a-5a30-4d66-898a-1dd300e707bc"]]
                   }
                 },
-                "type": "object"
+                "type": "object",
+                "examples": [
+                  {
+                    "userList": ["d1bc9d1a-5a30-4d66-898a-1dd300e707bc"]
+                  }
+                ]
               }
             }
           }
@@ -2778,6 +2786,35 @@
                   },
                   "minItems": 0,
                   "type": "array"
+                },
+                "examples": {
+                  "Removed user list": {
+                    "summary": "Example removed user list",
+                    "description": "An example array of ManagedObject.User that represents those removed from specific privileged device assignment.",
+                    "value": [
+                      {
+                        "creationDate": "2023-10-21T15:24:47.970Z",
+                        "displayName": "Example User (Priv)",
+                        "firstName": "John",
+                        "lastName": "Doe",
+                        "id": "9f237e13-9a04-4daf-b3d4-6d2beec3c2bf",
+                        "upn": "priv-user@example.com",
+                        "securityClass": "Privileged",
+                        "uiEducation": false,
+                        "uniqueGroupId": "ad402c42-1bc9-4ba5-9419-7dbfb46a9c4d",
+                        "intermediaryAssignmentList": [
+                          "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                          "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                          "995f3b39-1e01-40d4-9368-ee956343e97c"
+                        ],
+                        "siloAssignmentList": [
+                          "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                          "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                          "995f3b39-1e01-40d4-9368-ee956343e97c"
+                        ]
+                      }
+                    ]
+                  }
                 }
               }
             },
@@ -2807,6 +2844,68 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ObjectPage.ManagedUser"
+                },
+                "examples": {
+                  "Example response": {
+                    "summary": "Example paged response",
+                    "description": "An example of ObjectPage.ManagedUser returned that represents the list of users assigned to specific privileged device.",
+                    "value": {
+                      "@odata.count": 3,
+                      "@odata.nextLink": "2",
+                      "value": [
+                        {
+                          "creationDate": "2023-10-21T15:24:47.970Z",
+                          "displayName": "Example User (Priv)",
+                          "firstName": "John",
+                          "lastName": "Doe",
+                          "id": "9f237e13-9a04-4daf-b3d4-6d2beec3c2bf",
+                          "upn": "priv-user@example.com",
+                          "securityClass": "Privileged",
+                          "uiEducation": false,
+                          "uniqueGroupId": "ad402c42-1bc9-4ba5-9419-7dbfb46a9c4d",
+                          "intermediaryAssignmentList": [
+                            "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                            "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                            "995f3b39-1e01-40d4-9368-ee956343e97c"
+                          ],
+                          "siloAssignmentList": [
+                            "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                            "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                            "995f3b39-1e01-40d4-9368-ee956343e97c"
+                          ]
+                        },
+                        {
+                          "creationDate": "2023-10-21T15:24:47.970Z",
+                          "displayName": "Example User (Priv)",
+                          "firstName": "John",
+                          "lastName": "Doe",
+                          "id": "9f237e13-9a04-4daf-b3d4-6d2beec3c2bf",
+                          "upn": "priv-user@example.com",
+                          "securityClass": "Privileged",
+                          "uiEducation": false,
+                          "uniqueGroupId": "ad402c42-1bc9-4ba5-9419-7dbfb46a9c4d",
+                          "intermediaryAssignmentList": [
+                            "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                            "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                            "995f3b39-1e01-40d4-9368-ee956343e97c"
+                          ],
+                          "siloAssignmentList": [
+                            "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                            "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                            "995f3b39-1e01-40d4-9368-ee956343e97c"
+                          ],
+                          "deviceAssignmentList": [
+                            "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                            "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                            "995f3b39-1e01-40d4-9368-ee956343e97c"
+                          ],
+                          "generatedPassword": "GY_w7bZUKRgpIXctD0S2wg",
+                          "parentId": "e59a3a64-dc36-4368-80ec-c205eb176ef6",
+                          "temporaryAccessPass": "BCKTSN#E2R&5"
+                        }
+                      ]
+                    }
+                  }
                 }
               }
             },
@@ -2838,14 +2937,17 @@
                   "description": "This example is the security best practice of having only one user mapped to a managed device.",
                   "summary": "1:1 User Mapping",
                   "value": {
-                    "userList": ["user@contoso.com"]
+                    "userList": ["0674276a-31e8-4773-8ed9-6fb49dbd0fa8"]
                   }
                 },
                 "Multi-User Managed Device": {
-                  "description": "This example is the security best practice of having only one user mapped to a managed device.",
+                  "description": "This example is the security best practice of having multiple users mapped to a managed device.",
                   "summary": "Multi-User Assignment",
                   "value": {
-                    "userList": ["user@contoso.com", "anotherUser@contoso.com"]
+                    "userList": [
+                      "0674276a-31e8-4773-8ed9-6fb49dbd0fa8",
+                      "66714224-b1a6-4fd6-b9d8-5263fdf755fc"
+                    ]
                   }
                 }
               },
@@ -2853,21 +2955,21 @@
                 "properties": {
                   "userList": {
                     "items": {
-                      "examples": [
-                        {
-                          "value": "d1bc9d1a-5a30-4d66-898a-1dd300e707bc",
-                          "summary": "Example user ID to add",
-                          "description": "An example UUID string that represents the unique identifier of a user that will be assigned to a managed device."
-                        }
-                      ],
+                      "examples": ["d1bc9d1a-5a30-4d66-898a-1dd300e707bc"],
                       "format": "uuid",
                       "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
                       "type": "string"
                     },
-                    "type": "array"
+                    "type": "array",
+                    "examples": [["d1bc9d1a-5a30-4d66-898a-1dd300e707bc"]]
                   }
                 },
-                "type": "object"
+                "type": "object",
+                "examples": [
+                  {
+                    "userList": ["d1bc9d1a-5a30-4d66-898a-1dd300e707bc"]
+                  }
+                ]
               }
             }
           }
@@ -2882,6 +2984,35 @@
                   },
                   "minItems": 0,
                   "type": "array"
+                },
+                "examples": {
+                  "List of Managed Users": {
+                    "summary": "Users assigned to the privileged device",
+                    "description": "An example of ManagedObject.User array that represents the list of users which successfully assigned to the specified privileged device.",
+                    "value": [
+                      {
+                        "creationDate": "2023-10-21T15:24:47.970Z",
+                        "displayName": "Example User (Priv)",
+                        "firstName": "John",
+                        "lastName": "Doe",
+                        "id": "9f237e13-9a04-4daf-b3d4-6d2beec3c2bf",
+                        "upn": "priv-user@example.com",
+                        "securityClass": "Privileged",
+                        "uiEducation": false,
+                        "uniqueGroupId": "ad402c42-1bc9-4ba5-9419-7dbfb46a9c4d",
+                        "intermediaryAssignmentList": [
+                          "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                          "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                          "995f3b39-1e01-40d4-9368-ee956343e97c"
+                        ],
+                        "siloAssignmentList": [
+                          "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                          "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                          "995f3b39-1e01-40d4-9368-ee956343e97c"
+                        ]
+                      }
+                    ]
+                  }
                 }
               }
             },
