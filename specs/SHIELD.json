@@ -2416,6 +2416,32 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ObjectPage.Intermediary.Avd"
+                },
+                "examples": {
+                  "Paged AVD intermediaries": {
+                    "summary": "Example paged AVD intermediary list",
+                    "description": "An example paged AVD intermediary list returned that represents the current page of all AVD intermediary instances form the specified security class.",
+                    "value": {
+                      "@odata.count": 1,
+                      "@odata.nextLink": "1",
+                      "value": [
+                        {
+                          "id": "e097a3f5-9599-44a2-8923-fd3276c83ae1",
+                          "kind": "AVD",
+                          "name": "Legacy Reach Back",
+                          "securityClass": "Privileged",
+                          "addressRangeCIDR": "172.16.1.0/24",
+                          "assignmentGroup": "68873e26-3c35-465c-9422-0884a00beb36",
+                          "index": 0,
+                          "location": "East US 2",
+                          "resourceId": "/subscriptions/742f0d26-daa0-4f84-8d4f-fb052f89f639/resourceGroups/SHIELD_-_PSM-Legacy_Reach_Back/providers/Microsoft.DesktopVirtualization/hostpools/SHIELD_-_PSM-Cluster-Legacy_Reach_Back",
+                          "sessionHostGroup": "f99f0918-da9b-4c58-9a8d-9346abc5d9ec",
+                          "sessionHostPrefix": "Reach",
+                          "vmSku": "Standard_D2s_v5"
+                        }
+                      ]
+                    }
+                  }
                 }
               }
             },
@@ -2478,6 +2504,32 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ObjectPage.Intermediary.Avd"
+                },
+                "examples": {
+                  "Paged AVD intermediary result": {
+                    "summary": "Example paged result of a AVD intermediary list",
+                    "description": "An example paged result that represents the current page of retrieved AVD intermediary list from a parent group filtered by specified class.",
+                    "value": {
+                      "@odata.count": 1,
+                      "@odata.nextLink": "1",
+                      "value": [
+                        {
+                          "id": "e097a3f5-9599-44a2-8923-fd3276c83ae1",
+                          "kind": "AVD",
+                          "name": "Legacy Reach Back",
+                          "securityClass": "Privileged",
+                          "addressRangeCIDR": "172.16.1.0/24",
+                          "assignmentGroup": "68873e26-3c35-465c-9422-0884a00beb36",
+                          "index": 0,
+                          "location": "East US 2",
+                          "resourceId": "/subscriptions/742f0d26-daa0-4f84-8d4f-fb052f89f639/resourceGroups/SHIELD_-_PSM-Legacy_Reach_Back/providers/Microsoft.DesktopVirtualization/hostpools/SHIELD_-_PSM-Cluster-Legacy_Reach_Back",
+                          "sessionHostGroup": "f99f0918-da9b-4c58-9a8d-9346abc5d9ec",
+                          "sessionHostPrefix": "Reach",
+                          "vmSku": "Standard_D2s_v5"
+                        }
+                      ]
+                    }
+                  }
                 }
               }
             },
@@ -2585,6 +2637,68 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ObjectPage.ManagedUser"
+                },
+                "examples": {
+                  "Managed user page": {
+                    "summary": "Example paged user result",
+                    "description": "An example of paged user result that represents the current page of assigned user list retrieved from the specified AVD intermediary.",
+                    "value": {
+                      "@odata.count": 3,
+                      "@odata.nextLink": "2",
+                      "value": [
+                        {
+                          "creationDate": "2023-10-21T15:24:47.970Z",
+                          "displayName": "Example User (Priv)",
+                          "firstName": "John",
+                          "lastName": "Doe",
+                          "id": "9f237e13-9a04-4daf-b3d4-6d2beec3c2bf",
+                          "upn": "priv-user@example.com",
+                          "securityClass": "Privileged",
+                          "uiEducation": false,
+                          "uniqueGroupId": "ad402c42-1bc9-4ba5-9419-7dbfb46a9c4d",
+                          "intermediaryAssignmentList": [
+                            "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                            "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                            "995f3b39-1e01-40d4-9368-ee956343e97c"
+                          ],
+                          "siloAssignmentList": [
+                            "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                            "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                            "995f3b39-1e01-40d4-9368-ee956343e97c"
+                          ]
+                        },
+                        {
+                          "creationDate": "2023-10-21T15:24:47.970Z",
+                          "displayName": "Example User (Priv)",
+                          "firstName": "John",
+                          "lastName": "Doe",
+                          "id": "9f237e13-9a04-4daf-b3d4-6d2beec3c2bf",
+                          "upn": "priv-user@example.com",
+                          "securityClass": "Privileged",
+                          "uiEducation": false,
+                          "uniqueGroupId": "ad402c42-1bc9-4ba5-9419-7dbfb46a9c4d",
+                          "intermediaryAssignmentList": [
+                            "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                            "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                            "995f3b39-1e01-40d4-9368-ee956343e97c"
+                          ],
+                          "siloAssignmentList": [
+                            "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                            "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                            "995f3b39-1e01-40d4-9368-ee956343e97c"
+                          ],
+                          "deviceAssignmentList": [
+                            "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                            "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                            "995f3b39-1e01-40d4-9368-ee956343e97c"
+                          ],
+                          "generatedPassword": "GY_w7bZUKRgpIXctD0S2wg",
+                          "parentId": "e59a3a64-dc36-4368-80ec-c205eb176ef6",
+                          "temporaryAccessPass": "BCKTSN#E2R&5"
+                        }
+                      ]
+                    }
+                  }
                 }
               }
             },
@@ -2643,12 +2757,19 @@
                     "items": {
                       "format": "uuid",
                       "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
-                      "type": "string"
+                      "type": "string",
+                      "examples": ["0c56b055-9042-4f54-8e6e-6510e12a81dc"]
                     },
-                    "type": "array"
+                    "type": "array",
+                    "examples": [["0c56b055-9042-4f54-8e6e-6510e12a81dc"]]
                   }
                 },
-                "type": "object"
+                "type": "object",
+                "examples": [
+                  {
+                    "userList": ["0c56b055-9042-4f54-8e6e-6510e12a81dc"]
+                  }
+                ]
               }
             }
           }
@@ -2663,6 +2784,35 @@
                   },
                   "minItems": 0,
                   "type": "array"
+                },
+                "examples": {
+                  "Managed user": {
+                    "summary": "Example managed users returned",
+                    "description": "An example of managed user array returned that represents the users has been assigned to the specified AVD cluster and created corresponding session host successfully.",
+                    "value": [
+                      {
+                        "creationDate": "2023-10-21T15:24:47.970Z",
+                        "displayName": "Example User (Priv)",
+                        "firstName": "John",
+                        "lastName": "Doe",
+                        "id": "9f237e13-9a04-4daf-b3d4-6d2beec3c2bf",
+                        "upn": "priv-user@example.com",
+                        "securityClass": "Privileged",
+                        "uiEducation": false,
+                        "uniqueGroupId": "ad402c42-1bc9-4ba5-9419-7dbfb46a9c4d",
+                        "intermediaryAssignmentList": [
+                          "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                          "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                          "995f3b39-1e01-40d4-9368-ee956343e97c"
+                        ],
+                        "siloAssignmentList": [
+                          "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                          "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                          "995f3b39-1e01-40d4-9368-ee956343e97c"
+                        ]
+                      }
+                    ]
+                  }
                 }
               }
             },
@@ -2684,7 +2834,7 @@
     },
     "/Api/Defend/Intermediary/{intermediaryId}/Type/{securityClass}/Offering/8a921026-ec06-4e08-af19-8812e161e61f/Assign/{userId}": {
       "get": {
-        "description": "Get the specified managed user's from the specified AVD intermediary assignment list.\n\nThis endpoint requires the `Intermediary.Privileged.Read`, `Intermediary.Privileged.ReadWrite`, `Intermediary.Specialized.Read`, `Intermediary.Specialized.ReadWrite`, `Intermediary.Enterprise.ReadWrite`, `Intermediary.Enterprise.Read`, or the `Everything.ReadWrite` scope (permission). The security class parameter in the URL path corresponds to the same permission in the scope. That means if you are granted a privileged role, you can only call the privilege class URL.",
+        "description": "Get the specified managed user(s) from the specified AVD intermediary assignment list.\n\nThis endpoint requires the `Intermediary.Privileged.Read`, `Intermediary.Privileged.ReadWrite`, `Intermediary.Specialized.Read`, `Intermediary.Specialized.ReadWrite`, `Intermediary.Enterprise.ReadWrite`, `Intermediary.Enterprise.Read`, or the `Everything.ReadWrite` scope (permission). The security class parameter in the URL path corresponds to the same permission in the scope. That means if you are granted a privileged role, you can only call the privilege class URL.",
         "operationId": "/Api/Defend/Intermediary/:intermediaryId/Type/:securityClass/Offering/AVD/Assign/:userId/Get",
         "parameters": [
           {
@@ -2703,6 +2853,68 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ObjectPage.ManagedUser"
+                },
+                "examples": {
+                  "Assigned users": {
+                    "summary": "Example assigned user list",
+                    "description": "An example paged assigned user list that represents the current page retrieved from specified AVD intermediary assignment list.",
+                    "value": {
+                      "@odata.count": 3,
+                      "@odata.nextLink": "2",
+                      "value": [
+                        {
+                          "creationDate": "2023-10-21T15:24:47.970Z",
+                          "displayName": "Example User (Priv)",
+                          "firstName": "John",
+                          "lastName": "Doe",
+                          "id": "9f237e13-9a04-4daf-b3d4-6d2beec3c2bf",
+                          "upn": "priv-user@example.com",
+                          "securityClass": "Privileged",
+                          "uiEducation": false,
+                          "uniqueGroupId": "ad402c42-1bc9-4ba5-9419-7dbfb46a9c4d",
+                          "intermediaryAssignmentList": [
+                            "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                            "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                            "995f3b39-1e01-40d4-9368-ee956343e97c"
+                          ],
+                          "siloAssignmentList": [
+                            "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                            "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                            "995f3b39-1e01-40d4-9368-ee956343e97c"
+                          ]
+                        },
+                        {
+                          "creationDate": "2023-10-21T15:24:47.970Z",
+                          "displayName": "Example User (Priv)",
+                          "firstName": "John",
+                          "lastName": "Doe",
+                          "id": "9f237e13-9a04-4daf-b3d4-6d2beec3c2bf",
+                          "upn": "priv-user@example.com",
+                          "securityClass": "Privileged",
+                          "uiEducation": false,
+                          "uniqueGroupId": "ad402c42-1bc9-4ba5-9419-7dbfb46a9c4d",
+                          "intermediaryAssignmentList": [
+                            "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                            "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                            "995f3b39-1e01-40d4-9368-ee956343e97c"
+                          ],
+                          "siloAssignmentList": [
+                            "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                            "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                            "995f3b39-1e01-40d4-9368-ee956343e97c"
+                          ],
+                          "deviceAssignmentList": [
+                            "0390fb3e-c58b-4d73-b02c-eae41ec5e4a5",
+                            "593d97dc-9a43-4bc7-9d79-ecde407d7782",
+                            "995f3b39-1e01-40d4-9368-ee956343e97c"
+                          ],
+                          "generatedPassword": "GY_w7bZUKRgpIXctD0S2wg",
+                          "parentId": "e59a3a64-dc36-4368-80ec-c205eb176ef6",
+                          "temporaryAccessPass": "BCKTSN#E2R&5"
+                        }
+                      ]
+                    }
+                  }
                 }
               }
             },
