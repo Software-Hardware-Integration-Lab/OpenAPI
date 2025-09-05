@@ -7,9 +7,7 @@
                 "name": "correlationId",
                 "required": true,
                 "schema": {
-                    "examples": [
-                        "1d71e0fe-6e4a-464d-a690-80addf3bda55"
-                    ],
+                    "examples": ["1d71e0fe-6e4a-464d-a690-80addf3bda55"],
                     "format": "uuid",
                     "maxLength": 36,
                     "minLength": 36,
@@ -17,11 +15,11 @@
                     "type": "string"
                 },
                 "examples": {
-                    "valid correlation Id": {
-                        "summary": "Example valid correlation ID",
-                        "description": "An example of a valid correlation ID in type UUID string.",
-                        "value": "1d71e0fe-6e4a-464d-a690-80addf3bda55"
-                    }
+                  "valid correlation Id": {
+                    "summary": "Example valid correlation ID",
+                    "description": "An example of a valid correlation ID in type UUID string.",
+                    "value": "1d71e0fe-6e4a-464d-a690-80addf3bda55"
+                  }
                 }
             },
             "tenantId": {
@@ -30,9 +28,7 @@
                 "name": "tenantId",
                 "required": true,
                 "schema": {
-                    "examples": [
-                        "b2fd105a-2594-437e-b934-1a62a51c28b4"
-                    ],
+                    "examples": ["b2fd105a-2594-437e-b934-1a62a51c28b4"],
                     "format": "uuid",
                     "maxLength": 36,
                     "minLength": 36,
@@ -40,11 +36,11 @@
                     "type": "string"
                 },
                 "examples": {
-                    "valid tenant Id": {
-                        "summary": "Example valid tenant ID",
-                        "description": "An example of a valid tenant ID in type UUID string.",
-                        "value": "1d71e0fe-6e4a-464d-a690-80addf3bda55"
-                    }
+                  "valid tenant Id": {
+                    "summary": "Example valid tenant ID",
+                    "description": "An example of a valid tenant ID in type UUID string.",
+                    "value": "1d71e0fe-6e4a-464d-a690-80addf3bda55"
+                  }
                 }
             },
             "channelName": {
@@ -53,17 +49,15 @@
                 "name": "channelName",
                 "required": true,
                 "schema": {
-                    "examples": [
-                        "beta"
-                    ],
+                    "examples": ["beta"],
                     "type": "string"
                 },
                 "examples": {
-                    "valid channel name": {
-                        "summary": "Example valid channel name",
-                        "description": "An example string of a valid channel name.",
-                        "value": "stable"
-                    }
+                  "valid channel name": {
+                    "summary": "Example valid channel name",
+                    "description": "An example string of a valid channel name.",
+                    "value": "stable"
+                  }
                 }
             },
             "channelRing": {
@@ -72,28 +66,26 @@
                 "name": "number",
                 "required": true,
                 "schema": {
-                    "examples": [
-                        1
-                    ],
+                    "examples": [1],
                     "type": "integer",
                     "minimum": 0
                 },
                 "examples": {
-                    "valid channel ring": {
-                        "summary": "Example valid channel ring",
-                        "description": "An example integer that represents a valid channel ring.",
-                        "value": 1
-                    },
-                    "minimum channel ring": {
-                        "summary": "Example minimum channel ring",
-                        "description": "An example integer that represents the minimum valid channel ring.",
-                        "value": 0
-                    },
-                    "invalid channel ring": {
-                        "summary": "Example invalid channel ring",
-                        "description": "An example integer that represents an invalid channel ring, which is negative.",
-                        "value": -1
-                    }
+                  "valid channel ring": {
+                    "summary": "Example valid channel ring",
+                    "description": "An example integer that represents a valid channel ring.",
+                    "value": 1
+                  },
+                  "minimum channel ring": {
+                    "summary": "Example minimum channel ring",
+                    "description": "An example integer that represents the minimum valid channel ring.",
+                    "value": 0
+                  },
+                  "invalid channel ring": {
+                    "summary": "Example invalid channel ring",
+                    "description": "An example integer that represents an invalid channel ring, which is negative.",
+                    "value": -1
+                  }
                 }
             },
             "version": {
@@ -102,17 +94,15 @@
                 "name": "version",
                 "required": true,
                 "schema": {
-                    "examples": [
-                        "1.12.5"
-                    ],
+                    "examples": ["1.12.5"],
                     "type": "string"
                 },
                 "examples": {
-                    "Valid version number": {
-                        "summary": "Example valid version number",
-                        "description": "An example string represents a valid semantic version number.",
-                        "value": "1.2.3"
-                    }
+                  "Valid version number": {
+                    "summary": "Example valid version number",
+                    "description": "An example string represents a valid semantic version number.",
+                    "value": "1.2.3"
+                  }
                 }
             },
             "parentId": {
@@ -121,9 +111,7 @@
                 "name": "parentId",
                 "required": false,
                 "schema": {
-                    "examples": [
-                        "3b241101-e2bb-4255-8caf-4136c566a962"
-                    ],
+                    "examples": ["3b241101-e2bb-4255-8caf-4136c566a962"],
                     "format": "uuid",
                     "maxLength": 36,
                     "minLength": 36,
@@ -131,11 +119,11 @@
                     "type": "string"
                 },
                 "examples": {
-                    "Valid parent ID": {
-                        "summary": "Example valid parent ID",
-                        "description": "An example UUID string that represents a valid parent object ID.",
-                        "value": "3b241101-e2bb-4255-8caf-4136c566a962"
-                    }
+                  "Valid parent ID": {
+                    "summary": "Example valid parent ID",
+                    "description": "An example UUID string that represents a valid parent object ID.",
+                    "value": "3b241101-e2bb-4255-8caf-4136c566a962"
+                  }
                 }
             },
             "dateStart": {
@@ -144,19 +132,17 @@
                 "name": "dateStart",
                 "required": false,
                 "schema": {
-                    "examples": [
-                        "2025-01-01T00:00:00Z"
-                    ],
+                    "examples": ["2025-01-01T00:00:00Z"],
                     "format": "date-time",
                     "type": "string"
                 },
                 "examples": {
-                    "Valid start date": {
-                        "summary": "Example valid start date",
-                        "description": "An example ISO8601 date string that represents a valid start date in a query.",
-                        "value": "2025-01-01T00:00:00Z"
-                    }
-                }
+                  "Valid start date": {
+                    "summary": "Example valid start date",
+                    "description": "An example ISO8601 date string that represents a valid start date in a query.",
+                    "value": "2025-01-01T00:00:00Z"
+                  }
+                }                
             },
             "dateEnd": {
                 "description": "Date string to narrow records selection to those created before or on that date.",
@@ -164,19 +150,18 @@
                 "name": "dateEnd",
                 "required": false,
                 "schema": {
-                    "examples": [
-                        "2025-02-05T23:59:59Z"
-                    ],
+                    "examples": ["2025-02-05T23:59:59Z"],
                     "format": "date-time",
                     "type": "string"
                 },
                 "examples": {
-                    "Valid end date": {
-                        "summary": "Example valid end date",
-                        "description": "An example ISO8601 date string that represents a valid end date in a query.",
-                        "value": "2025-02-05T23:59:59Z"
-                    }
-                }
+                  "Valid end date": {
+                    "summary": "Example valid end date",
+                    "description": "An example ISO8601 date string that represents a valid end date in a query.",
+                    "value": "2025-02-05T23:59:59Z"
+                  }
+                }                
+
             }
         },
         "responses": {
@@ -205,30 +190,22 @@
                 "properties": {
                     "authClient": {
                         "description": "Flag that indicates if the client side authentication validation is working or not.",
-                        "examples": [
-                            false
-                        ],
+                        "examples": [false],
                         "type": "boolean"
                     },
                     "authServer": {
                         "description": "Flag that indicates if the server side authentication is working or not.",
-                        "examples": [
-                            true
-                        ],
+                        "examples": [true],
                         "type": "boolean"
                     },
                     "bulkStorage": {
                         "description": "Flag that indicates if the bulk storage system is down (`false`) or not (`true`). False indicate the service is not working, true indicates the service is working.",
-                        "examples": [
-                            true
-                        ],
+                        "examples": [true],
                         "type": "boolean"
                     },
                     "database": {
                         "description": "Flag that indicates if the ORM (Database) system is down (`false`) or not (`true`). False indicate the service is not working, true indicates the service is working.",
-                        "examples": [
-                            false
-                        ],
+                        "examples": [false],
                         "type": "boolean"
                     }
                 },
@@ -239,56 +216,25 @@
                     "database"
                 ],
                 "title": "Core System - Health Report",
-                "type": "object",
-                "examples": [
-                    {
-                        "authClient": false,
-                        "authServer": true,
-                        "bulkStorage": true,
-                        "database": false
-                    }
-                ]
+                "type": "object"
             },
             "Chat.OpenAIChatMessage": {
                 "title": "Chat - Message Record",
                 "description": "Object representing entity supplied to the AI agent or a response from the AI Agent",
-                "examples": [
-                    {
-                        "role": "assistant",
-                        "content": "What are the available IDs?",
-                        "tool_calls": [
-                            {
-                                "id": "call_abc123",
-                                "type": "function",
-                                "function": {
-                                    "arguments": "{\"startDate\":\"2025-07-01\",\"endDate\":\"2025-07-10\"}",
-                                    "name": "getCorrelationIDs"
-                                }
+                "examples": [{
+                    "role": "assistant",
+                    "content": "What are the available IDs?",
+                    "tool_calls": [
+                        {
+                            "id": "call_abc123",
+                            "type": "function",
+                            "function": {
+                                "arguments": "{\"startDate\":\"2025-07-01\",\"endDate\":\"2025-07-10\"}",
+                                "name": "getCorrelationIDs"
                             }
-                        ]
-                    },
-                    {
-                        "name": "John Doe",
-                        "role": "user",
-                        "content": [
-                            {
-                                "text": "What are the available IDs?",
-                                "type": "text"
-                            }
-                        ],
-                        "tool_call_id": "call_abc123",
-                        "tool_calls": [
-                            {
-                                "id": "call_abc123",
-                                "type": "function",
-                                "function": {
-                                    "arguments": "{\"startDate\":\"2025-07-01\",\"endDate\":\"2025-07-10\"}",
-                                    "name": "getCorrelationIDs"
-                                }
-                            }
-                        ]
-                    }
-                ],
+                        }
+                    ]
+                }],
                 "type": "object",
                 "properties": {
                     "content": {
@@ -316,31 +262,17 @@
                                         "text",
                                         "type"
                                     ]
-                                },
-                                "examples": [
-                                    [
-                                        {
-                                            "text": "What are the available IDs?",
-                                            "type": "text"
-                                        }
-                                    ]
-                                ]
+                                }
                             }
                         ]
                     },
                     "role": {
                         "type": "string",
-                        "description": "The role of the messages author",
-                        "examples": [
-                            "assistant"
-                        ]
+                        "description": "The role of the messages author"
                     },
                     "name": {
                         "type": "string",
-                        "description": "An optional name for the participant",
-                        "examples": [
-                            "John Doe"
-                        ]
+                        "description": "An optional name for the participant"
                     },
                     "tool_calls": {
                         "type": "array",
@@ -350,10 +282,7 @@
                             "properties": {
                                 "id": {
                                     "type": "string",
-                                    "description": "The ID of the tool call",
-                                    "examples": [
-                                        "call_abc121"
-                                    ]
+                                    "description": "The ID of the tool call"
                                 },
                                 "function": {
                                     "type": "object",
@@ -361,52 +290,24 @@
                                     "properties": {
                                         "arguments": {
                                             "type": "string",
-                                            "description": "The arguments to call the function with",
-                                            "examples": [
-                                                "{\"startDate\":\"2025-07-01\",\"endDate\":\"2025-07-10\"}"
-                                            ]
+                                            "description": "The arguments to call the function with"
                                         },
                                         "name": {
                                             "type": "string",
-                                            "description": "The name of the function to call",
-                                            "examples": [
-                                                "getCorrelationIDs"
-                                            ]
+                                            "description": "The name of the function to call"
                                         }
-                                    },
-                                    "examples": [
-                                        {
-                                            "arguments": "{\"startDate\":\"2025-07-01\",\"endDate\":\"2025-07-10\"}",
-                                            "name": "getCorrelationIDs"
-                                        }
-                                    ]
+                                    }
                                 },
                                 "type": {
                                     "type": "string",
-                                    "description": "The type of the tool. Currently, only `function` is supported",
-                                    "examples": [
-                                        "function"
-                                    ]
+                                    "description": "The type of the tool. Currently, only `function` is supported"
                                 }
-                            },
-                            "examples": [
-                                {
-                                    "id": "call_abc121",
-                                    "function": {
-                                        "arguments": "{\"startDate\":\"2025-07-01\",\"endDate\":\"2025-07-10\"}",
-                                        "name": "getCorrelationIDs"
-                                    },
-                                    "type": "function"
-                                }
-                            ]
+                            }
                         }
                     },
                     "tool_call_id": {
                         "type": "string",
-                        "description": "Tool call that this message is responding to",
-                        "examples": [
-                            "call_abc123"
-                        ]
+                        "description": "Tool call that this message is responding to"
                     }
                 },
                 "required": [
@@ -416,64 +317,50 @@
             },
             "LicenseReport.CorrelationRecord": {
                 "description": "Metadata that describes the execution session (run) that is used to tie/relate all of the license report together.",
-                "examples": [
-                    {
-                        "auditTenantAccount": "priv-user@example.com",
-                        "correlationId": "9d838115-0868-45d4-b8a5-98adc1af7e42",
-                        "reportTenantAccount": "ent-user@example.com",
-                        "tenantId": "7e536189-b2dd-4c8b-98b1-9b174777883f",
-                        "createdAt": "2024-08-01T21:13:12.821Z",
-                        "updatedAt": "2024-08-01T21:13:12.821Z"
-                    }
-                ],
+                "examples": [{
+                    "auditTenantAccount": "priv-user@example.com",
+                    "correlationId": "9d838115-0868-45d4-b8a5-98adc1af7e42",
+                    "reportTenantAccount": "ent-user@example.com",
+                    "tenantId": "7e536189-b2dd-4c8b-98b1-9b174777883f",
+                    "createdAt": "2024-08-01T21:13:12.821Z",
+                    "updatedAt": "2024-08-01T21:13:12.821Z"
+                }],
                 "properties": {
                     "auditTenantAccount": {
                         "description": "The user account used to retrieve the license information in the tenant being audited.",
-                        "examples": [
-                            "admin-user@example.com"
-                        ],
+                        "examples": ["admin-user@example.com"],
                         "format": "email",
                         "type": "string"
                     },
                     "correlationId": {
                         "description": "The ID of the execution session (run) that is used to tie/relate all of the data together.",
-                        "examples": [
-                            "88da2253-758f-4135-9d37-64448c8b65c1"
-                        ],
+                        "examples": ["88da2253-758f-4135-9d37-64448c8b65c1"],
                         "format": "uuid",
                         "type": "string",
                         "pattern": "^\\w+-\\w+-\\w+-\\w+-\\w+$"
                     },
                     "reportTenantAccount": {
                         "description": "User account used to store/report the license report to the SHI Lab cloud service.",
-                        "examples": [
-                            "generic-user@example.com"
-                        ],
+                        "examples": ["generic-user@example.com"],
                         "format": "email",
                         "type": "string"
                     },
                     "tenantId": {
                         "description": "Unique ID of customer's Microsoft tenant that the license report is for.",
-                        "examples": [
-                            "0e1fe83f-a33f-4250-8546-225b8d45ae01"
-                        ],
+                        "examples": ["0e1fe83f-a33f-4250-8546-225b8d45ae01"],
                         "format": "uuid",
                         "type": "string",
                         "pattern": "^\\w+-\\w+-\\w+-\\w+-\\w+$"
                     },
                     "createdAt": {
                         "description": "Timestamp of when the report was created.",
-                        "examples": [
-                            "2024-08-01T21:12:22.148Z"
-                        ],
+                        "examples": ["2024-08-01T21:12:22.148Z"],
                         "format": "date-time",
                         "type": "string"
                     },
                     "updatedAt": {
                         "description": "Timestamp of when the report was last updated.",
-                        "examples": [
-                            "2024-08-01T21:12:22.148Z"
-                        ],
+                        "examples": ["2024-08-01T21:12:22.148Z"],
                         "format": "date-time",
                         "type": "string"
                     }
@@ -489,25 +376,10 @@
                 "properties": {
                     "assignedLicense": {
                         "additionalProperties": {
-                            "oneOf": [
-                                {
-                                    "type": "integer",
-                                    "examples": [
-                                        0
-                                    ]
-                                },
-                                {
-                                    "type": "null"
-                                }
-                            ]
+                            "type": "integer"
                         },
                         "description": "License assignment on the specified principal.",
-                        "type": "object",
-                        "examples": [
-                            {
-                                "eec0eb4f-6444-4f95-aba0-50c24d67f998": 0
-                            }
-                        ]
+                        "type": "object"
                     },
                     "assignedService": {
                         "additionalProperties": {
@@ -517,32 +389,12 @@
                                 },
                                 {
                                     "type": "integer",
-                                    "format": "int32",
-                                    "examples": [
-                                        0
-                                    ]
-                                },
-                                {
-                                    "type": "null"
+                                    "format": "int32"
                                 }
                             ]
                         },
                         "description": "Service configuration assignment.  This is used to record the set of principals that are \"benefiting\" from the service, regardless of license status.",
-                        "type": "object",
-                        "examples": [
-                            {
-                                "eec0eb4f-6444-4f95-aba0-50c24d67f998": 0,
-                                "4b0d28f2-c1ce-48ae-a7d2-1caaa7825891": null
-                            },
-                            {
-                                "eec0eb4f-6444-4f95-aba0-50c24d67f998": {
-                                    "Conditional Access": false,
-                                    "Access Review": true,
-                                    "Entitlement Management": false,
-                                    "Identity Protection": true
-                                }
-                            }
-                        ]
+                        "type": "object"
                     },
                     "consumedService": {
                         "additionalProperties": {
@@ -552,32 +404,12 @@
                                 },
                                 {
                                     "type": "integer",
-                                    "format": "int32",
-                                    "examples": [
-                                        0
-                                    ]
-                                },
-                                {
-                                    "type": "null"
+                                    "format": "int32"
                                 }
                             ]
                         },
                         "description": "Usage telemetry retrieved for the service to indicate if the specific principal is consuming the service or not, regardless of license status.",
-                        "type": "object",
-                        "examples": [
-                            {
-                                "eec0eb4f-6444-4f95-aba0-50c24d67f998": {
-                                    "Conditional Access": true,
-                                    "Access Review": false,
-                                    "Entitlement Management": false,
-                                    "Identity Protection": true
-                                }
-                            },
-                            {
-                                "eec0eb4f-6444-4f95-aba0-50c24d67f998": 0,
-                                "4b0d28f2-c1ce-48ae-a7d2-1caaa7825891": null
-                            }
-                        ]
+                        "type": "object"
                     }
                 },
                 "required": [
@@ -586,125 +418,112 @@
                     "consumedService"
                 ],
                 "description": "Collection of principals that have had their in-use licenses and assigned licenses. Where the key is the principal ID and the value is the insights.",
-                "examples": [
-                    {
-                        "assignedLicense": {
-                            "eec0eb4f-6444-4f95-aba0-50c24d67f998": 0,
-                            "41781fb2-bc02-4b7c-bd55-b576c07bb09d": 1,
-                            "7159f980-6f83-4b67-bf41-e172b3ae1352": 2
+                "examples": [{
+                    "assignedLicense": {
+                        "eec0eb4f-6444-4f95-aba0-50c24d67f998": null,
+                        "41781fb2-bc02-4b7c-bd55-b576c07bb09d": null,
+                        "7159f980-6f83-4b67-bf41-e172b3ae1352": null
+                    },
+                    "assignedService": {
+                        "eec0eb4f-6444-4f95-aba0-50c24d67f998": {
+                            "Conditional Access": false,
+                            "Access Review": true,
+                            "Entitlement Management": false,
+                            "Identity Protection": true
                         },
-                        "assignedService": {
-                            "eec0eb4f-6444-4f95-aba0-50c24d67f998": {
-                                "Conditional Access": false,
-                                "Access Review": true,
-                                "Entitlement Management": false,
-                                "Identity Protection": true
-                            },
-                            "41781fb2-bc02-4b7c-bd55-b576c07bb09d": {
-                                "Conditional Access": true,
-                                "Dynamic Group": false,
-                                "Group Naming": true,
-                                "On-Prem SSPR": false,
-                                "Group Expiration": true,
-                                "Provisioning Engine": true,
-                                "Enterprise State Roaming": false
-                            },
-                            "6511755b-c27d-4c66-a59e-b835e6b54e7f": null
+                        "41781fb2-bc02-4b7c-bd55-b576c07bb09d": {
+                            "Conditional Access": true,
+                            "Dynamic Group": false,
+                            "Group Naming": true,
+                            "On-Prem SSPR": false,
+                            "Group Expiration": true,
+                            "Provisioning Engine": true,
+                            "Enterprise State Roaming": false
                         },
-                        "consumedService": {
-                            "eec0eb4f-6444-4f95-aba0-50c24d67f998": {
-                                "Conditional Access": true,
-                                "Access Review": false,
-                                "Entitlement Management": false,
-                                "Identity Protection": true
-                            },
-                            "41781fb2-bc02-4b7c-bd55-b576c07bb09d": {
-                                "Conditional Access": true,
-                                "Dynamic Group": false,
-                                "Group Naming": true,
-                                "On-Prem SSPR": false,
-                                "Group Expiration": true,
-                                "Provisioning Engine": true,
-                                "Enterprise State Roaming": false
-                            },
-                            "4b0d28f2-c1ce-48ae-a7d2-1caaa7825891": null,
-                            "c90f1a25-e6cd-4163-ac6c-ca7616c585a9": null
-                        }
+                        "6511755b-c27d-4c66-a59e-b835e6b54e7f": null
+                    },
+                    "consumedService": {
+                        "eec0eb4f-6444-4f95-aba0-50c24d67f998": {
+                            "Conditional Access": true,
+                            "Access Review": false,
+                            "Entitlement Management": false,
+                            "Identity Protection": true
+                        },
+                        "41781fb2-bc02-4b7c-bd55-b576c07bb09d": {
+                            "Conditional Access": true,
+                            "Dynamic Group": false,
+                            "Group Naming": true,
+                            "On-Prem SSPR": false,
+                            "Group Expiration": true,
+                            "Provisioning Engine": true,
+                            "Enterprise State Roaming": false
+                        },
+                        "4b0d28f2-c1ce-48ae-a7d2-1caaa7825891": null,
+                        "c90f1a25-e6cd-4163-ac6c-ca7616c585a9": null
                     }
-                ],
+                }],
                 "title": "License Report - License Data"
             },
             "LicenseReport.FeatureBreakdown": {
                 "additionalProperties": {
-                    "type": "boolean",
-                    "examples": [
-                        true
-                    ]
+                    "type": "boolean"
                 },
                 "description": "List of features that are configured for the specific service plan's service configuration for the related principal.\nThe key is the name of the feature that is being described.\nThe value is the state of the feature configuration, `true` is in scope and `false` meaning not in scope.",
-                "examples": [
-                    {
-                        "Conditional Access": true,
-                        "Access Reviews": true,
-                        "Dynamic Groups": false,
-                        "On-Prem Password Rest": true,
-                        "On-Prem Password Protection": false
-                    }
-                ],
+                "examples": [{
+                    "Conditional Access": true,
+                    "Access Reviews": true,
+                    "Dynamic Groups": false,
+                    "On-Prem Password Rest": true,
+                    "On-Prem Password Protection": false
+                }],
                 "title": "License Report - Feature Breakdown",
                 "type": "object"
             },
             "LicenseReport": {
                 "description": "Completely calculated license report structure that is the result of a complete run.",
-                "examples": [
-                    {
-                        "availableLicense": {
-                            "e17b13ee-9749-488b-9289-d31a8fde045d": 123,
-                            "2d995b6a-d4aa-4d8d-a03c-372ecb66509d": 456,
-                            "cbf6ee7c-c3c1-44a6-9f18-020c65536470": 789
-                        },
-                        "correlation": {
-                            "auditTenantAccount": "admin-user@example.com",
-                            "correlationId": "88da2253-758f-4135-9d37-64448c8b65c1",
-                            "reportTenantAccount": "generic-user@example.com",
-                            "tenantId": "0e1fe83f-a33f-4250-8546-225b8d45ae01"
-                        },
-                        "licenseData": {
-                            "250844e1-a7ab-4f21-8e3f-58f51b5983a3": {
-                                "assignedLicense": {
-                                    "e17b13ee-9749-488b-9289-d31a8fde045d": 0
-                                },
-                                "assignedService": {
-                                    "cbf6ee7c-c3c1-44a6-9f18-020c65536470": 0,
-                                    "c7bcba35-199c-41e5-8c8d-6d4e4aad8964": null
-                                },
-                                "consumedService": {
-                                    "fe98c41a-d931-4f6f-a5bc-750ba7144a77": null,
-                                    "0474bdf1-ee76-4aff-a65c-6f82e5e1d5a6": {
-                                        "Something Here": true,
-                                        "Other Obscure feature": false
-                                    }
+                "examples": [{
+                    "availableLicense": {
+                        "e17b13ee-9749-488b-9289-d31a8fde045d": 123,
+                        "2d995b6a-d4aa-4d8d-a03c-372ecb66509d": 456,
+                        "cbf6ee7c-c3c1-44a6-9f18-020c65536470": 789
+                    },
+                    "correlation": {
+                        "auditTenantAccount": "admin-user@example.com",
+                        "correlationId": "88da2253-758f-4135-9d37-64448c8b65c1",
+                        "reportTenantAccount": "generic-user@example.com",
+                        "tenantId": "0e1fe83f-a33f-4250-8546-225b8d45ae01"
+                    },
+                    "licenseData": {
+                        "250844e1-a7ab-4f21-8e3f-58f51b5983a3": {
+                            "assignedLicense": {
+                                "e17b13ee-9749-488b-9289-d31a8fde045d": null
+                            },
+                            "assignedService": {
+                                "cbf6ee7c-c3c1-44a6-9f18-020c65536470": null,
+                                "c7bcba35-199c-41e5-8c8d-6d4e4aad8964": null
+                            },
+                            "consumedService": {
+                                "fe98c41a-d931-4f6f-a5bc-750ba7144a77": null,
+                                "0474bdf1-ee76-4aff-a65c-6f82e5e1d5a6": {
+                                    "Something Here": true,
+                                    "Other Obscure feature": false
                                 }
                             }
                         }
                     }
-                ],
+                }],
                 "type": "object",
                 "properties": {
                     "availableLicense": {
                         "additionalProperties": {
-                            "examples": [
-                                1234
-                            ],
+                            "examples": [1234],
                             "type": "integer"
                         },
                         "description": "Breakdown of the purchased licenses/service plans available in the tenant being audited for this run. Where the key is the ID of the service plan and the value is how many licenses are available/purchase for it.",
-                        "examples": [
-                            {
-                                "eec0eb4f-6444-4f95-aba0-50c24d67f998": 1234,
-                                "41781fb2-bc02-4b7c-bd55-b576c07bb09d": 123
-                            }
-                        ],
+                        "examples": [{
+                            "eec0eb4f-6444-4f95-aba0-50c24d67f998": 1234,
+                            "41781fb2-bc02-4b7c-bd55-b576c07bb09d": 123
+                        }],
                         "title": "License Report - Available Licenses",
                         "type": "object"
                     },
@@ -729,9 +548,7 @@
                 "properties": {
                     "correlationId": {
                         "description": "Used to correlate the license entitlements with other records.",
-                        "examples": [
-                            "e097a3f5-9599-44a2-8923-fd3276c83ae1"
-                        ],
+                        "examples": ["e097a3f5-9599-44a2-8923-fd3276c83ae1"],
                         "format": "uuid",
                         "maxLength": 36,
                         "minLength": 36,
@@ -741,128 +558,96 @@
                     },
                     "enterpriseDeviceCount": {
                         "description": "Count of Enterprise Devices that are allowed to be managed.",
-                        "examples": [
-                            5
-                        ],
+                        "examples": [5],
                         "format": "int32",
                         "type": "integer"
                     },
                     "enterpriseInterfaceCount": {
                         "description": "Count of Enterprise Interfaces that are allowed to be managed.",
-                        "examples": [
-                            6
-                        ],
+                        "examples": [6],
                         "format": "int32",
                         "type": "integer"
                     },
                     "enterpriseIntermediaryCount": {
                         "description": "Count of Enterprise Intermediaries that are allowed to be managed.",
-                        "examples": [
-                            7
-                        ],
+                        "examples": [7],
                         "format": "int32",
                         "type": "integer"
                     },
                     "enterpriseUserCount": {
                         "description": "Count of Enterprise Users that are allowed to be managed.",
-                        "examples": [
-                            8
-                        ],
+                        "examples": [8],
                         "format": "int32",
                         "type": "integer"
                     },
                     "notValidAfter": {
                         "description": "Date that the entitlement expires at.",
-                        "examples": [
-                            "2024-07-30T17:35:24.044Z"
-                        ],
+                        "examples": ["2024-07-30T17:35:24.044Z"],
                         "format": "date-time",
                         "type": "string"
                     },
                     "notValidBefore": {
                         "description": "Date that the entitlement becomes active at.",
-                        "examples": [
-                            "2024-07-30T17:37:15.300Z"
-                        ],
+                        "examples": ["2024-07-30T17:37:15.300Z"],
                         "format": "date-time",
                         "type": "string"
                     },
                     "privilegedDeviceCount": {
                         "description": "Count of Privileged Devices (PAW) that are allowed to be managed.",
-                        "examples": [
-                            9
-                        ],
+                        "examples": [9],
                         "format": "int32",
                         "type": "integer"
                     },
                     "privilegedInterfaceCount": {
                         "description": "Count of Privileged Interfaces that are allowed to be managed.",
-                        "examples": [
-                            10
-                        ],
+                        "examples": [10],
                         "format": "int32",
                         "type": "integer"
                     },
                     "privilegedIntermediaryCount": {
                         "description": "Count of Privileged Intermediaries that are allowed to be managed.",
-                        "examples": [
-                            11
-                        ],
+                        "examples": [11],
                         "format": "int32",
                         "type": "integer"
                     },
                     "privilegedUserCount": {
                         "description": "Count of Privileged Users that are allowed to be managed.",
-                        "examples": [
-                            12
-                        ],
+                        "examples": [12],
                         "format": "int32",
                         "type": "integer"
                     },
                     "purchaseId": {
                         "description": "This could be any value used to correlate the purchase operation to this entitlement record.",
-                        "examples": [
-                            "Bob's your uncle."
-                        ],
+                        "examples": ["Bob's your uncle."],
                         "type": "string"
                     },
                     "specializedDeviceCount": {
                         "description": "Count of Specialized Devices that are allowed to be managed.",
-                        "examples": [
-                            13
-                        ],
+                        "examples": [13],
                         "format": "int32",
                         "type": "integer"
                     },
                     "specializedInterfaceCount": {
                         "description": "Count of Specialized Interfaces that are allowed to be managed.",
-                        "examples": [
-                            14
-                        ],
+                        "examples": [14],
                         "format": "int32",
                         "type": "integer"
                     },
                     "specializedIntermediaryCount": {
                         "description": "Count of Specialized Intermediaries that are allowed to be managed.",
-                        "examples": [
-                            15
-                        ],
+                        "examples": [15],
                         "format": "int32",
                         "type": "integer"
                     },
                     "specializedUserCount": {
                         "description": "Count of Specialized Users that are allowed to be managed.",
-                        "examples": [
-                            15
-                        ],
+                        "examples": [15],
                         "format": "int32",
                         "type": "integer"
                     },
                     "tenantId": {
                         "description": "Tenant that this license entitlement is valid for.",
-                        "examples": [
-                            "a2a1698d-a3e0-42d3-96a4-47eb3e8f7dd1"
-                        ],
+                        "examples": ["a2a1698d-a3e0-42d3-96a4-47eb3e8f7dd1"],
                         "format": "uuid",
                         "maxLength": 36,
                         "minLength": 36,
@@ -889,124 +674,79 @@
                     "tenantId"
                 ],
                 "title": "License Entitlement - SHIELD Record",
-                "type": "object",
-                "examples": [
-                    {
-                        "correlationId": "e097a3f5-9599-44a2-8923-fd3276c83ae1",
-                        "enterpriseDeviceCount": 5,
-                        "enterpriseInterfaceCount": 6,
-                        "enterpriseIntermediaryCount": 7,
-                        "enterpriseUserCount": 8,
-                        "notValidAfter": "2024-07-30T17:35:24.044Z",
-                        "notValidBefore": "2024-07-30T17:37:15.300Z",
-                        "privilegedDeviceCount": 9,
-                        "privilegedInterfaceCount": 10,
-                        "privilegedIntermediaryCount": 11,
-                        "privilegedUserCount": 12,
-                        "purchaseId": "any arbitrary string as purchaseId",
-                        "specializedDeviceCount": 13,
-                        "specializedInterfaceCount": 14,
-                        "specializedIntermediaryCount": 15,
-                        "specializedUserCount": 15,
-                        "tenantId": "a2a1698d-a3e0-42d3-96a4-47eb3e8f7dd1"
-                    }
-                ]
+                "type": "object"
             },
             "LicenseEntitlement.Shield.Count": {
                 "properties": {
                     "enterpriseDeviceCount": {
                         "description": "Count of Enterprise Devices that are allowed to be managed.",
-                        "examples": [
-                            5
-                        ],
+                        "examples": [5],
                         "format": "int32",
                         "type": "integer"
                     },
                     "enterpriseInterfaceCount": {
                         "description": "Count of Enterprise Interfaces that are allowed to be managed.",
-                        "examples": [
-                            3
-                        ],
+                        "examples": [3],
                         "format": "int32",
                         "type": "integer"
                     },
                     "enterpriseIntermediaryCount": {
                         "description": "Count of Enterprise Intermediaries that are allowed to be managed.",
-                        "examples": [
-                            7
-                        ],
+                        "examples": [7],
                         "format": "int32",
                         "type": "integer"
                     },
                     "enterpriseUserCount": {
                         "description": "Count of Enterprise Users that are allowed to be managed.",
-                        "examples": [
-                            8
-                        ],
+                        "examples": [8],
                         "format": "int32",
                         "type": "integer"
                     },
                     "privilegedDeviceCount": {
                         "description": "Count of Privileged Devices (PAW) that are allowed to be managed.",
-                        "examples": [
-                            9
-                        ],
+                        "examples": [9],
                         "format": "int32",
                         "type": "integer"
                     },
                     "privilegedInterfaceCount": {
                         "description": "Count of Privileged Interfaces that are allowed to be managed.",
-                        "examples": [
-                            10
-                        ],
+                        "examples": [10],
                         "format": "int32",
                         "type": "integer"
                     },
                     "privilegedIntermediaryCount": {
                         "description": "Count of Privileged Intermediaries that are allowed to be managed.",
-                        "examples": [
-                            11
-                        ],
+                        "examples": [11],
                         "format": "int32",
                         "type": "integer"
                     },
                     "privilegedUserCount": {
                         "description": "Count of Privileged Users that are allowed to be managed.",
-                        "examples": [
-                            12
-                        ],
+                        "examples": [12],
                         "format": "int32",
                         "type": "integer"
                     },
                     "specializedDeviceCount": {
                         "description": "Count of Specialized Devices that are allowed to be managed.",
-                        "examples": [
-                            13
-                        ],
+                        "examples": [13],
                         "format": "int32",
                         "type": "integer"
                     },
                     "specializedInterfaceCount": {
                         "description": "Count of Specialized Interfaces that are allowed to be managed.",
-                        "examples": [
-                            14
-                        ],
+                        "examples": [14],
                         "format": "int32",
                         "type": "integer"
                     },
                     "specializedIntermediaryCount": {
                         "description": "Count of Specialized Intermediaries that are allowed to be managed.",
-                        "examples": [
-                            15
-                        ],
+                        "examples": [15],
                         "format": "int32",
                         "type": "integer"
                     },
                     "specializedUserCount": {
                         "description": "Count of Specialized Users that are allowed to be managed.",
-                        "examples": [
-                            15
-                        ],
+                        "examples": [15],
                         "format": "int32",
                         "type": "integer"
                     }
@@ -1026,135 +766,79 @@
                     "specializedUserCount"
                 ],
                 "title": "License Entitlement - Active SHIELD Count",
-                "type": "object",
-                "examples": [
-                    {
-                        "enterpriseDeviceCount": 5,
-                        "enterpriseInterfaceCount": 3,
-                        "enterpriseIntermediaryCount": 7,
-                        "enterpriseUserCount": 8,
-                        "privilegedDeviceCount": 9,
-                        "privilegedInterfaceCount": 10,
-                        "privilegedIntermediaryCount": 11,
-                        "privilegedUserCount": 12,
-                        "specializedDeviceCount": 13,
-                        "specializedInterfaceCount": 14,
-                        "specializedIntermediaryCount": 15,
-                        "specializedUserCount": 15
-                    }
-                ]
+                "type": "object"
             },
             "Telemetry.Shield": {
                 "properties": {
                     "correlationId": {
                         "description": "Primary key for the table, used to correlate multiple telemetry records together.",
                         "format": "uuid",
-                        "type": "string",
-                        "examples": [
-                            "1d71e0fe-6e4a-464d-a690-80addf3bda55"
-                        ]
+                        "type": "string"
                     },
                     "enterpriseDeviceCount": {
                         "description": "Count of Enterprise Devices that are deployed in the CX environment.",
                         "type": "integer",
-                        "minimum": 0,
-                        "examples": [
-                            0
-                        ]
+                        "minimum": 0
                     },
                     "enterpriseInterfaceCount": {
                         "description": "Number of active Enterprise interfaces.",
                         "type": "integer",
-                        "minimum": 0,
-                        "examples": [
-                            0
-                        ]
+                        "minimum": 0
                     },
                     "enterpriseIntermediaryCount": {
                         "description": "Number of active Enterprise intermediaries.",
                         "type": "integer",
-                        "minimum": 0,
-                        "examples": [
-                            0
-                        ]
+                        "minimum": 0
                     },
                     "enterpriseUserCount": {
                         "description": "Count of Enterprise Users that are deployed in the CX environment.",
                         "type": "integer",
-                        "minimum": 0,
-                        "examples": [
-                            0
-                        ]
+                        "minimum": 0
                     },
                     "monthlyActiveEntUsers": {
                         "description": "Number of active managed Enterprise users.",
                         "type": "integer",
-                        "minimum": 0,
-                        "examples": [
-                            0
-                        ]
+                        "minimum": 0
                     },
                     "monthlyActivePrivUsers": {
                         "description": "Number of active managed privileged users.",
                         "type": "integer",
-                        "minimum": 0,
-                        "examples": [
-                            0
-                        ]
+                        "minimum": 0
                     },
                     "monthlyActiveSpecUsers": {
                         "description": "Number of active managed Specialized users.",
                         "type": "integer",
-                        "minimum": 0,
-                        "examples": [
-                            0
-                        ]
+                        "minimum": 0
                     },
                     "privilegedDeviceCount": {
                         "description": "Count of Privileged Devices (PAW) that are deployed in the CX environment.",
                         "type": "integer",
-                        "minimum": 0,
-                        "examples": [
-                            0
-                        ]
+                        "minimum": 0
                     },
                     "privilegedInterfaceCount": {
                         "description": "Number of active Privileged interfaces.",
                         "type": "integer",
-                        "minimum": 0,
-                        "examples": [
-                            0
-                        ]
+                        "minimum": 0
                     },
                     "privilegedIntermediaryCount": {
                         "description": "Number of active Privileged intermediaries.",
                         "type": "integer",
-                        "minimum": 0,
-                        "examples": [
-                            0
-                        ]
+                        "minimum": 0
                     },
                     "privilegedUserCount": {
                         "description": "Count of Privileged Users that are deployed in the CX environment.",
                         "type": "integer",
-                        "minimum": 0,
-                        "examples": [
-                            0
-                        ]
+                        "minimum": 0
                     },
                     "shieldArchitectureVersion": {
                         "description": "Version number of the architecture that is deployed.",
-                        "examples": [
-                            "27"
-                        ],
+                        "examples": ["27"],
                         "type": "string",
-                        "minLength": 1
+                        "minimum": 1
                     },
                     "shieldCoreVersion": {
                         "description": "Version number of the product that the product is running.",
-                        "examples": [
-                            "2.5.6"
-                        ],
+                        "examples": ["2.5.6"],
                         "type": "string"
                     },
                     "specializedDeviceCount": {
@@ -1179,24 +863,18 @@
                     },
                     "tenantId": {
                         "description": "Tenant ID for the CX in question.",
-                        "examples": [
-                            "5ae80362-6fe8-4ab1-9b6d-8dfa99d91657"
-                        ],
+                        "examples": ["5ae80362-6fe8-4ab1-9b6d-8dfa99d91657"],
                         "type": "string"
                     },
                     "createdAt": {
                         "description": "Timestamp on when the record was created. This is auto managed by sequelize.",
-                        "examples": [
-                            "2024-08-02T23:48:50.231Z"
-                        ],
+                        "examples": ["2024-08-02T23:48:50.231Z"],
                         "format": "date-time",
                         "type": "string"
                     },
                     "updatedAt": {
                         "description": "Timestamp on when the record was last updated. This is auto managed by sequelize.",
-                        "examples": [
-                            "2024-08-02T23:48:50.231Z"
-                        ],
+                        "examples": ["2024-08-02T23:48:50.231Z"],
                         "format": "date-time",
                         "type": "string"
                     }
@@ -1221,41 +899,14 @@
                     "specializedUserCount"
                 ],
                 "title": "Application Telemetry - SHIELD",
-                "type": "object",
-                "examples": [
-                    {
-                        "correlationId": "1d71e0fe-6e4a-464d-a690-80addf3bda55",
-                        "enterpriseDeviceCount": 0,
-                        "enterpriseInterfaceCount": 0,
-                        "enterpriseIntermediaryCount": 0,
-                        "enterpriseUserCount": 0,
-                        "monthlyActiveEntUsers": 0,
-                        "monthlyActivePrivUsers": 0,
-                        "monthlyActiveSpecUsers": 0,
-                        "privilegedDeviceCount": 0,
-                        "privilegedInterfaceCount": 0,
-                        "privilegedIntermediaryCount": 0,
-                        "privilegedUserCount": 0,
-                        "shieldArchitectureVersion": "27",
-                        "shieldCoreVersion": "2.5.6",
-                        "specializedDeviceCount": 3,
-                        "specializedInterfaceCount": 2,
-                        "specializedIntermediaryCount": 1,
-                        "specializedUserCount": 0,
-                        "tenantId": "5ae80362-6fe8-4ab1-9b6d-8dfa99d91657",
-                        "createdAt": "2024-08-02T23:48:50.231Z",
-                        "updatedAt": "2024-08-02T23:48:50.231Z"
-                    }
-                ]
+                "type": "object"
             },
             "Update.Shield.Check": {
                 "description": "Object returning the value of the version of the latest application package available.",
                 "properties": {
                     "updateVersion": {
                         "description": "Latest found version of the application package.",
-                        "examples": [
-                            "1.12.5"
-                        ],
+                        "examples": ["1.12.5"],
                         "type": "string"
                     }
                 },
@@ -1263,35 +914,24 @@
                     "updateVersion"
                 ],
                 "title": "Update SHIELD Check - latest application package version",
-                "type": "object",
-                "examples": [
-                    {
-                        "updateVersion": "1.12.5"
-                    }
-                ]
+                "type": "object"
             },
             "Update.Shield.Channel": {
                 "description": "Channel configuration for the SHIELD update service.",
                 "properties": {
                     "latest": {
                         "description": "Version number of the latest update available to the chanel.",
-                        "examples": [
-                            "1.12.5"
-                        ],
+                        "examples": ["1.12.5"],
                         "type": "string"
                     },
                     "name": {
                         "description": "(Unique) Name of the update channel that this configuration belongs to.",
-                        "examples": [
-                            "stable"
-                        ],
+                        "examples": ["stable"],
                         "type": "string"
                     },
                     "previous": {
                         "description": "Version number of the number that is being replaced via ring deployment, available to all rings at the minimum.",
-                        "examples": [
-                            "1.12.4"
-                        ],
+                        "examples": ["1.12.4"],
                         "type": "string"
                     }
                 },
@@ -1301,30 +941,19 @@
                     "previous"
                 ],
                 "title": "SHIELD Update - Channel",
-                "type": "object",
-                "examples": [
-                    {
-                        "latest": "1.12.5",
-                        "name": "stable",
-                        "previous": "1.12.4"
-                    }
-                ]
+                "type": "object"
             },
             "Update.Shield.Channel.Ring": {
                 "description": "Object containing channel ring configuration.",
                 "properties": {
                     "latest": {
                         "description": "Flag that indicates if the ring should be operating off of the latest version number provided by the channel (`true`) or the previous (`false`).",
-                        "examples": [
-                            true
-                        ],
+                        "examples": [true],
                         "type": "boolean"
                     },
                     "number": {
                         "description": "Ring number that this configuration belongs to.",
-                        "examples": [
-                            1
-                        ],
+                        "examples": [1],
                         "type": "integer",
                         "minimum": 0
                     }
@@ -1334,43 +963,29 @@
                     "number"
                 ],
                 "title": "Update SHIELD Channel Ring - configuration entry",
-                "type": "object",
-                "examples": [
-                    {
-                        "latest": true,
-                        "number": 1
-                    }
-                ]
+                "type": "object"
             },
             "Update.Shield.Tenant": {
                 "description": "Object containing tenant update configuration.",
                 "properties": {
                     "alphaEnabled": {
                         "description": "Flag that indicates if the current tenant is allowed to request alpha builds (`true`) or not (`false`).",
-                        "examples": [
-                            false
-                        ],
+                        "examples": [false],
                         "type": "boolean"
                     },
                     "channel": {
                         "description": "Name of the deploy channel.",
-                        "examples": [
-                            "stable"
-                        ],
+                        "examples": ["stable"],
                         "type": "string"
                     },
                     "ring": {
                         "description": "Ring number that the client is a member of for the current chanel.",
-                        "examples": [
-                            1
-                        ],
+                        "examples": [1],
                         "type": "integer"
                     },
                     "tenantId": {
                         "description": "Tenant ID that the configuration belongs to.",
-                        "examples": [
-                            "a2a1698d-a3e0-42d3-96a4-47eb3e8f7dd1"
-                        ],
+                        "examples": ["a2a1698d-a3e0-42d3-96a4-47eb3e8f7dd1"],
                         "format": "uuid",
                         "maxLength": 36,
                         "minLength": 36,
@@ -1385,15 +1000,7 @@
                     "tenantId"
                 ],
                 "title": "Update SHIELD Tenant - configuration entry",
-                "type": "object",
-                "examples": [
-                    {
-                        "alphaEnabled": false,
-                        "channel": "stable",
-                        "ring": 1,
-                        "tenantId": "1d71e0fe-6e4a-464d-a690-80addf3bda55"
-                    }
-                ]
+                "type": "object"
             },
             "TenantDetails": {
                 "title": "Tenant Details Record",
@@ -1401,9 +1008,7 @@
                 "properties": {
                     "tenantId": {
                         "description": "The object ID of the tenant record",
-                        "examples": [
-                            "1c4d2f3b-2e4b-4a5b-8c6d-7e8f9a0b1c2d"
-                        ],
+                        "examples": ["1c4d2f3b-2e4b-4a5b-8c6d-7e8f9a0b1c2d"],
                         "format": "uuid",
                         "maxLength": 36,
                         "minLength": 36,
@@ -1412,16 +1017,12 @@
                     },
                     "tenantDisplayName": {
                         "description": "Human readable name for the tenant record",
-                        "examples": [
-                            "Contoso - Prod"
-                        ],
+                        "examples": ["Contoso - Prod"],
                         "type": "string"
                     },
                     "parentId": {
                         "description": "The object ID of the tenant that is considered a parent to this record",
-                        "examples": [
-                            "22354a3f-2e21-4bd2-8327-dc842cfa80c8"
-                        ],
+                        "examples": ["22354a3f-2e21-4bd2-8327-dc842cfa80c8"],
                         "format": "uuid",
                         "maxLength": 36,
                         "minLength": 36,
@@ -1436,17 +1037,12 @@
                             "maxLength": 36,
                             "minLength": 36,
                             "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
-                            "type": "string",
-                            "examples": [
-                                "fd9a6a53-594d-41aa-950a-b21ff41d4688"
-                            ]
+                            "type": "string"
                         },
-                        "examples": [
-                            [
-                                "fd9a6a53-594d-41aa-950a-b21ff41d4688",
-                                "54fc12cd-403d-4c48-be12-86b807e958d3"
-                            ]
-                        ]
+                        "examples": [[
+                            "fd9a6a53-594d-41aa-950a-b21ff41d4688",
+                            "54fc12cd-403d-4c48-be12-86b807e958d3"
+                        ]]
                     }
                 },
                 "type": "object",
@@ -1455,17 +1051,6 @@
                     "tenantDisplayName",
                     "parentId",
                     "authorizedPrincipalList"
-                ],
-                "examples": [
-                    {
-                        "tenantId": "1c4d2f3b-2e4b-4a5b-8c6d-7e8f9a0b1c2d",
-                        "tenantDisplayName": "Contoso - Prod",
-                        "parentId": "22354a3f-2e21-4bd2-8327-dc842cfa80c8",
-                        "authorizedPrincipalList": [
-                            "fd9a6a53-594d-41aa-950a-b21ff41d4688",
-                            "54fc12cd-403d-4c48-be12-86b807e958d3"
-                        ]
-                    }
                 ]
             }
         },
@@ -1507,28 +1092,6 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Core.HealthReport"
-                                },
-                                "examples": {
-                                    "Auth system failure": {
-                                        "summary": "Example health report - Auth failure",
-                                        "description": "An example health report returned indicates the authentication components are not working.",
-                                        "value": {
-                                            "authClient": false,
-                                            "authServer": false,
-                                            "bulkStorage": true,
-                                            "database": true
-                                        }
-                                    },
-                                    "Storage system failure": {
-                                        "summary": "Example health report - Storage failure",
-                                        "description": "An example health report returned indicates the storage components are not working.",
-                                        "value": {
-                                            "authClient": true,
-                                            "authServer": true,
-                                            "bulkStorage": false,
-                                            "database": false
-                                        }
-                                    }
                                 }
                             }
                         }
@@ -1550,8 +1113,8 @@
                         "application/json": {
                             "examples": [{
                                 "License Report": {
-                                    "description": "Sample, truncated report from an example customer environment. The request body is the License Report that to be stored.",
-                                    "summary": "Example License Report Request",
+                                    "description": "Sample, truncated report from an example customer environment.",
+                                    "summary": "License Report",
                                     "value": {
                                         "availableLicense": {
                                             "3d282045-ec7f-4813-88e2-29b74ee609f7": 123456,
@@ -1618,8 +1181,8 @@
                             "application/json": {
                                 "examples": [{
                                     "License Report": {
-                                        "description": "Sample, truncated report from an example customer environment. This will return the same report as the request input.",
-                                        "summary": "Example of license report stored.",
+                                        "description": "Sample, truncated report from an example customer environment.",
+                                        "summary": "License Report",
                                         "value": {
                                             "availableLicense": {
                                                 "3d282045-ec7f-4813-88e2-29b74ee609f7": 123456,
@@ -1711,9 +1274,9 @@
                     "200": {
                         "content": {
                             "application/json": {
-                                "examples": {
-                                    "Example Correlation Records": {
-                                        "description": "Sample list of correlation records for the current authenticated tenant.",
+                                "examples": [{
+                                    "Example License Report": {
+                                        "description": "Sample list of correlation records for the authenticated tenant.",
                                         "summary": "Available Correlation Records",
                                         "value": [
                                             {
@@ -1740,27 +1303,7 @@
                                     "minItems": 0,
                                     "items": {
                                         "$ref": "#/components/schemas/LicenseReport.CorrelationRecord"
-                                    },
-                                    "examples": [
-                                        [
-                                            {
-                                                "auditTenantAccount": "somebodyThatI@example.com",
-                                                "correlationId": "6d7c9271-9e68-4bdf-9ae3-f90c4213f74b",
-                                                "reportTenantAccount": "usedToKnow@example.com",
-                                                "tenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db",
-                                                "createdAt": "2024-08-01T21:14:45.026Z",
-                                                "updatedAt": "2024-08-01T21:14:45.026Z"
-                                            },
-                                            {
-                                                "auditTenantAccount": "somebodyThatI@example.com",
-                                                "correlationId": "d8095827-a313-40e1-b086-f72636de0edf",
-                                                "reportTenantAccount": "usedToKnow@example.com",
-                                                "tenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db",
-                                                "createdAt": "2024-07-25T21:14:45.026Z",
-                                                "updatedAt": "2024-07-25T21:14:45.026Z"
-                                            }
-                                        ]
-                                    ]
+                                    }
                                 }
                             }
                         },
@@ -1798,9 +1341,9 @@
                     "200": {
                         "content": {
                             "application/json": {
-                                "examples": {
-                                    "Example Correlation Records": {
-                                        "description": "Sample list of correlation records for the specified tenant.",
+                                "examples": [{
+                                    "Example License Report": {
+                                        "description": "Sample list of correlation records for the authenticated tenant.",
                                         "summary": "Available Correlation Records",
                                         "value": [
                                             {
@@ -1827,27 +1370,7 @@
                                     "minItems": 0,
                                     "items": {
                                         "$ref": "#/components/schemas/LicenseReport.CorrelationRecord"
-                                    },
-                                    "examples": [
-                                        [
-                                            {
-                                                "auditTenantAccount": "somebodyThatI@example.com",
-                                                "correlationId": "6d7c9271-9e68-4bdf-9ae3-f90c4213f74b",
-                                                "reportTenantAccount": "usedToKnow@example.com",
-                                                "tenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db",
-                                                "createdAt": "2024-08-01T21:14:45.026Z",
-                                                "updatedAt": "2024-08-01T21:14:45.026Z"
-                                            },
-                                            {
-                                                "auditTenantAccount": "somebodyThatI@example.com",
-                                                "correlationId": "d8095827-a313-40e1-b086-f72636de0edf",
-                                                "reportTenantAccount": "usedToKnow@example.com",
-                                                "tenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db",
-                                                "createdAt": "2024-07-25T21:14:45.026Z",
-                                                "updatedAt": "2024-07-25T21:14:45.026Z"
-                                            }
-                                        ]
-                                    ]
+                                    }
                                 }
                             }
                         },
@@ -1882,10 +1405,10 @@
                     "200": {
                         "content": {
                             "application/json": {
-                                "examples": {
-                                    "Example License Report": {
-                                        "description": "Sample, truncated license report from an example customer environment for a correlation record of the current authenticated tenant.",
-                                        "summary": "Example License Report",
+                                "examples": [{
+                                    "License Report": {
+                                        "description": "Sample, truncated report from an example customer environment.",
+                                        "summary": "License Report",
                                         "value": {
                                             "availableLicense": {
                                                 "3d282045-ec7f-4813-88e2-29b74ee609f7": 123456,
@@ -2006,8 +1529,8 @@
                             "application/json": {
                                 "examples": [{
                                     "License Report": {
-                                        "description": "Sample, truncated report from an example customer environment for a correlation record of the specified tenant.",
-                                        "summary": "Example License Report",
+                                        "description": "Sample, truncated report from an example customer environment.",
+                                        "summary": "License Report",
                                         "value": {
                                             "availableLicense": {
                                                 "3d282045-ec7f-4813-88e2-29b74ee609f7": 123456,
@@ -2127,26 +1650,6 @@
                                 "items": {
                                     "$ref": "#/components/schemas/Chat.OpenAIChatMessage"
                                 }
-                            },
-                            "examples": {
-                                "Tool call": {
-                                    "summary": "Example tool call request",
-                                    "description": "An example request that represent a message initiated by the chat assistant to call a tool function for the currently authenticated tenant.",
-                                    "value": {
-                                        "role": "assistant",
-                                        "content": "What are the available IDs?",
-                                        "tool_calls": [
-                                            {
-                                                "id": "call_abc123",
-                                                "type": "function",
-                                                "function": {
-                                                    "arguments": "{\"startDate\":\"2025-07-01\",\"endDate\":\"2025-07-10\"}",
-                                                    "name": "getCorrelationIDs"
-                                                }
-                                            }
-                                        ]
-                                    }
-                                }
                             }
                         }
                     }
@@ -2156,48 +1659,46 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "examples": [
-                                        {
-                                            "messageList": [
-                                                {
-                                                    "role": "user",
-                                                    "content": "Hello"
-                                                },
-                                                {
-                                                    "role": "assistant",
-                                                    "content": "Hello, how can I assist you today?"
-                                                },
-                                                {
-                                                    "role": "user",
-                                                    "content": "Can you show me what correlation records I have?"
-                                                },
-                                                {
-                                                    "role": "assistant",
-                                                    "content": "What are the available IDs?",
-                                                    "tool_calls": [
-                                                        {
-                                                            "id": "call_abc123",
-                                                            "type": "function",
-                                                            "function": {
-                                                                "arguments": "{\"startDate\":\"2025-07-01\",\"endDate\":\"2025-07-10\"}",
-                                                                "name": "getCorrelationIDs"
-                                                            }
+                                    "examples": [{
+                                        "messageList": [
+                                            {
+                                                "role": "user",
+                                                "content": "Hello"
+                                            },
+                                            {
+                                                "role": "assistant",
+                                                "content": "Hello, how can I assist you today?"
+                                            },
+                                            {
+                                                "role": "user",
+                                                "content": "Can you show me what correlation records I have?"
+                                            },
+                                            {
+                                                "role": "assistant",
+                                                "content": "What are the available IDs?",
+                                                "tool_calls": [
+                                                    {
+                                                        "id": "call_abc123",
+                                                        "type": "function",
+                                                        "function": {
+                                                            "arguments": "{\"startDate\":\"2025-07-01\",\"endDate\":\"2025-07-10\"}",
+                                                            "name": "getCorrelationIDs"
                                                         }
-                                                    ]
-                                                },
-                                                {
-                                                    "role": "tool",
-                                                    "content": "{\"825a9d7e-0b62-4392-b8ef-ab6951a46ebd\":\"2025-07-03T18:39:50.828Z\",\"744c0878-3a82-48a7-b239-a1d4b9298a69\":\"2025-07-07T21:01:20.995Z\"}",
-                                                    "tool_call_id": "call_abc123"
-                                                },
-                                                {
-                                                    "role": "assistant",
-                                                    "content": "You have correlation records for the following dates:\n- July 3, 2025\n- July 7, 2025\n\nWould you like to see details from any of these correlation records?"
-                                                }
-                                            ],
-                                            "responseText": "You have correlation records for the following dates:\n- July 3, 2025\n- July 7, 2025\n\nWould you like to see details from any of these correlation records?"
-                                        }
-                                    ],
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "role": "tool",
+                                                "content": "{\"825a9d7e-0b62-4392-b8ef-ab6951a46ebd\":\"2025-07-03T18:39:50.828Z\",\"744c0878-3a82-48a7-b239-a1d4b9298a69\":\"2025-07-07T21:01:20.995Z\"}",
+                                                "tool_call_id": "call_abc123"
+                                            },
+                                            {
+                                                "role": "assistant",
+                                                "content": "You have correlation records for the following dates:\n- July 3, 2025\n- July 7, 2025\n\nWould you like to see details from any of these correlation records?"
+                                            }
+                                        ],
+                                        "responseText": "You have correlation records for the following dates:\n- July 3, 2025\n- July 7, 2025\n\nWould you like to see details from any of these correlation records?"
+                                    }],
                                     "type": "object",
                                     "properties": {
                                         "messageList": {
@@ -2205,105 +1706,17 @@
                                             "description": "List of message objects in current conversation",
                                             "items": {
                                                 "$ref": "#/components/schemas/Chat.OpenAIChatMessage"
-                                            },
-                                            "examples": [
-                                                [
-                                                    {
-                                                        "role": "user",
-                                                        "content": "Hello"
-                                                    },
-                                                    {
-                                                        "role": "assistant",
-                                                        "content": "Hello, how can I assist you today?"
-                                                    },
-                                                    {
-                                                        "role": "user",
-                                                        "content": "Can you show me what correlation records I have?"
-                                                    },
-                                                    {
-                                                        "role": "assistant",
-                                                        "content": "What are the available IDs?",
-                                                        "tool_calls": [
-                                                            {
-                                                                "id": "call_abc123",
-                                                                "type": "function",
-                                                                "function": {
-                                                                    "arguments": "{\"startDate\":\"2025-07-01\",\"endDate\":\"2025-07-10\"}",
-                                                                    "name": "getCorrelationIDs"
-                                                                }
-                                                            }
-                                                        ]
-                                                    },
-                                                    {
-                                                        "role": "tool",
-                                                        "content": "{\"825a9d7e-0b62-4392-b8ef-ab6951a46ebd\":\"2025-07-03T18:39:50.828Z\",\"744c0878-3a82-48a7-b239-a1d4b9298a69\":\"2025-07-07T21:01:20.995Z\"}",
-                                                        "tool_call_id": "call_abc123"
-                                                    },
-                                                    {
-                                                        "role": "assistant",
-                                                        "content": "You have correlation records for the following dates:\n- July 3, 2025\n- July 7, 2025\n\nWould you like to see details from any of these correlation records?"
-                                                    }
-                                                ]
-                                            ]
+                                            }
                                         },
                                         "responseText": {
                                             "type": "string",
-                                            "description": "Most recent response text",
-                                            "examples": [
-                                                "You have correlation records for the following dates:\n- July 3, 2025\n- July 7, 2025\n\nWould you like to see details from any of these correlation records?"
-                                            ]
+                                            "description": "Most recent response text"
                                         }
                                     },
                                     "required": [
                                         "messageList",
                                         "responseText"
                                     ]
-                                },
-                                "examples": {
-                                    "Chat response": {
-                                        "summary": "Example chat response with context",
-                                        "description": "An example chat response that includes context of current chat session with the request appended for the currently authenticated tenant.",
-                                        "value": {
-                                            "messageList": [
-                                                {
-                                                    "role": "user",
-                                                    "content": "Hello"
-                                                },
-                                                {
-                                                    "role": "assistant",
-                                                    "content": "Hello, how can I assist you today?"
-                                                },
-                                                {
-                                                    "role": "user",
-                                                    "content": "Can you show me what correlation records I have?"
-                                                },
-                                                {
-                                                    "role": "assistant",
-                                                    "content": "What are the available IDs?",
-                                                    "tool_calls": [
-                                                        {
-                                                            "id": "call_abc123",
-                                                            "type": "function",
-                                                            "function": {
-                                                                "arguments": "{\"startDate\":\"2025-07-01\",\"endDate\":\"2025-07-10\"}",
-                                                                "name": "getCorrelationIDs"
-                                                            }
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "role": "tool",
-                                                    "content": "{\"825a9d7e-0b62-4392-b8ef-ab6951a46ebd\":\"2025-07-03T18:39:50.828Z\",\"744c0878-3a82-48a7-b239-a1d4b9298a69\":\"2025-07-07T21:01:20.995Z\"}",
-                                                    "tool_call_id": "call_abc123"
-                                                },
-                                                {
-                                                    "role": "assistant",
-                                                    "content": "You have correlation records for the following dates:\n- July 3, 2025\n- July 7, 2025\n\nWould you like to see details from any of these correlation records?"
-                                                }
-                                            ],
-                                            "responseText": "You have correlation records for the following dates:\n- July 3, 2025\n- July 7, 2025\n\nWould you like to see details from any of these correlation records?"
-                                        }
-                                    }
                                 }
                             }
                         },
@@ -2336,46 +1749,6 @@
                                 "type": "array",
                                 "items": {
                                     "$ref": "#/components/schemas/Chat.OpenAIChatMessage"
-                                },
-                                "examples": [
-                                    [
-                                        {
-                                            "role": "assistant",
-                                            "content": "What are the available IDs?",
-                                            "tool_calls": [
-                                                {
-                                                    "id": "call_abc123",
-                                                    "type": "function",
-                                                    "function": {
-                                                        "arguments": "{\"startDate\":\"2025-07-01\",\"endDate\":\"2025-07-10\"}",
-                                                        "name": "getCorrelationIDs"
-                                                    }
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                ]
-                            },
-                            "examples": {
-                                "Chat request": {
-                                    "summary": "Example chat request",
-                                    "description": "An example request that represent a message initiated by the chat assistant to call a tool function for the specified tenant.",
-                                    "value": [
-                                        {
-                                            "role": "assistant",
-                                            "content": "What are the available IDs?",
-                                            "tool_calls": [
-                                                {
-                                                    "id": "call_abc123",
-                                                    "type": "function",
-                                                    "function": {
-                                                        "arguments": "{\"startDate\":\"2025-07-01\",\"endDate\":\"2025-07-10\"}",
-                                                        "name": "getCorrelationIDs"
-                                                    }
-                                                }
-                                            ]
-                                        }
-                                    ]
                                 }
                             }
                         }
@@ -2386,48 +1759,46 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "examples": [
-                                        {
-                                            "messageList": [
-                                                {
-                                                    "role": "user",
-                                                    "content": "Hello"
-                                                },
-                                                {
-                                                    "role": "assistant",
-                                                    "content": "Hello, how can I assist you today?"
-                                                },
-                                                {
-                                                    "role": "user",
-                                                    "content": "Can you show me what correlation records I have?"
-                                                },
-                                                {
-                                                    "role": "assistant",
-                                                    "content": "What are the available IDs?",
-                                                    "tool_calls": [
-                                                        {
-                                                            "id": "call_abc123",
-                                                            "type": "function",
-                                                            "function": {
-                                                                "arguments": "{\"startDate\":\"2025-07-01\",\"endDate\":\"2025-07-10\"}",
-                                                                "name": "getCorrelationIDs"
-                                                            }
+                                    "examples": [{
+                                        "messageList": [
+                                            {
+                                                "role": "user",
+                                                "content": "Hello"
+                                            },
+                                            {
+                                                "role": "assistant",
+                                                "content": "Hello, how can I assist you today?"
+                                            },
+                                            {
+                                                "role": "user",
+                                                "content": "Can you show me what correlation records I have?"
+                                            },
+                                            {
+                                                "role": "assistant",
+                                                "content": "What are the available IDs?",
+                                                "tool_calls": [
+                                                    {
+                                                        "id": "call_abc123",
+                                                        "type": "function",
+                                                        "function": {
+                                                            "arguments": "{\"startDate\":\"2025-07-01\",\"endDate\":\"2025-07-10\"}",
+                                                            "name": "getCorrelationIDs"
                                                         }
-                                                    ]
-                                                },
-                                                {
-                                                    "role": "tool",
-                                                    "content": "{\"825a9d7e-0b62-4392-b8ef-ab6951a46ebd\":\"2025-07-03T18:39:50.828Z\",\"744c0878-3a82-48a7-b239-a1d4b9298a69\":\"2025-07-07T21:01:20.995Z\"}",
-                                                    "tool_call_id": "call_abc123"
-                                                },
-                                                {
-                                                    "role": "assistant",
-                                                    "content": "You have correlation records for the following dates:\n- July 3, 2025\n- July 7, 2025\n\nWould you like to see details from any of these correlation records?"
-                                                }
-                                            ],
-                                            "responseText": "You have correlation records for the following dates:\n- July 3, 2025\n- July 7, 2025\n\nWould you like to see details from any of these correlation records?"
-                                        }
-                                    ],
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "role": "tool",
+                                                "content": "{\"825a9d7e-0b62-4392-b8ef-ab6951a46ebd\":\"2025-07-03T18:39:50.828Z\",\"744c0878-3a82-48a7-b239-a1d4b9298a69\":\"2025-07-07T21:01:20.995Z\"}",
+                                                "tool_call_id": "call_abc123"
+                                            },
+                                            {
+                                                "role": "assistant",
+                                                "content": "You have correlation records for the following dates:\n- July 3, 2025\n- July 7, 2025\n\nWould you like to see details from any of these correlation records?"
+                                            }
+                                        ],
+                                        "responseText": "You have correlation records for the following dates:\n- July 3, 2025\n- July 7, 2025\n\nWould you like to see details from any of these correlation records?"
+                                    }],
                                     "type": "object",
                                     "properties": {
                                         "messageList": {
@@ -2435,105 +1806,17 @@
                                             "description": "List of message objects in current conversation",
                                             "items": {
                                                 "$ref": "#/components/schemas/Chat.OpenAIChatMessage"
-                                            },
-                                            "examples": [
-                                                [
-                                                    {
-                                                        "role": "user",
-                                                        "content": "Hello"
-                                                    },
-                                                    {
-                                                        "role": "assistant",
-                                                        "content": "Hello, how can I assist you today?"
-                                                    },
-                                                    {
-                                                        "role": "user",
-                                                        "content": "Can you show me what correlation records I have?"
-                                                    },
-                                                    {
-                                                        "role": "assistant",
-                                                        "content": "What are the available IDs?",
-                                                        "tool_calls": [
-                                                            {
-                                                                "id": "call_abc123",
-                                                                "type": "function",
-                                                                "function": {
-                                                                    "arguments": "{\"startDate\":\"2025-07-01\",\"endDate\":\"2025-07-10\"}",
-                                                                    "name": "getCorrelationIDs"
-                                                                }
-                                                            }
-                                                        ]
-                                                    },
-                                                    {
-                                                        "role": "tool",
-                                                        "content": "{\"825a9d7e-0b62-4392-b8ef-ab6951a46ebd\":\"2025-07-03T18:39:50.828Z\",\"744c0878-3a82-48a7-b239-a1d4b9298a69\":\"2025-07-07T21:01:20.995Z\"}",
-                                                        "tool_call_id": "call_abc123"
-                                                    },
-                                                    {
-                                                        "role": "assistant",
-                                                        "content": "You have correlation records for the following dates:\n- July 3, 2025\n- July 7, 2025\n\nWould you like to see details from any of these correlation records?"
-                                                    }
-                                                ]
-                                            ]
+                                            }
                                         },
                                         "responseText": {
                                             "type": "string",
-                                            "description": "Most recent response text",
-                                            "examples": [
-                                                "You have correlation records for the following dates:\n- July 3, 2025\n- July 7, 2025\n\nWould you like to see details from any of these correlation records?"
-                                            ]
+                                            "description": "Most recent response text"
                                         }
                                     },
                                     "required": [
                                         "messageList",
                                         "responseText"
                                     ]
-                                },
-                                "examples": {
-                                    "Chat response": {
-                                        "summary": "Example chat response",
-                                        "description": "An example chat response that includes context of current chat session with the request appended for the specified tenant.",
-                                        "value": {
-                                            "messageList": [
-                                                {
-                                                    "role": "user",
-                                                    "content": "Hello"
-                                                },
-                                                {
-                                                    "role": "assistant",
-                                                    "content": "Hello, how can I assist you today?"
-                                                },
-                                                {
-                                                    "role": "user",
-                                                    "content": "Can you show me what correlation records I have?"
-                                                },
-                                                {
-                                                    "role": "assistant",
-                                                    "content": "What are the available IDs?",
-                                                    "tool_calls": [
-                                                        {
-                                                            "id": "call_abc123",
-                                                            "type": "function",
-                                                            "function": {
-                                                                "arguments": "{\"startDate\":\"2025-07-01\",\"endDate\":\"2025-07-10\"}",
-                                                                "name": "getCorrelationIDs"
-                                                            }
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "role": "tool",
-                                                    "content": "{\"825a9d7e-0b62-4392-b8ef-ab6951a46ebd\":\"2025-07-03T18:39:50.828Z\",\"744c0878-3a82-48a7-b239-a1d4b9298a69\":\"2025-07-07T21:01:20.995Z\"}",
-                                                    "tool_call_id": "call_abc123"
-                                                },
-                                                {
-                                                    "role": "assistant",
-                                                    "content": "You have correlation records for the following dates:\n- July 3, 2025\n- July 7, 2025\n\nWould you like to see details from any of these correlation records?"
-                                                }
-                                            ],
-                                            "responseText": "You have correlation records for the following dates:\n- July 3, 2025\n- July 7, 2025\n\nWould you like to see details from any of these correlation records?"
-                                        }
-                                    }
                                 }
                             }
                         },
@@ -2694,7 +1977,7 @@
                             "application/json": {
                                 "examples": [{
                                     "Small MSP": {
-                                        "description": "Example active license count for a small MSP for the currently authenticated tenant.",
+                                        "description": "Example active license count for a small MSP.",
                                         "summary": "Local MSP",
                                         "value": {
                                             "enterpriseDeviceCount": 54,
@@ -2712,7 +1995,7 @@
                                         }
                                     },
                                     "No Licenses": {
-                                        "description": "Example license count for a company that doesn't have any licenses for the currently authenticated tenant..",
+                                        "description": "Example license count for a company that doesn't have any licenses.",
                                         "summary": "No License",
                                         "value": {
                                             "enterpriseDeviceCount": 0,
@@ -2730,7 +2013,7 @@
                                         }
                                     },
                                     "Enterprise": {
-                                        "description": "Example active license count for an enterprise sized company for the currently authenticated tenant..",
+                                        "description": "Example active license count for an enterprise sized company.",
                                         "summary": "Enterprise",
                                         "value": {
                                             "enterpriseDeviceCount": 60000,
@@ -2784,56 +2067,6 @@
                                     "minItems": 0,
                                     "items": {
                                         "$ref": "#/components/schemas/LicenseEntitlement.Shield"
-                                    },
-                                    "examples": [
-                                        [
-                                            {
-                                                "correlationId": "e097a3f5-9599-44a2-8923-fd3276c83ae1",
-                                                "enterpriseDeviceCount": 5,
-                                                "enterpriseInterfaceCount": 6,
-                                                "enterpriseIntermediaryCount": 7,
-                                                "enterpriseUserCount": 8,
-                                                "notValidAfter": "2024-07-30T17:35:24.044Z",
-                                                "notValidBefore": "2024-07-30T17:37:15.300Z",
-                                                "privilegedDeviceCount": 9,
-                                                "privilegedInterfaceCount": 10,
-                                                "privilegedIntermediaryCount": 11,
-                                                "privilegedUserCount": 12,
-                                                "purchaseId": "any arbitrary string as purchaseId",
-                                                "specializedDeviceCount": 13,
-                                                "specializedInterfaceCount": 14,
-                                                "specializedIntermediaryCount": 15,
-                                                "specializedUserCount": 15,
-                                                "tenantId": "a2a1698d-a3e0-42d3-96a4-47eb3e8f7dd1"
-                                            }
-                                        ]
-                                    ]
-                                },
-                                "examples": {
-                                    "Example Purchase": {
-                                        "summary": "Example entitlement purchase",
-                                        "description": "An example SHIELD entitlement for the specified tenant.",
-                                        "value": [
-                                            {
-                                                "correlationId": "e097a3f5-9599-44a2-8923-fd3276c83ae1",
-                                                "enterpriseDeviceCount": 5,
-                                                "enterpriseInterfaceCount": 6,
-                                                "enterpriseIntermediaryCount": 7,
-                                                "enterpriseUserCount": 8,
-                                                "notValidAfter": "2024-07-30T17:35:24.044Z",
-                                                "notValidBefore": "2024-07-30T17:37:15.300Z",
-                                                "privilegedDeviceCount": 9,
-                                                "privilegedInterfaceCount": 10,
-                                                "privilegedIntermediaryCount": 11,
-                                                "privilegedUserCount": 12,
-                                                "purchaseId": "any arbitrary string as purchaseId",
-                                                "specializedDeviceCount": 13,
-                                                "specializedInterfaceCount": 14,
-                                                "specializedIntermediaryCount": 15,
-                                                "specializedUserCount": 15,
-                                                "tenantId": "a2a1698d-a3e0-42d3-96a4-47eb3e8f7dd1"
-                                            }
-                                        ]
                                     }
                                 }
                             }
@@ -2934,8 +2167,8 @@
                             "application/json": {
                                 "examples": [{
                                     "Monthly Report": {
-                                        "description": "An example of latest monthly telemetry report for an enterprise organization after the latest telemetry input.",
-                                        "summary": "Updated Monthly Report",
+                                        "description": "Example monthly telemetry report for an enterprise organization.",
+                                        "summary": "Monthly Report",
                                         "value": {
                                             "correlationId": "6fe3cd30-931c-439a-b759-1e7f3a73622e",
                                             "enterpriseDeviceCount": 64221,
@@ -2989,8 +2222,8 @@
                             "application/json": {
                                 "examples": [{
                                     "List of Reports": {
-                                        "description": "List of all available SHIELD telemetry reports for the current authenticated tenant.",
-                                        "summary": "List of SHIELD telemetry reports",
+                                        "description": "List of all available telemetry reports for the authenticated tenant.",
+                                        "summary": "List of Reports",
                                         "value": [
                                             {
                                                 "correlationId": "6fe3cd30-931c-439a-b759-1e7f3a73622e",
@@ -3046,57 +2279,7 @@
                                     "items": {
                                         "$ref": "#/components/schemas/Telemetry.Shield"
                                     },
-                                    "minItems": 0,
-                                    "examples": [
-                                        [
-                                            {
-                                                "correlationId": "6fe3cd30-931c-439a-b759-1e7f3a73622e",
-                                                "enterpriseDeviceCount": 64221,
-                                                "enterpriseInterfaceCount": 523,
-                                                "enterpriseIntermediaryCount": 44,
-                                                "enterpriseUserCount": 642219,
-                                                "monthlyActiveEntUsers": 0,
-                                                "monthlyActivePrivUsers": 0,
-                                                "monthlyActiveSpecUsers": 0,
-                                                "privilegedDeviceCount": 50,
-                                                "privilegedInterfaceCount": 2000,
-                                                "privilegedIntermediaryCount": 25,
-                                                "privilegedUserCount": 50,
-                                                "shieldArchitectureVersion": "2",
-                                                "shieldCoreVersion": "3.0.0",
-                                                "specializedDeviceCount": 0,
-                                                "specializedInterfaceCount": 612,
-                                                "specializedIntermediaryCount": 2,
-                                                "specializedUserCount": 5238,
-                                                "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
-                                                "createdAt": "2024-08-05T15:25:55.525Z",
-                                                "updatedAt": "2024-08-05T15:25:55.525Z"
-                                            },
-                                            {
-                                                "correlationId": "a57d03c6-8218-4738-b860-ac158e257e27",
-                                                "enterpriseDeviceCount": 63221,
-                                                "enterpriseInterfaceCount": 523,
-                                                "enterpriseIntermediaryCount": 44,
-                                                "enterpriseUserCount": 632219,
-                                                "monthlyActiveEntUsers": 0,
-                                                "monthlyActivePrivUsers": 0,
-                                                "monthlyActiveSpecUsers": 0,
-                                                "privilegedDeviceCount": 50,
-                                                "privilegedInterfaceCount": 2000,
-                                                "privilegedIntermediaryCount": 25,
-                                                "privilegedUserCount": 50,
-                                                "shieldArchitectureVersion": "2",
-                                                "shieldCoreVersion": "3.0.0",
-                                                "specializedDeviceCount": 0,
-                                                "specializedInterfaceCount": 612,
-                                                "specializedIntermediaryCount": 2,
-                                                "specializedUserCount": 5238,
-                                                "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
-                                                "createdAt": "2024-07-05T15:25:55.525Z",
-                                                "updatedAt": "2024-07-05T15:25:55.525Z"
-                                            }
-                                        ]
-                                    ]
+                                    "minItems": 0
                                 }
                             }
                         },
@@ -3130,8 +2313,8 @@
                             "application/json": {
                                 "examples": [{
                                     "List of Reports": {
-                                        "description": "List of all available SHIELD telemetry reports for the specified tenant.",
-                                        "summary": "List of SHIELD telemetry reports",
+                                        "description": "List of all available telemetry reports for the authenticated tenant.",
+                                        "summary": "List of Reports",
                                         "value": [
                                             {
                                                 "correlationId": "6fe3cd30-931c-439a-b759-1e7f3a73622e",
@@ -3187,57 +2370,7 @@
                                     "items": {
                                         "$ref": "#/components/schemas/Telemetry.Shield"
                                     },
-                                    "minItems": 0,
-                                    "examples": [
-                                        [
-                                            {
-                                                "correlationId": "6fe3cd30-931c-439a-b759-1e7f3a73622e",
-                                                "enterpriseDeviceCount": 64221,
-                                                "enterpriseInterfaceCount": 523,
-                                                "enterpriseIntermediaryCount": 44,
-                                                "enterpriseUserCount": 642219,
-                                                "monthlyActiveEntUsers": 0,
-                                                "monthlyActivePrivUsers": 0,
-                                                "monthlyActiveSpecUsers": 0,
-                                                "privilegedDeviceCount": 50,
-                                                "privilegedInterfaceCount": 2000,
-                                                "privilegedIntermediaryCount": 25,
-                                                "privilegedUserCount": 50,
-                                                "shieldArchitectureVersion": "2",
-                                                "shieldCoreVersion": "3.0.0",
-                                                "specializedDeviceCount": 0,
-                                                "specializedInterfaceCount": 612,
-                                                "specializedIntermediaryCount": 2,
-                                                "specializedUserCount": 5238,
-                                                "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
-                                                "createdAt": "2024-08-05T15:25:55.525Z",
-                                                "updatedAt": "2024-08-05T15:25:55.525Z"
-                                            },
-                                            {
-                                                "correlationId": "a57d03c6-8218-4738-b860-ac158e257e27",
-                                                "enterpriseDeviceCount": 63221,
-                                                "enterpriseInterfaceCount": 523,
-                                                "enterpriseIntermediaryCount": 44,
-                                                "enterpriseUserCount": 632219,
-                                                "monthlyActiveEntUsers": 0,
-                                                "monthlyActivePrivUsers": 0,
-                                                "monthlyActiveSpecUsers": 0,
-                                                "privilegedDeviceCount": 50,
-                                                "privilegedInterfaceCount": 2000,
-                                                "privilegedIntermediaryCount": 25,
-                                                "privilegedUserCount": 50,
-                                                "shieldArchitectureVersion": "2",
-                                                "shieldCoreVersion": "3.0.0",
-                                                "specializedDeviceCount": 0,
-                                                "specializedInterfaceCount": 612,
-                                                "specializedIntermediaryCount": 2,
-                                                "specializedUserCount": 5238,
-                                                "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
-                                                "createdAt": "2024-07-05T15:25:55.525Z",
-                                                "updatedAt": "2024-07-05T15:25:55.525Z"
-                                            }
-                                        ]
-                                    ]
+                                    "minItems": 0
                                 }
                             }
                         },
@@ -3309,38 +2442,6 @@
                                     "type": "array",
                                     "items": {
                                         "$ref": "#/components/schemas/Update.Shield.Channel"
-                                    },
-                                    "examples": [
-                                        [
-                                            {
-                                                "latest": "1.12.5",
-                                                "name": "stable",
-                                                "previous": "1.12.4"
-                                            }
-                                        ]
-                                    ]
-                                },
-                                "examples": {
-                                    "Channel configuration": {
-                                        "summary": "Example all channel configs",
-                                        "description": "An example showing the all channel configurations.",
-                                        "value": [
-                                            {
-                                                "latest": "1.12.5",
-                                                "name": "stable",
-                                                "previous": "1.12.4"
-                                            },
-                                            {
-                                                "latest": "1.12.7",
-                                                "name": "alpha",
-                                                "previous": "1.12.6"
-                                            },
-                                            {
-                                                "latest": "1.12.6",
-                                                "name": "beta",
-                                                "previous": "1.12.5"
-                                            }
-                                        ]
                                     }
                                 }
                             }
@@ -3378,26 +2479,6 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Update.Shield.Channel"
-                                },
-                                "examples": {
-                                    "Stable channel config": {
-                                        "summary": "Example stable channel config",
-                                        "description": "An example showing the stable update channel configuration.",
-                                        "value": {
-                                            "latest": "1.12.5",
-                                            "name": "stable",
-                                            "previous": "1.12.4"
-                                        }
-                                    },
-                                    "Alpha channel config": {
-                                        "summary": "Example alpha channel config",
-                                        "description": "An example showing the alpha update channel configuration.",
-                                        "value": {
-                                            "latest": "1.12.7",
-                                            "name": "alpha",
-                                            "previous": "1.12.6"
-                                        }
-                                    }
                                 }
                             }
                         },
@@ -3431,7 +2512,7 @@
                         "application/json": {
                             "examples": [{
                                 "Channel Configuration Details": {
-                                    "description": "Example channel configuration object that will add/update for specified channel.",
+                                    "description": "Example channel configuration object.",
                                     "summary": "Channel Configuration",
                                     "value": {
                                         "latest": "1.12.5",
@@ -3443,26 +2524,17 @@
                                 "type": "object",
                                 "properties": {
                                     "latest": {
-                                        "description": "Version number of the latest update available to the chanel.",
-                                        "examples": [
-                                            "1.12.5"
-                                        ],
-                                        "type": "string"
+                                        "description": "Flag that indicates if the ring should be operating off of the latest version number provided by the channel (`true`) or the previous (`false`).",
+                                        "examples": ["true"],
+                                        "type": "boolean"
                                     },
-                                    "previous": {
-                                        "description": "Version number of the number that is being replaced via ring deployment, available to all rings at the minimum.",
-                                        "examples": [
-                                            "1.12.14"
-                                        ],
-                                        "type": "string"
+                                    "number": {
+                                        "description": "Ring number that this configuration belongs to.",
+                                        "examples": [1],
+                                        "type": "integer",
+                                        "minimum": 0
                                     }
-                                },
-                                "examples": [
-                                    {
-                                        "latest": "1.12.5",
-                                        "previous": "1.12.4"
-                                    }
-                                ]
+                                }
                             }
                         }
                     }
@@ -3552,30 +2624,6 @@
                                     "type": "array",
                                     "items": {
                                         "$ref": "#/components/schemas/Update.Shield.Channel.Ring"
-                                    },
-                                    "examples": [
-                                        [
-                                            {
-                                                "latest": true,
-                                                "number": 1
-                                            }
-                                        ]
-                                    ]
-                                },
-                                "examples": {
-                                    "All ring config": {
-                                        "summary": "Example all ring configs",
-                                        "description": "An example showing the configurations of all rings of the specified channel.",
-                                        "value": [
-                                            {
-                                                "latest": true,
-                                                "number": 1
-                                            },
-                                            {
-                                                "latest": false,
-                                                "number": 0
-                                            }
-                                        ]
                                     }
                                 }
                             }
@@ -3616,16 +2664,6 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Update.Shield.Channel.Ring"
-                                },
-                                "examples": {
-                                    "Sample ring config": {
-                                        "summary": "Example ring configuration",
-                                        "description": "An example ring configuration for the specified channel and ring.",
-                                        "value": {
-                                            "latest": true,
-                                            "number": 1
-                                        }
-                                    }
                                 }
                             }
                         },
@@ -3674,17 +2712,10 @@
                                 "properties": {
                                     "latest": {
                                         "description": "Flag that indicates if the ring should be operating off of the latest version number provided by the channel (`true`) or the previous (`false`).",
-                                        "examples": [
-                                            true
-                                        ],
+                                        "examples": [true],
                                         "type": "boolean"
                                     }
-                                },
-                                "examples": [
-                                    {
-                                        "latest": false
-                                    }
-                                ]
+                                }
                             }
                         }
                     }
@@ -3814,15 +2845,6 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Update.Shield.Check"
-                                },
-                                "examples": {
-                                    "Latest package version": {
-                                        "summary": "Example latest application version",
-                                        "description": "An example showing the latest SHIELD package available.",
-                                        "value": {
-                                            "updateVersion": "1.12.5"
-                                        }
-                                    }
                                 }
                             }
                         },
@@ -3853,15 +2875,6 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Update.Shield.Check"
-                                },
-                                "examples": {
-                                    "Latest package version": {
-                                        "summary": "Example latest application version",
-                                        "description": "An example showing the latest SHIELD package available for the specified channel.",
-                                        "value": {
-                                            "updateVersion": "1.12.5"
-                                        }
-                                    }
                                 }
                             }
                         },
@@ -3888,17 +2901,7 @@
                             "application/zip": {
                                 "schema": {
                                     "type": "string",
-                                    "format": "binary",
-                                    "examples": [
-                                        "UEsDBBQAAAAIAAeLbU0AAAAAAAAAAAAAAAAJAAQATm90ZS50eHRVVAkAA1V2YV... (truncated)"
-                                    ]
-                                },
-                                "examples": {
-                                    "base64-inline": {
-                                        "summary": "Base64-encoded ZIP)",
-                                        "description": "Base64 encoding of a small ZIP (truncated) to simulate a update package binary string for the channel specified.",
-                                        "value": "UEsDBBQAAAAIAAeLbU0AAAAAAAAAAAAAAAAJAAQATm90ZS50eHRVVAkAA1V2YV... (truncated)"
-                                    }
+                                    "format": "binary"
                                 }
                             }
                         }
@@ -3929,17 +2932,7 @@
                             "application/zip": {
                                 "schema": {
                                     "type": "string",
-                                    "format": "binary",
-                                    "examples": [
-                                        "UEsDBBQAAAAIAAeLbU0AAAAAAAAAAAAAAAAJAAQATm90ZS50eHRVVAkAA1V2YV... (truncated)"
-                                    ]
-                                },
-                                "examples": {
-                                    "base64-inline": {
-                                        "summary": "Base64-encoded ZIP",
-                                        "description": "Base64 encoding of a small ZIP (truncated) to simulate a update package binary string for the channel specified.",
-                                        "value": "UEsDBBQAAAAIAAeLbU0AAAAAAAAAAAAAAAAJAAQATm90ZS50eHRVVAkAA1V2YV... (truncated)"
-                                    }
+                                    "format": "binary"
                                 }
                             }
                         }
@@ -3969,30 +2962,6 @@
                                     "type": "array",
                                     "items": {
                                         "$ref": "#/components/schemas/Update.Shield.Tenant"
-                                    },
-                                    "examples": [
-                                        [
-                                            {
-                                                "alphaEnabled": false,
-                                                "channel": "stable",
-                                                "ring": 1,
-                                                "tenantId": "1d71e0fe-6e4a-464d-a690-80addf3bda55"
-                                            }
-                                        ]
-                                    ]
-                                },
-                                "examples": {
-                                    "All tenant list": {
-                                        "summary": "Example all tenant list",
-                                        "description": "A example truncated list of all tenant configurations that present in the update service.",
-                                        "value": [
-                                            {
-                                                "alphaEnabled": false,
-                                                "channel": "stable",
-                                                "ring": 1,
-                                                "tenantId": "1d71e0fe-6e4a-464d-a690-80addf3bda55"
-                                            }
-                                        ]
                                     }
                                 }
                             }
@@ -4030,18 +2999,6 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Update.Shield.Tenant"
-                                },
-                                "examples": {
-                                    "Tenant config": {
-                                        "summary": "Example tenant config",
-                                        "description": "A example configurations that present in the update service of the specified tenant.",
-                                        "value": {
-                                            "alphaEnabled": false,
-                                            "channel": "stable",
-                                            "ring": 1,
-                                            "tenantId": "1d71e0fe-6e4a-464d-a690-80addf3bda55"
-                                        }
-                                    }
                                 }
                             }
                         },
@@ -4089,33 +3046,20 @@
                                 "properties": {
                                     "alphaEnabled": {
                                         "description": "Flag that indicates if the current tenant is allowed to request alpha builds (`true`) or not (`false`).",
-                                        "examples": [
-                                            false
-                                        ],
+                                        "examples": [false],
                                         "type": "boolean"
                                     },
                                     "channel": {
                                         "description": "Name of the deploy channel.",
-                                        "examples": [
-                                            "stable"
-                                        ],
+                                        "examples": ["stable"],
                                         "type": "string"
                                     },
                                     "ring": {
                                         "description": "Ring number that the client is a member of for the current chanel.",
-                                        "examples": [
-                                            1
-                                        ],
+                                        "examples": [1],
                                         "type": "integer"
                                     }
-                                },
-                                "examples": [
-                                    {
-                                        "alphaEnabled": false,
-                                        "channel": "stable",
-                                        "ring": 1
-                                    }
-                                ]
+                                }
                             }
                         }
                     }
@@ -4126,7 +3070,7 @@
                             "application/json": {
                                 "examples": [{
                                     "Tenant Configuration Details": {
-                                        "description": "Example object returned on creation or update with tenantId set.",
+                                        "description": "Example object returned on creation or update.",
                                         "summary": "Tenant Configuration",
                                         "value": {
                                             "alphaEnabled": false,
@@ -4207,22 +3151,12 @@
                                     "minItems": 0,
                                     "items": {
                                         "$ref": "#/components/schemas/TenantDetails"
-                                    },
-                                    "examples": [
-                                        [
-                                            {
-                                                "tenantId": "7e8f9a0b-1c2d-3e4b-5a6c-7d8e9f0a1b2c",
-                                                "displayName": "Contoso - R&D",
-                                                "parentId": "f3ed1efc-4e62-46b8-bf2a-6b59ca9784e5",
-                                                "authorizedPrincipalList": []
-                                            }
-                                        ]
-                                    ]
+                                    }
                                 },
-                                "examples": {
-                                    "Example List Of Multiple Tenant Records": {
-                                        "description": "Sample list of multiple tenant records in the database",
-                                        "summary": "Multiple Tenant Records",
+                                "examples": [{
+                                    "Example List Of Tenant Records": {
+                                        "description": "Sample list of tenant records in the database",
+                                        "summary": "Existing Tenant Records",
                                         "value": [
                                             {
                                                 "tenantId": "5d6e7f8a-9b0c-1d2e-3f4a-5b6c7d8e9f0a",
@@ -4233,20 +3167,6 @@
                                                     "47c42971-2dea-4553-a788-d29a42e3e867"
                                                 ]
                                             },
-                                            {
-                                                "tenantId": "7e8f9a0b-1c2d-3e4b-5a6c-7d8e9f0a1b2c",
-                                                "displayName": "Contoso - R&D",
-                                                "parentId": "f3ed1efc-4e62-46b8-bf2a-6b59ca9784e5",
-                                                "authorizedPrincipalList": [
-                                                    "7e9ce415-32b2-4e7a-a920-d4dbaae022e3"
-                                                ]
-                                            }
-                                        ]
-                                    },
-                                    "Example List Of Single Tenant Record": {
-                                        "description": "Example list of single tenant records which no user is authorized yet.",
-                                        "summary": "Single Tenant Records",
-                                        "value": [
                                             {
                                                 "tenantId": "7e8f9a0b-1c2d-3e4b-5a6c-7d8e9f0a1b2c",
                                                 "displayName": "Contoso - R&D",
@@ -4294,7 +3214,7 @@
                                 },
                                 "examples": [{
                                     "Example Complete Tenant Record": {
-                                        "description": "An example showing a single existing tenant record.",
+                                        "description": "Sample details of one tenant record",
                                         "summary": "Existing Tenant Record",
                                         "value": {
                                             "tenantId": "9f0a1b2c-3d4e-5f6a-7b8c-9d0e1f2a3b4c",
@@ -4340,10 +3260,7 @@
                                 "properties": {
                                     "tenantDisplayName": {
                                         "description": "Human readable name for the tenant record",
-                                        "type": "string",
-                                        "examples": [
-                                            "Contoso - R&D East"
-                                        ]
+                                        "type": "string"
                                     },
                                     "parentId": {
                                         "description": "The object ID of the tenant that is considered a parent to this record",
@@ -4351,10 +3268,7 @@
                                         "maxLength": 36,
                                         "minLength": 36,
                                         "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
-                                        "type": "string",
-                                        "examples": [
-                                            "6a7b8c9d-0e1f-2a3b-4c5d-6e7f8a9b0c1d"
-                                        ]
+                                        "type": "string"
                                     },
                                     "authorizedPrincipalList": {
                                         "description": "List of object IDs that are allowed to access this record and related data.",
@@ -4364,17 +3278,8 @@
                                             "maxLength": 36,
                                             "minLength": 36,
                                             "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
-                                            "type": "string",
-                                            "examples": [
-                                                "4cae3355-0cff-410c-b4f9-69cb5de8f1ac"
-                                            ]
-                                        },
-                                        "examples": [
-                                            [
-                                                "4cae3355-0cff-410c-b4f9-69cb5de8f1ac",
-                                                "0e52e6ac-f8e1-4070-ae2e-9bd0a37507a1"
-                                            ]
-                                        ]
+                                            "type": "string"
+                                        }
                                     }
                                 },
                                 "anyOf": [
@@ -4393,36 +3298,26 @@
                                             "authorizedPrincipalList"
                                         ]
                                     }
-                                ],
-                                "examples": [
-                                    {
-                                        "tenantDisplayName": "Contoso - R&D East",
-                                        "parentId": "6a7b8c9d-0e1f-2a3b-4c5d-6e7f8a9b0c1d",
-                                        "authorizedPrincipalList": [
-                                            "4cae3355-0cff-410c-b4f9-69cb5de8f1ac",
-                                            "0e52e6ac-f8e1-4070-ae2e-9bd0a37507a1"
-                                        ]
-                                    }
                                 ]
                             },
                             "examples": [{
                                 "Example Request to Update Tenant Parent": {
-                                    "description": "Sample payload requesting adjustment to the parent value.",
+                                    "description": "Sample payload requesting adjustment to the parent value",
                                     "summary": "Update Parent Information for Tenant",
                                     "value": {
                                         "parentId": "6a7b8c9d-0e1f-2a3b-4c5d-6e7f8a9b0c1d"
                                     }
                                 },
                                 "Example Request for Tenant Name and Parent Update": {
-                                    "description": "Sample payload requesting to update parent value and display name on the tenant record.",
+                                    "description": "Sample payload requesting to update parent value and display name on the tenant record",
                                     "summary": "Update Tenant Record Name and Parent Information",
                                     "value": {
                                         "parentId": "8f9a0b1c-2d3e-4f5a-6b7c-8d9e0a1b2c3d",
-                                        "displayName": "Contoso - R&D West"
+                                        "displayName": "Contoso - R&D East"
                                     }
                                 },
                                 "Example Request for Tenant Authorized Principals Update": {
-                                    "description": "Sample payload requesting to update authorized principals for the tenant record.",
+                                    "description": "Sample payload requesting to update authorized principals for the tenant record",
                                     "summary": "Update Tenant Authorized Principals List",
                                     "value": {
                                         "authorizedPrincipalList": [
@@ -4444,7 +3339,7 @@
                                 },
                                 "examples": [{
                                     "Example Complete Tenant Record": {
-                                        "description": "Sample response after updating a tenant record.",
+                                        "description": "Sample response after updating a tenant record",
                                         "summary": "Updated Tenant Record",
                                         "value": {
                                             "tenantId": "c00ffc2c-b6f6-4121-bd8e-4d02e9504eb9",
