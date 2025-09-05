@@ -2386,21 +2386,23 @@
                     },
                     "archSpecVersion": {
                       "description": "An incrementing number that describes the version of the architecture specification that the API supports.",
-                      "examples": [123],
-                      "type": "number"
+                      "examples": ["25"],
+                      "type": "string",
+                      "minLength": 1
                     },
                     "deployedArchVersion": {
                       "description": "The version of the architecture specification that is currently deployed.",
-                      "examples": [25],
-                      "type": "number"
+                      "examples": ["23"],
+                      "type": "string",
+                      "minLength": 1
                     }
                   },
                   "type": "object",
                   "examples": [
                     {
                       "apiVersion": "1.2.3",
-                      "archSpecVersion": 123,
-                      "deployedArchVersion": 100
+                      "archSpecVersion": "25",
+                      "deployedArchVersion": "23"
                     }
                   ]
                 },
@@ -2408,10 +2410,10 @@
                   "Versions response": {
                     "summary": "Example versions response",
                     "description": "An example object that represents the aggregation of versioning information of all SHIELDs components. including:<br/> - Semantic version of the API server.<br/> - The incrementing architecture specification version that the API supports.<br/> - The incrementing architecture specification version that is currently deployed.",
-                    "value": {
+                    "value":                     {
                       "apiVersion": "1.2.3",
-                      "archSpecVersion": 123,
-                      "deployedArchVersion": 100
+                      "archSpecVersion": "25",
+                      "deployedArchVersion": "23"
                     }
                   }
                 }
