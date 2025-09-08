@@ -1333,11 +1333,78 @@
         "requestBody": {
           "content": {
             "application/json": {
-              "examples": [
-                {
+              "examples": {
+                "License Report": {
+                  "description": "Sample, truncated report from an example customer environment. The request body is the License Report that to be stored.",
+                  "summary": "Example License Report Request",
+                  "value": {
+                    "availableLicense": {
+                      "3d282045-ec7f-4813-88e2-29b74ee609f7": 123456,
+                      "5888a922-9f5b-45fd-bd5f-de3283d6a79e": 99999999,
+                      "a4b2e176-d63d-4081-9e21-226e2ac624b9": 5,
+                      "547404d4-8734-415f-a7ca-e9c1ffb95e48": 25,
+                      "d76878d6-1495-4243-a334-a82bb9818cd0": 500
+                    },
+                    "correlation": {
+                      "auditTenantAccount": "somebodyThatI@UsedToKnow.com"
+                    },
+                    "licenseData": {
+                      "250844e1-a7ab-4f21-8e3f-58f51b5983a3": {
+                        "assignedLicense": {
+                          "5888a922-9f5b-45fd-bd5f-de3283d6a79e": null,
+                          "3d282045-ec7f-4813-88e2-29b74ee609f7": null
+                        },
+                        "assignedService": {
+                          "a4b2e176-d63d-4081-9e21-226e2ac624b9": null,
+                          "d76878d6-1495-4243-a334-a82bb9818cd0": null
+                        },
+                        "consumedService": {
+                          "e0d101e8-6f1e-40a9-a66f-cad4112c9a59": null,
+                          "c63b7a2d-6573-4c37-9ca8-e12b954d3198": {
+                            "Something Here": true,
+                            "Other Obscure feature": false
+                          }
+                        }
+                      },
+                      "04e88835-771a-482b-9d6f-ba06c32cbb67": {
+                        "assignedLicense": {
+                          "3d282045-ec7f-4813-88e2-29b74ee609f7": null
+                        },
+                        "assignedService": {
+                          "a4b2e176-d63d-4081-9e21-226e2ac624b9": null,
+                          "d76878d6-1495-4243-a334-a82bb9818cd0": null
+                        },
+                        "consumedService": {
+                          "9d3603de-b378-4c4a-adcc-ee133cbef914": null,
+                          "e9a4e3d3-ebe0-405a-a8f4-35a04c4dba1f": {
+                            "Something Here": true,
+                            "Other Obscure feature": false
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "Ignorant License Report Request": {
+                  "description": "Clueless dev trying to automate this application without reading the docs. RTFM!",
+                  "summary": "Ignorant License Report Request",
+                  "value": {}
+                }
+              },
+              "schema": {
+                "$ref": "#/components/schemas/LicenseReport"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "examples": {
                   "License Report": {
-                    "description": "Sample, truncated report from an example customer environment.",
-                    "summary": "License Report",
+                    "description": "Sample, truncated report from an example customer environment. This will return the same report as the request input.",
+                    "summary": "Example of license report stored.",
                     "value": {
                       "availableLicense": {
                         "3d282045-ec7f-4813-88e2-29b74ee609f7": 123456,
@@ -1347,7 +1414,10 @@
                         "d76878d6-1495-4243-a334-a82bb9818cd0": 500
                       },
                       "correlation": {
-                        "auditTenantAccount": "somebodyThatI@UsedToKnow.com"
+                        "auditTenantAccount": "somebodyThatI@example.com",
+                        "correlationId": "6d7c9271-9e68-4bdf-9ae3-f90c4213f74b",
+                        "reportTenantAccount": "usedToKnow@example.com",
+                        "tenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db"
                       },
                       "licenseData": {
                         "250844e1-a7ab-4f21-8e3f-58f51b5983a3": {
@@ -1385,82 +1455,8 @@
                         }
                       }
                     }
-                  },
-                  "Ignorant License Report Request": {
-                    "description": "Clueless dev trying to automate this application without reading the docs. RTFM!",
-                    "summary": "Ignorant License Report Request",
-                    "value": {}
                   }
-                }
-              ],
-              "schema": {
-                "$ref": "#/components/schemas/LicenseReport"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "examples": [
-                  {
-                    "License Report": {
-                      "description": "Sample, truncated report from an example customer environment.",
-                      "summary": "License Report",
-                      "value": {
-                        "availableLicense": {
-                          "3d282045-ec7f-4813-88e2-29b74ee609f7": 123456,
-                          "5888a922-9f5b-45fd-bd5f-de3283d6a79e": 99999999,
-                          "a4b2e176-d63d-4081-9e21-226e2ac624b9": 5,
-                          "547404d4-8734-415f-a7ca-e9c1ffb95e48": 25,
-                          "d76878d6-1495-4243-a334-a82bb9818cd0": 500
-                        },
-                        "correlation": {
-                          "auditTenantAccount": "somebodyThatI@example.com",
-                          "correlationId": "6d7c9271-9e68-4bdf-9ae3-f90c4213f74b",
-                          "reportTenantAccount": "usedToKnow@example.com",
-                          "tenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db"
-                        },
-                        "licenseData": {
-                          "250844e1-a7ab-4f21-8e3f-58f51b5983a3": {
-                            "assignedLicense": {
-                              "5888a922-9f5b-45fd-bd5f-de3283d6a79e": null,
-                              "3d282045-ec7f-4813-88e2-29b74ee609f7": null
-                            },
-                            "assignedService": {
-                              "a4b2e176-d63d-4081-9e21-226e2ac624b9": null,
-                              "d76878d6-1495-4243-a334-a82bb9818cd0": null
-                            },
-                            "consumedService": {
-                              "e0d101e8-6f1e-40a9-a66f-cad4112c9a59": null,
-                              "c63b7a2d-6573-4c37-9ca8-e12b954d3198": {
-                                "Something Here": true,
-                                "Other Obscure feature": false
-                              }
-                            }
-                          },
-                          "04e88835-771a-482b-9d6f-ba06c32cbb67": {
-                            "assignedLicense": {
-                              "3d282045-ec7f-4813-88e2-29b74ee609f7": null
-                            },
-                            "assignedService": {
-                              "a4b2e176-d63d-4081-9e21-226e2ac624b9": null,
-                              "d76878d6-1495-4243-a334-a82bb9818cd0": null
-                            },
-                            "consumedService": {
-                              "9d3603de-b378-4c4a-adcc-ee133cbef914": null,
-                              "e9a4e3d3-ebe0-405a-a8f4-35a04c4dba1f": {
-                                "Something Here": true,
-                                "Other Obscure feature": false
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                ],
+                },
                 "schema": {
                   "$ref": "#/components/schemas/LicenseReport"
                 }
@@ -1498,38 +1494,56 @@
           "200": {
             "content": {
               "application/json": {
-                "examples": [
-                  {
-                    "Example License Report": {
-                      "description": "Sample list of correlation records for the authenticated tenant.",
-                      "summary": "Available Correlation Records",
-                      "value": [
-                        {
-                          "auditTenantAccount": "somebodyThatI@example.com",
-                          "correlationId": "6d7c9271-9e68-4bdf-9ae3-f90c4213f74b",
-                          "reportTenantAccount": "usedToKnow@example.com",
-                          "tenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db",
-                          "createdAt": "2024-08-01T21:14:45.026Z",
-                          "updatedAt": "2024-08-01T21:14:45.026Z"
-                        },
-                        {
-                          "auditTenantAccount": "somebodyThatI@example.com",
-                          "correlationId": "d8095827-a313-40e1-b086-f72636de0edf",
-                          "reportTenantAccount": "usedToKnow@example.com",
-                          "tenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db",
-                          "createdAt": "2024-07-25T21:14:45.026Z",
-                          "updatedAt": "2024-07-25T21:14:45.026Z"
-                        }
-                      ]
-                    }
+                "examples": {
+                  "Example Correlation Records": {
+                    "description": "Sample list of correlation records for the current authenticated tenant.",
+                    "summary": "Available Correlation Records",
+                    "value": [
+                      {
+                        "auditTenantAccount": "somebodyThatI@example.com",
+                        "correlationId": "6d7c9271-9e68-4bdf-9ae3-f90c4213f74b",
+                        "reportTenantAccount": "usedToKnow@example.com",
+                        "tenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db",
+                        "createdAt": "2024-08-01T21:14:45.026Z",
+                        "updatedAt": "2024-08-01T21:14:45.026Z"
+                      },
+                      {
+                        "auditTenantAccount": "somebodyThatI@example.com",
+                        "correlationId": "d8095827-a313-40e1-b086-f72636de0edf",
+                        "reportTenantAccount": "usedToKnow@example.com",
+                        "tenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db",
+                        "createdAt": "2024-07-25T21:14:45.026Z",
+                        "updatedAt": "2024-07-25T21:14:45.026Z"
+                      }
+                    ]
                   }
-                ],
+                },
                 "schema": {
                   "type": "array",
                   "minItems": 0,
                   "items": {
                     "$ref": "#/components/schemas/LicenseReport.CorrelationRecord"
-                  }
+                  },
+                  "examples": [
+                    [
+                      {
+                        "auditTenantAccount": "somebodyThatI@example.com",
+                        "correlationId": "6d7c9271-9e68-4bdf-9ae3-f90c4213f74b",
+                        "reportTenantAccount": "usedToKnow@example.com",
+                        "tenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db",
+                        "createdAt": "2024-08-01T21:14:45.026Z",
+                        "updatedAt": "2024-08-01T21:14:45.026Z"
+                      },
+                      {
+                        "auditTenantAccount": "somebodyThatI@example.com",
+                        "correlationId": "d8095827-a313-40e1-b086-f72636de0edf",
+                        "reportTenantAccount": "usedToKnow@example.com",
+                        "tenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db",
+                        "createdAt": "2024-07-25T21:14:45.026Z",
+                        "updatedAt": "2024-07-25T21:14:45.026Z"
+                      }
+                    ]
+                  ]
                 }
               }
             },
@@ -1565,38 +1579,56 @@
           "200": {
             "content": {
               "application/json": {
-                "examples": [
-                  {
-                    "Example License Report": {
-                      "description": "Sample list of correlation records for the authenticated tenant.",
-                      "summary": "Available Correlation Records",
-                      "value": [
-                        {
-                          "auditTenantAccount": "somebodyThatI@example.com",
-                          "correlationId": "6d7c9271-9e68-4bdf-9ae3-f90c4213f74b",
-                          "reportTenantAccount": "usedToKnow@example.com",
-                          "tenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db",
-                          "createdAt": "2024-08-01T21:14:45.026Z",
-                          "updatedAt": "2024-08-01T21:14:45.026Z"
-                        },
-                        {
-                          "auditTenantAccount": "somebodyThatI@example.com",
-                          "correlationId": "d8095827-a313-40e1-b086-f72636de0edf",
-                          "reportTenantAccount": "usedToKnow@example.com",
-                          "tenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db",
-                          "createdAt": "2024-07-25T21:14:45.026Z",
-                          "updatedAt": "2024-07-25T21:14:45.026Z"
-                        }
-                      ]
-                    }
+                "examples": {
+                  "Example Correlation Records": {
+                    "description": "Sample list of correlation records for the specified tenant.",
+                    "summary": "Available Correlation Records",
+                    "value": [
+                      {
+                        "auditTenantAccount": "somebodyThatI@example.com",
+                        "correlationId": "6d7c9271-9e68-4bdf-9ae3-f90c4213f74b",
+                        "reportTenantAccount": "usedToKnow@example.com",
+                        "tenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db",
+                        "createdAt": "2024-08-01T21:14:45.026Z",
+                        "updatedAt": "2024-08-01T21:14:45.026Z"
+                      },
+                      {
+                        "auditTenantAccount": "somebodyThatI@example.com",
+                        "correlationId": "d8095827-a313-40e1-b086-f72636de0edf",
+                        "reportTenantAccount": "usedToKnow@example.com",
+                        "tenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db",
+                        "createdAt": "2024-07-25T21:14:45.026Z",
+                        "updatedAt": "2024-07-25T21:14:45.026Z"
+                      }
+                    ]
                   }
-                ],
+                },
                 "schema": {
                   "type": "array",
                   "minItems": 0,
                   "items": {
                     "$ref": "#/components/schemas/LicenseReport.CorrelationRecord"
-                  }
+                  },
+                  "examples": [
+                    [
+                      {
+                        "auditTenantAccount": "somebodyThatI@example.com",
+                        "correlationId": "6d7c9271-9e68-4bdf-9ae3-f90c4213f74b",
+                        "reportTenantAccount": "usedToKnow@example.com",
+                        "tenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db",
+                        "createdAt": "2024-08-01T21:14:45.026Z",
+                        "updatedAt": "2024-08-01T21:14:45.026Z"
+                      },
+                      {
+                        "auditTenantAccount": "somebodyThatI@example.com",
+                        "correlationId": "d8095827-a313-40e1-b086-f72636de0edf",
+                        "reportTenantAccount": "usedToKnow@example.com",
+                        "tenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db",
+                        "createdAt": "2024-07-25T21:14:45.026Z",
+                        "updatedAt": "2024-07-25T21:14:45.026Z"
+                      }
+                    ]
+                  ]
                 }
               }
             },
@@ -1629,64 +1661,62 @@
           "200": {
             "content": {
               "application/json": {
-                "examples": [
-                  {
-                    "License Report": {
-                      "description": "Sample, truncated report from an example customer environment.",
-                      "summary": "License Report",
-                      "value": {
-                        "availableLicense": {
-                          "3d282045-ec7f-4813-88e2-29b74ee609f7": 123456,
-                          "5888a922-9f5b-45fd-bd5f-de3283d6a79e": 99999999,
-                          "a4b2e176-d63d-4081-9e21-226e2ac624b9": 5,
-                          "547404d4-8734-415f-a7ca-e9c1ffb95e48": 25,
-                          "d76878d6-1495-4243-a334-a82bb9818cd0": 500
-                        },
-                        "correlation": {
-                          "auditTenantAccount": "somebodyThatI@example.com",
-                          "correlationId": "6d7c9271-9e68-4bdf-9ae3-f90c4213f74b",
-                          "reportTenantAccount": "usedToKnow@example.com",
-                          "tenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db"
-                        },
-                        "licenseData": {
-                          "250844e1-a7ab-4f21-8e3f-58f51b5983a3": {
-                            "assignedLicense": {
-                              "5888a922-9f5b-45fd-bd5f-de3283d6a79e": null,
-                              "3d282045-ec7f-4813-88e2-29b74ee609f7": null
-                            },
-                            "assignedService": {
-                              "a4b2e176-d63d-4081-9e21-226e2ac624b9": null,
-                              "d76878d6-1495-4243-a334-a82bb9818cd0": null
-                            },
-                            "consumedService": {
-                              "e0d101e8-6f1e-40a9-a66f-cad4112c9a59": null,
-                              "c63b7a2d-6573-4c37-9ca8-e12b954d3198": {
-                                "Something Here": true,
-                                "Other Obscure feature": false
-                              }
-                            }
+                "examples": {
+                  "Example License Report": {
+                    "description": "Sample, truncated license report from an example customer environment for a correlation record of the current authenticated tenant.",
+                    "summary": "Example License Report",
+                    "value": {
+                      "availableLicense": {
+                        "3d282045-ec7f-4813-88e2-29b74ee609f7": 123456,
+                        "5888a922-9f5b-45fd-bd5f-de3283d6a79e": 99999999,
+                        "a4b2e176-d63d-4081-9e21-226e2ac624b9": 5,
+                        "547404d4-8734-415f-a7ca-e9c1ffb95e48": 25,
+                        "d76878d6-1495-4243-a334-a82bb9818cd0": 500
+                      },
+                      "correlation": {
+                        "auditTenantAccount": "somebodyThatI@example.com",
+                        "correlationId": "6d7c9271-9e68-4bdf-9ae3-f90c4213f74b",
+                        "reportTenantAccount": "usedToKnow@example.com",
+                        "tenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db"
+                      },
+                      "licenseData": {
+                        "250844e1-a7ab-4f21-8e3f-58f51b5983a3": {
+                          "assignedLicense": {
+                            "5888a922-9f5b-45fd-bd5f-de3283d6a79e": null,
+                            "3d282045-ec7f-4813-88e2-29b74ee609f7": null
                           },
-                          "04e88835-771a-482b-9d6f-ba06c32cbb67": {
-                            "assignedLicense": {
-                              "3d282045-ec7f-4813-88e2-29b74ee609f7": null
-                            },
-                            "assignedService": {
-                              "a4b2e176-d63d-4081-9e21-226e2ac624b9": null,
-                              "d76878d6-1495-4243-a334-a82bb9818cd0": null
-                            },
-                            "consumedService": {
-                              "9d3603de-b378-4c4a-adcc-ee133cbef914": null,
-                              "e9a4e3d3-ebe0-405a-a8f4-35a04c4dba1f": {
-                                "Something Here": true,
-                                "Other Obscure feature": false
-                              }
+                          "assignedService": {
+                            "a4b2e176-d63d-4081-9e21-226e2ac624b9": null,
+                            "d76878d6-1495-4243-a334-a82bb9818cd0": null
+                          },
+                          "consumedService": {
+                            "e0d101e8-6f1e-40a9-a66f-cad4112c9a59": null,
+                            "c63b7a2d-6573-4c37-9ca8-e12b954d3198": {
+                              "Something Here": true,
+                              "Other Obscure feature": false
+                            }
+                          }
+                        },
+                        "04e88835-771a-482b-9d6f-ba06c32cbb67": {
+                          "assignedLicense": {
+                            "3d282045-ec7f-4813-88e2-29b74ee609f7": null
+                          },
+                          "assignedService": {
+                            "a4b2e176-d63d-4081-9e21-226e2ac624b9": null,
+                            "d76878d6-1495-4243-a334-a82bb9818cd0": null
+                          },
+                          "consumedService": {
+                            "9d3603de-b378-4c4a-adcc-ee133cbef914": null,
+                            "e9a4e3d3-ebe0-405a-a8f4-35a04c4dba1f": {
+                              "Something Here": true,
+                              "Other Obscure feature": false
                             }
                           }
                         }
                       }
                     }
                   }
-                ],
+                },
                 "schema": {
                   "$ref": "#/components/schemas/LicenseReport"
                 }
@@ -1749,64 +1779,62 @@
           "200": {
             "content": {
               "application/json": {
-                "examples": [
-                  {
-                    "License Report": {
-                      "description": "Sample, truncated report from an example customer environment.",
-                      "summary": "License Report",
-                      "value": {
-                        "availableLicense": {
-                          "3d282045-ec7f-4813-88e2-29b74ee609f7": 123456,
-                          "5888a922-9f5b-45fd-bd5f-de3283d6a79e": 99999999,
-                          "a4b2e176-d63d-4081-9e21-226e2ac624b9": 5,
-                          "547404d4-8734-415f-a7ca-e9c1ffb95e48": 25,
-                          "d76878d6-1495-4243-a334-a82bb9818cd0": 500
-                        },
-                        "correlation": {
-                          "auditTenantAccount": "somebodyThatI@example.com",
-                          "correlationId": "6d7c9271-9e68-4bdf-9ae3-f90c4213f74b",
-                          "reportTenantAccount": "usedToKnow@example.com",
-                          "tenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db"
-                        },
-                        "licenseData": {
-                          "250844e1-a7ab-4f21-8e3f-58f51b5983a3": {
-                            "assignedLicense": {
-                              "5888a922-9f5b-45fd-bd5f-de3283d6a79e": null,
-                              "3d282045-ec7f-4813-88e2-29b74ee609f7": null
-                            },
-                            "assignedService": {
-                              "a4b2e176-d63d-4081-9e21-226e2ac624b9": null,
-                              "d76878d6-1495-4243-a334-a82bb9818cd0": null
-                            },
-                            "consumedService": {
-                              "e0d101e8-6f1e-40a9-a66f-cad4112c9a59": null,
-                              "c63b7a2d-6573-4c37-9ca8-e12b954d3198": {
-                                "Something Here": true,
-                                "Other Obscure feature": false
-                              }
-                            }
+                "examples": {
+                  "License Report": {
+                    "description": "Sample, truncated report from an example customer environment for a correlation record of the specified tenant.",
+                    "summary": "Example License Report",
+                    "value": {
+                      "availableLicense": {
+                        "3d282045-ec7f-4813-88e2-29b74ee609f7": 123456,
+                        "5888a922-9f5b-45fd-bd5f-de3283d6a79e": 99999999,
+                        "a4b2e176-d63d-4081-9e21-226e2ac624b9": 5,
+                        "547404d4-8734-415f-a7ca-e9c1ffb95e48": 25,
+                        "d76878d6-1495-4243-a334-a82bb9818cd0": 500
+                      },
+                      "correlation": {
+                        "auditTenantAccount": "somebodyThatI@example.com",
+                        "correlationId": "6d7c9271-9e68-4bdf-9ae3-f90c4213f74b",
+                        "reportTenantAccount": "usedToKnow@example.com",
+                        "tenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db"
+                      },
+                      "licenseData": {
+                        "250844e1-a7ab-4f21-8e3f-58f51b5983a3": {
+                          "assignedLicense": {
+                            "5888a922-9f5b-45fd-bd5f-de3283d6a79e": null,
+                            "3d282045-ec7f-4813-88e2-29b74ee609f7": null
                           },
-                          "04e88835-771a-482b-9d6f-ba06c32cbb67": {
-                            "assignedLicense": {
-                              "3d282045-ec7f-4813-88e2-29b74ee609f7": null
-                            },
-                            "assignedService": {
-                              "a4b2e176-d63d-4081-9e21-226e2ac624b9": null,
-                              "d76878d6-1495-4243-a334-a82bb9818cd0": null
-                            },
-                            "consumedService": {
-                              "9d3603de-b378-4c4a-adcc-ee133cbef914": null,
-                              "e9a4e3d3-ebe0-405a-a8f4-35a04c4dba1f": {
-                                "Something Here": true,
-                                "Other Obscure feature": false
-                              }
+                          "assignedService": {
+                            "a4b2e176-d63d-4081-9e21-226e2ac624b9": null,
+                            "d76878d6-1495-4243-a334-a82bb9818cd0": null
+                          },
+                          "consumedService": {
+                            "e0d101e8-6f1e-40a9-a66f-cad4112c9a59": null,
+                            "c63b7a2d-6573-4c37-9ca8-e12b954d3198": {
+                              "Something Here": true,
+                              "Other Obscure feature": false
+                            }
+                          }
+                        },
+                        "04e88835-771a-482b-9d6f-ba06c32cbb67": {
+                          "assignedLicense": {
+                            "3d282045-ec7f-4813-88e2-29b74ee609f7": null
+                          },
+                          "assignedService": {
+                            "a4b2e176-d63d-4081-9e21-226e2ac624b9": null,
+                            "d76878d6-1495-4243-a334-a82bb9818cd0": null
+                          },
+                          "consumedService": {
+                            "9d3603de-b378-4c4a-adcc-ee133cbef914": null,
+                            "e9a4e3d3-ebe0-405a-a8f4-35a04c4dba1f": {
+                              "Something Here": true,
+                              "Other Obscure feature": false
                             }
                           }
                         }
                       }
                     }
                   }
-                ],
+                },
                 "schema": {
                   "$ref": "#/components/schemas/LicenseReport"
                 }
@@ -2288,59 +2316,57 @@
         "requestBody": {
           "content": {
             "application/json": {
-              "examples": [
-                {
-                  "Specialized Purchase": {
-                    "description": "Add-on purchase for the specified customer for some additional specialized licenses.",
-                    "summary": "Specialized Purchase",
-                    "value": {
-                      "enterpriseDeviceCount": 0,
-                      "enterpriseInterfaceCount": 0,
-                      "enterpriseIntermediaryCount": 0,
-                      "enterpriseUserCount": 0,
-                      "notValidAfter": "2024-07-30T18:09:05.970Z",
-                      "notValidBefore": "1970-01-01T00:00:00.000Z",
-                      "privilegedDeviceCount": 0,
-                      "privilegedInterfaceCount": 0,
-                      "privilegedIntermediaryCount": 0,
-                      "privilegedUserCount": 0,
-                      "purchaseId": "ABC123",
-                      "specializedDeviceCount": 50,
-                      "specializedInterfaceCount": 3,
-                      "specializedIntermediaryCount": 1,
-                      "specializedUserCount": 50,
-                      "tenantId": "4b00fb78-d291-4dbd-8c0a-c93ae20bffd1"
-                    }
-                  },
-                  "Initial Purchase": {
-                    "description": "Complete suite of components purchased for the specified customer.",
-                    "summary": "Initial Purchase",
-                    "value": {
-                      "enterpriseDeviceCount": 7000,
-                      "enterpriseInterfaceCount": 500,
-                      "enterpriseIntermediaryCount": 10,
-                      "enterpriseUserCount": 7000,
-                      "notValidAfter": "2024-07-30T18:12:23.049Z",
-                      "notValidBefore": "1970-01-01T00:00:00.000Z",
-                      "privilegedDeviceCount": 200,
-                      "privilegedInterfaceCount": 50,
-                      "privilegedIntermediaryCount": 3,
-                      "privilegedUserCount": 200,
-                      "purchaseId": "654DEF",
-                      "specializedDeviceCount": 1000,
-                      "specializedInterfaceCount": 11,
-                      "specializedIntermediaryCount": 2,
-                      "specializedUserCount": 1000,
-                      "tenantId": "58ffb93f-5098-4630-bfc4-eeb4664208b4"
-                    }
-                  },
-                  "Ignorant Entitlement Creation Request": {
-                    "description": "Clueless dev trying to automate this application without reading the docs. RTFM!",
-                    "summary": "Ignorant Entitlement Creation Request",
-                    "value": {}
+              "examples": {
+                "Specialized Purchase": {
+                  "description": "Add-on purchase for the specified customer for some additional specialized licenses.",
+                  "summary": "Specialized Purchase",
+                  "value": {
+                    "enterpriseDeviceCount": 0,
+                    "enterpriseInterfaceCount": 0,
+                    "enterpriseIntermediaryCount": 0,
+                    "enterpriseUserCount": 0,
+                    "notValidAfter": "2024-07-30T18:09:05.970Z",
+                    "notValidBefore": "1970-01-01T00:00:00.000Z",
+                    "privilegedDeviceCount": 0,
+                    "privilegedInterfaceCount": 0,
+                    "privilegedIntermediaryCount": 0,
+                    "privilegedUserCount": 0,
+                    "purchaseId": "ABC123",
+                    "specializedDeviceCount": 50,
+                    "specializedInterfaceCount": 3,
+                    "specializedIntermediaryCount": 1,
+                    "specializedUserCount": 50,
+                    "tenantId": "4b00fb78-d291-4dbd-8c0a-c93ae20bffd1"
                   }
+                },
+                "Initial Purchase": {
+                  "description": "Complete suite of components purchased for the specified customer.",
+                  "summary": "Initial Purchase",
+                  "value": {
+                    "enterpriseDeviceCount": 7000,
+                    "enterpriseInterfaceCount": 500,
+                    "enterpriseIntermediaryCount": 10,
+                    "enterpriseUserCount": 7000,
+                    "notValidAfter": "2024-07-30T18:12:23.049Z",
+                    "notValidBefore": "1970-01-01T00:00:00.000Z",
+                    "privilegedDeviceCount": 200,
+                    "privilegedInterfaceCount": 50,
+                    "privilegedIntermediaryCount": 3,
+                    "privilegedUserCount": 200,
+                    "purchaseId": "654DEF",
+                    "specializedDeviceCount": 1000,
+                    "specializedInterfaceCount": 11,
+                    "specializedIntermediaryCount": 2,
+                    "specializedUserCount": 1000,
+                    "tenantId": "58ffb93f-5098-4630-bfc4-eeb4664208b4"
+                  }
+                },
+                "Ignorant Entitlement Creation Request": {
+                  "description": "Clueless dev trying to automate this application without reading the docs. RTFM!",
+                  "summary": "Ignorant Entitlement Creation Request",
+                  "value": {}
                 }
-              ],
+              },
               "schema": {
                 "$ref": "#/components/schemas/LicenseEntitlement.Shield"
               }
@@ -2351,56 +2377,54 @@
           "200": {
             "content": {
               "application/json": {
-                "examples": [
-                  {
-                    "Small MSP": {
-                      "description": "Example license entitlement for a small MSP.",
-                      "summary": "Local MSP",
-                      "value": {
-                        "correlationId": "60594489-6022-4ddb-8aa5-288c8d356cf2",
-                        "enterpriseDeviceCount": 25,
-                        "enterpriseInterfaceCount": 25,
-                        "enterpriseIntermediaryCount": 25,
-                        "enterpriseUserCount": 25,
-                        "notValidAfter": "2024-07-30T17:56:00.704Z",
-                        "notValidBefore": "1970-01-01T00:00:00.000Z",
-                        "privilegedDeviceCount": 10,
-                        "privilegedInterfaceCount": 10,
-                        "privilegedIntermediaryCount": 2,
-                        "privilegedUserCount": 10,
-                        "purchaseId": "Bob's your mother's brother.",
-                        "specializedDeviceCount": 5,
-                        "specializedInterfaceCount": 5,
-                        "specializedIntermediaryCount": 0,
-                        "specializedUserCount": 5,
-                        "tenantId": "1948adeb-797f-466b-962d-cc708a69d08d"
-                      }
-                    },
-                    "Enterprise": {
-                      "description": "Example license entitlement for an enterprise sized company.",
-                      "summary": "Enterprise",
-                      "value": {
-                        "correlationId": "46569e8d-eeaa-42f4-b954-05a998108eee",
-                        "enterpriseDeviceCount": 50000,
-                        "enterpriseInterfaceCount": 50000,
-                        "enterpriseIntermediaryCount": 100,
-                        "enterpriseUserCount": 50000,
-                        "notValidAfter": "2024-07-30T17:58:54.619Z",
-                        "notValidBefore": "1970-01-01T00:00:00.000Z",
-                        "privilegedDeviceCount": 300,
-                        "privilegedInterfaceCount": 100,
-                        "privilegedIntermediaryCount": 50,
-                        "privilegedUserCount": 300,
-                        "purchaseId": "Bob's your mother's brother.",
-                        "specializedDeviceCount": 1000,
-                        "specializedInterfaceCount": 5,
-                        "specializedIntermediaryCount": 10,
-                        "specializedUserCount": 1000,
-                        "tenantId": "bf78263c-6cec-44bc-9893-024dde25a486"
-                      }
+                "examples": {
+                  "Small MSP": {
+                    "description": "Example license entitlement for a small MSP.",
+                    "summary": "Local MSP",
+                    "value": {
+                      "correlationId": "60594489-6022-4ddb-8aa5-288c8d356cf2",
+                      "enterpriseDeviceCount": 25,
+                      "enterpriseInterfaceCount": 25,
+                      "enterpriseIntermediaryCount": 25,
+                      "enterpriseUserCount": 25,
+                      "notValidAfter": "2024-07-30T17:56:00.704Z",
+                      "notValidBefore": "1970-01-01T00:00:00.000Z",
+                      "privilegedDeviceCount": 10,
+                      "privilegedInterfaceCount": 10,
+                      "privilegedIntermediaryCount": 2,
+                      "privilegedUserCount": 10,
+                      "purchaseId": "Bob's your mother's brother.",
+                      "specializedDeviceCount": 5,
+                      "specializedInterfaceCount": 5,
+                      "specializedIntermediaryCount": 0,
+                      "specializedUserCount": 5,
+                      "tenantId": "1948adeb-797f-466b-962d-cc708a69d08d"
+                    }
+                  },
+                  "Enterprise": {
+                    "description": "Example license entitlement for an enterprise sized company.",
+                    "summary": "Enterprise",
+                    "value": {
+                      "correlationId": "46569e8d-eeaa-42f4-b954-05a998108eee",
+                      "enterpriseDeviceCount": 50000,
+                      "enterpriseInterfaceCount": 50000,
+                      "enterpriseIntermediaryCount": 100,
+                      "enterpriseUserCount": 50000,
+                      "notValidAfter": "2024-07-30T17:58:54.619Z",
+                      "notValidBefore": "1970-01-01T00:00:00.000Z",
+                      "privilegedDeviceCount": 300,
+                      "privilegedInterfaceCount": 100,
+                      "privilegedIntermediaryCount": 50,
+                      "privilegedUserCount": 300,
+                      "purchaseId": "Bob's your mother's brother.",
+                      "specializedDeviceCount": 1000,
+                      "specializedInterfaceCount": 5,
+                      "specializedIntermediaryCount": 10,
+                      "specializedUserCount": 1000,
+                      "tenantId": "bf78263c-6cec-44bc-9893-024dde25a486"
                     }
                   }
-                ],
+                },
                 "schema": {
                   "$ref": "#/components/schemas/LicenseEntitlement.Shield"
                 }
@@ -2427,64 +2451,62 @@
           "200": {
             "content": {
               "application/json": {
-                "examples": [
-                  {
-                    "Small MSP": {
-                      "description": "Example active license count for a small MSP.",
-                      "summary": "Local MSP",
-                      "value": {
-                        "enterpriseDeviceCount": 54,
-                        "enterpriseInterfaceCount": 46,
-                        "enterpriseIntermediaryCount": 2,
-                        "enterpriseUserCount": 54,
-                        "privilegedDeviceCount": 12,
-                        "privilegedInterfaceCount": 52,
-                        "privilegedIntermediaryCount": 4,
-                        "privilegedUserCount": 12,
-                        "specializedDeviceCount": 20,
-                        "specializedInterfaceCount": 15,
-                        "specializedIntermediaryCount": 0,
-                        "specializedUserCount": 20
-                      }
-                    },
-                    "No Licenses": {
-                      "description": "Example license count for a company that doesn't have any licenses.",
-                      "summary": "No License",
-                      "value": {
-                        "enterpriseDeviceCount": 0,
-                        "enterpriseInterfaceCount": 0,
-                        "enterpriseIntermediaryCount": 0,
-                        "enterpriseUserCount": 0,
-                        "privilegedDeviceCount": 0,
-                        "privilegedInterfaceCount": 0,
-                        "privilegedIntermediaryCount": 0,
-                        "privilegedUserCount": 0,
-                        "specializedDeviceCount": 0,
-                        "specializedInterfaceCount": 0,
-                        "specializedIntermediaryCount": 0,
-                        "specializedUserCount": 0
-                      }
-                    },
-                    "Enterprise": {
-                      "description": "Example active license count for an enterprise sized company.",
-                      "summary": "Enterprise",
-                      "value": {
-                        "enterpriseDeviceCount": 60000,
-                        "enterpriseInterfaceCount": 500,
-                        "enterpriseIntermediaryCount": 20,
-                        "enterpriseUserCount": 60000,
-                        "privilegedDeviceCount": 200,
-                        "privilegedInterfaceCount": 450,
-                        "privilegedIntermediaryCount": 15,
-                        "privilegedUserCount": 200,
-                        "specializedDeviceCount": 1000,
-                        "specializedInterfaceCount": 50,
-                        "specializedIntermediaryCount": 2,
-                        "specializedUserCount": 1000
-                      }
+                "examples": {
+                  "Small MSP": {
+                    "description": "Example active license count for a small MSP for the currently authenticated tenant.",
+                    "summary": "Local MSP",
+                    "value": {
+                      "enterpriseDeviceCount": 54,
+                      "enterpriseInterfaceCount": 46,
+                      "enterpriseIntermediaryCount": 2,
+                      "enterpriseUserCount": 54,
+                      "privilegedDeviceCount": 12,
+                      "privilegedInterfaceCount": 52,
+                      "privilegedIntermediaryCount": 4,
+                      "privilegedUserCount": 12,
+                      "specializedDeviceCount": 20,
+                      "specializedInterfaceCount": 15,
+                      "specializedIntermediaryCount": 0,
+                      "specializedUserCount": 20
+                    }
+                  },
+                  "No Licenses": {
+                    "description": "Example license count for a company that doesn't have any licenses for the currently authenticated tenant..",
+                    "summary": "No License",
+                    "value": {
+                      "enterpriseDeviceCount": 0,
+                      "enterpriseInterfaceCount": 0,
+                      "enterpriseIntermediaryCount": 0,
+                      "enterpriseUserCount": 0,
+                      "privilegedDeviceCount": 0,
+                      "privilegedInterfaceCount": 0,
+                      "privilegedIntermediaryCount": 0,
+                      "privilegedUserCount": 0,
+                      "specializedDeviceCount": 0,
+                      "specializedInterfaceCount": 0,
+                      "specializedIntermediaryCount": 0,
+                      "specializedUserCount": 0
+                    }
+                  },
+                  "Enterprise": {
+                    "description": "Example active license count for an enterprise sized company for the currently authenticated tenant..",
+                    "summary": "Enterprise",
+                    "value": {
+                      "enterpriseDeviceCount": 60000,
+                      "enterpriseInterfaceCount": 500,
+                      "enterpriseIntermediaryCount": 20,
+                      "enterpriseUserCount": 60000,
+                      "privilegedDeviceCount": 200,
+                      "privilegedInterfaceCount": 450,
+                      "privilegedIntermediaryCount": 15,
+                      "privilegedUserCount": 200,
+                      "specializedDeviceCount": 1000,
+                      "specializedInterfaceCount": 50,
+                      "specializedIntermediaryCount": 2,
+                      "specializedUserCount": 1000
                     }
                   }
-                ],
+                },
                 "schema": {
                   "$ref": "#/components/schemas/LicenseEntitlement.Shield.Count"
                 }
@@ -2519,6 +2541,56 @@
                   "minItems": 0,
                   "items": {
                     "$ref": "#/components/schemas/LicenseEntitlement.Shield"
+                  },
+                  "examples": [
+                    [
+                      {
+                        "correlationId": "e097a3f5-9599-44a2-8923-fd3276c83ae1",
+                        "enterpriseDeviceCount": 5,
+                        "enterpriseInterfaceCount": 6,
+                        "enterpriseIntermediaryCount": 7,
+                        "enterpriseUserCount": 8,
+                        "notValidAfter": "2024-07-30T17:35:24.044Z",
+                        "notValidBefore": "2024-07-30T17:37:15.300Z",
+                        "privilegedDeviceCount": 9,
+                        "privilegedInterfaceCount": 10,
+                        "privilegedIntermediaryCount": 11,
+                        "privilegedUserCount": 12,
+                        "purchaseId": "any arbitrary string as purchaseId",
+                        "specializedDeviceCount": 13,
+                        "specializedInterfaceCount": 14,
+                        "specializedIntermediaryCount": 15,
+                        "specializedUserCount": 15,
+                        "tenantId": "a2a1698d-a3e0-42d3-96a4-47eb3e8f7dd1"
+                      }
+                    ]
+                  ]
+                },
+                "examples": {
+                  "Example Purchase": {
+                    "summary": "Example entitlement purchase",
+                    "description": "An example SHIELD entitlement for the specified tenant.",
+                    "value": [
+                      {
+                        "correlationId": "e097a3f5-9599-44a2-8923-fd3276c83ae1",
+                        "enterpriseDeviceCount": 5,
+                        "enterpriseInterfaceCount": 6,
+                        "enterpriseIntermediaryCount": 7,
+                        "enterpriseUserCount": 8,
+                        "notValidAfter": "2024-07-30T17:35:24.044Z",
+                        "notValidBefore": "2024-07-30T17:37:15.300Z",
+                        "privilegedDeviceCount": 9,
+                        "privilegedInterfaceCount": 10,
+                        "privilegedIntermediaryCount": 11,
+                        "privilegedUserCount": 12,
+                        "purchaseId": "any arbitrary string as purchaseId",
+                        "specializedDeviceCount": 13,
+                        "specializedInterfaceCount": 14,
+                        "specializedIntermediaryCount": 15,
+                        "specializedUserCount": 15,
+                        "tenantId": "a2a1698d-a3e0-42d3-96a4-47eb3e8f7dd1"
+                      }
+                    ]
                   }
                 }
               }
