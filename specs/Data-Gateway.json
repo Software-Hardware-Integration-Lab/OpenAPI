@@ -1315,7 +1315,7 @@
                       "bulkStorage": false,
                       "database": false
                     }
-                  }                  
+                  }
                 }
               }
             }
@@ -3341,46 +3341,55 @@
                   "minItems": 0,
                   "items": {
                     "$ref": "#/components/schemas/TenantDetails"
-                  }
+                  },
+                  "examples": [
+                    [
+                      {
+                        "tenantId": "7e8f9a0b-1c2d-3e4b-5a6c-7d8e9f0a1b2c",
+                        "displayName": "Contoso - R&D",
+                        "parentId": "f3ed1efc-4e62-46b8-bf2a-6b59ca9784e5",
+                        "authorizedPrincipalList": []
+                      }
+                    ]
+                  ]
                 },
-                "examples": 
-                  {
-                    "Example List Of Multiple Tenant Records": {
-                      "description": "Sample list of multiple tenant records in the database",
-                      "summary": "Multiple Tenant Records",
-                      "value": [
-                        {
-                          "tenantId": "5d6e7f8a-9b0c-1d2e-3f4a-5b6c7d8e9f0a",
-                          "displayName": "Contoso - Legal",
-                          "parentId": "f3ed1efc-4e62-46b8-bf2a-6b59ca9784e5",
-                          "authorizedPrincipalList": [
-                            "59673771-3b4f-4518-9187-aee8a51c8c07",
-                            "47c42971-2dea-4553-a788-d29a42e3e867"
-                          ]
-                        },
-                        {
-                          "tenantId": "7e8f9a0b-1c2d-3e4b-5a6c-7d8e9f0a1b2c",
-                          "displayName": "Contoso - R&D",
-                          "parentId": "f3ed1efc-4e62-46b8-bf2a-6b59ca9784e5",
-                          "authorizedPrincipalList": [
-                            "7e9ce415-32b2-4e7a-a920-d4dbaae022e3"
-                          ]
-                        }
-                      ]
-                    },
-                    "Example List Of Single Tenant Record": {
-                      "description": "Example list of single tenant records which no user is authorized yet.",
-                      "summary": "Single Tenant Records",
-                      "value": [
-                        {
-                          "tenantId": "7e8f9a0b-1c2d-3e4b-5a6c-7d8e9f0a1b2c",
-                          "displayName": "Contoso - R&D",
-                          "parentId": "f3ed1efc-4e62-46b8-bf2a-6b59ca9784e5",
-                          "authorizedPrincipalList": []
-                        }
-                      ]                      
-                    }
+                "examples": {
+                  "Example List Of Multiple Tenant Records": {
+                    "description": "Sample list of multiple tenant records in the database",
+                    "summary": "Multiple Tenant Records",
+                    "value": [
+                      {
+                        "tenantId": "5d6e7f8a-9b0c-1d2e-3f4a-5b6c7d8e9f0a",
+                        "displayName": "Contoso - Legal",
+                        "parentId": "f3ed1efc-4e62-46b8-bf2a-6b59ca9784e5",
+                        "authorizedPrincipalList": [
+                          "59673771-3b4f-4518-9187-aee8a51c8c07",
+                          "47c42971-2dea-4553-a788-d29a42e3e867"
+                        ]
+                      },
+                      {
+                        "tenantId": "7e8f9a0b-1c2d-3e4b-5a6c-7d8e9f0a1b2c",
+                        "displayName": "Contoso - R&D",
+                        "parentId": "f3ed1efc-4e62-46b8-bf2a-6b59ca9784e5",
+                        "authorizedPrincipalList": [
+                          "7e9ce415-32b2-4e7a-a920-d4dbaae022e3"
+                        ]
+                      }
+                    ]
+                  },
+                  "Example List Of Single Tenant Record": {
+                    "description": "Example list of single tenant records which no user is authorized yet.",
+                    "summary": "Single Tenant Records",
+                    "value": [
+                      {
+                        "tenantId": "7e8f9a0b-1c2d-3e4b-5a6c-7d8e9f0a1b2c",
+                        "displayName": "Contoso - R&D",
+                        "parentId": "f3ed1efc-4e62-46b8-bf2a-6b59ca9784e5",
+                        "authorizedPrincipalList": []
+                      }
+                    ]
                   }
+                }
               }
             },
             "description": "OK"
@@ -3415,24 +3424,22 @@
                 "schema": {
                   "$ref": "#/components/schemas/TenantDetails"
                 },
-                "examples": [
-                  {
-                    "Example Complete Tenant Record": {
-                      "description": "Sample details of one tenant record",
-                      "summary": "Existing Tenant Record",
-                      "value": {
-                        "tenantId": "9f0a1b2c-3d4e-5f6a-7b8c-9d0e1f2a3b4c",
-                        "displayName": "Contoso - Testing",
-                        "parentId": "f3ed1efc-4e62-46b8-bf2a-6b59ca9784e5",
-                        "authorizedPrincipalList": [
-                          "9f0a1b2c-3d4e-5f6a-7b8c-9d0e1f2a3b4c",
-                          "2e3f4a5b-6c7d-8e9f-0a1b-2c3d4e5f6a7b",
-                          "4b5c6d7e-8f9a-0b1c-2d3e-4f5a6b7c8d9e"
-                        ]
-                      }
+                "examples": {
+                  "Example Complete Tenant Record": {
+                    "description": "An example showing a single existing tenant record.",
+                    "summary": "Existing Tenant Record",
+                    "value": {
+                      "tenantId": "9f0a1b2c-3d4e-5f6a-7b8c-9d0e1f2a3b4c",
+                      "displayName": "Contoso - Testing",
+                      "parentId": "f3ed1efc-4e62-46b8-bf2a-6b59ca9784e5",
+                      "authorizedPrincipalList": [
+                        "9f0a1b2c-3d4e-5f6a-7b8c-9d0e1f2a3b4c",
+                        "2e3f4a5b-6c7d-8e9f-0a1b-2c3d4e5f6a7b",
+                        "4b5c6d7e-8f9a-0b1c-2d3e-4f5a6b7c8d9e"
+                      ]
                     }
                   }
-                ]
+                }
               }
             },
             "description": "OK"
@@ -3463,7 +3470,8 @@
                 "properties": {
                   "tenantDisplayName": {
                     "description": "Human readable name for the tenant record",
-                    "type": "string"
+                    "type": "string",
+                    "examples": ["Contoso - R&D East"]
                   },
                   "parentId": {
                     "description": "The object ID of the tenant that is considered a parent to this record",
@@ -3471,7 +3479,8 @@
                     "maxLength": 36,
                     "minLength": 36,
                     "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
-                    "type": "string"
+                    "type": "string",
+                    "examples": ["6a7b8c9d-0e1f-2a3b-4c5d-6e7f8a9b0c1d"]
                   },
                   "authorizedPrincipalList": {
                     "description": "List of object IDs that are allowed to access this record and related data.",
@@ -3481,8 +3490,15 @@
                       "maxLength": 36,
                       "minLength": 36,
                       "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
-                      "type": "string"
-                    }
+                      "type": "string",
+                      "examples": ["4cae3355-0cff-410c-b4f9-69cb5de8f1ac"]
+                    },
+                    "examples": [
+                      [
+                        "4cae3355-0cff-410c-b4f9-69cb5de8f1ac",
+                        "0e52e6ac-f8e1-4070-ae2e-9bd0a37507a1"
+                      ]
+                    ]
                   }
                 },
                 "anyOf": [
@@ -3495,37 +3511,45 @@
                   {
                     "required": ["authorizedPrincipalList"]
                   }
+                ],
+                "examples": [
+                  {
+                    "tenantDisplayName": "Contoso - R&D East",
+                    "parentId": "6a7b8c9d-0e1f-2a3b-4c5d-6e7f8a9b0c1d",
+                    "authorizedPrincipalList": [
+                      "4cae3355-0cff-410c-b4f9-69cb5de8f1ac",
+                      "0e52e6ac-f8e1-4070-ae2e-9bd0a37507a1"
+                    ]
+                  }
                 ]
               },
-              "examples": [
-                {
-                  "Example Request to Update Tenant Parent": {
-                    "description": "Sample payload requesting adjustment to the parent value",
-                    "summary": "Update Parent Information for Tenant",
-                    "value": {
-                      "parentId": "6a7b8c9d-0e1f-2a3b-4c5d-6e7f8a9b0c1d"
-                    }
-                  },
-                  "Example Request for Tenant Name and Parent Update": {
-                    "description": "Sample payload requesting to update parent value and display name on the tenant record",
-                    "summary": "Update Tenant Record Name and Parent Information",
-                    "value": {
-                      "parentId": "8f9a0b1c-2d3e-4f5a-6b7c-8d9e0a1b2c3d",
-                      "displayName": "Contoso - R&D East"
-                    }
-                  },
-                  "Example Request for Tenant Authorized Principals Update": {
-                    "description": "Sample payload requesting to update authorized principals for the tenant record",
-                    "summary": "Update Tenant Authorized Principals List",
-                    "value": {
-                      "authorizedPrincipalList": [
-                        "4cae3355-0cff-410c-b4f9-69cb5de8f1ac",
-                        "0e52e6ac-f8e1-4070-ae2e-9bd0a37507a1"
-                      ]
-                    }
+              "examples": {
+                "Example Request to Update Tenant Parent": {
+                  "description": "Sample payload requesting adjustment to the parent value.",
+                  "summary": "Update Parent Information for Tenant",
+                  "value": {
+                    "parentId": "6a7b8c9d-0e1f-2a3b-4c5d-6e7f8a9b0c1d"
+                  }
+                },
+                "Example Request for Tenant Name and Parent Update": {
+                  "description": "Sample payload requesting to update parent value and display name on the tenant record.",
+                  "summary": "Update Tenant Record Name and Parent Information",
+                  "value": {
+                    "parentId": "8f9a0b1c-2d3e-4f5a-6b7c-8d9e0a1b2c3d",
+                    "displayName": "Contoso - R&D West"
+                  }
+                },
+                "Example Request for Tenant Authorized Principals Update": {
+                  "description": "Sample payload requesting to update authorized principals for the tenant record.",
+                  "summary": "Update Tenant Authorized Principals List",
+                  "value": {
+                    "authorizedPrincipalList": [
+                      "4cae3355-0cff-410c-b4f9-69cb5de8f1ac",
+                      "0e52e6ac-f8e1-4070-ae2e-9bd0a37507a1"
+                    ]
                   }
                 }
-              ]
+              }
             }
           }
         },
@@ -3536,22 +3560,20 @@
                 "schema": {
                   "$ref": "#/components/schemas/TenantDetails"
                 },
-                "examples": [
-                  {
-                    "Example Complete Tenant Record": {
-                      "description": "Sample response after updating a tenant record",
-                      "summary": "Updated Tenant Record",
-                      "value": {
-                        "tenantId": "c00ffc2c-b6f6-4121-bd8e-4d02e9504eb9",
-                        "displayName": "Contoso - Testing",
-                        "parentId": "8c291062-a4f7-4706-b4df-59e605497f06",
-                        "authorizedPrincipalList": [
-                          "b856517a-2086-4be4-b63e-d6ca8a5b0ff6"
-                        ]
-                      }
+                "examples": {
+                  "Example Complete Tenant Record": {
+                    "description": "Sample response after updating a tenant record.",
+                    "summary": "Updated Tenant Record",
+                    "value": {
+                      "tenantId": "c00ffc2c-b6f6-4121-bd8e-4d02e9504eb9",
+                      "displayName": "Contoso - Testing",
+                      "parentId": "8c291062-a4f7-4706-b4df-59e605497f06",
+                      "authorizedPrincipalList": [
+                        "b856517a-2086-4be4-b63e-d6ca8a5b0ff6"
+                      ]
                     }
                   }
-                ]
+                }
               }
             },
             "description": "OK"
