@@ -1870,6 +1870,26 @@
                 "items": {
                   "$ref": "#/components/schemas/Chat.OpenAIChatMessage"
                 }
+              },
+              "examples": {
+                "Tool call": {
+                  "summary": "Example tool call request",
+                  "description": "An example request that represent a message initiated by the chat assistant to call a tool function for the currently authenticated tenant.",
+                  "value": {
+                    "role": "assistant",
+                    "content": "What are the available IDs?",
+                    "tool_calls": [
+                      {
+                        "id": "call_abc123",
+                        "type": "function",
+                        "function": {
+                          "arguments": "{\"startDate\":\"2025-07-01\",\"endDate\":\"2025-07-10\"}",
+                          "name": "getCorrelationIDs"
+                        }
+                      }
+                    ]
+                  }
+                }
               }
             }
           }
@@ -1928,14 +1948,102 @@
                       "description": "List of message objects in current conversation",
                       "items": {
                         "$ref": "#/components/schemas/Chat.OpenAIChatMessage"
-                      }
+                      },
+                      "examples": [
+                        [
+                          {
+                            "role": "user",
+                            "content": "Hello"
+                          },
+                          {
+                            "role": "assistant",
+                            "content": "Hello, how can I assist you today?"
+                          },
+                          {
+                            "role": "user",
+                            "content": "Can you show me what correlation records I have?"
+                          },
+                          {
+                            "role": "assistant",
+                            "content": "What are the available IDs?",
+                            "tool_calls": [
+                              {
+                                "id": "call_abc123",
+                                "type": "function",
+                                "function": {
+                                  "arguments": "{\"startDate\":\"2025-07-01\",\"endDate\":\"2025-07-10\"}",
+                                  "name": "getCorrelationIDs"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "role": "tool",
+                            "content": "{\"825a9d7e-0b62-4392-b8ef-ab6951a46ebd\":\"2025-07-03T18:39:50.828Z\",\"744c0878-3a82-48a7-b239-a1d4b9298a69\":\"2025-07-07T21:01:20.995Z\"}",
+                            "tool_call_id": "call_abc123"
+                          },
+                          {
+                            "role": "assistant",
+                            "content": "You have correlation records for the following dates:\n- July 3, 2025\n- July 7, 2025\n\nWould you like to see details from any of these correlation records?"
+                          }
+                        ]
+                      ]
                     },
                     "responseText": {
                       "type": "string",
-                      "description": "Most recent response text"
+                      "description": "Most recent response text",
+                      "examples": [
+                        "You have correlation records for the following dates:\n- July 3, 2025\n- July 7, 2025\n\nWould you like to see details from any of these correlation records?"
+                      ]
                     }
                   },
                   "required": ["messageList", "responseText"]
+                },
+                "examples": {
+                  "Chat response": {
+                    "summary": "Example chat response with context",
+                    "description": "An example chat response that includes context of current chat session with the request appended for the currently authenticated tenant.",
+                    "value": {
+                      "messageList": [
+                        {
+                          "role": "user",
+                          "content": "Hello"
+                        },
+                        {
+                          "role": "assistant",
+                          "content": "Hello, how can I assist you today?"
+                        },
+                        {
+                          "role": "user",
+                          "content": "Can you show me what correlation records I have?"
+                        },
+                        {
+                          "role": "assistant",
+                          "content": "What are the available IDs?",
+                          "tool_calls": [
+                            {
+                              "id": "call_abc123",
+                              "type": "function",
+                              "function": {
+                                "arguments": "{\"startDate\":\"2025-07-01\",\"endDate\":\"2025-07-10\"}",
+                                "name": "getCorrelationIDs"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "role": "tool",
+                          "content": "{\"825a9d7e-0b62-4392-b8ef-ab6951a46ebd\":\"2025-07-03T18:39:50.828Z\",\"744c0878-3a82-48a7-b239-a1d4b9298a69\":\"2025-07-07T21:01:20.995Z\"}",
+                          "tool_call_id": "call_abc123"
+                        },
+                        {
+                          "role": "assistant",
+                          "content": "You have correlation records for the following dates:\n- July 3, 2025\n- July 7, 2025\n\nWould you like to see details from any of these correlation records?"
+                        }
+                      ],
+                      "responseText": "You have correlation records for the following dates:\n- July 3, 2025\n- July 7, 2025\n\nWould you like to see details from any of these correlation records?"
+                    }
+                  }
                 }
               }
             },
@@ -1966,6 +2074,46 @@
                 "type": "array",
                 "items": {
                   "$ref": "#/components/schemas/Chat.OpenAIChatMessage"
+                },
+                "examples": [
+                  [
+                    {
+                      "role": "assistant",
+                      "content": "What are the available IDs?",
+                      "tool_calls": [
+                        {
+                          "id": "call_abc123",
+                          "type": "function",
+                          "function": {
+                            "arguments": "{\"startDate\":\"2025-07-01\",\"endDate\":\"2025-07-10\"}",
+                            "name": "getCorrelationIDs"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                ]
+              },
+              "examples": {
+                "Chat request": {
+                  "summary": "Example chat request",
+                  "description": "An example request that represent a message initiated by the chat assistant to call a tool function for the specified tenant.",
+                  "value": [
+                    {
+                      "role": "assistant",
+                      "content": "What are the available IDs?",
+                      "tool_calls": [
+                        {
+                          "id": "call_abc123",
+                          "type": "function",
+                          "function": {
+                            "arguments": "{\"startDate\":\"2025-07-01\",\"endDate\":\"2025-07-10\"}",
+                            "name": "getCorrelationIDs"
+                          }
+                        }
+                      ]
+                    }
+                  ]
                 }
               }
             }
@@ -2025,14 +2173,102 @@
                       "description": "List of message objects in current conversation",
                       "items": {
                         "$ref": "#/components/schemas/Chat.OpenAIChatMessage"
-                      }
+                      },
+                      "examples": [
+                        [
+                          {
+                            "role": "user",
+                            "content": "Hello"
+                          },
+                          {
+                            "role": "assistant",
+                            "content": "Hello, how can I assist you today?"
+                          },
+                          {
+                            "role": "user",
+                            "content": "Can you show me what correlation records I have?"
+                          },
+                          {
+                            "role": "assistant",
+                            "content": "What are the available IDs?",
+                            "tool_calls": [
+                              {
+                                "id": "call_abc123",
+                                "type": "function",
+                                "function": {
+                                  "arguments": "{\"startDate\":\"2025-07-01\",\"endDate\":\"2025-07-10\"}",
+                                  "name": "getCorrelationIDs"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "role": "tool",
+                            "content": "{\"825a9d7e-0b62-4392-b8ef-ab6951a46ebd\":\"2025-07-03T18:39:50.828Z\",\"744c0878-3a82-48a7-b239-a1d4b9298a69\":\"2025-07-07T21:01:20.995Z\"}",
+                            "tool_call_id": "call_abc123"
+                          },
+                          {
+                            "role": "assistant",
+                            "content": "You have correlation records for the following dates:\n- July 3, 2025\n- July 7, 2025\n\nWould you like to see details from any of these correlation records?"
+                          }
+                        ]
+                      ]
                     },
                     "responseText": {
                       "type": "string",
-                      "description": "Most recent response text"
+                      "description": "Most recent response text",
+                      "examples": [
+                        "You have correlation records for the following dates:\n- July 3, 2025\n- July 7, 2025\n\nWould you like to see details from any of these correlation records?"
+                      ]
                     }
                   },
                   "required": ["messageList", "responseText"]
+                },
+                "examples": {
+                  "Chat response": {
+                    "summary": "Example chat response",
+                    "description": "An example chat response that includes context of current chat session with the request appended for the specified tenant.",
+                    "value": {
+                      "messageList": [
+                        {
+                          "role": "user",
+                          "content": "Hello"
+                        },
+                        {
+                          "role": "assistant",
+                          "content": "Hello, how can I assist you today?"
+                        },
+                        {
+                          "role": "user",
+                          "content": "Can you show me what correlation records I have?"
+                        },
+                        {
+                          "role": "assistant",
+                          "content": "What are the available IDs?",
+                          "tool_calls": [
+                            {
+                              "id": "call_abc123",
+                              "type": "function",
+                              "function": {
+                                "arguments": "{\"startDate\":\"2025-07-01\",\"endDate\":\"2025-07-10\"}",
+                                "name": "getCorrelationIDs"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "role": "tool",
+                          "content": "{\"825a9d7e-0b62-4392-b8ef-ab6951a46ebd\":\"2025-07-03T18:39:50.828Z\",\"744c0878-3a82-48a7-b239-a1d4b9298a69\":\"2025-07-07T21:01:20.995Z\"}",
+                          "tool_call_id": "call_abc123"
+                        },
+                        {
+                          "role": "assistant",
+                          "content": "You have correlation records for the following dates:\n- July 3, 2025\n- July 7, 2025\n\nWould you like to see details from any of these correlation records?"
+                        }
+                      ],
+                      "responseText": "You have correlation records for the following dates:\n- July 3, 2025\n- July 7, 2025\n\nWould you like to see details from any of these correlation records?"
+                    }
+                  }
                 }
               }
             },
@@ -2342,12 +2578,47 @@
         "requestBody": {
           "content": {
             "application/json": {
-              "examples": [
-                {
+              "examples": {
+                "Monthly Report": {
+                  "description": "Example monthly telemetry report for an enterprise organization.",
+                  "summary": "Monthly Report",
+                  "value": {
+                    "enterpriseDeviceCount": 64221,
+                    "enterpriseInterfaceCount": 523,
+                    "enterpriseIntermediaryCount": 44,
+                    "enterpriseUserCount": 642219,
+                    "monthlyActiveEntUsers": 0,
+                    "monthlyActivePrivUsers": 0,
+                    "monthlyActiveSpecUsers": 0,
+                    "privilegedDeviceCount": 50,
+                    "privilegedInterfaceCount": 2000,
+                    "privilegedIntermediaryCount": 25,
+                    "privilegedUserCount": 50,
+                    "shieldArchitectureVersion": "2",
+                    "shieldCoreVersion": "3.0.0",
+                    "specializedDeviceCount": 0,
+                    "specializedInterfaceCount": 612,
+                    "specializedIntermediaryCount": 2,
+                    "specializedUserCount": 5238
+                  }
+                }
+              },
+              "schema": {
+                "$ref": "#/components/schemas/Telemetry.Shield"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "examples": {
                   "Monthly Report": {
-                    "description": "Example monthly telemetry report for an enterprise organization.",
-                    "summary": "Monthly Report",
+                    "description": "An example of latest monthly telemetry report for an enterprise organization after the latest telemetry input.",
+                    "summary": "Updated Monthly Report",
                     "value": {
+                      "correlationId": "6fe3cd30-931c-439a-b759-1e7f3a73622e",
                       "enterpriseDeviceCount": 64221,
                       "enterpriseInterfaceCount": 523,
                       "enterpriseIntermediaryCount": 44,
@@ -2364,52 +2635,13 @@
                       "specializedDeviceCount": 0,
                       "specializedInterfaceCount": 612,
                       "specializedIntermediaryCount": 2,
-                      "specializedUserCount": 5238
+                      "specializedUserCount": 5238,
+                      "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                      "createdAt": "2024-08-05T15:25:55.525Z",
+                      "updatedAt": "2024-08-05T15:25:55.525Z"
                     }
                   }
-                }
-              ],
-              "schema": {
-                "$ref": "#/components/schemas/Telemetry.Shield"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "examples": [
-                  {
-                    "Monthly Report": {
-                      "description": "Example monthly telemetry report for an enterprise organization.",
-                      "summary": "Monthly Report",
-                      "value": {
-                        "correlationId": "6fe3cd30-931c-439a-b759-1e7f3a73622e",
-                        "enterpriseDeviceCount": 64221,
-                        "enterpriseInterfaceCount": 523,
-                        "enterpriseIntermediaryCount": 44,
-                        "enterpriseUserCount": 642219,
-                        "monthlyActiveEntUsers": 0,
-                        "monthlyActivePrivUsers": 0,
-                        "monthlyActiveSpecUsers": 0,
-                        "privilegedDeviceCount": 50,
-                        "privilegedInterfaceCount": 2000,
-                        "privilegedIntermediaryCount": 25,
-                        "privilegedUserCount": 50,
-                        "shieldArchitectureVersion": "2",
-                        "shieldCoreVersion": "3.0.0",
-                        "specializedDeviceCount": 0,
-                        "specializedInterfaceCount": 612,
-                        "specializedIntermediaryCount": 2,
-                        "specializedUserCount": 5238,
-                        "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
-                        "createdAt": "2024-08-05T15:25:55.525Z",
-                        "updatedAt": "2024-08-05T15:25:55.525Z"
-                      }
-                    }
-                  }
-                ],
+                },
                 "schema": {
                   "$ref": "#/components/schemas/Telemetry.Shield"
                 }
@@ -2434,68 +2666,116 @@
           "200": {
             "content": {
               "application/json": {
-                "examples": [
-                  {
-                    "List of Reports": {
-                      "description": "List of all available telemetry reports for the authenticated tenant.",
-                      "summary": "List of Reports",
-                      "value": [
-                        {
-                          "correlationId": "6fe3cd30-931c-439a-b759-1e7f3a73622e",
-                          "enterpriseDeviceCount": 64221,
-                          "enterpriseInterfaceCount": 523,
-                          "enterpriseIntermediaryCount": 44,
-                          "enterpriseUserCount": 642219,
-                          "monthlyActiveEntUsers": 0,
-                          "monthlyActivePrivUsers": 0,
-                          "monthlyActiveSpecUsers": 0,
-                          "privilegedDeviceCount": 50,
-                          "privilegedInterfaceCount": 2000,
-                          "privilegedIntermediaryCount": 25,
-                          "privilegedUserCount": 50,
-                          "shieldArchitectureVersion": "2",
-                          "shieldCoreVersion": "3.0.0",
-                          "specializedDeviceCount": 0,
-                          "specializedInterfaceCount": 612,
-                          "specializedIntermediaryCount": 2,
-                          "specializedUserCount": 5238,
-                          "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
-                          "createdAt": "2024-08-05T15:25:55.525Z",
-                          "updatedAt": "2024-08-05T15:25:55.525Z"
-                        },
-                        {
-                          "correlationId": "a57d03c6-8218-4738-b860-ac158e257e27",
-                          "enterpriseDeviceCount": 63221,
-                          "enterpriseInterfaceCount": 523,
-                          "enterpriseIntermediaryCount": 44,
-                          "enterpriseUserCount": 632219,
-                          "monthlyActiveEntUsers": 0,
-                          "monthlyActivePrivUsers": 0,
-                          "monthlyActiveSpecUsers": 0,
-                          "privilegedDeviceCount": 50,
-                          "privilegedInterfaceCount": 2000,
-                          "privilegedIntermediaryCount": 25,
-                          "privilegedUserCount": 50,
-                          "shieldArchitectureVersion": "2",
-                          "shieldCoreVersion": "3.0.0",
-                          "specializedDeviceCount": 0,
-                          "specializedInterfaceCount": 612,
-                          "specializedIntermediaryCount": 2,
-                          "specializedUserCount": 5238,
-                          "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
-                          "createdAt": "2024-07-05T15:25:55.525Z",
-                          "updatedAt": "2024-07-05T15:25:55.525Z"
-                        }
-                      ]
-                    }
+                "examples": {
+                  "List of Reports": {
+                    "description": "List of all available SHIELD telemetry reports for the current authenticated tenant.",
+                    "summary": "List of SHIELD telemetry reports",
+                    "value": [
+                      {
+                        "correlationId": "6fe3cd30-931c-439a-b759-1e7f3a73622e",
+                        "enterpriseDeviceCount": 64221,
+                        "enterpriseInterfaceCount": 523,
+                        "enterpriseIntermediaryCount": 44,
+                        "enterpriseUserCount": 642219,
+                        "monthlyActiveEntUsers": 0,
+                        "monthlyActivePrivUsers": 0,
+                        "monthlyActiveSpecUsers": 0,
+                        "privilegedDeviceCount": 50,
+                        "privilegedInterfaceCount": 2000,
+                        "privilegedIntermediaryCount": 25,
+                        "privilegedUserCount": 50,
+                        "shieldArchitectureVersion": "2",
+                        "shieldCoreVersion": "3.0.0",
+                        "specializedDeviceCount": 0,
+                        "specializedInterfaceCount": 612,
+                        "specializedIntermediaryCount": 2,
+                        "specializedUserCount": 5238,
+                        "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                        "createdAt": "2024-08-05T15:25:55.525Z",
+                        "updatedAt": "2024-08-05T15:25:55.525Z"
+                      },
+                      {
+                        "correlationId": "a57d03c6-8218-4738-b860-ac158e257e27",
+                        "enterpriseDeviceCount": 63221,
+                        "enterpriseInterfaceCount": 523,
+                        "enterpriseIntermediaryCount": 44,
+                        "enterpriseUserCount": 632219,
+                        "monthlyActiveEntUsers": 0,
+                        "monthlyActivePrivUsers": 0,
+                        "monthlyActiveSpecUsers": 0,
+                        "privilegedDeviceCount": 50,
+                        "privilegedInterfaceCount": 2000,
+                        "privilegedIntermediaryCount": 25,
+                        "privilegedUserCount": 50,
+                        "shieldArchitectureVersion": "2",
+                        "shieldCoreVersion": "3.0.0",
+                        "specializedDeviceCount": 0,
+                        "specializedInterfaceCount": 612,
+                        "specializedIntermediaryCount": 2,
+                        "specializedUserCount": 5238,
+                        "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                        "createdAt": "2024-07-05T15:25:55.525Z",
+                        "updatedAt": "2024-07-05T15:25:55.525Z"
+                      }
+                    ]
                   }
-                ],
+                },
                 "schema": {
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/Telemetry.Shield"
                   },
-                  "minItems": 0
+                  "minItems": 0,
+                  "examples": [
+                    [
+                      {
+                        "correlationId": "6fe3cd30-931c-439a-b759-1e7f3a73622e",
+                        "enterpriseDeviceCount": 64221,
+                        "enterpriseInterfaceCount": 523,
+                        "enterpriseIntermediaryCount": 44,
+                        "enterpriseUserCount": 642219,
+                        "monthlyActiveEntUsers": 0,
+                        "monthlyActivePrivUsers": 0,
+                        "monthlyActiveSpecUsers": 0,
+                        "privilegedDeviceCount": 50,
+                        "privilegedInterfaceCount": 2000,
+                        "privilegedIntermediaryCount": 25,
+                        "privilegedUserCount": 50,
+                        "shieldArchitectureVersion": "2",
+                        "shieldCoreVersion": "3.0.0",
+                        "specializedDeviceCount": 0,
+                        "specializedInterfaceCount": 612,
+                        "specializedIntermediaryCount": 2,
+                        "specializedUserCount": 5238,
+                        "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                        "createdAt": "2024-08-05T15:25:55.525Z",
+                        "updatedAt": "2024-08-05T15:25:55.525Z"
+                      },
+                      {
+                        "correlationId": "a57d03c6-8218-4738-b860-ac158e257e27",
+                        "enterpriseDeviceCount": 63221,
+                        "enterpriseInterfaceCount": 523,
+                        "enterpriseIntermediaryCount": 44,
+                        "enterpriseUserCount": 632219,
+                        "monthlyActiveEntUsers": 0,
+                        "monthlyActivePrivUsers": 0,
+                        "monthlyActiveSpecUsers": 0,
+                        "privilegedDeviceCount": 50,
+                        "privilegedInterfaceCount": 2000,
+                        "privilegedIntermediaryCount": 25,
+                        "privilegedUserCount": 50,
+                        "shieldArchitectureVersion": "2",
+                        "shieldCoreVersion": "3.0.0",
+                        "specializedDeviceCount": 0,
+                        "specializedInterfaceCount": 612,
+                        "specializedIntermediaryCount": 2,
+                        "specializedUserCount": 5238,
+                        "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                        "createdAt": "2024-07-05T15:25:55.525Z",
+                        "updatedAt": "2024-07-05T15:25:55.525Z"
+                      }
+                    ]
+                  ]
                 }
               }
             },
@@ -2525,68 +2805,116 @@
           "200": {
             "content": {
               "application/json": {
-                "examples": [
-                  {
-                    "List of Reports": {
-                      "description": "List of all available telemetry reports for the authenticated tenant.",
-                      "summary": "List of Reports",
-                      "value": [
-                        {
-                          "correlationId": "6fe3cd30-931c-439a-b759-1e7f3a73622e",
-                          "enterpriseDeviceCount": 64221,
-                          "enterpriseInterfaceCount": 523,
-                          "enterpriseIntermediaryCount": 44,
-                          "enterpriseUserCount": 642219,
-                          "monthlyActiveEntUsers": 0,
-                          "monthlyActivePrivUsers": 0,
-                          "monthlyActiveSpecUsers": 0,
-                          "privilegedDeviceCount": 50,
-                          "privilegedInterfaceCount": 2000,
-                          "privilegedIntermediaryCount": 25,
-                          "privilegedUserCount": 50,
-                          "shieldArchitectureVersion": "2",
-                          "shieldCoreVersion": "3.0.0",
-                          "specializedDeviceCount": 0,
-                          "specializedInterfaceCount": 612,
-                          "specializedIntermediaryCount": 2,
-                          "specializedUserCount": 5238,
-                          "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
-                          "createdAt": "2024-08-05T15:25:55.525Z",
-                          "updatedAt": "2024-08-05T15:25:55.525Z"
-                        },
-                        {
-                          "correlationId": "a57d03c6-8218-4738-b860-ac158e257e27",
-                          "enterpriseDeviceCount": 63221,
-                          "enterpriseInterfaceCount": 523,
-                          "enterpriseIntermediaryCount": 44,
-                          "enterpriseUserCount": 632219,
-                          "monthlyActiveEntUsers": 0,
-                          "monthlyActivePrivUsers": 0,
-                          "monthlyActiveSpecUsers": 0,
-                          "privilegedDeviceCount": 50,
-                          "privilegedInterfaceCount": 2000,
-                          "privilegedIntermediaryCount": 25,
-                          "privilegedUserCount": 50,
-                          "shieldArchitectureVersion": "2",
-                          "shieldCoreVersion": "3.0.0",
-                          "specializedDeviceCount": 0,
-                          "specializedInterfaceCount": 612,
-                          "specializedIntermediaryCount": 2,
-                          "specializedUserCount": 5238,
-                          "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
-                          "createdAt": "2024-07-05T15:25:55.525Z",
-                          "updatedAt": "2024-07-05T15:25:55.525Z"
-                        }
-                      ]
-                    }
+                "examples": {
+                  "List of Reports": {
+                    "description": "List of all available SHIELD telemetry reports for the specified tenant.",
+                    "summary": "List of SHIELD telemetry reports",
+                    "value": [
+                      {
+                        "correlationId": "6fe3cd30-931c-439a-b759-1e7f3a73622e",
+                        "enterpriseDeviceCount": 64221,
+                        "enterpriseInterfaceCount": 523,
+                        "enterpriseIntermediaryCount": 44,
+                        "enterpriseUserCount": 642219,
+                        "monthlyActiveEntUsers": 0,
+                        "monthlyActivePrivUsers": 0,
+                        "monthlyActiveSpecUsers": 0,
+                        "privilegedDeviceCount": 50,
+                        "privilegedInterfaceCount": 2000,
+                        "privilegedIntermediaryCount": 25,
+                        "privilegedUserCount": 50,
+                        "shieldArchitectureVersion": "2",
+                        "shieldCoreVersion": "3.0.0",
+                        "specializedDeviceCount": 0,
+                        "specializedInterfaceCount": 612,
+                        "specializedIntermediaryCount": 2,
+                        "specializedUserCount": 5238,
+                        "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                        "createdAt": "2024-08-05T15:25:55.525Z",
+                        "updatedAt": "2024-08-05T15:25:55.525Z"
+                      },
+                      {
+                        "correlationId": "a57d03c6-8218-4738-b860-ac158e257e27",
+                        "enterpriseDeviceCount": 63221,
+                        "enterpriseInterfaceCount": 523,
+                        "enterpriseIntermediaryCount": 44,
+                        "enterpriseUserCount": 632219,
+                        "monthlyActiveEntUsers": 0,
+                        "monthlyActivePrivUsers": 0,
+                        "monthlyActiveSpecUsers": 0,
+                        "privilegedDeviceCount": 50,
+                        "privilegedInterfaceCount": 2000,
+                        "privilegedIntermediaryCount": 25,
+                        "privilegedUserCount": 50,
+                        "shieldArchitectureVersion": "2",
+                        "shieldCoreVersion": "3.0.0",
+                        "specializedDeviceCount": 0,
+                        "specializedInterfaceCount": 612,
+                        "specializedIntermediaryCount": 2,
+                        "specializedUserCount": 5238,
+                        "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                        "createdAt": "2024-07-05T15:25:55.525Z",
+                        "updatedAt": "2024-07-05T15:25:55.525Z"
+                      }
+                    ]
                   }
-                ],
+                },
                 "schema": {
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/Telemetry.Shield"
                   },
-                  "minItems": 0
+                  "minItems": 0,
+                  "examples": [
+                    [
+                      {
+                        "correlationId": "6fe3cd30-931c-439a-b759-1e7f3a73622e",
+                        "enterpriseDeviceCount": 64221,
+                        "enterpriseInterfaceCount": 523,
+                        "enterpriseIntermediaryCount": 44,
+                        "enterpriseUserCount": 642219,
+                        "monthlyActiveEntUsers": 0,
+                        "monthlyActivePrivUsers": 0,
+                        "monthlyActiveSpecUsers": 0,
+                        "privilegedDeviceCount": 50,
+                        "privilegedInterfaceCount": 2000,
+                        "privilegedIntermediaryCount": 25,
+                        "privilegedUserCount": 50,
+                        "shieldArchitectureVersion": "2",
+                        "shieldCoreVersion": "3.0.0",
+                        "specializedDeviceCount": 0,
+                        "specializedInterfaceCount": 612,
+                        "specializedIntermediaryCount": 2,
+                        "specializedUserCount": 5238,
+                        "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                        "createdAt": "2024-08-05T15:25:55.525Z",
+                        "updatedAt": "2024-08-05T15:25:55.525Z"
+                      },
+                      {
+                        "correlationId": "a57d03c6-8218-4738-b860-ac158e257e27",
+                        "enterpriseDeviceCount": 63221,
+                        "enterpriseInterfaceCount": 523,
+                        "enterpriseIntermediaryCount": 44,
+                        "enterpriseUserCount": 632219,
+                        "monthlyActiveEntUsers": 0,
+                        "monthlyActivePrivUsers": 0,
+                        "monthlyActiveSpecUsers": 0,
+                        "privilegedDeviceCount": 50,
+                        "privilegedInterfaceCount": 2000,
+                        "privilegedIntermediaryCount": 25,
+                        "privilegedUserCount": 50,
+                        "shieldArchitectureVersion": "2",
+                        "shieldCoreVersion": "3.0.0",
+                        "specializedDeviceCount": 0,
+                        "specializedInterfaceCount": 612,
+                        "specializedIntermediaryCount": 2,
+                        "specializedUserCount": 5238,
+                        "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                        "createdAt": "2024-07-05T15:25:55.525Z",
+                        "updatedAt": "2024-07-05T15:25:55.525Z"
+                      }
+                    ]
+                  ]
                 }
               }
             },
