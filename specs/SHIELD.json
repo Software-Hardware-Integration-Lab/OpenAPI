@@ -250,6 +250,11 @@
                         "example": 7,
                         "type": "number",
                         "minimum": 1
+                    },
+                    "link": {
+                        "description": "URL to provide the end user with more information about the current step.",
+                        "example": "https://docs.shilab.com/",
+                        "type": "string"
                     }
                 },
                 "type": "object",
