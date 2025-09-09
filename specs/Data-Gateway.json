@@ -3208,8 +3208,7 @@
           "200": {
             "content": {
               "application/json": {
-                "examples": [
-                  {
+                "examples": {
                     "Channel Configuration Details": {
                       "description": "Example object returned on creation or update.",
                       "summary": "Channel Configuration",
@@ -3219,8 +3218,7 @@
                         "previous": "1.12.4"
                       }
                     }
-                  }
-                ],
+                  },
                 "schema": {
                   "$ref": "#/components/schemas/Update.Shield.Channel"
                 }
