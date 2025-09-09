@@ -3054,6 +3054,38 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/Update.Shield.Channel"
+                  },
+                  "examples": [
+                    [
+                      {
+                        "latest": "1.12.5",
+                        "name": "stable",
+                        "previous": "1.12.4"
+                      }
+                    ]
+                  ]
+                },
+                "examples": {
+                  "Channel configuration": {
+                    "summary": "Example all channel configs",
+                    "description": "An example showing the all channel configurations.",
+                    "value": [
+                      {
+                        "latest": "1.12.5",
+                        "name": "stable",
+                        "previous": "1.12.4"
+                      },
+                      {
+                        "latest": "1.12.7",
+                        "name": "alpha",
+                        "previous": "1.12.6"
+                      },
+                      {
+                        "latest": "1.12.6",
+                        "name": "beta",
+                        "previous": "1.12.5"
+                      }
+                    ]
                   }
                 }
               }
@@ -3089,6 +3121,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Update.Shield.Channel"
+                },
+                "examples": {
+                  "Stable channel config": {
+                    "summary": "Example stable channel config",
+                    "description": "An example showing the stable update channel configuration.",
+                    "value": {
+                      "latest": "1.12.5",
+                      "name": "stable",
+                      "previous": "1.12.4"
+                    }
+                  },
+                  "Alpha channel config": {
+                    "summary": "Example alpha channel config",
+                    "description": "An example showing the alpha update channel configuration.",
+                    "value": {
+                      "latest": "1.12.7",
+                      "name": "alpha",
+                      "previous": "1.12.6"
+                    }
+                  }
                 }
               }
             },
@@ -3118,33 +3170,36 @@
         "requestBody": {
           "content": {
             "application/json": {
-              "examples": [
-                {
-                  "Channel Configuration Details": {
-                    "description": "Example channel configuration object.",
-                    "summary": "Channel Configuration",
-                    "value": {
-                      "latest": "1.12.5",
-                      "previous": "1.12.4"
-                    }
+              "examples": {
+                "Channel Configuration Details": {
+                  "description": "Example channel configuration object that will add/update for specified channel.",
+                  "summary": "Channel Configuration",
+                  "value": {
+                    "latest": "1.12.5",
+                    "previous": "1.12.4"
                   }
                 }
-              ],
+              },
               "schema": {
                 "type": "object",
                 "properties": {
                   "latest": {
-                    "description": "Flag that indicates if the ring should be operating off of the latest version number provided by the channel (`true`) or the previous (`false`).",
-                    "examples": ["true"],
-                    "type": "boolean"
+                    "description": "Version number of the latest update available to the chanel.",
+                    "examples": ["1.12.5"],
+                    "type": "string"
                   },
-                  "number": {
-                    "description": "Ring number that this configuration belongs to.",
-                    "examples": [1],
-                    "type": "integer",
-                    "minimum": 0
+                  "previous": {
+                    "description": "Version number of the number that is being replaced via ring deployment, available to all rings at the minimum.",
+                    "examples": ["1.12.14"],
+                    "type": "string"
                   }
-                }
+                },
+                "examples": [
+                  {
+                    "latest": "1.12.5",
+                    "previous": "1.12.4"
+                  }
+                ]
               }
             }
           }
