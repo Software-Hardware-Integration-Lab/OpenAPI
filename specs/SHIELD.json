@@ -1050,6 +1050,30 @@
                 "title": "Page of Managed Device Objects",
                 "type": "object"
             },
+            "ObjectPage.ManagedPrivilegedDevice": {
+                "properties": {
+                    "@odata.count": {
+                        "nullable": true,
+                        "type": "number"
+                    },
+                    "@odata.nextLink": {
+                        "nullable": true,
+                        "type": "string"
+                    },
+                    "value": {
+                        "items": {
+                            "$ref": "#/components/schemas/ManagedObject.PrivilegedDevice"
+                        },
+                        "minItems": 0,
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "value"
+                ],
+                "title": "Page of Managed Privileged Device Objects",
+                "type": "object"
+            },
             "ObjectPage.ManagedUser": {
                 "properties": {
                     "@odata.count": {
@@ -1079,6 +1103,30 @@
                     "value"
                 ],
                 "title": "Page of Managed User Objects",
+                "type": "object"
+            },
+            "ObjectPage.ManagedPrivilegedUser": {
+                "properties": {
+                    "@odata.count": {
+                        "nullable": true,
+                        "type": "number"
+                    },
+                    "@odata.nextLink": {
+                        "nullable": true,
+                        "type": "string"
+                    },
+                    "value": {
+                        "items": {
+                            "$ref": "#/components/schemas/ManagedObject.PrivilegedUser"
+                        },
+                        "minItems": 0,
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "value"
+                ],
+                "title": "Page of Managed Privileged User Objects",
                 "type": "object"
             },
             "SecurityClassList": {
@@ -1114,7 +1162,7 @@
         },
         "description": "Deprive your threats of practical significance. Deploy the Securing Privilege Access architecture. All in a few seconds.",
         "title": "SHI Environment Lockdown and Defense",
-        "version": "3.0.4"
+        "version": "3.0.7"
     },
     "openapi": "3.0.0",
     "paths": {
@@ -2368,6 +2416,97 @@
                 ]
             }
         },
+        "/Api/Defend/Device/Type/Privileged": {
+            "get": {
+                "description": "Returns a list of all privileged managed devices.\n\nThis endpoint requires the `Device.Privileged.Read`, `Device.Privileged.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Defend/Device/Type/Privileged/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/nextLink"
+                    },
+                    {
+                        "$ref": "#/components/parameters/search"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ObjectPage.ManagedPrivilegedDevice"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "525": {
+                        "$ref": "#/components/responses/525"
+                    }
+                },
+                "summary": "Get All Privileged Devices",
+                "tags": [
+                    "Device Management"
+                ]
+            },
+            "post": {
+                "description": "Commissions a new device, into the device hierarchy and appends appropriate metadata and initial policies. Appends required metadata to proper locations.\n\nThis endpoint requires the `Device.Privileged.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Defend/Device/Type/Privileged/Post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "deviceId": "f7e1a66f-ce2e-4351-83df-2776813ef95d"
+                            },
+                            "schema": {
+                                "properties": {
+                                    "deviceId": {
+                                        "description": "The SHIELD ID (Entra ID Device ID) of the device to target.",
+                                        "example": "75da7fa4-4a04-44c8-8f2c-c1b2fa29aa51",
+                                        "format": "uuid",
+                                        "maxLength": 36,
+                                        "minLength": 36,
+                                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "deviceId"
+                                ],
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ManagedObject.PrivilegedDevice"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "525": {
+                        "$ref": "#/components/responses/525"
+                    }
+                },
+                "summary": "Commission a New PAW.",
+                "tags": [
+                    "Device Management"
+                ]
+            }
+        },
         "/Api/Defend/Device/Type/{securityClass}": {
             "get": {
                 "description": "Returns a list of all devices managed or unmanaged.\n\nThis endpoint requires the `Device.Privileged.Read`, `Device.Privileged.ReadWrite`, `Device.Specialized.Read`, `Device.Specialized.ReadWrite`, `Device.Enterprise.ReadWrite`, `Device.Enterprise.Read`, or the `Everything.ReadWrite` scope (permission). The security class parameter in the URL path corresponds to the same permission in the scope. That means if you are granted a privileged role, you can only call the privilege class URL. When reading the `unmanaged` objects, any security class permission can read them, no need for a specific `unmanaged` class assignment.",
@@ -2633,6 +2772,100 @@
                     }
                 },
                 "summary": "Create/Bring User Into Management",
+                "tags": [
+                    "User Management"
+                ]
+            }
+        },
+        "/Api/Defend/User/Type/Privileged": {
+            "get": {
+                "description": "Returns a list of all privileged managed users.\n\nThis endpoint requires the `User.Privileged.Read`, `User.Privileged.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Defend/User/Type/Privileged/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/nextLink"
+                    },
+                    {
+                        "$ref": "#/components/parameters/search"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ObjectPage.ManagedPrivilegedUser"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "525": {
+                        "$ref": "#/components/responses/525"
+                    }
+                },
+                "summary": "Get All Privileged Users",
+                "tags": [
+                    "User Management"
+                ]
+            },
+            "post": {
+                "description": "Securely clones the specified user's properties into a new managed user object in the privileged baselines.\n\nThis endpoint requires the `User.Privileged.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Defend/User/Type/Privileged/Post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "userId": "d886680d-a283-4fc2-803f-370d81d62366"
+                            },
+                            "schema": {
+                                "properties": {
+                                    "userId": {
+                                        "description": "The Entra ID object ID of the user to clone.",
+                                        "example": "264a8bed-0714-48fd-8b9d-0e4c4715cee5",
+                                        "format": "uuid",
+                                        "maxLength": 36,
+                                        "minLength": 36,
+                                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "userId"
+                                ],
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ManagedObject.PrivilegedUser"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "409": {
+                        "description": "User is already managed."
+                    },
+                    "525": {
+                        "$ref": "#/components/responses/525"
+                    }
+                },
+                "summary": "Create/Bring new Privileged User Into Management",
                 "tags": [
                     "User Management"
                 ]
