@@ -33,6 +33,41 @@
             }
         },
         "schemas": {
+            "Auth.Id": {
+                "title": "Auth IDs required to authenticate",
+                "description": "Object containing IDs necessary to perform user authentication in the EntraID.",
+                "examples": [
+                    {
+                        "appId": "2a7e1b3c-4d5f-4a8b-9e6a-1c2b7f3d8e4a",
+                        "tenantId": "9c1e7a2b-5d3f-4a8b-2c6e-7f1a3d9e8b5c"
+                    }
+                ],
+                "properties": {
+                    "appId": {
+                        "description": "Application ID that should be used in Access Tokens as the audience and the endpoint necessary for auth code flows.",
+                        "type": "string",
+                        "format": "uuid",
+                        "maxLength": 36,
+                        "minLength": 36,
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                        "readOnly": true
+                    },
+                    "tenantId": {
+                        "description": "Tenant ID necessary for authority host URL configuration and UI customization.",
+                        "type": "string",
+                        "format": "uuid",
+                        "maxLength": 36,
+                        "minLength": 36,
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                        "readOnly": true
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "appId",
+                    "tenantId"
+                ]
+            },
             "Core.HealthReport": {
                 "title": "Core System - Health Report",
                 "description": "Health report that indicates if a service is down or not that the URL Shortener relies on.",
@@ -73,9 +108,14 @@
                         "sourceUrl": "https://www.example.com/vanityUrl",
                         "createdBy": "3c5a9b7e-2d4f-4c1b-8e6a-7f2b3d1c9e45",
                         "customUserAgentMatcher": null,
+                        "expectedBrokenScanStatusCode": null,
                         "domainConfigId": "9a1e7b2c-5d3f-4a8b-9c2e-6f1a3d7e8b54",
+                        "enabled": true,
+                        "enableLinkBrokenScan": false,
                         "updatedBy": "3c5a9b7e-2d4f-4c1b-8e6a-7f2b3d1c9e45",
                         "targetUrl": "https://www.example.com/very-long-and-complex-url-with_plenty-of-special-characters-and-non-repeated-words",
+                        "notEnabledAfter": "2025-12-31T23:59:59Z",
+                        "notEnabledBefore": null,
                         "targetUrlCustom": null,
                         "targetUrlMobile": null,
                         "targetUrlNodeJs": null,
@@ -116,6 +156,13 @@
                         ],
                         "maxLength": 512
                     },
+                    "expectedBrokenScanStatusCode": {
+                        "description": "Status code expected by the scheduled scan results.",
+                        "type": [
+                            "integer",
+                            "null"
+                        ]
+                    },
                     "domainConfigId": {
                         "description": "Object ID of the domain configuration that this redirect record is associated with.",
                         "type": "string",
@@ -124,6 +171,14 @@
                         "minLength": 36,
                         "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
                         "readOnly": true
+                    },
+                    "enabled": {
+                        "description": " Flag that indicates if the created URL is enabled (`true`) or not (`false`).",
+                        "type": "boolean"
+                    },
+                    "enableLinkBrokenScan": {
+                        "description": "Flag that enables (`true`) or disables (`false`) scans happening against the target to check if broken.",
+                        "type": "boolean"
                     },
                     "updatedBy": {
                         "description": "Object ID of the last user who updated this record.",
@@ -137,6 +192,22 @@
                         "description": "Destination that the client will be redirected to if the source is matched. This is the default URL that will be used when no user agent is matched.",
                         "type": "string",
                         "format": "uri"
+                    },
+                    "notEnabledAfter": {
+                        "description": "Date that when present, indicates when the link expires.",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
+                    },
+                    "notEnabledBefore": {
+                        "description": "Date that when present, indicates when the link goes live.",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     },
                     "targetUrlCustom": {
                         "description": "Target URL for custom defined and matching user agent clients.",
@@ -193,9 +264,14 @@
                     "sourceUrl",
                     "createdBy",
                     "customUserAgentMatcher",
+                    "expectedBrokenScanStatusCode",
                     "domainConfigId",
+                    "enabled",
+                    "enableLinkBrokenScan",
                     "updatedBy",
                     "targetUrl",
+                    "notEnabledAfter",
+                    "notEnabledBefore",
                     "targetUrlCustom",
                     "targetUrlMobile",
                     "targetUrlNodeJs",
@@ -410,48 +486,25 @@
         },
         "description": "Create vanity or numeric short version of your desired URL. Share it digitally, as QR code, or print it.",
         "title": "SHI URL Shortener",
-        "version": "0.0.2"
+        "version": "0.0.3"
     },
     "openapi": "3.1.1",
     "paths": {
         "/Api/Auth/Id": {
             "get": {
+                "summary": "Retrieves the IDs required to authenticate.",
                 "description": "Provides the Tenant ID and the Application ID of the service principal that access tokens need to be issued against. This is also useful for configuring public clients to be able to authenticate to for auth code flows.",
                 "operationId": "/Api/Auth/Id/Get",
                 "responses": {
                     "200": {
+                        "description": "OK",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "appId": {
-                                            "description": "Application ID that should be used in Access Tokens as the audience and the endpoint necessary for auth code flows.",
-                                            "type": "string",
-                                            "format": "uuid",
-                                            "maxLength": 36,
-                                            "minLength": 36,
-                                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
-                                            "readOnly": true
-                                        },
-                                        "tenantId": {
-                                            "description": "Tenant ID necessary for authority host URL configuration and UI customization.",
-                                            "type": "string",
-                                            "format": "uuid",
-                                            "maxLength": 36,
-                                            "minLength": 36,
-                                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
-                                            "readOnly": true
-                                        }
-                                    },
-                                    "type": "object",
-                                    "required": [
-                                        "appId",
-                                        "tenantId"
-                                    ]
+                                    "$ref": "#/components/schemas/Auth.Id"
                                 }
                             }
-                        },
-                        "description": "OK"
+                        }
                     },
                     "500": {
                         "$ref": "#/components/responses/500"
@@ -460,8 +513,7 @@
                 "tags": [
                     "Core"
                 ],
-                "security": [],
-                "summary": "Retrieves the IDs required to authenticate."
+                "security": []
             }
         },
         "/Api/Core/Health": {
@@ -682,12 +734,18 @@
                                 "Complete and proper payload": {
                                     "description": "Request where all required fields are present and valid.",
                                     "value": {
+                                        "id": "7e2b1c8a-4f3d-4e2a-9b1a-2c6e8d7f1a23",
                                         "sourceUrl": "https://www.example.com/long-and-complex-url",
                                         "createdBy": "3c5a9b7e-2d4f-4c1b-8e6a-7f2b3d1c9e45",
                                         "customUserAgentMatcher": null,
+                                        "expectedBrokenScanStatusCode": null,
                                         "domainConfigId": "9a1e7b2c-5d3f-4a8b-9c2e-6f1a3d7e8b54",
+                                        "enabled": true,
+                                        "enableLinkBrokenScan": false,
                                         "updatedBy": "3c5a9b7e-2d4f-4c1b-8e6a-7f2b3d1c9e45",
                                         "targetUrl": "https://www.example.com/target",
+                                        "notEnabledAfter": null,
+                                        "notEnabledBefore": null,
                                         "targetUrlCustom": null,
                                         "targetUrlMobile": null,
                                         "targetUrlNodeJs": null,
