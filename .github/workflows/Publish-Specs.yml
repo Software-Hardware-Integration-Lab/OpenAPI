@@ -1,0 +1,65 @@
+# Display Name of the workflow
+name: Publish - OpenAPI Specs to GitHub Pages
+
+# Determine when to run this workflow
+on:
+  # Allow manual triggering of the workflow
+  workflow_dispatch:
+  # Runs every Sunday at 00:00 UTC
+  schedule:
+    - cron: '0 0 * * 0'
+
+jobs:
+  Deploy-GH-Pages:
+    # Human friendly display name for the job
+    name: Deploy OpenAPI Specification to GitHub Pages
+
+    # Filter for which runners are allowed to execute this job
+    runs-on: ubuntu-latest
+
+    # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+    permissions:
+        pages: write
+        id-token: write
+
+    # Allow one concurrent deployment
+    concurrency:
+        group: "pages"
+        cancel-in-progress: true
+
+    # List of steps to execute in this job
+    steps:
+        # Configure the GH pages environment
+        - name: Setup Pages
+          uses: actions/configure-pages@v5
+
+        # Grab a copy of the latest binaries
+        - name: Download Latest Swagger UI Release
+          run: |
+            LATEST_URL=$(curl -sL https://api.github.com/repos/swagger-api/swagger-ui/releases/latest | grep "tarball_url" | cut -d '"' -f 4)
+            curl -L "$LATEST_URL" -o swagger-ui.tar.gz
+
+        # Extract the downloaded archive
+        - name: Extract Swagger UI dist folder
+          run: |
+            mkdir swagger-ui
+            tar -xzf swagger-ui.tar.gz --strip-components=1 -C swagger-ui
+
+        # Update the config to have the SHI Lab Specs
+        - name: Replace SwaggerUIBundle url with urls array in swagger-initializer.js
+          run: |
+            DIST_FILE="swagger-ui/dist/swagger-initializer.js"
+            # Remove the 'url:' property and insert the 'urls:' array
+            sed -i '/url: /c\    urls: [\n{\n"url": "https://raw.githubusercontent.com/Software-Hardware-Integration-Lab/OpenAPI/refs/heads/main/specs/Data-Gateway.json",\n"name": "Data Gateway"\n},\n{\n"url": "https://raw.githubusercontent.com/Software-Hardware-Integration-Lab/OpenAPI/refs/heads/main/specs/SHIELD.json",\n"name": "SHIELD"\n},\n{\n"url": "https://raw.githubusercontent.com/Software-Hardware-Integration-Lab/OpenAPI/refs/heads/main/specs/Url-Shortener.json",\n"name": "SHI - URL Shortener"\n}\n],' "$DIST_FILE"
+
+        # Uploads the built artifact to github pages
+        - name: Upload Artifact
+          uses: actions/upload-pages-artifact@v3
+          with:
+            # Upload static files
+            path: "swagger-ui/dist/"
+
+        # Deploy the compiled pages
+        - name: Deploy to GitHub Pages
+          id: deployment
+          uses: actions/deploy-pages@v4
