@@ -1,6 +1,27 @@
 {
   "components": {
     "parameters": {
+      "tenantId": {
+        "description": "The object ID of the tenant identifier for the specific records",
+        "in": "path",
+        "name": "tenantId",
+        "required": true,
+        "schema": {
+          "examples": ["1d71e0fe-6e4a-464d-a690-80addf3bda55"],
+          "format": "uuid",
+          "maxLength": 36,
+          "minLength": 36,
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"          
+        },
+        "examples": {
+          "valid correlation ID": {
+            "value": "1d71e0fe-6e4a-464d-a690-80addf3bda55",
+            "summary": "Example valid tenant ID",
+            "description": "An example of a valid tenant ID in type UUID."
+          }
+        }        
+      },
       "correlationId": {
         "description": "The object ID of the correlation identifier for the specified record.",
         "in": "path",
@@ -3904,7 +3925,6 @@
       "post": {
         "description": "Configure a route to store new architectural analysis report information.",
         "operationId": "/Api/ArchitectureReport/Post",
-        "parameters": [],
         "requestBody": {},
         "responses": {},
         "summary": {},
@@ -3915,7 +3935,6 @@
       "get": {
         "description": "Configure a route to retrieve the list of correlation records for the authenticated tenant.",
         "operationId": "/Api/ArchitectureReport/Correlation/Post",
-        "parameters": [],
         "requestBody": {},
         "responses": {},
         "summary": {},
@@ -3926,7 +3945,9 @@
       "get": {
         "description": "Configure a route to retrieve the list of correlation records for the specified tenant, if the caller is SHI and authorized.",
         "operationId": "/Api/ArchitectureReport/Correlation/Tenant/:tenantId/Get",
-        "parameters": [],
+        "parameters": [{
+          "$ref": "#/components/parameters/tenantId"
+        }],
         "requestBody": {},
         "responses": {},
         "summary": {},
@@ -3937,7 +3958,9 @@
       "get": {
         "description": "Configure a route to retrieve architectural analysis report for the specified correlation ID in the authenticated tenant.",
         "operationId": "/Api/ArchitectureReport/Correlation/:correlationId/Data/Get",
-        "parameters": [],
+        "parameters": [{
+          "$ref": "#/components/parameters/correlationId"
+        }],
         "requestBody": {},
         "responses": {},
         "summary": {},
@@ -3957,7 +3980,11 @@
       "get": {
         "description": "Configure a route to retrieve architectural analysis report for the specified correlation ID for the specified tenant, if the caller is SHI and authorized.",
         "operationId": "/Api/ArchitectureReport/Correlation/:correlationId/Tenant/:tenantId/Data/Get",
-        "parameters": [],
+        "parameters": [{
+          "$ref": "#/components/parameters/correlationId"
+        },{
+          "$ref": "#/components/parameters/tenantId"
+        }],
         "requestBody": {},
         "responses": {},
         "summary": {},
@@ -3966,7 +3993,11 @@
       "delete": {
         "description": "Configure a route to remove the specified architectural analysis report.",
         "operationId": "/Api/ArchitectureReport/Correlation/:correlationId/Tenant/:tenantId/Data/Delete",
-        "parameters": [],
+        "parameters": [{
+          "$ref": "#/components/parameters/correlationId"
+        }, {
+          "$ref": "#/components/parameters/tenantId"
+        }],
         "requestBody": {},
         "responses": {},
         "summary": {},
