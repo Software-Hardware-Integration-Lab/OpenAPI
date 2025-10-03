@@ -3899,6 +3899,79 @@
         "summary": "Deploy Marketplace Offering",
         "tags": ["Marketplace"]
       }
+    },
+    "/Api/ArchitectureReport": {
+      "post": {
+        "description": "Configure a route to store new architectural analysis report information.",
+        "operationId": "/Api/ArchitectureReport/Post",
+        "parameters": [],
+        "requestBody": {},
+        "responses": {},
+        "summary": {},
+        "tags": ["ArchitectureReport"]
+      }
+    },
+    "/Api/ArchitectureReport/Correlation": {
+      "get": {
+        "description": "Configure a route to retrieve the list of correlation records for the authenticated tenant.",
+        "operationId": "/Api/ArchitectureReport/Correlation/Post",
+        "parameters": [],
+        "requestBody": {},
+        "responses": {},
+        "summary": {},
+        "tags": ["ArchitectureReport"]        
+      }
+    },
+    "/Api/ArchitectureReport/Correlation/Tenant/{tenantId}": {
+      "get": {
+        "description": "Configure a route to retrieve the list of correlation records for the specified tenant, if the caller is SHI and authorized.",
+        "operationId": "/Api/ArchitectureReport/Correlation/Tenant/:tenantId/Get",
+        "parameters": [],
+        "requestBody": {},
+        "responses": {},
+        "summary": {},
+        "tags": ["ArchitectureReport"]        
+      }
+    },
+    "/Api/ArchitectureReport/Correlation/{correlationId}/Data": {
+      "get": {
+        "description": "Configure a route to retrieve architectural analysis report for the specified correlation ID in the authenticated tenant.",
+        "operationId": "/Api/ArchitectureReport/Correlation/:correlationId/Data/Get",
+        "parameters": [],
+        "requestBody": {},
+        "responses": {},
+        "summary": {},
+        "tags": ["ArchitectureReport"]        
+      },
+      "delete": {
+        "description": "Configure a route to allow customers to self service delete architectural analysis reports.",
+        "operationId": "/Api/ArchitectureReport/Correlation/:correlationId/Data/Delete",
+        "parameters": [],
+        "requestBody": {},
+        "responses": {},
+        "summary": {},
+        "tags": ["ArchitectureReport"]        
+      }
+    },
+    "/Api/ArchitectureReport/Correlation/{correlationId}/Tenant/{tenantId}/Data": {
+      "get": {
+        "description": "Configure a route to retrieve architectural analysis report for the specified correlation ID for the specified tenant, if the caller is SHI and authorized.",
+        "operationId": "/Api/ArchitectureReport/Correlation/:correlationId/Tenant/:tenantId/Data/Get",
+        "parameters": [],
+        "requestBody": {},
+        "responses": {},
+        "summary": {},
+        "tags": ["ArchitectureReport"]        
+      },
+      "delete": {
+        "description": "Configure a route to remove the specified architectural analysis report.",
+        "operationId": "/Api/ArchitectureReport/Correlation/:correlationId/Tenant/:tenantId/Data/Delete",
+        "parameters": [],
+        "requestBody": {},
+        "responses": {},
+        "summary": {},
+        "tags": ["ArchitectureReport"]        
+      }
     }
   },
   "security": [
