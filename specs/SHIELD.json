@@ -1545,8 +1545,184 @@
         "examples": ["Privileged"],
         "title": "Type of security class the object(s) belongs to",
         "type": "string"
-      }
-    },
+      },
+      "ArchitectureReport": {        
+        "description": "Container that represents the entire architecture report structure for a complete run of architectural analysis.",
+        "title": "Architecture Report - Complete Object",
+        "type": "object",
+        "properties": {
+          "tenantMetadata": {
+            "$ref": "#/components/schemas/ArchitectureReport.TenantMetadata"
+          },
+          "correlation": {},
+          "scheduling": {
+            "description": "@todo - Check with Elliot.",
+            "examples": ["2023-02-04T05:06:09.601Z"],
+            "format": "date-time",
+            "type": "string"
+          },
+          "securityPosture": {
+            "$ref": "#/components/"
+          }
+        },
+        "required": ["tenantMetadata", "correlation", "scheduling", "securityPosture"],
+        "examples": [{
+            "correlation": {     
+              "auditTenantAccount": "user@example.com",
+              "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+              "createdAt": "2023-02-04T05:06:09.601Z",
+              "reportTenantAccount": "user@example.com",
+              "tenantId": "123e4567-e89b-12d3-a456-426614174000",
+              "updatedAt": "2023-02-04T05:06:09.601Z"
+            },
+            "scheduling": "2023-02-04T05:06:09.601Z",
+            "securityPosture": { 
+                "device": {
+                  "123e4567-e89b-12d3-a456-426614174000": {
+                    "assignedService": {
+                        "234e4567-e89b-12d3-a456-426614174000": 0
+                    }
+                }
+              },
+                "user": {
+                    "123e4567-e89b-12d3-a456-426614174000": {
+                        "assignedService": {
+                            "234e4567-e89b-12d3-a456-426614174000": 0
+                        }
+                    }
+                }
+             },
+            "tenantMetadata": {
+              "totalDeviceCount": 1,
+              "totalGuestCount": 0,
+              "totalMemberCount": 1,
+              "totalUserCount": 1
+            }
+        }]
+      },
+      "ArchitectureReport.TenantMetadata": {
+        "title": "Architecture Report - Tenant Metadata",
+        "description": "Metadata for the tenant.",
+        "type": "object",
+        "properties": {
+          "totalUserCount": {
+            "type": "integer",
+            "examples": [0, 1]
+          },
+          "totalGuestCount": {
+            "type": "integer",
+            "examples": [0, 1]
+          },
+          "totalMemberCount": {
+            "type": "integer",
+            "examples": [0, 1]
+          },
+          "totalDeviceCount": {
+            "type": "integer",
+            "examples": [0, 1]
+          }
+        },
+        "examples": [{
+          "totalDeviceCount": 1,
+          "totalGuestCount": 0,
+          "totalMemberCount": 1,
+          "totalUserCount": 1
+        }]   
+      },
+      "ArchitectureReport.SecurityPosture": {
+        "title": "Architecture Report - Security Posture",
+        "description": "A collection of user and device principal assignments.",
+        "type": "object",
+        "properties": {
+          "device": {
+            "type": "object",
+            "description": "Device principal assignment data.",
+            "additionalProperties": false,
+            "patternProperties": {
+              "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$": {
+                "$ref": "#/components/schemas/ArchitectureReport.PrincipalAssignment"
+              }
+            }
+          },
+          "user": {
+            "type": "object",
+            "description": "User principal assignment data.",
+            "additionalProperties": false,
+            "patternProperties": {
+              "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$": {
+                "$ref": "#/components/schemas/ArchitectureReport.PrincipalAssignment"
+              }
+          }
+          }
+        },
+        "examples": [
+          {
+            "device": {
+                "123e4567-e89b-12d3-a456-426614174000": {
+                    "assignedService": {
+                        "234e4567-e89b-12d3-a456-426614174000": 0
+                    }
+                }
+            },
+            "user": {
+                "123e4567-e89b-12d3-a456-426614174000": {
+                    "assignedService": {
+                        "234e4567-e89b-12d3-a456-426614174000": 0
+                    }
+                }
+            }
+        }
+        ]
+      },
+      "ArchitectureReport.PrincipalAssignment": {
+        "title": "Architecture Report - Principal Assignment",
+        "description": "Principal assignment for the security posture data.",
+        "type": "object",
+        "properties": {
+          "assignedService": {
+            "type": "object",
+            "description": "Service configuration assignment used to record the set of principals that are \"benefiting\" from the service, regardless of license status.",
+            "additionalProperties": false,
+            "patternProperties": {
+              "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/ArchitectureReport.FeatureBreakdown"
+                  },
+                  {
+                    "type": "number",
+                    "examples": [0, 1]
+                  }
+                ]
+              }
+            },
+            "examples": [{
+                "234e4567-e89b-12d3-a456-426614174000": 0
+            }]
+          }        
+        },
+        "examples": [
+          {
+            "assignedService": {
+                "234e4567-e89b-12d3-a456-426614174000": 0
+            }
+          }
+        ]
+      },
+      "ArchitectureReport.FeatureBreakdown": {
+        "title": "Architecture Report - Feature Breakdown",
+        "description": "List of features that are configured for the specific service plan's service configuration for the related principal.",
+        "type": "object",
+        "additionalProperties": {
+          "type": "boolean",
+          "examples": [true]
+        },
+        "examples": [{
+          "Feature X": true,
+          "Feature Y": false
+        }]
+      },
     "securitySchemes": {
       "EntraID": {
         "type": "http",
@@ -3925,7 +4101,9 @@
       "post": {
         "description": "A route to store a new architectural analysis report information.",
         "operationId": "/Api/ArchitectureReport/Post",
-        "requestBody": {},
+        "requestBody": {
+
+        },
         "responses": {},
         "summary": "Store new architectural analysis report.",
         "tags": ["ArchitectureReport"]
@@ -4056,4 +4234,5 @@
       "name": "Update"
     }
   ]
+}
 }
