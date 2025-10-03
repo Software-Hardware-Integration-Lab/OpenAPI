@@ -684,6 +684,169 @@
                     ]
                 }
             },
+            "Deploy.ConfigurationItem": {
+                "title": "Deploy - Configuration Item List",
+                "description": "",
+                "type": "array",
+                "items": {
+                    "description": "",
+                    "type": "object",
+                    "properties": {
+                        "childDependencies": {
+                            "type": "array",
+                            "description": "List of Object IDs in UUID format that reference configuration items identified as entities dependent on the presence of the current item.",
+                            "minItems": 0,
+                            "items": {
+                                "type": "string",
+                                "format": "uuid",
+                                "maxLength": 36,
+                                "minLength": 36,
+                                "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                            }
+                        },
+                        "compareFunction": {
+                            "type": "string",
+                            "description": "Name of the bound function to perform comparison action."
+                        },
+                        "deployFunction": {
+                            "type": "string",
+                            "description": "Name of the bound function to perform deploy action."
+                        },
+                        "groupTagList": {
+                            "type": "array",
+                            "description": "List of metadata tags that indicate which deployment sets the configuration item is compatible with.",
+                            "minItems": 1,
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "description": {
+                                        "type": "string",
+                                        "description": "Long form explanation what the tag is and/or does."
+                                    },
+                                    "displayName": {
+                                        "type": "string",
+                                        "description": "Human friendly name of the tag."
+                                    },
+                                    "tagId": {
+                                        "type": "string",
+                                        "description": "Object ID in the UUID format of the tag entity.",
+                                        "format": "uuid",
+                                        "maxLength": 36,
+                                        "minLength": 36,
+                                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                                    }
+                                },
+                                "required": [
+                                    "description",
+                                    "displayName",
+                                    "tagId"
+                                ]
+                            }
+                        },
+                        "msCloudTypes": {
+                            "type": "array",
+                            "description": "List of Microsoft Sovereign Clouds the configuration items is compatible with.",
+                            "minItems": 1,
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "parentDependencies": {
+                            "type": "array",
+                            "description": "List of Object IDs in UUID format that reference configuration items identified as entities which deploy and existence is required for the current item.",
+                            "minItems": 0,
+                            "items": {
+                                "type": "string",
+                                "format": "uuid",
+                                "maxLength": 36,
+                                "minLength": 36,
+                                "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                            }
+                        },
+                        "removeFunction": {
+                            "type": "string",
+                            "description": "Name of the bound function to perform removal action."
+                        },
+                        "restoreFunction": {
+                            "type": "string",
+                            "description": "Name of the bound function to perform restoration action."
+                        },
+                        "templateId": {
+                            "type": "string",
+                            "description": "Internal Object ID in UUID format to uniquely identify this configuration item definition.",
+                            "format": "uuid",
+                            "maxLength": 36,
+                            "minLength": 36,
+                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                        },
+                        "urlPath": {
+                            "type": "string",
+                            "description": "Relative Graph Api path identifying where the resource to be located and managed."
+                        }
+                    },
+                    "required": [
+                        "childDependencies",
+                        "compareFunction",
+                        "deployFunction",
+                        "groupTagList",
+                        "msCloudTypes",
+                        "parentDependencies",
+                        "removeFunction",
+                        "restoreFunction",
+                        "templateId",
+                        "urlPath"
+                    ]
+                },
+                "example": [
+                    {
+                        "childDependencies": [
+                            "7e1a2b3c-4d5f-4a8b-9e6a-1c2b7f3d8e4a",
+                            "9c2e7a1b-5d3f-4a8b-2c6e-7f1a3d9e8b5c"
+                        ],
+                        "compareFunction": "bound compareResource",
+                        "deployFunction": "bound deployResource",
+                        "groupTagList": [
+                            {
+                                "description": "Collection of policies covering critical conditional access settings.",
+                                "displayName": "Conditional Policy",
+                                "tagId": "3b7e2a1c-4d5f-4a8b-9e6a-2c1b7f3d8e4a"
+                            }
+                        ],
+                        "msCloudTypes": [
+                            "Public"
+                        ],
+                        "parentDependencies": [
+                            "8e6a1c2b-7f3d-4a8b-9c2e-5d3f7a1b2e4a"
+                        ],
+                        "removeFunction": "bound removeResource",
+                        "restoreFunction": "bound restoreResource",
+                        "templateId": "2a1c7e3b-5d4f-4a8b-9e6a-7f3d2b1c8e4a",
+                        "urlPath": "/identity/conditionalAccess/policies"
+                    },
+                    {
+                        "childDependencies": [
+                            "1c2b5d3f-7a1b-4a8b-9e6a-2e4a3b7e8c5d"
+                        ],
+                        "compareFunction": "bound compareResourceCustom",
+                        "deployFunction": "bound deployResourceCustom",
+                        "groupTagList": [
+                            {
+                                "description": "Principal containers that are used to provide assignments.",
+                                "displayName": "Administrative Unit",
+                                "tagId": "5d3f9c2e-7a1b-4a8b-2c6e-1a3d7e8b5c4a"
+                            }
+                        ],
+                        "msCloudTypes": [
+                            "Public"
+                        ],
+                        "parentDependencies": [],
+                        "removeFunction": "bound removeResource",
+                        "restoreFunction": "bound restoreResource",
+                        "templateId": "4a8b7e1a-2b3c-4d5f-9e6a-1c2b7f3d8e4a",
+                        "urlPath": "/directory/administrativeUnits"
+                    }
+                ]
+            },
             "Deploy.PathIndicator": {
                 "title": "Deploy - Path Payload",
                 "description": "Payload with path data used in several endpoints",
@@ -2303,17 +2466,39 @@
                 ]
             }
         },
-        "/Api/Deploy/Architecture": {
+        "/Api/Deploy/Component/Architecture": {
             "get": {
                 "summary": "Returns List of Available Architectures",
                 "description": "Retrieves the collection of possible architecture configurations to be deployed including all metadata accompanying these records.\n\nThis endpoint requires the `Deploy.Read`, `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
-                "operationId": "/Api/Deploy/Architecture/Get",
+                "operationId": "/Api/Deploy/Component/Architecture/Get",
                 "responses": {
                     "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Deploy.ArchitectureData"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "Deploy"
+                ]
+            }
+        },
+        "/Api/Deploy/Component/ConfigurationItem": {
+            "get": {
+                "summary": "Returns List of Available Configuration Items",
+                "description": "Retrieves the collection of all existing configuration items with curated set of metadata.\n\nThis endpoint requires the `Deploy.Read`, `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Deploy/Component/ConfigurationItem/Get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Deploy.ConfigurationItem"
                                 }
                             }
                         },
