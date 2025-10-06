@@ -1554,7 +1554,9 @@
           "tenantMetadata": {
             "$ref": "#/components/schemas/ArchitectureReport.TenantMetadata"
           },
-          "correlation": {},
+          "correlation": {
+            "$ref": "#/components/schemas/ArchitectureReport.ArchitectureCorrelationRecord"
+          },
           "scheduling": {
             "description": "@todo - Check with Elliot.",
             "examples": ["2023-02-04T05:06:09.601Z"],
@@ -1600,6 +1602,56 @@
             }
         }]
       },
+      "ArchitectureReport.ArchitectureCorrelationRecord": {
+        "title": "Used for cross record tracking and auditing.",
+        "description": "Model/data structure that stores the records that contains the metadata for architecture report records.",
+        "type": "object",
+        "properties": {
+          "auditTenantAccount": {
+            "type": "string",
+            "description": "The user principal name used to authenticate into the tenant being audited.",
+            "examples": ["user@example.com"]
+          },
+          "reportTenantAccount": {
+            "type": "string",
+            "description": "User account used to store/report the architecture report to the SHI Lab cloud service.",
+            "examples": ["user@example.com"]
+          },
+          "tenantId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Tenant that the tool was run against.",
+            "examples": ["123e4567-e89b-12d3-a456-426614174000"]            
+          },                    
+          "correlationId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Unique Identifier that represents a single run of architectural analysis. This record is used to identify which architecture report records should be grouped together.",
+            "examples": ["a1b2c3d4-e5f6-7890-abcd-ef1234567890"]
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp on when the record was created. This is auto managed by sequelize.",
+            "examples": ["2023-02-04T05:06:09.601Z"]
+          },
+          "updateAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp on when the record was last updated. This is auto managed by sequelize.",
+            "examples": ["2023-02-04T05:06:09.601Z"]            
+          }
+        },
+        "required": ["auditTenantAccount", "correlationId", "createdAt", "updatedAt", "reportTenantAccount", "tenantId"],
+        "examples": [{
+          "auditTenantAccount": "user@example.com",
+          "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "createdAt": "2023-02-04T05:06:09.601Z",
+          "reportTenantAccount": "user@example.com",
+          "tenantId": "123e4567-e89b-12d3-a456-426614174000",
+          "updatedAt": "2023-02-04T05:06:09.601Z"
+        }]
+      },
       "ArchitectureReport.TenantMetadata": {
         "title": "Architecture Report - Tenant Metadata",
         "description": "Metadata for the tenant.",
@@ -1607,18 +1659,22 @@
         "properties": {
           "totalUserCount": {
             "type": "integer",
+            "description": "Total count of users on the tenant.",
             "examples": [0, 1]
           },
           "totalGuestCount": {
             "type": "integer",
+            "description": "Total count of guests on the tenant.",
             "examples": [0, 1]
           },
           "totalMemberCount": {
             "type": "integer",
+            "description": "Total count of members on the tenant.",
             "examples": [0, 1]
           },
           "totalDeviceCount": {
             "type": "integer",
+            "description": "Total count of devices on the tenant.",
             "examples": [0, 1]
           }
         },
