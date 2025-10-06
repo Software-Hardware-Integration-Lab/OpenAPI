@@ -178,40 +178,6 @@
             "description": "An example of valid EntraID managed user ID in type UUID."
           }
         }
-      },
-      "dateStart": {
-        "name": "dateStart",
-        "description": "The date string used to determine the lower bound value in a query.",
-        "in": "query",
-        "schema": {
-          "type": "string",
-          "format": "date-time",
-          "examples": ["2025-01-01"]
-        },
-        "examples": {
-          "valid start date": {
-            "value": "2025-01-01",
-            "summary": "Example date for lower bound value in a query.",
-            "description": "In architecture report context, it is used to compare against the createdAt property."
-          }
-        }
-      },
-      "dateEnd": {
-        "name": "dateEnd",
-        "description": "The date string used to determine the upper bound value in a query.",
-        "in": "query",
-        "schema": {
-          "type": "string",
-          "format": "date-time",
-          "examples": ["2025-01-01"]
-        },
-        "examples": {
-          "valid end date": {
-            "value": "2025-01-01",
-            "summary": "Example date for upper bound value in a query.",
-            "description": "In architecture report context, it is used to compare against the createdAt property."
-          }
-        }          
       }
     },
     "responses": {
@@ -1558,7 +1524,8 @@
         "examples": ["Privileged"],
         "title": "Type of security class the object(s) belongs to",
         "type": "string"
-      },
+      }
+    },
     "securitySchemes": {
       "EntraID": {
         "type": "http",
@@ -3983,5 +3950,4 @@
       "name": "Update"
     }
   ]
-}
 }
