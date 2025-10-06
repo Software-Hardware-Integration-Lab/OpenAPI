@@ -143,6 +143,40 @@
             "summary": "Example search term",
             "description": "An example valid search term used in object filtering in a query."
           }
+        },
+        "dateStart": {
+          "name": "dateStart",
+          "description": "The date string used to determine the lower bound value in a query.",
+          "in": "query",
+          "schema": {
+            "type": "string",
+            "format": "date-time",
+            "examples": ["2025-01-01"]
+          },
+          "examples": {
+            "valid start date": {
+              "value": "2025-01-01",
+              "summary": "Example date for lower bound value in a query.",
+              "description": "In architecture report context, it is used to compare against the createdAt property."
+            }
+          }
+        },
+        "dateEnd": {
+          "name": "dateEnd",
+          "description": "The date string used to determine the upper bound value in a query.",
+          "in": "query",
+          "schema": {
+            "type": "string",
+            "format": "date-time",
+            "examples": ["2025-01-01"]
+          },
+          "examples": {
+            "valid end date": {
+              "value": "2025-01-01",
+              "summary": "Example date for upper bound value in a query.",
+              "description": "In architecture report context, it is used to compare against the createdAt property."
+            }
+          }          
         }
       },
       "securityClass": {
@@ -4158,9 +4192,103 @@
         "description": "A route to store a new architectural analysis report information.",
         "operationId": "/Api/ArchitectureReport/Post",
         "requestBody": {
-
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/ArchitectureReport"
+              },
+              "examples": {
+                "Sample Architecture Report Upload": {
+                  "summary": "The architecture report being uploaded.",
+                  "description": "An example architecture report object upload to the endpoint for storage.",
+                  "value": {
+                    "correlation": {     
+                      "auditTenantAccount": "user@example.com",
+                      "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                      "createdAt": "2023-02-04T05:06:09.601Z",
+                      "reportTenantAccount": "user@example.com",
+                      "tenantId": "123e4567-e89b-12d3-a456-426614174000",
+                      "updatedAt": "2023-02-04T05:06:09.601Z"
+                    },
+                    "scheduling": "2023-02-04T05:06:09.601Z",
+                    "securityPosture": { 
+                        "device": {
+                          "123e4567-e89b-12d3-a456-426614174000": {
+                            "assignedService": {
+                                "234e4567-e89b-12d3-a456-426614174000": 0
+                            }
+                        }
+                      },
+                        "user": {
+                            "123e4567-e89b-12d3-a456-426614174000": {
+                                "assignedService": {
+                                    "234e4567-e89b-12d3-a456-426614174000": 0
+                                }
+                            }
+                        }
+                    },
+                    "tenantMetadata": {
+                      "totalDeviceCount": 1,
+                      "totalGuestCount": 0,
+                      "totalMemberCount": 1,
+                      "totalUserCount": 1
+                    }
+                  }
+                }
+              }
+            }
+          }
         },
         "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/ArchitectureReport"
+                },
+                "examples": {
+                  "Successful upload": {
+                    "summary": "The Architecture Report Returned",
+                    "description": "An example architecture report object returned indicating the architecture report upload operation succeed. This should be the same as the uploaded architecture report.",
+                    "value": {
+                      "correlation": {     
+                        "auditTenantAccount": "user@example.com",
+                        "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                        "createdAt": "2023-02-04T05:06:09.601Z",
+                        "reportTenantAccount": "user@example.com",
+                        "tenantId": "123e4567-e89b-12d3-a456-426614174000",
+                        "updatedAt": "2023-02-04T05:06:09.601Z"
+                      },
+                      "scheduling": "2023-02-04T05:06:09.601Z",
+                      "securityPosture": { 
+                          "device": {
+                            "123e4567-e89b-12d3-a456-426614174000": {
+                              "assignedService": {
+                                  "234e4567-e89b-12d3-a456-426614174000": 0
+                              }
+                          }
+                        },
+                          "user": {
+                              "123e4567-e89b-12d3-a456-426614174000": {
+                                  "assignedService": {
+                                      "234e4567-e89b-12d3-a456-426614174000": 0
+                                  }
+                              }
+                          }
+                      },
+                      "tenantMetadata": {
+                        "totalDeviceCount": 1,
+                        "totalGuestCount": 0,
+                        "totalMemberCount": 1,
+                        "totalUserCount": 1
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "The uploaded architecture report has been stored successfully."
+          },
           "400": {
             "$ref": "#/components/responses/400"
           }
@@ -4171,10 +4299,45 @@
     },
     "/Api/ArchitectureReport/Correlation": {
       "get": {
-        "description": "A route to retrieve the list of correlation records for the authenticated tenant.",
-        "operationId": "/Api/ArchitectureReport/Correlation/Post",
-        "requestBody": {},
+        "description": "A route to retrieve the list of correlation records for the current authenticated tenant.",
+        "operationId": "/Api/ArchitectureReport/Correlation/Get",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/dateStart"
+          }, 
+          {
+            "$ref": "#/components/parameters/dateEnd"
+          }
+        ],
         "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ArchitectureReport.ArchitectureCorrelationRecord"
+                  },
+                  "minItems": 0,
+                  "type": "array"
+                },
+                "examples": {
+                  "Returned Architecture Correlation Records": {
+                    "summary": "Example Architecture Correlation Records returned",
+                    "description": "An example of an ArchitectureReport.ArchitectureCorrelationRecord array returned.",
+                    "value": [{
+                      "auditTenantAccount": "user@example.com",
+                      "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                      "createdAt": "2023-02-04T05:06:09.601Z",
+                      "reportTenantAccount": "user@example.com",
+                      "tenantId": "123e4567-e89b-12d3-a456-426614174000",
+                      "updatedAt": "2023-02-04T05:06:09.601Z"
+                    }]
+                  }
+                }
+              }
+            },
+            "description": "OK"
+          },          
           "400": {
             "$ref": "#/components/responses/400"
           }
@@ -4187,11 +4350,46 @@
       "get": {
         "description": "Internal API route to retrieve the list of correlation records for the specified tenant, if the caller is SHI and authorized.",
         "operationId": "/Api/ArchitectureReport/Correlation/Tenant/:tenantId/Get",
-        "parameters": [{
-          "$ref": "#/components/parameters/tenantId"
-        }],
-        "requestBody": {},
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/tenantId"
+          }, 
+          {
+            "$ref": "#/components/parameters/dateStart"
+          }, 
+          {
+            "$ref": "#/components/parameters/dateEnd"
+          }
+        ],
         "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ArchitectureReport.ArchitectureCorrelationRecord"
+                  },
+                  "minItems": 0,
+                  "type": "array"
+                },
+                "examples": {
+                  "Returned Architecture Correlation Records": {
+                    "summary": "Example Architecture Correlation Records returned",
+                    "description": "An example of an ArchitectureReport.ArchitectureCorrelationRecord array returned.",
+                    "value": [{
+                      "auditTenantAccount": "user@example.com",
+                      "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                      "createdAt": "2023-02-04T05:06:09.601Z",
+                      "reportTenantAccount": "user@example.com",
+                      "tenantId": "123e4567-e89b-12d3-a456-426614174000",
+                      "updatedAt": "2023-02-04T05:06:09.601Z"
+                    }]
+                  }
+                }
+              }
+            },
+            "description": "OK"
+          },
           "400": {
             "$ref": "#/components/responses/400"
           }
@@ -4207,8 +4405,56 @@
         "parameters": [{
           "$ref": "#/components/parameters/correlationId"
         }],
-        "requestBody": {},
         "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArchitectureReport"
+                },
+                "examples": {
+                  "Returned Architecture Report": {
+                    "summary": "Example Architecture Report returned",
+                    "description": "An example of ArchitectureReport object returned that represents an successful architectural analysis run result.",
+                    "value": {
+                        "correlation": {     
+                          "auditTenantAccount": "user@example.com",
+                          "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "createdAt": "2023-02-04T05:06:09.601Z",
+                          "reportTenantAccount": "user@example.com",
+                          "tenantId": "123e4567-e89b-12d3-a456-426614174000",
+                          "updatedAt": "2023-02-04T05:06:09.601Z"
+                        },
+                        "scheduling": "2023-02-04T05:06:09.601Z",
+                        "securityPosture": { 
+                            "device": {
+                              "123e4567-e89b-12d3-a456-426614174000": {
+                                "assignedService": {
+                                    "234e4567-e89b-12d3-a456-426614174000": 0
+                                }
+                            }
+                          },
+                            "user": {
+                                "123e4567-e89b-12d3-a456-426614174000": {
+                                    "assignedService": {
+                                        "234e4567-e89b-12d3-a456-426614174000": 0
+                                    }
+                                }
+                            }
+                        },
+                        "tenantMetadata": {
+                          "totalDeviceCount": 1,
+                          "totalGuestCount": 0,
+                          "totalMemberCount": 1,
+                          "totalUserCount": 1
+                        }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "OK"            
+          },
           "400": {
             "$ref": "#/components/responses/400"
           }
@@ -4222,8 +4468,10 @@
         "parameters": [{
           "$ref": "#/components/parameters/correlationId"
         }],
-        "requestBody": {},
         "responses": {
+          "204": {
+            "description": "The specified architectural analysis report has been deleted successfully."
+          },
           "400": {
             "$ref": "#/components/responses/400"
           }
@@ -4241,8 +4489,56 @@
         },{
           "$ref": "#/components/parameters/tenantId"
         }],
-        "requestBody": {},
         "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArchitectureReport"
+                },
+                "examples": {
+                  "Returned Architecture Report": {
+                    "summary": "Example Architecture Report returned",
+                    "description": "An example of ArchitectureReport object returned that represents an successful architectural analysis run result.",
+                    "value": {
+                        "correlation": {     
+                          "auditTenantAccount": "user@example.com",
+                          "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "createdAt": "2023-02-04T05:06:09.601Z",
+                          "reportTenantAccount": "user@example.com",
+                          "tenantId": "123e4567-e89b-12d3-a456-426614174000",
+                          "updatedAt": "2023-02-04T05:06:09.601Z"
+                        },
+                        "scheduling": "2023-02-04T05:06:09.601Z",
+                        "securityPosture": { 
+                            "device": {
+                              "123e4567-e89b-12d3-a456-426614174000": {
+                                "assignedService": {
+                                    "234e4567-e89b-12d3-a456-426614174000": 0
+                                }
+                            }
+                          },
+                            "user": {
+                                "123e4567-e89b-12d3-a456-426614174000": {
+                                    "assignedService": {
+                                        "234e4567-e89b-12d3-a456-426614174000": 0
+                                    }
+                                }
+                            }
+                        },
+                        "tenantMetadata": {
+                          "totalDeviceCount": 1,
+                          "totalGuestCount": 0,
+                          "totalMemberCount": 1,
+                          "totalUserCount": 1
+                        }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "OK"
+          },
           "400": {
             "$ref": "#/components/responses/400"
           }
@@ -4258,8 +4554,10 @@
         }, {
           "$ref": "#/components/parameters/tenantId"
         }],
-        "requestBody": {},
         "responses": {
+          "204": {
+            "description": "The specified architectural analysis report has been deleted successfully."
+          },
           "400": {
             "$ref": "#/components/responses/400"
           }
