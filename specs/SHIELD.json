@@ -4160,7 +4160,11 @@
         "requestBody": {
 
         },
-        "responses": {},
+        "responses": {
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        },
         "summary": "Store new architectural analysis report.",
         "tags": ["ArchitectureReport"]
       }
@@ -4170,7 +4174,11 @@
         "description": "A route to retrieve the list of correlation records for the authenticated tenant.",
         "operationId": "/Api/ArchitectureReport/Correlation/Post",
         "requestBody": {},
-        "responses": {},
+        "responses": {
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        },
         "summary": "Retrieve correlation records for current tenant.",
         "tags": ["ArchitectureReport"]        
       }
@@ -4183,7 +4191,11 @@
           "$ref": "#/components/parameters/tenantId"
         }],
         "requestBody": {},
-        "responses": {},
+        "responses": {
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        },
         "summary": "Retrieve correlation records for the specified tenant.",
         "tags": ["ArchitectureReport"]        
       }
@@ -4196,7 +4208,11 @@
           "$ref": "#/components/parameters/correlationId"
         }],
         "requestBody": {},
-        "responses": {},
+        "responses": {
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        },
         "summary": "Retrieve architectural analysis report for current tenant by specified correlation ID.",
         "tags": ["ArchitectureReport"]        
       },
@@ -4207,7 +4223,11 @@
           "$ref": "#/components/parameters/correlationId"
         }],
         "requestBody": {},
-        "responses": {},
+        "responses": {
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        },
         "summary": "Delete specific architectural analysis report by correlation ID.",
         "tags": ["ArchitectureReport"]        
       }
@@ -4222,7 +4242,11 @@
           "$ref": "#/components/parameters/tenantId"
         }],
         "requestBody": {},
-        "responses": {},
+        "responses": {
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        },
         "summary": "Retrieve architectural analysis reports for the specified tenant by correlation ID.",
         "tags": ["ArchitectureReport"]        
       },
@@ -4235,7 +4259,11 @@
           "$ref": "#/components/parameters/tenantId"
         }],
         "requestBody": {},
-        "responses": {},
+        "responses": {
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        },
         "summary": "Remove architectural analysis report for the specified tenant by correlation ID.",
         "tags": ["ArchitectureReport"]        
       }
