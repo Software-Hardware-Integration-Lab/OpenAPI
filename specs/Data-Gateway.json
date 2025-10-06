@@ -1255,7 +1255,7 @@
           }
         ]
       },
-      "ArchitectureReport": {        
+      "ArchitectureReport": {
         "description": "Container that represents the entire architecture report structure for a complete run of architectural analysis.",
         "title": "Architecture Report - Complete Object",
         "type": "object",
@@ -1276,9 +1276,15 @@
             "$ref": "#/components/schemas/ArchitectureReport.SecurityPosture"
           }
         },
-        "required": ["tenantMetadata", "correlation", "scheduling", "securityPosture"],
-        "examples": [{
-            "correlation": {     
+        "required": [
+          "tenantMetadata",
+          "correlation",
+          "scheduling",
+          "securityPosture"
+        ],
+        "examples": [
+          {
+            "correlation": {
               "auditTenantAccount": "user@example.com",
               "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
               "createdAt": "2023-02-04T05:06:09.601Z",
@@ -1287,29 +1293,30 @@
               "updatedAt": "2023-02-04T05:06:09.601Z"
             },
             "scheduling": "2023-02-04T05:06:09.601Z",
-            "securityPosture": { 
-                "device": {
-                  "123e4567-e89b-12d3-a456-426614174000": {
-                    "assignedService": {
-                        "234e4567-e89b-12d3-a456-426614174000": 0
-                    }
+            "securityPosture": {
+              "device": {
+                "123e4567-e89b-12d3-a456-426614174000": {
+                  "assignedService": {
+                    "234e4567-e89b-12d3-a456-426614174000": 0
+                  }
                 }
               },
-                "user": {
-                    "123e4567-e89b-12d3-a456-426614174000": {
-                        "assignedService": {
-                            "234e4567-e89b-12d3-a456-426614174000": 0
-                        }
-                    }
+              "user": {
+                "123e4567-e89b-12d3-a456-426614174000": {
+                  "assignedService": {
+                    "234e4567-e89b-12d3-a456-426614174000": 0
+                  }
                 }
-             },
+              }
+            },
             "tenantMetadata": {
               "totalDeviceCount": 1,
               "totalGuestCount": 0,
               "totalMemberCount": 1,
               "totalUserCount": 1
             }
-        }]
+          }
+        ]
       },
       "ArchitectureReport.ArchitectureCorrelationRecord": {
         "title": "Architecture Report - Architecture Correlation Record",
@@ -1330,8 +1337,8 @@
             "type": "string",
             "format": "uuid",
             "description": "Tenant that the tool was run against.",
-            "examples": ["123e4567-e89b-12d3-a456-426614174000"]            
-          },                    
+            "examples": ["123e4567-e89b-12d3-a456-426614174000"]
+          },
           "correlationId": {
             "type": "string",
             "format": "uuid",
@@ -1348,18 +1355,27 @@
             "type": "string",
             "format": "date-time",
             "description": "Timestamp on when the record was last updated. This is auto managed by sequelize.",
-            "examples": ["2023-02-04T05:06:09.601Z"]            
+            "examples": ["2023-02-04T05:06:09.601Z"]
           }
         },
-        "required": ["auditTenantAccount", "correlationId", "createdAt", "updatedAt", "reportTenantAccount", "tenantId"],
-        "examples": [{
-          "auditTenantAccount": "user@example.com",
-          "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-          "createdAt": "2023-02-04T05:06:09.601Z",
-          "reportTenantAccount": "user@example.com",
-          "tenantId": "123e4567-e89b-12d3-a456-426614174000",
-          "updatedAt": "2023-02-04T05:06:09.601Z"
-        }]
+        "required": [
+          "auditTenantAccount",
+          "correlationId",
+          "createdAt",
+          "updatedAt",
+          "reportTenantAccount",
+          "tenantId"
+        ],
+        "examples": [
+          {
+            "auditTenantAccount": "user@example.com",
+            "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "createdAt": "2023-02-04T05:06:09.601Z",
+            "reportTenantAccount": "user@example.com",
+            "tenantId": "123e4567-e89b-12d3-a456-426614174000",
+            "updatedAt": "2023-02-04T05:06:09.601Z"
+          }
+        ]
       },
       "ArchitectureReport.TenantMetadata": {
         "title": "Architecture Report - Tenant Metadata",
@@ -1387,12 +1403,14 @@
             "examples": [0, 1]
           }
         },
-        "examples": [{
-          "totalDeviceCount": 1,
-          "totalGuestCount": 0,
-          "totalMemberCount": 1,
-          "totalUserCount": 1
-        }]   
+        "examples": [
+          {
+            "totalDeviceCount": 1,
+            "totalGuestCount": 0,
+            "totalMemberCount": 1,
+            "totalUserCount": 1
+          }
+        ]
       },
       "ArchitectureReport.SecurityPosture": {
         "title": "Architecture Report - Security Posture",
@@ -1417,26 +1435,26 @@
               "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$": {
                 "$ref": "#/components/schemas/ArchitectureReport.PrincipalAssignment"
               }
-          }
+            }
           }
         },
         "examples": [
           {
             "device": {
-                "123e4567-e89b-12d3-a456-426614174000": {
-                    "assignedService": {
-                        "234e4567-e89b-12d3-a456-426614174000": 0
-                    }
+              "123e4567-e89b-12d3-a456-426614174000": {
+                "assignedService": {
+                  "234e4567-e89b-12d3-a456-426614174000": 0
                 }
+              }
             },
             "user": {
-                "123e4567-e89b-12d3-a456-426614174000": {
-                    "assignedService": {
-                        "234e4567-e89b-12d3-a456-426614174000": 0
-                    }
+              "123e4567-e89b-12d3-a456-426614174000": {
+                "assignedService": {
+                  "234e4567-e89b-12d3-a456-426614174000": 0
                 }
+              }
             }
-        }
+          }
         ]
       },
       "ArchitectureReport.PrincipalAssignment": {
@@ -1450,10 +1468,12 @@
             "additionalProperties": false,
             "patternProperties": {
               "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$": {
-                "nullable": true,
                 "oneOf": [
                   {
                     "$ref": "#/components/schemas/ArchitectureReport.FeatureBreakdown"
+                  },
+                  {
+                    "type": "null"
                   },
                   {
                     "type": "number",
@@ -1462,15 +1482,17 @@
                 ]
               }
             },
-            "examples": [{
+            "examples": [
+              {
                 "234e4567-e89b-12d3-a456-426614174000": 0
-            }]
-          }        
+              }
+            ]
+          }
         },
         "examples": [
           {
             "assignedService": {
-                "234e4567-e89b-12d3-a456-426614174000": 0
+              "234e4567-e89b-12d3-a456-426614174000": 0
             }
           }
         ]
@@ -1483,11 +1505,13 @@
           "type": "boolean",
           "examples": [true]
         },
-        "examples": [{
-          "Feature X": true,
-          "Feature Y": false
-        }]
-      }      
+        "examples": [
+          {
+            "Feature X": true,
+            "Feature Y": false
+          }
+        ]
+      }
     },
     "securitySchemes": {
       "EntraID": {
@@ -3442,16 +3466,16 @@
             "content": {
               "application/json": {
                 "examples": {
-                    "Channel Configuration Details": {
-                      "description": "Example object returned on creation or update.",
-                      "summary": "Channel Configuration",
-                      "value": {
-                        "latest": "1.12.5",
-                        "name": "stable",
-                        "previous": "1.12.4"
-                      }
+                  "Channel Configuration Details": {
+                    "description": "Example object returned on creation or update.",
+                    "summary": "Channel Configuration",
+                    "value": {
+                      "latest": "1.12.5",
+                      "name": "stable",
+                      "previous": "1.12.4"
                     }
-                  },
+                  }
+                },
                 "schema": {
                   "$ref": "#/components/schemas/Update.Shield.Channel"
                 }
@@ -4399,7 +4423,7 @@
                   "summary": "The architecture report being uploaded.",
                   "description": "An example architecture report object upload to the endpoint for storage.",
                   "value": {
-                    "correlation": {     
+                    "correlation": {
                       "auditTenantAccount": "user@example.com",
                       "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
                       "createdAt": "2023-02-04T05:06:09.601Z",
@@ -4408,21 +4432,21 @@
                       "updatedAt": "2023-02-04T05:06:09.601Z"
                     },
                     "scheduling": "2023-02-04T05:06:09.601Z",
-                    "securityPosture": { 
-                        "device": {
-                          "123e4567-e89b-12d3-a456-426614174000": {
-                            "assignedService": {
-                                "234e4567-e89b-12d3-a456-426614174000": 0
-                            }
+                    "securityPosture": {
+                      "device": {
+                        "123e4567-e89b-12d3-a456-426614174000": {
+                          "assignedService": {
+                            "234e4567-e89b-12d3-a456-426614174000": 0
+                          }
                         }
                       },
-                        "user": {
-                            "123e4567-e89b-12d3-a456-426614174000": {
-                                "assignedService": {
-                                    "234e4567-e89b-12d3-a456-426614174000": 0
-                                }
-                            }
+                      "user": {
+                        "123e4567-e89b-12d3-a456-426614174000": {
+                          "assignedService": {
+                            "234e4567-e89b-12d3-a456-426614174000": 0
+                          }
                         }
+                      }
                     },
                     "tenantMetadata": {
                       "totalDeviceCount": 1,
@@ -4448,7 +4472,7 @@
                     "summary": "The Architecture Report Returned",
                     "description": "An example architecture report object returned indicating the architecture report upload operation succeed. This should be the same as the uploaded architecture report.",
                     "value": {
-                      "correlation": {     
+                      "correlation": {
                         "auditTenantAccount": "user@example.com",
                         "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
                         "createdAt": "2023-02-04T05:06:09.601Z",
@@ -4457,21 +4481,21 @@
                         "updatedAt": "2023-02-04T05:06:09.601Z"
                       },
                       "scheduling": "2023-02-04T05:06:09.601Z",
-                      "securityPosture": { 
-                          "device": {
-                            "123e4567-e89b-12d3-a456-426614174000": {
-                              "assignedService": {
-                                  "234e4567-e89b-12d3-a456-426614174000": 0
-                              }
+                      "securityPosture": {
+                        "device": {
+                          "123e4567-e89b-12d3-a456-426614174000": {
+                            "assignedService": {
+                              "234e4567-e89b-12d3-a456-426614174000": 0
+                            }
                           }
                         },
-                          "user": {
-                              "123e4567-e89b-12d3-a456-426614174000": {
-                                  "assignedService": {
-                                      "234e4567-e89b-12d3-a456-426614174000": 0
-                                  }
-                              }
+                        "user": {
+                          "123e4567-e89b-12d3-a456-426614174000": {
+                            "assignedService": {
+                              "234e4567-e89b-12d3-a456-426614174000": 0
+                            }
                           }
+                        }
                       },
                       "tenantMetadata": {
                         "totalDeviceCount": 1,
@@ -4501,7 +4525,7 @@
         "parameters": [
           {
             "$ref": "#/components/parameters/dateStart"
-          }, 
+          },
           {
             "$ref": "#/components/parameters/dateEnd"
           }
@@ -4521,26 +4545,28 @@
                   "Returned Architecture Correlation Records": {
                     "summary": "Example Architecture Correlation Records returned",
                     "description": "An example of an ArchitectureReport.ArchitectureCorrelationRecord array returned.",
-                    "value": [{
-                      "auditTenantAccount": "user@example.com",
-                      "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-                      "createdAt": "2023-02-04T05:06:09.601Z",
-                      "reportTenantAccount": "user@example.com",
-                      "tenantId": "123e4567-e89b-12d3-a456-426614174000",
-                      "updatedAt": "2023-02-04T05:06:09.601Z"
-                    }]
+                    "value": [
+                      {
+                        "auditTenantAccount": "user@example.com",
+                        "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                        "createdAt": "2023-02-04T05:06:09.601Z",
+                        "reportTenantAccount": "user@example.com",
+                        "tenantId": "123e4567-e89b-12d3-a456-426614174000",
+                        "updatedAt": "2023-02-04T05:06:09.601Z"
+                      }
+                    ]
                   }
                 }
               }
             },
             "description": "OK"
-          },          
+          },
           "400": {
             "$ref": "#/components/responses/400"
           }
         },
         "summary": "Retrieve correlation records for current tenant.",
-        "tags": ["Architecture Report"]        
+        "tags": ["Architecture Report"]
       }
     },
     "/Api/ArchitectureReport/Correlation/Tenant/{tenantId}": {
@@ -4550,10 +4576,10 @@
         "parameters": [
           {
             "$ref": "#/components/parameters/tenantId"
-          }, 
+          },
           {
             "$ref": "#/components/parameters/dateStart"
-          }, 
+          },
           {
             "$ref": "#/components/parameters/dateEnd"
           }
@@ -4573,14 +4599,16 @@
                   "Returned Architecture Correlation Records": {
                     "summary": "Example Architecture Correlation Records returned",
                     "description": "An example of an ArchitectureReport.ArchitectureCorrelationRecord array returned.",
-                    "value": [{
-                      "auditTenantAccount": "user@example.com",
-                      "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-                      "createdAt": "2023-02-04T05:06:09.601Z",
-                      "reportTenantAccount": "user@example.com",
-                      "tenantId": "123e4567-e89b-12d3-a456-426614174000",
-                      "updatedAt": "2023-02-04T05:06:09.601Z"
-                    }]
+                    "value": [
+                      {
+                        "auditTenantAccount": "user@example.com",
+                        "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                        "createdAt": "2023-02-04T05:06:09.601Z",
+                        "reportTenantAccount": "user@example.com",
+                        "tenantId": "123e4567-e89b-12d3-a456-426614174000",
+                        "updatedAt": "2023-02-04T05:06:09.601Z"
+                      }
+                    ]
                   }
                 }
               }
@@ -4592,16 +4620,18 @@
           }
         },
         "summary": "Retrieve correlation records for the specified tenant.",
-        "tags": ["Architecture Report"]        
+        "tags": ["Architecture Report"]
       }
     },
     "/Api/ArchitectureReport/Correlation/{correlationId}/Data": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/correlationId"
+        }
+      ],
       "get": {
         "description": "A route to retrieve architectural analysis report for the specified correlation ID in the authenticated tenant.",
         "operationId": "/Api/ArchitectureReport/Correlation/:correlationId/Data/Get",
-        "parameters": [{
-          "$ref": "#/components/parameters/correlationId"
-        }],
         "responses": {
           "200": {
             "content": {
@@ -4614,57 +4644,54 @@
                     "summary": "Example Architecture Report returned",
                     "description": "An example of ArchitectureReport object returned that represents an successful architectural analysis run result.",
                     "value": {
-                        "correlation": {     
-                          "auditTenantAccount": "user@example.com",
-                          "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-                          "createdAt": "2023-02-04T05:06:09.601Z",
-                          "reportTenantAccount": "user@example.com",
-                          "tenantId": "123e4567-e89b-12d3-a456-426614174000",
-                          "updatedAt": "2023-02-04T05:06:09.601Z"
-                        },
-                        "scheduling": "2023-02-04T05:06:09.601Z",
-                        "securityPosture": { 
-                            "device": {
-                              "123e4567-e89b-12d3-a456-426614174000": {
-                                "assignedService": {
-                                    "234e4567-e89b-12d3-a456-426614174000": 0
-                                }
+                      "correlation": {
+                        "auditTenantAccount": "user@example.com",
+                        "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                        "createdAt": "2023-02-04T05:06:09.601Z",
+                        "reportTenantAccount": "user@example.com",
+                        "tenantId": "123e4567-e89b-12d3-a456-426614174000",
+                        "updatedAt": "2023-02-04T05:06:09.601Z"
+                      },
+                      "scheduling": "2023-02-04T05:06:09.601Z",
+                      "securityPosture": {
+                        "device": {
+                          "123e4567-e89b-12d3-a456-426614174000": {
+                            "assignedService": {
+                              "234e4567-e89b-12d3-a456-426614174000": 0
                             }
-                          },
-                            "user": {
-                                "123e4567-e89b-12d3-a456-426614174000": {
-                                    "assignedService": {
-                                        "234e4567-e89b-12d3-a456-426614174000": 0
-                                    }
-                                }
-                            }
+                          }
                         },
-                        "tenantMetadata": {
-                          "totalDeviceCount": 1,
-                          "totalGuestCount": 0,
-                          "totalMemberCount": 1,
-                          "totalUserCount": 1
+                        "user": {
+                          "123e4567-e89b-12d3-a456-426614174000": {
+                            "assignedService": {
+                              "234e4567-e89b-12d3-a456-426614174000": 0
+                            }
+                          }
                         }
+                      },
+                      "tenantMetadata": {
+                        "totalDeviceCount": 1,
+                        "totalGuestCount": 0,
+                        "totalMemberCount": 1,
+                        "totalUserCount": 1
+                      }
                     }
                   }
                 }
               }
             },
-            "description": "OK"            
+            "description": "OK"
           },
           "400": {
             "$ref": "#/components/responses/400"
           }
         },
         "summary": "Retrieve architectural analysis report for current tenant by specified correlation ID.",
-        "tags": ["Architecture Report"]        
+        "tags": ["Architecture Report"]
       },
       "delete": {
         "description": "A route to allow customers to self service delete architectural analysis report.",
         "operationId": "/Api/ArchitectureReport/Correlation/:correlationId/Data/Delete",
-        "parameters": [{
-          "$ref": "#/components/parameters/correlationId"
-        }],
         "responses": {
           "204": {
             "description": "The specified architectural analysis report has been deleted successfully."
@@ -4674,18 +4701,21 @@
           }
         },
         "summary": "Delete specific architectural analysis report by correlation ID.",
-        "tags": ["Architecture Report"]        
+        "tags": ["Architecture Report"]
       }
     },
     "/Api/ArchitectureReport/Correlation/{correlationId}/Tenant/{tenantId}/Data": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/correlationId"
+        },
+        {
+          "$ref": "#/components/parameters/tenantId"
+        }
+      ],
       "get": {
         "description": "Internal API route to retrieve architectural analysis report for the specified correlation ID for the specified tenant, if the caller is SHI and authorized.",
         "operationId": "/Api/ArchitectureReport/Correlation/:correlationId/Tenant/:tenantId/Data/Get",
-        "parameters": [{
-          "$ref": "#/components/parameters/correlationId"
-        },{
-          "$ref": "#/components/parameters/tenantId"
-        }],
         "responses": {
           "200": {
             "content": {
@@ -4698,37 +4728,37 @@
                     "summary": "Example Architecture Report returned",
                     "description": "An example of ArchitectureReport object returned that represents an successful architectural analysis run result.",
                     "value": {
-                        "correlation": {     
-                          "auditTenantAccount": "user@example.com",
-                          "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-                          "createdAt": "2023-02-04T05:06:09.601Z",
-                          "reportTenantAccount": "user@example.com",
-                          "tenantId": "123e4567-e89b-12d3-a456-426614174000",
-                          "updatedAt": "2023-02-04T05:06:09.601Z"
-                        },
-                        "scheduling": "2023-02-04T05:06:09.601Z",
-                        "securityPosture": { 
-                            "device": {
-                              "123e4567-e89b-12d3-a456-426614174000": {
-                                "assignedService": {
-                                    "234e4567-e89b-12d3-a456-426614174000": 0
-                                }
+                      "correlation": {
+                        "auditTenantAccount": "user@example.com",
+                        "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                        "createdAt": "2023-02-04T05:06:09.601Z",
+                        "reportTenantAccount": "user@example.com",
+                        "tenantId": "123e4567-e89b-12d3-a456-426614174000",
+                        "updatedAt": "2023-02-04T05:06:09.601Z"
+                      },
+                      "scheduling": "2023-02-04T05:06:09.601Z",
+                      "securityPosture": {
+                        "device": {
+                          "123e4567-e89b-12d3-a456-426614174000": {
+                            "assignedService": {
+                              "234e4567-e89b-12d3-a456-426614174000": 0
                             }
-                          },
-                            "user": {
-                                "123e4567-e89b-12d3-a456-426614174000": {
-                                    "assignedService": {
-                                        "234e4567-e89b-12d3-a456-426614174000": 0
-                                    }
-                                }
-                            }
+                          }
                         },
-                        "tenantMetadata": {
-                          "totalDeviceCount": 1,
-                          "totalGuestCount": 0,
-                          "totalMemberCount": 1,
-                          "totalUserCount": 1
+                        "user": {
+                          "123e4567-e89b-12d3-a456-426614174000": {
+                            "assignedService": {
+                              "234e4567-e89b-12d3-a456-426614174000": 0
+                            }
+                          }
                         }
+                      },
+                      "tenantMetadata": {
+                        "totalDeviceCount": 1,
+                        "totalGuestCount": 0,
+                        "totalMemberCount": 1,
+                        "totalUserCount": 1
+                      }
                     }
                   }
                 }
@@ -4741,16 +4771,11 @@
           }
         },
         "summary": "Retrieve architectural analysis reports for the specified tenant by correlation ID.",
-        "tags": ["Architecture Report"]        
+        "tags": ["Architecture Report"]
       },
       "delete": {
         "description": "Internal API route to remove the specified architectural analysis report, if the caller is SHI and authorized.",
         "operationId": "/Api/ArchitectureReport/Correlation/:correlationId/Tenant/:tenantId/Data/Delete",
-        "parameters": [{
-          "$ref": "#/components/parameters/correlationId"
-        }, {
-          "$ref": "#/components/parameters/tenantId"
-        }],
         "responses": {
           "204": {
             "description": "The specified architectural analysis report has been deleted successfully."
@@ -4760,9 +4785,9 @@
           }
         },
         "summary": "Remove architectural analysis report for the specified tenant by correlation ID.",
-        "tags": ["Architecture Report"]        
+        "tags": ["Architecture Report"]
       }
-    }    
+    }
   },
   "security": [
     {
