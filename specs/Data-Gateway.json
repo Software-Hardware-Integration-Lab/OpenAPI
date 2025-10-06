@@ -1351,7 +1351,7 @@
             "description": "Timestamp on when the record was created. This is auto managed by sequelize.",
             "examples": ["2023-02-04T05:06:09.601Z"]
           },
-          "updateAt": {
+          "updatedAt": {
             "type": "string",
             "format": "date-time",
             "description": "Timestamp on when the record was last updated. This is auto managed by sequelize.",
