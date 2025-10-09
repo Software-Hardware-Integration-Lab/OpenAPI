@@ -1,4 +1,5 @@
-name: Deploy Swagger UI Spec Docs
+# Display Name of the workflow
+name: Publish - OpenAPI Specs to GitHub Pages
 
 # Determine when to run this workflow
 on:
