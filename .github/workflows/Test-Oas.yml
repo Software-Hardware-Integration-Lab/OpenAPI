@@ -1,5 +1,5 @@
 # Display Name of the workflow
-name: Validate OpenAPI Spec Files
+name: Test - OpenAPI Specification Schemas
 
 on:
   # Allows you to run this workflow manually from the Actions tab
@@ -27,17 +27,17 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE
     - name: Download Source Files
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
 
       # Set up NodeJS on the build host
     - name: Setup Node.JS Environment
       uses: actions/setup-node@v4
       with:
-        node-version: 22.x
+        node-version: 22
 
     # Sets up OpenJDK on the build host
     - name: Set up Microsoft OpenJDK
-      uses: actions/setup-java@v4
+      uses: actions/setup-java@v5
       with:
         java-version: '21'
         distribution: 'microsoft'
