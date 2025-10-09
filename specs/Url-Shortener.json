@@ -794,7 +794,7 @@
                             "type": "string",
                             "format": "uri",
                             "examples": [
-                                "https://www.example.com/custom-target?customMMobileDefinition"
+                                "https://www.example.com/custom-target?customMobileDefinition"
                             ]
                         }
                     },
