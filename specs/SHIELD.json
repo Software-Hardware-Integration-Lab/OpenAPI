@@ -1749,7 +1749,7 @@
         },
         "description": "Deprive your threats of practical significance. Deploy the Securing Privilege Access architecture. All in a few seconds.",
         "title": "SHI Environment Lockdown and Defense",
-        "version": "3.0.4"
+        "version": "3.0.9"
     },
     "openapi": "3.1.0",
     "paths": {
@@ -2628,6 +2628,97 @@
                 },
                 "tags": [
                     "Infrastructure Deployment"
+                ]
+            }
+        },
+        "/Api/Deploy/Remediate": {
+            "post": {
+                "summary": "Perform remediation steps to address discovered gaps in security posture",
+                "description": "After the user consents, perform necessary steps to deploy resources to cover the security gap.\n\nThis endpoint requires the `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Deploy/Remediate/Post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "examples": {
+                                "Insufficient Remediation Request": {
+                                    "description": "Someone trying to automate this application without reading the documentation.",
+                                    "summary": "Remediation Request Missing Needed Data",
+                                    "value": {}
+                                },
+                                "No User Consent": {
+                                    "description": "User did not agree to the terms and conditions. This post should not have been sent.",
+                                    "summary": "User Did Not Consent",
+                                    "value": {
+                                        "remediationConsent": false,
+                                        "templateList": [
+                                            "8e2b1c7a-4d5f-4a8b-9e6a-2c1b7f3d8e4a",
+                                            "3a7e2b1c-5d4f-4a8b-9e6a-7f2b3d1c9e45"
+                                        ]
+                                    }
+                                },
+                                "User Consented": {
+                                    "description": "User agreed to the terms and conditions and pressed the remediate button.",
+                                    "summary": "User Consented",
+                                    "value": {
+                                        "remediationConsent": true,
+                                        "templateList": [
+                                            "9c1e7a2b-5d3f-4a8b-2c6e-1a7f3d9e8b5c",
+                                            "2b3e7a1c-4d5f-4a8b-9e6a-5d1c7e2b3a4f",
+                                            "7f1a3d9e-8b5c-4a8b-2c6e-9c2e7a1b5d3f"
+                                        ]
+                                    }
+                                }
+                            },
+                            "schema": {
+                                "properties": {
+                                    "remediationConsent": {
+                                        "description": "Flag that indicates the end user has consented to remediation steps (`true`) or not (`false`).",
+                                        "type": "boolean",
+                                        "examples": [
+                                            true
+                                        ]
+                                    },
+                                    "templateList": {
+                                        "description": "List of templateIds that indicate configuration items to be applied as part of remediation.",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "uuid",
+                                            "maxLength": 36,
+                                            "minLength": 36,
+                                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                                            "examples": [
+                                                "5d1c7e2b-3a4f-4a8b-9e6a-7f2b3d1c9e45"
+                                            ]
+                                        },
+                                        "minItems": 0
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "remediationConsent",
+                                    "templateList"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Request for remediation is accepted and process is running"
+                    },
+                    "400": {
+                        "description": "User provided information or choice are invalid for the operation"
+                    },
+                    "409": {
+                        "description": "Operation is already in progress"
+                    },
+                    "503": {
+                        "description": "System requirements have not been met!"
+                    }
+                },
+                "tags": [
+                    "Deploy"
                 ]
             }
         },
