@@ -3647,7 +3647,7 @@
         "/Api/Deploy/Progress": {
             "get": {
                 "summary": "Returns Current Execution Progress of the Deploy Module",
-                "description": "Provides a detailed breakdown of the current progress of the deploy module and its sub-components, if any.\n\nThis endpoint requires the `Deploy.Read`, or the `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
+                "description": "Provides a detailed breakdown of the current progress of the deploy module and its sub-components, if any.\n\nThis endpoint requires the `Deploy.Read`, `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
                 "operationId": "/Api/Deploy/Progress/Get",
                 "responses": {
                     "200": {
@@ -3681,6 +3681,392 @@
                             }
                         },
                         "description": "OK"
+                    }
+                },
+                "tags": [
+                    "Deploy"
+                ]
+            }
+        },
+        "/Api/Deploy/Compare": {
+            "get": {
+                "summary": "Retrieves Cached Evaluation Results",
+                "description": "Returns results of the last performed comparison of the values in the existing resources and their original requested configurations. Resulting object consists of several categories and includes timestamp when the evaluation was performed.\n\nThis endpoint requires the `Deploy.Read`, or `Deploy.ReadWrite`, or `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Deploy/Compare/Get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Response with Cached Data": {
+                                        "summary": "Example of the comparison results",
+                                        "description": "An example of the cached results from the previous comparison operation.",
+                                        "value": {
+                                            "invalid": [
+                                                {
+                                                    "templateId": "a14402b8-98c5-41e3-ba99-e5e1a536f68d",
+                                                    "message": "Setting ID '58246273-d366-40d5-ac3d-daacb8bc2655' - Item not found."
+                                                },
+                                                {
+                                                    "templateId": "9af9209d-d191-4b42-9f65-dfd8b7882bba",
+                                                    "message": "Setting ID 'f6f5d07b-230c-4818-93de-e407b8ca9537' - Insufficient access to view this data."
+                                                }
+                                            ],
+                                            "lastRunTimestamp": "2025-03-25T14:28:54Z",
+                                            "missing": [
+                                                {
+                                                    "templateId": "78afd77c-c2a6-4328-9c61-b9fd44114823",
+                                                    "message": "{\"displayName\":\"Privileged Objects\",\"description\":\"Privileged objects managed by application.\",\"membershipType\":\"Assigned\"}"
+                                                }
+                                            ],
+                                            "results": [
+                                                {
+                                                    "templateId": "c47c20bd-46fa-4dfe-b971-3e5b1ce34a86",
+                                                    "variants": [
+                                                        {
+                                                            "actions": [
+                                                                2,
+                                                                3
+                                                            ],
+                                                            "errorCode": 5,
+                                                            "path": "/displayName"
+                                                        },
+                                                        {
+                                                            "actions": [
+                                                                2
+                                                            ],
+                                                            "errorCode": 1,
+                                                            "path": "/groupPolicyUploadedLanguageFiles"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "templateId": "4b26b6f6-9cb3-4384-bd1e-6d298455c2c4",
+                                                    "variants": [
+                                                        {
+                                                            "actions": [
+                                                                3
+                                                            ],
+                                                            "errorCode": 3,
+                                                            "path": "/roleScopeTagIds/1"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/Deploy.CompareResponse"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "Deploy"
+                ]
+            }
+        },
+        "/Api/Deploy/Compare/Invoke": {
+            "post": {
+                "summary": "Requests to Run New Evaluation and Returns Results",
+                "description": "Resets all cached data and initiates process to compar the values in the existing resources and their original requested configurations. Returns resulting object split into several categories and including timestamp when the evaluation was performed.\n\nThis endpoint requires the `Deploy.ReadWrite` or `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/DeployCompare/Invoke/Post",
+                "requestBody": {
+                    "description": "No payload is expected or needed for this operation",
+                    "content": {
+                        "application/json": {}
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Response with New Data": {
+                                        "summary": "Example of the comparison results",
+                                        "description": "An example of the newly calculated results after performing comparison operation.",
+                                        "value": {
+                                            "invalid": [
+                                                {
+                                                    "templateId": "a14402b8-98c5-41e3-ba99-e5e1a536f68d",
+                                                    "message": "Setting ID '58246273-d366-40d5-ac3d-daacb8bc2655' - Item not found."
+                                                },
+                                                {
+                                                    "templateId": "9af9209d-d191-4b42-9f65-dfd8b7882bba",
+                                                    "message": "Setting ID 'f6f5d07b-230c-4818-93de-e407b8ca9537' - Insufficient access to view this data."
+                                                }
+                                            ],
+                                            "lastRunTimestamp": "2025-03-25T14:28:54Z",
+                                            "missing": [
+                                                {
+                                                    "templateId": "78afd77c-c2a6-4328-9c61-b9fd44114823",
+                                                    "message": "{\"displayName\":\"Privileged Objects\",\"description\":\"Privileged objects managed by application.\",\"membershipType\":\"Assigned\"}"
+                                                }
+                                            ],
+                                            "results": [
+                                                {
+                                                    "templateId": "c47c20bd-46fa-4dfe-b971-3e5b1ce34a86",
+                                                    "variants": [
+                                                        {
+                                                            "actions": [
+                                                                2,
+                                                                3
+                                                            ],
+                                                            "errorCode": 5,
+                                                            "path": "/displayName"
+                                                        },
+                                                        {
+                                                            "actions": [
+                                                                2
+                                                            ],
+                                                            "errorCode": 1,
+                                                            "path": "/groupPolicyUploadedLanguageFiles"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "templateId": "4b26b6f6-9cb3-4384-bd1e-6d298455c2c4",
+                                                    "variants": [
+                                                        {
+                                                            "actions": [
+                                                                3
+                                                            ],
+                                                            "errorCode": 3,
+                                                            "path": "/roleScopeTagIds/1"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/Deploy.CompareResponse"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "503": {
+                        "description": "Deployed architecture is invalid or missing!"
+                    }
+                },
+                "tags": [
+                    "Deploy"
+                ]
+            }
+        },
+        "/Api/Deploy/Skip": {
+            "get": {
+                "summary": "Retrieves List of Existing Override Rules",
+                "description": "Retrieves the details of override property in the Settings Engine and returns list grouped by configuration item reference.\n\nThis endpoint requires `Deploy.Read`, or `Deploy.ReadWrite`, or `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Deploy/Skip/Get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Example Response with Current Rules": {
+                                        "summary": "Example of the returned list of the skipped items",
+                                        "description": "An example of the list indicating configuration items and the properties that are designed to be ignored during the comparison operation.",
+                                        "value": {
+                                            "f47ac10b-58cc-4372-a567-0e02b2c3d479": [
+                                                "/"
+                                            ],
+                                            "9c858901-8a57-4791-81fe-4c455b099bc9": [
+                                                "/description",
+                                                "/name"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "description": "Flat path representing entire item or specific nested property in the configuration item.",
+                                            "examples": [
+                                                "/description"
+                                            ]
+                                        },
+                                        "examples": [
+                                            [
+                                                "/",
+                                                "/description"
+                                            ]
+                                        ]
+                                    },
+                                    "description": "Collection of references to configuration items (using templateId property as property name) and array of strings as value.",
+                                    "examples": [
+                                        {
+                                            "f47ac10b-58cc-4372-a567-0e02b2c3d479": [
+                                                "/"
+                                            ],
+                                            "9c858901-8a57-4791-81fe-4c455b099bc9": [
+                                                "/description",
+                                                "/name"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "Deploy"
+                ]
+            }
+        },
+        "/Api/Deploy/Skip/{templateId}": {
+            "post": {
+                "summary": "Records New Entry to Skip During Evaluation",
+                "description": "Stores the reference to the entity to be skipped during the evaluation process. Could be entire configuration item or a specific property.\n\nThis endpoint requires the `Deploy.ReadWrite` or `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Deploy/Skip/:templateId/Post",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/templateId"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Deploy.PathIndicator"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Recorded successfully"
+                    },
+                    "400": {
+                        "description": "The body does not match expected format!"
+                    }
+                },
+                "tags": [
+                    "Deploy"
+                ]
+            },
+            "delete": {
+                "summary": "Removes Existing Entry From Being Skipped",
+                "description": "Deletes the entry so it is no longer ignored during the evaluation process.\n\nThis endpoint requires the `Deploy.ReadWrite` or `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Deploy/Skip/:templateId/Delete",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/templateId"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Deploy.PathIndicator"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Record has been removed successfully"
+                    },
+                    "400": {
+                        "description": "The body does not match expected format!"
+                    }
+                },
+                "tags": [
+                    "Deploy"
+                ]
+            }
+        },
+        "/Api/Deploy/Restore/{templateId}": {
+            "patch": {
+                "summary": "Restores the Details Of the Deployed Resource",
+                "description": "Calculates and applies a change to the deployed resource to restore original value from the entire configuration item or single property.\n\nThis endpoint requires the `Deploy.ReadWrite` or `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Deploy/Restore/:templateId/Patch",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/templateId"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Deploy.PathIndicator"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Restoration of configuration item or its property is successful"
+                    },
+                    "400": {
+                        "description": "The body does not match expected format!"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    }
+                },
+                "tags": [
+                    "Deploy"
+                ]
+            }
+        },
+        "/Api/Deploy/Remove": {
+            "get": {
+                "summary": "Indicates if the Remove Function Can Be Ran",
+                "description": "Provides a flag that indicates if the core infrastructure removal command can be ran or not.\n\nThis endpoint requires the `Deploy.Read`, `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Deploy/Remove/Get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                },
+                                "examples": {
+                                    "Remove Ready": {
+                                        "value": true,
+                                        "summary": "Removal Ready",
+                                        "description": "Flag that indicates that no dependent components are present and the core infra can be removed."
+                                    },
+                                    "Remove Not Ready": {
+                                        "value": false,
+                                        "summary": "Removal Not Ready",
+                                        "description": "Flag that indicates that dependent components are present and the core infra should not be removed."
+                                    }
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "503": {
+                        "description": "Deployed architecture is invalid or missing!"
+                    }
+                },
+                "tags": [
+                    "Deploy"
+                ]
+            },
+            "delete": {
+                "summary": "Removes All Provisioned Infrastructure Resources",
+                "description": "Deletes all resources in the tenant that were created during the initial deploy or any update operation since.\n\nThis endpoint requires the `Deploy.ReadWrite` or `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/DeployRemove/Delete",
+                "responses": {
+                    "202": {
+                        "description": "Request for removal is accepted and process initiated"
+                    },
+                    "503": {
+                        "description": "Deployed architecture is invalid or missing!"
                     }
                 },
                 "tags": [
@@ -5234,357 +5620,6 @@
                 "summary": "Deploy Marketplace Offering",
                 "tags": [
                     "Marketplace"
-                ]
-            }
-        },
-        "/Api/Deploy/Compare": {
-            "get": {
-                "summary": "Retrieves Cached Evaluation Results",
-                "description": "Returns results of the last performed comparison of the values in the existing resources and their original requested configurations. Resulting object consists of several categories and includes timestamp when the evaluation was performed.\n\nThis endpoint requires the `Deploy.Read`, or `Deploy.ReadWrite`, or `Everything.ReadWrite` scope (permission).",
-                "operationId": "/Api/Deploy/Compare/Get",
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "examples": {
-                                    "Response with Cached Data": {
-                                        "summary": "Example of the comparison results",
-                                        "description": "An example of the cached results from the previous comparison operation.",
-                                        "value": {
-                                            "invalid": [
-                                                {
-                                                    "templateId": "a14402b8-98c5-41e3-ba99-e5e1a536f68d",
-                                                    "message": "Setting ID '58246273-d366-40d5-ac3d-daacb8bc2655' - Item not found."
-                                                },
-                                                {
-                                                    "templateId": "9af9209d-d191-4b42-9f65-dfd8b7882bba",
-                                                    "message": "Setting ID 'f6f5d07b-230c-4818-93de-e407b8ca9537' - Insufficient access to view this data."
-                                                }
-                                            ],
-                                            "lastRunTimestamp": "2025-03-25T14:28:54Z",
-                                            "missing": [
-                                                {
-                                                    "templateId": "78afd77c-c2a6-4328-9c61-b9fd44114823",
-                                                    "message": "{\"displayName\":\"Privileged Objects\",\"description\":\"Privileged objects managed by application.\",\"membershipType\":\"Assigned\"}"
-                                                }
-                                            ],
-                                            "results": [
-                                                {
-                                                    "templateId": "c47c20bd-46fa-4dfe-b971-3e5b1ce34a86",
-                                                    "variants": [
-                                                        {
-                                                            "actions": [
-                                                                2,
-                                                                3
-                                                            ],
-                                                            "errorCode": 5,
-                                                            "path": "/displayName"
-                                                        },
-                                                        {
-                                                            "actions": [
-                                                                2
-                                                            ],
-                                                            "errorCode": 1,
-                                                            "path": "/groupPolicyUploadedLanguageFiles"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "templateId": "4b26b6f6-9cb3-4384-bd1e-6d298455c2c4",
-                                                    "variants": [
-                                                        {
-                                                            "actions": [
-                                                                3
-                                                            ],
-                                                            "errorCode": 3,
-                                                            "path": "/roleScopeTagIds/1"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    }
-                                },
-                                "schema": {
-                                    "$ref": "#/components/schemas/Deploy.CompareResponse"
-                                }
-                            }
-                        },
-                        "description": "OK"
-                    }
-                },
-                "tags": [
-                    "Deploy"
-                ]
-            }
-        },
-        "/Api/Deploy/Compare/Invoke": {
-            "post": {
-                "summary": "Requests to Run New Evaluation and Returns Results",
-                "description": "Resets all cached data and initiates process to compar the values in the existing resources and their original requested configurations. Returns resulting object split into several categories and including timestamp when the evaluation was performed.\n\nThis endpoint requires the `Deploy.ReadWrite` or `Everything.ReadWrite` scope (permission).",
-                "operationId": "/Api/DeployCompare/Invoke/Post",
-                "requestBody": {
-                    "description": "No payload is expected or needed for this operation",
-                    "content": {
-                        "application/json": {}
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "examples": {
-                                    "Response with New Data": {
-                                        "summary": "Example of the comparison results",
-                                        "description": "An example of the newly calculated results after performing comparison operation.",
-                                        "value": {
-                                            "invalid": [
-                                                {
-                                                    "templateId": "a14402b8-98c5-41e3-ba99-e5e1a536f68d",
-                                                    "message": "Setting ID '58246273-d366-40d5-ac3d-daacb8bc2655' - Item not found."
-                                                },
-                                                {
-                                                    "templateId": "9af9209d-d191-4b42-9f65-dfd8b7882bba",
-                                                    "message": "Setting ID 'f6f5d07b-230c-4818-93de-e407b8ca9537' - Insufficient access to view this data."
-                                                }
-                                            ],
-                                            "lastRunTimestamp": "2025-03-25T14:28:54Z",
-                                            "missing": [
-                                                {
-                                                    "templateId": "78afd77c-c2a6-4328-9c61-b9fd44114823",
-                                                    "message": "{\"displayName\":\"Privileged Objects\",\"description\":\"Privileged objects managed by application.\",\"membershipType\":\"Assigned\"}"
-                                                }
-                                            ],
-                                            "results": [
-                                                {
-                                                    "templateId": "c47c20bd-46fa-4dfe-b971-3e5b1ce34a86",
-                                                    "variants": [
-                                                        {
-                                                            "actions": [
-                                                                2,
-                                                                3
-                                                            ],
-                                                            "errorCode": 5,
-                                                            "path": "/displayName"
-                                                        },
-                                                        {
-                                                            "actions": [
-                                                                2
-                                                            ],
-                                                            "errorCode": 1,
-                                                            "path": "/groupPolicyUploadedLanguageFiles"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "templateId": "4b26b6f6-9cb3-4384-bd1e-6d298455c2c4",
-                                                    "variants": [
-                                                        {
-                                                            "actions": [
-                                                                3
-                                                            ],
-                                                            "errorCode": 3,
-                                                            "path": "/roleScopeTagIds/1"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    }
-                                },
-                                "schema": {
-                                    "$ref": "#/components/schemas/Deploy.CompareResponse"
-                                }
-                            }
-                        },
-                        "description": "OK"
-                    },
-                    "503": {
-                        "description": "Deployed architecture is invalid or missing!"
-                    }
-                },
-                "tags": [
-                    "Deploy"
-                ]
-            }
-        },
-        "/Api/Deploy/Restore/{templateId}": {
-            "patch": {
-                "summary": "Restores the Details Of the Deployed Resource",
-                "description": "Calculates and applies a change to the deployed resource to restore original value from the entire configuration item or single property.\n\nThis endpoint requires the `Deploy.ReadWrite` or `Everything.ReadWrite` scope (permission).",
-                "operationId": "/Api/Deploy/Restore/:templateId/Patch",
-                "parameters": [
-                    {
-                        "$ref": "#/components/parameters/templateId"
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Deploy.PathIndicator"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "204": {
-                        "description": "Restoration of configuration item or its property is successful"
-                    },
-                    "400": {
-                        "description": "The body does not match expected format!"
-                    },
-                    "404": {
-                        "$ref": "#/components/responses/404"
-                    }
-                },
-                "tags": [
-                    "Deploy"
-                ]
-            }
-        },
-        "/Api/Deploy/Remove": {
-            "delete": {
-                "summary": "Removes All Provisioned Infrastructure Resources",
-                "description": "Deletes all resources in the tenant that were created during the initial deploy or any update operation since.\n\nThis endpoint requires the `Deploy.ReadWrite` or `Everything.ReadWrite` scope (permission).",
-                "operationId": "/Api/DeployRemove/Delete",
-                "responses": {
-                    "202": {
-                        "description": "Request for removal is accepted and process initiated"
-                    },
-                    "503": {
-                        "description": "Deployed architecture is invalid or missing!"
-                    }
-                },
-                "tags": [
-                    "Deploy"
-                ]
-            }
-        },
-        "/Api/Deploy/Skip": {
-            "get": {
-                "summary": "Retrieves List of Existing Override Rules",
-                "description": "Retrieves the details of override property in the Settings Engine and returns list grouped by configuration item reference.\n\nThis endpoint requires `Deploy.Read`, or `Deploy.ReadWrite`, or `Everything.ReadWrite` scope (permission).",
-                "operationId": "/Api/Deploy/Skip/Get",
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "examples": {
-                                    "Example Response with Current Rules": {
-                                        "summary": "Example of the returned list of the skipped items",
-                                        "description": "An example of the list indicating configuration items and the properties that are designed to be ignored during the comparison operation.",
-                                        "value": {
-                                            "f47ac10b-58cc-4372-a567-0e02b2c3d479": [
-                                                "/"
-                                            ],
-                                            "9c858901-8a57-4791-81fe-4c455b099bc9": [
-                                                "/description",
-                                                "/name"
-                                            ]
-                                        }
-                                    }
-                                },
-                                "schema": {
-                                    "type": "object",
-                                    "additionalProperties": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "string",
-                                            "description": "Flat path representing entire item or specific nested property in the configuration item.",
-                                            "examples": [
-                                                "/description"
-                                            ]
-                                        },
-                                        "examples": [
-                                            [
-                                                "/",
-                                                "/description"
-                                            ]
-                                        ]
-                                    },
-                                    "description": "Collection of references to configuration items (using templateId property as property name) and array of strings as value.",
-                                    "examples": [
-                                        {
-                                            "f47ac10b-58cc-4372-a567-0e02b2c3d479": [
-                                                "/"
-                                            ],
-                                            "9c858901-8a57-4791-81fe-4c455b099bc9": [
-                                                "/description",
-                                                "/name"
-                                            ]
-                                        }
-                                    ]
-                                }
-                            }
-                        },
-                        "description": "OK"
-                    }
-                },
-                "tags": [
-                    "Deploy"
-                ]
-            }
-        },
-        "/Api/Deploy/Skip/{templateId}": {
-            "post": {
-                "summary": "Records New Entry to Skip During Evaluation",
-                "description": "Stores the reference to the entity to be skipped during the evaluation process. Could be entire configuration item or a specific property.\n\nThis endpoint requires the `Deploy.ReadWrite` or `Everything.ReadWrite` scope (permission).",
-                "operationId": "/Api/Deploy/Skip/:templateId/Post",
-                "parameters": [
-                    {
-                        "$ref": "#/components/parameters/templateId"
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Deploy.PathIndicator"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "204": {
-                        "description": "Recorded successfully"
-                    },
-                    "400": {
-                        "description": "The body does not match expected format!"
-                    }
-                },
-                "tags": [
-                    "Deploy"
-                ]
-            },
-            "delete": {
-                "summary": "Removes Existing Entry From Being Skipped",
-                "description": "Deletes the entry so it is no longer ignored during the evaluation process.\n\nThis endpoint requires the `Deploy.ReadWrite` or `Everything.ReadWrite` scope (permission).",
-                "operationId": "/Api/Deploy/Skip/:templateId/Delete",
-                "parameters": [
-                    {
-                        "$ref": "#/components/parameters/templateId"
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Deploy.PathIndicator"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "204": {
-                        "description": "Record has been removed successfully"
-                    },
-                    "400": {
-                        "description": "The body does not match expected format!"
-                    }
-                },
-                "tags": [
-                    "Deploy"
                 ]
             }
         }
