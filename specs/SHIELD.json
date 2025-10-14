@@ -152,6 +152,29 @@
                     }
                 }
             },
+            "templateId": {
+                "description": "Reference to the specific configuration item that is deployed in the tenant.",
+                "in": "path",
+                "name": "templateId",
+                "required": true,
+                "schema": {
+                    "type": "string",
+                    "format": "uuid",
+                    "maxLength": 36,
+                    "minLength": 36,
+                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                    "examples": [
+                        "42ff150d-2ff0-4b38-849e-fe6aa5eedb49"
+                    ]
+                },
+                "examples": {
+                    "valid template ID": {
+                        "value": "7e2a1c3b-4d5f-4a8b-9e6a-2c1b7f3d8e4a",
+                        "summary": "Example of a valid template ID",
+                        "description": "An example of a correct template ID value in UUID format used in restoration and skip operations."
+                    }
+                }
+            },
             "updateChannelName": {
                 "description": "Name of the update channel that should be used when querying or downloading updates.",
                 "in": "path",
@@ -549,6 +572,780 @@
                     {
                         "sccAuth": "54BKPtTL-eSMFp5cqYTMMSblm2U80cUJqQgmbe4f_sRn4ammMmU1NKNurn9HqpsUtS4FrMJRTKa3Or_pFbedM_57R0fVBfNJ-m2Pvey9OweWIDradzT0dB1WnufPTJiT2y7zSQy91Y9wJIn1_aY5q-MNh75qwjM84Dng-mYzbd9KqUfyPUolOo-j-... (Truncated)",
                         "xsrf": "PEDwTvWdm2qSTe-n8h-1praK4OcQK1ELTJ08DWYqBRzQiyA2MIuEKEMNLu4ExjDNpAOUnAxmsqOeuGzb82MJYkegOE6hW8BzpSM6k9nbTbJ4yjNGzMSQvWUnyqrBvGa8JfSRiSeaKdXGBnxGd90Spw2:... (truncated)"
+                    }
+                ]
+            },
+            "Deploy.ConfigurationTag": {
+                "title": "Deploy - Configuration Tag",
+                "description": "Definition of an object representing configuration tag used within architecture collections.",
+                "type": "object",
+                "properties": {
+                    "advanced": {
+                        "type": "boolean",
+                        "description": "Flag indicating if additional challenges should be required before user can use this configuration item.",
+                        "examples": [
+                            false
+                        ]
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Long form explanation what the tag is and/or does.",
+                        "examples": [
+                            "This tag indicates specific collection and very important."
+                        ]
+                    },
+                    "displayName": {
+                        "type": "string",
+                        "description": "Human friendly name of the config tag.",
+                        "examples": [
+                            "Important Collection"
+                        ]
+                    },
+                    "dependentTag": {
+                        "type": "array",
+                        "description": "List of configuration tags that are required to be selected if this one were to be selected. This property is primarily used for illustration to the end user or system.",
+                        "minItems": 0,
+                        "items": {
+                            "$ref": "#/components/schemas/Deploy.ConfigurationTag"
+                        },
+                        "examples": [
+                            [
+                                {
+                                    "advanced": false,
+                                    "description": "This tag indicates specific collection and very important.",
+                                    "displayName": "Important Collection",
+                                    "dependentTag": [],
+                                    "id": "2c7e1a3b-5d4f-4a8b-9e6a-1c2b7f3d8e4a"
+                                }
+                            ]
+                        ]
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "Object ID of the config tag entity.",
+                        "format": "uuid",
+                        "maxLength": 36,
+                        "minLength": 36,
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                        "examples": [
+                            "8b3e2a1c-7d4f-4a8b-9e6a-2c1b7f3d8e4a"
+                        ]
+                    }
+                },
+                "required": [
+                    "advanced",
+                    "description",
+                    "displayName",
+                    "dependentTag",
+                    "id"
+                ],
+                "examples": [
+                    {
+                        "advanced": true,
+                        "description": "This tag indicates optional collection and can be skipped.",
+                        "displayName": "Optional Collection",
+                        "dependentTag": [],
+                        "id": "4d1c7e2b-3a5f-4a8b-9e6a-7f2b3d1c9e45"
+                    }
+                ]
+            },
+            "Deploy.ArchitectureData": {
+                "title": "Deploy - Architecture Data Record",
+                "description": "Collection of objects describing existing architectures available for selection.",
+                "type": "array",
+                "items": {
+                    "description": "List of architecture tag objects with metadata to help UI present the information to the user.",
+                    "type": "object",
+                    "properties": {
+                        "advanced": {
+                            "type": "boolean",
+                            "description": "Flag indicating if additional challenges should be required before user can select this architecture item.",
+                            "examples": [
+                                false
+                            ]
+                        },
+                        "configTagList": {
+                            "type": "array",
+                            "description": "List of configuration tags that are a part of this architecture.",
+                            "minItems": 0,
+                            "items": {
+                                "$ref": "#/components/schemas/Deploy.ConfigurationTag"
+                            },
+                            "examples": [
+                                [
+                                    {
+                                        "advanced": false,
+                                        "description": "Default configuration that is applicable in most cases",
+                                        "displayName": "General Configuration",
+                                        "dependentTag": [],
+                                        "id": "7e4a2c9f-1b3d-4f6a-8e9c-2d5f3a7b6c1e"
+                                    }
+                                ]
+                            ]
+                        },
+                        "description": {
+                            "type": "string",
+                            "description": "Long form explanation what the architecture is and/or does.",
+                            "examples": [
+                                "Default architecture that is applicable in most cases"
+                            ]
+                        },
+                        "displayName": {
+                            "type": "string",
+                            "description": "Human friendly name of the architecture tag.",
+                            "examples": [
+                                "General Architecture"
+                            ]
+                        },
+                        "id": {
+                            "type": "string",
+                            "description": "Object ID of the architecture tag entity.",
+                            "format": "uuid",
+                            "maxLength": 36,
+                            "minLength": 36,
+                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                            "examples": [
+                                "2f6a1c9e-7b3d-4e8f-9a2c-5d1e3b7f4c6a"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "advanced",
+                        "configTagList",
+                        "description",
+                        "displayName",
+                        "id"
+                    ],
+                    "examples": [
+                        {
+                            "advanced": false,
+                            "configTagList": [
+                                {
+                                    "advanced": false,
+                                    "description": "Default configuration that is applicable in most cases",
+                                    "displayName": "General Configuration",
+                                    "dependentTag": [],
+                                    "id": "7e4a2c9f-1b3d-4f6a-8e9c-2d5f3a7b6c1e"
+                                }
+                            ],
+                            "description": "Default architecture that is applicable in most cases",
+                            "displayName": "General Architecture",
+                            "id": "2f6a1c9e-7b3d-4e8f-9a2c-5d1e3b7f4c6a"
+                        }
+                    ]
+                },
+                "examples": [
+                    [
+                        {
+                            "advanced": false,
+                            "configTagList": [
+                                {
+                                    "advanced": false,
+                                    "description": "Default configuration that is applicable in most cases",
+                                    "displayName": "General Configuration",
+                                    "dependentTag": [],
+                                    "id": "7e4a2c9f-1b3d-4f6a-8e9c-2d5f3a7b6c1e"
+                                }
+                            ],
+                            "description": "Default architecture that is applicable in most cases",
+                            "displayName": "General Architecture",
+                            "id": "2f6a1c9e-7b3d-4e8f-9a2c-5d1e3b7f4c6a"
+                        },
+                        {
+                            "advanced": true,
+                            "configTagList": [
+                                {
+                                    "advanced": false,
+                                    "description": "Custom configuration to provision group container",
+                                    "displayName": "Custom Group",
+                                    "dependentTag": [],
+                                    "id": "3a9f2e1c-6b4d-4c7a-9f8e-1d2b5e3a7c6f"
+                                },
+                                {
+                                    "advanced": true,
+                                    "description": "Custom configuration to create access policy",
+                                    "displayName": "Custom Policy",
+                                    "dependentTag": [
+                                        {
+                                            "advanced": true,
+                                            "description": "Custom configuration to enable location control",
+                                            "displayName": "Location Control",
+                                            "dependentTag": [],
+                                            "id": "1b7e3c9a-4f2d-4a6e-9f8c-2d5a1b3f6c7e"
+                                        }
+                                    ],
+                                    "id": "6c3e1a9f-2b7d-4f8a-9e5c-1d4a3b7e6f2c"
+                                }
+                            ],
+                            "description": "Custom architecture for discover process only",
+                            "displayName": "Discover-only Architecture",
+                            "id": "8c1f3a7e-2d4b-4f6a-9e5c-3b7d2a1f6c9e"
+                        }
+                    ]
+                ]
+            },
+            "Deploy.CompareResponse": {
+                "title": "Deploy - Compare Response Record",
+                "description": "Object with the details of the evaluation of the deployed infrastructure resources.",
+                "type": "object",
+                "properties": {
+                    "invalid": {
+                        "type": "array",
+                        "description": "Collection of the configuration items where request for resource data responded with an error.",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "templateId": {
+                                    "type": "string",
+                                    "description": "Internal reference identifier of the resource.",
+                                    "format": "uuid",
+                                    "maxLength": 36,
+                                    "minLength": 36,
+                                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                                    "examples": [
+                                        "a14402b8-98c5-41e3-ba99-e5e1a536f68d"
+                                    ]
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "Text with the details of the error response.",
+                                    "examples": [
+                                        "Setting ID '58246273-d366-40d5-ac3d-daacb8bc2655' - Item not found."
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "templateId",
+                                "message"
+                            ],
+                            "examples": [
+                                {
+                                    "templateId": "a14402b8-98c5-41e3-ba99-e5e1a536f68d",
+                                    "message": "Setting ID '58246273-d366-40d5-ac3d-daacb8bc2655' - Item not found."
+                                }
+                            ]
+                        },
+                        "examples": [
+                            [
+                                {
+                                    "templateId": "a14402b8-98c5-41e3-ba99-e5e1a536f68d",
+                                    "message": "Setting ID '58246273-d366-40d5-ac3d-daacb8bc2655' - Item not found."
+                                },
+                                {
+                                    "templateId": "9af9209d-d191-4b42-9f65-dfd8b7882bba",
+                                    "message": "Setting ID 'f6f5d07b-230c-4818-93de-e407b8ca9537' - Insufficient access to view this data."
+                                }
+                            ]
+                        ]
+                    },
+                    "lastRunTimestamp": {
+                        "description": "Point in time expressed in ISO 8601 format when the evaluation results were generated. ",
+                        "examples": [
+                            "2025-03-25T14:28:54Z"
+                        ],
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
+                    },
+                    "missing": {
+                        "type": "array",
+                        "description": "Collection of the configuration items that are expected to be deployed but do not have resource reference id.",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "templateId": {
+                                    "type": "string",
+                                    "description": "Internal reference identifier of the resource.",
+                                    "format": "uuid",
+                                    "maxLength": 36,
+                                    "minLength": 36,
+                                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                                    "examples": [
+                                        "78afd77c-c2a6-4328-9c61-b9fd44114823"
+                                    ]
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "Text containing details of the original configuration item definition.",
+                                    "examples": [
+                                        "{\"displayName\":\"Privileged Objects\",\"description\":\"Privileged objects managed by application.\",\"membershipType\":\"Assigned\"}"
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "templateId",
+                                "message"
+                            ],
+                            "examples": [
+                                {
+                                    "templateId": "78afd77c-c2a6-4328-9c61-b9fd44114823",
+                                    "message": "{\"displayName\":\"Privileged Objects\",\"description\":\"Privileged objects managed by application.\",\"membershipType\":\"Assigned\"}"
+                                }
+                            ]
+                        },
+                        "examples": [
+                            [
+                                {
+                                    "templateId": "78afd77c-c2a6-4328-9c61-b9fd44114823",
+                                    "message": "{\"displayName\":\"Privileged Objects\",\"description\":\"Privileged objects managed by application.\",\"membershipType\":\"Assigned\"}"
+                                }
+                            ]
+                        ]
+                    },
+                    "results": {
+                        "type": "array",
+                        "description": "Collection of the configuration items where discrepancies were found.",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "templateId": {
+                                    "type": "string",
+                                    "description": "Internal reference identifier of the resource.",
+                                    "format": "uuid",
+                                    "maxLength": 36,
+                                    "minLength": 36,
+                                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                                    "examples": [
+                                        "c47c20bd-46fa-4dfe-b971-3e5b1ce34a86"
+                                    ]
+                                },
+                                "variants": {
+                                    "type": "array",
+                                    "description": "List of individual parts of the resource where discrepancies were determined.",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "actions": {
+                                                "items": {
+                                                    "type": "number",
+                                                    "examples": [
+                                                        2
+                                                    ]
+                                                },
+                                                "description": "List of operations available to be performed on the entity.",
+                                                "type": "array",
+                                                "minItems": 1,
+                                                "examples": [
+                                                    [
+                                                        2,
+                                                        3
+                                                    ]
+                                                ]
+                                            },
+                                            "errorCode": {
+                                                "description": "Detailed information about the discrepancy for the entity.",
+                                                "type": "number",
+                                                "examples": [
+                                                    5
+                                                ]
+                                            },
+                                            "path": {
+                                                "description": "Location in the object where evaluated property encountered an error.",
+                                                "type": "string",
+                                                "examples": [
+                                                    "/displayName"
+                                                ]
+                                            }
+                                        },
+                                        "required": [
+                                            "actions",
+                                            "errorCode",
+                                            "path"
+                                        ],
+                                        "examples": [
+                                            {
+                                                "actions": [
+                                                    2,
+                                                    3
+                                                ],
+                                                "errorCode": 5,
+                                                "path": "/displayName"
+                                            }
+                                        ]
+                                    },
+                                    "examples": [
+                                        [
+                                            {
+                                                "actions": [
+                                                    2,
+                                                    3
+                                                ],
+                                                "errorCode": 5,
+                                                "path": "/displayName"
+                                            }
+                                        ]
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "templateId",
+                                "variants"
+                            ],
+                            "examples": [
+                                {
+                                    "templateId": "c47c20bd-46fa-4dfe-b971-3e5b1ce34a86",
+                                    "variants": [
+                                        {
+                                            "actions": [
+                                                2,
+                                                3
+                                            ],
+                                            "errorCode": 5,
+                                            "path": "/displayName"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "templateId": "4b26b6f6-9cb3-4384-bd1e-6d298455c2c4",
+                                    "variants": [
+                                        {
+                                            "actions": [
+                                                3
+                                            ],
+                                            "errorCode": 3,
+                                            "path": "/roleScopeTagIds/1"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "examples": [
+                            [
+                                {
+                                    "templateId": "c47c20bd-46fa-4dfe-b971-3e5b1ce34a86",
+                                    "variants": [
+                                        {
+                                            "actions": [
+                                                2,
+                                                3
+                                            ],
+                                            "errorCode": 5,
+                                            "path": "/displayName"
+                                        },
+                                        {
+                                            "actions": [
+                                                2
+                                            ],
+                                            "errorCode": 1,
+                                            "path": "/groupPolicyUploadedLanguageFiles"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "templateId": "4b26b6f6-9cb3-4384-bd1e-6d298455c2c4",
+                                    "variants": [
+                                        {
+                                            "actions": [
+                                                3
+                                            ],
+                                            "errorCode": 3,
+                                            "path": "/roleScopeTagIds/1"
+                                        }
+                                    ]
+                                }
+                            ]
+                        ]
+                    }
+                },
+                "required": [
+                    "invalid",
+                    "lastRunTimestamp",
+                    "missing",
+                    "results"
+                ],
+                "examples": [
+                    {
+                        "invalid": [
+                            {
+                                "templateId": "a14402b8-98c5-41e3-ba99-e5e1a536f68d",
+                                "message": "Setting ID '58246273-d366-40d5-ac3d-daacb8bc2655' - Item not found."
+                            },
+                            {
+                                "templateId": "9af9209d-d191-4b42-9f65-dfd8b7882bba",
+                                "message": "Setting ID 'f6f5d07b-230c-4818-93de-e407b8ca9537' - Insufficient access to view this data."
+                            }
+                        ],
+                        "lastRunTimestamp": "2025-03-25T14:28:54Z",
+                        "missing": [
+                            {
+                                "templateId": "78afd77c-c2a6-4328-9c61-b9fd44114823",
+                                "message": "{\"displayName\":\"Privileged Objects\",\"description\":\"Privileged objects managed by application.\",\"membershipType\":\"Assigned\"}"
+                            }
+                        ],
+                        "results": [
+                            {
+                                "templateId": "c47c20bd-46fa-4dfe-b971-3e5b1ce34a86",
+                                "variants": [
+                                    {
+                                        "actions": [
+                                            2,
+                                            3
+                                        ],
+                                        "errorCode": 5,
+                                        "path": "/displayName"
+                                    },
+                                    {
+                                        "actions": [
+                                            2
+                                        ],
+                                        "errorCode": 1,
+                                        "path": "/groupPolicyUploadedLanguageFiles"
+                                    }
+                                ]
+                            },
+                            {
+                                "templateId": "4b26b6f6-9cb3-4384-bd1e-6d298455c2c4",
+                                "variants": [
+                                    {
+                                        "actions": [
+                                            3
+                                        ],
+                                        "errorCode": 3,
+                                        "path": "/roleScopeTagIds/1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "Deploy.ConfigurationItem": {
+                "title": "Deploy - Configuration Item List",
+                "description": "",
+                "type": "array",
+                "items": {
+                    "description": "",
+                    "type": "object",
+                    "properties": {
+                        "childDependencies": {
+                            "type": "array",
+                            "description": "List of Object IDs in UUID format that reference configuration items identified as entities dependent on the presence of the current item.",
+                            "minItems": 0,
+                            "items": {
+                                "type": "string",
+                                "format": "uuid",
+                                "maxLength": 36,
+                                "minLength": 36,
+                                "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                                "examples": [
+                                    "7e1a2b3c-4d5f-4a8b-9e6a-1c2b7f3d8e4a"
+                                ]
+                            },
+                            "examples": [
+                                [
+                                    "7e1a2b3c-4d5f-4a8b-9e6a-1c2b7f3d8e4a",
+                                    "9c2e7a1b-5d3f-4a8b-2c6e-7f1a3d9e8b5c"
+                                ]
+                            ]
+                        },
+                        "groupTagList": {
+                            "type": "array",
+                            "description": "List of metadata tags that indicate which deployment sets the configuration item is compatible with.",
+                            "minItems": 1,
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "description": {
+                                        "type": "string",
+                                        "description": "Long form explanation what the tag is and/or does.",
+                                        "examples": [
+                                            "Collection of policies covering critical conditional access settings."
+                                        ]
+                                    },
+                                    "displayName": {
+                                        "type": "string",
+                                        "description": "Human friendly name of the tag.",
+                                        "examples": [
+                                            "Conditional Policy"
+                                        ]
+                                    },
+                                    "tagId": {
+                                        "type": "string",
+                                        "description": "Object ID in the UUID format of the tag entity.",
+                                        "format": "uuid",
+                                        "maxLength": 36,
+                                        "minLength": 36,
+                                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                                        "examples": [
+                                            "3b7e2a1c-4d5f-4a8b-9e6a-2c1b7f3d8e4a"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "description",
+                                    "displayName",
+                                    "tagId"
+                                ],
+                                "examples": [
+                                    {
+                                        "description": "Collection of policies covering critical conditional access settings.",
+                                        "displayName": "Conditional Policy",
+                                        "tagId": "3b7e2a1c-4d5f-4a8b-9e6a-2c1b7f3d8e4a"
+                                    }
+                                ]
+                            },
+                            "examples": [
+                                [
+                                    {
+                                        "description": "Collection of policies covering critical conditional access settings.",
+                                        "displayName": "Conditional Policy",
+                                        "tagId": "3b7e2a1c-4d5f-4a8b-9e6a-2c1b7f3d8e4a"
+                                    }
+                                ]
+                            ]
+                        },
+                        "msCloudTypes": {
+                            "type": "array",
+                            "description": "List of Microsoft Sovereign Clouds the configuration items is compatible with.",
+                            "minItems": 1,
+                            "items": {
+                                "type": "string",
+                                "examples": [
+                                    "USGov"
+                                ]
+                            },
+                            "examples": [
+                                [
+                                    "Public"
+                                ]
+                            ]
+                        },
+                        "parentDependencies": {
+                            "type": "array",
+                            "description": "List of Object IDs in UUID format that reference configuration items identified as entities which deploy and existence is required for the current item.",
+                            "minItems": 0,
+                            "items": {
+                                "type": "string",
+                                "format": "uuid",
+                                "maxLength": 36,
+                                "minLength": 36,
+                                "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                                "examples": [
+                                    "8e6a1c2b-7f3d-4a8b-9c2e-5d3f7a1b2e4a"
+                                ]
+                            },
+                            "examples": [
+                                [
+                                    "8e6a1c2b-7f3d-4a8b-9c2e-5d3f7a1b2e4a"
+                                ]
+                            ]
+                        },
+                        "templateId": {
+                            "type": "string",
+                            "description": "Internal Object ID in UUID format to uniquely identify this configuration item definition.",
+                            "format": "uuid",
+                            "maxLength": 36,
+                            "minLength": 36,
+                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                            "examples": [
+                                "2a1c7e3b-5d4f-4a8b-9e6a-7f3d2b1c8e4a"
+                            ]
+                        },
+                        "urlPath": {
+                            "type": "string",
+                            "description": "Relative Graph Api path identifying where the resource to be located and managed.",
+                            "examples": [
+                                "/identity/conditionalAccess/policies"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "childDependencies",
+                        "groupTagList",
+                        "msCloudTypes",
+                        "parentDependencies",
+                        "templateId",
+                        "urlPath"
+                    ],
+                    "examples": [
+                        {
+                            "childDependencies": [
+                                "7e1a2b3c-4d5f-4a8b-9e6a-1c2b7f3d8e4a",
+                                "9c2e7a1b-5d3f-4a8b-2c6e-7f1a3d9e8b5c"
+                            ],
+                            "groupTagList": [
+                                {
+                                    "description": "Collection of policies covering critical conditional access settings.",
+                                    "displayName": "Conditional Policy",
+                                    "tagId": "3b7e2a1c-4d5f-4a8b-9e6a-2c1b7f3d8e4a"
+                                }
+                            ],
+                            "msCloudTypes": [
+                                "Public"
+                            ],
+                            "parentDependencies": [
+                                "8e6a1c2b-7f3d-4a8b-9c2e-5d3f7a1b2e4a"
+                            ],
+                            "templateId": "2a1c7e3b-5d4f-4a8b-9e6a-7f3d2b1c8e4a",
+                            "urlPath": "/identity/conditionalAccess/policies"
+                        }
+                    ]
+                },
+                "examples": [
+                    [
+                        {
+                            "childDependencies": [
+                                "7e1a2b3c-4d5f-4a8b-9e6a-1c2b7f3d8e4a",
+                                "9c2e7a1b-5d3f-4a8b-2c6e-7f1a3d9e8b5c"
+                            ],
+                            "groupTagList": [
+                                {
+                                    "description": "Collection of policies covering critical conditional access settings.",
+                                    "displayName": "Conditional Policy",
+                                    "tagId": "3b7e2a1c-4d5f-4a8b-9e6a-2c1b7f3d8e4a"
+                                }
+                            ],
+                            "msCloudTypes": [
+                                "Public"
+                            ],
+                            "parentDependencies": [
+                                "8e6a1c2b-7f3d-4a8b-9c2e-5d3f7a1b2e4a"
+                            ],
+                            "templateId": "2a1c7e3b-5d4f-4a8b-9e6a-7f3d2b1c8e4a",
+                            "urlPath": "/identity/conditionalAccess/policies"
+                        },
+                        {
+                            "childDependencies": [
+                                "1c2b5d3f-7a1b-4a8b-9e6a-2e4a3b7e8c5d"
+                            ],
+                            "groupTagList": [
+                                {
+                                    "description": "Principal containers that are used to provide assignments.",
+                                    "displayName": "Administrative Unit",
+                                    "tagId": "5d3f9c2e-7a1b-4a8b-2c6e-1a3d7e8b5c4a"
+                                }
+                            ],
+                            "msCloudTypes": [
+                                "Public"
+                            ],
+                            "parentDependencies": [],
+                            "templateId": "4a8b7e1a-2b3c-4d5f-9e6a-1c2b7f3d8e4a",
+                            "urlPath": "/directory/administrativeUnits"
+                        }
+                    ]
+                ]
+            },
+            "Deploy.PathIndicator": {
+                "title": "Deploy - Path Payload",
+                "description": "Payload with path data used in several endpoints",
+                "type": "object",
+                "properties": {
+                    "path": {
+                        "description": "Location of the target in the object structure of the configuration item flattened for predictable navigation.",
+                        "type": "string",
+                        "examples": [
+                            "/roleScopeTagIds"
+                        ]
+                    }
+                },
+                "required": [
+                    "path"
+                ],
+                "examples": [
+                    {
+                        "path": "/roleScopeTagIds"
                     }
                 ]
             },
@@ -2032,7 +2829,7 @@
         },
         "/Api/Update": {
             "get": {
-                "summary": "Check if an Update Is Pending",
+                "summary": "Checks if an Update Is Pending",
                 "description": "Provides the state of the update engine. Where `true` means there is an update detected and `false` means there isn't an update available. This endpoint is available to all authorization levels.",
                 "operationId": "/Api/Update/Get",
                 "responses": {
@@ -2064,7 +2861,7 @@
         },
         "/Api/Update/Check": {
             "get": {
-                "summary": "Check for a New Version",
+                "summary": "Checks for a New Version",
                 "description": "Checks with data gateway and compares the reported version to the version that is locally installed. If there is a difference, a new update is marked as available. Always returns the latest version available on data gateway, even if that version is installed locally.\n\nThis endpoint requires the `Update.Read`, `Update.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
                 "operationId": "/Api/Update/Check/Get",
                 "responses": {
@@ -2109,7 +2906,7 @@
         },
         "/Api/Update/Check/Channel/{Update Channel Name}": {
             "get": {
-                "summary": "Check for a New Version in Channel",
+                "summary": "Checks for a New Version in Channel",
                 "description": "Checks with the SHI Data Gateway in the specified update channel and compares the reported version to the version that is locally installed. If there is a difference, a new update is marked as available. Always returns the latest version available on data gateway, even if that version is installed locally.\n\nThis endpoint requires the `Update.Read`, `Update.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
                 "operationId": "/Api/Update/Check/Channel/UpdateChannelName/Get",
                 "parameters": [
@@ -2194,7 +2991,7 @@
         },
         "/Api/Update/Upload": {
             "post": {
-                "summary": "Upload Custom Update Package",
+                "summary": "Uploads Custom Update Package",
                 "description": "THIS API SHOULD ONLY BE USED IF INSTRUCTED BY SHI EMPLOYEES!\n\nUploads the specified ZIP package, validates signature and installs it if it matches. This ignores version numbers and will allow you to install the same version again if necessary.\n\nThis endpoint requires the `Update.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
                 "operationId": "/Api/Update/Upload/Post",
                 "requestBody": {
@@ -2219,7 +3016,7 @@
         },
         "/Api/Discover/Status": {
             "get": {
-                "summary": "State of the Discover Module.",
+                "summary": "Returns State of the Discover Module",
                 "description": "Provides a detailed breakdown of the current state of the discover module and it progress.\n\nThis endpoint requires the `Discover.Read`, or the `Everything.ReadWrite` scope (permission).",
                 "operationId": "/Api/Discover/Status/Get",
                 "responses": {
@@ -2250,7 +3047,7 @@
         },
         "/Api/Discover/Progress": {
             "get": {
-                "summary": "Current execution progress of the Discover module.",
+                "summary": "Returns Current Execution Progress of the Discover Module",
                 "description": "Provides a detailed breakdown of the current progress of the discover module and it progress.\n\nThis endpoint requires the `Discover.Read`, or the `Everything.ReadWrite` scope (permission).",
                 "operationId": "/Api/Discover/Progress/Get",
                 "responses": {
@@ -2286,7 +3083,7 @@
         },
         "/Api/Discover/Report": {
             "get": {
-                "summary": "Start Discover's Report Generation",
+                "summary": "Starts Discover's Report Generation",
                 "description": "Starts the Discover module's report collection engine to create a license report and upload it to the data gateway.\n\nThis endpoint requires the `Discover.Action.Run`, or the `Everything.ReadWrite` scope (permission).",
                 "operationId": "/Api/Discover/Report/Start",
                 "responses": {
@@ -2472,6 +3269,7 @@
         },
         "/Api/Deploy": {
             "get": {
+                "summary": "Gets the Current Status of the Infrastructure Deployment",
                 "description": "Has the core infrastructure engine check if the config engine can initialize properly.\n\nThis endpoint requires the `Deploy.Read`, `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
                 "operationId": "/Api/Deploy/Get",
                 "responses": {
@@ -2482,34 +3280,92 @@
                                     "Infra deployed": {
                                         "description": "All API calls should be available since the core infrastructure is deployed.",
                                         "summary": "Infrastructure is deployed",
-                                        "value": true
+                                        "value": {
+                                            "deployedArchitecture": "4a7f2e9c-1b3d-4c6a-9f8e-2d5b3e1a7c9f",
+                                            "deployTagInclude": true,
+                                            "deployedTags": [
+                                                "5e2a9c1f-8b3d-4f6a-9e7c-2d1f3a6b4c8e",
+                                                "9c7f2e1a-3b6d-4a8e-9f5c-1d2a4b7e6c3f"
+                                            ],
+                                            "isDeploying": true
+                                        }
                                     },
                                     "Infra not deployed": {
                                         "description": "Infrastructure is not deployed. Please run the deployment before attempting different API calls.",
                                         "summary": "Infrastructure is not deployed",
-                                        "value": false
+                                        "value": {
+                                            "deployedArchitecture": null,
+                                            "deployTagInclude": false,
+                                            "deployedTags": [],
+                                            "isDeploying": false
+                                        }
                                     }
                                 },
                                 "schema": {
-                                    "type": "boolean",
-                                    "examples": [
-                                        true
+                                    "properties": {
+                                        "deployedArchitecture": {
+                                            "description": "Reference of the architecture type being deployed that defines what resources could be targeted.",
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ],
+                                            "format": "uuid",
+                                            "maxLength": 36,
+                                            "minLength": 36,
+                                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                                            "examples": [
+                                                "6a2b7e1c-3d4f-4a8b-9e6a-2c1b7f3d8e4a"
+                                            ]
+                                        },
+                                        "deployTagInclude": {
+                                            "description": "Flag that indicates if the tag list has been set to be in inclusion mode (`true`) or exclusion mode (`false`).",
+                                            "type": "boolean",
+                                            "examples": [
+                                                true
+                                            ]
+                                        },
+                                        "deployedTags": {
+                                            "description": "Collection of references to the groupings that list related or dependent resources to be deployed.",
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "format": "uuid",
+                                                "maxLength": 36,
+                                                "minLength": 36,
+                                                "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                                                "examples": [
+                                                    "9e1c2b7a-5d3f-4a8b-2c6e-7f1a3d9e8b5c"
+                                                ]
+                                            },
+                                            "minItems": 0
+                                        },
+                                        "isDeploying": {
+                                            "description": "Flag to indicate if process has started and ongoing (true) or not (false).",
+                                            "type": "boolean",
+                                            "examples": [
+                                                true
+                                            ]
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "deployedArchitecture",
+                                        "deployTagInclude",
+                                        "deployedTags",
+                                        "isDeploying"
                                     ]
                                 }
                             }
                         },
                         "description": "OK"
-                    },
-                    "401": {
-                        "$ref": "#/components/responses/401"
                     }
                 },
-                "summary": "Get the current status of the infrastructure deployment",
                 "tags": [
-                    "Infrastructure Deployment"
+                    "Deploy"
                 ]
             },
             "post": {
+                "summary": "Deploys the Core Infrastructure Architecture Specification",
                 "description": "After the user consents, deploy the core security groups, scope tag, configurations and metadata.\n\nThis endpoint requires the `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
                 "operationId": "/Api/Deploy/Post",
                 "requestBody": {
@@ -2525,20 +3381,65 @@
                                     "description": "User did not agree to the terms and conditions. This post should not have been sent.",
                                     "summary": "User Did Not Consent",
                                     "value": {
-                                        "deploymentConsent": false
+                                        "deploymentConsent": false,
+                                        "architectureId": "3f9c1a2e-4b7e-4f5e-9c3e-8d2f7a1b6c9d",
+                                        "tagList": [
+                                            "7a2e5b1f-9c4d-4e3a-8f1b-2d6c3e9a7f4e"
+                                        ],
+                                        "include": true
                                     }
                                 },
                                 "User Consented": {
                                     "description": "User agreed to the terms and conditions and pressed the deploy button.",
                                     "summary": "User Consented",
                                     "value": {
-                                        "deploymentConsent": true
+                                        "deploymentConsent": true,
+                                        "architectureId": "1d4f9c7a-3e2b-4a6d-9f8e-7c2a1b5e3d9f",
+                                        "tagList": [
+                                            "6b3e2f1a-8d9c-4f7e-9a3b-1c2d5e7f4a6b",
+                                            "9e1c3a7b-2f4d-4e6a-8c9f-3b7d1a5e2f6c"
+                                        ],
+                                        "include": false
                                     }
                                 }
                             },
                             "schema": {
                                 "properties": {
                                     "deploymentConsent": {
+                                        "description": "Flag that indicates the end user has consented to deploying the architecture (`true`) or not (`false`).",
+                                        "type": "boolean",
+                                        "examples": [
+                                            true
+                                        ]
+                                    },
+                                    "architectureId": {
+                                        "description": "Reference of the architecture type being deployed that defines what resources could be targeted.",
+                                        "type": "string",
+                                        "format": "uuid",
+                                        "maxLength": 36,
+                                        "minLength": 36,
+                                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                                        "examples": [
+                                            "3b8e2a1c-7d4f-4a8b-9e6a-2c1b7f3d8e4a"
+                                        ]
+                                    },
+                                    "tagList": {
+                                        "description": "Collection of references to the groupings that list related or dependent resources to be deployed.",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "uuid",
+                                            "maxLength": 36,
+                                            "minLength": 36,
+                                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                                            "examples": [
+                                                "5d1c7e2b-3a4f-4a8b-9e6a-7f2b3d1c9e45"
+                                            ]
+                                        },
+                                        "minItems": 0
+                                    },
+                                    "include": {
+                                        "description": "Flag to indicate if calculated resources should be included (true) or excluded (false) from the deploy.",
                                         "type": "boolean",
                                         "examples": [
                                             true
@@ -2546,51 +3447,207 @@
                                     }
                                 },
                                 "type": "object",
-                                "examples": [
-                                    {
-                                        "deploymentConsent": true
-                                    }
+                                "required": [
+                                    "deploymentConsent",
+                                    "architectureId",
+                                    "tagList",
+                                    "include"
                                 ]
                             }
                         }
                     }
                 },
                 "responses": {
-                    "204": {
+                    "202": {
+                        "description": "Request for deployment is accepted and process is running"
+                    },
+                    "400": {
+                        "description": "User information or choice are invalid for the operation"
+                    },
+                    "409": {
+                        "description": "Operation is already in progress"
+                    },
+                    "503": {
+                        "description": "System requirements have not been met!"
+                    }
+                },
+                "tags": [
+                    "Deploy"
+                ]
+            },
+            "patch": {
+                "summary": "Augments the list of tags set as deployed and provisions new resources",
+                "description": "Changes the list of tags based on include flags, calculates the list of matchings resources and deploys all the ones marked as not provisioned.\n\nThis endpoint requires the `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Deploy/Patch",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "examples": {
+                                "Invalid Request": {
+                                    "description": "User submits request with empty list.",
+                                    "summary": "Empty request",
+                                    "value": {
+                                        "tagList": []
+                                    }
+                                },
+                                "Acceptable Request": {
+                                    "description": "User provides one or more values for the list of tags.",
+                                    "summary": "Request with data",
+                                    "value": {
+                                        "tagList": [
+                                            "f3b9c7e2-1a4d-4c2e-9f3e-8b6a1c2d9e7a",
+                                            "a7d2f1c4-3e8b-4b6f-9c1d-2f4e7a9b3c6d"
+                                        ]
+                                    }
+                                }
+                            },
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "tagList": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "uuid",
+                                            "maxLength": 36,
+                                            "minLength": 36,
+                                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                                            "examples": [
+                                                "f3b9c7e2-1a4d-4c2e-9f3e-8b6a1c2d9e7a"
+                                            ]
+                                        },
+                                        "minItems": 1,
+                                        "examples": [
+                                            [
+                                                "f3b9c7e2-1a4d-4c2e-9f3e-8b6a1c2d9e7a",
+                                                "a7d2f1c4-3e8b-4b6f-9c1d-2f4e7a9b3c6d"
+                                            ]
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "tagList"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Request for changes is accepted and deployment of the additional resources is running"
+                    },
+                    "400": {
+                        "description": "User information is invalid/incomplete for the operation"
+                    },
+                    "503": {
+                        "description": "System requirements have not been met!"
+                    }
+                },
+                "tags": [
+                    "Deploy"
+                ]
+            }
+        },
+        "/Api/Deploy/Component/Architecture": {
+            "get": {
+                "summary": "Returns List of Available Architectures",
+                "description": "Retrieves the collection of possible architecture configurations to be deployed including all metadata accompanying these records.\n\nThis endpoint requires the `Deploy.Read`, `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Deploy/Component/Architecture/Get",
+                "responses": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "examples": {
-                                    "Successful Deployment": {
-                                        "description": "When a deployment request is successfully executed, a boolean true is returned.",
-                                        "summary": "Successful Deployment",
-                                        "value": true
+                                    "Sample List of Available Architectures": {
+                                        "description": "Sample list of architecture records available to be deployed.",
+                                        "summary": "Available Architectures",
+                                        "value": [
+                                            {
+                                                "id": "4a7f2e9c-1b3d-4c6a-9f8e-2d5b3e1a7c9f",
+                                                "name": "Standard Security Baseline",
+                                                "description": "Provides a standard security baseline for most organizations with core security groups, scope tags and configurations.",
+                                                "version": "1.0.0",
+                                                "isActive": true,
+                                                "createdAt": "2024-01-15T12:00:00Z",
+                                                "updatedAt": "2024-06-20T08:30:00Z"
+                                            },
+                                            {
+                                                "id": "7e2a5b1f-9c4d-4e3a-8f1b-2d6c3e9a7f4e",
+                                                "name": "Enhanced Security Posture",
+                                                "description": "An enhanced security posture architecture with additional configurations and stricter access controls.",
+                                                "version": "2.1.0",
+                                                "isActive": true,
+                                                "createdAt": "2024-03-10T09:15:00Z",
+                                                "updatedAt": "2024-07-05T14:45:00Z"
+                                            }
+                                        ]
                                     }
                                 },
                                 "schema": {
-                                    "type": "boolean",
-                                    "examples": [
-                                        true
-                                    ]
+                                    "$ref": "#/components/schemas/Deploy.ArchitectureData"
                                 }
                             }
                         },
                         "description": "OK"
-                    },
-                    "401": {
-                        "$ref": "#/components/responses/401"
                     }
                 },
-                "summary": "Deploy the core infrastructure architecture specification",
                 "tags": [
-                    "Infrastructure Deployment"
-                ],
-                "security": []
+                    "Deploy"
+                ]
+            }
+        },
+        "/Api/Deploy/Component/ConfigurationItem": {
+            "get": {
+                "summary": "Returns List of Available Configuration Items",
+                "description": "Retrieves the collection of all existing configuration items with curated set of metadata.\n\nThis endpoint requires the `Deploy.Read`, `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Deploy/Component/ConfigurationItem/Get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Sample List of Available Configuration Items": {
+                                        "description": "Sample list of configuration item records available to be deployed.",
+                                        "summary": "Available Configuration Items",
+                                        "value": [
+                                            {
+                                                "id": "5e2a9c1f-8b3d-4f6a-9e7c-2d1f3a6b4c8e",
+                                                "name": "Core Security Group",
+                                                "description": "A core security group that contains essential security roles and permissions.",
+                                                "type": "SecurityGroup",
+                                                "isActive": true,
+                                                "createdAt": "2024-02-20T10:00:00Z",
+                                                "updatedAt": "2024-05-15T11:30:00Z"
+                                            },
+                                            {
+                                                "id": "9c7f2e1a-3b6d-4a8e-9f5c-1d2a4b7e6c3f",
+                                                "name": "Scope Tag - Confidential Data",
+                                                "description": "A scope tag designed to restrict access to confidential data resources.",
+                                                "type": "ScopeTag",
+                                                "isActive": true,
+                                                "createdAt": "2024-04-12T14:20:00Z",
+                                                "updatedAt": "2024-07-01T09:50:00Z"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/Deploy.ConfigurationItem"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "Deploy"
+                ]
             }
         },
         "/Api/Deploy/Progress": {
             "get": {
-                "summary": "Current execution progress of the Deploy module.",
-                "description": "Provides a detailed breakdown of the current progress of the deploy module and its sub-components, if any.\n\nThis endpoint requires the `Deploy.Read`, or the `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
+                "summary": "Returns Current Execution Progress of the Deploy Module",
+                "description": "Provides a detailed breakdown of the current progress of the deploy module and its sub-components, if any.\n\nThis endpoint requires the `Deploy.Read`, `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
                 "operationId": "/Api/Deploy/Progress/Get",
                 "responses": {
                     "200": {
@@ -2627,7 +3684,7 @@
                     }
                 },
                 "tags": [
-                    "Infrastructure Deployment"
+                    "Deploy"
                 ]
             }
         },
@@ -2722,71 +3779,389 @@
                 ]
             }
         },
-        "/Api/Deploy/Version": {
+        "/Api/Deploy/Compare": {
             "get": {
-                "description": "Gets the version of the API server and the architecture version deployed as well as the supported version of the architecture spec from the server.\n\nThis endpoint requires the `Deploy.Read`, `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
-                "operationId": "/Api/Deploy/Version/Get",
+                "summary": "Retrieves Cached Evaluation Results",
+                "description": "Returns results of the last performed comparison of the values in the existing resources and their original requested configurations. Resulting object consists of several categories and includes timestamp when the evaluation was performed.\n\nThis endpoint requires the `Deploy.Read`, or `Deploy.ReadWrite`, or `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Deploy/Compare/Get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Response with Cached Data": {
+                                        "summary": "Example of the comparison results",
+                                        "description": "An example of the cached results from the previous comparison operation.",
+                                        "value": {
+                                            "invalid": [
+                                                {
+                                                    "templateId": "a14402b8-98c5-41e3-ba99-e5e1a536f68d",
+                                                    "message": "Setting ID '58246273-d366-40d5-ac3d-daacb8bc2655' - Item not found."
+                                                },
+                                                {
+                                                    "templateId": "9af9209d-d191-4b42-9f65-dfd8b7882bba",
+                                                    "message": "Setting ID 'f6f5d07b-230c-4818-93de-e407b8ca9537' - Insufficient access to view this data."
+                                                }
+                                            ],
+                                            "lastRunTimestamp": "2025-03-25T14:28:54Z",
+                                            "missing": [
+                                                {
+                                                    "templateId": "78afd77c-c2a6-4328-9c61-b9fd44114823",
+                                                    "message": "{\"displayName\":\"Privileged Objects\",\"description\":\"Privileged objects managed by application.\",\"membershipType\":\"Assigned\"}"
+                                                }
+                                            ],
+                                            "results": [
+                                                {
+                                                    "templateId": "c47c20bd-46fa-4dfe-b971-3e5b1ce34a86",
+                                                    "variants": [
+                                                        {
+                                                            "actions": [
+                                                                2,
+                                                                3
+                                                            ],
+                                                            "errorCode": 5,
+                                                            "path": "/displayName"
+                                                        },
+                                                        {
+                                                            "actions": [
+                                                                2
+                                                            ],
+                                                            "errorCode": 1,
+                                                            "path": "/groupPolicyUploadedLanguageFiles"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "templateId": "4b26b6f6-9cb3-4384-bd1e-6d298455c2c4",
+                                                    "variants": [
+                                                        {
+                                                            "actions": [
+                                                                3
+                                                            ],
+                                                            "errorCode": 3,
+                                                            "path": "/roleScopeTagIds/1"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/Deploy.CompareResponse"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "Deploy"
+                ]
+            }
+        },
+        "/Api/Deploy/Compare/Invoke": {
+            "post": {
+                "summary": "Requests to Run New Evaluation and Returns Results",
+                "description": "Resets all cached data and initiates process to compar the values in the existing resources and their original requested configurations. Returns resulting object split into several categories and including timestamp when the evaluation was performed.\n\nThis endpoint requires the `Deploy.ReadWrite` or `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/DeployCompare/Invoke/Post",
+                "requestBody": {
+                    "description": "No payload is expected or needed for this operation",
+                    "content": {
+                        "application/json": {}
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Response with New Data": {
+                                        "summary": "Example of the comparison results",
+                                        "description": "An example of the newly calculated results after performing comparison operation.",
+                                        "value": {
+                                            "invalid": [
+                                                {
+                                                    "templateId": "a14402b8-98c5-41e3-ba99-e5e1a536f68d",
+                                                    "message": "Setting ID '58246273-d366-40d5-ac3d-daacb8bc2655' - Item not found."
+                                                },
+                                                {
+                                                    "templateId": "9af9209d-d191-4b42-9f65-dfd8b7882bba",
+                                                    "message": "Setting ID 'f6f5d07b-230c-4818-93de-e407b8ca9537' - Insufficient access to view this data."
+                                                }
+                                            ],
+                                            "lastRunTimestamp": "2025-03-25T14:28:54Z",
+                                            "missing": [
+                                                {
+                                                    "templateId": "78afd77c-c2a6-4328-9c61-b9fd44114823",
+                                                    "message": "{\"displayName\":\"Privileged Objects\",\"description\":\"Privileged objects managed by application.\",\"membershipType\":\"Assigned\"}"
+                                                }
+                                            ],
+                                            "results": [
+                                                {
+                                                    "templateId": "c47c20bd-46fa-4dfe-b971-3e5b1ce34a86",
+                                                    "variants": [
+                                                        {
+                                                            "actions": [
+                                                                2,
+                                                                3
+                                                            ],
+                                                            "errorCode": 5,
+                                                            "path": "/displayName"
+                                                        },
+                                                        {
+                                                            "actions": [
+                                                                2
+                                                            ],
+                                                            "errorCode": 1,
+                                                            "path": "/groupPolicyUploadedLanguageFiles"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "templateId": "4b26b6f6-9cb3-4384-bd1e-6d298455c2c4",
+                                                    "variants": [
+                                                        {
+                                                            "actions": [
+                                                                3
+                                                            ],
+                                                            "errorCode": 3,
+                                                            "path": "/roleScopeTagIds/1"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/Deploy.CompareResponse"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "503": {
+                        "description": "Deployed architecture is invalid or missing!"
+                    }
+                },
+                "tags": [
+                    "Deploy"
+                ]
+            }
+        },
+        "/Api/Deploy/Skip": {
+            "get": {
+                "summary": "Retrieves List of Existing Override Rules",
+                "description": "Retrieves the details of override property in the Settings Engine and returns list grouped by configuration item reference.\n\nThis endpoint requires `Deploy.Read`, or `Deploy.ReadWrite`, or `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Deploy/Skip/Get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Example Response with Current Rules": {
+                                        "summary": "Example of the returned list of the skipped items",
+                                        "description": "An example of the list indicating configuration items and the properties that are designed to be ignored during the comparison operation.",
+                                        "value": {
+                                            "f47ac10b-58cc-4372-a567-0e02b2c3d479": [
+                                                "/"
+                                            ],
+                                            "9c858901-8a57-4791-81fe-4c455b099bc9": [
+                                                "/description",
+                                                "/name"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "description": "Flat path representing entire item or specific nested property in the configuration item.",
+                                            "examples": [
+                                                "/description"
+                                            ]
+                                        },
+                                        "examples": [
+                                            [
+                                                "/",
+                                                "/description"
+                                            ]
+                                        ]
+                                    },
+                                    "description": "Collection of references to configuration items (using templateId property as property name) and array of strings as value.",
+                                    "examples": [
+                                        {
+                                            "f47ac10b-58cc-4372-a567-0e02b2c3d479": [
+                                                "/"
+                                            ],
+                                            "9c858901-8a57-4791-81fe-4c455b099bc9": [
+                                                "/description",
+                                                "/name"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "Deploy"
+                ]
+            }
+        },
+        "/Api/Deploy/Skip/{templateId}": {
+            "post": {
+                "summary": "Records New Entry to Skip During Evaluation",
+                "description": "Stores the reference to the entity to be skipped during the evaluation process. Could be entire configuration item or a specific property.\n\nThis endpoint requires the `Deploy.ReadWrite` or `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Deploy/Skip/:templateId/Post",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/templateId"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Deploy.PathIndicator"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Recorded successfully"
+                    },
+                    "400": {
+                        "description": "The body does not match expected format!"
+                    }
+                },
+                "tags": [
+                    "Deploy"
+                ]
+            },
+            "delete": {
+                "summary": "Removes Existing Entry From Being Skipped",
+                "description": "Deletes the entry so it is no longer ignored during the evaluation process.\n\nThis endpoint requires the `Deploy.ReadWrite` or `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Deploy/Skip/:templateId/Delete",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/templateId"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Deploy.PathIndicator"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Record has been removed successfully"
+                    },
+                    "400": {
+                        "description": "The body does not match expected format!"
+                    }
+                },
+                "tags": [
+                    "Deploy"
+                ]
+            }
+        },
+        "/Api/Deploy/Restore/{templateId}": {
+            "patch": {
+                "summary": "Restores the Details Of the Deployed Resource",
+                "description": "Calculates and applies a change to the deployed resource to restore original value from the entire configuration item or single property.\n\nThis endpoint requires the `Deploy.ReadWrite` or `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Deploy/Restore/:templateId/Patch",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/templateId"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Deploy.PathIndicator"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Restoration of configuration item or its property is successful"
+                    },
+                    "400": {
+                        "description": "The body does not match expected format!"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    }
+                },
+                "tags": [
+                    "Deploy"
+                ]
+            }
+        },
+        "/Api/Deploy/Remove": {
+            "get": {
+                "summary": "Indicates if the Remove Function Can Be Ran",
+                "description": "Provides a flag that indicates if the core infrastructure removal command can be ran or not.\n\nThis endpoint requires the `Deploy.Read`, `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Deploy/Remove/Get",
                 "responses": {
                     "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "apiVersion": {
-                                            "description": "Follows symantec versioning as laid out here: https://semver.org/. This number is the version of the API server.",
-                                            "examples": [
-                                                "1.2.3"
-                                            ],
-                                            "type": "string"
-                                        },
-                                        "archSpecVersion": {
-                                            "description": "An incrementing number that describes the version of the architecture specification that the API supports.",
-                                            "examples": [
-                                                "25"
-                                            ],
-                                            "type": "string",
-                                            "minLength": 1
-                                        },
-                                        "deployedArchVersion": {
-                                            "description": "The version of the architecture specification that is currently deployed.",
-                                            "examples": [
-                                                "23"
-                                            ],
-                                            "type": "string",
-                                            "minLength": 1
-                                        }
-                                    },
-                                    "type": "object",
-                                    "examples": [
-                                        {
-                                            "apiVersion": "1.2.3",
-                                            "archSpecVersion": "25",
-                                            "deployedArchVersion": "23"
-                                        }
-                                    ]
+                                    "type": "boolean"
                                 },
                                 "examples": {
-                                    "Versions response": {
-                                        "summary": "Example versions response",
-                                        "description": "An example object that represents the aggregation of versioning information of all SHIELDs components. including:<br/> - Semantic version of the API server.<br/> - The incrementing architecture specification version that the API supports.<br/> - The incrementing architecture specification version that is currently deployed.",
-                                        "value": {
-                                            "apiVersion": "1.2.3",
-                                            "archSpecVersion": "25",
-                                            "deployedArchVersion": "23"
-                                        }
+                                    "Remove Ready": {
+                                        "value": true,
+                                        "summary": "Removal Ready",
+                                        "description": "Flag that indicates that no dependent components are present and the core infra can be removed."
+                                    },
+                                    "Remove Not Ready": {
+                                        "value": false,
+                                        "summary": "Removal Not Ready",
+                                        "description": "Flag that indicates that dependent components are present and the core infra should not be removed."
                                     }
                                 }
                             }
                         },
                         "description": "OK"
                     },
-                    "401": {
-                        "$ref": "#/components/responses/401"
+                    "503": {
+                        "description": "Deployed architecture is invalid or missing!"
                     }
                 },
-                "summary": "Gets the version of SHIELDs components",
                 "tags": [
-                    "Infrastructure Deployment"
+                    "Deploy"
+                ]
+            },
+            "delete": {
+                "summary": "Removes All Provisioned Infrastructure Resources",
+                "description": "Deletes all resources in the tenant that were created during the initial deploy or any update operation since.\n\nThis endpoint requires the `Deploy.ReadWrite` or `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/DeployRemove/Delete",
+                "responses": {
+                    "202": {
+                        "description": "Request for removal is accepted and process initiated"
+                    },
+                    "503": {
+                        "description": "Deployed architecture is invalid or missing!"
+                    }
+                },
+                "tags": [
+                    "Deploy"
                 ]
             }
         },
@@ -4381,8 +5756,8 @@
             "name": "Marketplace"
         },
         {
-            "description": "Checks the status and starts deployment of the core infrastructure.",
-            "name": "Infrastructure Deployment"
+            "description": "Collection of tasks to perform deploy or removal of the infrastructure entities, evaluate details of the resources, handle restoration steps, and support handling architecture/configuration choices from the user.",
+            "name": "Deploy"
         },
         {
             "description": "Manage the updates for SHIELD and the policies deployed into the managed environment.",
