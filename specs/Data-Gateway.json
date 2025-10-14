@@ -1489,7 +1489,7 @@
         },
         "description": "Collects data from the various SHI Lab products and makes it available in a standardized way.",
         "title": "SHI Data Gateway",
-        "version": "2.2.2"
+        "version": "2.3.1"
     },
     "openapi": "3.1.1",
     "paths": {
