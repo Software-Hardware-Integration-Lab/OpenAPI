@@ -33,6 +33,47 @@
             }
         },
         "schemas": {
+            "Auth.ContextIdList": {
+                "title": "Auth IDs required to authenticate",
+                "description": "Object containing IDs necessary to perform user authentication in the EntraID.",
+                "examples": [
+                    {
+                        "appId": "2a7e1b3c-4d5f-4a8b-9e6a-1c2b7f3d8e4a",
+                        "tenantId": "9c1e7a2b-5d3f-4a8b-2c6e-7f1a3d9e8b5c"
+                    }
+                ],
+                "properties": {
+                    "appId": {
+                        "description": "Application ID that should be used in Access Tokens as the audience and the endpoint necessary for auth code flows.",
+                        "type": "string",
+                        "format": "uuid",
+                        "maxLength": 36,
+                        "minLength": 36,
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                        "readOnly": true,
+                        "examples": [
+                            "2a7e1b3c-4d5f-4a8b-9e6a-1c2b7f3d8e4a"
+                        ]
+                    },
+                    "tenantId": {
+                        "description": "Tenant ID necessary for authority host URL configuration and UI customization.",
+                        "type": "string",
+                        "format": "uuid",
+                        "maxLength": 36,
+                        "minLength": 36,
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                        "readOnly": true,
+                        "examples": [
+                            "9c1e7a2b-5d3f-4a8b-2c6e-7f1a3d9e8b5c"
+                        ]
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "appId",
+                    "tenantId"
+                ]
+            },
             "Core.HealthReport": {
                 "title": "Core System - Health Report",
                 "description": "Health report that indicates if a service is down or not that the URL Shortener relies on.",
@@ -46,15 +87,24 @@
                 "properties": {
                     "authClient": {
                         "description": "Flag that indicates if the client side authentication validation is working or not.",
-                        "type": "boolean"
+                        "type": "boolean",
+                        "examples": [
+                            true
+                        ]
                     },
                     "authServer": {
                         "description": "Flag that indicates if the server side authentication is working or not.",
-                        "type": "boolean"
+                        "type": "boolean",
+                        "examples": [
+                            true
+                        ]
                     },
                     "database": {
                         "description": "Flag that indicates if the ORM (Database) system is down (`false`) or not (`true`). False indicate the service is not working, true indicates the service is working.",
-                        "type": "boolean"
+                        "type": "boolean",
+                        "examples": [
+                            false
+                        ]
                     }
                 },
                 "type": "object",
@@ -73,9 +123,14 @@
                         "sourceUrl": "https://www.example.com/vanityUrl",
                         "createdBy": "3c5a9b7e-2d4f-4c1b-8e6a-7f2b3d1c9e45",
                         "customUserAgentMatcher": null,
+                        "expectedBrokenScanStatusCode": null,
                         "domainConfigId": "9a1e7b2c-5d3f-4a8b-9c2e-6f1a3d7e8b54",
+                        "enabled": true,
+                        "enableLinkBrokenScan": false,
                         "updatedBy": "3c5a9b7e-2d4f-4c1b-8e6a-7f2b3d1c9e45",
                         "targetUrl": "https://www.example.com/very-long-and-complex-url-with_plenty-of-special-characters-and-non-repeated-words",
+                        "notEnabledAfter": "2025-12-31T23:59:59Z",
+                        "notEnabledBefore": null,
                         "targetUrlCustom": null,
                         "targetUrlMobile": null,
                         "targetUrlNodeJs": null,
@@ -92,12 +147,18 @@
                         "maxLength": 36,
                         "minLength": 36,
                         "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
-                        "readOnly": true
+                        "readOnly": true,
+                        "examples": [
+                            "7e2b1c8a-4f3d-4e2a-9b1a-2c6e8d7f1a23"
+                        ]
                     },
                     "sourceUrl": {
                         "description": "The codified version of the full URL that a user would be navigating to. It has to be unique in the table as it will be used during lookup.",
                         "type": "string",
-                        "format": "uri"
+                        "format": "uri",
+                        "examples": [
+                            "https://www.example.com/vanityUrl"
+                        ]
                     },
                     "createdBy": {
                         "description": "Object ID of the user who initially creates this record.",
@@ -106,7 +167,10 @@
                         "maxLength": 36,
                         "minLength": 36,
                         "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
-                        "readOnly": true
+                        "readOnly": true,
+                        "examples": [
+                            "3c5a9b7e-2d4f-4c1b-8e6a-7f2b3d1c9e45"
+                        ]
                     },
                     "customUserAgentMatcher": {
                         "description": "Custom user agent matcher to be used with the custom target url. Custom target url is non-operable if this is not set. String max char count is 512.",
@@ -114,7 +178,20 @@
                             "string",
                             "null"
                         ],
-                        "maxLength": 512
+                        "maxLength": 512,
+                        "examples": [
+                            null
+                        ]
+                    },
+                    "expectedBrokenScanStatusCode": {
+                        "description": "Status code expected by the scheduled scan results.",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "examples": [
+                            200
+                        ]
                     },
                     "domainConfigId": {
                         "description": "Object ID of the domain configuration that this redirect record is associated with.",
@@ -123,7 +200,24 @@
                         "maxLength": 36,
                         "minLength": 36,
                         "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
-                        "readOnly": true
+                        "readOnly": true,
+                        "examples": [
+                            "9a1e7b2c-5d3f-4a8b-9c2e-6f1a3d7e8b54"
+                        ]
+                    },
+                    "enabled": {
+                        "description": " Flag that indicates if the created URL is enabled (`true`) or not (`false`).",
+                        "type": "boolean",
+                        "examples": [
+                            true
+                        ]
+                    },
+                    "enableLinkBrokenScan": {
+                        "description": "Flag that enables (`true`) or disables (`false`) scans happening against the target to check if broken.",
+                        "type": "boolean",
+                        "examples": [
+                            false
+                        ]
                     },
                     "updatedBy": {
                         "description": "Object ID of the last user who updated this record.",
@@ -131,12 +225,40 @@
                         "format": "uuid",
                         "maxLength": 36,
                         "minLength": 36,
-                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                        "examples": [
+                            "3c5a9b7e-2d4f-4c1b-8e6a-7f2b3d1c9e45"
+                        ]
                     },
                     "targetUrl": {
                         "description": "Destination that the client will be redirected to if the source is matched. This is the default URL that will be used when no user agent is matched.",
                         "type": "string",
-                        "format": "uri"
+                        "format": "uri",
+                        "examples": [
+                            "https://www.example.com/very-long-and-complex-url-with_plenty-of-special-characters-and-non-repeated-words"
+                        ]
+                    },
+                    "notEnabledAfter": {
+                        "description": "Date that when present, indicates when the link expires.",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time",
+                        "examples": [
+                            "2025-12-31T23:59:59Z"
+                        ]
+                    },
+                    "notEnabledBefore": {
+                        "description": "Date that when present, indicates when the link goes live.",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time",
+                        "examples": [
+                            null
+                        ]
                     },
                     "targetUrlCustom": {
                         "description": "Target URL for custom defined and matching user agent clients.",
@@ -144,7 +266,10 @@
                             "string",
                             "null"
                         ],
-                        "format": "uri"
+                        "format": "uri",
+                        "examples": [
+                            null
+                        ]
                     },
                     "targetUrlMobile": {
                         "description": "Target URL for various mobile operating systems.",
@@ -152,7 +277,10 @@
                             "string",
                             "null"
                         ],
-                        "format": "uri"
+                        "format": "uri",
+                        "examples": [
+                            null
+                        ]
                     },
                     "targetUrlNodeJs": {
                         "description": "Target URL for Node.JS clients.",
@@ -160,7 +288,10 @@
                             "string",
                             "null"
                         ],
-                        "format": "uri"
+                        "format": "uri",
+                        "examples": [
+                            null
+                        ]
                     },
                     "targetUrlPowershell": {
                         "description": "Target URL for PowerShell clients.",
@@ -168,7 +299,10 @@
                             "string",
                             "null"
                         ],
-                        "format": "uri"
+                        "format": "uri",
+                        "examples": [
+                            null
+                        ]
                     },
                     "targetUrlPython": {
                         "description": "Target URL for Python clients.",
@@ -176,7 +310,10 @@
                             "string",
                             "null"
                         ],
-                        "format": "uri"
+                        "format": "uri",
+                        "examples": [
+                            null
+                        ]
                     },
                     "type": {
                         "description": "Type of the redirect. Used to calculate the status code to be sent to the caller.",
@@ -184,6 +321,9 @@
                         "enum": [
                             "temporary",
                             "permanent"
+                        ],
+                        "examples": [
+                            "temporary"
                         ]
                     }
                 },
@@ -193,9 +333,14 @@
                     "sourceUrl",
                     "createdBy",
                     "customUserAgentMatcher",
+                    "expectedBrokenScanStatusCode",
                     "domainConfigId",
+                    "enabled",
+                    "enableLinkBrokenScan",
                     "updatedBy",
                     "targetUrl",
+                    "notEnabledAfter",
+                    "notEnabledBefore",
                     "targetUrlCustom",
                     "targetUrlMobile",
                     "targetUrlNodeJs",
@@ -222,11 +367,17 @@
                         "maxLength": 36,
                         "minLength": 36,
                         "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
-                        "readOnly": true
+                        "readOnly": true,
+                        "examples": [
+                            "d4f5e6a7-b8c9-4d0e-9f1a-2b3c4d5e6f70"
+                        ]
                     },
                     "name": {
                         "description": "Term or component that is banned in any of the vanity URLs that users can create.",
-                        "type": "string"
+                        "type": "string",
+                        "examples": [
+                            "admin"
+                        ]
                     },
                     "type": {
                         "description": "Specifies how the name ban operates: `rootSegment` operates matches like `https://example.com/<term>/*`, `global` operates matches like `https://example.com/*<term>*`.",
@@ -234,6 +385,9 @@
                         "enum": [
                             "rootSegment",
                             "global"
+                        ],
+                        "examples": [
+                            "rootSegment"
                         ]
                     }
                 },
@@ -265,27 +419,42 @@
                         "maxLength": 36,
                         "minLength": 36,
                         "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
-                        "readOnly": true
+                        "readOnly": true,
+                        "examples": [
+                            "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d"
+                        ]
                     },
                     "allowHttp": {
                         "description": "Flag that indicates if the domain accepts unencrypted traffic (`true`) or not (`false`).",
-                        "type": "boolean"
+                        "type": "boolean",
+                        "examples": [
+                            false
+                        ]
                     },
                     "count": {
                         "description": "Current increment for the id number if the domain is in ID number mode. Always incremented even if not in ID mode so as to be able to swap to ID mode if requested with no risk for collision.",
                         "type": "integer",
                         "format": "int32",
                         "minimum": 0,
-                        "readOnly": true
+                        "readOnly": true,
+                        "examples": [
+                            1
+                        ]
                     },
                     "hidden": {
                         "description": "Flag that indicates if the domain name is hidden from the user interface. The domain will always be visible on the domain name admin config page. This flag is useful for hiding names that are behind load balancers from end users to reduce confusion. Can also be used to `enable` or `disable` end user interaction in the UI with the specified names.",
-                        "type": "boolean"
+                        "type": "boolean",
+                        "examples": [
+                            false
+                        ]
                     },
                     "hostName": {
                         "description": "String to be used in matching the host name. Subdomains need to have their own record to be usable.",
                         "type": "string",
-                        "format": "hostname"
+                        "format": "hostname",
+                        "examples": [
+                            "example.com"
+                        ]
                     },
                     "type": {
                         "description": "Flag that indicates the type of shortened URL that can be generated on the domain: `vanity` allows any user structure as long as it is unique. Example: `https://example.com/myUrl`, `idNumber` locks out user control of the vanity URL and hard codes it to an ID number. Example: `https://example.com/managedLink?id=123`.",
@@ -293,6 +462,9 @@
                         "enum": [
                             "vanity",
                             "idNumber"
+                        ],
+                        "examples": [
+                            "vanity"
                         ]
                     }
                 },
@@ -328,7 +500,10 @@
                         "maxLength": 36,
                         "minLength": 36,
                         "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
-                        "readOnly": true
+                        "readOnly": true,
+                        "examples": [
+                            "2e1c4b7a-8d3f-4e2b-9a1c-7f5d2b3e6a9c"
+                        ]
                     },
                     "assignmentTargetType": {
                         "description": "Type of object that this RBAC assignment is for.",
@@ -337,13 +512,19 @@
                             "RedirectConfig",
                             "DomainName",
                             "BannedName"
+                        ],
+                        "examples": [
+                            "RedirectConfig"
                         ]
                     },
                     "createdAt": {
                         "description": "Time stamp of when the assignment was created.",
                         "type": "string",
                         "format": "date-time",
-                        "readOnly": true
+                        "readOnly": true,
+                        "examples": [
+                            "2025-08-20T12:00:00Z"
+                        ]
                     },
                     "targetId": {
                         "description": "Unique ID of the system that this assignment describes.",
@@ -351,7 +532,10 @@
                         "format": "uuid",
                         "maxLength": 36,
                         "minLength": 36,
-                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                        "examples": [
+                            "5a7e2c1b-3d4f-4a8b-9e6a-2c1b7f3d8e4a"
+                        ]
                     },
                     "principalId": {
                         "description": "Object ID of the principal that this assignment targets.",
@@ -359,7 +543,10 @@
                         "format": "uuid",
                         "maxLength": 36,
                         "minLength": 36,
-                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                        "examples": [
+                            "9b2e7a1c-4d3f-5a8b-2c6e-1a7f3d9e8b5c"
+                        ]
                     },
                     "principalType": {
                         "description": "Flag used to optimize principal processing.",
@@ -367,6 +554,9 @@
                         "enum": [
                             "user",
                             "group"
+                        ],
+                        "examples": [
+                            "user"
                         ]
                     },
                     "role": {
@@ -375,7 +565,10 @@
                         "format": "uuid",
                         "maxLength": 36,
                         "minLength": 36,
-                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                        "examples": [
+                            "b8e2c7a1-4d3f-4a9b-8e6a-2c1b7f3d8e4a"
+                        ]
                     }
                 },
                 "type": "object",
@@ -410,48 +603,35 @@
         },
         "description": "Create vanity or numeric short version of your desired URL. Share it digitally, as QR code, or print it.",
         "title": "SHI URL Shortener",
-        "version": "0.0.2"
+        "version": "0.0.4"
     },
     "openapi": "3.1.1",
     "paths": {
         "/Api/Auth/Id": {
             "get": {
+                "summary": "Retrieves the IDs required to authenticate.",
                 "description": "Provides the Tenant ID and the Application ID of the service principal that access tokens need to be issued against. This is also useful for configuring public clients to be able to authenticate to for auth code flows.",
                 "operationId": "/Api/Auth/Id/Get",
                 "responses": {
                     "200": {
+                        "description": "OK",
                         "content": {
                             "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "appId": {
-                                            "description": "Application ID that should be used in Access Tokens as the audience and the endpoint necessary for auth code flows.",
-                                            "type": "string",
-                                            "format": "uuid",
-                                            "maxLength": 36,
-                                            "minLength": 36,
-                                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
-                                            "readOnly": true
-                                        },
-                                        "tenantId": {
-                                            "description": "Tenant ID necessary for authority host URL configuration and UI customization.",
-                                            "type": "string",
-                                            "format": "uuid",
-                                            "maxLength": 36,
-                                            "minLength": 36,
-                                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
-                                            "readOnly": true
+                                "examples": {
+                                    "Response with Data": {
+                                        "summary": "Response with available IDs",
+                                        "description": "Example response containing both the Tenant ID and the Application ID.",
+                                        "value": {
+                                            "appId": "2a7e1b3c-4d5f-4a8b-9e6a-1c2b7f3d8e4a",
+                                            "tenantId": "9c1e7a2b-5d3f-4a8b-2c6e-7f1a3d9e8b5c"
                                         }
-                                    },
-                                    "type": "object",
-                                    "required": [
-                                        "appId",
-                                        "tenantId"
-                                    ]
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/Auth.ContextIdList"
                                 }
                             }
-                        },
-                        "description": "OK"
+                        }
                     },
                     "500": {
                         "$ref": "#/components/responses/500"
@@ -460,8 +640,7 @@
                 "tags": [
                     "Core"
                 ],
-                "security": [],
-                "summary": "Retrieves the IDs required to authenticate."
+                "security": []
             }
         },
         "/Api/Core/Health": {
@@ -520,7 +699,10 @@
                         "description": "Filter by the `sourceUrl` field.",
                         "schema": {
                             "type": "string",
-                            "format": "uri"
+                            "format": "uri",
+                            "examples": [
+                                "https://www.example.com/vanityUrl"
+                            ]
                         }
                     },
                     {
@@ -532,7 +714,10 @@
                             "format": "uuid",
                             "maxLength": 36,
                             "minLength": 36,
-                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                            "examples": [
+                                "3c5a9b7e-2d4f-4c1b-8e6a-7f2b3d1c9e45"
+                            ]
                         }
                     },
                     {
@@ -541,7 +726,10 @@
                         "description": "Filter by the `customUserAgentMatcher` field.",
                         "schema": {
                             "type": "string",
-                            "maxLength": 512
+                            "maxLength": 512,
+                            "examples": [
+                                "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1"
+                            ]
                         }
                     },
                     {
@@ -553,7 +741,10 @@
                             "format": "uuid",
                             "maxLength": 36,
                             "minLength": 36,
-                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                            "examples": [
+                                "9a1e7b2c-5d3f-4a8b-9c2e-6f1a3d7e8b54"
+                            ]
                         }
                     },
                     {
@@ -565,7 +756,10 @@
                             "format": "uuid",
                             "maxLength": 36,
                             "minLength": 36,
-                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                            "examples": [
+                                "3c5a9b7e-2d4f-4c1b-8e6a-7f2b3d1c9e45"
+                            ]
                         }
                     },
                     {
@@ -574,7 +768,10 @@
                         "description": "Filter by the `targetUrl` field.",
                         "schema": {
                             "type": "string",
-                            "format": "uri"
+                            "format": "uri",
+                            "examples": [
+                                "https://www.example.com/very-long-and-complex-url-with_plenty-of-special-characters-and-non-repeated-words"
+                            ]
                         }
                     },
                     {
@@ -583,7 +780,10 @@
                         "description": "Filter by the `targetUrlCustom` field.",
                         "schema": {
                             "type": "string",
-                            "format": "uri"
+                            "format": "uri",
+                            "examples": [
+                                "https://www.example.com/custom-target?customUserAgentDefinition"
+                            ]
                         }
                     },
                     {
@@ -592,7 +792,10 @@
                         "description": "Filter by the `targetUrlMobile` field.",
                         "schema": {
                             "type": "string",
-                            "format": "uri"
+                            "format": "uri",
+                            "examples": [
+                                "https://www.example.com/custom-target?customMobileDefinition"
+                            ]
                         }
                     },
                     {
@@ -601,7 +804,10 @@
                         "description": "Filter by the `targetUrlNodeJs` field.",
                         "schema": {
                             "type": "string",
-                            "format": "uri"
+                            "format": "uri",
+                            "examples": [
+                                "https://www.example.com/custom-target?customNodeJsDefinition"
+                            ]
                         }
                     },
                     {
@@ -610,7 +816,10 @@
                         "description": "Filter by the `targetUrlPowershell` field.",
                         "schema": {
                             "type": "string",
-                            "format": "uri"
+                            "format": "uri",
+                            "examples": [
+                                "https://www.example.com/custom-target?customPowerShellDefinition"
+                            ]
                         }
                     },
                     {
@@ -619,7 +828,10 @@
                         "description": "Filter by the `targetUrlPython` field.",
                         "schema": {
                             "type": "string",
-                            "format": "uri"
+                            "format": "uri",
+                            "examples": [
+                                "https://www.example.com/custom-target?customPythonDefinition"
+                            ]
                         }
                     },
                     {
@@ -631,6 +843,9 @@
                             "enum": [
                                 "temporary",
                                 "permanent"
+                            ],
+                            "examples": [
+                                "temporary"
                             ]
                         }
                     }
@@ -640,6 +855,39 @@
                         "description": "OK",
                         "content": {
                             "application/json": {
+                                "examples": {
+                                    "No records available": {
+                                        "summary": "Example of the empty list",
+                                        "description": "Response when no records available in the database or match based on the provided filters.",
+                                        "value": []
+                                    },
+                                    "Records available": {
+                                        "summary": "Example of the response with data",
+                                        "description": "Response when one or more records available in the result set.",
+                                        "value": [
+                                            {
+                                                "id": "7e2b1c8a-4f3d-4e2a-9b1a-2c6e8d7f1a23",
+                                                "sourceUrl": "https://www.example.com/vanityUrl",
+                                                "createdBy": "3c5a9b7e-2d4f-4c1b-8e6a-7f2b3d1c9e45",
+                                                "customUserAgentMatcher": null,
+                                                "expectedBrokenScanStatusCode": null,
+                                                "domainConfigId": "9a1e7b2c-5d3f-4a8b-9c2e-6f1a3d7e8b54",
+                                                "enabled": true,
+                                                "enableLinkBrokenScan": false,
+                                                "updatedBy": "3c5a9b7e-2d4f-4c1b-8e6a-7f2b3d1c9e45",
+                                                "targetUrl": "https://www.example.com/very-long-and-complex-url-with_plenty-of-special-characters-and-non-repeated-words",
+                                                "notEnabledAfter": "2025-12-31T23:59:59Z",
+                                                "notEnabledBefore": null,
+                                                "targetUrlCustom": null,
+                                                "targetUrlMobile": null,
+                                                "targetUrlNodeJs": null,
+                                                "targetUrlPowershell": null,
+                                                "targetUrlPython": null,
+                                                "type": "temporary"
+                                            }
+                                        ]
+                                    }
+                                },
                                 "schema": {
                                     "type": "array",
                                     "items": {
@@ -670,6 +918,7 @@
                         "application/json": {
                             "examples": {
                                 "Missing a required field": {
+                                    "summary": "Example of payload with missing fields",
                                     "description": "Payload is missing one or more of the required fields.",
                                     "value": {
                                         "sourceUrl": "https://www.example.com/long-and-complex-url",
@@ -680,14 +929,20 @@
                                     }
                                 },
                                 "Complete and proper payload": {
+                                    "summary": "Example of payload with all necessary fields",
                                     "description": "Request where all required fields are present and valid.",
                                     "value": {
                                         "sourceUrl": "https://www.example.com/long-and-complex-url",
                                         "createdBy": "3c5a9b7e-2d4f-4c1b-8e6a-7f2b3d1c9e45",
                                         "customUserAgentMatcher": null,
+                                        "expectedBrokenScanStatusCode": null,
                                         "domainConfigId": "9a1e7b2c-5d3f-4a8b-9c2e-6f1a3d7e8b54",
+                                        "enabled": true,
+                                        "enableLinkBrokenScan": false,
                                         "updatedBy": "3c5a9b7e-2d4f-4c1b-8e6a-7f2b3d1c9e45",
                                         "targetUrl": "https://www.example.com/target",
+                                        "notEnabledAfter": null,
+                                        "notEnabledBefore": null,
                                         "targetUrlCustom": null,
                                         "targetUrlMobile": null,
                                         "targetUrlNodeJs": null,
@@ -764,8 +1019,23 @@
                         "description": "OK",
                         "content": {
                             "application/json": {
+                                "examples": {
+                                    "Name is available": {
+                                        "summary": "Example response when the name is available",
+                                        "description": "Response when the requested name is not taken and can be used.",
+                                        "value": true
+                                    },
+                                    "Name is taken": {
+                                        "summary": "Example response when the name is not available",
+                                        "description": "Response when the requested name is already in use and cannot be used.",
+                                        "value": false
+                                    }
+                                },
                                 "schema": {
-                                    "type": "boolean"
+                                    "type": "boolean",
+                                    "examples": [
+                                        true
+                                    ]
                                 }
                             }
                         }
@@ -794,6 +1064,32 @@
                         "description": "OK",
                         "content": {
                             "application/json": {
+                                "examples": {
+                                    "Response with record data": {
+                                        "summary": "Single record with data",
+                                        "description": "Response with all record information.",
+                                        "value": {
+                                            "id": "7e2b1c8a-4f3d-4e2a-9b1a-2c6e8d7f1a23",
+                                            "sourceUrl": "https://www.example.com/long-and-complex-url",
+                                            "createdBy": "3c5a9b7e-2d4f-4c1b-8e6a-7f2b3d1c9e45",
+                                            "customUserAgentMatcher": null,
+                                            "expectedBrokenScanStatusCode": null,
+                                            "domainConfigId": "9a1e7b2c-5d3f-4a8b-9c2e-6f1a3d7e8b54",
+                                            "enabled": true,
+                                            "enableLinkBrokenScan": false,
+                                            "updatedBy": "3c5a9b7e-2d4f-4c1b-8e6a-7f2b3d1c9e45",
+                                            "targetUrl": "https://www.example.com/target",
+                                            "notEnabledAfter": null,
+                                            "notEnabledBefore": null,
+                                            "targetUrlCustom": null,
+                                            "targetUrlMobile": null,
+                                            "targetUrlNodeJs": null,
+                                            "targetUrlPowershell": null,
+                                            "targetUrlPython": null,
+                                            "type": "temporary"
+                                        }
+                                    }
+                                },
                                 "schema": {
                                     "$ref": "#/components/schemas/Redirect.UrlConfiguration"
                                 }
@@ -844,6 +1140,32 @@
                         "description": "OK",
                         "content": {
                             "application/json": {
+                                "examples": {
+                                    "Response with updated record data": {
+                                        "summary": "Single record with updated data",
+                                        "description": "Response with all record information after the update.",
+                                        "value": {
+                                            "id": "7e2b1c8a-4f3d-4e2a-9b1a-2c6e8d7f1a23",
+                                            "sourceUrl": "https://www.example.com/long-and-complex-url",
+                                            "createdBy": "3c5a9b7e-2d4f-4c1b-8e6a-7f2b3d1c9e45",
+                                            "customUserAgentMatcher": null,
+                                            "expectedBrokenScanStatusCode": null,
+                                            "domainConfigId": "9a1e7b2c-5d3f-4a8b-9c2e-6f1a3d7e8b54",
+                                            "enabled": true,
+                                            "enableLinkBrokenScan": false,
+                                            "updatedBy": "3c5a9b7e-2d4f-4c1b-8e6a-7f2b3d1c9e45",
+                                            "targetUrl": "https://www.example.com/target-updated",
+                                            "notEnabledAfter": null,
+                                            "notEnabledBefore": null,
+                                            "targetUrlCustom": null,
+                                            "targetUrlMobile": null,
+                                            "targetUrlNodeJs": "https://www.example.com/target-nodejs",
+                                            "targetUrlPowershell": null,
+                                            "targetUrlPython": null,
+                                            "type": "permanent"
+                                        }
+                                    }
+                                },
                                 "schema": {
                                     "$ref": "#/components/schemas/Redirect.UrlConfiguration"
                                 }
@@ -894,7 +1216,10 @@
                         "in": "query",
                         "description": "Filter by the `name` field.",
                         "schema": {
-                            "type": "string"
+                            "type": "string",
+                            "examples": [
+                                "admin"
+                            ]
                         }
                     },
                     {
@@ -906,6 +1231,9 @@
                             "enum": [
                                 "rootSegment",
                                 "global"
+                            ],
+                            "examples": [
+                                "rootSegment"
                             ]
                         }
                     }
@@ -915,6 +1243,24 @@
                         "description": "OK",
                         "content": {
                             "application/json": {
+                                "examples": {
+                                    "No records available": {
+                                        "summary": "Example of the empty list",
+                                        "description": "Response when no records available in the database or match based on the supplied filters.",
+                                        "value": []
+                                    },
+                                    "Records available": {
+                                        "summary": "Example of the response with data",
+                                        "description": "Response when one or more records available in the result set.",
+                                        "value": [
+                                            {
+                                                "id": "5f1e7b2c-3d4f-4a8b-9c2e-6f1a3d7e8b55",
+                                                "name": "admin",
+                                                "type": "rootSegment"
+                                            }
+                                        ]
+                                    }
+                                },
                                 "schema": {
                                     "type": "array",
                                     "items": {
@@ -969,6 +1315,17 @@
                         "description": "OK",
                         "content": {
                             "application/json": {
+                                "examples": {
+                                    "Created record data": {
+                                        "summary": "Single record with data",
+                                        "description": "Response with record information after creation.",
+                                        "value": {
+                                            "id": "5f1e7b2c-3d4f-4a8b-9c2e-6f1a3d7e8b55",
+                                            "name": "admin",
+                                            "type": "rootSegment"
+                                        }
+                                    }
+                                },
                                 "schema": {
                                     "$ref": "#/components/schemas/Redirect.BannedTerm"
                                 }
@@ -999,6 +1356,17 @@
                         "description": "OK",
                         "content": {
                             "application/json": {
+                                "examples": {
+                                    "Record data": {
+                                        "summary": "Single record with data",
+                                        "description": "Response with current record information.",
+                                        "value": {
+                                            "id": "5f1e7b2c-3d4f-4a8b-9c2e-6f1a3d7e8b55",
+                                            "name": "admin",
+                                            "type": "rootSegment"
+                                        }
+                                    }
+                                },
                                 "schema": {
                                     "$ref": "#/components/schemas/Redirect.BannedTerm"
                                 }
@@ -1049,7 +1417,10 @@
                         "in": "query",
                         "description": "Filter by the `allowHttp` field.",
                         "schema": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "examples": [
+                                true
+                            ]
                         }
                     },
                     {
@@ -1059,7 +1430,10 @@
                         "schema": {
                             "type": "integer",
                             "format": "int32",
-                            "minimum": 0
+                            "minimum": 0,
+                            "examples": [
+                                5
+                            ]
                         }
                     },
                     {
@@ -1067,7 +1441,10 @@
                         "in": "query",
                         "description": "Filter by the `hidden` field.",
                         "schema": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "examples": [
+                                false
+                            ]
                         }
                     },
                     {
@@ -1075,7 +1452,10 @@
                         "in": "query",
                         "description": "Filter by the `hostName` field.",
                         "schema": {
-                            "type": "string"
+                            "type": "string",
+                            "examples": [
+                                "example.com"
+                            ]
                         }
                     },
                     {
@@ -1087,6 +1467,9 @@
                             "enum": [
                                 "vanity",
                                 "idNumber"
+                            ],
+                            "examples": [
+                                "idNumber"
                             ]
                         }
                     }
@@ -1096,6 +1479,27 @@
                         "description": "OK",
                         "content": {
                             "application/json": {
+                                "examples": {
+                                    "No records available": {
+                                        "summary": "Example of the empty list",
+                                        "description": "Response when no records available in the database or match based on the supplied filters.",
+                                        "value": []
+                                    },
+                                    "Records available": {
+                                        "summary": "Example of the response with data",
+                                        "description": "Response when one or more records available in the result set.",
+                                        "value": [
+                                            {
+                                                "id": "5f1e7b2c-3d4f-4a8b-9c2e-6f1a3d7e8b55",
+                                                "allowHttp": true,
+                                                "count": 10,
+                                                "hidden": false,
+                                                "hostName": "example.com",
+                                                "type": "vanity"
+                                            }
+                                        ]
+                                    }
+                                },
                                 "schema": {
                                     "type": "array",
                                     "items": {
@@ -1154,6 +1558,20 @@
                         "description": "OK",
                         "content": {
                             "application/json": {
+                                "examples": {
+                                    "Created record data": {
+                                        "summary": "Single record with data",
+                                        "description": "Response with record information after creation.",
+                                        "value": {
+                                            "id": "5f1e7b2c-3d4f-4a8b-9c2e-6f1a3d7e8b55",
+                                            "allowHttp": false,
+                                            "count": 1,
+                                            "hidden": false,
+                                            "hostName": "example.com",
+                                            "type": "vanity"
+                                        }
+                                    }
+                                },
                                 "schema": {
                                     "$ref": "#/components/schemas/Redirect.DomainName"
                                 }
@@ -1184,6 +1602,20 @@
                         "description": "OK",
                         "content": {
                             "application/json": {
+                                "examples": {
+                                    "Record data": {
+                                        "summary": "Single record with data",
+                                        "description": "Response with current record information.",
+                                        "value": {
+                                            "id": "5f1e7b2c-3d4f-4a8b-9c2e-6f1a3d7e8b55",
+                                            "allowHttp": false,
+                                            "count": 1,
+                                            "hidden": false,
+                                            "hostName": "example.com",
+                                            "type": "vanity"
+                                        }
+                                    }
+                                },
                                 "schema": {
                                     "$ref": "#/components/schemas/Redirect.DomainName"
                                 }
@@ -1233,6 +1665,20 @@
                         "description": "OK",
                         "content": {
                             "application/json": {
+                                "examples": {
+                                    "Response with updated record data": {
+                                        "summary": "Single record with updated information",
+                                        "description": "Response with all record information after the update.",
+                                        "value": {
+                                            "id": "5f1e7b2c-3d4f-4a8b-9c2e-6f1a3d7e8b55",
+                                            "allowHttp": false,
+                                            "count": 1,
+                                            "hidden": false,
+                                            "hostName": "example.com",
+                                            "type": "idNumber"
+                                        }
+                                    }
+                                },
                                 "schema": {
                                     "$ref": "#/components/schemas/Redirect.DomainName"
                                 }
@@ -1288,6 +1734,9 @@
                                 "RedirectConfig",
                                 "DomainName",
                                 "BannedName"
+                            ],
+                            "examples": [
+                                "RedirectConfig"
                             ]
                         }
                     },
@@ -1297,7 +1746,10 @@
                         "description": "Filter by the `createdAt` field.",
                         "schema": {
                             "type": "string",
-                            "format": "date-time"
+                            "format": "date-time",
+                            "examples": [
+                                "2025-10-05T00:00:00.000Z"
+                            ]
                         }
                     },
                     {
@@ -1309,7 +1761,10 @@
                             "format": "uuid",
                             "maxLength": 36,
                             "minLength": 36,
-                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                            "examples": [
+                                "5a7e2c1b-3d4f-4a8b-9e6a-2c1b7f3d8e4a"
+                            ]
                         }
                     },
                     {
@@ -1321,7 +1776,10 @@
                             "format": "uuid",
                             "maxLength": 36,
                             "minLength": 36,
-                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                            "examples": [
+                                "9b2e7a1c-4d3f-5a8b-2c6e-1a7f3d9e8b5c"
+                            ]
                         }
                     },
                     {
@@ -1333,6 +1791,9 @@
                             "enum": [
                                 "user",
                                 "group"
+                            ],
+                            "examples": [
+                                "user"
                             ]
                         }
                     },
@@ -1345,7 +1806,10 @@
                             "format": "uuid",
                             "maxLength": 36,
                             "minLength": 36,
-                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                            "examples": [
+                                "b8e2c7a1-4d3f-4a9b-8e6a-2c1b7f3d8e4a"
+                            ]
                         }
                     }
                 ],
@@ -1354,6 +1818,28 @@
                         "description": "OK",
                         "content": {
                             "application/json": {
+                                "examples": {
+                                    "No records available": {
+                                        "summary": "Example of the empty list",
+                                        "description": "Response when no records available in the database or match based on the supplied filters.",
+                                        "value": []
+                                    },
+                                    "Records available": {
+                                        "summary": "Example of the response with data",
+                                        "description": "Response when one or more records available in the result set.",
+                                        "value": [
+                                            {
+                                                "id": "6f2a1b7e-3d4c-4a8b-9e6a-2c1b7f3d8e4a",
+                                                "assignmentTargetType": "RedirectConfig",
+                                                "createdAt": "2025-10-05T12:34:56.789Z",
+                                                "targetId": "5a7e2c1b-3d4f-4a8b-9e6a-2c1b7f3d8e4a",
+                                                "principalId": "9b2e7a1c-4d3f-5a8b-2c6e-1a7f3d9e8b5c",
+                                                "principalType": "user",
+                                                "role": "b8e2c7a1-4d3f-4a9b-8e6a-2c1b7f3d8e4a"
+                                            }
+                                        ]
+                                    }
+                                },
                                 "schema": {
                                     "type": "array",
                                     "items": {
@@ -1413,6 +1899,21 @@
                         "description": "OK",
                         "content": {
                             "application/json": {
+                                "examples": {
+                                    "Created record data": {
+                                        "summary": "Single record with data",
+                                        "description": "Response with record information after creation.",
+                                        "value": {
+                                            "id": "6f2a1b7e-3d4c-4a8b-9e6a-2c1b7f3d8e4a",
+                                            "assignmentTargetType": "RedirectConfig",
+                                            "createdAt": "2025-10-05T12:34:56.789Z",
+                                            "targetId": "8b2e7a1c-4d3f-5a8b-0c6e-1a7f3d9e8b5c",
+                                            "principalId": "c7e1a2b3-4d5f-4a8b-9e6a-2c1b7f3d8e4a",
+                                            "principalType": "user",
+                                            "role": "9e1c7b2a-5d3f-4a8b-9c2e-6f1a3d7e8b54"
+                                        }
+                                    }
+                                },
                                 "schema": {
                                     "$ref": "#/components/schemas/Redirect.RbacAssignment"
                                 }
@@ -1443,6 +1944,21 @@
                         "description": "OK",
                         "content": {
                             "application/json": {
+                                "examples": {
+                                    "Record data": {
+                                        "summary": "Single record with data",
+                                        "description": "Response with current record information.",
+                                        "value": {
+                                            "id": "6f2a1b7e-3d4c-4a8b-9e6a-2c1b7f3d8e4a",
+                                            "assignmentTargetType": "RedirectConfig",
+                                            "createdAt": "2025-10-05T12:34:56.789Z",
+                                            "targetId": "5a7e2c1b-3d4f-4a8b-9e6a-2c1b7f3d8e4a",
+                                            "principalId": "9b2e7a1c-4d3f-5a8b-2c6e-1a7f3d9e8b5c",
+                                            "principalType": "user",
+                                            "role": "b8e2c7a1-4d3f-4a9b-8e6a-2c1b7f3d8e4a"
+                                        }
+                                    }
+                                },
                                 "schema": {
                                     "$ref": "#/components/schemas/Redirect.RbacAssignment"
                                 }
