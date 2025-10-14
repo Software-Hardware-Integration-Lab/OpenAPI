@@ -33,7 +33,7 @@
             }
         },
         "schemas": {
-            "Auth.Id": {
+            "Auth.ContextIdList": {
                 "title": "Auth IDs required to authenticate",
                 "description": "Object containing IDs necessary to perform user authentication in the EntraID.",
                 "examples": [
@@ -628,7 +628,7 @@
                                     }
                                 },
                                 "schema": {
-                                    "$ref": "#/components/schemas/Auth.Id"
+                                    "$ref": "#/components/schemas/Auth.ContextIdList"
                                 }
                             }
                         }
