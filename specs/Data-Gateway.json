@@ -3521,36 +3521,52 @@
             "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
           }
         },
-        "summary": "Deletes the Specified Channel",
-        "tags": ["SHIELD - Update"]
-      }
+        "description": "Collects data from the various SHI Lab products and makes it available in a standardized way.",
+        "title": "SHI Data Gateway",
+        "version": "2.3.1"
     },
-    "/Api/Update/Shield/Channel/{channelName}/Ring": {
-      "get": {
-        "description": "Retrieves all of the ring configurations for a channel that are present in the update service.\n\nThis endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible from the `SHI Lab` tenant. End user access is restricted.",
-        "operationId": "/Api/Update/Shield/Channel/:channelName/Ring/Get",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/channelName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Update.Shield.Channel.Ring"
-                  },
-                  "examples": [
-                    [
-                      {
-                        "latest": true,
-                        "number": 1
-                      }
-                    ]
-                  ]
+    "openapi": "3.1.1",
+    "paths": {
+        "/Api/Core/Health": {
+            "get": {
+                "description": "Check the health of the various components of the data gateway and report back. Useful for automated health probing.",
+                "operationId": "/Api/ServiceHealth/Get",
+                "responses": {
+                    "201": {
+                        "description": "Service is operational!"
+                    },
+                    "500": {
+                        "description": "Service has a failure described with following report.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Core.HealthReport"
+                                },
+                                "examples": {
+                                    "Auth system failure": {
+                                        "summary": "Example health report - Auth failure",
+                                        "description": "An example health report returned indicates the authentication components are not working.",
+                                        "value": {
+                                            "authClient": false,
+                                            "authServer": false,
+                                            "bulkStorage": true,
+                                            "database": true
+                                        }
+                                    },
+                                    "Storage system failure": {
+                                        "summary": "Example health report - Storage failure",
+                                        "description": "An example health report returned indicates the storage components are not working.",
+                                        "value": {
+                                            "authClient": true,
+                                            "authServer": true,
+                                            "bulkStorage": false,
+                                            "database": false
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 },
                 "examples": {
                   "All ring config": {
