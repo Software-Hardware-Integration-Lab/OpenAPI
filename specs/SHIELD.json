@@ -2366,6 +2366,28 @@
                     }
                 ]
             },
+            "ObjectPage.ManagedPrivilegedDevice": {
+                "properties": {
+                    "@odata.count": {
+                        "type": "number"
+                    },
+                    "@odata.nextLink": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "items": {
+                            "$ref": "#/components/schemas/ManagedObject.PrivilegedDevice"
+                        },
+                        "minItems": 0,
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "value"
+                ],
+                "title": "Page of Managed Privileged Device Objects",
+                "type": "object"
+            },
             "ObjectPage.ManagedUser": {
                 "properties": {
                     "@odata.count": {
@@ -2510,6 +2532,28 @@
                         ]
                     }
                 ]
+            },
+            "ObjectPage.ManagedPrivilegedUser": {
+                "properties": {
+                    "@odata.count": {
+                        "type": "number"
+                    },
+                    "@odata.nextLink": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "items": {
+                            "$ref": "#/components/schemas/ManagedObject.PrivilegedUser"
+                        },
+                        "minItems": 0,
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "value"
+                ],
+                "title": "Page of Managed Privileged User Objects",
+                "type": "object"
             },
             "SecurityClassList": {
                 "description": "Security class types as described in https://learn.microsoft.com/en-us/security/compass/privileged-access-security-levels.",
@@ -5133,6 +5177,42 @@
                 ]
             }
         },
+        "/Api/Defend/Device/Type/Privileged": {
+            "get": {
+                "description": "Returns a list of all privileged managed devices.\n\nThis endpoint requires the `Device.Privileged.Read`, `Device.Privileged.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Defend/Device/Type/Privileged/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/nextLink"
+                    },
+                    {
+                        "$ref": "#/components/parameters/search"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ObjectPage.ManagedPrivilegedDevice"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "525": {
+                        "$ref": "#/components/responses/525"
+                    }
+                },
+                "summary": "Get All Privileged Devices",
+                "tags": [
+                    "Device Management"
+                ]
+            }
+        },
         "/Api/Defend/Device/{deviceId}/Type/{securityClass}": {
             "delete": {
                 "description": "Removes the device from the management hierarchy, removes metadata tagging and issues the wipe command to the devices.\n\nThis endpoint requires the `Device.Privileged.ReadWrite`, `Device.Specialized.ReadWrite`, `Device.Enterprise.ReadWrite`, or the `Everything.ReadWrite` scope (permission). The security class parameter in the URL path corresponds to the same permission in the scope. That means if you are granted a privileged role, you can only call the privilege class URL.",
@@ -5415,6 +5495,42 @@
                     }
                 },
                 "summary": "Create/Bring User Into Management",
+                "tags": [
+                    "User Management"
+                ]
+            }
+        },
+        "/Api/Defend/User/Type/Privileged": {
+            "get": {
+                "description": "Returns a list of all privileged managed users.\n\nThis endpoint requires the `User.Privileged.Read`, `User.Privileged.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Defend/User/Type/Privileged/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/nextLink"
+                    },
+                    {
+                        "$ref": "#/components/parameters/search"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ObjectPage.ManagedPrivilegedUser"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "525": {
+                        "$ref": "#/components/responses/525"
+                    }
+                },
+                "summary": "Get All Privileged Users",
                 "tags": [
                     "User Management"
                 ]
