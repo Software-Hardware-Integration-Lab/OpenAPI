@@ -3732,6 +3732,57 @@
                 ]
             }
         },
+        "/Api/Deploy/Remediate/BreakGlass": {
+            "post": {
+                "summary": "Request to create BreakGlass security group",
+                "description": "Attempt to create BreakGlass security group in the tenant. If group has already been provisioned it will return the name of the group to reference.\n\nThis endpoint requires the `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission). ",
+                "operationId": "/Api/Deploy/Remediate/BreakGlass/Post",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Response with data": {
+                                        "summary": "Example of the returned data",
+                                        "description": "An example of the name of the resource either created or already existing.",
+                                        "value": {
+                                            "groupName": "SHIELD - BreakGlass"
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "groupName": {
+                                            "type": "string",
+                                            "description": "Name of the security group created now or already existing in the tenant.",
+                                            "examples": [
+                                                "SHIELD - BreakGlass"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "groupName"
+                                    ],
+                                    "examples": [
+                                        {
+                                            "groupName": "SHIELD - BreakGlass"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "503": {
+                        "description": "System requirements have not been met!"
+                    }
+                },
+                "tags": [
+                    "Deploy"
+                ]
+            }
+        },
         "/Api/Deploy/Remediate": {
             "post": {
                 "summary": "Perform remediation steps to address discovered gaps in security posture",
