@@ -1,0 +1,16 @@
+{
+    "servers": {
+        "ESLint": {
+            "type": "stdio",
+            "command": "npx",
+            "args": [
+                "@eslint/mcp@latest"
+            ]
+        },
+        "Socket": {
+            "url": "https://mcp.socket.dev/",
+            "type": "http"
+        }
+    },
+    "inputs": []
+}

@@ -134,7 +134,7 @@
                         "targetUrlCustom": null,
                         "targetUrlMobile": null,
                         "targetUrlNodeJs": null,
-                        "targetUrlPowershell": null,
+                        "targetUrlPowerShell": null,
                         "targetUrlPython": null,
                         "type": "temporary"
                     }
@@ -293,7 +293,7 @@
                             null
                         ]
                     },
-                    "targetUrlPowershell": {
+                    "targetUrlPowerShell": {
                         "description": "Target URL for PowerShell clients.",
                         "type": [
                             "string",
@@ -344,7 +344,7 @@
                     "targetUrlCustom",
                     "targetUrlMobile",
                     "targetUrlNodeJs",
-                    "targetUrlPowershell",
+                    "targetUrlPowerShell",
                     "targetUrlPython",
                     "type"
                 ]
@@ -603,7 +603,7 @@
         },
         "description": "Create vanity or numeric short version of your desired URL. Share it digitally, as QR code, or print it.",
         "title": "SHI URL Shortener",
-        "version": "0.0.4"
+        "version": "0.0.5"
     },
     "openapi": "3.1.1",
     "paths": {
@@ -811,9 +811,9 @@
                         }
                     },
                     {
-                        "name": "targetUrlPowershell",
+                        "name": "targetUrlPowerShell",
                         "in": "query",
-                        "description": "Filter by the `targetUrlPowershell` field.",
+                        "description": "Filter by the `targetUrlPowerShell` field.",
                         "schema": {
                             "type": "string",
                             "format": "uri",
@@ -881,7 +881,7 @@
                                                 "targetUrlCustom": null,
                                                 "targetUrlMobile": null,
                                                 "targetUrlNodeJs": null,
-                                                "targetUrlPowershell": null,
+                                                "targetUrlPowerShell": null,
                                                 "targetUrlPython": null,
                                                 "type": "temporary"
                                             }
@@ -946,7 +946,7 @@
                                         "targetUrlCustom": null,
                                         "targetUrlMobile": null,
                                         "targetUrlNodeJs": null,
-                                        "targetUrlPowershell": null,
+                                        "targetUrlPowerShell": null,
                                         "targetUrlPython": null,
                                         "type": "temporary"
                                     }
@@ -1084,7 +1084,7 @@
                                             "targetUrlCustom": null,
                                             "targetUrlMobile": null,
                                             "targetUrlNodeJs": null,
-                                            "targetUrlPowershell": null,
+                                            "targetUrlPowerShell": null,
                                             "targetUrlPython": null,
                                             "type": "temporary"
                                         }
@@ -1160,7 +1160,7 @@
                                             "targetUrlCustom": null,
                                             "targetUrlMobile": null,
                                             "targetUrlNodeJs": "https://www.example.com/target-nodejs",
-                                            "targetUrlPowershell": null,
+                                            "targetUrlPowerShell": null,
                                             "targetUrlPython": null,
                                             "type": "permanent"
                                         }
