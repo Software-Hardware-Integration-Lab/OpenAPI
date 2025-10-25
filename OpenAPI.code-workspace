@@ -28,6 +28,11 @@
 		"cSpell.enabledFileTypes": {
 			"*": true
 		},
+		"cSpell.words": [
+			"Entra",
+			"kiota",
+			"typia"
+		],
 		"editor.formatOnSave": true,
 		"editor.bracketPairColorization.enabled": true,
 		"typescript.format.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": true,
