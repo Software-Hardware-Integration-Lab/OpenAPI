@@ -16,6 +16,18 @@
   "bugs": {
     "url": "https://github.com/Software-Hardware-Integration-Lab/OpenAPI/issues"
   },
+  "packageManager": "npm@11.6.2",
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": ">=22.17.0",
+      "onFail": "error"
+    },
+    "packageManager": {
+      "name": "npm",
+      "onFail": "error"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/Software-Hardware-Integration-Lab/OpenAPI"
