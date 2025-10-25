@@ -52,11 +52,27 @@
 		"yaml.format.singleQuote": true,
 		"powershell.codeFormatting.useConstantStrings": true,
 		"typescript.tsdk": "node_modules\\typescript\\lib",
-		"github.copilot.editor.enableAutoCompletions": false,
-		"cSpell.words": [
-			"Entra",
-			"kiota",
-			"typia"
+		"eslint.rules.customizations": [
+			{
+				"rule": "*",
+				"severity": "warn"
+			}
+		],
+		"github.copilot.enable": {
+			"*": false
+		},
+		"github.copilot.chat.agent.autoFix": false,
+		"github.copilot.chat.agent.runTasks": false,
+		"github.copilot.editor.enableCodeActions": false,
+		"todo-tree.general.tags": [
+			"BUG",
+			"HACK",
+			"FIXME",
+			"TODO",
+			"XXX",
+			"[ ]",
+			"[x]",
+			"* @todo"
 		]
 	},
 	"extensions": {
@@ -66,7 +82,8 @@
 			"gruntfuggly.todo-tree",
 			"PKief.material-icon-theme",
 			"SocketSecurity.vscode-socket-security",
-			"42Crunch.vscode-openapi"
+			"42Crunch.vscode-openapi",
+			"MS-CST-E.vscode-devskim"
 		]
 	}
 }
