@@ -81,7 +81,7 @@ const customConfiguredClient = dataGatewayClientFactory(credential, void 0, cust
 To regenerate the SDK from the OpenAPI specification, run:
 
 ```bash
-npm run-script generate:Sdk
+npm run generate:Sdk
 ```
 
 ### Building the SDK
@@ -89,7 +89,7 @@ npm run-script generate:Sdk
 To build the SDK for production, run:
 
 ```bash
-npm run-script build:Prod
+npm run build:Prod
 ```
 
 ## License

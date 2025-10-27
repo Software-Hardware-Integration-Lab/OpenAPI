@@ -77,7 +77,7 @@ jobs:
 
             # Generate the TypeScript SDK
             - name: Generate SDK Client Code via Kiota
-              run: npm run-script generate:Sdk
+              run: npm run generate:Sdk
               working-directory: ${{matrix.specifications.sdkPath}}
 
             # Enforce linting standards
@@ -87,7 +87,7 @@ jobs:
 
             # Generate the TypeScript SDK
             - name: Build Project
-              run: npm run-script build:Prod
+              run: npm run build:Prod
               working-directory: ${{matrix.specifications.sdkPath}}
 
             # Publish the artifact to NPM with attestation
