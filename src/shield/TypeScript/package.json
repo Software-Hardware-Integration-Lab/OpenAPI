@@ -1,75 +1,77 @@
 {
-  "name": "@shi-corp/sdk-shield",
-  "version": "3.0.10",
-  "type": "module",
-  "main": "bin/index.js",
-  "description": "SDK client used to interface with the SHIELD application.",
-  "keywords": [
-    "OpenAPI",
-    "SHIELD",
-    "SDK",
-    "Automation",
-    "API",
-    "SHI"
-  ],
-  "homepage": "https://github.com/Software-Hardware-Integration-Lab/OpenAPI#readme",
-  "bugs": {
-    "url": "https://github.com/Software-Hardware-Integration-Lab/OpenAPI/issues"
-  },
-  "packageManager": "npm@11.6.2",
-  "devEngines": {
-    "runtime": {
-      "name": "node",
-      "version": ">=22.17.0",
-      "onFail": "error"
+    "name": "@shi-corp/sdk-shield",
+    "version": "3.0.10",
+    "type": "module",
+    "main": "bin/index.js",
+    "description": "SDK client used to interface with the SHIELD application.",
+    "keywords": [
+        "OpenAPI",
+        "SHIELD",
+        "SDK",
+        "Automation",
+        "API",
+        "SHI"
+    ],
+    "homepage": "https://github.com/Software-Hardware-Integration-Lab/OpenAPI#readme",
+    "bugs": {
+        "url": "https://github.com/Software-Hardware-Integration-Lab/OpenAPI/issues"
     },
-    "packageManager": {
-      "name": "npm",
-      "onFail": "error"
+    "packageManager": "npm@11.6.2",
+    "devEngines": {
+        "runtime": {
+            "name": "node",
+            "version": ">=22.17.0",
+            "onFail": "error"
+        },
+        "packageManager": {
+            "name": "npm",
+            "onFail": "error"
+        }
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Software-Hardware-Integration-Lab/OpenAPI.git"
+    },
+    "license": "MIT",
+    "author": "Elliot Huffman (elliot_huffman@shi.com)",
+    "scripts": {
+        "build:Dev": "tsc",
+        "prebuild:Prod": "tsc --sourceMap false --emitDeclarationOnly false",
+        "build:Prod": "tsc --sourceMap false --removeComments false",
+        "generate:Sdk": "kiota generate -l typescript -d ../../../specs/SHIELD.json -c ShieldClient -o ./sdk/ --exclude-backward-compatible",
+        "prepare": "ts-patch install",
+        "lint": "eslint --max-warnings 0"
+    },
+    "devDependencies": {
+        "@azure/core-auth": "~1.10.1",
+        "@shi-corp/development-utilities": "^2.1.0",
+        "@types/node": "~24.9.1",
+        "ts-patch": "~3.3.0",
+        "typescript": "~5.9.3"
+    },
+    "dependencies": {
+        "@microsoft/kiota-authentication-azure": "~1.0.0-preview.99",
+        "@microsoft/kiota-bundle": "~1.0.0-preview.99",
+        "typia": "~9.7.2"
+    },
+    "overrides": {
+        "function-bind": "npm:@socketregistry/function-bind@^1",
+        "hasown": "npm:@socketregistry/hasown@^1",
+        "is-core-module": "npm:@socketregistry/is-core-module@^1",
+        "is-interactive": "npm:@socketregistry/is-interactive@^1",
+        "is-unicode-supported": "npm:@socketregistry/is-unicode-supported@^1",
+        "path-parse": "npm:@socketregistry/path-parse@^1",
+        "safe-buffer": "npm:@socketregistry/safe-buffer@^1",
+        "safer-buffer": "npm:@socketregistry/safer-buffer@^1"
+    },
+    "resolutions": {
+        "function-bind": "npm:@socketregistry/function-bind@^1",
+        "hasown": "npm:@socketregistry/hasown@^1",
+        "is-core-module": "npm:@socketregistry/is-core-module@^1",
+        "is-interactive": "npm:@socketregistry/is-interactive@^1",
+        "is-unicode-supported": "npm:@socketregistry/is-unicode-supported@^1",
+        "path-parse": "npm:@socketregistry/path-parse@^1",
+        "safe-buffer": "npm:@socketregistry/safe-buffer@^1",
+        "safer-buffer": "npm:@socketregistry/safer-buffer@^1"
     }
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Software-Hardware-Integration-Lab/OpenAPI.git"
-  },
-  "license": "MIT",
-  "author": "Elliot Huffman (elliot_huffman@shi.com)",
-  "scripts": {
-    "build:Dev": "tsc",
-    "prebuild:Prod": "tsc --sourceMap false --emitDeclarationOnly false",
-    "build:Prod": "tsc --sourceMap false --removeComments false",
-    "generate:Sdk": "kiota generate -l typescript -d ../../../specs/SHIELD.json -c ShieldClient -o ./sdk/ --exclude-backward-compatible",
-    "prepare": "ts-patch install"
-  },
-  "devDependencies": {
-    "@azure/core-auth": "~1.10.1",
-    "@types/node": "~24.8.0",
-    "ts-patch": "~3.3.0",
-    "typescript": "~5.9.3"
-  },
-  "dependencies": {
-    "@microsoft/kiota-authentication-azure": "~1.0.0-preview.99",
-    "@microsoft/kiota-bundle": "~1.0.0-preview.99",
-    "typia": "~9.7.2"
-  },
-  "overrides": {
-    "function-bind": "npm:@socketregistry/function-bind@^1",
-    "hasown": "npm:@socketregistry/hasown@^1",
-    "is-core-module": "npm:@socketregistry/is-core-module@^1",
-    "is-interactive": "npm:@socketregistry/is-interactive@^1",
-    "is-unicode-supported": "npm:@socketregistry/is-unicode-supported@^1",
-    "path-parse": "npm:@socketregistry/path-parse@^1",
-    "safe-buffer": "npm:@socketregistry/safe-buffer@^1",
-    "safer-buffer": "npm:@socketregistry/safer-buffer@^1"
-  },
-  "resolutions": {
-    "function-bind": "npm:@socketregistry/function-bind@^1",
-    "hasown": "npm:@socketregistry/hasown@^1",
-    "is-core-module": "npm:@socketregistry/is-core-module@^1",
-    "is-interactive": "npm:@socketregistry/is-interactive@^1",
-    "is-unicode-supported": "npm:@socketregistry/is-unicode-supported@^1",
-    "path-parse": "npm:@socketregistry/path-parse@^1",
-    "safe-buffer": "npm:@socketregistry/safe-buffer@^1",
-    "safer-buffer": "npm:@socketregistry/safer-buffer@^1"
-  }
 }

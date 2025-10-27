@@ -35,6 +35,8 @@
 		],
 		"editor.formatOnSave": true,
 		"editor.bracketPairColorization.enabled": true,
+		"editor.detectIndentation": false,
+		"editor.tabSize": 4,
 		"typescript.format.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": true,
 		"typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
 		"typescript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": true,

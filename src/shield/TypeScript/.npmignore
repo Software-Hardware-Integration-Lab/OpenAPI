@@ -5,5 +5,8 @@
 # Ignore the TypeScript config
 tsconfig.json
 
+# Ignore linting config
+eslint.config.js
+
 # Ignore the generated SDK source code
 /sdk/

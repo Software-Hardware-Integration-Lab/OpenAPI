@@ -1,8 +1,8 @@
-import { AzureIdentityAuthenticationProvider } from "@microsoft/kiota-authentication-azure";
-import { FetchRequestAdapter } from "@microsoft/kiota-http-fetchlibrary";
-import type { TokenCredential } from "@azure/core-auth";
 import { assert, assertGuardEquals } from 'typia';
-import { createDataGatewayClient } from "./sdk/dataGatewayClient.js";
+import { AzureIdentityAuthenticationProvider } from '@microsoft/kiota-authentication-azure';
+import { FetchRequestAdapter } from '@microsoft/kiota-http-fetchlibrary';
+import type { TokenCredential } from '@azure/core-auth';
+import { createDataGatewayClient } from './sdk/dataGatewayClient.js';
 
 // Export all of the SDK's types
 export type * from './sdk/models/index.js';
@@ -14,7 +14,7 @@ export type * from './sdk/models/index.js';
  * @param scopeList Specific audience and or list of permissions to request on the access token when retrieved. Defaults to the global data gateway enterprise app with whatever credentials the current principal has assigned.
  * @returns Configured API client that is able to make requests against SHI Data Gateway.
  */
-export function dataGatewayClientFactory(credential: TokenCredential, baseUrl?: URL, scopeList?: string[]) {
+export function dataGatewayClientFactory(credential: TokenCredential, baseUrl?: URL, scopeList?: string[]): ReturnType<typeof createDataGatewayClient> {
     // #region Input Validation
     assert(credential);
 
