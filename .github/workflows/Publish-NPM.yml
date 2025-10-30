@@ -49,11 +49,9 @@ jobs:
 
             # Set up NodeJS on the build host
             - name: Setup Node.JS Runtime
-              uses: actions/setup-node@v5
+              uses: actions/setup-node@v6
               with:
                   node-version: 22
-                  cache: 'npm'
-                  cache-dependency-path: ${{matrix.specifications.sdkPath}}/package-lock.json
                   registry-url: https://registry.npmjs.org
                   scope: shi-corp
 
