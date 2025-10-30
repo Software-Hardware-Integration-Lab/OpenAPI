@@ -575,6 +575,55 @@
                     }
                 ]
             },
+            "Deploy.BreakGlassIndicator": {
+                "title": "Deploy - Break Glass Indicator",
+                "description": "Object containing the state and message providing details about break glass group and user existence.",
+                "type": "object",
+                "properties": {
+                    "state": {
+                        "type": "integer",
+                        "description": " Numerical representation of the break glass group/user state: -1 = no break glass group. 0 = break glass group but < 2 users. 1 = break glass group with >= 2 users.",
+                        "enum": [
+                            -1,
+                            0,
+                            1
+                        ],
+                        "examples": [
+                            1
+                        ]
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "Status message indicating the state of the break glass group deployment and user creation requirements.",
+                        "enum": [
+                            "No break glass group exists",
+                            "Break glass group has less than 2 users",
+                            "Looks Good"
+                        ],
+                        "examples": [
+                            "Looks Good"
+                        ]
+                    }
+                },
+                "required": [
+                    "state",
+                    "message"
+                ],
+                "examples": [
+                    {
+                        "state": 1,
+                        "message": "Looks Good"
+                    },
+                    {
+                        "state": 0,
+                        "message": "Break glass group has less than 2 users"
+                    },
+                    {
+                        "state": -1,
+                        "message": "No break glass group exists"
+                    }
+                ]
+            },
             "Deploy.ConfigurationTag": {
                 "title": "Deploy - Configuration Tag",
                 "description": "Definition of an object representing configuration tag used within architecture collections.",
@@ -3585,6 +3634,54 @@
                     },
                     "503": {
                         "description": "System requirements have not been met!"
+                    }
+                },
+                "tags": [
+                    "Deploy"
+                ]
+            }
+        },
+        "/Api/Deploy/BreakGlassStatus": {
+            "get": {
+                "summary": "Checks the status of the break glass groups and required users existence.",
+                "description": "Retreives a numerical representation of existence status and a human readable message corresponding to said number",
+                "operationId": "/Api/Deploy/BreakGlassStatus/Get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Deploy.BreakGlassIndicator"
+                                },
+                                "examples": {
+                                    "Break Glass Indicator": {
+                                        "value": {
+                                            "state": 1,
+                                            "message": "Looks Good"
+                                        },
+                                        "summary": " Group exists with 2 or more users",
+                                        "description": "An example break glass indicator object returned from the endpoint when the group is present and there are 2 or more users."
+                                    },
+                                    "Break Glass Indicator User Issue": {
+                                        "value": {
+                                            "state": 0,
+                                            "message": "Break glass group has less than 2 users."
+                                        },
+                                        "summary": "Group exists with less than 2 users.",
+                                        "description": "An example break glass indicator object returned from the endpoint when the break glass group is present and there are less than 2 users."
+                                    },
+                                    "Break Glass Indicator Group Issue": {
+                                        "value": {
+                                            "state": -1,
+                                            "message": "No break glass group exists"
+                                        },
+                                        "summary": "The break glass group is missing.",
+                                        "description": "An example break glass indicator object returned from the endpoint when no break glass group has been detected."
+                                    }
+                                }
+                            }
+                        },
+                        "description": "OK"
                     }
                 },
                 "tags": [
