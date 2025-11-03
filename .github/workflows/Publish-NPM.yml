@@ -2,90 +2,93 @@
 name: Publish - SDKs to Global Registries
 
 on:
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+    # Allows you to run this workflow manually from the Actions tab
+    workflow_dispatch:
 
 jobs:
-  # Generate the TypeScript SDK client code
-  TypeScript-Build:
-    # Generate each SDK client in a separate build process to speed up execution and publishing
-    strategy:
-      matrix:
-        # Spec and SDK root locations
-        specifications:
-          - name: SHIELD
-            sdkPath: 'src/shield/TypeScript'
-            specPath: 'spec/SHIELD.json'
-          - name: DataGateway
-            sdkPath: 'src/dataGateway/TypeScript'
-            specPath: 'spec/Data-Gateway.json'
-          - name: UrlShortener
-            sdkPath: 'src/urlShortener/TypeScript'
-            specPath: 'spec/Url-Shortener.json'
+    # Generate the TypeScript SDK client code
+    TypeScript-Build:
+        # Generate each SDK client in a separate build process to speed up execution and publishing
+        strategy:
+            matrix:
+                # Spec and SDK root locations
+                specifications:
+                    - name: SHIELD
+                      sdkPath: 'src/shield/TypeScript'
+                      specPath: 'spec/SHIELD.json'
+                    - name: DataGateway
+                      sdkPath: 'src/dataGateway/TypeScript'
+                      specPath: 'spec/Data-Gateway.json'
+                    - name: UrlShortener
+                      sdkPath: 'src/urlShortener/TypeScript'
+                      specPath: 'spec/Url-Shortener.json'
 
-    # Display name of the job
-    name: Generate TypeScript SDK
+        # Display name of the job
+        name: Generate TypeScript SDK
 
-    # Operating system filter for the runners
-    runs-on: ubuntu-latest
+        # Operating system filter for the runners
+        runs-on: ubuntu-latest
 
-    # Publish the package to NPM
-    environment: NPM-OIDC
+        # Publish the package to NPM
+        environment: NPM-OIDC
 
-    # Allow single failures for SDK publish, e.g. SDG fail due to not getting an update but SHIELD goes through
-    continue-on-error: true
+        # Allow single failures for SDK publish, e.g. SDG fail due to not getting an update but SHIELD goes through
+        continue-on-error: true
 
-    # Sets the scopes available to the github_token injected to the GH Actions runner
-    permissions:
-      attestations: write
-      contents: read
-      id-token: write
+        # Sets the scopes available to the github_token injected to the GH Actions runner
+        permissions:
+            attestations: write
+            contents: read
+            id-token: write
 
-    # Set of steps required to generate the API client for TypeScript
-    steps:
-      # Download all of the source code
-      - name: Clone Repo Locally
-        uses: actions/checkout@v5
+        # Set of steps required to generate the API client for TypeScript
+        steps:
+            # Download all of the source code
+            - name: Clone Repo Locally
+              uses: actions/checkout@v5
 
-      # Set up NodeJS on the build host
-      - name: Setup Node.JS Runtime
-        uses: actions/setup-node@v5
-        with:
-          node-version: 22
-          cache: 'npm'
-          cache-dependency-path: ${{matrix.specifications.sdkPath}}/package-lock.json
-          registry-url: https://registry.npmjs.org
-          scope: shi-corp
+            # Set up NodeJS on the build host
+            - name: Setup Node.JS Runtime
+              uses: actions/setup-node@v6
+              with:
+                  node-version: 22
+                  registry-url: https://registry.npmjs.org
+                  scope: shi-corp
 
-      # Update the NPM CLI to the latest available version
-      - name: Update NPM CLI
-        run: npm install -g npm
+            # Update the NPM CLI to the latest available version
+            - name: Update NPM CLI
+              run: npm install -g npm
 
-      # Set up all of the supporting components for SDK generation
-      - name: Initialize Kiota Binaries
-        uses: microsoft/setup-kiota@v0.5.0
+            # Set up all of the supporting components for SDK generation
+            - name: Initialize Kiota Binaries
+              uses: microsoft/setup-kiota@v0.5.0
 
-      # Install the dependencies needed to build the project
-      - name: Install Build Dependencies
-        run: npm install
-        working-directory: ${{matrix.specifications.sdkPath}}
+            # Install the dependencies needed to build the project
+            - name: Install Build Dependencies
+              run: npm install
+              working-directory: ${{matrix.specifications.sdkPath}}
 
-      # Cryptographically attest that packages haven't been tampered where supported
-      - name: Attest Provenance
-        run: npm audit signatures
-        working-directory: ${{matrix.specifications.sdkPath}}
+            # Cryptographically attest that packages haven't been tampered where supported
+            - name: Attest Provenance
+              run: npm audit signatures
+              working-directory: ${{matrix.specifications.sdkPath}}
 
-      # Generate the TypeScript SDK
-      - name: Generate SDK Client Code via Kiota
-        run: npm run-script generate:Sdk
-        working-directory: ${{matrix.specifications.sdkPath}}
+            # Generate the TypeScript SDK
+            - name: Generate SDK Client Code via Kiota
+              run: npm run generate:Sdk
+              working-directory: ${{matrix.specifications.sdkPath}}
 
-      # Generate the TypeScript SDK
-      - name: Build Project
-        run: npm run-script build:Prod
-        working-directory: ${{matrix.specifications.sdkPath}}
+            # Enforce linting standards
+            - name: Generate SDK Client Code via Kiota
+              run: npm run lint
+              working-directory: ${{matrix.specifications.sdkPath}}
 
-      # Publish the artifact to NPM with attestation
-      - name: Upload Package to NPM Registry
-        run: npm publish
-        working-directory: ${{matrix.specifications.sdkPath}}
+            # Generate the TypeScript SDK
+            - name: Build Project
+              run: npm run build:Prod
+              working-directory: ${{matrix.specifications.sdkPath}}
+
+            # Publish the artifact to NPM with attestation
+            - name: Upload Package to NPM Registry
+              run: npm publish
+              working-directory: ${{matrix.specifications.sdkPath}}

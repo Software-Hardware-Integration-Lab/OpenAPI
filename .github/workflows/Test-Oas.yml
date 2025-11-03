@@ -2,53 +2,53 @@
 name: Test - OpenAPI Specification Schemas
 
 on:
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+    # Allows you to run this workflow manually from the Actions tab
+    workflow_dispatch:
 
-  # Run the unit tests on every change
-  push:
-    branches: ['main']
-  pull_request:
-    branches: ['main']
+    # Run the unit tests on every change
+    push:
+        branches: ['main']
+    pull_request:
+        branches: ['main']
 
 jobs:
-  Validate:
-    # Display name of the job
-    name: Validate OpenAPI Specs
+    Validate:
+        # Display name of the job
+        name: Validate OpenAPI Specs
 
-    # Operating system filter for the runners
-    runs-on: ubuntu-latest
+        # Operating system filter for the runners
+        runs-on: ubuntu-latest
 
-    # Set explicit least privilege permissions
-    permissions:
-      contents: read
+        # Set explicit least privilege permissions
+        permissions:
+            contents: read
 
-    # Run the set of steps needed to validate the OpenAPI Spec files
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE
-      - name: Download Source Files
-        uses: actions/checkout@v5
+        # Run the set of steps needed to validate the OpenAPI Spec files
+        steps:
+            # Checks-out your repository under $GITHUB_WORKSPACE
+            - name: Download Source Files
+              uses: actions/checkout@v5
 
-        # Set up NodeJS on the build host
-      - name: Setup Node.JS Environment
-        uses: actions/setup-node@v5
-        with:
-          node-version: 22
+              # Set up NodeJS on the build host
+            - name: Setup Node.JS Environment
+              uses: actions/setup-node@v6
+              with:
+                  node-version: 22
 
-      # Sets up OpenJDK on the build host
-      - name: Set up Microsoft OpenJDK
-        uses: actions/setup-java@v5
-        with:
-          java-version: '21'
-          distribution: 'microsoft'
+            # Sets up OpenJDK on the build host
+            - name: Set up Microsoft OpenJDK
+              uses: actions/setup-java@v5
+              with:
+                  java-version: '21'
+                  distribution: 'microsoft'
 
-      # Install all of the dependencies
-      - name: Install All of the Project Dependencies
-        run: npm install @openapitools/openapi-generator-cli -g
+            # Install all of the dependencies
+            - name: Install All of the Project Dependencies
+              run: npm install @openapitools/openapi-generator-cli -g
 
-      # Run the validation of all Specification Files
-      - name: Validate OpenAPI Specs
-        run: |
-          for file in $(find ./specs -name "*.json"); do
-            openapi-generator-cli validate -i "$file"
-          done
+            # Run the validation of all Specification Files
+            - name: Validate OpenAPI Specs
+              run: |
+                  for file in $(find ./specs -name "*.json"); do
+                    openapi-generator-cli validate -i "$file"
+                  done
