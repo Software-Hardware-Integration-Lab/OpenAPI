@@ -1113,7 +1113,7 @@
             },
             "Deploy.ConfigurationItem": {
                 "title": "Deploy - Configuration Item List",
-                "description": "",
+                "description": "Collection of objects representing the configuration items with curated properties and values in user-friendly format.",
                 "type": "array",
                 "items": {
                     "description": "",
@@ -1138,6 +1138,19 @@
                                     "7e1a2b3c-4d5f-4a8b-9e6a-1c2b7f3d8e4a",
                                     "9c2e7a1b-5d3f-4a8b-2c6e-7f1a3d9e8b5c"
                                 ]
+                            ]
+                        },
+                        "deployState": {
+                            "type": "string",
+                            "description": "Indicator of the infrastructure configuration item's current state. Mutated means that the item has been modified by the end user outside of SHIELD.",
+                            "enum": [
+                                "notDeployed",
+                                "deployed",
+                                "Mutated",
+                                "error"
+                            ],
+                            "examples": [
+                                "deployed"
                             ]
                         },
                         "groupTagList": {
@@ -1253,6 +1266,7 @@
                     },
                     "required": [
                         "childDependencies",
+                        "deployState",
                         "groupTagList",
                         "msCloudTypes",
                         "parentDependencies",
@@ -1265,6 +1279,7 @@
                                 "7e1a2b3c-4d5f-4a8b-9e6a-1c2b7f3d8e4a",
                                 "9c2e7a1b-5d3f-4a8b-2c6e-7f1a3d9e8b5c"
                             ],
+                            "deployState": "deployed",
                             "groupTagList": [
                                 {
                                     "description": "Collection of policies covering critical conditional access settings.",
@@ -1290,6 +1305,7 @@
                                 "7e1a2b3c-4d5f-4a8b-9e6a-1c2b7f3d8e4a",
                                 "9c2e7a1b-5d3f-4a8b-2c6e-7f1a3d9e8b5c"
                             ],
+                            "deployState": "deployed",
                             "groupTagList": [
                                 {
                                     "description": "Collection of policies covering critical conditional access settings.",
@@ -1310,6 +1326,7 @@
                             "childDependencies": [
                                 "1c2b5d3f-7a1b-4a8b-9e6a-2e4a3b7e8c5d"
                             ],
+                            "deployState": "notDeployed",
                             "groupTagList": [
                                 {
                                     "description": "Principal containers that are used to provide assignments.",
@@ -3655,22 +3672,45 @@
                                         "summary": "Available Configuration Items",
                                         "value": [
                                             {
-                                                "id": "5e2a9c1f-8b3d-4f6a-9e7c-2d1f3a6b4c8e",
-                                                "name": "Core Security Group",
-                                                "description": "A core security group that contains essential security roles and permissions.",
-                                                "type": "SecurityGroup",
-                                                "isActive": true,
-                                                "createdAt": "2024-02-20T10:00:00Z",
-                                                "updatedAt": "2024-05-15T11:30:00Z"
+                                                "childDependencies": [
+                                                    "7e1a2b3c-4d5f-4a8b-9e6a-1c2b7f3d8e4a",
+                                                    "9c2e7a1b-5d3f-4a8b-2c6e-7f1a3d9e8b5c"
+                                                ],
+                                                "deployState": "deployed",
+                                                "groupTagList": [
+                                                    {
+                                                        "description": "Collection of policies covering critical conditional access settings.",
+                                                        "displayName": "Conditional Policy",
+                                                        "tagId": "3b7e2a1c-4d5f-4a8b-9e6a-2c1b7f3d8e4a"
+                                                    }
+                                                ],
+                                                "msCloudTypes": [
+                                                    "Public"
+                                                ],
+                                                "parentDependencies": [
+                                                    "8e6a1c2b-7f3d-4a8b-9c2e-5d3f7a1b2e4a"
+                                                ],
+                                                "templateId": "2a1c7e3b-5d4f-4a8b-9e6a-7f3d2b1c8e4a",
+                                                "urlPath": "/identity/conditionalAccess/policies"
                                             },
                                             {
-                                                "id": "9c7f2e1a-3b6d-4a8e-9f5c-1d2a4b7e6c3f",
-                                                "name": "Scope Tag - Confidential Data",
-                                                "description": "A scope tag designed to restrict access to confidential data resources.",
-                                                "type": "ScopeTag",
-                                                "isActive": true,
-                                                "createdAt": "2024-04-12T14:20:00Z",
-                                                "updatedAt": "2024-07-01T09:50:00Z"
+                                                "childDependencies": [
+                                                    "1c2b5d3f-7a1b-4a8b-9e6a-2e4a3b7e8c5d"
+                                                ],
+                                                "deployState": "notDeployed",
+                                                "groupTagList": [
+                                                    {
+                                                        "description": "Principal containers that are used to provide assignments.",
+                                                        "displayName": "Administrative Unit",
+                                                        "tagId": "5d3f9c2e-7a1b-4a8b-2c6e-1a3d7e8b5c4a"
+                                                    }
+                                                ],
+                                                "msCloudTypes": [
+                                                    "Public"
+                                                ],
+                                                "parentDependencies": [],
+                                                "templateId": "4a8b7e1a-2b3c-4d5f-9e6a-1c2b7f3d8e4a",
+                                                "urlPath": "/directory/administrativeUnits"
                                             }
                                         ]
                                     }
