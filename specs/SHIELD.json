@@ -3609,6 +3609,43 @@
                 ]
             }
         },
+        "/Api/Deploy/Remediate/BreakGlass": {
+            "get": {
+                "summary": "Checks the status of the break glass groups and required users existence.",
+                "description": "Retrieves the status of required user quantity existence in the break glass group.\n\nThis endpoint requires the `Deploy.Read` scope (permission).",
+                "operationId": "/Api/Deploy/Remediate/BreakGlass/Get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean",
+                                    "examples": [
+                                        true
+                                    ]
+                                },
+                                "examples": {
+                                    "2 or more users": {
+                                        "summary": "2 or more users",
+                                        "description": "An example boolean value that represents the existence of 2 or more users in the break glass group.",
+                                        "value": true
+                                    },
+                                    "Less than 2 users": {
+                                        "summary": "Less than 2 users",
+                                        "description": "An example boolean value that represents the existence of less than 2 users in the break glass group.",
+                                        "value": false
+                                    }
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "Deploy"
+                ]
+            }
+        },
         "/Api/Deploy/Component/Architecture": {
             "get": {
                 "summary": "Returns List of Available Architectures",
