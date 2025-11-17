@@ -1,6 +1,6 @@
 {
     "name": "@shi-corp/sdk-url-shortener",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "type": "module",
     "main": "bin/index.js",
     "description": "SDK client used to interface with the URL Shortener application.",
