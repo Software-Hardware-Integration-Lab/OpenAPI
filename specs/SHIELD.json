@@ -119,7 +119,7 @@
                 }
             },
             "operation": {
-                "description": "Flag to indicate which progress data  in the Deploy Engine to retrieve.",
+                "description": "Flag to indicate which progress data in the Deploy Engine to retrieve. If invalid value is provided, it would be ignored and result defaulted to deploy operation.",
                 "in": "query",
                 "name": "operation",
                 "schema": {
@@ -141,7 +141,7 @@
                     "invalid request": {
                         "value": "somethingelse",
                         "summary": "Example of the request that includes unexpected value",
-                        "description": "An example of a incorrect value that would be ignored and defaulted to data for deploy action."
+                        "description": "An example of an incorrect value that would be ignored and defaulted to data for deploy action."
                     }
                 }
             },
