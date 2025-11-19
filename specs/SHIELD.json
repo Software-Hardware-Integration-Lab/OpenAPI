@@ -118,6 +118,33 @@
                     }
                 }
             },
+            "operation": {
+                "description": "Flag to indicate which progress data  in the Deploy Engine to retrieve.",
+                "in": "query",
+                "name": "operation",
+                "schema": {
+                    "examples": [
+                        "remediate"
+                    ],
+                    "type": "string",
+                    "enum": [
+                        "deploy",
+                        "remediate"
+                    ]
+                },
+                "examples": {
+                    "valid request": {
+                        "value": "remediate",
+                        "summary": "Example of the request that provides expected value",
+                        "description": "An example of a valid value that indicates the progress bar data to retrieve is for remediation action."
+                    },
+                    "invalid request": {
+                        "value": "somethingelse",
+                        "summary": "Example of the request that includes unexpected value",
+                        "description": "An example of a incorrect value that would be ignored and defaulted to data for deploy action."
+                    }
+                }
+            },
             "search": {
                 "description": "Used in object filtering.",
                 "in": "query",
@@ -3644,6 +3671,55 @@
                 "tags": [
                     "Deploy"
                 ]
+            },
+            "post": {
+                "summary": "Request to create BreakGlass security group",
+                "description": "Attempt to create BreakGlass security group in the tenant. If group has already been provisioned it will return the name of the group to reference.\n\nThis endpoint requires the `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission). ",
+                "operationId": "/Api/Deploy/Remediate/BreakGlass/Post",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Response with data": {
+                                        "summary": "Example of the returned data",
+                                        "description": "An example of the name of the resource either created or already existing.",
+                                        "value": {
+                                            "groupName": "SHIELD - BreakGlass"
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "groupName": {
+                                            "type": "string",
+                                            "description": "Name of the security group created now or already existing in the tenant.",
+                                            "examples": [
+                                                "SHIELD - BreakGlass"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "groupName"
+                                    ],
+                                    "examples": [
+                                        {
+                                            "groupName": "SHIELD - BreakGlass"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "503": {
+                        "description": "System requirements have not been met!"
+                    }
+                },
+                "tags": [
+                    "Deploy"
+                ]
             }
         },
         "/Api/Deploy/Component/Architecture": {
@@ -3770,6 +3846,11 @@
                 "summary": "Returns Current Execution Progress of the Deploy Module",
                 "description": "Provides a detailed breakdown of the current progress of the deploy module and its sub-components, if any.\n\nThis endpoint requires the `Deploy.Read`, `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
                 "operationId": "/Api/Deploy/Progress/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/operation"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "content": {
@@ -3802,57 +3883,6 @@
                             }
                         },
                         "description": "OK"
-                    }
-                },
-                "tags": [
-                    "Deploy"
-                ]
-            }
-        },
-        "/Api/Deploy/Remediate/BreakGlass": {
-            "post": {
-                "summary": "Request to create BreakGlass security group",
-                "description": "Attempt to create BreakGlass security group in the tenant. If group has already been provisioned it will return the name of the group to reference.\n\nThis endpoint requires the `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission). ",
-                "operationId": "/Api/Deploy/Remediate/BreakGlass/Post",
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "examples": {
-                                    "Response with data": {
-                                        "summary": "Example of the returned data",
-                                        "description": "An example of the name of the resource either created or already existing.",
-                                        "value": {
-                                            "groupName": "SHIELD - BreakGlass"
-                                        }
-                                    }
-                                },
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "groupName": {
-                                            "type": "string",
-                                            "description": "Name of the security group created now or already existing in the tenant.",
-                                            "examples": [
-                                                "SHIELD - BreakGlass"
-                                            ]
-                                        }
-                                    },
-                                    "required": [
-                                        "groupName"
-                                    ],
-                                    "examples": [
-                                        {
-                                            "groupName": "SHIELD - BreakGlass"
-                                        }
-                                    ]
-                                }
-                            }
-                        },
-                        "description": "OK"
-                    },
-                    "503": {
-                        "description": "System requirements have not been met!"
                     }
                 },
                 "tags": [
