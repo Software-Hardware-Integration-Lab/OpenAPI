@@ -127,6 +127,7 @@
                         "domainConfigId": "9a1e7b2c-5d3f-4a8b-9c2e-6f1a3d7e8b54",
                         "enabled": true,
                         "enableLinkBrokenScan": false,
+                        "hitCount": 123,
                         "updatedBy": "3c5a9b7e-2d4f-4c1b-8e6a-7f2b3d1c9e45",
                         "targetUrl": "https://www.example.com/very-long-and-complex-url-with_plenty-of-special-characters-and-non-repeated-words",
                         "notEnabledAfter": "2025-12-31T23:59:59Z",
@@ -218,6 +219,14 @@
                         "type": "boolean",
                         "examples": [
                             false
+                        ]
+                    },
+                    "hitCount": {
+                        "description": "Count of how many times this record has been used to redirect a client.",
+                        "type": "number",
+                        "examples": [
+                            123,
+                            0
                         ]
                     },
                     "updatedBy": {
@@ -349,6 +358,7 @@
                     "domainConfigId",
                     "enabled",
                     "enableLinkBrokenScan",
+                    "hitCount",
                     "updatedBy",
                     "targetUrl",
                     "notEnabledAfter",
@@ -624,7 +634,7 @@
         },
         "description": "Create vanity or numeric short version of your desired URL. Share it digitally, as QR code, or print it.",
         "title": "SHI URL Shortener",
-        "version": "1.0.0"
+        "version": "1.0.1"
     },
     "openapi": "3.1.1",
     "paths": {
