@@ -1140,7 +1140,7 @@
             },
             "Deploy.RemediationResponse": {
                 "title": "Deploy - Remediation Response Record",
-                "description": "Object with the details of the perform remediation action.",
+                "description": "Object with the details of the performed remediation action.",
                 "type": "object",
                 "properties": {
                     "errors": {
