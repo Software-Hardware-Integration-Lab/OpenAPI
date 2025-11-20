@@ -1138,6 +1138,100 @@
                     }
                 ]
             },
+            "Deploy.RemediationResponse": {
+                "title": "Deploy - Remediation Response Record",
+                "description": "Object with the details of the perform remediation action.",
+                "type": "object",
+                "properties": {
+                    "errors": {
+                        "type": "array",
+                        "description": "Collection of the configuration items that failed to provision and available details on the error.",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "templateId": {
+                                    "type": "string",
+                                    "description": "Internal reference identifier of the resource.",
+                                    "format": "uuid",
+                                    "maxLength": 36,
+                                    "minLength": 36,
+                                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                                    "examples": [
+                                        "7e2b1c3d-4f5a-4a8b-9e6a-1c2b7f3d8e4a"
+                                    ]
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "Text with the details of the error response.",
+                                    "examples": [
+                                        "Failed to create dedicated group for the resource: Unexpected error."
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "templateId",
+                                "message"
+                            ],
+                            "examples": [
+                                {
+                                    "templateId": "7e2b1c3d-4f5a-4a8b-9e6a-1c2b7f3d8e4a",
+                                    "message": "Failed to create dedicated group for the resource: Unexpected error."
+                                }
+                            ]
+                        },
+                        "examples": [
+                            [
+                                {
+                                    "templateId": "7e2b1c3d-4f5a-4a8b-9e6a-1c2b7f3d8e4a",
+                                    "message": "Failed to create dedicated group for the resource: Unexpected error."
+                                },
+                                {
+                                    "templateId": "2a1c7e3b-5d4f-4a8b-9e6a-7f3d2b1c8e4a",
+                                    "message": "Failed to create the resource: invalid value for 'id' reference."
+                                }
+                            ]
+                        ]
+                    },
+                    "results": {
+                        "type": "object",
+                        "description": "Records in the form of key/value where key is templateId of the configuration item and value is the name of the provisioned resource.",
+                        "additionalProperties": {
+                            "type": "string",
+                            "examples": [
+                                "CSPM - MDCA"
+                            ]
+                        },
+                        "examples": [
+                            {
+                                "4a8b7e1a-2b3c-4d5f-9e6a-1c2b7f3d8e4a": "CSPM - MDCA",
+                                "b3e2c1d4-7f5a-4a8b-9e6a-2c1b7f3d8e4a": "CSPM - Authentication Methods"
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "errors",
+                    "results"
+                ],
+                "examples": [
+                    {
+                        "errors": [
+                            {
+                                "templateId": "7e2b1c3d-4f5a-4a8b-9e6a-1c2b7f3d8e4a",
+                                "message": "Failed to create dedicated group for the resource: Unexpected error."
+                            },
+                            {
+                                "templateId": "2a1c7e3b-5d4f-4a8b-9e6a-7f3d2b1c8e4a",
+                                "message": "Failed to create the resource: invalid value for 'id' reference."
+                            }
+                        ],
+                        "results": {
+                            "4a8b7e1a-2b3c-4d5f-9e6a-1c2b7f3d8e4a": "CSPM - MDCA",
+                            "b3e2c1d4-7f5a-4a8b-9e6a-2c1b7f3d8e4a": "CSPM - Authentication Methods"
+                        }
+                    }
+                ]
+            },
             "Deploy.ConfigurationItem": {
                 "title": "Deploy - Configuration Item List",
                 "description": "Collection of objects representing the configuration items with curated properties and values in user-friendly format.",
@@ -3636,7 +3730,7 @@
                 ]
             }
         },
-        "/Api/Deploy/Remediate/BreakGlass": {
+        "/Api/Deploy/BreakGlass": {
             "get": {
                 "summary": "Checks the status of the break glass groups and required users existence.",
                 "description": "Retrieves the status of required user quantity existence in the break glass group.\n\nThis endpoint requires the `Deploy.Read` scope (permission).",
@@ -3891,6 +3985,48 @@
             }
         },
         "/Api/Deploy/Remediate": {
+            "get": {
+                "summary": "Retrieves Collected Remediation Results",
+                "description": "Returns results of the performed remediation action including any errors that occurred as well as mapping of templateId/name for the created resources.\n\nThis endpoint requires the `Deploy.Read`, or `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Deploy/Remediate/Get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Response with Remediation Data": {
+                                        "summary": "Example of the remediation results",
+                                        "description": "An example of the current results of the remediation action.",
+                                        "value": {
+                                            "errors": [
+                                                {
+                                                    "templateId": "7e2b1c3d-4f5a-4a8b-9e6a-1c2b7f3d8e4a",
+                                                    "message": "Failed to create dedicated group for the resource: Unexpected error."
+                                                },
+                                                {
+                                                    "templateId": "2a1c7e3b-5d4f-4a8b-9e6a-7f3d2b1c8e4a",
+                                                    "message": "Failed to create the resource: invalid value for 'id' reference."
+                                                }
+                                            ],
+                                            "results": {
+                                                "4a8b7e1a-2b3c-4d5f-9e6a-1c2b7f3d8e4a": "CSPM - MDCA",
+                                                "b3e2c1d4-7f5a-4a8b-9e6a-2c1b7f3d8e4a": "CSPM - Authentication Methods"
+                                            }
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/Deploy.RemediationResponse"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "Deploy"
+                ]
+            },
             "post": {
                 "summary": "Perform remediation steps to address discovered gaps in security posture",
                 "description": "After the user consents, perform necessary steps to deploy resources to cover the security gap.\n\nThis endpoint requires the `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
