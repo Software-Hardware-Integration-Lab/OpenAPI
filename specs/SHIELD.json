@@ -3596,7 +3596,7 @@
             "get": {
                 "summary": "Checks the status of the break glass groups and required users existence.",
                 "description": "Retrieves the status of required user quantity existence in the break glass group.\n\nThis endpoint requires the `Deploy.Read` scope (permission).",
-                "operationId": "/Api/Deploy/Remediate/BreakGlass/Get",
+                "operationId": "/Api/Deploy/BreakGlass/Get",
                 "responses": {
                     "200": {
                         "content": {
