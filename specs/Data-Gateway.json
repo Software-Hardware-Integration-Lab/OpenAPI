@@ -2227,6 +2227,303 @@
                         ]
                     }
                 ]
+            },
+            "ArchitectureReportV1": {
+                "description": "Completely calculated architecture report structure that is the result of a complete run.",
+                "type": "object",
+                "properties": {
+                    "correlation": {
+                        "$ref": "#/components/schemas/CorrelationRecordV1"
+                    },
+                    "principalData": {
+                        "$ref": "#/components/schemas/PrincipalData"
+                    },
+                    "tenantMetadata": {
+                        "$ref": "#/components/schemas/ArchitectureReportV1.TenantMetadata"
+                    }
+                },
+                "required": [
+                    "correlation",
+                    "tenantMetadata",
+                    "principalData"
+                ],
+                "title": "Architecture Report V1 - Complete Object"
+            },
+            "ArchitectureReportV1.CorrelationRecord": {
+                "$ref": "#/components/schemas/CorrelationRecordV1",
+                "description": "Metadata that describes the execution session (run) that is used to tie/relate architecture report versions together.",
+                "title": "Architecture Report V1 - CorrelationRecord"
+            },
+            "ArchitectureReportV1.TenantMetadata": {
+                "description": "This is the the tenant data calculated for the architecture report",
+                "example": {
+                    "totalDeviceCount": 1,
+                    "totalGuestCount": 1,
+                    "totalMemberCount": 1,
+                    "totalUserCount": 1
+                },
+                "properties": {
+                    "totalDeviceCount": {
+                        "description": "The count of total devices within the tenant",
+                        "examples": [
+                            1
+                        ],
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "totalGuestCount": {
+                        "description": "The count of total guests within the tenant",
+                        "examples": [
+                            1
+                        ],
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "totalMemberCount": {
+                        "description": "The count of total members within the tenant",
+                        "examples": [
+                            1
+                        ],
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "totalUserCount": {
+                        "description": "The count of total users within the tenant",
+                        "examples": [
+                            1
+                        ],
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "totalDeviceCount",
+                    "totalGuestCount",
+                    "totalMemberCount",
+                    "totalUserCount"
+                ]
+            },
+            "CorrelationRecordV0": {
+                "description": "Metadata that describes the execution session (run) that is used to tie/relate report versions together.",
+                "example": {
+                    "auditTenantAccount": "priv-user@example.com",
+                    "correlationId": "9d838115-0868-45d4-b8a5-98adc1af7e42",
+                    "reportTenantAccount": "ent-user@example.com",
+                    "tenantId": "7e536189-b2dd-4c8b-98b1-9b174777883f",
+                    "createdAt": "2024-08-01T21:13:12.821Z",
+                    "updatedAt": "2024-08-01T21:13:12.821Z"
+                },
+                "properties": {
+                    "auditTenantAccount": {
+                        "description": "The user account used to retrieve the report information in the tenant being audited.",
+                        "examples": [
+                            "admin-user@example.com"
+                        ],
+                        "format": "email",
+                        "type": "string"
+                    },
+                    "correlationId": {
+                        "description": "The ID of the execution session (run) that is used to tie/relate all of the data together.",
+                        "examples": [
+                            "88da2253-758f-4135-9d37-64448c8b65c1"
+                        ],
+                        "format": "uuid",
+                        "type": "string",
+                        "pattern": "^\\w+-\\w+-\\w+-\\w+-\\w+$"
+                    },
+                    "reportTenantAccount": {
+                        "description": "User account used to store/report the report to the SHI Lab cloud service.",
+                        "examples": [
+                            "generic-user@example.com"
+                        ],
+                        "format": "email",
+                        "type": "string"
+                    },
+                    "tenantId": {
+                        "description": "Unique ID of customer's Microsoft tenant that the report is auditing.",
+                        "examples": [
+                            "0e1fe83f-a33f-4250-8546-225b8d45ae01"
+                        ],
+                        "format": "uuid",
+                        "type": "string",
+                        "pattern": "^\\w+-\\w+-\\w+-\\w+-\\w+$"
+                    },
+                    "createdAt": {
+                        "description": "Timestamp of when the report was created.",
+                        "examples": [
+                            "2024-08-01T21:12:22.148Z"
+                        ],
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "description": "Timestamp of when the report was last updated.",
+                        "examples": [
+                            "2024-08-01T21:12:22.148Z"
+                        ],
+                        "format": "date-time",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "auditTenantAccount"
+                ],
+                "title": "Correlation Record V0",
+                "type": "object"
+            },
+            "CorrelationRecordV1": {
+                "description": "Metadata that describes the execution session (run) that is used to tie/relate report versions together.",
+                "example": {
+                    "auditTenantAccount": "priv-user@example.com",
+                    "correlationId": "b7e2c8a1-4f3a-4e2b-9c6d-2a1e8f7b3c2d",
+                    "isMigrating": false,
+                    "reportTenantAccount": "ent-user@example.com",
+                    "schemaVersion": 1,
+                    "tenantId": "f2a4d7c3-8b1e-4e5a-9c2d-7e3b6a1f4c8d",
+                    "createdAt": "2025-01-01T00:00:00Z",
+                    "updatedAt": "2025-01-02T00:00:00Z"
+                },
+                "properties": {
+                    "auditTenantAccount": {
+                        "description": "The user account used to retrieve the report information in the tenant being audited.",
+                        "examples": [
+                            "admin-user@example.com"
+                        ],
+                        "format": "email",
+                        "type": "string"
+                    },
+                    "correlationId": {
+                        "description": "The ID of the execution session (run) that is used to tie/relate all of the data together.",
+                        "examples": [
+                            "88da2253-758f-4135-9d37-64448c8b65c1"
+                        ],
+                        "format": "uuid",
+                        "type": "string",
+                        "pattern": "^\\w+-\\w+-\\w+-\\w+-\\w+$"
+                    },
+                    "isMigrating": {
+                        "description": "Flag to show when the stored report is migrating to a newer version.",
+                        "examples": [
+                            true
+                        ],
+                        "type": "boolean"
+                    },
+                    "reportTenantAccount": {
+                        "description": "User account used to store/report the report to the SHI Lab cloud service.",
+                        "examples": [
+                            "generic-user@example.com"
+                        ],
+                        "format": "email",
+                        "type": "string"
+                    },
+                    "schemaVersion": {
+                        "description": "Version number of the rendered report",
+                        "examples": [
+                            1
+                        ],
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "tenantId": {
+                        "description": "Unique ID of customer's Microsoft tenant that the report is auditing.",
+                        "examples": [
+                            "0e1fe83f-a33f-4250-8546-225b8d45ae01"
+                        ],
+                        "format": "uuid",
+                        "type": "string",
+                        "pattern": "^\\w+-\\w+-\\w+-\\w+-\\w+$"
+                    },
+                    "createdAt": {
+                        "description": "Timestamp of when the report was created.",
+                        "examples": [
+                            "2024-08-01T21:12:22.148Z"
+                        ],
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "description": "Timestamp of when the report was last updated.",
+                        "examples": [
+                            "2024-08-01T21:12:22.148Z"
+                        ],
+                        "format": "date-time",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "auditTenantAccount"
+                ],
+                "title": "Correlation Record V1",
+                "type": "object"
+            },
+            "ArchitectureReport.PrincipalData": {
+                "$ref": "#/components/schemas/PrincipalData"
+            },
+            "PrincipalData": {
+                "description": "placeholder",
+                "example": {
+                    "device": {
+                        "3d282045-ec7f-4813-88e2-29b74ee609f7": {
+                            "assignedService": {
+                                "a4b2e176-d63d-4081-9e21-226e2ac624b9": {
+                                    "FeatureA": true,
+                                    "FeatureB": false
+                                },
+                                "d76878d6-1495-4243-a334-a82bb9818cd0": 10
+                            },
+                            "assignedLicense": {
+                                "id": "5888a922-9f5b-45fd-bd5f-de3283d6a79e",
+                                "servicePlanList": [
+                                    "547404d4-8734-415f-a7ca-e9c1ffb95e48"
+                                ]
+                            },
+                            "consumedService": {
+                                "e0d101e8-6f1e-40a9-a66f-cad4112c9a59": {
+                                    "FeatureA": true,
+                                    "FeatureB": true
+                                },
+                                "c63b7a2d-6573-4c37-9ca8-e12b954d3198": null
+                            },
+                            "principalMetadata": {
+                                "sharedComputer": true
+                            }
+                        }
+                    },
+                    "user": {
+                        "04e88835-771a-482b-9d6f-ba06c32cbb67": {
+                            "assignedService": {
+                                "a4b2e176-d63d-4081-9e21-226e2ac624b9": null,
+                                "d76878d6-1495-4243-a334-a82bb9818cd0": {
+                                    "FeatureA": false,
+                                    "FeatureB": true
+                                }
+                            },
+                            "assignedLicense": {
+                                "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                                "servicePlanList": [
+                                    "f8ec916b-97b5-4687-b960-9afb8ed5e85e"
+                                ]
+                            },
+                            "consumedService": {
+                                "9d3603de-b378-4c4a-adcc-ee133cbef914": 5,
+                                "e9a4e3d3-ebe0-405a-a8f4-35a04c4dba1f": {
+                                    "FeatureA": true,
+                                    "FeatureB": false
+                                }
+                            },
+                            "enhancedData": null,
+                            "llmInferred": {
+                                "isServiceAccount": true,
+                                "isFrontlineWorker": false,
+                                "isTempWorker": false
+                            },
+                            "principalMetadata": {
+                                "sharedMailbox": false
+                            }
+                        }
+                    }
+                },
+                "type": "object"
             }
         },
         "securitySchemes": {
@@ -5996,6 +6293,241 @@
                     "Tenant Records"
                 ]
             }
+        },
+        "/Api/V1/ArchitectureReport": {
+            "post": {
+                "summary": "Submit Architecture Report V1",
+                "description": "Submits an Architecture Report V1 payload to the Architecture Report endpoint.",
+                "operationId": "/Api/V1/ArchitectureReport",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ArchitectureReportV1"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Architecture Report V1 submitted successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ArchitectureReportV1"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    }
+                },
+                "tags": [
+                    "Architecture Reporting"
+                ]
+            }
+        },
+        "/Api/V1/ArchitectureReport/Correlation": {
+            "get": {
+                "summary": "Get Correlation Records",
+                "description": "Retrieves a list of correlation records, optionally filtered by date range.",
+                "operationId": "/Api/V1/ArchitectureReport/Correlation",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/dateStart"
+                    },
+                    {
+                        "$ref": "#/components/parameters/dateEnd"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A list of correlation records.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CorrelationRecordV1"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    }
+                },
+                "tags": [
+                    "Architecture Reporting"
+                ]
+            }
+        },
+        "/Api/V1/ArchitectureReport/Correlation/Tenant/{tenantId}": {
+            "get": {
+                "summary": "Get Correlation Records by Tenant",
+                "description": "Retrieves a list of correlation records for a specific tenant.",
+                "operationId": "/Api/V1/ArchitectureReport/Correlation/Tenant/{tenantId}",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/tenantId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A list of correlation records for the specified tenant.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CorrelationRecordV1"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    }
+                },
+                "tags": [
+                    "Architecture Reporting"
+                ]
+            }
+        },
+        "/Api/V1/ArchitectureReport/Correlation/{correlationId}/Data": {
+            "delete": {
+                "summary": "Delete Architecture Report Data by Correlation ID",
+                "description": "Deletes the architecture report data associated with the specified correlation ID.",
+                "operationId": "/Api/V1/ArchitectureReport/Correlation/{correlationId}/Data",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/correlationId"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Architecture report data deleted successfully."
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    }
+                },
+                "tags": [
+                    "Architecture Reporting"
+                ]
+            },
+            "get": {
+                "summary": "Get Architecture Report Data by Correlation ID",
+                "description": "Retrieves the architecture report data associated with the specified correlation ID.",
+                "operationId": "/Api/V1/ArchitectureReport/Correlation/{correlationId}/Data",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/correlationId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The architecture report data for the specified correlation ID.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ArchitectureReportV1"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request. The correlation ID is invalid."
+                    },
+                    "404": {
+                        "description": "Not Found. No data found for the specified correlation ID."
+                    }
+                },
+                "tags": [
+                    "Architecture Reporting"
+                ]
+            }
+        },
+        "/Api/V1/ArchitectureReport/Correlation/{correlationId}/Tenant/{tenantId}/Data": {
+            "delete": {
+                "summary": "Delete Architecture Report Data by Correlation ID and Tenant ID",
+                "description": "Deletes the architecture report data associated with the specified correlation ID and tenant ID.",
+                "operationId": "/Api/V1/ArchitectureReport/Correlation/{correlationId}/Tenant/{tenantId}/Data",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/correlationId",
+                        "required": true
+                    },
+                    {
+                        "$ref": "#/components/parameters/tenantId",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Architecture report data deleted successfully."
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    }
+                },
+                "tags": [
+                    "Architecture Reporting"
+                ]
+            },
+            "get": {
+                "summary": "Get Architecture Report Data by Correlation ID and Tenant ID",
+                "description": "Retrieves the architecture report data associated with the specified correlation ID and tenant ID.",
+                "operationId": "/Api/V1/ArchitectureReport/Correlation/{correlationId}/Tenant/{tenantId}/Data",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/correlationId",
+                        "required": true
+                    },
+                    {
+                        "$ref": "#/components/parameters/tenantId",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The architecture report data for the specified correlation ID and tenant ID.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ArchitectureReportV1"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    }
+                },
+                "tags": [
+                    "Architecture Reporting"
+                ]
+            }
         }
     },
     "security": [
@@ -6033,6 +6565,10 @@
         {
             "description": "Manages and reports the list of purchased licenses for the various SHI Lab Products.",
             "name": "License Entitlement"
+        },
+        {
+            "description": "Collects and reports data about a tenant's architecture.",
+            "name": "Architecture Reporting"
         },
         {
             "description": "Collects data from the various SHI Lab products.",
