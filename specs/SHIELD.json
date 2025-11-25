@@ -4296,7 +4296,12 @@
                 "requestBody": {
                     "description": "No payload is expected or needed for this operation",
                     "content": {
-                        "application/json": {}
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {}
+                            }
+                        }
                     }
                 },
                 "responses": {
