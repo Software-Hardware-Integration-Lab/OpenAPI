@@ -1465,6 +1465,246 @@
                     ]
                 ]
             },
+            "Deploy.ConfigurationItemMetaData": {
+                "title": "Deploy - Configuration Item Meta Data",
+                "description": "Object representing populated information expanding details of the Configuration Item with user friendly information.",
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "description": "Human readable short title.",
+                        "examples": [
+                            "Multi-Factor Authentication (MFA)"
+                        ]
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Lengthier definition for the resource that provides more insight into what is covered or intended.",
+                        "examples": [
+                            "This policy enforces multi-factor authentication (MFA) for enterprise identities during sign-in to reduce the risk of identity compromise."
+                        ]
+                    },
+                    "licenseRequirement": {
+                        "type": "string",
+                        "description": "Definition of license requirements to use this resource.",
+                        "examples": [
+                            "Microsoft Entra ID P1"
+                        ]
+                    },
+                    "priority": {
+                        "type": "integer",
+                        "description": "Indicator of the priority of the resource implementation. Lower number indicates higher priority.",
+                        "enum": [
+                            1,
+                            50,
+                            100
+                        ],
+                        "examples": [
+                            1
+                        ]
+                    },
+                    "operationalRisk": {
+                        "type": "integer",
+                        "description": "Indicator of the level of possible disruptions if this resource is not implemented. Lower number indicates higher risk.",
+                        "enum": [
+                            1,
+                            50,
+                            100
+                        ],
+                        "examples": [
+                            50
+                        ]
+                    },
+                    "importanceReasonList": {
+                        "type": "array",
+                        "description": "Reasons explaining importance of the implementation of this resource.",
+                        "items": {
+                            "type": "string",
+                            "examples": [
+                                "MFA adds a layer of protection to the sign-in process."
+                            ]
+                        },
+                        "examples": [
+                            [
+                                "MFA adds a layer of protection to the sign-in process.",
+                                "When accessing accounts or apps, users provide additional identity verification, such as scanning a fingerprint or entering a code."
+                            ]
+                        ]
+                    },
+                    "deploymentBenefitList": {
+                        "type": "array",
+                        "description": "Benefits gained by implementing the resource.",
+                        "items": {
+                            "type": "string",
+                            "examples": [
+                                "Reduces the risk of compromised user credentials."
+                            ]
+                        },
+                        "examples": [
+                            [
+                                "Reduces the risk of compromised user credentials.",
+                                "Prevents brute-force attack."
+                            ]
+                        ]
+                    },
+                    "nonDeploymentRiskList": {
+                        "type": "array",
+                        "description": "Possible risks that could lead to issues if this resource is not implemented.",
+                        "items": {
+                            "type": "string",
+                            "examples": [
+                                "Dramatically increased risk of account compromise."
+                            ]
+                        },
+                        "examples": [
+                            [
+                                "Dramatically increased risk of account compromise.",
+                                "Higher chance of account compromise through phishing attacks."
+                            ]
+                        ]
+                    },
+                    "guideStepList": {
+                        "type": "array",
+                        "description": "Collection of steps customer should consider or follow for successful implementation of the resource.",
+                        "items": {
+                            "type": "string",
+                            "examples": [
+                                "Communicate the restriction to EntraID-joined devices and provide transition guidance."
+                            ]
+                        },
+                        "examples": [
+                            [
+                                "Communicate the restriction to EntraID-joined devices and provide transition guidance.",
+                                "Stage the rollout with a pilot group and exclude critical accounts."
+                            ]
+                        ]
+                    },
+                    "compliancePositionList": {
+                        "type": "array",
+                        "description": "Statements describing what this resource might help with in the realm of compliance and security.",
+                        "items": {
+                            "type": "string",
+                            "examples": [
+                                "Deploying MFA helps meet compliance requirements for various industry regulations and standards."
+                            ]
+                        },
+                        "examples": [
+                            [
+                                "Deploying MFA helps meet compliance requirements for various industry regulations and standards."
+                            ]
+                        ]
+                    },
+                    "compliancePositionStandardList": {
+                        "type": "array",
+                        "description": "Collection of frameworks that this resource addresses when implemented.",
+                        "items": {
+                            "type": "string",
+                            "examples": [
+                                "ISO 27001"
+                            ]
+                        },
+                        "examples": [
+                            [
+                                "ISO 27001",
+                                "NIST"
+                            ]
+                        ]
+                    },
+                    "disclaimerList": {
+                        "type": "array",
+                        "description": "Collection of disclaimer statements.",
+                        "items": {
+                            "type": "string",
+                            "examples": [
+                                "Please be aware that deploying this policy will enforce MFA for all users on their next sign-in."
+                            ]
+                        },
+                        "examples": [
+                            [
+                                "Please be aware that deploying this policy will enforce MFA for all users on their next sign-in."
+                            ]
+                        ]
+                    },
+                    "baseLink": {
+                        "type": "string",
+                        "description": "Web URL to the Microsoft or Azure service where resource can be found.",
+                        "format": "uri",
+                        "examples": [
+                            "https://entra.microsoft.com"
+                        ]
+                    },
+                    "learnLinkList": {
+                        "type": "array",
+                        "description": "Collection of educational URLs for user to explore.",
+                        "items": {
+                            "type": "string",
+                            "format": "uri",
+                            "examples": [
+                                "https://learn.microsoft.com/en-us/azure/active-directory/authentication/concept-mfa-howitworks"
+                            ]
+                        },
+                        "examples": [
+                            [
+                                "https://learn.microsoft.com/en-us/azure/active-directory/authentication/concept-mfa-howitworks",
+                                "https://learn.microsoft.com/en-us/azure/active-directory/authentication/tutorial-enable-azure-mfa"
+                            ]
+                        ]
+                    }
+                },
+                "required": [
+                    "title",
+                    "description",
+                    "priority",
+                    "operationalRisk",
+                    "importanceReasonList",
+                    "deploymentBenefitList",
+                    "nonDeploymentRiskList",
+                    "guideStepList",
+                    "compliancePositionList",
+                    "compliancePositionStandardList",
+                    "disclaimerList",
+                    "baseLink"
+                ],
+                "examples": [
+                    {
+                        "title": "Multi-Factor Authentication (MFA)",
+                        "description": "This policy enforces multi-factor authentication (MFA) for enterprise identities during sign-in to reduce the risk of identity compromise.",
+                        "licenseRequirement": "Microsoft Entra ID P1",
+                        "priority": 1,
+                        "operationalRisk": 50,
+                        "importanceReasonList": [
+                            "MFA adds a layer of protection to the sign-in process."
+                        ],
+                        "deploymentBenefitList": [
+                            "Reduces the risk of compromised user credentials.",
+                            "Prevents brute-force attack."
+                        ],
+                        "nonDeploymentRiskList": [
+                            "Dramatically increased risk of account compromise.",
+                            "Higher chance of account compromise through phishing attacks."
+                        ],
+                        "guideStepList": [
+                            "Communicate the restriction to EntraID-joined devices and provide transition guidance.",
+                            "Stage the rollout with a pilot group and exclude critical accounts."
+                        ],
+                        "compliancePositionList": [
+                            "Deploying MFA helps meet compliance requirements for various industry regulations and standards."
+                        ],
+                        "compliancePositionStandardList": [
+                            "ISO 27001",
+                            "NIST"
+                        ],
+                        "disclaimerList": [
+                            "Please be aware that deploying this policy will enforce MFA for all users on their next sign-in."
+                        ],
+                        "baseLink": "https://entra.microsoft.com",
+                        "learnLinkList": [
+                            "https://learn.microsoft.com/en-us/azure/active-directory/authentication/concept-mfa-howitworks",
+                            "https://learn.microsoft.com/en-us/azure/active-directory/authentication/tutorial-enable-azure-mfa"
+                        ]
+                    }
+                ]
+            },
             "Deploy.PathIndicator": {
                 "title": "Deploy - Path Payload",
                 "description": "Payload with path data used in several endpoints",
@@ -3928,6 +4168,98 @@
                             }
                         },
                         "description": "OK"
+                    }
+                },
+                "tags": [
+                    "Deploy"
+                ]
+            }
+        },
+        "/Api/Deploy/Component/ConfigurationItemMetaData/{templateId}": {
+            "get": {
+                "summary": "Returns Result of Retrieving Configuration Item Documentation",
+                "description": "Retrieves additional metadata from the configuration item if it was entered, or provides a message indicating it is missing.\n\nThis endpoint requires the `Deploy.Read`, `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission). ",
+                "operationId": "/Api/Deploy/Component/ConfigurationItemMetaData/:templateId/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/templateId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Response With Documentation": {
+                                        "description": "Sample response object of the documentation for the specific configuration item.",
+                                        "summary": "Configuration Item Documentation",
+                                        "value": {
+                                            "title": "Multi-Factor Authentication (MFA)",
+                                            "description": "This policy enforces multi-factor authentication (MFA) for enterprise identities during sign-in to reduce the risk of identity compromise.",
+                                            "licenseRequirement": "Microsoft Entra ID P1",
+                                            "priority": 1,
+                                            "operationalRisk": 50,
+                                            "importanceReasonList": [
+                                                "MFA adds a layer of protection to the sign-in process."
+                                            ],
+                                            "deploymentBenefitList": [
+                                                "Reduces the risk of compromised user credentials.",
+                                                "Prevents brute-force attack."
+                                            ],
+                                            "nonDeploymentRiskList": [
+                                                "Dramatically increased risk of account compromise.",
+                                                "Higher chance of account compromise through phishing attacks."
+                                            ],
+                                            "guideStepList": [
+                                                "Communicate the restriction to EntraID-joined devices and provide transition guidance.",
+                                                "Stage the rollout with a pilot group and exclude critical accounts."
+                                            ],
+                                            "compliancePositionList": [
+                                                "Deploying MFA helps meet compliance requirements for various industry regulations and standards."
+                                            ],
+                                            "compliancePositionStandardList": [
+                                                "ISO 27001",
+                                                "NIST"
+                                            ],
+                                            "disclaimerList": [
+                                                "Please be aware that deploying this policy will enforce MFA for all users on their next sign-in."
+                                            ],
+                                            "baseLink": "https://entra.microsoft.com",
+                                            "learnLinkList": [
+                                                "https://learn.microsoft.com/en-us/azure/active-directory/authentication/concept-mfa-howitworks",
+                                                "https://learn.microsoft.com/en-us/azure/active-directory/authentication/tutorial-enable-azure-mfa"
+                                            ]
+                                        }
+                                    },
+                                    "Response When Documentation is Missing": {
+                                        "description": "Sample response with unavailable documentation",
+                                        "summary": "Missing Configuration Item Documentation",
+                                        "value": "No documentation available yet!"
+                                    }
+                                },
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "$ref": "#/components/schemas/Deploy.ConfigurationItemMetaData"
+                                        },
+                                        {
+                                            "type": "string",
+                                            "description": "Indicator that no additional information is available for this configuration item.",
+                                            "examples": [
+                                                "No documentation available yet!"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
                     }
                 },
                 "tags": [
