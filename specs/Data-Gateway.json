@@ -414,7 +414,7 @@
                     "role"
                 ]
             },
-            "FeatureBreakdown": {
+            "Report.FeatureBreakdown": {
                 "additionalProperties": {
                     "type": "boolean",
                     "examples": [
@@ -431,7 +431,7 @@
                         "On-Prem Password Protection": false
                     }
                 ],
-                "title": "License Report - Feature Breakdown",
+                "title": "Report - Feature Breakdown",
                 "type": "object"
             },
             "LicenseReport.CorrelationRecord": {
@@ -533,7 +533,7 @@
                         "additionalProperties": {
                             "oneOf": [
                                 {
-                                    "$ref": "#/components/schemas/FeatureBreakdown"
+                                    "$ref": "#/components/schemas/Report.FeatureBreakdown"
                                 },
                                 {
                                     "type": "integer",
@@ -568,7 +568,7 @@
                         "additionalProperties": {
                             "oneOf": [
                                 {
-                                    "$ref": "#/components/schemas/FeatureBreakdown"
+                                    "$ref": "#/components/schemas/Report.FeatureBreakdown"
                                 },
                                 {
                                     "type": "integer",
@@ -817,6 +817,7 @@
                 "properties": {
                     "availableLicense": {
                         "type": "array",
+                        "description": "Array of license bundles available. Each item includes the total purchased, the unique license bundle ID, and a list of associated service plan list.",
                         "items": {
                             "type": "object",
                             "required": [
@@ -827,32 +828,79 @@
                             "properties": {
                                 "count": {
                                     "type": "integer",
-                                    "description": "Number of licenses that are purchased of the specific license."
+                                    "format": "int32",
+                                    "description": "Number of licenses that are purchased of the specific license.",
+                                    "examples": [
+                                        10
+                                    ]
                                 },
                                 "id": {
                                     "type": "string",
                                     "format": "uuid",
-                                    "description": "Well known ID of the license bundle."
+                                    "maxLength": 36,
+                                    "minLength": 36,
+                                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                                    "description": "Well known ID of the license bundle.",
+                                    "examples": [
+                                        "09d9b4dc-b229-4f06-a22a-617c82091e21"
+                                    ]
                                 },
                                 "servicePlanList": {
                                     "type": "array",
                                     "items": {
                                         "type": "string",
-                                        "format": "uuid"
+                                        "format": "uuid",
+                                        "maxLength": 36,
+                                        "minLength": 36,
+                                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                                        "description": "Well known ID of the license bundle."
                                     },
-                                    "description": "List of available service plans for the current license."
-                                }
+                                    "description": "List of available service plans for the current license.",
+                                    "examples": [
+                                        [
+                                            "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                                        ]
+                                    ]
+                                },
+                                "examples": [
+                                    {
+                                        "count": 10,
+                                        "id": "034d1003-cab4-4a91-9ebc-c8931fdf0063",
+                                        "servicePlanList": [
+                                            "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                                        ]
+                                    }
+                                ]
                             }
-                        }
+                        },
+                        "examples": [
+                            {
+                                "availableLicense": [
+                                    {
+                                        "count": 10,
+                                        "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                                        "servicePlanList": [
+                                            "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                                            "123e4567-e89b-12d3-a456-426614174000"
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
                     },
                     "correlation": {
-                        "$ref": "#/components/schemas/LicenseReportV1.LicenseCorrelationRecord"
+                        "$ref": "#/components/schemas/Report.CorrelationRecordV1"
                     },
                     "principalData": {
-                        "$ref": "#/components/schemas/LicenseReportV1.PrincipalData"
+                        "$ref": "#/components/schemas/Report.PrincipalData"
                     },
                     "schemaVersion": {
-                        "type": "integer"
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "Version number of the license report schema.",
+                        "examples": [
+                            1
+                        ]
                     }
                 },
                 "required": [
@@ -863,8 +911,8 @@
                 ],
                 "title": "License Report V1 - Complete Object"
             },
-            "LicenseReportV1.LicenseCorrelationRecord": {
-                "description": "Metadata that describes the execution session (run) that is used to tie/relate all of the license report together.",
+            "Report.CorrelationRecordV1": {
+                "description": "Metadata that describes the execution session (run) that is used to tie/relate report versions together.",
                 "examples": [
                     {
                         "auditTenantAccount": "user@example.com",
@@ -893,7 +941,9 @@
                         ],
                         "format": "uuid",
                         "type": "string",
-                        "pattern": "^\\w+-\\w+-\\w+-\\w+-\\w+$"
+                        "maxLength": 36,
+                        "minLength": 36,
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
                     },
                     "createdAt": {
                         "description": "Timestamp of when the report was created.",
@@ -933,7 +983,9 @@
                         ],
                         "format": "uuid",
                         "type": "string",
-                        "pattern": "^\\w+-\\w+-\\w+-\\w+-\\w+$"
+                        "maxLength": 36,
+                        "minLength": 36,
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
                     },
                     "updatedAt": {
                         "description": "Timestamp of when the report was last updated.",
@@ -948,10 +1000,11 @@
                     "auditTenantAccount",
                     "reportTenantAccount"
                 ],
-                "title": "License Report V1 - License Correlation Record",
+                "title": "Report - Correlation Record V1",
                 "type": "object"
             },
-            "LicenseReportV1.PrincipalData": {
+            "Report.PrincipalData": {
+                "description": "Contains user and device records included in the license report, detailing assigned services, licenses, consumed services, and related metadata for each principal. ",
                 "type": "object",
                 "required": [
                     "device",
@@ -960,120 +1013,337 @@
                 "properties": {
                     "user": {
                         "type": "object",
+                        "description": "Object containing user records, each keyed by user ID. Includes assigned services, licenses, consumed services, inferred attributes, metadata, and enhanced identity data for each user.",
                         "additionalProperties": {
                             "type": "object",
                             "properties": {
                                 "assignedService": {
                                     "type": "object",
                                     "additionalProperties": {
-                                        "$ref": "#/components/schemas/LicenseReportV1.AdditionalService"
+                                        "$ref": "#/components/schemas/Report.AdditionalService"
                                     }
                                 },
                                 "assignedLicense": {
-                                    "$ref": "#/components/schemas/LicenseReportV1.AssignedLicense"
+                                    "$ref": "#/components/schemas/Report.AssignedLicense"
                                 },
                                 "consumedService": {
                                     "type": "object",
                                     "additionalProperties": {
-                                        "$ref": "#/components/schemas/LicenseReportV1.AdditionalService"
+                                        "$ref": "#/components/schemas/Report.AdditionalService"
                                     }
                                 },
                                 "llmInferred": {
                                     "type": "object",
+                                    "description": "Inferred principal attributes, showing if the account is a service account, frontline worker, temporary worker.",
                                     "properties": {
                                         "isServiceAccount": {
-                                            "type": "boolean"
+                                            "description": "Indicates if the account is a service account.",
+                                            "type": [
+                                                "boolean",
+                                                "null"
+                                            ],
+                                            "examples": [
+                                                true,
+                                                null
+                                            ]
                                         },
                                         "isFrontlineWorker": {
-                                            "type": "boolean"
+                                            "description": "Indicates if the user is a frontline worker.",
+                                            "type": [
+                                                "boolean",
+                                                "null"
+                                            ],
+                                            "examples": [
+                                                true,
+                                                null
+                                            ]
                                         },
                                         "isTempWorker": {
-                                            "type": "boolean"
+                                            "description": "Indicates if the user is a temporary worker.",
+                                            "type": [
+                                                "boolean",
+                                                "null"
+                                            ],
+                                            "examples": [
+                                                true,
+                                                null
+                                            ]
                                         }
-                                    }
+                                    },
+                                    "examples": [
+                                        {
+                                            "llmInferred": {
+                                                "isFrontlineWorker": false,
+                                                "isTempWorker": true,
+                                                "isServiceAccount": null
+                                            }
+                                        }
+                                    ]
                                 },
                                 "principalMetadata": {
-                                    "type": "object",
-                                    "properties": {
-                                        "sharedMailbox": {
-                                            "type": "boolean"
-                                        }
-                                    }
+                                    "$ref": "#/components/schemas/Report.PrincipalMetadata"
                                 },
                                 "enhancedData": {
                                     "type": "object",
+                                    "descriptions": "Additional identity details for the user, such as principal name, job title, department, office location, and employee type.",
                                     "properties": {
                                         "userPrincipalName": {
-                                            "type": "string"
+                                            "type": "string",
+                                            "description": "The user's principal name (UPN).",
+                                            "examples": [
+                                                "user@example.com"
+                                            ]
                                         },
                                         "idpJobTitle": {
-                                            "type": "string"
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ],
+                                            "description": "The user's job title from the identity provider.",
+                                            "examples": [
+                                                "Engineer",
+                                                null
+                                            ]
                                         },
                                         "idpDepartment": {
-                                            "type": "string"
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ],
+                                            "description": "The user's department from the identity provider",
+                                            "examples": [
+                                                "IT",
+                                                null
+                                            ]
                                         },
                                         "idpOfficeLocation": {
-                                            "type": "string"
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ],
+                                            "description": "The user's office location from the identity provider",
+                                            "examples": [
+                                                "HQ",
+                                                null
+                                            ]
                                         },
                                         "idpEmployeeType": {
-                                            "type": "string"
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ],
+                                            "description": "The user's employee type from the identity provider.",
+                                            "examples": [
+                                                "Permanent",
+                                                null
+                                            ]
+                                        }
+                                    },
+                                    "examples": [
+                                        {
+                                            "enhancedData": {
+                                                "userPrincipalName": "user@example.com",
+                                                "idpJobTitle": "Engineer",
+                                                "idpDepartment": "IT",
+                                                "idpOfficeLocation": "HQ",
+                                                "idpEmployeeType": "Permanent"
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "examples": [
+                            {
+                                "user": {
+                                    "e7b8c8a2-1f2e-4c3a-9b6a-2d8e4f8a9b7c": {
+                                        "assignedService": {
+                                            "3d282045-ec7f-4813-88e2-29b74ee609f7": {
+                                                "featureA": true,
+                                                "featureB": false
+                                            }
+                                        },
+                                        "assignedLicense": [
+                                            {
+                                                "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                                                "servicePlanList": [
+                                                    "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                                                ]
+                                            }
+                                        ],
+                                        "consumedService": {
+                                            "3d282045-ec7f-4813-88e2-29b74ee609f7": {
+                                                "featureA": true,
+                                                "featureB": false
+                                            }
+                                        },
+                                        "llmInferred": {
+                                            "isServiceAccount": false,
+                                            "isFrontlineWorker": true,
+                                            "isTempWorker": null
+                                        },
+                                        "principalMetadata": {
+                                            "sharedMailbox": false
+                                        },
+                                        "enhancedData": {
+                                            "userPrincipalName": "user@example.com",
+                                            "idpJobTitle": "Engineer",
+                                            "idpDepartment": "IT",
+                                            "idpOfficeLocation": "HQ",
+                                            "idpEmployeeType": "Full-Time"
                                         }
                                     }
                                 }
                             }
-                        }
+                        ]
                     },
                     "device": {
                         "type": "object",
+                        "description": "Object containing device records, each keyed by device ID. Includes assigned services, licenses, consumed services, and metadata for each device.",
                         "additionalProperties": {
                             "type": "object",
                             "properties": {
                                 "assignedService": {
                                     "type": "object",
                                     "additionalProperties": {
-                                        "$ref": "#/components/schemas/LicenseReportV1.AdditionalService"
+                                        "$ref": "#/components/schemas/Report.AdditionalService"
                                     }
                                 },
                                 "assignedLicense": {
-                                    "$ref": "#/components/schemas/LicenseReportV1.AssignedLicense"
+                                    "$ref": "#/components/schemas/Report.AssignedLicense"
                                 },
                                 "consumedService": {
                                     "type": "object",
                                     "additionalProperties": {
-                                        "$ref": "#/components/schemas/LicenseReportV1.AdditionalService"
+                                        "$ref": "#/components/schemas/Report.AdditionalService"
                                     }
                                 },
                                 "principalMetadata": {
-                                    "type": "object",
-                                    "properties": {
-                                        "sharedComputer": {
-                                            "type": "boolean"
+                                    "$ref": "#/components/schemas/Report.PrincipalMetadata"
+                                }
+                            }
+                        },
+                        "examples": [
+                            {
+                                "device": {
+                                    "f1e2d3c4-b5a6-7890-1234-56789abcdef0": {
+                                        "assignedService": {
+                                            "3d282045-ec7f-4813-88e2-29b74ee609f7": 5
+                                        },
+                                        "assignedLicense": [
+                                            {
+                                                "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                                                "servicePlanList": [
+                                                    "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                                                ]
+                                            }
+                                        ],
+                                        "consumedService": {
+                                            "3d282045-ec7f-4813-88e2-29b74ee609f7": 5
+                                        },
+                                        "principalMetadata": {
+                                            "sharedComputer": true
                                         }
                                     }
                                 }
                             }
-                        }
-                    },
-                    "schemaVersion": {
-                        "type": "integer"
+                        ]
                     }
                 },
-                "title": "License Report V1 - Principal Data"
-            },
-            "LicenseReportV1.AdditionalService": {
-                "oneOf": [
+                "examples": [
                     {
-                        "$ref": "#/components/schemas/FeatureBreakdown"
-                    },
-                    {
-                        "type": "number",
-                        "description": "Number of in-scope principals or usage count."
-                    },
-                    {
-                        "type": "null",
-                        "description": "No data or unused."
+                        "user": {
+                            "e7b8c8a2-1f2e-4c3a-9b6a-2d8e4f8a9b7c": {
+                                "assignedService": {
+                                    "3d282045-ec7f-4813-88e2-29b74ee609f7": {
+                                        "featureA": true,
+                                        "featureB": false
+                                    }
+                                },
+                                "assignedLicense": [
+                                    {
+                                        "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                                        "servicePlanList": [
+                                            "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                                        ]
+                                    }
+                                ],
+                                "consumedService": {
+                                    "3d282045-ec7f-4813-88e2-29b74ee609f7": {
+                                        "featureA": true,
+                                        "featureB": false
+                                    }
+                                },
+                                "llmInferred": {
+                                    "isServiceAccount": false,
+                                    "isFrontlineWorker": true,
+                                    "isTempWorker": null
+                                },
+                                "principalMetadata": {
+                                    "sharedMailbox": false
+                                },
+                                "enhancedData": {
+                                    "userPrincipalName": "user@example.com",
+                                    "idpJobTitle": "Engineer",
+                                    "idpDepartment": "IT",
+                                    "idpOfficeLocation": "HQ",
+                                    "idpEmployeeType": "Full-Time"
+                                }
+                            }
+                        },
+                        "device": {
+                            "f1e2d3c4-b5a6-7890-1234-56789abcdef0": {
+                                "assignedService": {
+                                    "3d282045-ec7f-4813-88e2-29b74ee609f7": 5
+                                },
+                                "assignedLicense": [
+                                    {
+                                        "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                                        "servicePlanList": [
+                                            "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                                        ]
+                                    }
+                                ],
+                                "consumedService": {
+                                    "3d282045-ec7f-4813-88e2-29b74ee609f7": 5
+                                },
+                                "principalMetadata": {
+                                    "sharedComputer": true
+                                }
+                            }
+                        }
                     }
                 ],
+                "title": "Report - Principal Data"
+            },
+            "Report.AdditionalService": {
+                "description": "Represents a service assignment or usage for a principal, which can be a feature breakdown, a usage count, or null if not applicable.",
+                "additionalProperties": {
+                    "type": "object",
+                    "oneOf": [
+                        {
+                            "$ref": "#/components/schemas/Report.FeatureBreakdown"
+                        },
+                        {
+                            "type": "number",
+                            "description": "Number of in-scope principals or usage count.",
+                            "examples": [
+                                10
+                            ]
+                        },
+                        {
+                            "type": "null",
+                            "description": "No data or unused."
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "featureA": true,
+                            "featureB": false,
+                            "featureC": null
+                        }
+                    ]
+                },
                 "examples": [
                     {
                         "3d282045-ec7f-4813-88e2-29b74ee609f7": {
@@ -1083,9 +1353,11 @@
                         "a1b2c3d4-e5f6-7890-abcd-ef1234567890": 5,
                         "123e4567-e89b-12d3-a456-426614174000": null
                     }
-                ]
+                ],
+                "title": "Report - Additional Service"
             },
-            "LicenseReportV1.AssignedLicense": {
+            "Report.AssignedLicense": {
+                "description": "List of licenses assigned to a principal, including license ID and associated service plans.",
                 "type": "array",
                 "items": {
                     "type": "object",
@@ -1097,13 +1369,26 @@
                         "id": {
                             "type": "string",
                             "format": "uuid",
-                            "description": "Unique identifier for the assigned license."
+                            "description": "Unique identifier for the assigned license.",
+                            "maxLength": 36,
+                            "minLength": 36,
+                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                            "examples": [
+                                "88da2253-758f-4135-9d37-64448c8b65c1"
+                            ]
                         },
                         "servicePlanList": {
                             "type": "array",
                             "items": {
                                 "type": "string",
-                                "format": "uuid"
+                                "format": "uuid",
+                                "description": "Unique identifier for the service plan.",
+                                "maxLength": 36,
+                                "minLength": 36,
+                                "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                                "examples": [
+                                    "88da2253-758f-4135-9d37-64448c8b65c1"
+                                ]
                             },
                             "description": "List of service plans associated with the assigned license."
                         }
@@ -1123,7 +1408,21 @@
                             "abcdefab-cdef-abcd-efab-cdefabcdefab"
                         ]
                     }
-                ]
+                ],
+                "title": "Report - Assigned License"
+            },
+            "Report.PrincipalMetadata": {
+                "type": "object",
+                "description": "Metadata about the principal, such as whether the account is a shared.",
+                "properties": {
+                    "sharedMailbox": {
+                        "type": "boolean",
+                        "examples": [
+                            true
+                        ]
+                    }
+                },
+                "title": "Report - Principal Meta Data"
             },
             "LicenseEntitlement.Shield": {
                 "description": "Record that describes the purchased licenses for a specific tenant. More than one of these can be active at a single time.",
@@ -2618,7 +2917,7 @@
                     }
                 },
                 "responses": {
-                    "200": {
+                    "201": {
                         "content": {
                             "application/json": {
                                 "examples": {
@@ -2783,7 +3082,7 @@
                                     "type": "array",
                                     "minItems": 0,
                                     "items": {
-                                        "$ref": "#/components/schemas/LicenseReportV1.LicenseCorrelationRecord"
+                                        "$ref": "#/components/schemas/Report.CorrelationRecordV1"
                                     },
                                     "examples": [
                                         [
@@ -2814,11 +3113,17 @@
                         },
                         "description": "OK"
                     },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
                     "401": {
                         "$ref": "#/components/responses/401"
                     },
                     "403": {
                         "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
                     }
                 },
                 "tags": [
@@ -2878,7 +3183,7 @@
                                     "type": "array",
                                     "minItems": 0,
                                     "items": {
-                                        "$ref": "#/components/schemas/LicenseReportV1.LicenseCorrelationRecord"
+                                        "$ref": "#/components/schemas/Report.CorrelationRecordV1"
                                     },
                                     "examples": [
                                         [
@@ -2917,6 +3222,9 @@
                     },
                     "403": {
                         "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
                     }
                 },
                 "tags": [
@@ -3044,6 +3352,9 @@
                     },
                     "403": {
                         "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
                     }
                 },
                 "tags": [
@@ -3060,6 +3371,9 @@
                     }
                 ],
                 "responses": {
+                    "201": {
+                        "description": "Deleted successfully"
+                    },
                     "204": {
                         "description": "Deleted successfully"
                     },
@@ -3201,6 +3515,9 @@
                     },
                     "403": {
                         "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
                     }
                 },
                 "tags": [
@@ -3220,6 +3537,9 @@
                     }
                 ],
                 "responses": {
+                    "201": {
+                        "description": "Deleted successfully"
+                    },
                     "204": {
                         "description": "Deleted successfully"
                     },
