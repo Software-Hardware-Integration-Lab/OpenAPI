@@ -439,73 +439,8 @@
             },
             "LicenseReport.CorrelationRecord": {
                 "description": "Metadata that describes the execution session (run) that is used to tie/relate all of the license report together.",
-                "examples": [
-                    {
-                        "auditTenantAccount": "priv-user@example.com",
-                        "correlationId": "9d838115-0868-45d4-b8a5-98adc1af7e42",
-                        "reportTenantAccount": "ent-user@example.com",
-                        "tenantId": "7e536189-b2dd-4c8b-98b1-9b174777883f",
-                        "createdAt": "2024-08-01T21:13:12.821Z",
-                        "updatedAt": "2024-08-01T21:13:12.821Z"
-                    }
-                ],
-                "properties": {
-                    "auditTenantAccount": {
-                        "description": "The user account used to retrieve the license information in the tenant being audited.",
-                        "examples": [
-                            "admin-user@example.com"
-                        ],
-                        "format": "email",
-                        "type": "string"
-                    },
-                    "correlationId": {
-                        "description": "The ID of the execution session (run) that is used to tie/relate all of the data together.",
-                        "examples": [
-                            "88da2253-758f-4135-9d37-64448c8b65c1"
-                        ],
-                        "format": "uuid",
-                        "type": "string",
-                        "pattern": "^\\w+-\\w+-\\w+-\\w+-\\w+$"
-                    },
-                    "reportTenantAccount": {
-                        "description": "User account used to store/report the license report to the SHI Lab cloud service.",
-                        "examples": [
-                            "generic-user@example.com"
-                        ],
-                        "format": "email",
-                        "type": "string"
-                    },
-                    "tenantId": {
-                        "description": "Unique ID of customer's Microsoft tenant that the license report is for.",
-                        "examples": [
-                            "0e1fe83f-a33f-4250-8546-225b8d45ae01"
-                        ],
-                        "format": "uuid",
-                        "type": "string",
-                        "pattern": "^\\w+-\\w+-\\w+-\\w+-\\w+$"
-                    },
-                    "createdAt": {
-                        "description": "Timestamp of when the report was created.",
-                        "examples": [
-                            "2024-08-01T21:12:22.148Z"
-                        ],
-                        "format": "date-time",
-                        "type": "string"
-                    },
-                    "updatedAt": {
-                        "description": "Timestamp of when the report was last updated.",
-                        "examples": [
-                            "2024-08-01T21:12:22.148Z"
-                        ],
-                        "format": "date-time",
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "auditTenantAccount"
-                ],
-                "title": "License Report - Correlation Record",
-                "type": "object"
+                "$ref": "#/components/schemas/Report.CorrelationRecordV0",
+                "title": "License Report - Correlation Record"
             },
             "LicenseReport.LicenseData": {
                 "type": "object",
@@ -923,6 +858,81 @@
                 ],
                 "title": "License Report V1 - Complete Object"
             },
+            "Report.CorrelationRecordV0": {
+                "description": "Metadata that describes the execution session (run) that is used to tie/relate report versions together.",
+                "examples": [
+                    {
+                        "auditTenantAccount": "priv-user@example.com",
+                        "correlationId": "9d838115-0868-45d4-b8a5-98adc1af7e42",
+                        "reportTenantAccount": "ent-user@example.com",
+                        "tenantId": "7e536189-b2dd-4c8b-98b1-9b174777883f",
+                        "createdAt": "2024-08-01T21:13:12.821Z",
+                        "updatedAt": "2024-08-01T21:13:12.821Z"
+                    }
+                ],
+                "properties": {
+                    "auditTenantAccount": {
+                        "description": "The user account used to retrieve the report information in the tenant being audited.",
+                        "examples": [
+                            "admin-user@example.com"
+                        ],
+                        "format": "email",
+                        "type": "string"
+                    },
+                    "correlationId": {
+                        "description": "The ID of the execution session (run) that is used to tie/relate all of the data together.",
+                        "examples": [
+                            "88da2253-758f-4135-9d37-64448c8b65c1"
+                        ],
+                        "format": "uuid",
+                        "type": "string",
+                        "pattern": "^\\w+-\\w+-\\w+-\\w+-\\w+$"
+                    },
+                    "reportTenantAccount": {
+                        "description": "User account used to store/report the report to the SHI Lab cloud service.",
+                        "examples": [
+                            "generic-user@example.com"
+                        ],
+                        "format": "email",
+                        "type": "string"
+                    },
+                    "tenantId": {
+                        "description": "Unique ID of customer's Microsoft tenant that the report is auditing.",
+                        "examples": [
+                            "0e1fe83f-a33f-4250-8546-225b8d45ae01"
+                        ],
+                        "format": "uuid",
+                        "type": "string",
+                        "pattern": "^\\w+-\\w+-\\w+-\\w+-\\w+$"
+                    },
+                    "createdAt": {
+                        "description": "Timestamp of when the report was created.",
+                        "examples": [
+                            "2024-08-01T21:12:22.148Z"
+                        ],
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "description": "Timestamp of when the report was last updated.",
+                        "examples": [
+                            "2024-08-01T21:12:22.148Z"
+                        ],
+                        "format": "date-time",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "auditTenantAccount",
+                    "correlationId",
+                    "reportTenantAccount",
+                    "tenantId",
+                    "createdAt",
+                    "updatedAt"
+                ],
+                "title": "Report - Correlation Record V0",
+                "type": "object"
+            },
             "Report.CorrelationRecordV1": {
                 "description": "Metadata that describes the execution session (run) that is used to tie/relate report versions together.",
                 "examples": [
@@ -1016,7 +1026,7 @@
                 "type": "object"
             },
             "Report.PrincipalData": {
-                "description": "Contains user and device records included in the license report, detailing assigned services, licenses, consumed services, and related metadata for each principal. ",
+                "description": "Contains user and device records included in the report, detailing assigned services, licenses, consumed services, and related metadata for each principal.",
                 "type": "object",
                 "required": [
                     "device",
@@ -2233,10 +2243,10 @@
                 "type": "object",
                 "properties": {
                     "correlation": {
-                        "$ref": "#/components/schemas/CorrelationRecordV1"
+                        "$ref": "#/components/schemas/ArchitectureReportV1.CorrelationRecord"
                     },
                     "principalData": {
-                        "$ref": "#/components/schemas/PrincipalData"
+                        "$ref": "#/components/schemas/ArchitectureReport.PrincipalData"
                     },
                     "tenantMetadata": {
                         "$ref": "#/components/schemas/ArchitectureReportV1.TenantMetadata"
@@ -2250,7 +2260,7 @@
                 "title": "Architecture Report V1 - Complete Object"
             },
             "ArchitectureReportV1.CorrelationRecord": {
-                "$ref": "#/components/schemas/CorrelationRecordV1",
+                "$ref": "#/components/schemas/Report.CorrelationRecordV1",
                 "description": "Metadata that describes the execution session (run) that is used to tie/relate architecture report versions together.",
                 "title": "Architecture Report V1 - CorrelationRecord"
             },
@@ -2305,240 +2315,17 @@
                     "totalUserCount"
                 ]
             },
-            "CorrelationRecordV0": {
-                "description": "Metadata that describes the execution session (run) that is used to tie/relate report versions together.",
-                "examples": [
-                    {
-                        "auditTenantAccount": "priv-user@example.com",
-                        "correlationId": "9d838115-0868-45d4-b8a5-98adc1af7e42",
-                        "reportTenantAccount": "ent-user@example.com",
-                        "tenantId": "7e536189-b2dd-4c8b-98b1-9b174777883f",
-                        "createdAt": "2024-08-01T21:13:12.821Z",
-                        "updatedAt": "2024-08-01T21:13:12.821Z"
-                    }
-                ],
-                "properties": {
-                    "auditTenantAccount": {
-                        "description": "The user account used to retrieve the report information in the tenant being audited.",
-                        "examples": [
-                            "admin-user@example.com"
-                        ],
-                        "format": "email",
-                        "type": "string"
-                    },
-                    "correlationId": {
-                        "description": "The ID of the execution session (run) that is used to tie/relate all of the data together.",
-                        "examples": [
-                            "88da2253-758f-4135-9d37-64448c8b65c1"
-                        ],
-                        "format": "uuid",
-                        "type": "string",
-                        "pattern": "^\\w+-\\w+-\\w+-\\w+-\\w+$"
-                    },
-                    "reportTenantAccount": {
-                        "description": "User account used to store/report the report to the SHI Lab cloud service.",
-                        "examples": [
-                            "generic-user@example.com"
-                        ],
-                        "format": "email",
-                        "type": "string"
-                    },
-                    "tenantId": {
-                        "description": "Unique ID of customer's Microsoft tenant that the report is auditing.",
-                        "examples": [
-                            "0e1fe83f-a33f-4250-8546-225b8d45ae01"
-                        ],
-                        "format": "uuid",
-                        "type": "string",
-                        "pattern": "^\\w+-\\w+-\\w+-\\w+-\\w+$"
-                    },
-                    "createdAt": {
-                        "description": "Timestamp of when the report was created.",
-                        "examples": [
-                            "2024-08-01T21:12:22.148Z"
-                        ],
-                        "format": "date-time",
-                        "type": "string"
-                    },
-                    "updatedAt": {
-                        "description": "Timestamp of when the report was last updated.",
-                        "examples": [
-                            "2024-08-01T21:12:22.148Z"
-                        ],
-                        "format": "date-time",
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "auditTenantAccount"
-                ],
-                "title": "Correlation Record V0",
-                "type": "object"
-            },
-            "CorrelationRecordV1": {
-                "description": "Metadata that describes the execution session (run) that is used to tie/relate report versions together.",
-                "examples": [
-                    {
-                        "auditTenantAccount": "priv-user@example.com",
-                        "correlationId": "b7e2c8a1-4f3a-4e2b-9c6d-2a1e8f7b3c2d",
-                        "isMigrating": false,
-                        "reportTenantAccount": "ent-user@example.com",
-                        "schemaVersion": 1,
-                        "tenantId": "f2a4d7c3-8b1e-4e5a-9c2d-7e3b6a1f4c8d",
-                        "createdAt": "2025-01-01T00:00:00Z",
-                        "updatedAt": "2025-01-02T00:00:00Z"
-                    }
-                ],
-                "properties": {
-                    "auditTenantAccount": {
-                        "description": "The user account used to retrieve the report information in the tenant being audited.",
-                        "examples": [
-                            "admin-user@example.com"
-                        ],
-                        "format": "email",
-                        "type": "string"
-                    },
-                    "correlationId": {
-                        "description": "The ID of the execution session (run) that is used to tie/relate all of the data together.",
-                        "examples": [
-                            "88da2253-758f-4135-9d37-64448c8b65c1"
-                        ],
-                        "format": "uuid",
-                        "type": "string",
-                        "pattern": "^\\w+-\\w+-\\w+-\\w+-\\w+$"
-                    },
-                    "isMigrating": {
-                        "description": "Flag to show when the stored report is migrating to a newer version.",
-                        "examples": [
-                            true
-                        ],
-                        "type": "boolean"
-                    },
-                    "reportTenantAccount": {
-                        "description": "User account used to store/report the report to the SHI Lab cloud service.",
-                        "examples": [
-                            "generic-user@example.com"
-                        ],
-                        "format": "email",
-                        "type": "string"
-                    },
-                    "schemaVersion": {
-                        "description": "Version number of the rendered report",
-                        "examples": [
-                            1
-                        ],
-                        "format": "int32",
-                        "type": "integer"
-                    },
-                    "tenantId": {
-                        "description": "Unique ID of customer's Microsoft tenant that the report is auditing.",
-                        "examples": [
-                            "0e1fe83f-a33f-4250-8546-225b8d45ae01"
-                        ],
-                        "format": "uuid",
-                        "type": "string",
-                        "pattern": "^\\w+-\\w+-\\w+-\\w+-\\w+$"
-                    },
-                    "createdAt": {
-                        "description": "Timestamp of when the report was created.",
-                        "examples": [
-                            "2024-08-01T21:12:22.148Z"
-                        ],
-                        "format": "date-time",
-                        "type": "string"
-                    },
-                    "updatedAt": {
-                        "description": "Timestamp of when the report was last updated.",
-                        "examples": [
-                            "2024-08-01T21:12:22.148Z"
-                        ],
-                        "format": "date-time",
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "auditTenantAccount"
-                ],
-                "title": "Correlation Record V1",
-                "type": "object"
-            },
             "ArchitectureReport.PrincipalData": {
-                "$ref": "#/components/schemas/PrincipalData"
+                "description": "Contains user and device records included in the architecture report, detailing assigned services, licenses, consumed services, and related metadata for each principal.",
+                "$ref": "#/components/schemas/Report.PrincipalData",
+                "title": "Architecture Report - Principal Data"
             },
-            "PrincipalData": {
-                "description": "placeholder",
-                "examples": [
-                    {
-                        "device": {
-                            "3d282045-ec7f-4813-88e2-29b74ee609f7": {
-                                "assignedService": {
-                                    "a4b2e176-d63d-4081-9e21-226e2ac624b9": {
-                                        "FeatureA": true,
-                                        "FeatureB": false
-                                    },
-                                    "d76878d6-1495-4243-a334-a82bb9818cd0": 10
-                                },
-                                "assignedLicense": {
-                                    "id": "5888a922-9f5b-45fd-bd5f-de3283d6a79e",
-                                    "servicePlanList": [
-                                        "547404d4-8734-415f-a7ca-e9c1ffb95e48"
-                                    ]
-                                },
-                                "consumedService": {
-                                    "e0d101e8-6f1e-40a9-a66f-cad4112c9a59": {
-                                        "FeatureA": true,
-                                        "FeatureB": true
-                                    },
-                                    "c63b7a2d-6573-4c37-9ca8-e12b954d3198": null
-                                },
-                                "principalMetadata": {
-                                    "sharedComputer": true
-                                }
-                            }
-                        },
-                        "user": {
-                            "04e88835-771a-482b-9d6f-ba06c32cbb67": {
-                                "assignedService": {
-                                    "a4b2e176-d63d-4081-9e21-226e2ac624b9": null,
-                                    "d76878d6-1495-4243-a334-a82bb9818cd0": {
-                                        "FeatureA": false,
-                                        "FeatureB": true
-                                    }
-                                },
-                                "assignedLicense": {
-                                    "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
-                                    "servicePlanList": [
-                                        "f8ec916b-97b5-4687-b960-9afb8ed5e85e"
-                                    ]
-                                },
-                                "consumedService": {
-                                    "9d3603de-b378-4c4a-adcc-ee133cbef914": 5,
-                                    "e9a4e3d3-ebe0-405a-a8f4-35a04c4dba1f": {
-                                        "FeatureA": true,
-                                        "FeatureB": false
-                                    }
-                                },
-                                "enhancedData": null,
-                                "llmInferred": {
-                                    "isServiceAccount": true,
-                                    "isFrontlineWorker": false,
-                                    "isTempWorker": false
-                                },
-                                "principalMetadata": {
-                                    "sharedMailbox": false
-                                }
-                            }
-                        }
-                    }
-                ],
-                "type": "object"
-            },
-            "CommonPrincipalAssignment": {
+            "Report.CommonPrincipalAssignment": {
                 "properties": {
                     "assignedService": {
                         "oneOf": [
                             {
-                                "$ref": "#/components/schemas/FeatureBreakdown"
+                                "$ref": "#/components/schemas/Report.FeatureBreakdown"
                             },
                             {
                                 "type": "integer",
