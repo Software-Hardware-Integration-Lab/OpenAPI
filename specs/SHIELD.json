@@ -4620,6 +4620,32 @@
                 ]
             }
         },
+        "/Api/Deploy/Analyze/Invoke": {
+            "post": {
+                "summary": "Requests to run the Infrastructure Configuration Analysis",
+                "description": "Initiates an asynchronous analysis of all deployed configuration items in the infrastructure. It starts the analysis process, to discover any and all inconsistencies at the configuration item level.\n\nThis endpoint requires the `Deploy.ReadWrite` or `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Analyze/Invoke/Post",
+                "requestBody": {
+                    "description": "No payload is expected or needed for this operation",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {}
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Request for analyze is accepted and process is initiated"
+                    }
+                },
+                "tags": [
+                    "Deploy"
+                ]
+            }
+        },
         "/Api/Deploy/Skip": {
             "get": {
                 "summary": "Retrieves List of Existing Override Rules",
