@@ -1012,6 +1012,7 @@
                 ],
                 "properties": {
                     "user": {
+                        "title": "User Principal Records",
                         "type": "object",
                         "description": "Object containing user records, each keyed by user ID. Includes assigned services, licenses, consumed services, inferred attributes, metadata, and enhanced identity data for each user.",
                         "additionalProperties": {
@@ -1033,6 +1034,7 @@
                                     }
                                 },
                                 "llmInferred": {
+                                    "title": "Principal Inferred Attributes",
                                     "type": "object",
                                     "description": "Inferred principal attributes, showing if the account is a service account, frontline worker, temporary worker.",
                                     "properties": {
@@ -1084,6 +1086,7 @@
                                     "$ref": "#/components/schemas/Report.PrincipalMetadata"
                                 },
                                 "enhancedData": {
+                                    "title": "User Enhanced Identity Data",
                                     "type": "object",
                                     "descriptions": "Additional identity details for the user, such as principal name, job title, department, office location, and employee type.",
                                     "properties": {
@@ -1099,7 +1102,7 @@
                                                 "string",
                                                 "null"
                                             ],
-                                            "description": "The user's job title from the identity provider.",
+                                            "description": "The user's job title.",
                                             "examples": [
                                                 "Engineer",
                                                 null
@@ -1110,7 +1113,7 @@
                                                 "string",
                                                 "null"
                                             ],
-                                            "description": "The user's department from the identity provider",
+                                            "description": "The user's department.",
                                             "examples": [
                                                 "IT",
                                                 null
@@ -1121,7 +1124,7 @@
                                                 "string",
                                                 "null"
                                             ],
-                                            "description": "The user's office location from the identity provider",
+                                            "description": "The user's office location.",
                                             "examples": [
                                                 "HQ",
                                                 null
@@ -1132,7 +1135,7 @@
                                                 "string",
                                                 "null"
                                             ],
-                                            "description": "The user's employee type from the identity provider.",
+                                            "description": "The user's employee type.",
                                             "examples": [
                                                 "Permanent",
                                                 null
@@ -1198,6 +1201,7 @@
                         ]
                     },
                     "device": {
+                        "title": "Device Principal Records",
                         "type": "object",
                         "description": "Object containing device records, each keyed by device ID. Includes assigned services, licenses, consumed services, and metadata for each device.",
                         "additionalProperties": {
