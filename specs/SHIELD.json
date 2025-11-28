@@ -1749,6 +1749,329 @@
                     }
                 ]
             },
+            "CspmPolicyAssessment": {
+                "title": "Discover - Cspm Policy Assessment Result",
+                "description": "Policy Assessment Result containing coverage calculations for the architecture report",
+                "type": "object",
+                "properties": {
+                    "policyList": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/CspmPolicyAssessment.PolicyRecord"
+                        },
+                        "description": "The mapping between ConfigurationItem templateIds and their corresponding policy record",
+                        "examples": [
+                            {
+                                "11111111-1111-1111-1111-111111111111": {
+                                    "categoryList": [
+                                        "Access Control",
+                                        "Compliance"
+                                    ],
+                                    "coverageMetricsNormalized": {
+                                        "covered": 80,
+                                        "noCover": 0,
+                                        "partial": 20
+                                    },
+                                    "coverageMetricsRaw": {
+                                        "covered": 8,
+                                        "noCover": 0,
+                                        "partial": 2
+                                    },
+                                    "coverageStatus": "full",
+                                    "name": "Sample Policy 1"
+                                },
+                                "22222222-2222-2222-2222-222222222222": {
+                                    "categoryList": [
+                                        "Data Protection"
+                                    ],
+                                    "coverageMetricsNormalized": {
+                                        "covered": 50,
+                                        "noCover": 20,
+                                        "partial": 30
+                                    },
+                                    "coverageMetricsRaw": {
+                                        "covered": 5,
+                                        "noCover": 2,
+                                        "partial": 3
+                                    },
+                                    "coverageStatus": "partial",
+                                    "name": "Sample Policy 2"
+                                },
+                                "33333333-3333-3333-3333-333333333333": {
+                                    "categoryList": [
+                                        "Network Security"
+                                    ],
+                                    "coverageMetricsNormalized": {
+                                        "covered": 0,
+                                        "noCover": 100,
+                                        "partial": 0
+                                    },
+                                    "coverageMetricsRaw": {
+                                        "covered": 0,
+                                        "noCover": 10,
+                                        "partial": 0
+                                    },
+                                    "coverageStatus": "none",
+                                    "name": "Sample Policy 3"
+                                },
+                                "44444444-4444-4444-4444-444444444444": {
+                                    "categoryList": [
+                                        "Identity Management"
+                                    ],
+                                    "coverageMetricsNormalized": {
+                                        "covered": 70,
+                                        "noCover": 20,
+                                        "partial": 10
+                                    },
+                                    "coverageMetricsRaw": {
+                                        "covered": 7,
+                                        "noCover": 2,
+                                        "partial": 1
+                                    },
+                                    "coverageStatus": "partial",
+                                    "name": "Sample Policy 4"
+                                }
+                            }
+                        ]
+                    },
+                    "reportCreatedDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "The date the architecture report was created.",
+                        "examples": [
+                            "2025-11-25T11:00:00Z"
+                        ]
+                    },
+                    "reportUpdatedDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "The date the architecture report was last updated.",
+                        "examples": [
+                            "2025-11-25T11:00:00Z"
+                        ]
+                    }
+                },
+                "required": [
+                    "policyList"
+                ],
+                "examples": [
+                    {
+                        "policyList": {
+                            "11111111-1111-1111-1111-111111111111": {
+                                "categoryList": [
+                                    "Access Control",
+                                    "Compliance"
+                                ],
+                                "coverageMetricsNormalized": {
+                                    "covered": 80,
+                                    "noCover": 0,
+                                    "partial": 20
+                                },
+                                "coverageMetricsRaw": {
+                                    "covered": 8,
+                                    "noCover": 0,
+                                    "partial": 2
+                                },
+                                "coverageStatus": "full",
+                                "name": "Sample Policy 1"
+                            },
+                            "22222222-2222-2222-2222-222222222222": {
+                                "categoryList": [
+                                    "Data Protection"
+                                ],
+                                "coverageMetricsNormalized": {
+                                    "covered": 50,
+                                    "noCover": 20,
+                                    "partial": 30
+                                },
+                                "coverageMetricsRaw": {
+                                    "covered": 5,
+                                    "noCover": 2,
+                                    "partial": 3
+                                },
+                                "coverageStatus": "partial",
+                                "name": "Sample Policy 2"
+                            },
+                            "33333333-3333-3333-3333-333333333333": {
+                                "categoryList": [
+                                    "Network Security"
+                                ],
+                                "coverageMetricsNormalized": {
+                                    "covered": 0,
+                                    "noCover": 100,
+                                    "partial": 0
+                                },
+                                "coverageMetricsRaw": {
+                                    "covered": 0,
+                                    "noCover": 10,
+                                    "partial": 0
+                                },
+                                "coverageStatus": "none",
+                                "name": "Sample Policy 3"
+                            },
+                            "44444444-4444-4444-4444-444444444444": {
+                                "categoryList": [
+                                    "Identity Management"
+                                ],
+                                "coverageMetricsNormalized": {
+                                    "covered": 70,
+                                    "noCover": 20,
+                                    "partial": 10
+                                },
+                                "coverageMetricsRaw": {
+                                    "covered": 7,
+                                    "noCover": 2,
+                                    "partial": 1
+                                },
+                                "coverageStatus": "partial",
+                                "name": "Sample Policy 4"
+                            }
+                        },
+                        "reportCreatedDate": "2025-11-25T11:00:00Z",
+                        "reportUpdatedDate": "2025-11-26T11:00:00Z"
+                    }
+                ]
+            },
+            "CspmPolicyAssessment.PolicyRecord": {
+                "title": "Discover - Cspm Policy Assessment Policy Record",
+                "description": "Represents a policy record containing policy details along with user coverage metrics and status",
+                "type": "object",
+                "properties": {
+                    "categoryList": {
+                        "description": "Categories that the policy belongs to",
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "description": "category of the policy",
+                            "examples": [
+                                "Identity Management"
+                            ]
+                        },
+                        "examples": [
+                            "Sample Policy Name"
+                        ]
+                    },
+                    "name": {
+                        "description": "Name of the policy",
+                        "type": "string",
+                        "examples": [
+                            "Sample Policy Name"
+                        ]
+                    },
+                    "coverageMetricsRaw": {
+                        "description": "Represents the raw coverage status of the users",
+                        "type": "object",
+                        "properties": {
+                            "covered": {
+                                "description": "The amount of users fully covered",
+                                "type": "number",
+                                "examples": [
+                                    0,
+                                    5,
+                                    10
+                                ]
+                            },
+                            "partial": {
+                                "description": "The amount of users partially covered",
+                                "type": "number",
+                                "examples": [
+                                    0,
+                                    5,
+                                    10
+                                ]
+                            },
+                            "noCover": {
+                                "description": "The amount of users not covered",
+                                "type": "number",
+                                "examples": [
+                                    0,
+                                    5,
+                                    10
+                                ]
+                            }
+                        },
+                        "examples": [
+                            {
+                                "covered": 7,
+                                "noCover": 2,
+                                "partial": 1
+                            }
+                        ]
+                    },
+                    "coverageMetricsNormalized": {
+                        "description": "Represents the normalized coverage status of the users",
+                        "type": "object",
+                        "properties": {
+                            "covered": {
+                                "description": "The amount of users fully covered",
+                                "type": "number",
+                                "examples": [
+                                    70
+                                ]
+                            },
+                            "partial": {
+                                "description": "The amount of users partially covered",
+                                "type": "number",
+                                "examples": [
+                                    20
+                                ]
+                            },
+                            "noCover": {
+                                "description": "The amount of users not covered",
+                                "type": "number",
+                                "examples": [
+                                    10
+                                ]
+                            }
+                        },
+                        "examples": [
+                            {
+                                "covered": 70,
+                                "noCover": 20,
+                                "partial": 10
+                            }
+                        ]
+                    },
+                    "coverageStatus": {
+                        "description": "The summary status for the coverage metrics",
+                        "type": "string",
+                        "enum": [
+                            "full",
+                            "partial",
+                            "none"
+                        ],
+                        "examples": [
+                            "partial"
+                        ]
+                    }
+                },
+                "required": [
+                    "categoryList",
+                    "name",
+                    "coverageMetricsRaw",
+                    "coverageMetricsNormalized",
+                    "coverageStatus"
+                ],
+                "examples": [
+                    {
+                        "categoryList": [
+                            "Identity Management"
+                        ],
+                        "coverageMetricsNormalized": {
+                            "covered": 70,
+                            "noCover": 20,
+                            "partial": 10
+                        },
+                        "coverageMetricsRaw": {
+                            "covered": 7,
+                            "noCover": 2,
+                            "partial": 1
+                        },
+                        "coverageStatus": "partial",
+                        "name": "Sample Policy"
+                    }
+                ]
+            },
             "ManagedObject.Intermediary": {
                 "description": "Base template for all intermediary objects to inherit from.",
                 "properties": {
@@ -3687,6 +4010,123 @@
                     "Discover"
                 ],
                 "summary": "Retrieve the Specified License Report"
+            }
+        },
+        "/Api/Discover/ArchitectureReport/Correlation/{correlationId}/Data": {
+            "get": {
+                "description": "Retrieves the CSPM assessment coverage calculation results on the architecture report for the specified correlation ID in the authenticated tenant.\n\nThis endpoint requires the `Discover.Read`, or the `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Discover/ArchitectureReport/Correlation/:correlationId/Data/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/correlationId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "CspmPolicyAssessment": {
+                                        "description": "Sample CSPM Policy Assessment including a mapping of configuration item template IDs to their corresponding policy records containing coverage status",
+                                        "summary": "Example CSPM Policy Assessment Response",
+                                        "value": {
+                                            "policyList": {
+                                                "11111111-1111-1111-1111-111111111111": {
+                                                    "categoryList": [
+                                                        "Access Control",
+                                                        "Compliance"
+                                                    ],
+                                                    "coverageMetricsNormalized": {
+                                                        "covered": 80,
+                                                        "noCover": 0,
+                                                        "partial": 20
+                                                    },
+                                                    "coverageMetricsRaw": {
+                                                        "covered": 8,
+                                                        "noCover": 0,
+                                                        "partial": 2
+                                                    },
+                                                    "coverageStatus": "full",
+                                                    "name": "Sample Policy 1"
+                                                },
+                                                "22222222-2222-2222-2222-222222222222": {
+                                                    "categoryList": [
+                                                        "Data Protection"
+                                                    ],
+                                                    "coverageMetricsNormalized": {
+                                                        "covered": 50,
+                                                        "noCover": 20,
+                                                        "partial": 30
+                                                    },
+                                                    "coverageMetricsRaw": {
+                                                        "covered": 5,
+                                                        "noCover": 2,
+                                                        "partial": 3
+                                                    },
+                                                    "coverageStatus": "partial",
+                                                    "name": "Sample Policy 2"
+                                                },
+                                                "33333333-3333-3333-3333-333333333333": {
+                                                    "categoryList": [
+                                                        "Network Security"
+                                                    ],
+                                                    "coverageMetricsNormalized": {
+                                                        "covered": 0,
+                                                        "noCover": 100,
+                                                        "partial": 0
+                                                    },
+                                                    "coverageMetricsRaw": {
+                                                        "covered": 0,
+                                                        "noCover": 10,
+                                                        "partial": 0
+                                                    },
+                                                    "coverageStatus": "none",
+                                                    "name": "Sample Policy 3"
+                                                },
+                                                "44444444-4444-4444-4444-444444444444": {
+                                                    "categoryList": [
+                                                        "Identity Management"
+                                                    ],
+                                                    "coverageMetricsNormalized": {
+                                                        "covered": 70,
+                                                        "noCover": 20,
+                                                        "partial": 10
+                                                    },
+                                                    "coverageMetricsRaw": {
+                                                        "covered": 7,
+                                                        "noCover": 2,
+                                                        "partial": 1
+                                                    },
+                                                    "coverageStatus": "partial",
+                                                    "name": "Sample Policy 4"
+                                                }
+                                            },
+                                            "reportCreatedDate": "2025-11-25T11:00:00Z",
+                                            "reportUpdatedDate": "2025-11-26T11:00:00Z"
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/CspmPolicyAssessment"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    }
+                },
+                "tags": [
+                    "Discover"
+                ],
+                "summary": "Retrieve the Specified Architecture Report's CSPM assessment coverage calculations"
             }
         },
         "/Api/Deploy": {
