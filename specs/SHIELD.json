@@ -129,7 +129,8 @@
                     "type": "string",
                     "enum": [
                         "deploy",
-                        "remediate"
+                        "remediate",
+                        "analysis"
                     ]
                 },
                 "examples": {
