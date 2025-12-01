@@ -3094,7 +3094,7 @@
                     }
                 },
                 "responses": {
-                    "201": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "examples": {
@@ -3563,9 +3563,6 @@
                     "201": {
                         "description": "Deleted successfully"
                     },
-                    "204": {
-                        "description": "Deleted successfully"
-                    },
                     "400": {
                         "$ref": "#/components/responses/400"
                     },
@@ -3733,9 +3730,6 @@
                 ],
                 "responses": {
                     "201": {
-                        "description": "Deleted successfully"
-                    },
-                    "204": {
                         "description": "Deleted successfully"
                     },
                     "400": {
@@ -6131,7 +6125,7 @@
                     }
                 },
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "Architecture Report V1 submitted successfully.",
                         "content": {
                             "application/json": {
@@ -6144,11 +6138,8 @@
                     "400": {
                         "$ref": "#/components/responses/400"
                     },
-                    "401": {
-                        "$ref": "#/components/responses/401"
-                    },
-                    "403": {
-                        "$ref": "#/components/responses/403"
+                    "500": {
+                        "$ref": "#/components/responses/500"
                     }
                 },
                 "tags": [
@@ -6186,14 +6177,8 @@
                     "400": {
                         "$ref": "#/components/responses/400"
                     },
-                    "401": {
-                        "$ref": "#/components/responses/401"
-                    },
-                    "403": {
-                        "$ref": "#/components/responses/403"
-                    },
-                    "404": {
-                        "$ref": "#/components/responses/404"
+                    "500": {
+                        "$ref": "#/components/responses/500"
                     }
                 },
                 "tags": [
@@ -6234,14 +6219,8 @@
                     "400": {
                         "$ref": "#/components/responses/400"
                     },
-                    "401": {
-                        "$ref": "#/components/responses/401"
-                    },
-                    "403": {
-                        "$ref": "#/components/responses/403"
-                    },
-                    "404": {
-                        "$ref": "#/components/responses/404"
+                    "500": {
+                        "$ref": "#/components/responses/500"
                     }
                 },
                 "tags": [
@@ -6266,11 +6245,8 @@
                     "400": {
                         "$ref": "#/components/responses/400"
                     },
-                    "401": {
-                        "$ref": "#/components/responses/401"
-                    },
-                    "403": {
-                        "$ref": "#/components/responses/403"
+                    "500": {
+                        "$ref": "#/components/responses/500"
                     }
                 },
                 "tags": [
@@ -6300,14 +6276,8 @@
                     "400": {
                         "$ref": "#/components/responses/400"
                     },
-                    "401": {
-                        "$ref": "#/components/responses/401"
-                    },
-                    "403": {
-                        "$ref": "#/components/responses/403"
-                    },
-                    "404": {
-                        "$ref": "#/components/responses/404"
+                    "500": {
+                        "$ref": "#/components/responses/500"
                     }
                 },
                 "tags": [
@@ -6337,14 +6307,8 @@
                     "400": {
                         "$ref": "#/components/responses/400"
                     },
-                    "401": {
-                        "$ref": "#/components/responses/401"
-                    },
-                    "403": {
-                        "$ref": "#/components/responses/403"
-                    },
-                    "404": {
-                        "$ref": "#/components/responses/404"
+                    "500": {
+                        "$ref": "#/components/responses/500"
                     }
                 },
                 "tags": [
@@ -6379,14 +6343,8 @@
                     "400": {
                         "$ref": "#/components/responses/400"
                     },
-                    "401": {
-                        "$ref": "#/components/responses/401"
-                    },
-                    "403": {
-                        "$ref": "#/components/responses/403"
-                    },
-                    "404": {
-                        "$ref": "#/components/responses/404"
+                    "500": {
+                        "$ref": "#/components/responses/500"
                     }
                 },
                 "tags": [
