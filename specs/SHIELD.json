@@ -3207,6 +3207,80 @@
                 ],
                 "title": "Type of security class the object(s) belongs to",
                 "type": "string"
+            },
+            "ArchitectureReport.CorrelationRecord": {
+                "description": "Metadata that describes the execution session (run) that is used to tie/relate all of the architecture report together.",
+                "examples": [
+                    {
+                        "auditTenantAccount": "first-user@example.com",
+                        "correlationId": "b25f54b3-f30e-4447-9236-24ecac2e9261",
+                        "reportTenantAccount": "other-user@example.com",
+                        "tenantId": "a7159bdc-678d-4726-901e-cd6d018d46e2",
+                        "createdAt": "2025-11-01T00:10:10.821Z",
+                        "updatedAt": "2025-12-01T20:10:12.821Z"
+                    }
+                ],
+                "properties": {
+                    "auditTenantAccount": {
+                        "description": "The user principal name used to authenticate into the tenant being audited.",
+                        "examples": [
+                            "admin-user@example.com"
+                        ],
+                        "format": "email",
+                        "type": "string"
+                    },
+                    "correlationId": {
+                        "description": "Unique Identifier that represents a single run of architectural analysis. This record is used to identify which architecture report records should be grouped together.",
+                        "examples": [
+                            "88da2253-758f-4135-9d37-64448c8b65c1"
+                        ],
+                        "type": "string",
+                        "format": "uuid",
+                        "maxLength": 36,
+                        "minLength": 36,
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                    },
+                    "reportTenantAccount": {
+                        "description": "User account used to store/report the architecture report to the SHI Lab cloud service.",
+                        "examples": [
+                            "generic-user@example.com"
+                        ],
+                        "format": "email",
+                        "type": "string"
+                    },
+                    "tenantId": {
+                        "description": "Tenant that the tool was run against.",
+                        "examples": [
+                            "0e1fe83f-a33f-4250-8546-225b8d45ae01"
+                        ],
+                        "type": "string",
+                        "format": "uuid",
+                        "maxLength": 36,
+                        "minLength": 36,
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                    },
+                    "createdAt": {
+                        "description": "Timestamp on when the record was created.",
+                        "examples": [
+                            "2024-08-01T21:12:22.148Z"
+                        ],
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "description": "Timestamp on when the record was last updated.",
+                        "examples": [
+                            "2024-08-01T21:12:22.148Z"
+                        ],
+                        "format": "date-time",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "auditTenantAccount"
+                ],
+                "title": "Architecture Report - Correlation Record",
+                "type": "object"
             }
         },
         "securitySchemes": {
@@ -3855,7 +3929,7 @@
                 "tags": [
                     "Discover"
                 ],
-                "summary": "Retrieve the List of Correlation Records"
+                "summary": "Retrieve the List of License Report Correlation Records"
             }
         },
         "/Api/Discover/LicenseReport/Correlation/{correlationId}/Data": {
@@ -3948,6 +4022,74 @@
                     "Discover"
                 ],
                 "summary": "Retrieve the Specified License Report"
+            }
+        },
+        "/Api/Discover/ArchitectureReport/Correlation": {
+            "get": {
+                "description": "Retrieves the list of correlation records for the authenticated tenant. Correlation records store the metadata for a specific architecture report.\n\nThis endpoint requires the `Discover.Read`, or the `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Discover/ArchitectureReport/Correlation/Get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Typical Response": {
+                                        "description": "Sample list of correlation records for the authenticated tenant.",
+                                        "summary": "Available Correlation Records for Architecture Report",
+                                        "value": [
+                                            {
+                                                "auditTenantAccount": "somebody@example.com",
+                                                "correlationId": "e0b0ebef-d0bf-4467-80c8-6a3a5f37fb24",
+                                                "reportTenantAccount": "tenantUser@example.com",
+                                                "tenantId": "79f7e8c4-15fa-4ae2-8f05-74f3c5071798",
+                                                "createdAt": "2025-10-01T12:14:45.026Z",
+                                                "updatedAt": "2025-11-02T00:14:45.026Z"
+                                            },
+                                            {
+                                                "auditTenantAccount": "somebodyElse@example.com",
+                                                "correlationId": "de4a7293-eed0-4167-b622-efeb764a2148",
+                                                "reportTenantAccount": "anotherUser@example.com",
+                                                "tenantId": "23317352-da99-4b52-ac1c-ad8e16310296",
+                                                "createdAt": "2025-06-20T20:14:45.026Z",
+                                                "updatedAt": "2025-07-22T12:10:45.026Z"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "schema": {
+                                    "type": "array",
+                                    "minItems": 0,
+                                    "items": {
+                                        "$ref": "#/components/schemas/ArchitectureReport.CorrelationRecord"
+                                    },
+                                    "examples": [
+                                        [
+                                            {
+                                                "auditTenantAccount": "somebody@example.com",
+                                                "correlationId": "e0b0ebef-d0bf-4467-80c8-6a3a5f37fb24",
+                                                "reportTenantAccount": "tenantUser@example.com",
+                                                "tenantId": "79f7e8c4-15fa-4ae2-8f05-74f3c5071798",
+                                                "createdAt": "2025-10-01T12:14:45.026Z",
+                                                "updatedAt": "2025-11-02T00:14:45.026Z"
+                                            }
+                                        ]
+                                    ]
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    }
+                },
+                "tags": [
+                    "Discover"
+                ],
+                "summary": "Retrieve the list of Architecture Report Correlation Records"
             }
         },
         "/Api/Discover/ArchitectureReport/Correlation/{correlationId}/Data": {
