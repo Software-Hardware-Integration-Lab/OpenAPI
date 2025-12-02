@@ -6164,7 +6164,7 @@
         "/Api/V1/ArchitectureReport": {
             "post": {
                 "summary": "Submit Architecture Report V1",
-                "description": "Submits an Architecture Report V1 payload to the Architecture Report endpoint.",
+                "description": "Submits an Architecture Report V1 payload to the Architecture Report endpoint.\n\nThis endpoint requires the `ArchitectureReport.ReadWrite`, `ArchitectureReport.ReadWrite.All` scope (permission).",
                 "operationId": "/Api/V1/ArchitectureReport/Post",
                 "parameters": [],
                 "requestBody": {
@@ -6370,7 +6370,7 @@
             },
             "get": {
                 "summary": "Get Architecture Report v1 Data by Correlation ID and Tenant ID",
-                "description": "Retrieves the architecture report data associated with the specified correlation ID and tenant ID.",
+                "description": "Retrieves the architecture report data associated with the specified correlation ID and tenant ID.\n\nThis endpoint requires the `ArchitectureReport.Read.All`, `ArchitectureReport.ReadWrite.All` scope (permission). This endpoint is also only accessible from the `SHI` and `SHI Lab` tenants. End user access is restricted.",
                 "operationId": "/Api/V1/ArchitectureReport/Correlation/{correlationId}/Tenant/{tenantId}/Data/Get",
                 "parameters": [
                     {
