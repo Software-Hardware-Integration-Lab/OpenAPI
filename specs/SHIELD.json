@@ -3249,7 +3249,7 @@
                         "type": "string"
                     },
                     "tenantId": {
-                        "description": "Tenant that the tool was run against.",
+                        "description": "Unique identifier of the customer tenant that the report was created for.",
                         "examples": [
                             "0e1fe83f-a33f-4250-8546-225b8d45ae01"
                         ],
@@ -3260,7 +3260,7 @@
                         "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
                     },
                     "createdAt": {
-                        "description": "Timestamp on when the record was created.",
+                        "description": "Timestamp when the record was created.",
                         "examples": [
                             "2024-08-01T21:12:22.148Z"
                         ],
@@ -3268,7 +3268,7 @@
                         "type": "string"
                     },
                     "updatedAt": {
-                        "description": "Timestamp on when the record was last updated.",
+                        "description": "Timestamp when the record was updated last.",
                         "examples": [
                             "2024-08-01T21:12:22.148Z"
                         ],
