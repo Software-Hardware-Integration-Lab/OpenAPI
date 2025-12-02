@@ -1432,22 +1432,32 @@
                             },
                             "description": "List of service plans associated with the assigned license."
                         }
-                    }
+                    },
+                    "examples": [
+                        {
+                            "id": "6318eedb-d578-4917-93d5-26a49fe29431",
+                            "servicePlanList": [
+                                "d1c81651-c68e-4603-8009-579ac5202286"
+                            ]
+                        }
+                    ]
                 },
                 "examples": [
-                    {
-                        "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
-                        "servicePlanList": [
-                            "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-                            "123e4567-e89b-12d3-a456-426614174000"
-                        ]
-                    },
-                    {
-                        "id": "7e8f9a0b-1c2d-3e4f-5a6b-7c8d9e0f1a2b",
-                        "servicePlanList": [
-                            "abcdefab-cdef-abcd-efab-cdefabcdefab"
-                        ]
-                    }
+                    [
+                        {
+                            "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                            "servicePlanList": [
+                                "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                                "123e4567-e89b-12d3-a456-426614174000"
+                            ]
+                        },
+                        {
+                            "id": "7e8f9a0b-1c2d-3e4f-5a6b-7c8d9e0f1a2b",
+                            "servicePlanList": [
+                                "abcdefab-cdef-abcd-efab-cdefabcdefab"
+                            ]
+                        }
+                    ]
                 ],
                 "title": "Report - PrincipalData - Assigned License"
             },
