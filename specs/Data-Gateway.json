@@ -853,7 +853,10 @@
                                         "maxLength": 36,
                                         "minLength": 36,
                                         "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
-                                        "description": "Well known ID of the license bundle."
+                                        "description": "Well known ID of the service plan.",
+                                        "examples": [
+                                            "ff417b87-8f30-4250-94bb-8551cab0453b"
+                                        ]
                                     },
                                     "description": "List of available service plans for the current license.",
                                     "examples": [
@@ -1014,6 +1017,14 @@
                     "user": {
                         "title": "User Principal Records",
                         "type": "object",
+                        "required": [
+                            "assignedService",
+                            "assignedLicense",
+                            "consumedService",
+                            "llmInferred",
+                            "principalMetadata",
+                            "enhancedData"
+                        ],
                         "description": "Object containing user records, each keyed by user ID. Includes assigned services, licenses, consumed services, inferred attributes, metadata, and enhanced identity data for each user.",
                         "additionalProperties": {
                             "type": "object",
@@ -1036,39 +1047,83 @@
                                 "llmInferred": {
                                     "title": "Principal Inferred Attributes",
                                     "type": "object",
+                                    "required": [
+                                        "isServiceAccount",
+                                        "isFrontlineWorker",
+                                        "isTempWorker"
+                                    ],
                                     "description": "Inferred principal attributes, showing if the account is a service account, frontline worker, temporary worker.",
                                     "properties": {
                                         "isServiceAccount": {
-                                            "description": "Indicates if the account is a service account.",
-                                            "type": [
-                                                "boolean",
-                                                "null"
+                                            "description": "The user service account; may be null if not provided.",
+                                            "oneOf": [
+                                                {
+                                                    "type": "boolean",
+                                                    "description": "Indicates if the account is a service account.",
+                                                    "examples": [
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "type": "null",
+                                                    "description": "No data or unused."
+                                                }
                                             ],
                                             "examples": [
-                                                true,
-                                                null
+                                                {
+                                                    "isServiceAccount": true
+                                                },
+                                                {
+                                                    "isServiceAccount": null
+                                                }
                                             ]
                                         },
                                         "isFrontlineWorker": {
-                                            "description": "Indicates if the user is a frontline worker.",
-                                            "type": [
-                                                "boolean",
-                                                "null"
+                                            "description": "The user a temporary employee; may be null if not provided.",
+                                            "oneOf": [
+                                                {
+                                                    "type": "boolean",
+                                                    "description": "Indicates if the user is a frontline worker.",
+                                                    "examples": [
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "type": "null",
+                                                    "description": "No data or unused."
+                                                }
                                             ],
                                             "examples": [
-                                                true,
-                                                null
+                                                {
+                                                    "isFrontlineWorker": true
+                                                },
+                                                {
+                                                    "isFrontlineWorker": null
+                                                }
                                             ]
                                         },
                                         "isTempWorker": {
-                                            "description": "Indicates if the user is a temporary worker.",
-                                            "type": [
-                                                "boolean",
-                                                "null"
+                                            "description": "The user is a temporary worker; may be bull if not provided.",
+                                            "oneOf": [
+                                                {
+                                                    "type": "boolean",
+                                                    "description": "Indicates if the user is a temporary worker.",
+                                                    "examples": [
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "type": "null",
+                                                    "description": "No data or unused."
+                                                }
                                             ],
                                             "examples": [
-                                                true,
-                                                null
+                                                {
+                                                    "isTempWorker": true
+                                                },
+                                                {
+                                                    "isTempWorker": null
+                                                }
                                             ]
                                         }
                                     },
@@ -1087,61 +1142,139 @@
                                 },
                                 "enhancedData": {
                                     "title": "User Enhanced Identity Data",
-                                    "type": "object",
-                                    "descriptions": "Additional identity details for the user, such as principal name, job title, department, office location, and employee type.",
-                                    "properties": {
-                                        "userPrincipalName": {
-                                            "type": "string",
-                                            "description": "The user's principal name (UPN).",
+                                    "description": "Additional identity details for the user, such as principal name, job title, department, office location, and employee type; present only if customer consented, otherwise null.",
+                                    "oneOf": [
+                                        {
+                                            "type": "object",
+                                            "required": [
+                                                "userPrincipalName",
+                                                "idpJobTitle",
+                                                "idpDepartment",
+                                                "idpOfficeLocation",
+                                                "idpEmployeeType"
+                                            ],
+                                            "properties": {
+                                                "userPrincipalName": {
+                                                    "type": "string",
+                                                    "description": "The user's principal name (UPN).",
+                                                    "examples": [
+                                                        "user@example.com"
+                                                    ]
+                                                },
+                                                "idpJobTitle": {
+                                                    "description": "The user's job title as provided by the identity provider; may be null if not available.",
+                                                    "oneOf": [
+                                                        {
+                                                            "type": "string",
+                                                            "description": "The user's job title.",
+                                                            "examples": [
+                                                                "Engineer"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "type": "null",
+                                                            "description": "No data or unused."
+                                                        }
+                                                    ],
+                                                    "examples": [
+                                                        {
+                                                            "idpJobTitle": "Engineer"
+                                                        },
+                                                        {
+                                                            "idpJobTitle": null
+                                                        }
+                                                    ]
+                                                },
+                                                "idpDepartment": {
+                                                    "description": "The user's employee department as provided by the identity provider; may be null if not available.",
+                                                    "oneOf": [
+                                                        {
+                                                            "type": "string",
+                                                            "description": "The user's department.",
+                                                            "examples": [
+                                                                "IT"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "type": "null",
+                                                            "description": "No data or unused."
+                                                        }
+                                                    ],
+                                                    "examples": [
+                                                        {
+                                                            "idpDepartment": "IT"
+                                                        },
+                                                        {
+                                                            "idpDepartment": null
+                                                        }
+                                                    ]
+                                                },
+                                                "idpOfficeLocation": {
+                                                    "description": "The user's office location as provided by the identity provider; may be null if not available.",
+                                                    "oneOf": [
+                                                        {
+                                                            "type": "string",
+                                                            "description": "The user's office location.",
+                                                            "examples": [
+                                                                "HQ"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "type": "null",
+                                                            "description": "No data or unused."
+                                                        }
+                                                    ],
+                                                    "examples": [
+                                                        {
+                                                            "idpOfficeLocation": "IT"
+                                                        },
+                                                        {
+                                                            "idpOfficeLocation": null
+                                                        }
+                                                    ]
+                                                },
+                                                "idpEmployeeType": {
+                                                    "description": "The user's employee type as provided by the identity provider; may be null if not available.",
+                                                    "oneOf": [
+                                                        {
+                                                            "type": "string",
+                                                            "description": "The user's employee type.",
+                                                            "examples": [
+                                                                "Permanent"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "type": "null",
+                                                            "description": "No data or unused."
+                                                        }
+                                                    ],
+                                                    "examples": [
+                                                        {
+                                                            "idpEmployeeType": "IT"
+                                                        },
+                                                        {
+                                                            "idpEmployeeType": null
+                                                        }
+                                                    ]
+                                                }
+                                            },
                                             "examples": [
-                                                "user@example.com"
+                                                {
+                                                    "enhancedData": {
+                                                        "userPrincipalName": "user@example.com",
+                                                        "idpJobTitle": "Engineer",
+                                                        "idpDepartment": "IT",
+                                                        "idpOfficeLocation": "HQ",
+                                                        "idpEmployeeType": "Permanent"
+                                                    }
+                                                }
                                             ]
                                         },
-                                        "idpJobTitle": {
-                                            "type": [
-                                                "string",
-                                                "null"
-                                            ],
-                                            "description": "The user's job title.",
-                                            "examples": [
-                                                "Engineer",
-                                                null
-                                            ]
-                                        },
-                                        "idpDepartment": {
-                                            "type": [
-                                                "string",
-                                                "null"
-                                            ],
-                                            "description": "The user's department.",
-                                            "examples": [
-                                                "IT",
-                                                null
-                                            ]
-                                        },
-                                        "idpOfficeLocation": {
-                                            "type": [
-                                                "string",
-                                                "null"
-                                            ],
-                                            "description": "The user's office location.",
-                                            "examples": [
-                                                "HQ",
-                                                null
-                                            ]
-                                        },
-                                        "idpEmployeeType": {
-                                            "type": [
-                                                "string",
-                                                "null"
-                                            ],
-                                            "description": "The user's employee type.",
-                                            "examples": [
-                                                "Permanent",
-                                                null
-                                            ]
+                                        {
+                                            "type": "null",
+                                            "description": "No data or unused."
                                         }
-                                    },
+                                    ],
                                     "examples": [
                                         {
                                             "enhancedData": {
@@ -1151,6 +1284,9 @@
                                                 "idpOfficeLocation": "HQ",
                                                 "idpEmployeeType": "Permanent"
                                             }
+                                        },
+                                        {
+                                            "enhancedData": null
                                         }
                                     ]
                                 }
@@ -1203,6 +1339,12 @@
                     "device": {
                         "title": "Device Principal Records",
                         "type": "object",
+                        "required": [
+                            "assignedService",
+                            "assignedLicense",
+                            "consumedService",
+                            "principalMetadata"
+                        ],
                         "description": "Object containing device records, each keyed by device ID. Includes assigned services, licenses, consumed services, and metadata for each device.",
                         "additionalProperties": {
                             "type": "object",
@@ -1323,7 +1465,6 @@
             "Report.AdditionalService": {
                 "description": "Represents a service assignment or usage for a principal, which can be a feature breakdown, a usage count, or null if not applicable.",
                 "additionalProperties": {
-                    "type": "object",
                     "oneOf": [
                         {
                             "$ref": "#/components/schemas/Report.FeatureBreakdown"
@@ -1391,14 +1532,16 @@
                                 "minLength": 36,
                                 "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
                                 "examples": [
-                                    "88da2253-758f-4135-9d37-64448c8b65c1"
+                                    [
+                                        "88da2253-758f-4135-9d37-64448c8b65c1"
+                                    ]
                                 ]
                             },
                             "description": "List of service plans associated with the assigned license."
                         }
                     }
                 },
-                "example": [
+                "examples": [
                     {
                         "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
                         "servicePlanList": [
@@ -1426,6 +1569,11 @@
                         ]
                     }
                 },
+                "examples": [
+                    {
+                        "sharedMailbox": true
+                    }
+                ],
                 "title": "Report - Principal Meta Data"
             },
             "LicenseEntitlement.Shield": {
