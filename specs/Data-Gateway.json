@@ -437,12 +437,12 @@
                 "title": "Report - Feature Breakdown",
                 "type": "object"
             },
-            "LicenseReport.CorrelationRecord": {
+            "LicenseReportV0.CorrelationRecord": {
                 "description": "Metadata that describes the execution session (run) that is used to tie/relate all of the license report together.",
                 "$ref": "#/components/schemas/Report.CorrelationRecordV0",
                 "title": "License Report - Correlation Record"
             },
-            "LicenseReport.LicenseData": {
+            "LicenseReportV0.LicenseData": {
                 "type": "object",
                 "properties": {
                     "assignedLicense": {
@@ -592,7 +592,7 @@
                 ],
                 "title": "License Report - License Data"
             },
-            "LicenseReport": {
+            "LicenseReportV0": {
                 "description": "Completely calculated license report structure that is the result of a complete run.",
                 "examples": [
                     {
@@ -647,11 +647,11 @@
                         "type": "object"
                     },
                     "correlation": {
-                        "$ref": "#/components/schemas/LicenseReport.CorrelationRecord"
+                        "$ref": "#/components/schemas/LicenseReportV0.CorrelationRecord"
                     },
                     "licenseData": {
                         "additionalProperties": {
-                            "$ref": "#/components/schemas/LicenseReport.LicenseData"
+                            "$ref": "#/components/schemas/LicenseReportV0.LicenseData"
                         }
                     }
                 },
@@ -2479,7 +2479,7 @@
                                 }
                             },
                             "schema": {
-                                "$ref": "#/components/schemas/LicenseReport"
+                                "$ref": "#/components/schemas/LicenseReportV0"
                             }
                         }
                     }
@@ -2545,7 +2545,7 @@
                                     }
                                 },
                                 "schema": {
-                                    "$ref": "#/components/schemas/LicenseReport"
+                                    "$ref": "#/components/schemas/LicenseReportV0"
                                 }
                             }
                         },
@@ -2611,7 +2611,7 @@
                                     "type": "array",
                                     "minItems": 0,
                                     "items": {
-                                        "$ref": "#/components/schemas/LicenseReport.CorrelationRecord"
+                                        "$ref": "#/components/schemas/LicenseReportV0.CorrelationRecord"
                                     },
                                     "examples": [
                                         [
@@ -2698,7 +2698,7 @@
                                     "type": "array",
                                     "minItems": 0,
                                     "items": {
-                                        "$ref": "#/components/schemas/LicenseReport.CorrelationRecord"
+                                        "$ref": "#/components/schemas/LicenseReportV0.CorrelationRecord"
                                     },
                                     "examples": [
                                         [
@@ -2811,7 +2811,7 @@
                                     }
                                 },
                                 "schema": {
-                                    "$ref": "#/components/schemas/LicenseReport"
+                                    "$ref": "#/components/schemas/LicenseReportV0"
                                 }
                             }
                         },
@@ -2933,7 +2933,7 @@
                                     }
                                 },
                                 "schema": {
-                                    "$ref": "#/components/schemas/LicenseReport"
+                                    "$ref": "#/components/schemas/LicenseReportV0"
                                 }
                             }
                         },
