@@ -1014,14 +1014,7 @@
                     }
                 },
                 "required": [
-                    "auditTenantAccount",
-                    "correlationId",
-                    "createdAt",
-                    "isMigrating",
-                    "reportTenantAccount",
-                    "schemaVersion",
-                    "tenantId",
-                    "updatedAt"
+                    "auditTenantAccount"
                 ],
                 "title": "Report - Correlation Record V1",
                 "type": "object"
@@ -3072,8 +3065,7 @@
                                             }
                                         ],
                                         "correlation": {
-                                            "auditTenantAccount": "user@example.com",
-                                            "reportTenantAccount": "user@example.com"
+                                            "auditTenantAccount": "user@example.com"
                                         },
                                         "principalData": {
                                             "user": {
@@ -6181,14 +6173,7 @@
                                     "summary": "Example of license report stored.",
                                     "value": {
                                         "correlation": {
-                                            "auditTenantAccount": "user@example.com",
-                                            "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-                                            "createdAt": "2023-11-19T10:00:00.000Z",
-                                            "isMigrating": false,
-                                            "reportTenantAccount": "user@example.com",
-                                            "schemaVersion": 1,
-                                            "tenantId": "123e4567-e89b-12d3-a456-426614174000",
-                                            "updatedAt": "2023-11-19T10:05:00.000Z"
+                                            "auditTenantAccount": "user@example.com"
                                         },
                                         "principalData": {
                                             "user": {
