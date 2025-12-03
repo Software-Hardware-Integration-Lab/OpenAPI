@@ -192,6 +192,9 @@
             "404": {
                 "description": "The requested object was not found."
             },
+            "500": {
+                "description": "An unexpected error occurred on the server!"
+            },
             "503": {
                 "description": "App is starting still. Feature is not available. Please try again later."
             },
@@ -414,6 +417,26 @@
                     "role"
                 ]
             },
+            "Report.FeatureBreakdown": {
+                "additionalProperties": {
+                    "type": "boolean",
+                    "examples": [
+                        true
+                    ]
+                },
+                "description": "List of features that are configured for the specific service plan's service configuration for the related principal.\nThe key is the name of the feature that is being described.\nThe value is the state of the feature configuration, `true` is in scope and `false` meaning not in scope.",
+                "examples": [
+                    {
+                        "Conditional Access": true,
+                        "Access Reviews": true,
+                        "Dynamic Groups": false,
+                        "On-Prem Password Rest": true,
+                        "On-Prem Password Protection": false
+                    }
+                ],
+                "title": "Report - Feature Breakdown",
+                "type": "object"
+            },
             "LicenseReport.CorrelationRecord": {
                 "description": "Metadata that describes the execution session (run) that is used to tie/relate all of the license report together.",
                 "examples": [
@@ -513,7 +536,7 @@
                         "additionalProperties": {
                             "oneOf": [
                                 {
-                                    "$ref": "#/components/schemas/LicenseReport.FeatureBreakdown"
+                                    "$ref": "#/components/schemas/Report.FeatureBreakdown"
                                 },
                                 {
                                     "type": "integer",
@@ -548,7 +571,7 @@
                         "additionalProperties": {
                             "oneOf": [
                                 {
-                                    "$ref": "#/components/schemas/LicenseReport.FeatureBreakdown"
+                                    "$ref": "#/components/schemas/Report.FeatureBreakdown"
                                 },
                                 {
                                     "type": "integer",
@@ -634,26 +657,6 @@
                 ],
                 "title": "License Report - License Data"
             },
-            "LicenseReport.FeatureBreakdown": {
-                "additionalProperties": {
-                    "type": "boolean",
-                    "examples": [
-                        true
-                    ]
-                },
-                "description": "List of features that are configured for the specific service plan's service configuration for the related principal.\nThe key is the name of the feature that is being described.\nThe value is the state of the feature configuration, `true` is in scope and `false` meaning not in scope.",
-                "examples": [
-                    {
-                        "Conditional Access": true,
-                        "Access Reviews": true,
-                        "Dynamic Groups": false,
-                        "On-Prem Password Rest": true,
-                        "On-Prem Password Protection": false
-                    }
-                ],
-                "title": "License Report - Feature Breakdown",
-                "type": "object"
-            },
             "LicenseReport": {
                 "description": "Completely calculated license report structure that is the result of a complete run.",
                 "examples": [
@@ -723,6 +726,763 @@
                     "licenseData"
                 ],
                 "title": "License Report - Complete Object"
+            },
+            "LicenseReportV1": {
+                "description": "Completely calculated license report V1 structure that is the result of a complete run.",
+                "examples": [
+                    {
+                        "availableLicense": [
+                            {
+                                "count": 10,
+                                "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                                "servicePlanList": [
+                                    "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                                    "123e4567-e89b-12d3-a456-426614174000"
+                                ]
+                            }
+                        ],
+                        "correlation": {
+                            "auditTenantAccount": "user@example.com",
+                            "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                            "createdAt": "2023-11-19T10:00:00.000Z",
+                            "isMigrating": false,
+                            "reportTenantAccount": "user@example.com",
+                            "schemaVersion": 1,
+                            "tenantId": "123e4567-e89b-12d3-a456-426614174000",
+                            "updatedAt": "2023-11-19T10:05:00.000Z"
+                        },
+                        "principalData": {
+                            "device": {
+                                "f1e2d3c4-b5a6-7890-1234-56789abcdef0": {
+                                    "assignedService": {
+                                        "3d282045-ec7f-4813-88e2-29b74ee609f7": 5
+                                    },
+                                    "assignedLicense": [
+                                        {
+                                            "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                                            "servicePlanList": [
+                                                "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                                            ]
+                                        }
+                                    ],
+                                    "consumedService": {
+                                        "3d282045-ec7f-4813-88e2-29b74ee609f7": 5
+                                    },
+                                    "principalMetadata": {
+                                        "sharedComputer": true
+                                    }
+                                }
+                            },
+                            "user": {
+                                "e7b8c8a2-1f2e-4c3a-9b6a-2d8e4f8a9b7c": {
+                                    "assignedService": {
+                                        "3d282045-ec7f-4813-88e2-29b74ee609f7": {
+                                            "featureA": true,
+                                            "featureB": false
+                                        }
+                                    },
+                                    "assignedLicense": [
+                                        {
+                                            "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                                            "servicePlanList": [
+                                                "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                                            ]
+                                        }
+                                    ],
+                                    "consumedService": {
+                                        "3d282045-ec7f-4813-88e2-29b74ee609f7": {
+                                            "featureA": true,
+                                            "featureB": false
+                                        }
+                                    },
+                                    "llmInferred": {
+                                        "isServiceAccount": false,
+                                        "isFrontlineWorker": true,
+                                        "isTempWorker": null
+                                    },
+                                    "principalMetadata": {
+                                        "sharedMailbox": false
+                                    },
+                                    "enhancedData": {
+                                        "userPrincipalName": "user@example.com",
+                                        "idpJobTitle": "Software Engineer",
+                                        "idpDepartment": "Engineering",
+                                        "idpOfficeLocation": "Building 1",
+                                        "idpEmployeeType": "Full-Time"
+                                    }
+                                }
+                            }
+                        },
+                        "schemaVersion": 1
+                    }
+                ],
+                "type": "object",
+                "properties": {
+                    "availableLicense": {
+                        "type": "array",
+                        "description": "Array of license bundles available. Each item includes the total purchased, the unique license bundle ID, and a list of associated service plan list.",
+                        "items": {
+                            "type": "object",
+                            "required": [
+                                "count",
+                                "id",
+                                "servicePlanList"
+                            ],
+                            "properties": {
+                                "count": {
+                                    "type": "integer",
+                                    "format": "int32",
+                                    "description": "Number of licenses that are purchased of the specific license.",
+                                    "examples": [
+                                        10
+                                    ]
+                                },
+                                "id": {
+                                    "type": "string",
+                                    "format": "uuid",
+                                    "maxLength": 36,
+                                    "minLength": 36,
+                                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                                    "description": "Well known ID of the license bundle.",
+                                    "examples": [
+                                        "09d9b4dc-b229-4f06-a22a-617c82091e21"
+                                    ]
+                                },
+                                "servicePlanList": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string",
+                                        "format": "uuid",
+                                        "maxLength": 36,
+                                        "minLength": 36,
+                                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                                        "description": "Well known ID of the service plan.",
+                                        "examples": [
+                                            "ff417b87-8f30-4250-94bb-8551cab0453b"
+                                        ]
+                                    },
+                                    "description": "List of available service plans for the current license.",
+                                    "examples": [
+                                        [
+                                            "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                                            "f0578fdb-bbf3-43a0-939d-af4a7ddf2532"
+                                        ]
+                                    ]
+                                }
+                            },
+                            "examples": [
+                                {
+                                    "count": 10,
+                                    "id": "034d1003-cab4-4a91-9ebc-c8931fdf0063",
+                                    "servicePlanList": [
+                                        "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                                    ]
+                                }
+                            ]
+                        },
+                        "examples": [
+                            [
+                                {
+                                    "count": 10,
+                                    "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                                    "servicePlanList": [
+                                        "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                                        "123e4567-e89b-12d3-a456-426614174000"
+                                    ]
+                                },
+                                {
+                                    "count": 20,
+                                    "id": "e7358cd2-fea1-4dad-9ff1-e344f9a2b93f",
+                                    "servicePlanList": [
+                                        "73d8d3d6-b398-4665-8c64-15e63a75a3b1"
+                                    ]
+                                }
+                            ]
+                        ]
+                    },
+                    "correlation": {
+                        "$ref": "#/components/schemas/Report.CorrelationRecordV1"
+                    },
+                    "principalData": {
+                        "$ref": "#/components/schemas/Report.PrincipalData"
+                    },
+                    "schemaVersion": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "Version number of the license report schema.",
+                        "examples": [
+                            1
+                        ]
+                    }
+                },
+                "required": [
+                    "availableLicense",
+                    "correlation",
+                    "principalData",
+                    "schemaVersion"
+                ],
+                "title": "License Report V1 - Complete Object"
+            },
+            "Report.CorrelationRecordV1": {
+                "description": "Metadata that describes the execution session (run) that is used to tie/relate report versions together.",
+                "examples": [
+                    {
+                        "auditTenantAccount": "user@example.com",
+                        "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                        "createdAt": "2023-11-19T10:00:00.000Z",
+                        "isMigrating": false,
+                        "reportTenantAccount": "user@example.com",
+                        "schemaVersion": 1,
+                        "tenantId": "123e4567-e89b-12d3-a456-426614174000",
+                        "updatedAt": "2023-11-19T10:05:00.000Z"
+                    }
+                ],
+                "properties": {
+                    "auditTenantAccount": {
+                        "description": "The user account used to retrieve the license information in the tenant being audited.",
+                        "examples": [
+                            "user@example.com"
+                        ],
+                        "format": "email",
+                        "type": "string"
+                    },
+                    "correlationId": {
+                        "description": "The ID of the execution session (run) that is used to tie/relate all of the data together.",
+                        "examples": [
+                            "88da2253-758f-4135-9d37-64448c8b65c1"
+                        ],
+                        "format": "uuid",
+                        "type": "string",
+                        "maxLength": 36,
+                        "minLength": 36,
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                    },
+                    "createdAt": {
+                        "description": "Timestamp of when the report was created.",
+                        "examples": [
+                            "2024-08-01T21:12:22.148Z"
+                        ],
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "isMigrating": {
+                        "description": "Flag indicating whether the current license report is migrating. If true, data is currently migrating from one version to another.",
+                        "examples": [
+                            true
+                        ],
+                        "type": "boolean"
+                    },
+                    "reportTenantAccount": {
+                        "description": "User account used to store/report the license report to the SHI Lab cloud service.",
+                        "examples": [
+                            "user@example.com"
+                        ],
+                        "format": "email",
+                        "type": "string"
+                    },
+                    "schemaVersion": {
+                        "description": "Specifies the version of the current license report.",
+                        "examples": [
+                            1
+                        ],
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "tenantId": {
+                        "description": "Unique ID of customer's Microsoft tenant that the license report is for.",
+                        "examples": [
+                            "0e1fe83f-a33f-4250-8546-225b8d45ae01"
+                        ],
+                        "format": "uuid",
+                        "type": "string",
+                        "maxLength": 36,
+                        "minLength": 36,
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                    },
+                    "updatedAt": {
+                        "description": "Timestamp of when the report was last updated.",
+                        "examples": [
+                            "2024-08-01T21:12:22.148Z"
+                        ],
+                        "format": "date-time",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "auditTenantAccount",
+                    "reportTenantAccount"
+                ],
+                "title": "Report - Correlation Record V1",
+                "type": "object"
+            },
+            "Report.PrincipalData": {
+                "description": "Contains user and device records included in the license report, detailing assigned services, licenses, consumed services, and related metadata for each principal. ",
+                "type": "object",
+                "required": [
+                    "device",
+                    "user"
+                ],
+                "properties": {
+                    "user": {
+                        "title": "User Principal Records",
+                        "type": "object",
+                        "description": "Object containing user records, each keyed by user ID. Includes assigned services, licenses, consumed services, inferred attributes, metadata, and enhanced identity data for each user.",
+                        "additionalProperties": {
+                            "type": "object",
+                            "required": [
+                                "assignedService",
+                                "assignedLicense",
+                                "consumedService",
+                                "llmInferred",
+                                "principalMetadata",
+                                "enhancedData"
+                            ],
+                            "properties": {
+                                "assignedService": {
+                                    "$ref": "#/components/schemas/Report.PrincipalData.CommonService"
+                                },
+                                "assignedLicense": {
+                                    "$ref": "#/components/schemas/Report.PrincipalData.AssignedLicense"
+                                },
+                                "consumedService": {
+                                    "$ref": "#/components/schemas/Report.PrincipalData.CommonService"
+                                },
+                                "llmInferred": {
+                                    "title": "Principal Inferred Attributes",
+                                    "type": "object",
+                                    "required": [
+                                        "isServiceAccount",
+                                        "isFrontlineWorker",
+                                        "isTempWorker"
+                                    ],
+                                    "description": "Inferred principal attributes, showing if the account is a service account, frontline worker, temporary worker.",
+                                    "properties": {
+                                        "isServiceAccount": {
+                                            "description": "Indicates if the account is a service account.",
+                                            "type": [
+                                                "boolean",
+                                                "null"
+                                            ],
+                                            "examples": [
+                                                true,
+                                                null
+                                            ]
+                                        },
+                                        "isFrontlineWorker": {
+                                            "description": "Indicates if the user is a frontline worker.",
+                                            "type": [
+                                                "boolean",
+                                                "null"
+                                            ],
+                                            "examples": [
+                                                true,
+                                                null
+                                            ]
+                                        },
+                                        "isTempWorker": {
+                                            "description": "Indicates if the user is a temporary worker.",
+                                            "type": [
+                                                "boolean",
+                                                "null"
+                                            ],
+                                            "examples": [
+                                                true,
+                                                null
+                                            ]
+                                        }
+                                    },
+                                    "examples": [
+                                        {
+                                            "isFrontlineWorker": false,
+                                            "isTempWorker": true,
+                                            "isServiceAccount": null
+                                        }
+                                    ]
+                                },
+                                "principalMetadata": {
+                                    "$ref": "#/components/schemas/Report.PrincipalData.PrincipalMetadata"
+                                },
+                                "enhancedData": {
+                                    "title": "User Enhanced Identity Data",
+                                    "description": "Additional identity details for the user, such as principal name, job title, department, office location, and employee type; present only if customer consented, otherwise null.",
+                                    "oneOf": [
+                                        {
+                                            "type": "object",
+                                            "required": [
+                                                "userPrincipalName",
+                                                "idpJobTitle",
+                                                "idpDepartment",
+                                                "idpOfficeLocation",
+                                                "idpEmployeeType"
+                                            ],
+                                            "properties": {
+                                                "userPrincipalName": {
+                                                    "type": "string",
+                                                    "description": "The user's principal name (UPN).",
+                                                    "examples": [
+                                                        "user@example.com"
+                                                    ]
+                                                },
+                                                "idpJobTitle": {
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "The user's job title.",
+                                                    "examples": [
+                                                        "Engineer",
+                                                        null
+                                                    ]
+                                                },
+                                                "idpDepartment": {
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "The user's department.",
+                                                    "examples": [
+                                                        "IT",
+                                                        null
+                                                    ]
+                                                },
+                                                "idpOfficeLocation": {
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "The user's office location.",
+                                                    "examples": [
+                                                        "HQ",
+                                                        null
+                                                    ]
+                                                },
+                                                "idpEmployeeType": {
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "The user's employee type.",
+                                                    "examples": [
+                                                        "Permanent",
+                                                        null
+                                                    ]
+                                                }
+                                            },
+                                            "examples": [
+                                                {
+                                                    "userPrincipalName": "user@example.com",
+                                                    "idpJobTitle": "Engineer",
+                                                    "idpDepartment": "IT",
+                                                    "idpOfficeLocation": "HQ",
+                                                    "idpEmployeeType": "Permanent"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "null",
+                                            "description": "No data or unused."
+                                        }
+                                    ],
+                                    "examples": [
+                                        {
+                                            "userPrincipalName": "user@example.com",
+                                            "idpJobTitle": "Engineer",
+                                            "idpDepartment": "IT",
+                                            "idpOfficeLocation": "HQ",
+                                            "idpEmployeeType": "Permanent"
+                                        },
+                                        null
+                                    ]
+                                }
+                            }
+                        },
+                        "examples": [
+                            {
+                                "e7b8c8a2-1f2e-4c3a-9b6a-2d8e4f8a9b7c": {
+                                    "assignedService": {
+                                        "3d282045-ec7f-4813-88e2-29b74ee609f7": {
+                                            "featureA": true,
+                                            "featureB": false
+                                        }
+                                    },
+                                    "assignedLicense": [
+                                        {
+                                            "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                                            "servicePlanList": [
+                                                "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                                            ]
+                                        }
+                                    ],
+                                    "consumedService": {
+                                        "3d282045-ec7f-4813-88e2-29b74ee609f7": {
+                                            "featureA": true,
+                                            "featureB": false
+                                        }
+                                    },
+                                    "llmInferred": {
+                                        "isServiceAccount": false,
+                                        "isFrontlineWorker": true,
+                                        "isTempWorker": null
+                                    },
+                                    "principalMetadata": {
+                                        "sharedMailbox": false
+                                    },
+                                    "enhancedData": {
+                                        "userPrincipalName": "user@example.com",
+                                        "idpJobTitle": "Engineer",
+                                        "idpDepartment": "IT",
+                                        "idpOfficeLocation": "HQ",
+                                        "idpEmployeeType": "Full-Time"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "device": {
+                        "title": "Device Principal Records",
+                        "type": "object",
+                        "description": "Object containing device records, each keyed by device ID. Includes assigned services, licenses, consumed services, and metadata for each device.",
+                        "additionalProperties": {
+                            "type": "object",
+                            "required": [
+                                "assignedService",
+                                "assignedLicense",
+                                "consumedService",
+                                "principalMetadata"
+                            ],
+                            "properties": {
+                                "assignedService": {
+                                    "$ref": "#/components/schemas/Report.PrincipalData.CommonService"
+                                },
+                                "assignedLicense": {
+                                    "$ref": "#/components/schemas/Report.PrincipalData.AssignedLicense"
+                                },
+                                "consumedService": {
+                                    "$ref": "#/components/schemas/Report.PrincipalData.CommonService"
+                                },
+                                "principalMetadata": {
+                                    "$ref": "#/components/schemas/Report.PrincipalData.PrincipalMetadata"
+                                }
+                            }
+                        },
+                        "examples": [
+                            {
+                                "f1e2d3c4-b5a6-7890-1234-56789abcdef0": {
+                                    "assignedService": {
+                                        "3d282045-ec7f-4813-88e2-29b74ee609f7": 5
+                                    },
+                                    "assignedLicense": [
+                                        {
+                                            "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                                            "servicePlanList": [
+                                                "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                                            ]
+                                        }
+                                    ],
+                                    "consumedService": {
+                                        "3d282045-ec7f-4813-88e2-29b74ee609f7": 5
+                                    },
+                                    "principalMetadata": {
+                                        "sharedComputer": true
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                },
+                "examples": [
+                    {
+                        "user": {
+                            "e7b8c8a2-1f2e-4c3a-9b6a-2d8e4f8a9b7c": {
+                                "assignedService": {
+                                    "3d282045-ec7f-4813-88e2-29b74ee609f7": {
+                                        "featureA": true,
+                                        "featureB": false
+                                    }
+                                },
+                                "assignedLicense": [
+                                    {
+                                        "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                                        "servicePlanList": [
+                                            "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                                        ]
+                                    }
+                                ],
+                                "consumedService": {
+                                    "3d282045-ec7f-4813-88e2-29b74ee609f7": {
+                                        "featureA": true,
+                                        "featureB": false
+                                    }
+                                },
+                                "llmInferred": {
+                                    "isServiceAccount": false,
+                                    "isFrontlineWorker": true,
+                                    "isTempWorker": null
+                                },
+                                "principalMetadata": {
+                                    "sharedMailbox": false
+                                },
+                                "enhancedData": {
+                                    "userPrincipalName": "user@example.com",
+                                    "idpJobTitle": "Engineer",
+                                    "idpDepartment": "IT",
+                                    "idpOfficeLocation": "HQ",
+                                    "idpEmployeeType": "Full-Time"
+                                }
+                            }
+                        },
+                        "device": {
+                            "f1e2d3c4-b5a6-7890-1234-56789abcdef0": {
+                                "assignedService": {
+                                    "3d282045-ec7f-4813-88e2-29b74ee609f7": 5
+                                },
+                                "assignedLicense": [
+                                    {
+                                        "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                                        "servicePlanList": [
+                                            "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                                        ]
+                                    }
+                                ],
+                                "consumedService": {
+                                    "3d282045-ec7f-4813-88e2-29b74ee609f7": 5
+                                },
+                                "principalMetadata": {
+                                    "sharedComputer": true
+                                }
+                            }
+                        }
+                    }
+                ],
+                "title": "Report - Principal Data"
+            },
+            "Report.PrincipalData.CommonService": {
+                "type": "object",
+                "description": "Represents a service assignment or usage for a principal, which can be a feature breakdown, a usage count, or null if not applicable.",
+                "additionalProperties": {
+                    "oneOf": [
+                        {
+                            "$ref": "#/components/schemas/Report.FeatureBreakdown"
+                        },
+                        {
+                            "type": "number",
+                            "description": "Number of in-scope principals or usage count.",
+                            "examples": [
+                                10
+                            ]
+                        },
+                        {
+                            "type": "null",
+                            "description": "No data or unused."
+                        }
+                    ],
+                    "examples": [
+                        {
+                            "featureA": true,
+                            "featureB": false,
+                            "featureC": null
+                        }
+                    ]
+                },
+                "examples": [
+                    {
+                        "3d282045-ec7f-4813-88e2-29b74ee609f7": {
+                            "featureA": true,
+                            "featureB": false
+                        },
+                        "a1b2c3d4-e5f6-7890-abcd-ef1234567890": 5,
+                        "123e4567-e89b-12d3-a456-426614174000": null
+                    }
+                ],
+                "title": "Report - PrincipalData - Common Service"
+            },
+            "Report.PrincipalData.AssignedLicense": {
+                "description": "List of licenses assigned to a principal, including license ID and associated service plans.",
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "required": [
+                        "id",
+                        "servicePlanList"
+                    ],
+                    "properties": {
+                        "id": {
+                            "type": "string",
+                            "format": "uuid",
+                            "description": "Unique identifier for the assigned license.",
+                            "maxLength": 36,
+                            "minLength": 36,
+                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                            "examples": [
+                                "88da2253-758f-4135-9d37-64448c8b65c1"
+                            ]
+                        },
+                        "servicePlanList": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "format": "uuid",
+                                "description": "Unique identifier for the service plan.",
+                                "maxLength": 36,
+                                "minLength": 36,
+                                "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                                "examples": [
+                                    [
+                                        "88da2253-758f-4135-9d37-64448c8b65c1"
+                                    ]
+                                ]
+                            },
+                            "description": "List of service plans associated with the assigned license."
+                        }
+                    },
+                    "examples": [
+                        {
+                            "id": "6318eedb-d578-4917-93d5-26a49fe29431",
+                            "servicePlanList": [
+                                "d1c81651-c68e-4603-8009-579ac5202286"
+                            ]
+                        }
+                    ]
+                },
+                "examples": [
+                    [
+                        {
+                            "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                            "servicePlanList": [
+                                "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                                "123e4567-e89b-12d3-a456-426614174000"
+                            ]
+                        },
+                        {
+                            "id": "7e8f9a0b-1c2d-3e4f-5a6b-7c8d9e0f1a2b",
+                            "servicePlanList": [
+                                "abcdefab-cdef-abcd-efab-cdefabcdefab"
+                            ]
+                        }
+                    ]
+                ],
+                "title": "Report - PrincipalData - Assigned License"
+            },
+            "Report.PrincipalData.PrincipalMetadata": {
+                "type": "object",
+                "description": "Metadata about the principal, such as whether the account is a shared.",
+                "required": [
+                    "sharedMailbox"
+                ],
+                "properties": {
+                    "sharedMailbox": {
+                        "type": "boolean",
+                        "examples": [
+                            true
+                        ]
+                    }
+                },
+                "examples": [
+                    {
+                        "sharedMailbox": true
+                    }
+                ],
+                "title": "Report - PrincipalData - Principal Meta Data"
             },
             "LicenseEntitlement.Shield": {
                 "description": "Record that describes the purchased licenses for a specific tenant. More than one of these can be active at a single time.",
@@ -2111,6 +2871,773 @@
                     "License Analytics"
                 ],
                 "summary": "Delete the Specified License Report for Specified Tenant"
+            }
+        },
+        "/Api/V1/LicenseReport": {
+            "post": {
+                "description": "Store the results of a license analytics run.\n\nThis endpoint requires the `LicenseReport.ReadWrite`, or `LicenseReport.ReadWrite.All` scope (permission).",
+                "operationId": "/Api/V1/LicenseReport/Post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "examples": {
+                                "License Report": {
+                                    "description": "Sample, truncated report from an example customer environment. The request body is the License Report V1 that to be stored.",
+                                    "summary": "Example License Report Request",
+                                    "value": {
+                                        "availableLicense": [
+                                            {
+                                                "count": 10,
+                                                "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                                                "servicePlanList": [
+                                                    "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                                                    "123e4567-e89b-12d3-a456-426614174000"
+                                                ]
+                                            }
+                                        ],
+                                        "correlation": {
+                                            "auditTenantAccount": "user@example.com",
+                                            "reportTenantAccount": "user@example.com"
+                                        },
+                                        "principalData": {
+                                            "user": {
+                                                "e7b8c8a2-1f2e-4c3a-9b6a-2d8e4f8a9b7c": {
+                                                    "assignedService": {
+                                                        "3d282045-ec7f-4813-88e2-29b74ee609f7": {
+                                                            "featureA": true,
+                                                            "featureB": false
+                                                        }
+                                                    },
+                                                    "assignedLicense": [
+                                                        {
+                                                            "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                                                            "servicePlanList": [
+                                                                "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "consumedService": {
+                                                        "3d282045-ec7f-4813-88e2-29b74ee609f7": {
+                                                            "featureA": true,
+                                                            "featureB": false
+                                                        }
+                                                    },
+                                                    "llmInferred": {
+                                                        "isServiceAccount": false,
+                                                        "isFrontlineWorker": true,
+                                                        "isTempWorker": null
+                                                    },
+                                                    "principalMetadata": {
+                                                        "sharedMailbox": false
+                                                    },
+                                                    "enhancedData": {
+                                                        "userPrincipalName": "user@example.com",
+                                                        "idpJobTitle": "Software Engineer",
+                                                        "idpDepartment": "Engineering",
+                                                        "idpOfficeLocation": "Building 1",
+                                                        "idpEmployeeType": "Full-Time"
+                                                    }
+                                                }
+                                            },
+                                            "device": {
+                                                "f1e2d3c4-b5a6-7890-1234-56789abcdef0": {
+                                                    "assignedService": {
+                                                        "3d282045-ec7f-4813-88e2-29b74ee609f7": 5
+                                                    },
+                                                    "assignedLicense": [
+                                                        {
+                                                            "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                                                            "servicePlanList": [
+                                                                "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "consumedService": {
+                                                        "3d282045-ec7f-4813-88e2-29b74ee609f7": 5
+                                                    },
+                                                    "principalMetadata": {
+                                                        "sharedComputer": true
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "schemaVersion": 1
+                                    }
+                                },
+                                "Ignorant License Report Request": {
+                                    "description": "Looks like automation started without checking the docs—give them a quick read to make things easier!",
+                                    "summary": "Docs First, Smooth Automation Ahead",
+                                    "value": {}
+                                }
+                            },
+                            "schema": {
+                                "$ref": "#/components/schemas/LicenseReportV1"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "License Report V1": {
+                                        "description": "Sample, truncated report from an example customer environment. This will return the same report as the request input.",
+                                        "summary": "Example of license report stored.",
+                                        "value": {
+                                            "availableLicense": [
+                                                {
+                                                    "count": 10,
+                                                    "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                                                    "servicePlanList": [
+                                                        "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                                                        "123e4567-e89b-12d3-a456-426614174000"
+                                                    ]
+                                                }
+                                            ],
+                                            "correlation": {
+                                                "auditTenantAccount": "user@example.com",
+                                                "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                                                "createdAt": "2023-11-19T10:00:00.000Z",
+                                                "isMigrating": false,
+                                                "reportTenantAccount": "user@example.com",
+                                                "schemaVersion": 1,
+                                                "tenantId": "123e4567-e89b-12d3-a456-426614174000",
+                                                "updatedAt": "2023-11-19T10:05:00.000Z"
+                                            },
+                                            "principalData": {
+                                                "user": {
+                                                    "e7b8c8a2-1f2e-4c3a-9b6a-2d8e4f8a9b7c": {
+                                                        "assignedService": {
+                                                            "3d282045-ec7f-4813-88e2-29b74ee609f7": {
+                                                                "featureA": true,
+                                                                "featureB": false
+                                                            }
+                                                        },
+                                                        "assignedLicense": [
+                                                            {
+                                                                "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                                                                "servicePlanList": [
+                                                                    "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                                                                ]
+                                                            }
+                                                        ],
+                                                        "consumedService": {
+                                                            "3d282045-ec7f-4813-88e2-29b74ee609f7": {
+                                                                "featureA": true,
+                                                                "featureB": false
+                                                            }
+                                                        },
+                                                        "llmInferred": {
+                                                            "isServiceAccount": false,
+                                                            "isFrontlineWorker": true,
+                                                            "isTempWorker": null
+                                                        },
+                                                        "principalMetadata": {
+                                                            "sharedMailbox": false
+                                                        },
+                                                        "enhancedData": {
+                                                            "userPrincipalName": "user@example.com",
+                                                            "idpJobTitle": "Software Engineer",
+                                                            "idpDepartment": "Engineering",
+                                                            "idpOfficeLocation": "Building 1",
+                                                            "idpEmployeeType": "Full-Time"
+                                                        }
+                                                    }
+                                                },
+                                                "device": {
+                                                    "f1e2d3c4-b5a6-7890-1234-56789abcdef0": {
+                                                        "assignedService": {
+                                                            "3d282045-ec7f-4813-88e2-29b74ee609f7": 5
+                                                        },
+                                                        "assignedLicense": [
+                                                            {
+                                                                "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                                                                "servicePlanList": [
+                                                                    "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                                                                ]
+                                                            }
+                                                        ],
+                                                        "consumedService": {
+                                                            "3d282045-ec7f-4813-88e2-29b74ee609f7": 5
+                                                        },
+                                                        "principalMetadata": {
+                                                            "sharedComputer": true
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "schemaVersion": 1
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/LicenseReportV1"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "tags": [
+                    "License Analytics"
+                ],
+                "summary": "Store License Analytics Data"
+            }
+        },
+        "/Api/V1/LicenseReport/Correlation": {
+            "get": {
+                "description": "Retrieves the list of correlation records for the authenticated tenant. Can use filters targeting creation date to limit results. Correlation records store the metadata for a specific license report.\n\nThis endpoint requires the `LicenseReport.Read`,  `LicenseReport.Read.All`, `LicenseReport.ReadWrite`, or `LicenseReport.ReadWrite.All` scope (permission).",
+                "operationId": "/Api/V1/LicenseReport/Correlation/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/dateStart"
+                    },
+                    {
+                        "$ref": "#/components/parameters/dateEnd"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Example Correlation Records": {
+                                        "description": "Sample list of correlation records for the current authenticated tenant.",
+                                        "summary": "Available Correlation Records",
+                                        "value": [
+                                            {
+                                                "auditTenantAccount": "user@example.com",
+                                                "correlationId": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                                                "createdAt": "2023-11-19T10:00:00.000Z",
+                                                "isMigrating": false,
+                                                "reportTenantAccount": "user@example.com",
+                                                "schemaVersion": 1,
+                                                "tenantId": "123e4567-e89b-12d3-a456-426614174000",
+                                                "updatedAt": "2023-11-19T10:05:00.000Z"
+                                            },
+                                            {
+                                                "auditTenantAccount": "user@example.com",
+                                                "correlationId": "5888a922-9f5b-45fd-bd5f-de3283d6a79e",
+                                                "createdAt": "2023-12-19T10:00:00.000Z",
+                                                "isMigrating": false,
+                                                "reportTenantAccount": "user@example.com",
+                                                "schemaVersion": 1,
+                                                "tenantId": "123e4567-e89b-12d3-a456-426614174000",
+                                                "updatedAt": "2023-11-19T10:05:00.000Z"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "schema": {
+                                    "type": "array",
+                                    "minItems": 0,
+                                    "items": {
+                                        "$ref": "#/components/schemas/Report.CorrelationRecordV1"
+                                    },
+                                    "examples": [
+                                        [
+                                            {
+                                                "auditTenantAccount": "user@example.com",
+                                                "correlationId": "547404d4-8734-415f-a7ca-e9c1ffb95e48",
+                                                "createdAt": "2023-12-19T10:00:00.000Z",
+                                                "isMigrating": false,
+                                                "reportTenantAccount": "user@example.com",
+                                                "schemaVersion": 1,
+                                                "tenantId": "123e4567-e89b-12d3-a456-426614174000",
+                                                "updatedAt": "2023-11-19T10:05:00.000Z"
+                                            },
+                                            {
+                                                "auditTenantAccount": "user@example.com",
+                                                "correlationId": "d76878d6-1495-4243-a334-a82bb9818cd0",
+                                                "createdAt": "2023-12-19T10:00:00.000Z",
+                                                "isMigrating": false,
+                                                "reportTenantAccount": "user@example.com",
+                                                "schemaVersion": 1,
+                                                "tenantId": "123e4567-e89b-12d3-a456-426614174000",
+                                                "updatedAt": "2023-11-19T10:05:00.000Z"
+                                            }
+                                        ]
+                                    ]
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "tags": [
+                    "License Analytics"
+                ],
+                "summary": "Retrieve the List of Correlation Records"
+            }
+        },
+        "/Api/V1/LicenseReport/Correlation/Tenant/{tenantId}": {
+            "get": {
+                "description": "Retrieves the list of correlation records for the specified tenant. Can use filters targeting creation date to limit results. Correlation records store the metadata for a specific license report.\n\nThis endpoint requires the `LicenseReport.Read.All`, or `LicenseReport.ReadWrite.All` scope (permission). This endpoint is also only accessible from the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "operationId": "/Api/V1/LicenseReport/Correlation/Tenant/:tenantId/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/tenantId"
+                    },
+                    {
+                        "$ref": "#/components/parameters/dateStart"
+                    },
+                    {
+                        "$ref": "#/components/parameters/dateEnd"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Example Correlation Records": {
+                                        "description": "Sample list of correlation records for the specified tenant.",
+                                        "summary": "Available Correlation Records",
+                                        "value": [
+                                            {
+                                                "auditTenantAccount": "user@example.com",
+                                                "correlationId": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                                                "createdAt": "2023-11-19T10:00:00.000Z",
+                                                "isMigrating": false,
+                                                "reportTenantAccount": "user@example.com",
+                                                "schemaVersion": 1,
+                                                "tenantId": "123e4567-e89b-12d3-a456-426614174000",
+                                                "updatedAt": "2023-11-19T10:05:00.000Z"
+                                            },
+                                            {
+                                                "auditTenantAccount": "user@example.com",
+                                                "correlationId": "e0d101e8-6f1e-40a9-a66f-cad4112c9a59",
+                                                "createdAt": "2023-11-19T10:00:00.000Z",
+                                                "isMigrating": false,
+                                                "reportTenantAccount": "user@example.com",
+                                                "schemaVersion": 1,
+                                                "tenantId": "123e4567-e89b-12d3-a456-426614174000",
+                                                "updatedAt": "2023-11-19T10:05:00.000Z"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "schema": {
+                                    "type": "array",
+                                    "minItems": 0,
+                                    "items": {
+                                        "$ref": "#/components/schemas/Report.CorrelationRecordV1"
+                                    },
+                                    "examples": [
+                                        [
+                                            {
+                                                "auditTenantAccount": "user@example.com",
+                                                "correlationId": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                                                "createdAt": "2023-11-19T10:00:00.000Z",
+                                                "isMigrating": false,
+                                                "reportTenantAccount": "user@example.com",
+                                                "schemaVersion": 1,
+                                                "tenantId": "123e4567-e89b-12d3-a456-426614174000",
+                                                "updatedAt": "2023-11-19T10:05:00.000Z"
+                                            },
+                                            {
+                                                "auditTenantAccount": "user@example.com",
+                                                "correlationId": "e0d101e8-6f1e-40a9-a66f-cad4112c9a59",
+                                                "createdAt": "2023-11-19T10:00:00.000Z",
+                                                "isMigrating": false,
+                                                "reportTenantAccount": "user@example.com",
+                                                "schemaVersion": 1,
+                                                "tenantId": "123e4567-e89b-12d3-a456-426614174000",
+                                                "updatedAt": "2023-11-19T10:05:00.000Z"
+                                            }
+                                        ]
+                                    ]
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "tags": [
+                    "License Analytics"
+                ],
+                "summary": "Retrieve the List of Correlation Records for Specified Tenant"
+            }
+        },
+        "/Api/V1/LicenseReport/Correlation/{correlationId}/Data": {
+            "get": {
+                "description": "Retrieves the full license report v1 for the specified correlation ID in the authenticated tenant. The license report v1 contains all of the license usage and compliance information with the required correlation data.\n\nThis endpoint requires the `LicenseReport.Read`, `LicenseReport.Read.All`, `LicenseReport.ReadWrite`, or `LicenseReport.ReadWrite.All` scope (permission).",
+                "operationId": "/Api/V1/LicenseReport/Correlation/:correlationId/Data/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/correlationId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Example License Report V1": {
+                                        "description": "Sample, truncated license report v1 from an example customer environment for a correlation record of the current authenticated tenant.",
+                                        "summary": "Example License Report V1",
+                                        "value": {
+                                            "availableLicense": [
+                                                {
+                                                    "count": 10,
+                                                    "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                                                    "servicePlanList": [
+                                                        "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                                                        "123e4567-e89b-12d3-a456-426614174000"
+                                                    ]
+                                                }
+                                            ],
+                                            "correlation": {
+                                                "auditTenantAccount": "user@example.com",
+                                                "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                                                "createdAt": "2023-11-19T10:00:00.000Z",
+                                                "isMigrating": false,
+                                                "reportTenantAccount": "user@example.com",
+                                                "schemaVersion": 1,
+                                                "tenantId": "123e4567-e89b-12d3-a456-426614174000",
+                                                "updatedAt": "2023-11-19T10:05:00.000Z"
+                                            },
+                                            "principalData": {
+                                                "user": {
+                                                    "e7b8c8a2-1f2e-4c3a-9b6a-2d8e4f8a9b7c": {
+                                                        "assignedService": {
+                                                            "3d282045-ec7f-4813-88e2-29b74ee609f7": {
+                                                                "featureA": true,
+                                                                "featureB": false
+                                                            }
+                                                        },
+                                                        "assignedLicense": [
+                                                            {
+                                                                "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                                                                "servicePlanList": [
+                                                                    "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                                                                ]
+                                                            }
+                                                        ],
+                                                        "consumedService": {
+                                                            "3d282045-ec7f-4813-88e2-29b74ee609f7": {
+                                                                "featureA": true,
+                                                                "featureB": false
+                                                            }
+                                                        },
+                                                        "llmInferred": {
+                                                            "isServiceAccount": false,
+                                                            "isFrontlineWorker": true,
+                                                            "isTempWorker": null
+                                                        },
+                                                        "principalMetadata": {
+                                                            "sharedMailbox": false
+                                                        },
+                                                        "enhancedData": {
+                                                            "userPrincipalName": "user@example.com",
+                                                            "idpJobTitle": "Software Engineer",
+                                                            "idpDepartment": "Engineering",
+                                                            "idpOfficeLocation": "Building 1",
+                                                            "idpEmployeeType": "Full-Time"
+                                                        }
+                                                    }
+                                                },
+                                                "device": {
+                                                    "f1e2d3c4-b5a6-7890-1234-56789abcdef0": {
+                                                        "assignedService": {
+                                                            "3d282045-ec7f-4813-88e2-29b74ee609f7": 5
+                                                        },
+                                                        "assignedLicense": [
+                                                            {
+                                                                "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                                                                "servicePlanList": [
+                                                                    "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                                                                ]
+                                                            }
+                                                        ],
+                                                        "consumedService": {
+                                                            "3d282045-ec7f-4813-88e2-29b74ee609f7": 5
+                                                        },
+                                                        "principalMetadata": {
+                                                            "sharedComputer": true
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "schemaVersion": 1
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/LicenseReportV1"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "tags": [
+                    "License Analytics"
+                ],
+                "summary": "Retrieve the Specified License Report V1"
+            },
+            "delete": {
+                "description": "Deletes the full license report v1 for the specified correlation ID.\n\nThis endpoint requires the `LicenseReport.ReadWrite`, or `LicenseReport.ReadWrite.All` scope (permission).",
+                "operationId": "/Api/V1/LicenseReport/Correlation/:correlationId/Data/delete",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/correlationId"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Deleted successfully"
+                    },
+                    "204": {
+                        "description": "Deleted successfully"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "tags": [
+                    "License Analytics"
+                ],
+                "summary": "Delete the Specified License Report for the currently authenticated tenant."
+            }
+        },
+        "/Api/V1/LicenseReport/Correlation/{correlationId}/Tenant/{tenantId}/Data": {
+            "get": {
+                "description": "Retrieves the full license report v1 for the specified correlation ID and tenant. The license report v1 contains all of the license usage and compliance information with the required correlation data.\n\nThis endpoint requires the `LicenseReport.Read.All`, or `LicenseReport.ReadWrite.All` scope (permission). This endpoint is also only accessible from the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "operationId": "/Api/V1/LicenseReport/Correlation/:correlationId/Tenant/:tenantId/Data/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/correlationId"
+                    },
+                    {
+                        "$ref": "#/components/parameters/tenantId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "License Report V1": {
+                                        "description": "Sample, truncated report from an example customer environment for a correlation record of the specified tenant.",
+                                        "summary": "Example License Report V1",
+                                        "value": {
+                                            "availableLicense": [
+                                                {
+                                                    "count": 10,
+                                                    "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                                                    "servicePlanList": [
+                                                        "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                                                        "123e4567-e89b-12d3-a456-426614174000"
+                                                    ]
+                                                }
+                                            ],
+                                            "correlation": {
+                                                "auditTenantAccount": "user@example.com",
+                                                "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                                                "createdAt": "2023-11-19T10:00:00.000Z",
+                                                "isMigrating": false,
+                                                "reportTenantAccount": "user@example.com",
+                                                "schemaVersion": 1,
+                                                "tenantId": "123e4567-e89b-12d3-a456-426614174000",
+                                                "updatedAt": "2023-11-19T10:05:00.000Z"
+                                            },
+                                            "principalData": {
+                                                "user": {
+                                                    "e7b8c8a2-1f2e-4c3a-9b6a-2d8e4f8a9b7c": {
+                                                        "assignedService": {
+                                                            "3d282045-ec7f-4813-88e2-29b74ee609f7": {
+                                                                "featureA": true,
+                                                                "featureB": false
+                                                            }
+                                                        },
+                                                        "assignedLicense": [
+                                                            {
+                                                                "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                                                                "servicePlanList": [
+                                                                    "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                                                                ]
+                                                            }
+                                                        ],
+                                                        "consumedService": {
+                                                            "3d282045-ec7f-4813-88e2-29b74ee609f7": {
+                                                                "featureA": true,
+                                                                "featureB": false
+                                                            }
+                                                        },
+                                                        "llmInferred": {
+                                                            "isServiceAccount": false,
+                                                            "isFrontlineWorker": true,
+                                                            "isTempWorker": null
+                                                        },
+                                                        "principalMetadata": {
+                                                            "sharedMailbox": false
+                                                        },
+                                                        "enhancedData": {
+                                                            "userPrincipalName": "user@example.com",
+                                                            "idpJobTitle": "Software Engineer",
+                                                            "idpDepartment": "Engineering",
+                                                            "idpOfficeLocation": "Building 1",
+                                                            "idpEmployeeType": "Full-Time"
+                                                        }
+                                                    }
+                                                },
+                                                "device": {
+                                                    "f1e2d3c4-b5a6-7890-1234-56789abcdef0": {
+                                                        "assignedService": {
+                                                            "3d282045-ec7f-4813-88e2-29b74ee609f7": 5
+                                                        },
+                                                        "assignedLicense": [
+                                                            {
+                                                                "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                                                                "servicePlanList": [
+                                                                    "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                                                                ]
+                                                            }
+                                                        ],
+                                                        "consumedService": {
+                                                            "3d282045-ec7f-4813-88e2-29b74ee609f7": 5
+                                                        },
+                                                        "principalMetadata": {
+                                                            "sharedComputer": true
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "schemaVersion": 1
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/LicenseReportV1"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "tags": [
+                    "License Analytics"
+                ],
+                "summary": "Retrieve the Specified License Report V1 for Specified Tenant"
+            },
+            "delete": {
+                "description": "Deletes the full license report v1 for the specified correlation ID and tenant.\n\nThis endpoint requires the `LicenseReport.ReadWrite.All` scope (permission). This endpoint is also only accessible from the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "operationId": "/Api/V1/LicenseReport/Correlation/:correlationId/Tenant/:tenantId/Data/delete",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/correlationId"
+                    },
+                    {
+                        "$ref": "#/components/parameters/tenantId"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Deleted successfully"
+                    },
+                    "204": {
+                        "description": "Deleted successfully"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "tags": [
+                    "License Analytics"
+                ],
+                "summary": "Delete the Specified License Report V1 for Specified Tenant"
             }
         },
         "/Api/Chat/LicenseGpt": {
