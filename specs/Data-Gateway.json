@@ -437,11 +437,6 @@
                 "title": "Report - Feature Breakdown",
                 "type": "object"
             },
-            "LicenseReportV0.CorrelationRecord": {
-                "description": "Metadata that describes the execution session (run) that is used to tie/relate all of the license report together.",
-                "$ref": "#/components/schemas/Report.CorrelationRecordV0",
-                "title": "License Report - Correlation Record"
-            },
             "LicenseReportV0.LicenseData": {
                 "type": "object",
                 "properties": {
@@ -647,7 +642,7 @@
                         "type": "object"
                     },
                     "correlation": {
-                        "$ref": "#/components/schemas/LicenseReportV0.CorrelationRecord"
+                        "$ref": "#/components/schemas/Report.CorrelationRecordV0"
                     },
                     "licenseData": {
                         "additionalProperties": {
@@ -2237,7 +2232,7 @@
                 "type": "object",
                 "properties": {
                     "correlation": {
-                        "$ref": "#/components/schemas/ArchitectureReportV1.CorrelationRecord"
+                        "$ref": "#/components/schemas/Report.CorrelationRecordV1"
                     },
                     "principalData": {
                         "$ref": "#/components/schemas/ArchitectureReport.PrincipalData"
@@ -2343,11 +2338,6 @@
                     }
                 ],
                 "title": "Architecture Report V1 - Complete Object"
-            },
-            "ArchitectureReportV1.CorrelationRecord": {
-                "$ref": "#/components/schemas/Report.CorrelationRecordV1",
-                "description": "Metadata that describes the execution session (run) that is used to tie/relate architecture report versions together.",
-                "title": "Architecture Report V1 - CorrelationRecord"
             },
             "ArchitectureReportV1.TenantMetadata": {
                 "description": "This is the the tenant data calculated for the architecture report",
@@ -2677,7 +2667,7 @@
                                     "type": "array",
                                     "minItems": 0,
                                     "items": {
-                                        "$ref": "#/components/schemas/LicenseReportV0.CorrelationRecord"
+                                        "$ref": "#/components/schemas/Report.CorrelationRecordV0"
                                     },
                                     "examples": [
                                         [
@@ -2764,7 +2754,7 @@
                                     "type": "array",
                                     "minItems": 0,
                                     "items": {
-                                        "$ref": "#/components/schemas/LicenseReportV0.CorrelationRecord"
+                                        "$ref": "#/components/schemas/Report.CorrelationRecordV0"
                                     },
                                     "examples": [
                                         [
@@ -6444,7 +6434,7 @@
                                         ]
                                     ],
                                     "items": {
-                                        "$ref": "#/components/schemas/ArchitectureReportV1.CorrelationRecord"
+                                        "$ref": "#/components/schemas/Report.CorrelationRecordV1"
                                     },
                                     "minItems": 0,
                                     "type": "array"
