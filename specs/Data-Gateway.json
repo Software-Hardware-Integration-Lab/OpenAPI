@@ -2252,7 +2252,8 @@
                 "required": [
                     "correlation",
                     "tenantMetadata",
-                    "principalData"
+                    "principalData",
+                    "schemaVersion"
                 ],
                 "examples": [
                     {
