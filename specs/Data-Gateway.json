@@ -3290,9 +3290,7 @@
                                                 "auditTenantAccount": "user@example.com",
                                                 "correlationId": "3d282045-ec7f-4813-88e2-29b74ee609f7",
                                                 "createdAt": "2023-11-19T10:00:00.000Z",
-                                                "isMigrating": false,
                                                 "reportTenantAccount": "user@example.com",
-                                                "schemaVersion": 1,
                                                 "tenantId": "123e4567-e89b-12d3-a456-426614174000",
                                                 "updatedAt": "2023-11-19T10:05:00.000Z"
                                             },
@@ -3300,9 +3298,7 @@
                                                 "auditTenantAccount": "user@example.com",
                                                 "correlationId": "5888a922-9f5b-45fd-bd5f-de3283d6a79e",
                                                 "createdAt": "2023-12-19T10:00:00.000Z",
-                                                "isMigrating": false,
                                                 "reportTenantAccount": "user@example.com",
-                                                "schemaVersion": 1,
                                                 "tenantId": "123e4567-e89b-12d3-a456-426614174000",
                                                 "updatedAt": "2023-11-19T10:05:00.000Z"
                                             }
@@ -3313,7 +3309,7 @@
                                     "type": "array",
                                     "minItems": 0,
                                     "items": {
-                                        "$ref": "#/components/schemas/Report.CorrelationRecordV1"
+                                        "$ref": "#/components/schemas/Report.CorrelationRecordV0"
                                     },
                                     "examples": [
                                         [
@@ -3321,9 +3317,7 @@
                                                 "auditTenantAccount": "user@example.com",
                                                 "correlationId": "547404d4-8734-415f-a7ca-e9c1ffb95e48",
                                                 "createdAt": "2023-12-19T10:00:00.000Z",
-                                                "isMigrating": false,
                                                 "reportTenantAccount": "user@example.com",
-                                                "schemaVersion": 1,
                                                 "tenantId": "123e4567-e89b-12d3-a456-426614174000",
                                                 "updatedAt": "2023-11-19T10:05:00.000Z"
                                             },
@@ -3331,9 +3325,7 @@
                                                 "auditTenantAccount": "user@example.com",
                                                 "correlationId": "d76878d6-1495-4243-a334-a82bb9818cd0",
                                                 "createdAt": "2023-12-19T10:00:00.000Z",
-                                                "isMigrating": false,
                                                 "reportTenantAccount": "user@example.com",
-                                                "schemaVersion": 1,
                                                 "tenantId": "123e4567-e89b-12d3-a456-426614174000",
                                                 "updatedAt": "2023-11-19T10:05:00.000Z"
                                             }
@@ -3394,9 +3386,7 @@
                                                 "auditTenantAccount": "user@example.com",
                                                 "correlationId": "3d282045-ec7f-4813-88e2-29b74ee609f7",
                                                 "createdAt": "2023-11-19T10:00:00.000Z",
-                                                "isMigrating": false,
                                                 "reportTenantAccount": "user@example.com",
-                                                "schemaVersion": 1,
                                                 "tenantId": "123e4567-e89b-12d3-a456-426614174000",
                                                 "updatedAt": "2023-11-19T10:05:00.000Z"
                                             },
@@ -3404,9 +3394,7 @@
                                                 "auditTenantAccount": "user@example.com",
                                                 "correlationId": "e0d101e8-6f1e-40a9-a66f-cad4112c9a59",
                                                 "createdAt": "2023-11-19T10:00:00.000Z",
-                                                "isMigrating": false,
                                                 "reportTenantAccount": "user@example.com",
-                                                "schemaVersion": 1,
                                                 "tenantId": "123e4567-e89b-12d3-a456-426614174000",
                                                 "updatedAt": "2023-11-19T10:05:00.000Z"
                                             }
@@ -3417,7 +3405,7 @@
                                     "type": "array",
                                     "minItems": 0,
                                     "items": {
-                                        "$ref": "#/components/schemas/Report.CorrelationRecordV1"
+                                        "$ref": "#/components/schemas/Report.CorrelationRecordV0"
                                     },
                                     "examples": [
                                         [
@@ -3425,9 +3413,7 @@
                                                 "auditTenantAccount": "user@example.com",
                                                 "correlationId": "3d282045-ec7f-4813-88e2-29b74ee609f7",
                                                 "createdAt": "2023-11-19T10:00:00.000Z",
-                                                "isMigrating": false,
                                                 "reportTenantAccount": "user@example.com",
-                                                "schemaVersion": 1,
                                                 "tenantId": "123e4567-e89b-12d3-a456-426614174000",
                                                 "updatedAt": "2023-11-19T10:05:00.000Z"
                                             },
@@ -3435,9 +3421,7 @@
                                                 "auditTenantAccount": "user@example.com",
                                                 "correlationId": "e0d101e8-6f1e-40a9-a66f-cad4112c9a59",
                                                 "createdAt": "2023-11-19T10:00:00.000Z",
-                                                "isMigrating": false,
                                                 "reportTenantAccount": "user@example.com",
-                                                "schemaVersion": 1,
                                                 "tenantId": "123e4567-e89b-12d3-a456-426614174000",
                                                 "updatedAt": "2023-11-19T10:05:00.000Z"
                                             }
@@ -6390,9 +6374,7 @@
                                                 "auditTenantAccount": "user@example.com",
                                                 "correlationId": "3d282045-ec7f-4813-88e2-29b74ee609f7",
                                                 "createdAt": "2023-11-19T10:00:00.000Z",
-                                                "isMigrating": false,
                                                 "reportTenantAccount": "user@example.com",
-                                                "schemaVersion": 1,
                                                 "tenantId": "123e4567-e89b-12d3-a456-426614174000",
                                                 "updatedAt": "2023-11-19T10:05:00.000Z"
                                             },
@@ -6400,9 +6382,7 @@
                                                 "auditTenantAccount": "user@example.com",
                                                 "correlationId": "5888a922-9f5b-45fd-bd5f-de3283d6a79e",
                                                 "createdAt": "2023-12-19T10:00:00.000Z",
-                                                "isMigrating": false,
                                                 "reportTenantAccount": "user@example.com",
-                                                "schemaVersion": 1,
                                                 "tenantId": "123e4567-e89b-12d3-a456-426614174000",
                                                 "updatedAt": "2023-11-19T10:05:00.000Z"
                                             }
@@ -6416,9 +6396,7 @@
                                                 "auditTenantAccount": "user@example.com",
                                                 "correlationId": "3d282045-ec7f-4813-88e2-29b74ee609f7",
                                                 "createdAt": "2023-11-19T10:00:00.000Z",
-                                                "isMigrating": false,
                                                 "reportTenantAccount": "user@example.com",
-                                                "schemaVersion": 1,
                                                 "tenantId": "123e4567-e89b-12d3-a456-426614174000",
                                                 "updatedAt": "2023-11-19T10:05:00.000Z"
                                             },
@@ -6426,16 +6404,14 @@
                                                 "auditTenantAccount": "user@example.com",
                                                 "correlationId": "5888a922-9f5b-45fd-bd5f-de3283d6a79e",
                                                 "createdAt": "2023-12-19T10:00:00.000Z",
-                                                "isMigrating": false,
                                                 "reportTenantAccount": "user@example.com",
-                                                "schemaVersion": 1,
                                                 "tenantId": "123e4567-e89b-12d3-a456-426614174000",
                                                 "updatedAt": "2023-11-19T10:05:00.000Z"
                                             }
                                         ]
                                     ],
                                     "items": {
-                                        "$ref": "#/components/schemas/Report.CorrelationRecordV1"
+                                        "$ref": "#/components/schemas/Report.CorrelationRecordV0"
                                     },
                                     "minItems": 0,
                                     "type": "array"
@@ -6484,9 +6460,7 @@
                                                 "auditTenantAccount": "user@example.com",
                                                 "correlationId": "3d282045-ec7f-4813-88e2-29b74ee609f7",
                                                 "createdAt": "2023-11-19T10:00:00.000Z",
-                                                "isMigrating": false,
                                                 "reportTenantAccount": "user@example.com",
-                                                "schemaVersion": 1,
                                                 "tenantId": "123e4567-e89b-12d3-a456-426614174000",
                                                 "updatedAt": "2023-11-19T10:05:00.000Z"
                                             },
@@ -6494,9 +6468,7 @@
                                                 "auditTenantAccount": "user@example.com",
                                                 "correlationId": "e0d101e8-6f1e-40a9-a66f-cad4112c9a59",
                                                 "createdAt": "2023-11-19T10:00:00.000Z",
-                                                "isMigrating": false,
                                                 "reportTenantAccount": "user@example.com",
-                                                "schemaVersion": 1,
                                                 "tenantId": "123e4567-e89b-12d3-a456-426614174000",
                                                 "updatedAt": "2023-11-19T10:05:00.000Z"
                                             }
@@ -6507,7 +6479,7 @@
                                     "type": "array",
                                     "minItems": 0,
                                     "items": {
-                                        "$ref": "#/components/schemas/ArchitectureReportV1.CorrelationRecord"
+                                        "$ref": "#/components/schemas/Report.CorrelationRecordV0"
                                     },
                                     "examples": [
                                         [
@@ -6515,9 +6487,7 @@
                                                 "auditTenantAccount": "user@example.com",
                                                 "correlationId": "3d282045-ec7f-4813-88e2-29b74ee609f7",
                                                 "createdAt": "2023-11-19T10:00:00.000Z",
-                                                "isMigrating": false,
                                                 "reportTenantAccount": "user@example.com",
-                                                "schemaVersion": 1,
                                                 "tenantId": "123e4567-e89b-12d3-a456-426614174000",
                                                 "updatedAt": "2023-11-19T10:05:00.000Z"
                                             },
@@ -6525,9 +6495,7 @@
                                                 "auditTenantAccount": "user@example.com",
                                                 "correlationId": "e0d101e8-6f1e-40a9-a66f-cad4112c9a59",
                                                 "createdAt": "2023-11-19T10:00:00.000Z",
-                                                "isMigrating": false,
                                                 "reportTenantAccount": "user@example.com",
-                                                "schemaVersion": 1,
                                                 "tenantId": "123e4567-e89b-12d3-a456-426614174000",
                                                 "updatedAt": "2023-11-19T10:05:00.000Z"
                                             }
