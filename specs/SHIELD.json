@@ -4494,7 +4494,7 @@
             "get": {
                 "summary": "Checks the status of the break glass groups and required users existence.",
                 "description": "Retrieves the status of required user quantity existence in the break glass group.\n\nThis endpoint requires the `Deploy.Read` scope (permission).",
-                "operationId": "/Api/Deploy/Remediate/BreakGlass/Get",
+                "operationId": "/Api/Deploy/BreakGlass/Get",
                 "responses": {
                     "200": {
                         "content": {
@@ -4529,7 +4529,7 @@
             "post": {
                 "summary": "Request to create BreakGlass security group",
                 "description": "Attempt to create BreakGlass security group in the tenant. If group has already been provisioned it will return the name of the group to reference.\n\nThis endpoint requires the `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission). ",
-                "operationId": "/Api/Deploy/Remediate/BreakGlass/Post",
+                "operationId": "/Api/Deploy/BreakGlass/Post",
                 "responses": {
                     "200": {
                         "content": {
