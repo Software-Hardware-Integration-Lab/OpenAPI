@@ -1650,6 +1650,36 @@
                                 "https://learn.microsoft.com/en-us/azure/active-directory/authentication/tutorial-enable-azure-mfa"
                             ]
                         ]
+                    },
+                    "manualCreateGuideList": {
+                        "type": "array",
+                        "description": "Collection of strings that make up a manual implementation guide for the associated configuration item.",
+                        "minItems": 0,
+                        "items": {
+                            "type": "string",
+                            "examples": [
+                                "• First level",
+                                "  • Second level",
+                                "    • Third level",
+                                "[Go to this link](https://google.com/)"
+                            ]
+                        },
+                        "examples": [
+                            [
+                                "• Name: \"PSM - Token Binding\"",
+                                "• Users",
+                                "  • What does this policy apply to: Users and groups",
+                                "  • Include",
+                                "  • Select: Select users and groups",
+                                "  • Select: Users and groups",
+                                "  • Select: Users and groups to include",
+                                "• Exclude",
+                                "  • Select: Select users and groups",
+                                "  • Select: Users and groups",
+                                "    • Select: Windows",
+                                "[Go to this link](https://google.com/)"
+                            ]
+                        ]
                     }
                 },
                 "required": [
@@ -1664,7 +1694,8 @@
                     "compliancePositionList",
                     "compliancePositionStandardList",
                     "disclaimerList",
-                    "baseLink"
+                    "baseLink",
+                    "manualCreateGuideList"
                 ],
                 "examples": [
                     {
@@ -1702,6 +1733,20 @@
                         "learnLinkList": [
                             "https://learn.microsoft.com/en-us/azure/active-directory/authentication/concept-mfa-howitworks",
                             "https://learn.microsoft.com/en-us/azure/active-directory/authentication/tutorial-enable-azure-mfa"
+                        ],
+                        "manualCreateGuideList": [
+                            "• Name: \"PSM - Token Binding\"",
+                            "• Users",
+                            "  • What does this policy apply to: Users and groups",
+                            "  • Include",
+                            "  • Select: Select users and groups",
+                            "  • Select: Users and groups",
+                            "  • Select: Users and groups to include",
+                            "• Exclude",
+                            "  • Select: Select users and groups",
+                            "  • Select: Users and groups",
+                            "    • Select: Windows",
+                            "[Go to this link](https://google.com/)"
                         ]
                     }
                 ]
@@ -4748,6 +4793,20 @@
                                             "learnLinkList": [
                                                 "https://learn.microsoft.com/en-us/azure/active-directory/authentication/concept-mfa-howitworks",
                                                 "https://learn.microsoft.com/en-us/azure/active-directory/authentication/tutorial-enable-azure-mfa"
+                                            ],
+                                            "manualCreateGuideList": [
+                                                "• Name: \"PSM - Token Binding\"",
+                                                "• Users",
+                                                "  • What does this policy apply to: Users and groups",
+                                                "  • Include",
+                                                "  • Select: Select users and groups",
+                                                "  • Select: Users and groups",
+                                                "  • Select: Users and groups to include",
+                                                "• Exclude",
+                                                "  • Select: Select users and groups",
+                                                "  • Select: Users and groups",
+                                                "    • Select: Windows",
+                                                "[Go to this link](https://google.com/)"
                                             ]
                                         }
                                     },
