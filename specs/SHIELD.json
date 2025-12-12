@@ -1654,24 +1654,14 @@
                     "manualCreateGuideList": {
                         "type": "array",
                         "description": "Collection of strings that make up a manual implementation guide for the associated configuration item.",
+                        "minItems": 0,
                         "items": {
                             "type": "string",
                             "examples": [
-                                [],
-                                [
-                                    "• Name: \"PSM - Token Binding\"",
-                                    "• Users",
-                                    "  • What does this policy apply to: Users and groups",
-                                    "  • Include",
-                                    "  • Select: Select users and groups",
-                                    "  • Select: Users and groups",
-                                    "  • Select: Users and groups to include",
-                                    "• Exclude",
-                                    "  • Select: Select users and groups",
-                                    "  • Select: Users and groups",
-                                    "    • Select: Windows",
-                                    "[Go to this link](https://google.com/)"
-                                ]
+                                "• First level",
+                                "  • Second level",
+                                "    • Third level",
+                                "[Go to this link](https://google.com/)"
                             ]
                         }
                     }
