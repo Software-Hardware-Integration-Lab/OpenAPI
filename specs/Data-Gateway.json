@@ -642,7 +642,7 @@
                         "type": "object"
                     },
                     "correlation": {
-                        "$ref": "#/components/schemas/Report.CorrelationRecordV0"
+                        "$ref": "#/components/schemas/Report.CorrelationRecord"
                     },
                     "licenseData": {
                         "additionalProperties": {
@@ -675,9 +675,7 @@
                             "auditTenantAccount": "user@example.com",
                             "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
                             "createdAt": "2023-11-19T10:00:00.000Z",
-                            "isMigrating": false,
                             "reportTenantAccount": "user@example.com",
-                            "schemaVersion": 1,
                             "tenantId": "123e4567-e89b-12d3-a456-426614174000",
                             "updatedAt": "2023-11-19T10:05:00.000Z"
                         },
@@ -831,7 +829,7 @@
                         ]
                     },
                     "correlation": {
-                        "$ref": "#/components/schemas/Report.CorrelationRecordV1"
+                        "$ref": "#/components/schemas/Report.CorrelationRecord"
                     },
                     "principalData": {
                         "$ref": "#/components/schemas/Report.PrincipalData"
@@ -853,7 +851,7 @@
                 ],
                 "title": "License Report V1 - Complete Object"
             },
-            "Report.CorrelationRecordV0": {
+            "Report.CorrelationRecord": {
                 "description": "Metadata that describes the execution session (run) that is used to tie/relate report versions together.",
                 "examples": [
                     {
@@ -921,97 +919,6 @@
                     "auditTenantAccount"
                 ],
                 "title": "License Report - Correlation Record",
-                "type": "object"
-            },
-            "Report.CorrelationRecordV1": {
-                "description": "Metadata that describes the execution session (run) that is used to tie/relate report versions together.",
-                "examples": [
-                    {
-                        "auditTenantAccount": "user@example.com",
-                        "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-                        "createdAt": "2023-11-19T10:00:00.000Z",
-                        "isMigrating": false,
-                        "reportTenantAccount": "user@example.com",
-                        "schemaVersion": 1,
-                        "tenantId": "123e4567-e89b-12d3-a456-426614174000",
-                        "updatedAt": "2023-11-19T10:05:00.000Z"
-                    }
-                ],
-                "properties": {
-                    "auditTenantAccount": {
-                        "description": "The user account used to retrieve the license information in the tenant being audited.",
-                        "examples": [
-                            "user@example.com"
-                        ],
-                        "format": "email",
-                        "type": "string"
-                    },
-                    "correlationId": {
-                        "description": "The ID of the execution session (run) that is used to tie/relate all of the data together.",
-                        "examples": [
-                            "88da2253-758f-4135-9d37-64448c8b65c1"
-                        ],
-                        "format": "uuid",
-                        "type": "string",
-                        "maxLength": 36,
-                        "minLength": 36,
-                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
-                    },
-                    "createdAt": {
-                        "description": "Timestamp of when the report was created.",
-                        "examples": [
-                            "2024-08-01T21:12:22.148Z"
-                        ],
-                        "format": "date-time",
-                        "type": "string"
-                    },
-                    "isMigrating": {
-                        "description": "Flag indicating whether the current license report is migrating. If true, data is currently migrating from one version to another.",
-                        "examples": [
-                            true
-                        ],
-                        "type": "boolean"
-                    },
-                    "reportTenantAccount": {
-                        "description": "User account used to store/report the license report to the SHI Lab cloud service.",
-                        "examples": [
-                            "user@example.com"
-                        ],
-                        "format": "email",
-                        "type": "string"
-                    },
-                    "schemaVersion": {
-                        "description": "Specifies the version of the current license report.",
-                        "examples": [
-                            1
-                        ],
-                        "format": "int32",
-                        "type": "integer"
-                    },
-                    "tenantId": {
-                        "description": "Unique ID of customer's Microsoft tenant that the license report is for.",
-                        "examples": [
-                            "0e1fe83f-a33f-4250-8546-225b8d45ae01"
-                        ],
-                        "format": "uuid",
-                        "type": "string",
-                        "maxLength": 36,
-                        "minLength": 36,
-                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
-                    },
-                    "updatedAt": {
-                        "description": "Timestamp of when the report was last updated.",
-                        "examples": [
-                            "2024-08-01T21:12:22.148Z"
-                        ],
-                        "format": "date-time",
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "auditTenantAccount"
-                ],
-                "title": "Report - Correlation Record V1",
                 "type": "object"
             },
             "Report.PrincipalData": {
@@ -2232,7 +2139,7 @@
                 "type": "object",
                 "properties": {
                     "correlation": {
-                        "$ref": "#/components/schemas/Report.CorrelationRecordV1"
+                        "$ref": "#/components/schemas/Report.CorrelationRecord"
                     },
                     "principalData": {
                         "$ref": "#/components/schemas/ArchitectureReport.PrincipalData"
@@ -2261,9 +2168,7 @@
                             "auditTenantAccount": "user@example.com",
                             "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
                             "createdAt": "2023-11-19T10:00:00.000Z",
-                            "isMigrating": false,
                             "reportTenantAccount": "user@example.com",
-                            "schemaVersion": 1,
                             "tenantId": "123e4567-e89b-12d3-a456-426614174000",
                             "updatedAt": "2023-11-19T10:05:00.000Z"
                         },
@@ -2668,7 +2573,7 @@
                                     "type": "array",
                                     "minItems": 0,
                                     "items": {
-                                        "$ref": "#/components/schemas/Report.CorrelationRecordV0"
+                                        "$ref": "#/components/schemas/Report.CorrelationRecord"
                                     },
                                     "examples": [
                                         [
@@ -2755,7 +2660,7 @@
                                     "type": "array",
                                     "minItems": 0,
                                     "items": {
-                                        "$ref": "#/components/schemas/Report.CorrelationRecordV0"
+                                        "$ref": "#/components/schemas/Report.CorrelationRecord"
                                     },
                                     "examples": [
                                         [
@@ -3167,9 +3072,7 @@
                                                 "auditTenantAccount": "user@example.com",
                                                 "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
                                                 "createdAt": "2023-11-19T10:00:00.000Z",
-                                                "isMigrating": false,
                                                 "reportTenantAccount": "user@example.com",
-                                                "schemaVersion": 1,
                                                 "tenantId": "123e4567-e89b-12d3-a456-426614174000",
                                                 "updatedAt": "2023-11-19T10:05:00.000Z"
                                             },
@@ -3309,7 +3212,7 @@
                                     "type": "array",
                                     "minItems": 0,
                                     "items": {
-                                        "$ref": "#/components/schemas/Report.CorrelationRecordV0"
+                                        "$ref": "#/components/schemas/Report.CorrelationRecord"
                                     },
                                     "examples": [
                                         [
@@ -3405,7 +3308,7 @@
                                     "type": "array",
                                     "minItems": 0,
                                     "items": {
-                                        "$ref": "#/components/schemas/Report.CorrelationRecordV0"
+                                        "$ref": "#/components/schemas/Report.CorrelationRecord"
                                     },
                                     "examples": [
                                         [
@@ -3486,9 +3389,7 @@
                                                 "auditTenantAccount": "user@example.com",
                                                 "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
                                                 "createdAt": "2023-11-19T10:00:00.000Z",
-                                                "isMigrating": false,
                                                 "reportTenantAccount": "user@example.com",
-                                                "schemaVersion": 1,
                                                 "tenantId": "123e4567-e89b-12d3-a456-426614174000",
                                                 "updatedAt": "2023-11-19T10:05:00.000Z"
                                             },
@@ -3652,9 +3553,7 @@
                                                 "auditTenantAccount": "user@example.com",
                                                 "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
                                                 "createdAt": "2023-11-19T10:00:00.000Z",
-                                                "isMigrating": false,
                                                 "reportTenantAccount": "user@example.com",
-                                                "schemaVersion": 1,
                                                 "tenantId": "123e4567-e89b-12d3-a456-426614174000",
                                                 "updatedAt": "2023-11-19T10:05:00.000Z"
                                             },
@@ -6251,9 +6150,7 @@
                                                 "auditTenantAccount": "user@example.com",
                                                 "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
                                                 "createdAt": "2023-11-19T10:00:00.000Z",
-                                                "isMigrating": false,
                                                 "reportTenantAccount": "user@example.com",
-                                                "schemaVersion": 1,
                                                 "tenantId": "123e4567-e89b-12d3-a456-426614174000",
                                                 "updatedAt": "2023-11-19T10:05:00.000Z"
                                             },
@@ -6411,7 +6308,7 @@
                                         ]
                                     ],
                                     "items": {
-                                        "$ref": "#/components/schemas/Report.CorrelationRecordV0"
+                                        "$ref": "#/components/schemas/Report.CorrelationRecord"
                                     },
                                     "minItems": 0,
                                     "type": "array"
@@ -6479,7 +6376,7 @@
                                     "type": "array",
                                     "minItems": 0,
                                     "items": {
-                                        "$ref": "#/components/schemas/Report.CorrelationRecordV0"
+                                        "$ref": "#/components/schemas/Report.CorrelationRecord"
                                     },
                                     "examples": [
                                         [
@@ -6563,9 +6460,7 @@
                                             "auditTenantAccount": "user@example.com",
                                             "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
                                             "createdAt": "2023-11-19T10:00:00.000Z",
-                                            "isMigrating": false,
                                             "reportTenantAccount": "user@example.com",
-                                            "schemaVersion": 1,
                                             "tenantId": "123e4567-e89b-12d3-a456-426614174000",
                                             "updatedAt": "2023-11-19T10:05:00.000Z"
                                         },
@@ -6713,9 +6608,7 @@
                                             "auditTenantAccount": "user@example.com",
                                             "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
                                             "createdAt": "2023-11-19T10:00:00.000Z",
-                                            "isMigrating": false,
                                             "reportTenantAccount": "user@example.com",
-                                            "schemaVersion": 1,
                                             "tenantId": "123e4567-e89b-12d3-a456-426614174000",
                                             "updatedAt": "2023-11-19T10:05:00.000Z"
                                         },
