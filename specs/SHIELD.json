@@ -1663,7 +1663,23 @@
                                 "    • Third level",
                                 "[Go to this link](https://google.com/)"
                             ]
-                        }
+                        },
+                        "examples": [
+                            [
+                                "• Name: \"PSM - Token Binding\"",
+                                "• Users",
+                                "  • What does this policy apply to: Users and groups",
+                                "  • Include",
+                                "  • Select: Select users and groups",
+                                "  • Select: Users and groups",
+                                "  • Select: Users and groups to include",
+                                "• Exclude",
+                                "  • Select: Select users and groups",
+                                "  • Select: Users and groups",
+                                "    • Select: Windows",
+                                "[Go to this link](https://google.com/)"
+                            ]
+                        ]
                     }
                 },
                 "required": [
