@@ -2325,7 +2325,7 @@
                         "type": "string"
                     },
                     "assessmentId": {
-                        "description": "Unique Identifier representing a single set of cloud matrix assessment.",
+                        "description": "Unique Identifier representing a single cloud matrix assessment.",
                         "examples": [
                             "bbab2907-c781-4bf1-b912-b91510853052"
                         ],
@@ -2351,7 +2351,7 @@
                         "pattern": "^\\w+-\\w+-\\w+-\\w+-\\w+$"
                     },
                     "discoverDate": {
-                        "description": "Timestamp of when when the discovery process was initiated",
+                        "description": "Timestamp of when the discovery process was initiated",
                         "examples": [
                             "2025-12-15T21:13:12.821Z"
                         ],
