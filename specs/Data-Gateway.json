@@ -2311,7 +2311,7 @@
                         "createdAt": "2025-12-15T21:13:12.821Z",
                         "crmId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
                         "discoverDate": "2025-12-15T21:13:12.821Z",
-                        "isComplete": 1,
+                        "isComplete": true,
                         "publisher": "Test Publisher",
                         "updatedAt": "2025-12-15T21:13:12.821Z"
                     }
@@ -2361,10 +2361,9 @@
                     "isComplete": {
                         "description": "Indicates whether the discovery process has been completed for this cloud matrix assessment record.",
                         "examples": [
-                            1
+                            true
                         ],
-                        "format": "int32",
-                        "type": "integer"
+                        "type": "boolean"
                     },
                     "publisher": {
                         "description": "The name of the publisher associated with this cloud matrix assessment record.",
@@ -6819,7 +6818,7 @@
                                                 "createdAt": "2025-12-15T21:13:12.821Z",
                                                 "crmId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
                                                 "discoverDate": "2025-12-15T21:13:12.821Z",
-                                                "isComplete": 1,
+                                                "isComplete": true,
                                                 "publisher": "Test Publisher",
                                                 "updatedAt": "2025-12-15T21:13:12.821Z"
                                             },
@@ -6829,7 +6828,7 @@
                                                 "createdAt": "2025-12-15T21:13:12.821Z",
                                                 "crmId": "fbea61c3-6c80-4fbb-9bd7-b6fa2356892e",
                                                 "discoverDate": "2025-12-15T21:13:12.821Z",
-                                                "isComplete": 1,
+                                                "isComplete": false,
                                                 "publisher": "Test Publisher",
                                                 "updatedAt": "2025-12-15T21:13:12.821Z"
                                             }
@@ -6845,7 +6844,7 @@
                                                 "createdAt": "2025-12-15T21:13:12.821Z",
                                                 "crmId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
                                                 "discoverDate": "2025-12-15T21:13:12.821Z",
-                                                "isComplete": 1,
+                                                "isComplete": true,
                                                 "publisher": "Test Publisher One",
                                                 "updatedAt": "2025-12-15T21:13:12.821Z"
                                             },
@@ -6855,7 +6854,7 @@
                                                 "createdAt": "2025-12-15T21:13:12.821Z",
                                                 "crmId": "fbea61c3-6c80-4fbb-9bd7-b6fa2356892e",
                                                 "discoverDate": "2025-12-15T21:13:12.821Z",
-                                                "isComplete": 1,
+                                                "isComplete": false,
                                                 "publisher": "Test Publisher Two",
                                                 "updatedAt": "2025-12-15T21:13:12.821Z"
                                             }
