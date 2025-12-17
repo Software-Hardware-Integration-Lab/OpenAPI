@@ -6456,83 +6456,87 @@
                             "application/json": {
                                 "examples": {
                                     "Example Architecture Report V1": {
-                                        "correlation": {
-                                            "auditTenantAccount": "user@example.com",
-                                            "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-                                            "createdAt": "2023-11-19T10:00:00.000Z",
-                                            "reportTenantAccount": "user@example.com",
-                                            "tenantId": "123e4567-e89b-12d3-a456-426614174000",
-                                            "updatedAt": "2023-11-19T10:05:00.000Z"
-                                        },
-                                        "principalData": {
-                                            "user": {
-                                                "e7b8c8a2-1f2e-4c3a-9b6a-2d8e4f8a9b7c": {
-                                                    "assignedService": {
-                                                        "3d282045-ec7f-4813-88e2-29b74ee609f7": {
-                                                            "featureA": true,
-                                                            "featureB": false
+                                        "description": "Sample structure of the valid architecture report along with all relevant metadata retrieved using correlation record ID.",
+                                        "summary": "Architecture Report Details",
+                                        "value": {
+                                            "correlation": {
+                                                "auditTenantAccount": "user@example.com",
+                                                "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                                                "createdAt": "2023-11-19T10:00:00.000Z",
+                                                "reportTenantAccount": "user@example.com",
+                                                "tenantId": "123e4567-e89b-12d3-a456-426614174000",
+                                                "updatedAt": "2023-11-19T10:05:00.000Z"
+                                            },
+                                            "principalData": {
+                                                "user": {
+                                                    "e7b8c8a2-1f2e-4c3a-9b6a-2d8e4f8a9b7c": {
+                                                        "assignedService": {
+                                                            "3d282045-ec7f-4813-88e2-29b74ee609f7": {
+                                                                "featureA": true,
+                                                                "featureB": false
+                                                            }
+                                                        },
+                                                        "assignedLicense": [
+                                                            {
+                                                                "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                                                                "servicePlanList": [
+                                                                    "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                                                                ]
+                                                            }
+                                                        ],
+                                                        "consumedService": {
+                                                            "3d282045-ec7f-4813-88e2-29b74ee609f7": {
+                                                                "featureA": true,
+                                                                "featureB": false
+                                                            }
+                                                        },
+                                                        "llmInferred": {
+                                                            "isServiceAccount": false,
+                                                            "isFrontlineWorker": true,
+                                                            "isTempWorker": null
+                                                        },
+                                                        "principalMetadata": {
+                                                            "sharedMailbox": false
+                                                        },
+                                                        "enhancedData": {
+                                                            "userPrincipalName": "user@example.com",
+                                                            "idpJobTitle": "Engineer",
+                                                            "idpDepartment": "IT",
+                                                            "idpOfficeLocation": "HQ",
+                                                            "idpEmployeeType": "Full-Time"
                                                         }
-                                                    },
-                                                    "assignedLicense": [
-                                                        {
-                                                            "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
-                                                            "servicePlanList": [
-                                                                "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-                                                            ]
+                                                    }
+                                                },
+                                                "device": {
+                                                    "f1e2d3c4-b5a6-7890-1234-56789abcdef0": {
+                                                        "assignedService": {
+                                                            "3d282045-ec7f-4813-88e2-29b74ee609f7": 5
+                                                        },
+                                                        "assignedLicense": [
+                                                            {
+                                                                "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                                                                "servicePlanList": [
+                                                                    "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                                                                ]
+                                                            }
+                                                        ],
+                                                        "consumedService": {
+                                                            "3d282045-ec7f-4813-88e2-29b74ee609f7": 5
+                                                        },
+                                                        "principalMetadata": {
+                                                            "sharedComputer": true
                                                         }
-                                                    ],
-                                                    "consumedService": {
-                                                        "3d282045-ec7f-4813-88e2-29b74ee609f7": {
-                                                            "featureA": true,
-                                                            "featureB": false
-                                                        }
-                                                    },
-                                                    "llmInferred": {
-                                                        "isServiceAccount": false,
-                                                        "isFrontlineWorker": true,
-                                                        "isTempWorker": null
-                                                    },
-                                                    "principalMetadata": {
-                                                        "sharedMailbox": false
-                                                    },
-                                                    "enhancedData": {
-                                                        "userPrincipalName": "user@example.com",
-                                                        "idpJobTitle": "Engineer",
-                                                        "idpDepartment": "IT",
-                                                        "idpOfficeLocation": "HQ",
-                                                        "idpEmployeeType": "Full-Time"
                                                     }
                                                 }
                                             },
-                                            "device": {
-                                                "f1e2d3c4-b5a6-7890-1234-56789abcdef0": {
-                                                    "assignedService": {
-                                                        "3d282045-ec7f-4813-88e2-29b74ee609f7": 5
-                                                    },
-                                                    "assignedLicense": [
-                                                        {
-                                                            "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
-                                                            "servicePlanList": [
-                                                                "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "consumedService": {
-                                                        "3d282045-ec7f-4813-88e2-29b74ee609f7": 5
-                                                    },
-                                                    "principalMetadata": {
-                                                        "sharedComputer": true
-                                                    }
-                                                }
-                                            }
-                                        },
-                                        "tenantMetadata": {
-                                            "totalDeviceCount": 1,
-                                            "totalGuestCount": 1,
-                                            "totalMemberCount": 1,
-                                            "totalUserCount": 1
-                                        },
-                                        "schemaVersion": 1
+                                            "tenantMetadata": {
+                                                "totalDeviceCount": 1,
+                                                "totalGuestCount": 1,
+                                                "totalMemberCount": 1,
+                                                "totalUserCount": 1
+                                            },
+                                            "schemaVersion": 1
+                                        }
                                     }
                                 },
                                 "schema": {
@@ -6604,83 +6608,87 @@
                             "application/json": {
                                 "examples": {
                                     "Architecture Report V1": {
-                                        "correlation": {
-                                            "auditTenantAccount": "user@example.com",
-                                            "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-                                            "createdAt": "2023-11-19T10:00:00.000Z",
-                                            "reportTenantAccount": "user@example.com",
-                                            "tenantId": "123e4567-e89b-12d3-a456-426614174000",
-                                            "updatedAt": "2023-11-19T10:05:00.000Z"
-                                        },
-                                        "principalData": {
-                                            "user": {
-                                                "e7b8c8a2-1f2e-4c3a-9b6a-2d8e4f8a9b7c": {
-                                                    "assignedService": {
-                                                        "3d282045-ec7f-4813-88e2-29b74ee609f7": {
-                                                            "featureA": true,
-                                                            "featureB": false
+                                        "description": "Sample structure of the valid architecture report along with all relevant metadata retrieved using correlation record ID and specific tenant ID.",
+                                        "summary": "Architecture Report Details",
+                                        "value": {
+                                            "correlation": {
+                                                "auditTenantAccount": "user@example.com",
+                                                "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                                                "createdAt": "2023-11-19T10:00:00.000Z",
+                                                "reportTenantAccount": "user@example.com",
+                                                "tenantId": "123e4567-e89b-12d3-a456-426614174000",
+                                                "updatedAt": "2023-11-19T10:05:00.000Z"
+                                            },
+                                            "principalData": {
+                                                "user": {
+                                                    "e7b8c8a2-1f2e-4c3a-9b6a-2d8e4f8a9b7c": {
+                                                        "assignedService": {
+                                                            "3d282045-ec7f-4813-88e2-29b74ee609f7": {
+                                                                "featureA": true,
+                                                                "featureB": false
+                                                            }
+                                                        },
+                                                        "assignedLicense": [
+                                                            {
+                                                                "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                                                                "servicePlanList": [
+                                                                    "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                                                                ]
+                                                            }
+                                                        ],
+                                                        "consumedService": {
+                                                            "3d282045-ec7f-4813-88e2-29b74ee609f7": {
+                                                                "featureA": true,
+                                                                "featureB": false
+                                                            }
+                                                        },
+                                                        "llmInferred": {
+                                                            "isServiceAccount": false,
+                                                            "isFrontlineWorker": true,
+                                                            "isTempWorker": null
+                                                        },
+                                                        "principalMetadata": {
+                                                            "sharedMailbox": false
+                                                        },
+                                                        "enhancedData": {
+                                                            "userPrincipalName": "user@example.com",
+                                                            "idpJobTitle": "Engineer",
+                                                            "idpDepartment": "IT",
+                                                            "idpOfficeLocation": "HQ",
+                                                            "idpEmployeeType": "Full-Time"
                                                         }
-                                                    },
-                                                    "assignedLicense": [
-                                                        {
-                                                            "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
-                                                            "servicePlanList": [
-                                                                "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-                                                            ]
+                                                    }
+                                                },
+                                                "device": {
+                                                    "f1e2d3c4-b5a6-7890-1234-56789abcdef0": {
+                                                        "assignedService": {
+                                                            "3d282045-ec7f-4813-88e2-29b74ee609f7": 5
+                                                        },
+                                                        "assignedLicense": [
+                                                            {
+                                                                "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                                                                "servicePlanList": [
+                                                                    "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                                                                ]
+                                                            }
+                                                        ],
+                                                        "consumedService": {
+                                                            "3d282045-ec7f-4813-88e2-29b74ee609f7": 5
+                                                        },
+                                                        "principalMetadata": {
+                                                            "sharedComputer": true
                                                         }
-                                                    ],
-                                                    "consumedService": {
-                                                        "3d282045-ec7f-4813-88e2-29b74ee609f7": {
-                                                            "featureA": true,
-                                                            "featureB": false
-                                                        }
-                                                    },
-                                                    "llmInferred": {
-                                                        "isServiceAccount": false,
-                                                        "isFrontlineWorker": true,
-                                                        "isTempWorker": null
-                                                    },
-                                                    "principalMetadata": {
-                                                        "sharedMailbox": false
-                                                    },
-                                                    "enhancedData": {
-                                                        "userPrincipalName": "user@example.com",
-                                                        "idpJobTitle": "Engineer",
-                                                        "idpDepartment": "IT",
-                                                        "idpOfficeLocation": "HQ",
-                                                        "idpEmployeeType": "Full-Time"
                                                     }
                                                 }
                                             },
-                                            "device": {
-                                                "f1e2d3c4-b5a6-7890-1234-56789abcdef0": {
-                                                    "assignedService": {
-                                                        "3d282045-ec7f-4813-88e2-29b74ee609f7": 5
-                                                    },
-                                                    "assignedLicense": [
-                                                        {
-                                                            "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
-                                                            "servicePlanList": [
-                                                                "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "consumedService": {
-                                                        "3d282045-ec7f-4813-88e2-29b74ee609f7": 5
-                                                    },
-                                                    "principalMetadata": {
-                                                        "sharedComputer": true
-                                                    }
-                                                }
-                                            }
-                                        },
-                                        "tenantMetadata": {
-                                            "totalDeviceCount": 1,
-                                            "totalGuestCount": 1,
-                                            "totalMemberCount": 1,
-                                            "totalUserCount": 1
-                                        },
-                                        "schemaVersion": 1
+                                            "tenantMetadata": {
+                                                "totalDeviceCount": 1,
+                                                "totalGuestCount": 1,
+                                                "totalMemberCount": 1,
+                                                "totalUserCount": 1
+                                            },
+                                            "schemaVersion": 1
+                                        }
                                     }
                                 },
                                 "schema": {
