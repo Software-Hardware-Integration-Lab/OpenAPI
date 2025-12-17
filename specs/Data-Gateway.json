@@ -2302,7 +2302,7 @@
                 "$ref": "#/components/schemas/Report.PrincipalData",
                 "title": "Architecture Report - Principal Data"
             },
-            "CloudMatrix": {
+            "CloudMatrixAssessmentRecord": {
                 "description": "Represents a cloud matrix record, including customer, assessment, and publisher details, as well as key timestamps and identifiers.",
                 "examples": [
                     {
@@ -2312,26 +2312,28 @@
                         "crmId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
                         "discoverDate": "2025-12-15T21:13:12.821Z",
                         "isComplete": true,
-                        "publisher": "Test Publisher",
+                        "publisher": "Test Publisher One",
                         "updatedAt": "2025-12-15T21:13:12.821Z"
                     }
                 ],
                 "properties": {
                     "accountName": {
-                        "description": "The name of the customer account associated with this cloud matrix assessment.",
+                        "description": "The name of the customer account associated with this cloud matrix assessment record.",
                         "examples": [
                             "Test Account Name"
                         ],
                         "type": "string"
                     },
                     "assessmentId": {
-                        "description": "Unique Identifier representing a single cloud matrix assessment.",
+                        "description": "The unique identifier (UUID) of the discovery session associated with this cloud matrix assessment record.",
                         "examples": [
                             "bbab2907-c781-4bf1-b912-b91510853052"
                         ],
                         "format": "uuid",
                         "type": "string",
-                        "pattern": "^\\w+-\\w+-\\w+-\\w+-\\w+$"
+                        "maxLength": 36,
+                        "minLength": 36,
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
                     },
                     "createdAt": {
                         "description": "Timestamp of when the report was created.",
@@ -2342,16 +2344,18 @@
                         "type": "string"
                     },
                     "crmId": {
-                        "description": "Unique Identifier representing the customer identity for this cloud matrix assessment.",
+                        "description": "The unique identifier (UUID) of the customer associated with this cloud matrix assessment record.",
                         "examples": [
                             "75498125-33cb-4b33-8705-f0fadadb1a2f"
                         ],
                         "format": "uuid",
                         "type": "string",
-                        "pattern": "^\\w+-\\w+-\\w+-\\w+-\\w+$"
+                        "maxLength": 36,
+                        "minLength": 36,
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
                     },
                     "discoverDate": {
-                        "description": "Timestamp of when the discovery process was initiated",
+                        "description": "Timestamp of when the discovery process was initiated.",
                         "examples": [
                             "2025-12-15T21:13:12.821Z"
                         ],
@@ -2387,7 +2391,7 @@
                     "discoverDate",
                     "publisher"
                 ],
-                "title": "Cloud Matrix Record",
+                "title": "Cloud Matrix Assessment Record",
                 "type": "object"
             }
         },
@@ -2411,7 +2415,7 @@
         },
         "description": "Collects data from the various SHI Lab products and makes it available in a standardized way.",
         "title": "SHI Data Gateway",
-        "version": "2.3.1"
+        "version": "2.5.0"
     },
     "openapi": "3.1.1",
     "paths": {
@@ -6819,7 +6823,7 @@
                                                 "crmId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
                                                 "discoverDate": "2025-12-15T21:13:12.821Z",
                                                 "isComplete": true,
-                                                "publisher": "Test Publisher",
+                                                "publisher": "Test Publisher One",
                                                 "updatedAt": "2025-12-15T21:13:12.821Z"
                                             },
                                             {
@@ -6829,7 +6833,7 @@
                                                 "crmId": "fbea61c3-6c80-4fbb-9bd7-b6fa2356892e",
                                                 "discoverDate": "2025-12-15T21:13:12.821Z",
                                                 "isComplete": false,
-                                                "publisher": "Test Publisher",
+                                                "publisher": "Test Publisher Two",
                                                 "updatedAt": "2025-12-15T21:13:12.821Z"
                                             }
                                         ]
@@ -6861,7 +6865,7 @@
                                         ]
                                     ],
                                     "items": {
-                                        "$ref": "#/components/schemas/CloudMatrix"
+                                        "$ref": "#/components/schemas/CloudMatrixAssessmentRecord"
                                     },
                                     "minItems": 0,
                                     "type": "array"
