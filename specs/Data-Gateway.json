@@ -4122,11 +4122,11 @@
         },
         "/Api/Chat/UpdateDocs": {
             "post": {
-                "description": "Sends a request to update the cached Data Gateway documentation if there is a newer version.\n\nThis endpoint requires the `LicenseGptCache.ReadWrite` scope (permission).This endpoint is also only accessible from the `SHI Lab` tenants. End user access is restricted.",
-                "operationId": "/Api/Chat/UpdateDocs",
+                "description": "Sends a request to update the cached Data Gateway documentation if there is a newer version.\n\nThis endpoint requires the `LicenseGptCache.ReadWrite` scope (permission). This endpoint is also only accessible from the `SHI Lab` tenant. End user access is restricted.",
+                "operationId": "/Api/Chat/UpdateDocs/Post",
                 "responses": {
                     "204": {
-                        "description": "OK"
+                        "description": "Documentation updated successfully"
                     },
                     "400": {
                         "$ref": "#/components/responses/400"
