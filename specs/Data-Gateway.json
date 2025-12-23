@@ -2302,12 +2302,12 @@
                 "$ref": "#/components/schemas/Report.PrincipalData",
                 "title": "Architecture Report - Principal Data"
             },
-            "CloudMatrixAssessmentRecord": {
-                "description": "Represents a cloud matrix record, including customer, assessment, and publisher details, as well as key timestamps and identifiers.",
+            "CloudMatrixAssessment.Correlation": {
+                "description": "Represents a cloud matrix assessment record, including customer, publisher details and correlation record, as well as key timestamps and identifiers.",
                 "examples": [
                     {
                         "accountName": "Test Account Name",
-                        "assessmentId": "bbab2907-c781-4bf1-b912-b91510853052",
+                        "correlationId": "bbab2907-c781-4bf1-b912-b91510853052",
                         "createdAt": "2025-12-15T21:13:12.821Z",
                         "crmId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
                         "discoverDate": "2025-12-15T21:13:12.821Z",
@@ -2324,7 +2324,7 @@
                         ],
                         "type": "string"
                     },
-                    "assessmentId": {
+                    "correlationId": {
                         "description": "The unique identifier (UUID) of the discovery session associated with this cloud matrix assessment record.",
                         "examples": [
                             "bbab2907-c781-4bf1-b912-b91510853052"
@@ -6818,7 +6818,7 @@
                                         "value": [
                                             {
                                                 "accountName": "Test Account Name",
-                                                "assessmentId": "bbab2907-c781-4bf1-b912-b91510853052",
+                                                "correlationId": "bbab2907-c781-4bf1-b912-b91510853052",
                                                 "createdAt": "2025-12-15T21:13:12.821Z",
                                                 "crmId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
                                                 "discoverDate": "2025-12-15T21:13:12.821Z",
@@ -6828,7 +6828,7 @@
                                             },
                                             {
                                                 "accountName": "Test Account Name",
-                                                "assessmentId": "e7cc9996-3c5f-4be4-bba2-c815a157dedb",
+                                                "correlationId": "e7cc9996-3c5f-4be4-bba2-c815a157dedb",
                                                 "createdAt": "2025-12-15T21:13:12.821Z",
                                                 "crmId": "fbea61c3-6c80-4fbb-9bd7-b6fa2356892e",
                                                 "discoverDate": "2025-12-15T21:13:12.821Z",
@@ -6844,7 +6844,7 @@
                                         [
                                             {
                                                 "accountName": "Test Account Name",
-                                                "assessmentId": "bbab2907-c781-4bf1-b912-b91510853052",
+                                                "correlationId": "bbab2907-c781-4bf1-b912-b91510853052",
                                                 "createdAt": "2025-12-15T21:13:12.821Z",
                                                 "crmId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
                                                 "discoverDate": "2025-12-15T21:13:12.821Z",
@@ -6854,7 +6854,7 @@
                                             },
                                             {
                                                 "accountName": "Test Account Name",
-                                                "assessmentId": "e7cc9996-3c5f-4be4-bba2-c815a157dedb",
+                                                "correlationId": "e7cc9996-3c5f-4be4-bba2-c815a157dedb",
                                                 "createdAt": "2025-12-15T21:13:12.821Z",
                                                 "crmId": "fbea61c3-6c80-4fbb-9bd7-b6fa2356892e",
                                                 "discoverDate": "2025-12-15T21:13:12.821Z",
@@ -6865,7 +6865,7 @@
                                         ]
                                     ],
                                     "items": {
-                                        "$ref": "#/components/schemas/CloudMatrixAssessmentRecord"
+                                        "$ref": "#/components/schemas/CloudMatrixAssessment.Correlation"
                                     },
                                     "minItems": 0,
                                     "type": "array"
