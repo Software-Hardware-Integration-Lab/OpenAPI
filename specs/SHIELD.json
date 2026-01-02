@@ -118,6 +118,34 @@
                     }
                 }
             },
+            "operation": {
+                "description": "Flag to indicate which progress data in the Deploy Engine to retrieve. If invalid value is provided, it would be ignored and result defaulted to deploy operation.",
+                "in": "query",
+                "name": "operation",
+                "schema": {
+                    "examples": [
+                        "remediate"
+                    ],
+                    "type": "string",
+                    "enum": [
+                        "deploy",
+                        "remediate",
+                        "analysis"
+                    ]
+                },
+                "examples": {
+                    "valid request": {
+                        "value": "remediate",
+                        "summary": "Example of the request that provides expected value",
+                        "description": "An example of a valid value that indicates the progress bar data to retrieve is for remediation action."
+                    },
+                    "invalid request": {
+                        "value": "somethingelse",
+                        "summary": "Example of the request that includes unexpected value",
+                        "description": "An example of an incorrect value that would be ignored and defaulted to data for deploy action."
+                    }
+                }
+            },
             "search": {
                 "description": "Used in object filtering.",
                 "in": "query",
@@ -1111,9 +1139,103 @@
                     }
                 ]
             },
+            "Deploy.RemediationResponse": {
+                "title": "Deploy - Remediation Response Record",
+                "description": "Object with the details of the performed remediation action.",
+                "type": "object",
+                "properties": {
+                    "errors": {
+                        "type": "array",
+                        "description": "Collection of the configuration items that failed to provision and available details on the error.",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "templateId": {
+                                    "type": "string",
+                                    "description": "Internal reference identifier of the resource.",
+                                    "format": "uuid",
+                                    "maxLength": 36,
+                                    "minLength": 36,
+                                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                                    "examples": [
+                                        "7e2b1c3d-4f5a-4a8b-9e6a-1c2b7f3d8e4a"
+                                    ]
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "Text with the details of the error response.",
+                                    "examples": [
+                                        "Failed to create dedicated group for the resource: Unexpected error."
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "templateId",
+                                "message"
+                            ],
+                            "examples": [
+                                {
+                                    "templateId": "7e2b1c3d-4f5a-4a8b-9e6a-1c2b7f3d8e4a",
+                                    "message": "Failed to create dedicated group for the resource: Unexpected error."
+                                }
+                            ]
+                        },
+                        "examples": [
+                            [
+                                {
+                                    "templateId": "7e2b1c3d-4f5a-4a8b-9e6a-1c2b7f3d8e4a",
+                                    "message": "Failed to create dedicated group for the resource: Unexpected error."
+                                },
+                                {
+                                    "templateId": "2a1c7e3b-5d4f-4a8b-9e6a-7f3d2b1c8e4a",
+                                    "message": "Failed to create the resource: invalid value for 'id' reference."
+                                }
+                            ]
+                        ]
+                    },
+                    "results": {
+                        "type": "object",
+                        "description": "Records in the form of key/value where key is templateId of the configuration item and value is the name of the provisioned resource.",
+                        "additionalProperties": {
+                            "type": "string",
+                            "examples": [
+                                "CSPM - MDCA"
+                            ]
+                        },
+                        "examples": [
+                            {
+                                "4a8b7e1a-2b3c-4d5f-9e6a-1c2b7f3d8e4a": "CSPM - MDCA",
+                                "b3e2c1d4-7f5a-4a8b-9e6a-2c1b7f3d8e4a": "CSPM - Authentication Methods"
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "errors",
+                    "results"
+                ],
+                "examples": [
+                    {
+                        "errors": [
+                            {
+                                "templateId": "7e2b1c3d-4f5a-4a8b-9e6a-1c2b7f3d8e4a",
+                                "message": "Failed to create dedicated group for the resource: Unexpected error."
+                            },
+                            {
+                                "templateId": "2a1c7e3b-5d4f-4a8b-9e6a-7f3d2b1c8e4a",
+                                "message": "Failed to create the resource: invalid value for 'id' reference."
+                            }
+                        ],
+                        "results": {
+                            "4a8b7e1a-2b3c-4d5f-9e6a-1c2b7f3d8e4a": "CSPM - MDCA",
+                            "b3e2c1d4-7f5a-4a8b-9e6a-2c1b7f3d8e4a": "CSPM - Authentication Methods"
+                        }
+                    }
+                ]
+            },
             "Deploy.ConfigurationItem": {
                 "title": "Deploy - Configuration Item List",
-                "description": "",
+                "description": "Collection of objects representing the configuration items with curated properties and values in user-friendly format.",
                 "type": "array",
                 "items": {
                     "description": "",
@@ -1138,6 +1260,19 @@
                                     "7e1a2b3c-4d5f-4a8b-9e6a-1c2b7f3d8e4a",
                                     "9c2e7a1b-5d3f-4a8b-2c6e-7f1a3d9e8b5c"
                                 ]
+                            ]
+                        },
+                        "deployState": {
+                            "type": "string",
+                            "description": "Indicator of the infrastructure configuration item's current state. Mutated means that the item has been modified by the end user outside of SHIELD.",
+                            "enum": [
+                                "notDeployed",
+                                "deployed",
+                                "Mutated",
+                                "error"
+                            ],
+                            "examples": [
+                                "deployed"
                             ]
                         },
                         "groupTagList": {
@@ -1253,6 +1388,7 @@
                     },
                     "required": [
                         "childDependencies",
+                        "deployState",
                         "groupTagList",
                         "msCloudTypes",
                         "parentDependencies",
@@ -1265,6 +1401,7 @@
                                 "7e1a2b3c-4d5f-4a8b-9e6a-1c2b7f3d8e4a",
                                 "9c2e7a1b-5d3f-4a8b-2c6e-7f1a3d9e8b5c"
                             ],
+                            "deployState": "deployed",
                             "groupTagList": [
                                 {
                                     "description": "Collection of policies covering critical conditional access settings.",
@@ -1290,6 +1427,7 @@
                                 "7e1a2b3c-4d5f-4a8b-9e6a-1c2b7f3d8e4a",
                                 "9c2e7a1b-5d3f-4a8b-2c6e-7f1a3d9e8b5c"
                             ],
+                            "deployState": "deployed",
                             "groupTagList": [
                                 {
                                     "description": "Collection of policies covering critical conditional access settings.",
@@ -1310,6 +1448,7 @@
                             "childDependencies": [
                                 "1c2b5d3f-7a1b-4a8b-9e6a-2e4a3b7e8c5d"
                             ],
+                            "deployState": "notDeployed",
                             "groupTagList": [
                                 {
                                     "description": "Principal containers that are used to provide assignments.",
@@ -1325,6 +1464,291 @@
                             "urlPath": "/directory/administrativeUnits"
                         }
                     ]
+                ]
+            },
+            "Deploy.ConfigurationItemMetaData": {
+                "title": "Deploy - Configuration Item Meta Data",
+                "description": "Object representing populated information expanding details of the Configuration Item with user friendly information.",
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "description": "Human readable short title.",
+                        "examples": [
+                            "Multi-Factor Authentication (MFA)"
+                        ]
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Lengthier definition for the resource that provides more insight into what is covered or intended.",
+                        "examples": [
+                            "This policy enforces multi-factor authentication (MFA) for enterprise identities during sign-in to reduce the risk of identity compromise."
+                        ]
+                    },
+                    "licenseRequirement": {
+                        "type": "string",
+                        "description": "Definition of license requirements to use this resource.",
+                        "examples": [
+                            "Microsoft Entra ID P1"
+                        ]
+                    },
+                    "priority": {
+                        "type": "integer",
+                        "description": "Indicator of the priority of the resource implementation. Lower number indicates higher priority.",
+                        "enum": [
+                            1,
+                            50,
+                            100
+                        ],
+                        "examples": [
+                            1
+                        ]
+                    },
+                    "operationalRisk": {
+                        "type": "integer",
+                        "description": "Indicator of the level of possible disruptions if this resource is not implemented. Lower number indicates higher risk.",
+                        "enum": [
+                            1,
+                            50,
+                            100
+                        ],
+                        "examples": [
+                            50
+                        ]
+                    },
+                    "importanceReasonList": {
+                        "type": "array",
+                        "description": "Reasons explaining importance of the implementation of this resource.",
+                        "items": {
+                            "type": "string",
+                            "examples": [
+                                "MFA adds a layer of protection to the sign-in process."
+                            ]
+                        },
+                        "examples": [
+                            [
+                                "MFA adds a layer of protection to the sign-in process.",
+                                "When accessing accounts or apps, users provide additional identity verification, such as scanning a fingerprint or entering a code."
+                            ]
+                        ]
+                    },
+                    "deploymentBenefitList": {
+                        "type": "array",
+                        "description": "Benefits gained by implementing the resource.",
+                        "items": {
+                            "type": "string",
+                            "examples": [
+                                "Reduces the risk of compromised user credentials."
+                            ]
+                        },
+                        "examples": [
+                            [
+                                "Reduces the risk of compromised user credentials.",
+                                "Prevents brute-force attack."
+                            ]
+                        ]
+                    },
+                    "nonDeploymentRiskList": {
+                        "type": "array",
+                        "description": "Possible risks that could lead to issues if this resource is not implemented.",
+                        "items": {
+                            "type": "string",
+                            "examples": [
+                                "Dramatically increased risk of account compromise."
+                            ]
+                        },
+                        "examples": [
+                            [
+                                "Dramatically increased risk of account compromise.",
+                                "Higher chance of account compromise through phishing attacks."
+                            ]
+                        ]
+                    },
+                    "guideStepList": {
+                        "type": "array",
+                        "description": "Collection of steps customer should consider or follow for successful implementation of the resource.",
+                        "items": {
+                            "type": "string",
+                            "examples": [
+                                "Communicate the restriction to EntraID-joined devices and provide transition guidance."
+                            ]
+                        },
+                        "examples": [
+                            [
+                                "Communicate the restriction to EntraID-joined devices and provide transition guidance.",
+                                "Stage the rollout with a pilot group and exclude critical accounts."
+                            ]
+                        ]
+                    },
+                    "compliancePositionList": {
+                        "type": "array",
+                        "description": "Statements describing what this resource might help with in the realm of compliance and security.",
+                        "items": {
+                            "type": "string",
+                            "examples": [
+                                "Deploying MFA helps meet compliance requirements for various industry regulations and standards."
+                            ]
+                        },
+                        "examples": [
+                            [
+                                "Deploying MFA helps meet compliance requirements for various industry regulations and standards."
+                            ]
+                        ]
+                    },
+                    "compliancePositionStandardList": {
+                        "type": "array",
+                        "description": "Collection of frameworks that this resource addresses when implemented.",
+                        "items": {
+                            "type": "string",
+                            "examples": [
+                                "ISO 27001"
+                            ]
+                        },
+                        "examples": [
+                            [
+                                "ISO 27001",
+                                "NIST"
+                            ]
+                        ]
+                    },
+                    "disclaimerList": {
+                        "type": "array",
+                        "description": "Collection of disclaimer statements.",
+                        "items": {
+                            "type": "string",
+                            "examples": [
+                                "Please be aware that deploying this policy will enforce MFA for all users on their next sign-in."
+                            ]
+                        },
+                        "examples": [
+                            [
+                                "Please be aware that deploying this policy will enforce MFA for all users on their next sign-in."
+                            ]
+                        ]
+                    },
+                    "baseLink": {
+                        "type": "string",
+                        "description": "Web URL to the Microsoft or Azure service where resource can be found.",
+                        "format": "uri",
+                        "examples": [
+                            "https://entra.microsoft.com"
+                        ]
+                    },
+                    "learnLinkList": {
+                        "type": "array",
+                        "description": "Collection of educational URLs for user to explore.",
+                        "items": {
+                            "type": "string",
+                            "format": "uri",
+                            "examples": [
+                                "https://learn.microsoft.com/en-us/azure/active-directory/authentication/concept-mfa-howitworks"
+                            ]
+                        },
+                        "examples": [
+                            [
+                                "https://learn.microsoft.com/en-us/azure/active-directory/authentication/concept-mfa-howitworks",
+                                "https://learn.microsoft.com/en-us/azure/active-directory/authentication/tutorial-enable-azure-mfa"
+                            ]
+                        ]
+                    },
+                    "manualCreateGuideList": {
+                        "type": "array",
+                        "description": "Collection of strings that make up a manual implementation guide for the associated configuration item.",
+                        "minItems": 0,
+                        "items": {
+                            "type": "string",
+                            "examples": [
+                                "• First level",
+                                "  • Second level",
+                                "    • Third level",
+                                "[Go to this link](https://google.com/)"
+                            ]
+                        },
+                        "examples": [
+                            [
+                                "• Name: \"PSM - Token Binding\"",
+                                "• Users",
+                                "  • What does this policy apply to: Users and groups",
+                                "  • Include",
+                                "  • Select: Select users and groups",
+                                "  • Select: Users and groups",
+                                "  • Select: Users and groups to include",
+                                "• Exclude",
+                                "  • Select: Select users and groups",
+                                "  • Select: Users and groups",
+                                "    • Select: Windows",
+                                "[Go to this link](https://google.com/)"
+                            ]
+                        ]
+                    }
+                },
+                "required": [
+                    "title",
+                    "description",
+                    "priority",
+                    "operationalRisk",
+                    "importanceReasonList",
+                    "deploymentBenefitList",
+                    "nonDeploymentRiskList",
+                    "guideStepList",
+                    "compliancePositionList",
+                    "compliancePositionStandardList",
+                    "disclaimerList",
+                    "baseLink",
+                    "manualCreateGuideList"
+                ],
+                "examples": [
+                    {
+                        "title": "Multi-Factor Authentication (MFA)",
+                        "description": "This policy enforces multi-factor authentication (MFA) for enterprise identities during sign-in to reduce the risk of identity compromise.",
+                        "licenseRequirement": "Microsoft Entra ID P1",
+                        "priority": 1,
+                        "operationalRisk": 50,
+                        "importanceReasonList": [
+                            "MFA adds a layer of protection to the sign-in process."
+                        ],
+                        "deploymentBenefitList": [
+                            "Reduces the risk of compromised user credentials.",
+                            "Prevents brute-force attack."
+                        ],
+                        "nonDeploymentRiskList": [
+                            "Dramatically increased risk of account compromise.",
+                            "Higher chance of account compromise through phishing attacks."
+                        ],
+                        "guideStepList": [
+                            "Communicate the restriction to EntraID-joined devices and provide transition guidance.",
+                            "Stage the rollout with a pilot group and exclude critical accounts."
+                        ],
+                        "compliancePositionList": [
+                            "Deploying MFA helps meet compliance requirements for various industry regulations and standards."
+                        ],
+                        "compliancePositionStandardList": [
+                            "ISO 27001",
+                            "NIST"
+                        ],
+                        "disclaimerList": [
+                            "Please be aware that deploying this policy will enforce MFA for all users on their next sign-in."
+                        ],
+                        "baseLink": "https://entra.microsoft.com",
+                        "learnLinkList": [
+                            "https://learn.microsoft.com/en-us/azure/active-directory/authentication/concept-mfa-howitworks",
+                            "https://learn.microsoft.com/en-us/azure/active-directory/authentication/tutorial-enable-azure-mfa"
+                        ],
+                        "manualCreateGuideList": [
+                            "• Name: \"PSM - Token Binding\"",
+                            "• Users",
+                            "  • What does this policy apply to: Users and groups",
+                            "  • Include",
+                            "  • Select: Select users and groups",
+                            "  • Select: Users and groups",
+                            "  • Select: Users and groups to include",
+                            "• Exclude",
+                            "  • Select: Select users and groups",
+                            "  • Select: Users and groups",
+                            "    • Select: Windows",
+                            "[Go to this link](https://google.com/)"
+                        ]
+                    }
                 ]
             },
             "Deploy.PathIndicator": {
@@ -1368,6 +1792,266 @@
                 "examples": [
                     {
                         "running": true
+                    }
+                ]
+            },
+            "Discover.ArchitectureReport.CspmPolicyAssessment": {
+                "title": "Discover - Architecture Report - Cspm Policy Assessment Result",
+                "description": "Policy Assessment Result containing coverage calculations for the architecture report",
+                "type": "object",
+                "properties": {
+                    "policyList": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/Discover.ArchitectureReport.CspmPolicyAssessment.PolicyRecord"
+                        },
+                        "description": "The mapping between ConfigurationItem templateIds and their corresponding policy record"
+                    },
+                    "reportCreatedDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "The date the architecture report was created.",
+                        "examples": [
+                            "2025-11-25T11:00:00Z"
+                        ]
+                    },
+                    "reportUpdatedDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "The date the architecture report was last updated.",
+                        "examples": [
+                            "2025-11-25T11:00:00Z"
+                        ]
+                    }
+                },
+                "required": [
+                    "policyList"
+                ],
+                "examples": [
+                    {
+                        "policyList": {
+                            "e7b8c2a2-2e4a-4b6a-9c3d-8f1e2a7b6c4d": {
+                                "categoryList": [
+                                    "Access Control",
+                                    "Compliance"
+                                ],
+                                "coverageMetricsNormalized": {
+                                    "covered": 80,
+                                    "noCover": 0,
+                                    "partial": 20
+                                },
+                                "coverageMetricsRaw": {
+                                    "covered": 8,
+                                    "noCover": 0,
+                                    "partial": 2
+                                },
+                                "coverageStatus": "full",
+                                "name": "Sample Policy 1"
+                            },
+                            "2a1e3c4d-5b6f-4e7a-8c9d-0f1b2a3c4d5e": {
+                                "categoryList": [
+                                    "Data Protection"
+                                ],
+                                "coverageMetricsNormalized": {
+                                    "covered": 50,
+                                    "noCover": 20,
+                                    "partial": 30
+                                },
+                                "coverageMetricsRaw": {
+                                    "covered": 5,
+                                    "noCover": 2,
+                                    "partial": 3
+                                },
+                                "coverageStatus": "partial",
+                                "name": "Sample Policy 2"
+                            },
+                            "9f8e7d6c-5b4a-3c2e-1d0f-8a7b6c5d4e3f": {
+                                "categoryList": [
+                                    "Network Security"
+                                ],
+                                "coverageMetricsNormalized": {
+                                    "covered": 0,
+                                    "noCover": 100,
+                                    "partial": 0
+                                },
+                                "coverageMetricsRaw": {
+                                    "covered": 0,
+                                    "noCover": 10,
+                                    "partial": 0
+                                },
+                                "coverageStatus": "none",
+                                "name": "Sample Policy 3"
+                            },
+                            "1f0e9d8c-7b6a-5c4d-3e2f-1a0b9c8d7e6f": {
+                                "categoryList": [
+                                    "Identity Management"
+                                ],
+                                "coverageMetricsNormalized": {
+                                    "covered": 70,
+                                    "noCover": 20,
+                                    "partial": 10
+                                },
+                                "coverageMetricsRaw": {
+                                    "covered": 7,
+                                    "noCover": 2,
+                                    "partial": 1
+                                },
+                                "coverageStatus": "partial",
+                                "name": "Sample Policy 4"
+                            }
+                        },
+                        "reportCreatedDate": "2025-11-25T11:00:00Z",
+                        "reportUpdatedDate": "2025-11-26T11:00:00Z"
+                    }
+                ]
+            },
+            "Discover.ArchitectureReport.CspmPolicyAssessment.PolicyRecord": {
+                "title": "Discover - Architecture Report - Cspm Policy Assessment Policy Record",
+                "description": "Represents a policy record containing policy details along with user coverage metrics and status",
+                "type": "object",
+                "properties": {
+                    "categoryList": {
+                        "description": "Categories that the policy belongs to",
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "description": "category of the policy",
+                            "examples": [
+                                "Identity Management"
+                            ]
+                        },
+                        "examples": [
+                            [
+                                "Identity Management"
+                            ]
+                        ]
+                    },
+                    "name": {
+                        "description": "Name of the policy",
+                        "type": "string",
+                        "examples": [
+                            "Sample Policy Name"
+                        ]
+                    },
+                    "coverageMetricsRaw": {
+                        "description": "Represents the raw coverage status of the users",
+                        "type": "object",
+                        "properties": {
+                            "covered": {
+                                "description": "The amount of users fully covered",
+                                "type": "number",
+                                "examples": [
+                                    5
+                                ]
+                            },
+                            "partial": {
+                                "description": "The amount of users partially covered",
+                                "type": "number",
+                                "examples": [
+                                    0,
+                                    5,
+                                    10
+                                ]
+                            },
+                            "noCover": {
+                                "description": "The amount of users not covered",
+                                "type": "number",
+                                "examples": [
+                                    0,
+                                    5,
+                                    10
+                                ]
+                            }
+                        },
+                        "examples": [
+                            {
+                                "covered": 7,
+                                "noCover": 2,
+                                "partial": 1
+                            }
+                        ],
+                        "required": [
+                            "covered",
+                            "partial",
+                            "noCover"
+                        ]
+                    },
+                    "coverageMetricsNormalized": {
+                        "description": "Represents the normalized coverage status of the users",
+                        "type": "object",
+                        "properties": {
+                            "covered": {
+                                "description": "The amount of users fully covered",
+                                "type": "number",
+                                "examples": [
+                                    70
+                                ]
+                            },
+                            "partial": {
+                                "description": "The amount of users partially covered",
+                                "type": "number",
+                                "examples": [
+                                    20
+                                ]
+                            },
+                            "noCover": {
+                                "description": "The amount of users not covered",
+                                "type": "number",
+                                "examples": [
+                                    10
+                                ]
+                            }
+                        },
+                        "examples": [
+                            {
+                                "covered": 70,
+                                "noCover": 20,
+                                "partial": 10
+                            }
+                        ],
+                        "required": [
+                            "covered",
+                            "partial",
+                            "noCover"
+                        ]
+                    },
+                    "coverageStatus": {
+                        "description": "The summary status for the coverage metrics",
+                        "type": "string",
+                        "enum": [
+                            "full",
+                            "partial",
+                            "none"
+                        ],
+                        "examples": [
+                            "partial"
+                        ]
+                    }
+                },
+                "required": [
+                    "categoryList",
+                    "name",
+                    "coverageMetricsRaw",
+                    "coverageMetricsNormalized",
+                    "coverageStatus"
+                ],
+                "examples": [
+                    {
+                        "categoryList": [
+                            "Identity Management"
+                        ],
+                        "coverageMetricsNormalized": {
+                            "covered": 70,
+                            "noCover": 20,
+                            "partial": 10
+                        },
+                        "coverageMetricsRaw": {
+                            "covered": 7,
+                            "noCover": 2,
+                            "partial": 1
+                        },
+                        "coverageStatus": "partial",
+                        "name": "Sample Policy"
                     }
                 ]
             },
@@ -2568,6 +3252,80 @@
                 ],
                 "title": "Type of security class the object(s) belongs to",
                 "type": "string"
+            },
+            "ArchitectureReport.CorrelationRecord": {
+                "description": "Metadata that describes the execution session (run) that is used to tie/relate all of the architecture report together.",
+                "examples": [
+                    {
+                        "auditTenantAccount": "first-user@example.com",
+                        "correlationId": "b25f54b3-f30e-4447-9236-24ecac2e9261",
+                        "reportTenantAccount": "other-user@example.com",
+                        "tenantId": "a7159bdc-678d-4726-901e-cd6d018d46e2",
+                        "createdAt": "2025-11-01T00:10:10.821Z",
+                        "updatedAt": "2025-12-01T20:10:12.821Z"
+                    }
+                ],
+                "properties": {
+                    "auditTenantAccount": {
+                        "description": "The user principal name used to authenticate into the tenant being audited.",
+                        "examples": [
+                            "admin-user@example.com"
+                        ],
+                        "format": "email",
+                        "type": "string"
+                    },
+                    "correlationId": {
+                        "description": "Unique Identifier that represents a single run of architectural analysis. This record is used to identify which architecture report records should be grouped together.",
+                        "examples": [
+                            "88da2253-758f-4135-9d37-64448c8b65c1"
+                        ],
+                        "type": "string",
+                        "format": "uuid",
+                        "maxLength": 36,
+                        "minLength": 36,
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                    },
+                    "reportTenantAccount": {
+                        "description": "User account used to store/report the architecture report to the SHI Lab cloud service.",
+                        "examples": [
+                            "generic-user@example.com"
+                        ],
+                        "format": "email",
+                        "type": "string"
+                    },
+                    "tenantId": {
+                        "description": "Unique identifier of the customer tenant that the report was created for.",
+                        "examples": [
+                            "0e1fe83f-a33f-4250-8546-225b8d45ae01"
+                        ],
+                        "type": "string",
+                        "format": "uuid",
+                        "maxLength": 36,
+                        "minLength": 36,
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                    },
+                    "createdAt": {
+                        "description": "Timestamp when the record was created.",
+                        "examples": [
+                            "2024-08-01T21:12:22.148Z"
+                        ],
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "description": "Timestamp when the record was updated last.",
+                        "examples": [
+                            "2024-08-01T21:12:22.148Z"
+                        ],
+                        "format": "date-time",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "auditTenantAccount"
+                ],
+                "title": "Architecture Report - Correlation Record",
+                "type": "object"
             }
         },
         "securitySchemes": {
@@ -2590,7 +3348,7 @@
         },
         "description": "Deprive your threats of practical significance. Deploy the Securing Privilege Access architecture. All in a few seconds.",
         "title": "SHI Environment Lockdown and Defense",
-        "version": "3.0.8"
+        "version": "3.1.0"
     },
     "openapi": "3.1.1",
     "paths": {
@@ -3216,7 +3974,7 @@
                 "tags": [
                     "Discover"
                 ],
-                "summary": "Retrieve the List of Correlation Records"
+                "summary": "Retrieve the List of License Report Correlation Records"
             }
         },
         "/Api/Discover/LicenseReport/Correlation/{correlationId}/Data": {
@@ -3309,6 +4067,191 @@
                     "Discover"
                 ],
                 "summary": "Retrieve the Specified License Report"
+            }
+        },
+        "/Api/Discover/ArchitectureReport/Correlation": {
+            "get": {
+                "description": "Retrieves the list of correlation records for the authenticated tenant. Correlation records store the metadata for a specific architecture report.\n\nThis endpoint requires the `Discover.Read`, or the `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Discover/ArchitectureReport/Correlation/Get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Typical Response": {
+                                        "description": "Sample list of correlation records for the authenticated tenant.",
+                                        "summary": "Available Correlation Records for Architecture Report",
+                                        "value": [
+                                            {
+                                                "auditTenantAccount": "somebody@example.com",
+                                                "correlationId": "e0b0ebef-d0bf-4467-80c8-6a3a5f37fb24",
+                                                "reportTenantAccount": "tenantUser@example.com",
+                                                "tenantId": "79f7e8c4-15fa-4ae2-8f05-74f3c5071798",
+                                                "createdAt": "2025-10-01T12:14:45.026Z",
+                                                "updatedAt": "2025-11-02T00:14:45.026Z"
+                                            },
+                                            {
+                                                "auditTenantAccount": "somebodyElse@example.com",
+                                                "correlationId": "de4a7293-eed0-4167-b622-efeb764a2148",
+                                                "reportTenantAccount": "anotherUser@example.com",
+                                                "tenantId": "23317352-da99-4b52-ac1c-ad8e16310296",
+                                                "createdAt": "2025-06-20T20:14:45.026Z",
+                                                "updatedAt": "2025-07-22T12:10:45.026Z"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "schema": {
+                                    "type": "array",
+                                    "minItems": 0,
+                                    "items": {
+                                        "$ref": "#/components/schemas/ArchitectureReport.CorrelationRecord"
+                                    },
+                                    "examples": [
+                                        [
+                                            {
+                                                "auditTenantAccount": "somebody@example.com",
+                                                "correlationId": "e0b0ebef-d0bf-4467-80c8-6a3a5f37fb24",
+                                                "reportTenantAccount": "tenantUser@example.com",
+                                                "tenantId": "79f7e8c4-15fa-4ae2-8f05-74f3c5071798",
+                                                "createdAt": "2025-10-01T12:14:45.026Z",
+                                                "updatedAt": "2025-11-02T00:14:45.026Z"
+                                            }
+                                        ]
+                                    ]
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    }
+                },
+                "tags": [
+                    "Discover"
+                ],
+                "summary": "Retrieve the list of Architecture Report Correlation Records"
+            }
+        },
+        "/Api/Discover/ArchitectureReport/Correlation/{correlationId}/Data": {
+            "get": {
+                "description": "Retrieves the CSPM assessment coverage calculation results on the architecture report for the specified correlation ID in the authenticated tenant.\n\nThis endpoint requires the `Discover.Read`, or the `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Discover/ArchitectureReport/Correlation/:correlationId/Data/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/correlationId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "CspmPolicyAssessment": {
+                                        "description": "Sample CSPM Policy Assessment including a mapping of configuration item template IDs to their corresponding policy records containing coverage status",
+                                        "summary": "Example CSPM Policy Assessment Response",
+                                        "value": {
+                                            "policyList": {
+                                                "e7b8c2a2-2e4a-4b6a-9c3d-8f1e2a7b6c4d": {
+                                                    "categoryList": [
+                                                        "Access Control",
+                                                        "Compliance"
+                                                    ],
+                                                    "coverageMetricsNormalized": {
+                                                        "covered": 80,
+                                                        "noCover": 0,
+                                                        "partial": 20
+                                                    },
+                                                    "coverageMetricsRaw": {
+                                                        "covered": 8,
+                                                        "noCover": 0,
+                                                        "partial": 2
+                                                    },
+                                                    "coverageStatus": "full",
+                                                    "name": "Sample Policy 1"
+                                                },
+                                                "2a1e3c4d-5b6f-4e7a-8c9d-0f1b2a3c4d5e": {
+                                                    "categoryList": [
+                                                        "Data Protection"
+                                                    ],
+                                                    "coverageMetricsNormalized": {
+                                                        "covered": 50,
+                                                        "noCover": 20,
+                                                        "partial": 30
+                                                    },
+                                                    "coverageMetricsRaw": {
+                                                        "covered": 5,
+                                                        "noCover": 2,
+                                                        "partial": 3
+                                                    },
+                                                    "coverageStatus": "partial",
+                                                    "name": "Sample Policy 2"
+                                                },
+                                                "9f8e7d6c-5b4a-3c2e-1d0f-8a7b6c5d4e3f": {
+                                                    "categoryList": [
+                                                        "Network Security"
+                                                    ],
+                                                    "coverageMetricsNormalized": {
+                                                        "covered": 0,
+                                                        "noCover": 100,
+                                                        "partial": 0
+                                                    },
+                                                    "coverageMetricsRaw": {
+                                                        "covered": 0,
+                                                        "noCover": 10,
+                                                        "partial": 0
+                                                    },
+                                                    "coverageStatus": "none",
+                                                    "name": "Sample Policy 3"
+                                                },
+                                                "1f0e9d8c-7b6a-5c4d-3e2f-1a0b9c8d7e6f": {
+                                                    "categoryList": [
+                                                        "Identity Management"
+                                                    ],
+                                                    "coverageMetricsNormalized": {
+                                                        "covered": 70,
+                                                        "noCover": 20,
+                                                        "partial": 10
+                                                    },
+                                                    "coverageMetricsRaw": {
+                                                        "covered": 7,
+                                                        "noCover": 2,
+                                                        "partial": 1
+                                                    },
+                                                    "coverageStatus": "partial",
+                                                    "name": "Sample Policy 4"
+                                                }
+                                            },
+                                            "reportCreatedDate": "2025-11-25T11:00:00Z",
+                                            "reportUpdatedDate": "2025-11-26T11:00:00Z"
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/Discover.ArchitectureReport.CspmPolicyAssessment"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    }
+                },
+                "tags": [
+                    "Discover"
+                ],
+                "summary": "Retrieve the Specified Architecture Report's CSPM assessment coverage calculations"
             }
         },
         "/Api/Deploy": {
@@ -3592,6 +4535,92 @@
                 ]
             }
         },
+        "/Api/Deploy/BreakGlass": {
+            "get": {
+                "summary": "Checks the status of the break glass groups and required users existence.",
+                "description": "Retrieves the status of required user quantity existence in the break glass group.\n\nThis endpoint requires the `Deploy.Read` scope (permission).",
+                "operationId": "/Api/Deploy/BreakGlass/Get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean",
+                                    "examples": [
+                                        true
+                                    ]
+                                },
+                                "examples": {
+                                    "2 or more users": {
+                                        "summary": "2 or more users",
+                                        "description": "An example boolean value that represents the existence of 2 or more users in the break glass group.",
+                                        "value": true
+                                    },
+                                    "Less than 2 users": {
+                                        "summary": "Less than 2 users",
+                                        "description": "An example boolean value that represents the existence of less than 2 users in the break glass group.",
+                                        "value": false
+                                    }
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "Deploy"
+                ]
+            },
+            "post": {
+                "summary": "Request to create BreakGlass security group",
+                "description": "Attempt to create BreakGlass security group in the tenant. If group has already been provisioned it will return the name of the group to reference.\n\nThis endpoint requires the `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission). ",
+                "operationId": "/Api/Deploy/BreakGlass/Post",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Response with data": {
+                                        "summary": "Example of the returned data",
+                                        "description": "An example of the name of the resource either created or already existing.",
+                                        "value": {
+                                            "groupName": "SHIELD - BreakGlass"
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "groupName": {
+                                            "type": "string",
+                                            "description": "Name of the security group created now or already existing in the tenant.",
+                                            "examples": [
+                                                "SHIELD - BreakGlass"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "groupName"
+                                    ],
+                                    "examples": [
+                                        {
+                                            "groupName": "SHIELD - BreakGlass"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "503": {
+                        "description": "System requirements have not been met!"
+                    }
+                },
+                "tags": [
+                    "Deploy"
+                ]
+            }
+        },
         "/Api/Deploy/Component/Architecture": {
             "get": {
                 "summary": "Returns List of Available Architectures",
@@ -3655,22 +4684,45 @@
                                         "summary": "Available Configuration Items",
                                         "value": [
                                             {
-                                                "id": "5e2a9c1f-8b3d-4f6a-9e7c-2d1f3a6b4c8e",
-                                                "name": "Core Security Group",
-                                                "description": "A core security group that contains essential security roles and permissions.",
-                                                "type": "SecurityGroup",
-                                                "isActive": true,
-                                                "createdAt": "2024-02-20T10:00:00Z",
-                                                "updatedAt": "2024-05-15T11:30:00Z"
+                                                "childDependencies": [
+                                                    "7e1a2b3c-4d5f-4a8b-9e6a-1c2b7f3d8e4a",
+                                                    "9c2e7a1b-5d3f-4a8b-2c6e-7f1a3d9e8b5c"
+                                                ],
+                                                "deployState": "deployed",
+                                                "groupTagList": [
+                                                    {
+                                                        "description": "Collection of policies covering critical conditional access settings.",
+                                                        "displayName": "Conditional Policy",
+                                                        "tagId": "3b7e2a1c-4d5f-4a8b-9e6a-2c1b7f3d8e4a"
+                                                    }
+                                                ],
+                                                "msCloudTypes": [
+                                                    "Public"
+                                                ],
+                                                "parentDependencies": [
+                                                    "8e6a1c2b-7f3d-4a8b-9c2e-5d3f7a1b2e4a"
+                                                ],
+                                                "templateId": "2a1c7e3b-5d4f-4a8b-9e6a-7f3d2b1c8e4a",
+                                                "urlPath": "/identity/conditionalAccess/policies"
                                             },
                                             {
-                                                "id": "9c7f2e1a-3b6d-4a8e-9f5c-1d2a4b7e6c3f",
-                                                "name": "Scope Tag - Confidential Data",
-                                                "description": "A scope tag designed to restrict access to confidential data resources.",
-                                                "type": "ScopeTag",
-                                                "isActive": true,
-                                                "createdAt": "2024-04-12T14:20:00Z",
-                                                "updatedAt": "2024-07-01T09:50:00Z"
+                                                "childDependencies": [
+                                                    "1c2b5d3f-7a1b-4a8b-9e6a-2e4a3b7e8c5d"
+                                                ],
+                                                "deployState": "notDeployed",
+                                                "groupTagList": [
+                                                    {
+                                                        "description": "Principal containers that are used to provide assignments.",
+                                                        "displayName": "Administrative Unit",
+                                                        "tagId": "5d3f9c2e-7a1b-4a8b-2c6e-1a3d7e8b5c4a"
+                                                    }
+                                                ],
+                                                "msCloudTypes": [
+                                                    "Public"
+                                                ],
+                                                "parentDependencies": [],
+                                                "templateId": "4a8b7e1a-2b3c-4d5f-9e6a-1c2b7f3d8e4a",
+                                                "urlPath": "/directory/administrativeUnits"
                                             }
                                         ]
                                     }
@@ -3688,11 +4740,122 @@
                 ]
             }
         },
+        "/Api/Deploy/Component/ConfigurationItemMetaData/{templateId}": {
+            "get": {
+                "summary": "Returns Result of Retrieving Configuration Item Documentation",
+                "description": "Retrieves additional metadata from the configuration item if it was entered, or provides a message indicating it is missing.\n\nThis endpoint requires the `Deploy.Read`, `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission). ",
+                "operationId": "/Api/Deploy/Component/ConfigurationItemMetaData/:templateId/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/templateId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Response With Documentation": {
+                                        "description": "Sample response object of the documentation for the specific configuration item.",
+                                        "summary": "Configuration Item Documentation",
+                                        "value": {
+                                            "title": "Multi-Factor Authentication (MFA)",
+                                            "description": "This policy enforces multi-factor authentication (MFA) for enterprise identities during sign-in to reduce the risk of identity compromise.",
+                                            "licenseRequirement": "Microsoft Entra ID P1",
+                                            "priority": 1,
+                                            "operationalRisk": 50,
+                                            "importanceReasonList": [
+                                                "MFA adds a layer of protection to the sign-in process."
+                                            ],
+                                            "deploymentBenefitList": [
+                                                "Reduces the risk of compromised user credentials.",
+                                                "Prevents brute-force attack."
+                                            ],
+                                            "nonDeploymentRiskList": [
+                                                "Dramatically increased risk of account compromise.",
+                                                "Higher chance of account compromise through phishing attacks."
+                                            ],
+                                            "guideStepList": [
+                                                "Communicate the restriction to EntraID-joined devices and provide transition guidance.",
+                                                "Stage the rollout with a pilot group and exclude critical accounts."
+                                            ],
+                                            "compliancePositionList": [
+                                                "Deploying MFA helps meet compliance requirements for various industry regulations and standards."
+                                            ],
+                                            "compliancePositionStandardList": [
+                                                "ISO 27001",
+                                                "NIST"
+                                            ],
+                                            "disclaimerList": [
+                                                "Please be aware that deploying this policy will enforce MFA for all users on their next sign-in."
+                                            ],
+                                            "baseLink": "https://entra.microsoft.com",
+                                            "learnLinkList": [
+                                                "https://learn.microsoft.com/en-us/azure/active-directory/authentication/concept-mfa-howitworks",
+                                                "https://learn.microsoft.com/en-us/azure/active-directory/authentication/tutorial-enable-azure-mfa"
+                                            ],
+                                            "manualCreateGuideList": [
+                                                "• Name: \"PSM - Token Binding\"",
+                                                "• Users",
+                                                "  • What does this policy apply to: Users and groups",
+                                                "  • Include",
+                                                "  • Select: Select users and groups",
+                                                "  • Select: Users and groups",
+                                                "  • Select: Users and groups to include",
+                                                "• Exclude",
+                                                "  • Select: Select users and groups",
+                                                "  • Select: Users and groups",
+                                                "    • Select: Windows",
+                                                "[Go to this link](https://google.com/)"
+                                            ]
+                                        }
+                                    },
+                                    "Response When Documentation is Missing": {
+                                        "description": "Sample response with unavailable documentation",
+                                        "summary": "Missing Configuration Item Documentation",
+                                        "value": "No documentation available yet!"
+                                    }
+                                },
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "$ref": "#/components/schemas/Deploy.ConfigurationItemMetaData"
+                                        },
+                                        {
+                                            "type": "string",
+                                            "description": "Indicator that no additional information is available for this configuration item.",
+                                            "examples": [
+                                                "No documentation available yet!"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    }
+                },
+                "tags": [
+                    "Deploy"
+                ]
+            }
+        },
         "/Api/Deploy/Progress": {
             "get": {
                 "summary": "Returns Current Execution Progress of the Deploy Module",
                 "description": "Provides a detailed breakdown of the current progress of the deploy module and its sub-components, if any.\n\nThis endpoint requires the `Deploy.Read`, `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
                 "operationId": "/Api/Deploy/Progress/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/operation"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "content": {
@@ -3725,6 +4888,139 @@
                             }
                         },
                         "description": "OK"
+                    }
+                },
+                "tags": [
+                    "Deploy"
+                ]
+            }
+        },
+        "/Api/Deploy/Remediate": {
+            "get": {
+                "summary": "Retrieves Collected Remediation Results",
+                "description": "Returns results of the performed remediation action including any errors that occurred as well as mapping of templateId/name for the created resources.\n\nThis endpoint requires the `Deploy.Read`, or `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Deploy/Remediate/Get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Response with Remediation Data": {
+                                        "summary": "Example of the remediation results",
+                                        "description": "An example of the current results of the remediation action.",
+                                        "value": {
+                                            "errors": [
+                                                {
+                                                    "templateId": "7e2b1c3d-4f5a-4a8b-9e6a-1c2b7f3d8e4a",
+                                                    "message": "Failed to create dedicated group for the resource: Unexpected error."
+                                                },
+                                                {
+                                                    "templateId": "2a1c7e3b-5d4f-4a8b-9e6a-7f3d2b1c8e4a",
+                                                    "message": "Failed to create the resource: invalid value for 'id' reference."
+                                                }
+                                            ],
+                                            "results": {
+                                                "4a8b7e1a-2b3c-4d5f-9e6a-1c2b7f3d8e4a": "CSPM - MDCA",
+                                                "b3e2c1d4-7f5a-4a8b-9e6a-2c1b7f3d8e4a": "CSPM - Authentication Methods"
+                                            }
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/Deploy.RemediationResponse"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "Deploy"
+                ]
+            },
+            "post": {
+                "summary": "Perform remediation steps to address discovered gaps in security posture",
+                "description": "After the user consents, perform necessary steps to deploy resources to cover the security gap.\n\nThis endpoint requires the `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Deploy/Remediate/Post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "examples": {
+                                "Insufficient Remediation Request": {
+                                    "description": "Someone trying to automate this application without reading the documentation.",
+                                    "summary": "Remediation Request Missing Needed Data",
+                                    "value": {}
+                                },
+                                "No User Consent": {
+                                    "description": "User did not agree to the terms and conditions. This post should not have been sent.",
+                                    "summary": "User Did Not Consent",
+                                    "value": {
+                                        "remediationConsent": false,
+                                        "templateList": [
+                                            "8e2b1c7a-4d5f-4a8b-9e6a-2c1b7f3d8e4a",
+                                            "3a7e2b1c-5d4f-4a8b-9e6a-7f2b3d1c9e45"
+                                        ]
+                                    }
+                                },
+                                "User Consented": {
+                                    "description": "User agreed to the terms and conditions and pressed the remediate button.",
+                                    "summary": "User Consented",
+                                    "value": {
+                                        "remediationConsent": true,
+                                        "templateList": [
+                                            "9c1e7a2b-5d3f-4a8b-2c6e-1a7f3d9e8b5c",
+                                            "2b3e7a1c-4d5f-4a8b-9e6a-5d1c7e2b3a4f",
+                                            "7f1a3d9e-8b5c-4a8b-2c6e-9c2e7a1b5d3f"
+                                        ]
+                                    }
+                                }
+                            },
+                            "schema": {
+                                "properties": {
+                                    "remediationConsent": {
+                                        "description": "Flag that indicates the end user has consented to remediation steps (`true`) or not (`false`).",
+                                        "type": "boolean",
+                                        "examples": [
+                                            true
+                                        ]
+                                    },
+                                    "templateList": {
+                                        "description": "List of templateIds that indicate configuration items to be applied as part of remediation.",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "uuid",
+                                            "maxLength": 36,
+                                            "minLength": 36,
+                                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                                            "examples": [
+                                                "5d1c7e2b-3a4f-4a8b-9e6a-7f2b3d1c9e45"
+                                            ]
+                                        },
+                                        "minItems": 0
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "remediationConsent",
+                                    "templateList"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Request for remediation is accepted and process is running"
+                    },
+                    "400": {
+                        "description": "User provided information or choice are invalid for the operation"
+                    },
+                    "409": {
+                        "description": "Operation is already in progress"
+                    },
+                    "503": {
+                        "description": "System requirements have not been met!"
                     }
                 },
                 "tags": [
@@ -3896,6 +5192,32 @@
                     },
                     "503": {
                         "description": "Deployed architecture is invalid or missing!"
+                    }
+                },
+                "tags": [
+                    "Deploy"
+                ]
+            }
+        },
+        "/Api/Deploy/Analyze/Invoke": {
+            "post": {
+                "summary": "Requests to run the Infrastructure Configuration Analysis",
+                "description": "Initiates an asynchronous analysis of all deployed configuration items in the infrastructure. It starts the analysis process, to discover any and all inconsistencies at the configuration item level.\n\nThis endpoint requires the `Deploy.ReadWrite` or `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Analyze/Invoke/Post",
+                "requestBody": {
+                    "description": "No payload is expected or needed for this operation",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {}
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Request for analyze is accepted and process is initiated"
                     }
                 },
                 "tags": [
