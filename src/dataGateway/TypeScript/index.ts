@@ -7,6 +7,9 @@ import { createDataGatewayClient } from './sdk/dataGatewayClient.js';
 // Export all of the SDK's types
 export type * from './sdk/models/index.js';
 
+// This is required for the type DataGatewayClient
+export type * from './sdk/dataGatewayClient.js';
+
 /**
  * Function that initializes the Data Gateway SDK.
  * @param credential Configured authentication session.
