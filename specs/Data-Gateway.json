@@ -2303,7 +2303,7 @@
                 "title": "Architecture Report - Principal Data"
             },
             "CloudMatrixCorrelationRecord": {
-                "description": "Represents a cloud matrix correlation record, including customer, publisher details and correlation record, as well as key timestamps and identifiers.",
+                "description": "Represents a Cloud Matrix correlation record, including customer and publisher details, as well as key timestamps and identifiers.",
                 "examples": [
                     {
                         "accountName": "Test Account Name",
@@ -6940,7 +6940,7 @@
             "description": "Enables query for available information (like tenant, license, etc) via conversation with OpenAI agent."
         },
         {
-            "description": "Collects and manages customer's cloud matrix data.",
+            "description": "Collects and manages customer Cloud Matrix data.",
             "name": "Cloud Matrix"
         }
     ]
