@@ -6881,7 +6881,7 @@
                     }
                 },
                 "tags": [
-                    "Cloud Matrix Correlation"
+                    "Cloud Matrix"
                 ],
                 "summary": "Get Cloud Matrix Correlation Records"
             }
@@ -6940,7 +6940,7 @@
             "description": "Enables query for available information (like tenant, license, etc) via conversation with OpenAI agent."
         },
         {
-            "description": "Collects and manages data for customer's cloud matrix.",
+            "description": "Collects and manages customer's cloud matrix data.",
             "name": "Cloud Matrix"
         }
     ]
