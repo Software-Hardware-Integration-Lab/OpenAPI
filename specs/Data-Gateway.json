@@ -2302,7 +2302,7 @@
                 "$ref": "#/components/schemas/Report.PrincipalData",
                 "title": "Architecture Report - Principal Data"
             },
-            "CloudMatrixAssessment.Correlation": {
+            "CloudMatrix.Correlation": {
                 "description": "Represents a cloud matrix assessment record, including customer, publisher details and correlation record, as well as key timestamps and identifiers.",
                 "examples": [
                     {
@@ -6796,7 +6796,7 @@
         },
         "/Api/CloudMatrix/Dashboard": {
             "get": {
-                "description": "Retrieves the list of cloud matrix records. Can use filters targeting creation date to limit results. Cloud matrix records store the metadata for a specific cloud matrix assessment.\n\nThis endpoint requires the `CloudMatrix.Read`,  `CloudMatrix.Read.All`, `CloudMatrix.ReadWrite`, or `CloudMatrix.ReadWrite.All` scope (permission).",
+                "description": "Retrieves the list of cloud matrix correlation records. Can use filters targeting creation date to limit results. Cloud matrix records store the metadata for a specific cloud matrix correlation.\n\nThis endpoint requires the `CloudMatrix.Read`,  `CloudMatrix.Read.All`, `CloudMatrix.ReadWrite`, or `CloudMatrix.ReadWrite.All` scope (permission).",
                 "operationId": "/Api/CloudMatrix/Dashboard/Get",
                 "parameters": [
                     {
@@ -6808,13 +6808,13 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "A list of cloud matrix records.",
+                        "description": "A list of cloud matrix correlation records.",
                         "content": {
                             "application/json": {
                                 "examples": {
                                     "Example Cloud Matrix Records": {
-                                        "description": "Sample list of cloud matrix records.",
-                                        "summary": "Available Cloud Matrix Records",
+                                        "description": "Sample list of cloud matrix correlation records.",
+                                        "summary": "Available Cloud Matrix correlation Records",
                                         "value": [
                                             {
                                                 "accountName": "Test Account Name",
@@ -6865,7 +6865,7 @@
                                         ]
                                     ],
                                     "items": {
-                                        "$ref": "#/components/schemas/CloudMatrixAssessment.Correlation"
+                                        "$ref": "#/components/schemas/CloudMatrix.Correlation"
                                     },
                                     "minItems": 0,
                                     "type": "array"
@@ -6881,9 +6881,9 @@
                     }
                 },
                 "tags": [
-                    "Cloud Matrix Assessment"
+                    "Cloud Matrix Correlation"
                 ],
-                "summary": "Get Cloud Matrix Assessment Records"
+                "summary": "Get Cloud Matrix Correlation Records"
             }
         }
     },
