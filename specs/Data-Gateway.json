@@ -177,6 +177,52 @@
                         "value": "2025-02-05T23:59:59Z"
                     }
                 }
+            },
+            "crmId": {
+                "description": "The object ID of the customer to operate against.",
+                "in": "path",
+                "name": "crmId",
+                "required": true,
+                "schema": {
+                    "examples": [
+                        "de186670-d772-11f0-899c-41d4a068f985"
+                    ],
+                    "format": "uuid",
+                    "maxLength": 36,
+                    "minLength": 36,
+                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                    "type": "string"
+                },
+                "examples": {
+                    "valid CRM Id": {
+                        "summary": "Example valid crmId",
+                        "description": "An example of a valid crmId (customer) in type UUID string.",
+                        "value": "de186670-d772-11f0-899c-41d4a068f985"
+                    }
+                }
+            },
+            "assessmentId": {
+                "description": "The object ID of the assessment to operate against.",
+                "in": "path",
+                "name": "assessmentId",
+                "required": true,
+                "schema": {
+                    "examples": [
+                        "745b00d0-d772-11f0-899c-41d4a068f985"
+                    ],
+                    "format": "uuid",
+                    "maxLength": 36,
+                    "minLength": 36,
+                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                    "type": "string"
+                },
+                "examples": {
+                    "valid assessment Id": {
+                        "summary": "Example valid assessmentId",
+                        "description": "An example of a valid assessmentId in type UUID string.",
+                        "value": "de186670-d772-11f0-899c-41d4a068f985"
+                    }
+                }
             }
         },
         "responses": {
@@ -6884,6 +6930,98 @@
                     "Cloud Matrix Assessment"
                 ],
                 "summary": "Get Cloud Matrix Assessment Records"
+            }
+        },
+        "/Api/CloudMatrix/Customer/:crmId/Assessment/:assessmentId": {
+            "get": {
+                "description": "Retrieves Cloud Matrix Assessment data for a specific assessment. Cloud matrix records store the metadata for a specific cloud matrix assessment.\n\nThis endpoint requires the `CloudMatrix.Read`,  `CloudMatrix.Read.All`, `CloudMatrix.ReadWrite`, or `CloudMatrix.ReadWrite.All` scope (permission).",
+                "operationId": "/Api/CloudMatrix/Customer/:crmId/Assessment/:assessmentId/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/crmId"
+                    },
+                    {
+                        "$ref": "#/components/parameters/assessmentId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A list of cloud matrix records.",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Example Cloud Matrix Records": {
+                                        "description": "Sample list of cloud matrix records.",
+                                        "summary": "Available Cloud Matrix Records",
+                                        "value": [
+                                            {
+                                                "accountName": "Test Account Name",
+                                                "assessmentId": "bbab2907-c781-4bf1-b912-b91510853052",
+                                                "createdAt": "2025-12-15T21:13:12.821Z",
+                                                "crmId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
+                                                "discoverDate": "2025-12-15T21:13:12.821Z",
+                                                "isComplete": true,
+                                                "publisher": "Test Publisher One",
+                                                "updatedAt": "2025-12-15T21:13:12.821Z"
+                                            },
+                                            {
+                                                "accountName": "Test Account Name",
+                                                "assessmentId": "e7cc9996-3c5f-4be4-bba2-c815a157dedb",
+                                                "createdAt": "2025-12-15T21:13:12.821Z",
+                                                "crmId": "fbea61c3-6c80-4fbb-9bd7-b6fa2356892e",
+                                                "discoverDate": "2025-12-15T21:13:12.821Z",
+                                                "isComplete": false,
+                                                "publisher": "Test Publisher Two",
+                                                "updatedAt": "2025-12-15T21:13:12.821Z"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "schema": {
+                                    "examples": [
+                                        [
+                                            {
+                                                "accountName": "Test Account Name",
+                                                "assessmentId": "bbab2907-c781-4bf1-b912-b91510853052",
+                                                "createdAt": "2025-12-15T21:13:12.821Z",
+                                                "crmId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
+                                                "discoverDate": "2025-12-15T21:13:12.821Z",
+                                                "isComplete": true,
+                                                "publisher": "Test Publisher One",
+                                                "updatedAt": "2025-12-15T21:13:12.821Z"
+                                            },
+                                            {
+                                                "accountName": "Test Account Name",
+                                                "assessmentId": "e7cc9996-3c5f-4be4-bba2-c815a157dedb",
+                                                "createdAt": "2025-12-15T21:13:12.821Z",
+                                                "crmId": "fbea61c3-6c80-4fbb-9bd7-b6fa2356892e",
+                                                "discoverDate": "2025-12-15T21:13:12.821Z",
+                                                "isComplete": false,
+                                                "publisher": "Test Publisher Two",
+                                                "updatedAt": "2025-12-15T21:13:12.821Z"
+                                            }
+                                        ]
+                                    ],
+                                    "items": {
+                                        "$ref": "#/components/schemas/CloudMatrixAssessmentRecord"
+                                    },
+                                    "minItems": 0,
+                                    "type": "array"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "tags": [
+                    "Cloud Matrix Assessment"
+                ],
+                "summary": "Get Cloud Matrix Assessment Record by ID"
             }
         }
     },
