@@ -2302,8 +2302,8 @@
                 "$ref": "#/components/schemas/Report.PrincipalData",
                 "title": "Architecture Report - Principal Data"
             },
-            "CloudMatrix.Correlation": {
-                "description": "Represents a cloud matrix assessment record, including customer, publisher details and correlation record, as well as key timestamps and identifiers.",
+            "CloudMatrixCorrelationRecord": {
+                "description": "Represents a cloud matrix correlation record, including customer, publisher details and correlation record, as well as key timestamps and identifiers.",
                 "examples": [
                     {
                         "accountName": "Test Account Name",
@@ -2318,14 +2318,14 @@
                 ],
                 "properties": {
                     "accountName": {
-                        "description": "The name of the customer account associated with this cloud matrix assessment record.",
+                        "description": "The name of the customer account associated with this cloud matrix correlation record.",
                         "examples": [
                             "Test Account Name"
                         ],
                         "type": "string"
                     },
                     "correlationId": {
-                        "description": "The unique identifier (UUID) of the discovery session associated with this cloud matrix assessment record.",
+                        "description": "The unique identifier (UUID) of the discovery session associated with this cloud matrix correlation record.",
                         "examples": [
                             "bbab2907-c781-4bf1-b912-b91510853052"
                         ],
@@ -2344,7 +2344,7 @@
                         "type": "string"
                     },
                     "crmId": {
-                        "description": "The unique identifier (UUID) of the customer associated with this cloud matrix assessment record.",
+                        "description": "The unique identifier (UUID) of the customer associated with this cloud matrix correlation record.",
                         "examples": [
                             "75498125-33cb-4b33-8705-f0fadadb1a2f"
                         ],
@@ -2363,14 +2363,14 @@
                         "type": "string"
                     },
                     "isComplete": {
-                        "description": "Indicates whether the discovery process has been completed for this cloud matrix assessment record.",
+                        "description": "Indicates whether the discovery process has been completed for this cloud matrix correlation record.",
                         "examples": [
                             true
                         ],
                         "type": "boolean"
                     },
                     "publisher": {
-                        "description": "The name of the publisher associated with this cloud matrix assessment record.",
+                        "description": "The name of the publisher associated with this cloud matrix correlation record.",
                         "examples": [
                             "Test Publisher"
                         ],
@@ -2391,7 +2391,7 @@
                     "discoverDate",
                     "publisher"
                 ],
-                "title": "Cloud Matrix Assessment Record",
+                "title": "Cloud Matrix Correlation Record",
                 "type": "object"
             }
         },
@@ -6865,7 +6865,7 @@
                                         ]
                                     ],
                                     "items": {
-                                        "$ref": "#/components/schemas/CloudMatrix.Correlation"
+                                        "$ref": "#/components/schemas/CloudMatrixCorrelationRecord"
                                     },
                                     "minItems": 0,
                                     "type": "array"
@@ -6940,8 +6940,8 @@
             "description": "Enables query for available information (like tenant, license, etc) via conversation with OpenAI agent."
         },
         {
-            "description": "Collects and manages data for customer's cloud matrix assessments.",
-            "name": "Cloud Matrix Assessment"
+            "description": "Collects and manages data for customer's cloud matrix.",
+            "name": "Cloud Matrix"
         }
     ]
 }
