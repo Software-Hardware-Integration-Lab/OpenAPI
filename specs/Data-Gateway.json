@@ -2680,8 +2680,8 @@
                     }
                 ]
             },
-            "CloudMatrixAssessmentCorrelationRecord": {
-                "description": "Represents a cloud matrix record, including customer, assessment, and publisher details, as well as key timestamps and identifiers.",
+            "CloudMatrixCorrelationRecord": {
+                "description": "Represents a Cloud Matrix correlation record, including customer and publisher details, as well as key timestamps and identifiers.",
                 "examples": [
                     {
                         "accountName": "Test Account Name",
@@ -2697,14 +2697,14 @@
                 ],
                 "properties": {
                     "accountName": {
-                        "description": "The name of the customer account associated with this cloud matrix assessment record.",
+                        "description": "The name of the customer account associated with this cloud matrix correlation record.",
                         "examples": [
                             "Test Account Name"
                         ],
                         "type": "string"
                     },
                     "correlationId": {
-                        "description": "The unique identifier (UUID) of the discovery session associated with this cloud matrix assessment record.",
+                        "description": "The unique identifier (UUID) of the discovery session associated with this cloud matrix correlation record.",
                         "examples": [
                             "bbab2907-c781-4bf1-b912-b91510853052"
                         ],
@@ -2723,7 +2723,7 @@
                         "type": "string"
                     },
                     "crmId": {
-                        "description": "The unique identifier (UUID) of the customer associated with this cloud matrix assessment record.",
+                        "description": "The unique identifier (UUID) of the customer associated with this cloud matrix correlation record.",
                         "examples": [
                             "75498125-33cb-4b33-8705-f0fadadb1a2f"
                         ],
@@ -2742,14 +2742,14 @@
                         "type": "string"
                     },
                     "isComplete": {
-                        "description": "Indicates whether the discovery process has been completed for this cloud matrix assessment record.",
+                        "description": "Indicates whether the discovery process has been completed for this cloud matrix correlation record.",
                         "examples": [
                             true
                         ],
                         "type": "boolean"
                     },
                     "publisher": {
-                        "description": "The name of the publisher associated with this cloud matrix assessment record.",
+                        "description": "The name of the publisher associated with this cloud matrix correlation record.",
                         "examples": [
                             "Test Publisher"
                         ],
@@ -2781,7 +2781,7 @@
                     "updatedAt",
                     "schemaVersion"
                 ],
-                "title": "Cloud Matrix Assessment Correlation Record",
+                "title": "Cloud Matrix Correlation Record",
                 "type": "object"
             }
         },
@@ -7186,7 +7186,7 @@
         },
         "/Api/CloudMatrix/Dashboard": {
             "get": {
-                "description": "Retrieves the list of cloud matrix records. Can use filters targeting creation date to limit results. Cloud matrix records store the metadata for a specific cloud matrix assessment.\n\nThis endpoint requires the `CloudMatrix.Read`,  `CloudMatrix.Read.All`, `CloudMatrix.ReadWrite`, or `CloudMatrix.ReadWrite.All` scope (permission).",
+                "description": "Retrieves the list of cloud matrix correlation records. Can use filters targeting creation date to limit results. Cloud matrix records store the metadata for a specific cloud matrix correlation.\n\nThis endpoint requires the `CloudMatrix.Read`,  `CloudMatrix.Read.All`, `CloudMatrix.ReadWrite`, or `CloudMatrix.ReadWrite.All` scope (permission).",
                 "operationId": "/Api/CloudMatrix/Dashboard/Get",
                 "parameters": [
                     {
@@ -7198,17 +7198,17 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "A list of cloud matrix records.",
+                        "description": "A list of cloud matrix correlation records.",
                         "content": {
                             "application/json": {
                                 "examples": {
                                     "Example Cloud Matrix Records": {
-                                        "description": "Sample list of cloud matrix records.",
-                                        "summary": "Available Cloud Matrix Records",
+                                        "description": "Sample list of cloud matrix correlation records.",
+                                        "summary": "Available Cloud Matrix correlation Records",
                                         "value": [
                                             {
                                                 "accountName": "Test Account Name",
-                                                "assessmentId": "bbab2907-c781-4bf1-b912-b91510853052",
+                                                "correlationId": "bbab2907-c781-4bf1-b912-b91510853052",
                                                 "createdAt": "2025-12-15T21:13:12.821Z",
                                                 "crmId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
                                                 "discoverDate": "2025-12-15T21:13:12.821Z",
@@ -7218,7 +7218,7 @@
                                             },
                                             {
                                                 "accountName": "Test Account Name",
-                                                "assessmentId": "e7cc9996-3c5f-4be4-bba2-c815a157dedb",
+                                                "correlationId": "e7cc9996-3c5f-4be4-bba2-c815a157dedb",
                                                 "createdAt": "2025-12-15T21:13:12.821Z",
                                                 "crmId": "fbea61c3-6c80-4fbb-9bd7-b6fa2356892e",
                                                 "discoverDate": "2025-12-15T21:13:12.821Z",
@@ -7234,7 +7234,7 @@
                                         [
                                             {
                                                 "accountName": "Test Account Name",
-                                                "assessmentId": "bbab2907-c781-4bf1-b912-b91510853052",
+                                                "correlationId": "bbab2907-c781-4bf1-b912-b91510853052",
                                                 "createdAt": "2025-12-15T21:13:12.821Z",
                                                 "crmId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
                                                 "discoverDate": "2025-12-15T21:13:12.821Z",
@@ -7244,7 +7244,7 @@
                                             },
                                             {
                                                 "accountName": "Test Account Name",
-                                                "assessmentId": "e7cc9996-3c5f-4be4-bba2-c815a157dedb",
+                                                "correlationId": "e7cc9996-3c5f-4be4-bba2-c815a157dedb",
                                                 "createdAt": "2025-12-15T21:13:12.821Z",
                                                 "crmId": "fbea61c3-6c80-4fbb-9bd7-b6fa2356892e",
                                                 "discoverDate": "2025-12-15T21:13:12.821Z",
@@ -7255,7 +7255,7 @@
                                         ]
                                     ],
                                     "items": {
-                                        "$ref": "#/components/schemas/CloudMatrixAssessmentCorrelationRecord"
+                                        "$ref": "#/components/schemas/CloudMatrixCorrelationRecord"
                                     },
                                     "minItems": 0,
                                     "type": "array"
@@ -7271,9 +7271,9 @@
                     }
                 },
                 "tags": [
-                    "Cloud Matrix Assessment"
+                    "Cloud Matrix"
                 ],
-                "summary": "Get Cloud Matrix Assessment Records"
+                "summary": "Get Cloud Matrix Correlation Records"
             }
         },
         "/Api/CloudMatrix/Assessment": {
@@ -12963,8 +12963,8 @@
             "description": "Enables query for available information (like tenant, license, etc) via conversation with OpenAI agent."
         },
         {
-            "description": "Collects and manages data for customer's cloud matrix assessments.",
-            "name": "Cloud Matrix Assessment"
+            "description": "Collects and manages customer Cloud Matrix data.",
+            "name": "Cloud Matrix"
         }
     ]
 }
