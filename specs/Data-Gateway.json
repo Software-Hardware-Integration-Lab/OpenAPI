@@ -2579,7 +2579,7 @@
                 "type": "object",
                 "properties": {
                     "correlation": {
-                        "$ref": "#/components/schemas/CloudMatrixAssessmentCorrelationRecord"
+                        "$ref": "#/components/schemas/CloudMatrixCorrelationRecord"
                     },
                     "title": {
                         "description": "Human-readable title of the roadmap.",
@@ -12904,7 +12904,7 @@
                     }
                 },
                 "tags": [
-                    "Cloud Matrix Assessment"
+                    "Cloud Matrix"
                 ],
                 "summary": "Get a default assessment schema object"
             }
