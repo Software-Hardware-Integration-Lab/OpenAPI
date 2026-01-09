@@ -213,7 +213,7 @@
                 "type": "string",
                 "examples": [
                     "fd9a6a53-594d-41aa-950a-b21ff41d4688"
-                ]                
+                ]
             },
             "Core.HealthReport": {
                 "description": "Health report that indicates if a service is down or not that the data gateway relies on.",
@@ -2327,25 +2327,195 @@
                 "properties": {
                     "name": {
                         "type": "string",
-                        "description": "",
-                        "examples": ["Microsoft E5 Premium"]
+                        "description": "Display name of the Cloud Matrix profile.",
+                        "examples": [
+                            "Microsoft E5 Premium"
+                        ]
                     },
                     "abbreviation": {
-                        "type": "string",
-                        "description": "",
-                        "examples": ["ME5P"]
+                        "oneOf": [
+                            {
+                                "type": "string",
+                                "description": "Short code used to abbreviate the profile name.",
+                                "examples": [
+                                    "ME5P"
+                                ]
+                            },
+                            {
+                                "type": "null",
+                                "description": "Null when the abbreviation is not available.",
+                                "examples": [
+                                    null
+                                ]
+                            }
+                        ]
                     },
                     "value": {
-                        "type": "number",
-                        "description": "",
-                        "examples": [5]
+                        "oneOf": [
+                            {
+                                "type": "number",
+                                "description": "Numeric score or weighting for the profile.",
+                                "examples": [
+                                    5
+                                ]
+                            },
+                            {
+                                "type": "null",
+                                "description": "Null when the profile value is not available.",
+                                "examples": [
+                                    null
+                                ]
+                            }
+                        ]
                     }
                 },
-                "required": ["name"]
+                "required": [
+                    "name",
+                    "value"
+                ]
             },
-            "CloudMatrixRoadmapElementMetaData": {
-                "title": "Cloud Matrix Roadmap Element MetaData",
+            "CloudMatrixRoadmapElementMetadata": {
+                "title": "Cloud Matrix Roadmap Element Metadata",
                 "description": "The metadata related to a Cloud Matrix Value Assessment.",
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the roadmap item being assessed.",
+                        "examples": [
+                            "M365 Apps for Enterprise - Mobile/Online"
+                        ]
+                    },
+                    "breakoutId": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Uuid"
+                            },
+                            {
+                                "type": "null",
+                                "description": "Null when the value is not available.",
+                                "examples": [
+                                    null
+                                ]
+                            }
+                        ]
+                    },
+                    "category": {
+                        "type": "string",
+                        "description": "Top-level category for the roadmap item.",
+                        "examples": [
+                            "USER EXPERIENCE"
+                        ]
+                    },
+                    "subCategory": {
+                        "type": "string",
+                        "description": "Subcategory that further classifies the roadmap item.",
+                        "examples": [
+                            "Productivity"
+                        ]
+                    },
+                    "startYearValue": {
+                        "oneOf": [
+                            {
+                                "type": "number",
+                                "description": "Assessment value for the start year of the roadmap.",
+                                "examples": [
+                                    2026
+                                ]
+                            },
+                            {
+                                "type": "null",
+                                "description": "Null when the value is not available.",
+                                "examples": [
+                                    null
+                                ]
+                            }
+                        ]
+                    },
+                    "yearPlusOneValue": {
+                        "oneOf": [
+                            {
+                                "type": "string",
+                                "description": "Projected assessment value one year after the start year.",
+                                "examples": [
+                                    2027
+                                ]
+                            },
+                            {
+                                "type": "null",
+                                "description": "Null when the value is not available.",
+                                "examples": [
+                                    null
+                                ]
+                            }
+                        ]
+                    },
+                    "yearPlusTwoValue": {
+                        "oneOf": [
+                            {
+                                "type": "string",
+                                "description": "Projected assessment value two years after the start year.",
+                                "examples": [
+                                    2028
+                                ]
+                            },
+                            {
+                                "type": "null",
+                                "description": "Null when the value is not available.",
+                                "examples": [
+                                    null
+                                ]
+                            }
+                        ]
+                    },
+                    "yearPlusThreeValue": {
+                        "oneOf": [
+                            {
+                                "type": "string",
+                                "description": "Projected assessment value three years after the start year.",
+                                "examples": [
+                                    2029
+                                ]
+                            },
+                            {
+                                "type": "null",
+                                "description": "Null when the value is not available.",
+                                "examples": [
+                                    null
+                                ]
+                            }
+                        ]
+                    },
+                    "sourceValue": {
+                        "oneOf": [
+                            {
+                                "type": "string",
+                                "description": "Baseline assessment value sourced from the original data.",
+                                "examples": [
+                                    0
+                                ]
+                            },
+                            {
+                                "type": "null",
+                                "description": "Null when the value is not available.",
+                                "examples": [
+                                    null
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "name",
+                    "breakoutId",
+                    "category",
+                    "subCategory",
+                    "startYearValue",
+                    "yearPlusOneValue",
+                    "yearPlusTwoValue",
+                    "yearPlusThreeValue",
+                    "sourceValue"
+                ],
                 "examples": [
                     {
                         "name": "M365 Apps for Enterprise - Mobile/Online",
@@ -2358,75 +2528,19 @@
                         "yearPlusThreeValue": 2029,
                         "sourceValue": 0
                     }
-                ],
-                "properties": {
-                    "name": {
-                        "type": "string",
-                        "description": "",
-                        "examples": ["M365 Apps for Enterprise - Mobile/Online"]
-                    },
-                    "breakoutId": {
-                        "$ref": "#/components/schemas/Uuid"
-                    },
-                    "category": {
-                        "type": "string",
-                        "description": "",
-                        "examples": ["USER EXPERIENCE"]
-                    },
-                    "subCategory": {
-                        "type": "string",
-                        "description": "",
-                        "examples": ["Productivity"]
-                    },          
-                    "startYearValue": {
-                        "type": "number",
-                        "description": "",
-                        "examples": [2026]
-                    },             
-                    "yearPlusOneValue": {
-                        "type": "string",
-                        "description": "",
-                        "examples": [2027]
-                    },                                     
-                    "yearPlusTwoValue": {
-                        "type": "string",
-                        "description": "",
-                        "examples": [2028]
-                    },          
-                    "yearPlusThreeValue": {
-                        "type": "string",
-                        "description": "",
-                        "examples": [2029]
-                    },            
-                    "sourceValue": {
-                        "type": "string",
-                        "description": "",
-                        "examples": [0]
-                    }                                                                                             
-                },
-                "required": [
-                    "name",
-                    "breakoutId",
-                    "category",
-                    "subCategory",
-                    "startYearValue",
-                    "yearPlusOneValue",
-                    "yearPlusTwoValue",
-                    "yearPlusThreeValue",
-                    "sourceValue"
                 ]
             },
             "CloudMatrixRoadmapElement": {
                 "title": "Cloud Matrix Roadmap Element",
                 "description": "An element of a Cloud Matrix Roadmap assessment.",
-                "type": "object",               
+                "type": "object",
                 "properties": {
-                    "metaData" : {
-                        "$ref": "#/components/schemas/CloudMatrixRoadmapElementMetaData"
+                    "metaData": {
+                        "$ref": "#/components/schemas/CloudMatrixRoadmapElementMetadata"
                     },
                     "profiles": {
                         "type": "array",
-                        "description": "",
+                        "description": "Profile scores associated with this roadmap element.",
                         "items": {
                             "$ref": "#/components/schemas/CloudMatrixProfileKeyValue"
                         }
@@ -2461,34 +2575,42 @@
             },
             "CloudMatrixRoadmap": {
                 "title": "Cloud Matrix Roadmap",
-                "description": "",
+                "description": "Roadmap output produced from a Cloud Matrix assessment.",
                 "type": "object",
                 "properties": {
-                    "correlation" : {
-                        "$ref": "#/components/schemas/CloudMatrixAssessmentRecord"
+                    "correlation": {
+                        "$ref": "#/components/schemas/CloudMatrixAssessmentCorrelationRecord"
                     },
                     "title": {
-                        "description": "",
+                        "description": "Human-readable title of the roadmap.",
                         "type": "string",
-                        "examples": ["MICROSOFT ROADMAP5.0"]
+                        "examples": [
+                            "MICROSOFT ROADMAP5.0"
+                        ]
                     },
                     "version": {
-                        "description": "",
+                        "description": "Roadmap version identifier.",
                         "type": "string",
-                        "examples": ["5.0.4"]
+                        "examples": [
+                            "5.0.4"
+                        ]
                     },
                     "description": {
-                        "description": "",
+                        "description": "Narrative description of the roadmap content.",
                         "type": "string",
-                        "examples": ["MICROSOFT CLOUD ADOPTION MATRIX v5.0"]
+                        "examples": [
+                            "MICROSOFT CLOUD ADOPTION MATRIX v5.0"
+                        ]
                     },
                     "startYear": {
-                        "description": "",
+                        "description": "Starting year for the roadmap plan.",
                         "type": "number",
-                        "examples": [2025]
+                        "examples": [
+                            2025
+                        ]
                     },
-                    "elements" : {
-                        "description": "",
+                    "elements": {
+                        "description": "Collection of roadmap elements included in this plan.",
                         "type": "array",
                         "items": {
                             "$ref": "#/components/schemas/CloudMatrixRoadmapElement"
@@ -2509,9 +2631,9 @@
                                     },
                                     "profiles": [
                                         {
-                                        "name": "Microsoft E5 Premium",
-                                        "abbreviation": "ME5P",
-                                        "value": 5
+                                            "name": "Microsoft E5 Premium",
+                                            "abbreviation": "ME5P",
+                                            "value": 5
                                         }
                                     ]
                                 }
@@ -2548,28 +2670,29 @@
                                 },
                                 "profiles": [
                                     {
-                                    "name": "Microsoft E5 Premium",
-                                    "abbreviation": "ME5P",
-                                    "value": 5
+                                        "name": "Microsoft E5 Premium",
+                                        "abbreviation": "ME5P",
+                                        "value": 5
                                     }
                                 ]
                             }
                         ]
                     }
-                ]                
+                ]
             },
-            "CloudMatrixAssessmentRecord": {
+            "CloudMatrixAssessmentCorrelationRecord": {
                 "description": "Represents a cloud matrix record, including customer, assessment, and publisher details, as well as key timestamps and identifiers.",
                 "examples": [
                     {
                         "accountName": "Test Account Name",
-                        "assessmentId": "bbab2907-c781-4bf1-b912-b91510853052",
+                        "correlationId": "bbab2907-c781-4bf1-b912-b91510853052",
                         "createdAt": "2025-12-15T21:13:12.821Z",
                         "crmId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
                         "discoverDate": "2025-12-15T21:13:12.821Z",
                         "isComplete": true,
                         "publisher": "Test Publisher One",
-                        "updatedAt": "2025-12-15T21:13:12.821Z"
+                        "updatedAt": "2025-12-15T21:13:12.821Z",
+                        "schemaVersion": 0
                     }
                 ],
                 "properties": {
@@ -2580,7 +2703,7 @@
                         ],
                         "type": "string"
                     },
-                    "assessmentId": {
+                    "correlationId": {
                         "description": "The unique identifier (UUID) of the discovery session associated with this cloud matrix assessment record.",
                         "examples": [
                             "bbab2907-c781-4bf1-b912-b91510853052"
@@ -2639,15 +2762,26 @@
                         ],
                         "format": "date-time",
                         "type": "string"
+                    },
+                    "schemaVersion": {
+                        "type": "number",
+                        "examples": [
+                            0
+                        ]
                     }
                 },
                 "required": [
                     "accountName",
+                    "correlationId",
+                    "createdAt",
                     "crmId",
                     "discoverDate",
-                    "publisher"
+                    "isComplete",
+                    "publisher",
+                    "updatedAt",
+                    "schemaVersion"
                 ],
-                "title": "Cloud Matrix Assessment Record",
+                "title": "Cloud Matrix Assessment Correlation Record",
                 "type": "object"
             }
         },
@@ -7121,7 +7255,7 @@
                                         ]
                                     ],
                                     "items": {
-                                        "$ref": "#/components/schemas/CloudMatrixAssessmentRecord"
+                                        "$ref": "#/components/schemas/CloudMatrixAssessmentCorrelationRecord"
                                     },
                                     "minItems": 0,
                                     "type": "array"
@@ -7153,16 +7287,16 @@
                             "application/json": {
                                 "examples": {},
                                 "schema": {
-                                    "$ref": "#/components/schemas/CloudMatrixAssessmentRecord"
+                                    "$ref": "#/components/schemas/CloudMatrixAssessmentCorrelationRecord"
                                 }
                             }
                         }
                     },
                     "400": {
-                        "$ref": "#/components/response/400"
+                        "$ref": "#/components/responses/400"
                     },
                     "500": {
-                        "$ref": "#/components/response/500"
+                        "$ref": "#/components/responses/500"
                     }
                 },
                 "tags": [
