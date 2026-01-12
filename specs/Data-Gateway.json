@@ -203,6 +203,18 @@
             }
         },
         "schemas": {
+            "Uuid": {
+                "format": "uuid",
+                "title": "Unique identifier",
+                "description": "36 characters long unique identifier (RFC 4122)",
+                "maxLength": 36,
+                "minLength": 36,
+                "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                "type": "string",
+                "examples": [
+                    "fd9a6a53-594d-41aa-950a-b21ff41d4688"
+                ]
+            },
             "Core.HealthReport": {
                 "description": "Health report that indicates if a service is down or not that the data gateway relies on.",
                 "properties": {
@@ -2302,6 +2314,372 @@
                 "$ref": "#/components/schemas/Report.PrincipalData",
                 "title": "Architecture Report - Principal Data"
             },
+            "CloudMatrixProfileKeyValue": {
+                "title": "Cloud Matrix Profile Key Value",
+                "description": "Key value pair in a Cloud Matrix profile",
+                "examples": [
+                    {
+                        "name": "Microsoft E5 Premium",
+                        "abbreviation": "ME5P",
+                        "value": 5
+                    }
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Display name of the Cloud Matrix profile.",
+                        "examples": [
+                            "Microsoft E5 Premium"
+                        ]
+                    },
+                    "abbreviation": {
+                        "oneOf": [
+                            {
+                                "type": "string",
+                                "description": "Short code used to abbreviate the profile name.",
+                                "examples": [
+                                    "ME5P"
+                                ]
+                            },
+                            {
+                                "type": "null",
+                                "description": "Null when the abbreviation is not available.",
+                                "examples": [
+                                    null
+                                ]
+                            }
+                        ]
+                    },
+                    "value": {
+                        "oneOf": [
+                            {
+                                "type": "number",
+                                "description": "Numeric score or weighting for the profile.",
+                                "examples": [
+                                    5
+                                ]
+                            },
+                            {
+                                "type": "null",
+                                "description": "Null when the profile value is not available.",
+                                "examples": [
+                                    null
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "name",
+                    "value"
+                ]
+            },
+            "CloudMatrixRoadmapElementMetadata": {
+                "title": "Cloud Matrix Roadmap Element Metadata",
+                "description": "The metadata related to a Cloud Matrix Value Assessment.",
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the roadmap item being assessed.",
+                        "examples": [
+                            "M365 Apps for Enterprise - Mobile/Online"
+                        ]
+                    },
+                    "breakoutId": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Uuid"
+                            },
+                            {
+                                "type": "null",
+                                "description": "Null when the value is not available.",
+                                "examples": [
+                                    null
+                                ]
+                            }
+                        ]
+                    },
+                    "category": {
+                        "type": "string",
+                        "description": "Top-level category for the roadmap item.",
+                        "examples": [
+                            "USER EXPERIENCE"
+                        ]
+                    },
+                    "subCategory": {
+                        "type": "string",
+                        "description": "Subcategory that further classifies the roadmap item.",
+                        "examples": [
+                            "Productivity"
+                        ]
+                    },
+                    "startYearValue": {
+                        "oneOf": [
+                            {
+                                "type": "number",
+                                "description": "Assessment value for the start year of the roadmap.",
+                                "examples": [
+                                    2026
+                                ]
+                            },
+                            {
+                                "type": "null",
+                                "description": "Null when the value is not available.",
+                                "examples": [
+                                    null
+                                ]
+                            }
+                        ]
+                    },
+                    "yearPlusOneValue": {
+                        "oneOf": [
+                            {
+                                "type": "string",
+                                "description": "Projected assessment value one year after the start year.",
+                                "examples": [
+                                    2027
+                                ]
+                            },
+                            {
+                                "type": "null",
+                                "description": "Null when the value is not available.",
+                                "examples": [
+                                    null
+                                ]
+                            }
+                        ]
+                    },
+                    "yearPlusTwoValue": {
+                        "oneOf": [
+                            {
+                                "type": "string",
+                                "description": "Projected assessment value two years after the start year.",
+                                "examples": [
+                                    2028
+                                ]
+                            },
+                            {
+                                "type": "null",
+                                "description": "Null when the value is not available.",
+                                "examples": [
+                                    null
+                                ]
+                            }
+                        ]
+                    },
+                    "yearPlusThreeValue": {
+                        "oneOf": [
+                            {
+                                "type": "string",
+                                "description": "Projected assessment value three years after the start year.",
+                                "examples": [
+                                    2029
+                                ]
+                            },
+                            {
+                                "type": "null",
+                                "description": "Null when the value is not available.",
+                                "examples": [
+                                    null
+                                ]
+                            }
+                        ]
+                    },
+                    "sourceValue": {
+                        "oneOf": [
+                            {
+                                "type": "string",
+                                "description": "Baseline assessment value sourced from the original data.",
+                                "examples": [
+                                    0
+                                ]
+                            },
+                            {
+                                "type": "null",
+                                "description": "Null when the value is not available.",
+                                "examples": [
+                                    null
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "name",
+                    "breakoutId",
+                    "category",
+                    "subCategory",
+                    "startYearValue",
+                    "yearPlusOneValue",
+                    "yearPlusTwoValue",
+                    "yearPlusThreeValue",
+                    "sourceValue"
+                ],
+                "examples": [
+                    {
+                        "name": "M365 Apps for Enterprise - Mobile/Online",
+                        "breakoutId": "35a6583b-1c9e-4ddf-8cb1-38d12c10ea53",
+                        "category": "USER EXPERIENCE",
+                        "subCategory": "Productivity",
+                        "startYearValue": 2026,
+                        "yearPlusOneValue": 2027,
+                        "yearPlusTwoValue": 2028,
+                        "yearPlusThreeValue": 2029,
+                        "sourceValue": 0
+                    }
+                ]
+            },
+            "CloudMatrixRoadmapElement": {
+                "title": "Cloud Matrix Roadmap Element",
+                "description": "An element of a Cloud Matrix Roadmap assessment.",
+                "type": "object",
+                "properties": {
+                    "metadata": {
+                        "$ref": "#/components/schemas/CloudMatrixRoadmapElementMetadata"
+                    },
+                    "profiles": {
+                        "type": "array",
+                        "description": "Profile scores associated with this roadmap element.",
+                        "items": {
+                            "$ref": "#/components/schemas/CloudMatrixProfileKeyValue"
+                        }
+                    }
+                },
+                "required": [
+                    "metadata",
+                    "profiles"
+                ],
+                "examples": [
+                    {
+                        "metadata": {
+                            "name": "M365 Apps for Enterprise - Mobile/Online ",
+                            "breakoutId": "35a6583b-1c9e-4ddf-8cb1-38d12c10ea53",
+                            "category": "USER EXPERIENCE",
+                            "subCategory": "Productivity",
+                            "startYearValue": 2026,
+                            "yearPlusOneValue": 2027,
+                            "yearPlusTwoValue": 2028,
+                            "yearPlusThreeValue": 2029,
+                            "sourceValue": 0
+                        },
+                        "profiles": [
+                            {
+                                "name": "Microsoft E5 Premium",
+                                "abbreviation": "ME5P",
+                                "value": 5
+                            }
+                        ]
+                    }
+                ]
+            },
+            "CloudMatrixRoadmap": {
+                "title": "Cloud Matrix Roadmap",
+                "description": "Roadmap output produced from a Cloud Matrix assessment.",
+                "type": "object",
+                "properties": {
+                    "correlation": {
+                        "$ref": "#/components/schemas/CloudMatrixCorrelationRecord"
+                    },
+                    "title": {
+                        "description": "Human-readable title of the roadmap.",
+                        "type": "string",
+                        "examples": [
+                            "MICROSOFT ROADMAP5.0"
+                        ]
+                    },
+                    "version": {
+                        "description": "Roadmap version identifier.",
+                        "type": "string",
+                        "examples": [
+                            "5.0.4"
+                        ]
+                    },
+                    "description": {
+                        "description": "Narrative description of the roadmap content.",
+                        "type": "string",
+                        "examples": [
+                            "MICROSOFT CLOUD ADOPTION MATRIX v5.0"
+                        ]
+                    },
+                    "startYear": {
+                        "description": "Starting year for the roadmap plan.",
+                        "type": "number",
+                        "examples": [
+                            2025
+                        ]
+                    },
+                    "elements": {
+                        "description": "Collection of roadmap elements included in this plan.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/CloudMatrixRoadmapElement"
+                        },
+                        "examples": [
+                            [
+                                {
+                                    "metadata": {
+                                        "name": "M365 Apps for Enterprise - Mobile/Online ",
+                                        "breakoutId": "35a6583b-1c9e-4ddf-8cb1-38d12c10ea53",
+                                        "category": "USER EXPERIENCE",
+                                        "subCategory": "Productivity",
+                                        "startYearValue": null,
+                                        "yearPlusOneValue": null,
+                                        "yearPlusTwoValue": null,
+                                        "yearPlusThreeValue": null,
+                                        "sourceValue": 0
+                                    },
+                                    "profiles": [
+                                        {
+                                            "name": "Microsoft E5 Premium",
+                                            "abbreviation": "ME5P",
+                                            "value": 5
+                                        }
+                                    ]
+                                }
+                            ]
+                        ]
+                    }
+                },
+                "required": [
+                    "correlation",
+                    "title",
+                    "version",
+                    "description",
+                    "startYear",
+                    "elements"
+                ],
+                "examples": [
+                    {
+                        "title": "MICROSOFT ROADMAP5.0",
+                        "version": "5.0.4",
+                        "description": "MICROSOFT CLOUD ADOPTION MATRIX v5.0",
+                        "startYear": 2025,
+                        "elements": [
+                            {
+                                "metadata": {
+                                    "name": "M365 Apps for Enterprise - Mobile/Online ",
+                                    "breakoutId": "35a6583b-1c9e-4ddf-8cb1-38d12c10ea53",
+                                    "category": "USER EXPERIENCE",
+                                    "subCategory": "Productivity",
+                                    "startYearValue": null,
+                                    "yearPlusOneValue": null,
+                                    "yearPlusTwoValue": null,
+                                    "yearPlusThreeValue": null,
+                                    "sourceValue": 0
+                                },
+                                "profiles": [
+                                    {
+                                        "name": "Microsoft E5 Premium",
+                                        "abbreviation": "ME5P",
+                                        "value": 5
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
             "CloudMatrixCorrelationRecord": {
                 "description": "Represents a Cloud Matrix correlation record, including customer and publisher details, as well as key timestamps and identifiers.",
                 "examples": [
@@ -2313,7 +2691,8 @@
                         "discoverDate": "2025-12-15T21:13:12.821Z",
                         "isComplete": true,
                         "publisher": "Test Publisher One",
-                        "updatedAt": "2025-12-15T21:13:12.821Z"
+                        "updatedAt": "2025-12-15T21:13:12.821Z",
+                        "schemaVersion": 0
                     }
                 ],
                 "properties": {
@@ -2383,13 +2762,24 @@
                         ],
                         "format": "date-time",
                         "type": "string"
+                    },
+                    "schemaVersion": {
+                        "type": "number",
+                        "examples": [
+                            0
+                        ]
                     }
                 },
                 "required": [
                     "accountName",
+                    "correlationId",
+                    "createdAt",
                     "crmId",
                     "discoverDate",
-                    "publisher"
+                    "isComplete",
+                    "publisher",
+                    "updatedAt",
+                    "schemaVersion"
                 ],
                 "title": "Cloud Matrix Correlation Record",
                 "type": "object"
@@ -6884,6 +7274,119 @@
                     "Cloud Matrix"
                 ],
                 "summary": "Get Cloud Matrix Correlation Records"
+            }
+        },
+        "/Api/CloudMatrix/Assessment": {
+            "get": {
+                "description": "Get a default assessment schema object as schema structure reference.",
+                "operationId": "/Api/CloudMatrix/Assessment/Get",
+                "responses": {
+                    "200": {
+                        "description": "The default assessment schema object.",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Default Output": {
+                                        "description": "Always returns the default schema template that stored in blob storage. This has been trimmed to contain one element for brevity.",
+                                        "summary": "Default Output",
+                                        "value": {
+                                            "title": "MICROSOFT ROADMAP5.0",
+                                            "version": "5.0.4",
+                                            "description": "MICROSOFT CLOUD ADOPTION MATRIX v5.0",
+                                            "startYear": 2025,
+                                            "correlation": {
+                                                "accountName": "Test Account",
+                                                "correlationId": "f961fc23-585f-493f-ad0e-31384b504468",
+                                                "createdAt": "2026-01-01T10:00:00.000Z",
+                                                "crmId": "b16a6e10-af05-46bf-aa68-ecaecb80a92e",
+                                                "discoverDate": "2026-01-08T10:00:00.000Z",
+                                                "schemaVersion": 0,
+                                                "isComplete": false,
+                                                "publisher": "Microsoft",
+                                                "updatedAt": "2026-01-02T12:30:00.000Z"
+                                            },
+                                            "elements": [
+                                                {
+                                                    "metadata": {
+                                                        "name": "M365 Apps for Enterprise - Mobile/Online ",
+                                                        "breakoutId": "35a6583b-1c9e-4ddf-8cb1-38d12c10ea53",
+                                                        "category": "USER EXPERIENCE",
+                                                        "subCategory": "Productivity",
+                                                        "startYearValue": null,
+                                                        "yearPlusOneValue": null,
+                                                        "yearPlusTwoValue": null,
+                                                        "yearPlusThreeValue": null,
+                                                        "sourceValue": 0
+                                                    },
+                                                    "profiles": [
+                                                        {
+                                                            "name": "Microsoft E5 Premium",
+                                                            "abbreviation": "ME5P",
+                                                            "value": 5
+                                                        },
+                                                        {
+                                                            "name": "Microsoft E3 Premium",
+                                                            "abbreviation": "ME3P",
+                                                            "value": 5
+                                                        },
+                                                        {
+                                                            "name": "Microsoft F3 Premium",
+                                                            "abbreviation": "MF3P",
+                                                            "value": 5
+                                                        },
+                                                        {
+                                                            "name": "Office E5 Premium",
+                                                            "abbreviation": "OE5P",
+                                                            "value": 5
+                                                        },
+                                                        {
+                                                            "name": "Office E3 Premium",
+                                                            "abbreviation": "OE3P",
+                                                            "value": 5
+                                                        },
+                                                        {
+                                                            "name": "Office E1 Premium",
+                                                            "abbreviation": "OE1P",
+                                                            "value": 5
+                                                        },
+                                                        {
+                                                            "name": "Microsoft Business Premium Plan",
+                                                            "abbreviation": "MBPP",
+                                                            "value": 5
+                                                        },
+                                                        {
+                                                            "name": "Microsoft Business Standard Plan",
+                                                            "abbreviation": "MBSP",
+                                                            "value": 5
+                                                        },
+                                                        {
+                                                            "name": "Microsoft Business Basic Plan",
+                                                            "abbreviation": "MBBP",
+                                                            "value": 5
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/CloudMatrixRoadmap"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "tags": [
+                    "Cloud Matrix"
+                ],
+                "summary": "Get a default assessment schema object"
             }
         }
     },
