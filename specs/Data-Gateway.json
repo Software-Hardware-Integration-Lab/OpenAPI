@@ -2387,7 +2387,7 @@
                         ]
                     },
                     "breakoutId": {
-                        "oneOf": [
+                        "allOf": [
                             {
                                 "$ref": "#/components/schemas/Uuid"
                             },
