@@ -7426,64 +7426,40 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "A list of cloud matrix records.",
+                        "description": "A cloud matrix record.",
                         "content": {
                             "application/json": {
                                 "examples": {
-                                    "Example Cloud Matrix Records": {
-                                        "description": "Sample list of cloud matrix records.",
-                                        "summary": "Available Cloud Matrix Records",
-                                        "value": [
-                                            {
-                                                "accountName": "Test Account Name",
-                                                "correlationId": "bbab2907-c781-4bf1-b912-b91510853052",
-                                                "createdAt": "2025-12-15T21:13:12.821Z",
-                                                "crmId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
-                                                "discoverDate": "2025-12-15T21:13:12.821Z",
-                                                "isComplete": true,
-                                                "publisher": "Test Publisher One",
-                                                "updatedAt": "2025-12-15T21:13:12.821Z"
-                                            },
-                                            {
-                                                "accountName": "Test Account Name",
-                                                "correlationId": "e7cc9996-3c5f-4be4-bba2-c815a157dedb",
-                                                "createdAt": "2025-12-15T21:13:12.821Z",
-                                                "crmId": "fbea61c3-6c80-4fbb-9bd7-b6fa2356892e",
-                                                "discoverDate": "2025-12-15T21:13:12.821Z",
-                                                "isComplete": false,
-                                                "publisher": "Test Publisher Two",
-                                                "updatedAt": "2025-12-15T21:13:12.821Z"
-                                            }
-                                        ]
+                                    "Example Cloud Matrix Record": {
+                                        "description": "Sample cloud matrix record.",
+                                        "summary": "Requested Cloud Matrix Record",
+                                        "value": {
+                                            "accountName": "Test Account Name",
+                                            "correlationId": "bbab2907-c781-4bf1-b912-b91510853052",
+                                            "createdAt": "2025-12-15T21:13:12.821Z",
+                                            "crmId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
+                                            "discoverDate": "2025-12-15T21:13:12.821Z",
+                                            "isComplete": true,
+                                            "publisher": "Test Publisher One",
+                                            "updatedAt": "2025-12-15T21:13:12.821Z"
+                                        }
                                     }
                                 },
                                 "schema": {
                                     "examples": [
-                                        [
-                                            {
-                                                "accountName": "Test Account Name",
-                                                "correlationId": "bbab2907-c781-4bf1-b912-b91510853052",
-                                                "createdAt": "2025-12-15T21:13:12.821Z",
-                                                "crmId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
-                                                "discoverDate": "2025-12-15T21:13:12.821Z",
-                                                "isComplete": true,
-                                                "publisher": "Test Publisher One",
-                                                "updatedAt": "2025-12-15T21:13:12.821Z"
-                                            },
-                                            {
-                                                "accountName": "Test Account Name",
-                                                "correlationId": "e7cc9996-3c5f-4be4-bba2-c815a157dedb",
-                                                "createdAt": "2025-12-15T21:13:12.821Z",
-                                                "crmId": "fbea61c3-6c80-4fbb-9bd7-b6fa2356892e",
-                                                "discoverDate": "2025-12-15T21:13:12.821Z",
-                                                "isComplete": false,
-                                                "publisher": "Test Publisher Two",
-                                                "updatedAt": "2025-12-15T21:13:12.821Z"
-                                            }
-                                        ]
+                                        {
+                                            "accountName": "Test Account Name",
+                                            "correlationId": "bbab2907-c781-4bf1-b912-b91510853052",
+                                            "createdAt": "2025-12-15T21:13:12.821Z",
+                                            "crmId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
+                                            "discoverDate": "2025-12-15T21:13:12.821Z",
+                                            "isComplete": true,
+                                            "publisher": "Test Publisher One",
+                                            "updatedAt": "2025-12-15T21:13:12.821Z"
+                                        }
                                     ],
                                     "items": {
-                                        "$ref": "#/components/schemas/CloudMatrixAssessmentRecord"
+                                        "$ref": "#/components/schemas/CloudMatrixCorrelationRecord"
                                     },
                                     "minItems": 0,
                                     "type": "array"
@@ -7499,7 +7475,7 @@
                     }
                 },
                 "tags": [
-                    "Cloud Matrix Assessment"
+                    "Cloud Matrix"
                 ],
                 "summary": "Get Cloud Matrix Assessment Record by ID"
             }
