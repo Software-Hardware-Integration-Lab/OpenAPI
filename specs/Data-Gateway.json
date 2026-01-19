@@ -7434,28 +7434,208 @@
                                         "description": "Sample cloud matrix record.",
                                         "summary": "Requested Cloud Matrix Record",
                                         "value": {
-                                            "accountName": "Test Account Name",
-                                            "correlationId": "bbab2907-c781-4bf1-b912-b91510853052",
-                                            "createdAt": "2025-12-15T21:13:12.821Z",
-                                            "crmId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
-                                            "discoverDate": "2025-12-15T21:13:12.821Z",
-                                            "isComplete": true,
-                                            "publisher": "Test Publisher One",
-                                            "updatedAt": "2025-12-15T21:13:12.821Z"
+                                            "title": "Microsoft Security & Productivity Roadmap (Sample)",
+                                            "version": "5.0.4",
+                                            "description": "Sample roadmap data showing service offerings, values, and plan profiles.",
+                                            "startYear": 2026,
+                                            "correlation": {
+                                                "accountName": "CMTestAccount1",
+                                                "correlationId": "745b00d0-d772-11f0-899c-41d4a068f985",
+                                                "crmId": "de186670-d772-11f0-899c-41d4a068f985",
+                                                "publisher": "Microsoft",
+                                                "schemaVersion": 0,
+                                                "isComplete": false,
+                                                "discoverDate": "2026-01-08T21:13:12.821Z",
+                                                "createdAt": "2026-01-08T21:13:12.821Z",
+                                                "updatedAt": "2026-01-08T21:13:12.821Z"
+                                            },
+                                            "elements": [
+                                                {
+                                                    "metadata": {
+                                                        "name": "Microsoft 365 Copilot Chat",
+                                                        "breakoutId": "97676a10-6875-4a32-8f2f-4bee4b147a84",
+                                                        "category": "Productivity",
+                                                        "subCategory": "AI Assistance",
+                                                        "startYearValue": 1,
+                                                        "yearPlusOneValue": 1,
+                                                        "yearPlusTwoValue": 1,
+                                                        "yearPlusThreeValue": 1,
+                                                        "sourceValue": 1
+                                                    },
+                                                    "profiles": [
+                                                        {
+                                                            "name": "E3",
+                                                            "value": 0
+                                                        },
+                                                        {
+                                                            "name": "E5",
+                                                            "value": 1
+                                                        },
+                                                        {
+                                                            "name": "Business Premium",
+                                                            "value": 0
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "metadata": {
+                                                        "name": "Microsoft Defender for Endpoint",
+                                                        "breakoutId": "da752c3d-30da-4370-97c3-89811ffc5478",
+                                                        "category": "Security",
+                                                        "subCategory": "Endpoint Protection",
+                                                        "startYearValue": 1,
+                                                        "yearPlusOneValue": 1,
+                                                        "yearPlusTwoValue": 1,
+                                                        "yearPlusThreeValue": 1,
+                                                        "sourceValue": 1
+                                                    },
+                                                    "profiles": [
+                                                        {
+                                                            "name": "Defender for Business",
+                                                            "value": 0
+                                                        },
+                                                        {
+                                                            "name": "MDE P1",
+                                                            "value": 1
+                                                        },
+                                                        {
+                                                            "name": "MDE P2",
+                                                            "value": 1
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "metadata": {
+                                                        "name": "Microsoft Entra Suite",
+                                                        "breakoutId": "e2849e30-8192-4272-899b-3ba90e412570",
+                                                        "category": "Identity",
+                                                        "subCategory": "IAM / Conditional Access",
+                                                        "startYearValue": 1,
+                                                        "yearPlusOneValue": 1,
+                                                        "yearPlusTwoValue": 1,
+                                                        "yearPlusThreeValue": 1,
+                                                        "sourceValue": 1
+                                                    },
+                                                    "profiles": [
+                                                        {
+                                                            "name": "Entra ID P1",
+                                                            "value": 1
+                                                        },
+                                                        {
+                                                            "name": "Entra ID P2",
+                                                            "value": 1
+                                                        },
+                                                        {
+                                                            "name": "Entra Suite",
+                                                            "value": 1
+                                                        }
+                                                    ]
+                                                }
+                                            ]
                                         }
                                     }
                                 },
                                 "schema": {
                                     "examples": [
                                         {
-                                            "accountName": "Test Account Name",
-                                            "correlationId": "bbab2907-c781-4bf1-b912-b91510853052",
-                                            "createdAt": "2025-12-15T21:13:12.821Z",
-                                            "crmId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
-                                            "discoverDate": "2025-12-15T21:13:12.821Z",
-                                            "isComplete": true,
-                                            "publisher": "Test Publisher One",
-                                            "updatedAt": "2025-12-15T21:13:12.821Z"
+                                            "title": "Microsoft Security & Productivity Roadmap (Sample)",
+                                            "version": "5.0.4",
+                                            "description": "Sample roadmap data showing service offerings, values, and plan profiles.",
+                                            "startYear": 2026,
+                                            "correlation": {
+                                                "accountName": "CMTestAccount1",
+                                                "correlationId": "745b00d0-d772-11f0-899c-41d4a068f985",
+                                                "crmId": "de186670-d772-11f0-899c-41d4a068f985",
+                                                "publisher": "Microsoft",
+                                                "schemaVersion": 0,
+                                                "isComplete": false,
+                                                "discoverDate": "2026-01-08T21:13:12.821Z",
+                                                "createdAt": "2026-01-08T21:13:12.821Z",
+                                                "updatedAt": "2026-01-08T21:13:12.821Z"
+                                            },
+                                            "elements": [
+                                                {
+                                                    "metadata": {
+                                                        "name": "Microsoft 365 Copilot Chat",
+                                                        "breakoutId": "97676a10-6875-4a32-8f2f-4bee4b147a84",
+                                                        "category": "Productivity",
+                                                        "subCategory": "AI Assistance",
+                                                        "startYearValue": 1,
+                                                        "yearPlusOneValue": 1,
+                                                        "yearPlusTwoValue": 1,
+                                                        "yearPlusThreeValue": 1,
+                                                        "sourceValue": 1
+                                                    },
+                                                    "profiles": [
+                                                        {
+                                                            "name": "E3",
+                                                            "value": 0
+                                                        },
+                                                        {
+                                                            "name": "E5",
+                                                            "value": 1
+                                                        },
+                                                        {
+                                                            "name": "Business Premium",
+                                                            "value": 0
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "metadata": {
+                                                        "name": "Microsoft Defender for Endpoint",
+                                                        "breakoutId": "da752c3d-30da-4370-97c3-89811ffc5478",
+                                                        "category": "Security",
+                                                        "subCategory": "Endpoint Protection",
+                                                        "startYearValue": 1,
+                                                        "yearPlusOneValue": 1,
+                                                        "yearPlusTwoValue": 1,
+                                                        "yearPlusThreeValue": 1,
+                                                        "sourceValue": 1
+                                                    },
+                                                    "profiles": [
+                                                        {
+                                                            "name": "Defender for Business",
+                                                            "value": 0
+                                                        },
+                                                        {
+                                                            "name": "MDE P1",
+                                                            "value": 1
+                                                        },
+                                                        {
+                                                            "name": "MDE P2",
+                                                            "value": 1
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "metadata": {
+                                                        "name": "Microsoft Entra Suite",
+                                                        "breakoutId": "e2849e30-8192-4272-899b-3ba90e412570",
+                                                        "category": "Identity",
+                                                        "subCategory": "IAM / Conditional Access",
+                                                        "startYearValue": 1,
+                                                        "yearPlusOneValue": 1,
+                                                        "yearPlusTwoValue": 1,
+                                                        "yearPlusThreeValue": 1,
+                                                        "sourceValue": 1
+                                                    },
+                                                    "profiles": [
+                                                        {
+                                                            "name": "Entra ID P1",
+                                                            "value": 1
+                                                        },
+                                                        {
+                                                            "name": "Entra ID P2",
+                                                            "value": 1
+                                                        },
+                                                        {
+                                                            "name": "Entra Suite",
+                                                            "value": 1
+                                                        }
+                                                    ]
+                                                }
+                                            ]
                                         }
                                     ],
                                     "items": {
