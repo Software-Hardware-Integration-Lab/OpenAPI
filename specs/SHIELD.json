@@ -4830,26 +4830,10 @@
                                                 "[Go to this link](https://google.com/)"
                                             ]
                                         }
-                                    },
-                                    "Response When Documentation is Missing": {
-                                        "description": "Sample response with unavailable documentation",
-                                        "summary": "Missing Configuration Item Documentation",
-                                        "value": "No documentation available yet!"
                                     }
                                 },
                                 "schema": {
-                                    "oneOf": [
-                                        {
-                                            "$ref": "#/components/schemas/Deploy.ConfigurationItemMetaData"
-                                        },
-                                        {
-                                            "type": "string",
-                                            "description": "Indicator that no additional information is available for this configuration item.",
-                                            "examples": [
-                                                "No documentation available yet!"
-                                            ]
-                                        }
-                                    ]
+                                    "$ref": "#/components/schemas/Deploy.ConfigurationItemMetaData"
                                 }
                             }
                         },
