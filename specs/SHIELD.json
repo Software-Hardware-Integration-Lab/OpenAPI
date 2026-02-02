@@ -5087,7 +5087,7 @@
         "/Api/Discover/Cache/Reset": {
             "post": {
                 "summary": "Request to Rebuild the Delta Engine's Cache From Scratch",
-                "description": "Requests the Cache Engine to clear and request latest data from thhe tenant to be available for the report generation.\n\nThis endpoint requires the `Discover.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
+                "description": "Requests the Cache Engine to clear and request latest data from the tenant to be available for the report generation.\n\nThis endpoint requires the `Discover.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
                 "operationId": "/Api/Discover/Cache/Reset/Post",
                 "responses": {
                     "202": {
