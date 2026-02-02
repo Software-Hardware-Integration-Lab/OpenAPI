@@ -2226,8 +2226,10 @@
                             "88da2253-758f-4135-9d37-64448c8b65c1"
                         ],
                         "format": "uuid",
-                        "type": "string",
-                        "pattern": "^\\w+-\\w+-\\w+-\\w+-\\w+$"
+                        "maxLength": 36,
+                        "minLength": 36,
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                        "type": "string"
                     },
                     "reportTenantAccount": {
                         "description": "User account used to store/report the license report to the SHI Lab cloud service.",
@@ -2243,8 +2245,10 @@
                             "0e1fe83f-a33f-4250-8546-225b8d45ae01"
                         ],
                         "format": "uuid",
-                        "type": "string",
-                        "pattern": "^\\w+-\\w+-\\w+-\\w+-\\w+$"
+                        "maxLength": 36,
+                        "minLength": 36,
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                        "type": "string"
                     },
                     "createdAt": {
                         "description": "Timestamp of when the report was created.",
@@ -2268,141 +2272,6 @@
                 ],
                 "title": "License Report - Correlation Record",
                 "type": "object"
-            },
-            "LicenseReport.LicenseData": {
-                "type": "object",
-                "properties": {
-                    "assignedLicense": {
-                        "additionalProperties": {
-                            "type": "integer",
-                            "examples": [
-                                1
-                            ]
-                        },
-                        "description": "License assignment on the specified principal.",
-                        "type": "object",
-                        "examples": [
-                            {
-                                "eec0eb4f-6444-4f95-aba0-50c24d67f998": 1
-                            }
-                        ]
-                    },
-                    "assignedService": {
-                        "additionalProperties": {
-                            "oneOf": [
-                                {
-                                    "$ref": "#/components/schemas/LicenseReport.FeatureBreakdown"
-                                },
-                                {
-                                    "type": "integer",
-                                    "format": "int32",
-                                    "examples": [
-                                        0
-                                    ]
-                                }
-                            ]
-                        },
-                        "description": "Service configuration assignment.  This is used to record the set of principals that are \"benefiting\" from the service, regardless of license status.",
-                        "type": "object",
-                        "examples": [
-                            {
-                                "eec0eb4f-6444-4f95-aba0-50c24d67f998": {
-                                    "Conditional Access": false,
-                                    "Access Review": true,
-                                    "Entitlement Management": false,
-                                    "Identity Protection": true
-                                }
-                            },
-                            {
-                                "eec0eb4f-6444-4f95-aba0-50c24d67f998": 0
-                            }
-                        ]
-                    },
-                    "consumedService": {
-                        "additionalProperties": {
-                            "oneOf": [
-                                {
-                                    "$ref": "#/components/schemas/LicenseReport.FeatureBreakdown"
-                                },
-                                {
-                                    "type": "integer",
-                                    "format": "int32",
-                                    "examples": [
-                                        0
-                                    ]
-                                }
-                            ]
-                        },
-                        "description": "Usage telemetry retrieved for the service to indicate if the specific principal is consuming the service or not, regardless of license status.",
-                        "type": "object",
-                        "examples": [
-                            {
-                                "4b0d28f2-c1ce-48ae-a7d2-1caaa7825891": null
-                            },
-                            {
-                                "eec0eb4f-6444-4f95-aba0-50c24d67f998": {
-                                    "Conditional Access": true,
-                                    "Access Review": false,
-                                    "Entitlement Management": false,
-                                    "Identity Protection": true
-                                }
-                            }
-                        ]
-                    }
-                },
-                "required": [
-                    "assignedLicense",
-                    "assignedService",
-                    "consumedService"
-                ],
-                "description": "Collection of principals that have had their in-use licenses and assigned licenses. Where the key is the principal ID and the value is the insights.",
-                "examples": [
-                    {
-                        "assignedLicense": {
-                            "eec0eb4f-6444-4f95-aba0-50c24d67f998": null,
-                            "41781fb2-bc02-4b7c-bd55-b576c07bb09d": null,
-                            "7159f980-6f83-4b67-bf41-e172b3ae1352": null
-                        },
-                        "assignedService": {
-                            "eec0eb4f-6444-4f95-aba0-50c24d67f998": {
-                                "Conditional Access": false,
-                                "Access Review": true,
-                                "Entitlement Management": false,
-                                "Identity Protection": true
-                            },
-                            "41781fb2-bc02-4b7c-bd55-b576c07bb09d": {
-                                "Conditional Access": true,
-                                "Dynamic Group": false,
-                                "Group Naming": true,
-                                "On-Prem SSPR": false,
-                                "Group Expiration": true,
-                                "Provisioning Engine": true,
-                                "Enterprise State Roaming": false
-                            },
-                            "6511755b-c27d-4c66-a59e-b835e6b54e7f": null
-                        },
-                        "consumedService": {
-                            "eec0eb4f-6444-4f95-aba0-50c24d67f998": {
-                                "Conditional Access": true,
-                                "Access Review": false,
-                                "Entitlement Management": false,
-                                "Identity Protection": true
-                            },
-                            "41781fb2-bc02-4b7c-bd55-b576c07bb09d": {
-                                "Conditional Access": true,
-                                "Dynamic Group": false,
-                                "Group Naming": true,
-                                "On-Prem SSPR": false,
-                                "Group Expiration": true,
-                                "Provisioning Engine": true,
-                                "Enterprise State Roaming": false
-                            },
-                            "4b0d28f2-c1ce-48ae-a7d2-1caaa7825891": null,
-                            "c90f1a25-e6cd-4163-ac6c-ca7616c585a9": null
-                        }
-                    }
-                ],
-                "title": "License Report - License Data"
             },
             "LicenseReport.FeatureBreakdown": {
                 "additionalProperties": {
@@ -2428,69 +2297,977 @@
                 "description": "Completely calculated license report structure that is the result of a complete run.",
                 "examples": [
                     {
-                        "availableLicense": {
-                            "e17b13ee-9749-488b-9289-d31a8fde045d": 123,
-                            "2d995b6a-d4aa-4d8d-a03c-372ecb66509d": 456,
-                            "cbf6ee7c-c3c1-44a6-9f18-020c65536470": 789
-                        },
+                        "availableLicense": [
+                            {
+                                "id": "7e2b1c8e-4f3a-4b2e-9c1d-8a7f6e5d4c3b",
+                                "count": 1500,
+                                "servicePlanList": [
+                                    "2a1f4b7c-8e3d-4c2a-9b5e-7d6f1a2b3c4d",
+                                    "9c8b7a6d-5e4f-3a2b-1c0d-8e7f6a5b4c3d"
+                                ]
+                            }
+                        ],
                         "correlation": {
-                            "auditTenantAccount": "admin-user@example.com",
-                            "correlationId": "88da2253-758f-4135-9d37-64448c8b65c1",
-                            "reportTenantAccount": "generic-user@example.com",
-                            "tenantId": "0e1fe83f-a33f-4250-8546-225b8d45ae01"
+                            "auditTenantAccount": "priv-user@example.com",
+                            "correlationId": "9d838115-0868-45d4-b8a5-98adc1af7e42",
+                            "reportTenantAccount": "ent-user@example.com",
+                            "tenantId": "7e536189-b2dd-4c8b-98b1-9b174777883f",
+                            "createdAt": "2024-08-01T21:13:12.821Z",
+                            "updatedAt": "2024-08-01T21:13:12.821Z"
                         },
-                        "licenseData": {
-                            "250844e1-a7ab-4f21-8e3f-58f51b5983a3": {
-                                "assignedLicense": {
-                                    "e17b13ee-9749-488b-9289-d31a8fde045d": null
-                                },
-                                "assignedService": {
-                                    "cbf6ee7c-c3c1-44a6-9f18-020c65536470": null,
-                                    "c7bcba35-199c-41e5-8c8d-6d4e4aad8964": null
-                                },
-                                "consumedService": {
-                                    "fe98c41a-d931-4f6f-a5bc-750ba7144a77": null,
-                                    "0474bdf1-ee76-4aff-a65c-6f82e5e1d5a6": {
-                                        "Something Here": true,
-                                        "Other Obscure feature": false
+                        "principalData": {
+                            "device": {
+                                "2d7e3c4a-1b8f-4e2d-9c1a-5f6a7b8e3c2d": {
+                                    "assignedService": {
+                                        "9c1e4b7a-5d2f-4e3b-8a1c-6f2b7e3c1d4a": {
+                                            "Conditional Access": false,
+                                            "Access Review": true,
+                                            "Entitlement Management": false,
+                                            "Identity Protection": true
+                                        },
+                                        "2a7e3c4d-1b8f-4e2a-9c1d-5f6a7b8e2c3d": 10
+                                    },
+                                    "assignedLicense": [
+                                        {
+                                            "id": "1f4e2b7a-3c8d-4e1a-9b2c-7d6e5f3a2b1c",
+                                            "servicePlanList": [
+                                                "5a7c3e2d-1b9f-4d2a-8c1e-6f3b7e2a4d5c",
+                                                "8e1c2a3d-4b7f-4e2c-9a1d-5f6b7c8e2d3a"
+                                            ]
+                                        }
+                                    ],
+                                    "consumedService": {
+                                        "7e2e1c7b-2b6e-4e7a-8c1a-2e7b8e1c2a3f": {
+                                            "Conditional Access": true,
+                                            "Access Review": false,
+                                            "Entitlement Management": false,
+                                            "Identity Protection": true
+                                        },
+                                        "3f8b2e1d-4c7a-4e2b-9d1a-7e2b3c4d5f6a": null
+                                    },
+                                    "principalMetadata": {
+                                        "sharedComputer": false
+                                    }
+                                }
+                            },
+                            "user": {
+                                "7a2e3c4d-1b9f-4e2a-8c1d-6f2b7e3a4d5c": {
+                                    "assignedService": {
+                                        "3a7e2c4d-1b9f-4e2a-8c1d-6f2b7e3c4d5a": {
+                                            "Conditional Access": false,
+                                            "Access Review": true,
+                                            "Entitlement Management": false,
+                                            "Identity Protection": true
+                                        },
+                                        "7b2e1c4d-3a8f-4e2b-9d1a-6f3c7e2a4d5b": null
+                                    },
+                                    "assignedLicense": [
+                                        {
+                                            "id": "4e2b7a1c-3d8f-4e2a-9c1d-5f6a7b8e2c3d",
+                                            "servicePlanList": [
+                                                "6f2a3c4d-1b7e-4e2c-8a1d-5f3b7e2a4d6c",
+                                                "9c1d2a3e-4b7f-4e2c-8a1d-5f6b7c8e2d3a"
+                                            ]
+                                        }
+                                    ],
+                                    "consumedService": {
+                                        "2a7e3c4d-1b8f-4e2a-9c1d-5f6a7b8e2c3d": {
+                                            "Conditional Access": true,
+                                            "Access Review": false,
+                                            "Entitlement Management": false,
+                                            "Identity Protection": true
+                                        },
+                                        "4c7e2a1d-8b3f-4e2c-9a1d-5f6b7e2c3d4a": 15
+                                    },
+                                    "llmInferred": {
+                                        "isServiceAccount": true,
+                                        "isFrontlineWorker": false,
+                                        "isTempWorker": null
+                                    },
+                                    "principalMetadata": {
+                                        "sharedMailbox": false
+                                    },
+                                    "enhancedData": {
+                                        "userPrincipalName": "some_user@example.com",
+                                        "idpJobTitle": "Senior Engineer",
+                                        "idpDepartment": "Engineering",
+                                        "idpOfficeLocation": "Building 1 / Floor 3",
+                                        "idpEmployeeType": "Full-Time"
                                     }
                                 }
                             }
-                        }
+                        },
+                        "schemaVersion": "1"
                     }
                 ],
                 "type": "object",
                 "properties": {
                     "availableLicense": {
-                        "additionalProperties": {
-                            "examples": [
-                                1234
-                            ],
-                            "type": "integer"
-                        },
-                        "description": "Breakdown of the purchased licenses/service plans available in the tenant being audited for this run. Where the key is the ID of the service plan and the value is how many licenses are available/purchase for it.",
-                        "examples": [
-                            {
-                                "eec0eb4f-6444-4f95-aba0-50c24d67f998": 1234,
-                                "41781fb2-bc02-4b7c-bd55-b576c07bb09d": 123
-                            }
-                        ],
                         "title": "License Report - Available Licenses",
-                        "type": "object"
+                        "description": "Collection of licenses that have been purchased by the customer.",
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "count": {
+                                    "description": "Number of licenses that are purchased of the specific license.",
+                                    "type": "integer",
+                                    "format": "int32",
+                                    "examples": [
+                                        1500
+                                    ]
+                                },
+                                "id": {
+                                    "description": "Well known ID of the license bundle.",
+                                    "format": "uuid",
+                                    "maxLength": 36,
+                                    "minLength": 36,
+                                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                                    "type": "string",
+                                    "examples": [
+                                        "7e2b1c8e-4f3a-4b2e-9c1d-8a7f6e5d4c3b"
+                                    ]
+                                },
+                                "servicePlanList": {
+                                    "description": "List of available service plans for the current license.",
+                                    "type": "array",
+                                    "items": {
+                                        "format": "uuid",
+                                        "maxLength": 36,
+                                        "minLength": 36,
+                                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                                        "type": "string",
+                                        "examples": [
+                                            "2a1f4b7c-8e3d-4c2a-9b5e-7d6f1a2b3c4d"
+                                        ]
+                                    },
+                                    "examples": [
+                                        [
+                                            "2a1f4b7c-8e3d-4c2a-9b5e-7d6f1a2b3c4d",
+                                            "9c8b7a6d-5e4f-3a2b-1c0d-8e7f6a5b4c3d"
+                                        ]
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "id",
+                                "count",
+                                "servicePlanList"
+                            ],
+                            "examples": [
+                                {
+                                    "id": "7e2b1c8e-4f3a-4b2e-9c1d-8a7f6e5d4c3b",
+                                    "count": 1500,
+                                    "servicePlanList": [
+                                        "2a1f4b7c-8e3d-4c2a-9b5e-7d6f1a2b3c4d",
+                                        "9c8b7a6d-5e4f-3a2b-1c0d-8e7f6a5b4c3d"
+                                    ]
+                                }
+                            ]
+                        },
+                        "examples": [
+                            [
+                                {
+                                    "id": "7e2b1c8e-4f3a-4b2e-9c1d-8a7f6e5d4c3b",
+                                    "count": 1500,
+                                    "servicePlanList": [
+                                        "2a1f4b7c-8e3d-4c2a-9b5e-7d6f1a2b3c4d",
+                                        "9c8b7a6d-5e4f-3a2b-1c0d-8e7f6a5b4c3d"
+                                    ]
+                                }
+                            ]
+                        ]
                     },
                     "correlation": {
                         "$ref": "#/components/schemas/LicenseReport.CorrelationRecord"
                     },
-                    "licenseData": {
-                        "additionalProperties": {
-                            "$ref": "#/components/schemas/LicenseReport.LicenseData"
-                        }
+                    "principalData": {
+                        "title": "Architecture Report - Principle Data",
+                        "description": "Container for all of the data that can be correlated to various principals.",
+                        "type": "object",
+                        "properties": {
+                            "device": {
+                                "description": "Device principal data. Where the key is the Object ID (`GUID`/`UUIDv4`) of the principal. The value is the collected data.",
+                                "type": "object",
+                                "additionalProperties": {
+                                    "description": "Structure of the data that represents a device principal.",
+                                    "type": "object",
+                                    "properties": {
+                                        "assignedService": {
+                                            "description": "Service configuration assignment. This is used to record the set of principals that are 'benefiting' from the service, regardless of license status.",
+                                            "type": "object",
+                                            "additionalProperties": {
+                                                "oneOf": [
+                                                    {
+                                                        "$ref": "#/components/schemas/LicenseReport.FeatureBreakdown"
+                                                    },
+                                                    {
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "examples": [
+                                                            7
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "null"
+                                                    }
+                                                ]
+                                            },
+                                            "examples": [
+                                                {
+                                                    "9c1e4b7a-5d2f-4e3b-8a1c-6f2b7e3c1d4a": {
+                                                        "Conditional Access": false,
+                                                        "Access Review": true,
+                                                        "Entitlement Management": false,
+                                                        "Identity Protection": true
+                                                    },
+                                                    "2a7e3c4d-1b8f-4e2a-9c1d-5f6a7b8e2c3d": 10
+                                                }
+                                            ]
+                                        },
+                                        "assignedLicense": {
+                                            "description": "List of the licenses and their associated service plans assigned to the current principal.",
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "description": "Unique identifier for the assigned license. These IDs are well-known and can be used with a lookup table to derive a display name.",
+                                                        "format": "uuid",
+                                                        "maxLength": 36,
+                                                        "minLength": 36,
+                                                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                                                        "type": "string",
+                                                        "examples": [
+                                                            "1f4e2b7a-3c8d-4e1a-9b2c-7d6e5f3a2b1c"
+                                                        ]
+                                                    },
+                                                    "servicePlanList": {
+                                                        "description": "List of service plans that are associated with the principal's assigned license. This list is only active/valid service plans. Disabled plans are filtered out.",
+                                                        "type": "array",
+                                                        "items": {
+                                                            "format": "uuid",
+                                                            "maxLength": 36,
+                                                            "minLength": 36,
+                                                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                                                            "type": "string",
+                                                            "examples": [
+                                                                "5a7c3e2d-1b9f-4d2a-8c1e-6f3b7e2a4d5c"
+                                                            ]
+                                                        },
+                                                        "examples": [
+                                                            [
+                                                                "5a7c3e2d-1b9f-4d2a-8c1e-6f3b7e2a4d5c",
+                                                                "8e1c2a3d-4b7f-4e2c-9a1d-5f6b7c8e2d3a"
+                                                            ]
+                                                        ]
+                                                    }
+                                                },
+                                                "required": [
+                                                    "id",
+                                                    "servicePlanList"
+                                                ],
+                                                "examples": [
+                                                    {
+                                                        "id": "1f4e2b7a-3c8d-4e1a-9b2c-7d6e5f3a2b1c",
+                                                        "servicePlanList": [
+                                                            "5a7c3e2d-1b9f-4d2a-8c1e-6f3b7e2a4d5c",
+                                                            "8e1c2a3d-4b7f-4e2c-9a1d-5f6b7c8e2d3a"
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            "examples": [
+                                                [
+                                                    {
+                                                        "id": "1f4e2b7a-3c8d-4e1a-9b2c-7d6e5f3a2b1c",
+                                                        "servicePlanList": [
+                                                            "5a7c3e2d-1b9f-4d2a-8c1e-6f3b7e2a4d5c",
+                                                            "8e1c2a3d-4b7f-4e2c-9a1d-5f6b7c8e2d3a"
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },
+                                        "consumedService": {
+                                            "description": "Usage telemetry retrieved for the service to indicate if the specific principal is consuming the service or not, regardless of license status.",
+                                            "type": "object",
+                                            "additionalProperties": {
+                                                "oneOf": [
+                                                    {
+                                                        "$ref": "#/components/schemas/LicenseReport.FeatureBreakdown"
+                                                    },
+                                                    {
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "examples": [
+                                                            3
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "null"
+                                                    }
+                                                ]
+                                            },
+                                            "examples": [
+                                                {
+                                                    "7e2e1c7b-2b6e-4e7a-8c1a-2e7b8e1c2a3f": {
+                                                        "Conditional Access": true,
+                                                        "Access Review": false,
+                                                        "Entitlement Management": false,
+                                                        "Identity Protection": true
+                                                    },
+                                                    "3f8b2e1d-4c7a-4e2b-9d1a-7e2b3c4d5f6a": 5
+                                                }
+                                            ]
+                                        },
+                                        "principalMetadata": {
+                                            "description": "Metadata that is derived by analysis rules, not wishy washy LLMs.",
+                                            "type": "object",
+                                            "properties": {
+                                                "sharedComputer": {
+                                                    "description": "Flag that indicates that the device has more than one user using it.",
+                                                    "type": "boolean",
+                                                    "examples": [
+                                                        false
+                                                    ]
+                                                }
+                                            },
+                                            "required": [
+                                                "sharedComputer"
+                                            ],
+                                            "examples": [
+                                                {
+                                                    "sharedComputer": false
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "assignedService",
+                                        "assignedLicense",
+                                        "consumedService",
+                                        "principalMetadata"
+                                    ],
+                                    "examples": [
+                                        {
+                                            "assignedService": {
+                                                "9c1e4b7a-5d2f-4e3b-8a1c-6f2b7e3c1d4a": {
+                                                    "Conditional Access": false,
+                                                    "Access Review": true,
+                                                    "Entitlement Management": false,
+                                                    "Identity Protection": true
+                                                },
+                                                "2a7e3c4d-1b8f-4e2a-9c1d-5f6a7b8e2c3d": 10
+                                            },
+                                            "assignedLicense": [
+                                                {
+                                                    "id": "1f4e2b7a-3c8d-4e1a-9b2c-7d6e5f3a2b1c",
+                                                    "servicePlanList": [
+                                                        "5a7c3e2d-1b9f-4d2a-8c1e-6f3b7e2a4d5c",
+                                                        "8e1c2a3d-4b7f-4e2c-9a1d-5f6b7c8e2d3a"
+                                                    ]
+                                                }
+                                            ],
+                                            "consumedService": {
+                                                "7e2e1c7b-2b6e-4e7a-8c1a-2e7b8e1c2a3f": {
+                                                    "Conditional Access": true,
+                                                    "Access Review": false,
+                                                    "Entitlement Management": false,
+                                                    "Identity Protection": true
+                                                },
+                                                "3f8b2e1d-4c7a-4e2b-9d1a-7e2b3c4d5f6a": null
+                                            },
+                                            "principalMetadata": {
+                                                "sharedComputer": false
+                                            }
+                                        }
+                                    ]
+                                },
+                                "examples": [
+                                    {
+                                        "2d7e3c4a-1b8f-4e2d-9c1a-5f6a7b8e3c2d": {
+                                            "assignedService": {
+                                                "9c1e4b7a-5d2f-4e3b-8a1c-6f2b7e3c1d4a": {
+                                                    "Conditional Access": false,
+                                                    "Access Review": true,
+                                                    "Entitlement Management": false,
+                                                    "Identity Protection": true
+                                                },
+                                                "2a7e3c4d-1b8f-4e2a-9c1d-5f6a7b8e2c3d": 10
+                                            },
+                                            "assignedLicense": [
+                                                {
+                                                    "id": "1f4e2b7a-3c8d-4e1a-9b2c-7d6e5f3a2b1c",
+                                                    "servicePlanList": [
+                                                        "5a7c3e2d-1b9f-4d2a-8c1e-6f3b7e2a4d5c",
+                                                        "8e1c2a3d-4b7f-4e2c-9a1d-5f6b7c8e2d3a"
+                                                    ]
+                                                }
+                                            ],
+                                            "consumedService": {
+                                                "7e2e1c7b-2b6e-4e7a-8c1a-2e7b8e1c2a3f": {
+                                                    "Conditional Access": true,
+                                                    "Access Review": false,
+                                                    "Entitlement Management": false,
+                                                    "Identity Protection": true
+                                                },
+                                                "3f8b2e1d-4c7a-4e2b-9d1a-7e2b3c4d5f6a": null
+                                            },
+                                            "principalMetadata": {
+                                                "sharedComputer": false
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "user": {
+                                "description": "User principal data. Where the key is the Object ID (`GUID`/`UUIDv4`) of the principal. The value is the collected data.",
+                                "type": "object",
+                                "additionalProperties": {
+                                    "description": "Structure of the data that represents a user principal.",
+                                    "type": "object",
+                                    "properties": {
+                                        "assignedService": {
+                                            "description": "Service configuration assignment. This is used to record the set of principals that are 'benefiting' from the service, regardless of license status.",
+                                            "type": "object",
+                                            "additionalProperties": {
+                                                "oneOf": [
+                                                    {
+                                                        "$ref": "#/components/schemas/LicenseReport.FeatureBreakdown"
+                                                    },
+                                                    {
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "examples": [
+                                                            12
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "null"
+                                                    }
+                                                ]
+                                            },
+                                            "examples": [
+                                                {
+                                                    "3a7e2c4d-1b9f-4e2a-8c1d-6f2b7e3c4d5a": {
+                                                        "Conditional Access": false,
+                                                        "Access Review": true,
+                                                        "Entitlement Management": false,
+                                                        "Identity Protection": true
+                                                    },
+                                                    "7b2e1c4d-3a8f-4e2b-9d1a-6f3c7e2a4d5b": null
+                                                }
+                                            ]
+                                        },
+                                        "assignedLicense": {
+                                            "description": "List of the licenses and their associated service plans assigned to the current principal.",
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "description": "Unique identifier for the assigned license. These IDs are well-known and can be used with a lookup table to derive a display name.",
+                                                        "format": "uuid",
+                                                        "maxLength": 36,
+                                                        "minLength": 36,
+                                                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                                                        "type": "string",
+                                                        "examples": [
+                                                            "4e2b7a1c-3d8f-4e2a-9c1d-5f6a7b8e2c3d"
+                                                        ]
+                                                    },
+                                                    "servicePlanList": {
+                                                        "description": "List of service plans that are associated with the principal's assigned license. This list is only active/valid service plans. Disabled plans are filtered out.",
+                                                        "type": "array",
+                                                        "items": {
+                                                            "format": "uuid",
+                                                            "maxLength": 36,
+                                                            "minLength": 36,
+                                                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                                                            "type": "string",
+                                                            "examples": [
+                                                                "6f2a3c4d-1b7e-4e2c-8a1d-5f3b7e2a4d6c"
+                                                            ]
+                                                        },
+                                                        "examples": [
+                                                            [
+                                                                "6f2a3c4d-1b7e-4e2c-8a1d-5f3b7e2a4d6c",
+                                                                "9c1d2a3e-4b7f-4e2c-8a1d-5f6b7c8e2d3a"
+                                                            ]
+                                                        ]
+                                                    }
+                                                },
+                                                "required": [
+                                                    "id",
+                                                    "servicePlanList"
+                                                ],
+                                                "examples": [
+                                                    {
+                                                        "id": "4e2b7a1c-3d8f-4e2a-9c1d-5f6a7b8e2c3d",
+                                                        "servicePlanList": [
+                                                            "6f2a3c4d-1b7e-4e2c-8a1d-5f3b7e2a4d6c",
+                                                            "9c1d2a3e-4b7f-4e2c-8a1d-5f6b7c8e2d3a"
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            "examples": [
+                                                [
+                                                    {
+                                                        "id": "4e2b7a1c-3d8f-4e2a-9c1d-5f6a7b8e2c3d",
+                                                        "servicePlanList": [
+                                                            "6f2a3c4d-1b7e-4e2c-8a1d-5f3b7e2a4d6c",
+                                                            "9c1d2a3e-4b7f-4e2c-8a1d-5f6b7c8e2d3a"
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },
+                                        "consumedService": {
+                                            "description": "Usage telemetry retrieved for the service to indicate if the specific principal is consuming the service or not, regardless of license status.",
+                                            "type": "object",
+                                            "additionalProperties": {
+                                                "oneOf": [
+                                                    {
+                                                        "$ref": "#/components/schemas/LicenseReport.FeatureBreakdown"
+                                                    },
+                                                    {
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "examples": [
+                                                            3
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "null"
+                                                    }
+                                                ]
+                                            },
+                                            "examples": [
+                                                {
+                                                    "2a7e3c4d-1b8f-4e2a-9c1d-5f6a7b8e2c3d": {
+                                                        "Conditional Access": true,
+                                                        "Access Review": false,
+                                                        "Entitlement Management": false,
+                                                        "Identity Protection": true
+                                                    },
+                                                    "4c7e2a1d-8b3f-4e2c-9a1d-5f6b7e2c3d4a": 15
+                                                }
+                                            ]
+                                        },
+                                        "llmInferred": {
+                                            "description": "User data inferred by the LLM. AI-generated content may be incorrect.",
+                                            "type": "object",
+                                            "properties": {
+                                                "isServiceAccount": {
+                                                    "description": "Is the user a service account.",
+                                                    "oneOf": [
+                                                        {
+                                                            "type": "boolean",
+                                                            "examples": [
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "type": "null"
+                                                        }
+                                                    ],
+                                                    "examples": [
+                                                        true
+                                                    ]
+                                                },
+                                                "isFrontlineWorker": {
+                                                    "description": "Is the user a frontline worker as defined by Microsoft.",
+                                                    "oneOf": [
+                                                        {
+                                                            "type": "boolean",
+                                                            "examples": [
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "type": "null"
+                                                        }
+                                                    ],
+                                                    "examples": [
+                                                        false
+                                                    ]
+                                                },
+                                                "isTempWorker": {
+                                                    "description": "Is the user a temporary employee. E.g. Intern, Contractor.",
+                                                    "oneOf": [
+                                                        {
+                                                            "type": "boolean",
+                                                            "examples": [
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "type": "null"
+                                                        }
+                                                    ],
+                                                    "examples": [
+                                                        false
+                                                    ]
+                                                }
+                                            },
+                                            "required": [
+                                                "isServiceAccount",
+                                                "isFrontlineWorker",
+                                                "isTempWorker"
+                                            ],
+                                            "examples": [
+                                                {
+                                                    "isServiceAccount": true,
+                                                    "isFrontlineWorker": false,
+                                                    "isTempWorker": null
+                                                }
+                                            ]
+                                        },
+                                        "principalMetadata": {
+                                            "description": "Metadata that is derived by analysis rules, not wishy washy LLMs.",
+                                            "type": "object",
+                                            "properties": {
+                                                "sharedMailbox": {
+                                                    "description": "Flag that indicates the principal is a shared mailbox in Exchange.",
+                                                    "type": "boolean",
+                                                    "examples": [
+                                                        false
+                                                    ]
+                                                }
+                                            },
+                                            "required": [
+                                                "sharedMailbox"
+                                            ],
+                                            "examples": [
+                                                {
+                                                    "sharedMailbox": false
+                                                }
+                                            ]
+                                        },
+                                        "enhancedData": {
+                                            "description": "Data that is End User Identifiable Information. Only collected if the customer explicitly agrees to the additional data retrieval.",
+                                            "oneOf": [
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "userPrincipalName": {
+                                                            "description": "Username of the user, frequently is also the email address.",
+                                                            "type": "string",
+                                                            "examples": [
+                                                                "some_user@example.com"
+                                                            ]
+                                                        },
+                                                        "idpJobTitle": {
+                                                            "description": "Job title of the user retrieved from the primary IDP's user profile.",
+                                                            "oneOf": [
+                                                                {
+                                                                    "type": "string",
+                                                                    "examples": [
+                                                                        "Senior Engineer"
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "type": "null"
+                                                                }
+                                                            ],
+                                                            "examples": [
+                                                                "Senior Engineer"
+                                                            ]
+                                                        },
+                                                        "idpDepartment": {
+                                                            "description": "Job organization metadata retrieved from the primary IDP's user profile.",
+                                                            "oneOf": [
+                                                                {
+                                                                    "type": "string",
+                                                                    "examples": [
+                                                                        "Engineering"
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "type": "null"
+                                                                }
+                                                            ],
+                                                            "examples": [
+                                                                "Engineering"
+                                                            ]
+                                                        },
+                                                        "idpOfficeLocation": {
+                                                            "description": "Job location metadata retrieved from the primary IDP's user profile.",
+                                                            "oneOf": [
+                                                                {
+                                                                    "type": "string",
+                                                                    "examples": [
+                                                                        "Building 1 / Floor 3"
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "type": "null"
+                                                                }
+                                                            ],
+                                                            "examples": [
+                                                                "Building 1 / Floor 3"
+                                                            ]
+                                                        },
+                                                        "idpEmployeeType": {
+                                                            "description": "Job type metadata retrieved from the primary IDP's user profile.",
+                                                            "oneOf": [
+                                                                {
+                                                                    "type": "string",
+                                                                    "examples": [
+                                                                        "Full-Time"
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "type": "null"
+                                                                }
+                                                            ],
+                                                            "examples": [
+                                                                "Full-Time"
+                                                            ]
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "userPrincipalName",
+                                                        "idpJobTitle",
+                                                        "idpDepartment",
+                                                        "idpOfficeLocation",
+                                                        "idpEmployeeType"
+                                                    ],
+                                                    "examples": [
+                                                        {
+                                                            "userPrincipalName": "some_user@example.com",
+                                                            "idpJobTitle": "Senior Engineer",
+                                                            "idpDepartment": "Engineering",
+                                                            "idpOfficeLocation": "Building 1 / Floor 3",
+                                                            "idpEmployeeType": "Full-Time"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "type": "null"
+                                                }
+                                            ],
+                                            "examples": [
+                                                {
+                                                    "userPrincipalName": "some_user@example.com",
+                                                    "idpJobTitle": "Senior Engineer",
+                                                    "idpDepartment": "Engineering",
+                                                    "idpOfficeLocation": "Building 1 / Floor 3",
+                                                    "idpEmployeeType": "Full-Time"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "assignedService",
+                                        "assignedLicense",
+                                        "consumedService",
+                                        "llmInferred",
+                                        "principalMetadata",
+                                        "enhancedData"
+                                    ],
+                                    "examples": [
+                                        {
+                                            "assignedService": {
+                                                "3a7e2c4d-1b9f-4e2a-8c1d-6f2b7e3c4d5a": {
+                                                    "Conditional Access": false,
+                                                    "Access Review": true,
+                                                    "Entitlement Management": false,
+                                                    "Identity Protection": true
+                                                },
+                                                "7b2e1c4d-3a8f-4e2b-9d1a-6f3c7e2a4d5b": null
+                                            },
+                                            "assignedLicense": [
+                                                {
+                                                    "id": "4e2b7a1c-3d8f-4e2a-9c1d-5f6a7b8e2c3d",
+                                                    "servicePlanList": [
+                                                        "6f2a3c4d-1b7e-4e2c-8a1d-5f3b7e2a4d6c",
+                                                        "9c1d2a3e-4b7f-4e2c-8a1d-5f6b7c8e2d3a"
+                                                    ]
+                                                }
+                                            ],
+                                            "consumedService": {
+                                                "2a7e3c4d-1b8f-4e2a-9c1d-5f6a7b8e2c3d": {
+                                                    "Conditional Access": true,
+                                                    "Access Review": false,
+                                                    "Entitlement Management": false,
+                                                    "Identity Protection": true
+                                                },
+                                                "4c7e2a1d-8b3f-4e2c-9a1d-5f6b7e2c3d4a": 15
+                                            },
+                                            "llmInferred": {
+                                                "isServiceAccount": true,
+                                                "isFrontlineWorker": false,
+                                                "isTempWorker": null
+                                            },
+                                            "principalMetadata": {
+                                                "sharedMailbox": false
+                                            },
+                                            "enhancedData": {
+                                                "userPrincipalName": "some_user@example.com",
+                                                "idpJobTitle": "Senior Engineer",
+                                                "idpDepartment": "Engineering",
+                                                "idpOfficeLocation": "Building 1 / Floor 3",
+                                                "idpEmployeeType": "Full-Time"
+                                            }
+                                        }
+                                    ]
+                                },
+                                "examples": [
+                                    {
+                                        "7a2e3c4d-1b9f-4e2a-8c1d-6f2b7e3a4d5c": {
+                                            "assignedService": {
+                                                "3a7e2c4d-1b9f-4e2a-8c1d-6f2b7e3c4d5a": {
+                                                    "Conditional Access": false,
+                                                    "Access Review": true,
+                                                    "Entitlement Management": false,
+                                                    "Identity Protection": true
+                                                },
+                                                "7b2e1c4d-3a8f-4e2b-9d1a-6f3c7e2a4d5b": null
+                                            },
+                                            "assignedLicense": [
+                                                {
+                                                    "id": "4e2b7a1c-3d8f-4e2a-9c1d-5f6a7b8e2c3d",
+                                                    "servicePlanList": [
+                                                        "6f2a3c4d-1b7e-4e2c-8a1d-5f3b7e2a4d6c",
+                                                        "9c1d2a3e-4b7f-4e2c-8a1d-5f6b7c8e2d3a"
+                                                    ]
+                                                }
+                                            ],
+                                            "consumedService": {
+                                                "2a7e3c4d-1b8f-4e2a-9c1d-5f6a7b8e2c3d": {
+                                                    "Conditional Access": true,
+                                                    "Access Review": false,
+                                                    "Entitlement Management": false,
+                                                    "Identity Protection": true
+                                                },
+                                                "4c7e2a1d-8b3f-4e2c-9a1d-5f6b7e2c3d4a": 15
+                                            },
+                                            "llmInferred": {
+                                                "isServiceAccount": true,
+                                                "isFrontlineWorker": false,
+                                                "isTempWorker": null
+                                            },
+                                            "principalMetadata": {
+                                                "sharedMailbox": false
+                                            },
+                                            "enhancedData": {
+                                                "userPrincipalName": "some_user@example.com",
+                                                "idpJobTitle": "Senior Engineer",
+                                                "idpDepartment": "Engineering",
+                                                "idpOfficeLocation": "Building 1 / Floor 3",
+                                                "idpEmployeeType": "Full-Time"
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        "required": [
+                            "device",
+                            "user"
+                        ],
+                        "examples": [
+                            {
+                                "device": {
+                                    "2d7e3c4a-1b8f-4e2d-9c1a-5f6a7b8e3c2d": {
+                                        "assignedService": {
+                                            "9c1e4b7a-5d2f-4e3b-8a1c-6f2b7e3c1d4a": {
+                                                "Conditional Access": false,
+                                                "Access Review": true,
+                                                "Entitlement Management": false,
+                                                "Identity Protection": true
+                                            },
+                                            "2a7e3c4d-1b8f-4e2a-9c1d-5f6a7b8e2c3d": 10
+                                        },
+                                        "assignedLicense": [
+                                            {
+                                                "id": "1f4e2b7a-3c8d-4e1a-9b2c-7d6e5f3a2b1c",
+                                                "servicePlanList": [
+                                                    "5a7c3e2d-1b9f-4d2a-8c1e-6f3b7e2a4d5c",
+                                                    "8e1c2a3d-4b7f-4e2c-9a1d-5f6b7c8e2d3a"
+                                                ]
+                                            }
+                                        ],
+                                        "consumedService": {
+                                            "7e2e1c7b-2b6e-4e7a-8c1a-2e7b8e1c2a3f": {
+                                                "Conditional Access": true,
+                                                "Access Review": false,
+                                                "Entitlement Management": false,
+                                                "Identity Protection": true
+                                            },
+                                            "3f8b2e1d-4c7a-4e2b-9d1a-7e2b3c4d5f6a": null
+                                        },
+                                        "principalMetadata": {
+                                            "sharedComputer": false
+                                        }
+                                    }
+                                },
+                                "user": {
+                                    "7a2e3c4d-1b9f-4e2a-8c1d-6f2b7e3a4d5c": {
+                                        "assignedService": {
+                                            "3a7e2c4d-1b9f-4e2a-8c1d-6f2b7e3c4d5a": {
+                                                "Conditional Access": false,
+                                                "Access Review": true,
+                                                "Entitlement Management": false,
+                                                "Identity Protection": true
+                                            },
+                                            "7b2e1c4d-3a8f-4e2b-9d1a-6f3c7e2a4d5b": null
+                                        },
+                                        "assignedLicense": [
+                                            {
+                                                "id": "4e2b7a1c-3d8f-4e2a-9c1d-5f6a7b8e2c3d",
+                                                "servicePlanList": [
+                                                    "6f2a3c4d-1b7e-4e2c-8a1d-5f3b7e2a4d6c",
+                                                    "9c1d2a3e-4b7f-4e2c-8a1d-5f6b7c8e2d3a"
+                                                ]
+                                            }
+                                        ],
+                                        "consumedService": {
+                                            "2a7e3c4d-1b8f-4e2a-9c1d-5f6a7b8e2c3d": {
+                                                "Conditional Access": true,
+                                                "Access Review": false,
+                                                "Entitlement Management": false,
+                                                "Identity Protection": true
+                                            },
+                                            "4c7e2a1d-8b3f-4e2c-9a1d-5f6b7e2c3d4a": 15
+                                        },
+                                        "llmInferred": {
+                                            "isServiceAccount": true,
+                                            "isFrontlineWorker": false,
+                                            "isTempWorker": null
+                                        },
+                                        "principalMetadata": {
+                                            "sharedMailbox": false
+                                        },
+                                        "enhancedData": {
+                                            "userPrincipalName": "some_user@example.com",
+                                            "idpJobTitle": "Senior Engineer",
+                                            "idpDepartment": "Engineering",
+                                            "idpOfficeLocation": "Building 1 / Floor 3",
+                                            "idpEmployeeType": "Full-Time"
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "schemaVersion": {
+                        "title": "License Report - Schema Version",
+                        "description": "Indicator for migration scripts to auto migrate the data to newer or older formats.",
+                        "type": "integer",
+                        "examples": [
+                            1
+                        ]
                     }
                 },
                 "required": [
                     "availableLicense",
                     "correlation",
-                    "licenseData"
+                    "principalData",
+                    "schemaVersion"
                 ],
                 "title": "License Report - Complete Object"
             },
@@ -3995,54 +4772,107 @@
                                         "description": "Sample, truncated report from an example customer environment.",
                                         "summary": "Example License Report",
                                         "value": {
-                                            "availableLicense": {
-                                                "3d282045-ec7f-4813-88e2-29b74ee609f7": 123456,
-                                                "5888a922-9f5b-45fd-bd5f-de3283d6a79e": 99999999,
-                                                "a4b2e176-d63d-4081-9e21-226e2ac624b9": 5,
-                                                "547404d4-8734-415f-a7ca-e9c1ffb95e48": 25,
-                                                "d76878d6-1495-4243-a334-a82bb9818cd0": 500
-                                            },
+                                            "availableLicense": [
+                                                {
+                                                    "id": "7e2b1c8e-4f3a-4b2e-9c1d-8a7f6e5d4c3b",
+                                                    "count": 1500,
+                                                    "servicePlanList": [
+                                                        "2a1f4b7c-8e3d-4c2a-9b5e-7d6f1a2b3c4d",
+                                                        "9c8b7a6d-5e4f-3a2b-1c0d-8e7f6a5b4c3d"
+                                                    ]
+                                                }
+                                            ],
                                             "correlation": {
-                                                "auditTenantAccount": "somebodyThatI@example.com",
-                                                "correlationId": "6d7c9271-9e68-4bdf-9ae3-f90c4213f74b",
-                                                "reportTenantAccount": "usedToKnow@example.com",
-                                                "tenantId": "3d6e7b7e-8d9a-4eb0-8753-67829b3934db"
+                                                "auditTenantAccount": "priv-user@example.com",
+                                                "correlationId": "9d838115-0868-45d4-b8a5-98adc1af7e42",
+                                                "reportTenantAccount": "ent-user@example.com",
+                                                "tenantId": "7e536189-b2dd-4c8b-98b1-9b174777883f",
+                                                "createdAt": "2024-08-01T21:13:12.821Z",
+                                                "updatedAt": "2024-08-01T21:13:12.821Z"
                                             },
-                                            "licenseData": {
-                                                "250844e1-a7ab-4f21-8e3f-58f51b5983a3": {
-                                                    "assignedLicense": {
-                                                        "5888a922-9f5b-45fd-bd5f-de3283d6a79e": null,
-                                                        "3d282045-ec7f-4813-88e2-29b74ee609f7": null
-                                                    },
-                                                    "assignedService": {
-                                                        "a4b2e176-d63d-4081-9e21-226e2ac624b9": null,
-                                                        "d76878d6-1495-4243-a334-a82bb9818cd0": null
-                                                    },
-                                                    "consumedService": {
-                                                        "e0d101e8-6f1e-40a9-a66f-cad4112c9a59": null,
-                                                        "c63b7a2d-6573-4c37-9ca8-e12b954d3198": {
-                                                            "Something Here": true,
-                                                            "Other Obscure feature": false
+                                            "principalData": {
+                                                "device": {
+                                                    "2d7e3c4a-1b8f-4e2d-9c1a-5f6a7b8e3c2d": {
+                                                        "assignedService": {
+                                                            "9c1e4b7a-5d2f-4e3b-8a1c-6f2b7e3c1d4a": {
+                                                                "Conditional Access": false,
+                                                                "Access Review": true,
+                                                                "Entitlement Management": false,
+                                                                "Identity Protection": true
+                                                            },
+                                                            "2a7e3c4d-1b8f-4e2a-9c1d-5f6a7b8e2c3d": 10
+                                                        },
+                                                        "assignedLicense": [
+                                                            {
+                                                                "id": "1f4e2b7a-3c8d-4e1a-9b2c-7d6e5f3a2b1c",
+                                                                "servicePlanList": [
+                                                                    "5a7c3e2d-1b9f-4d2a-8c1e-6f3b7e2a4d5c",
+                                                                    "8e1c2a3d-4b7f-4e2c-9a1d-5f6b7c8e2d3a"
+                                                                ]
+                                                            }
+                                                        ],
+                                                        "consumedService": {
+                                                            "7e2e1c7b-2b6e-4e7a-8c1a-2e7b8e1c2a3f": {
+                                                                "Conditional Access": true,
+                                                                "Access Review": false,
+                                                                "Entitlement Management": false,
+                                                                "Identity Protection": true
+                                                            },
+                                                            "3f8b2e1d-4c7a-4e2b-9d1a-7e2b3c4d5f6a": null
+                                                        },
+                                                        "principalMetadata": {
+                                                            "sharedComputer": false
                                                         }
                                                     }
                                                 },
-                                                "04e88835-771a-482b-9d6f-ba06c32cbb67": {
-                                                    "assignedLicense": {
-                                                        "3d282045-ec7f-4813-88e2-29b74ee609f7": null
-                                                    },
-                                                    "assignedService": {
-                                                        "a4b2e176-d63d-4081-9e21-226e2ac624b9": null,
-                                                        "d76878d6-1495-4243-a334-a82bb9818cd0": null
-                                                    },
-                                                    "consumedService": {
-                                                        "9d3603de-b378-4c4a-adcc-ee133cbef914": null,
-                                                        "e9a4e3d3-ebe0-405a-a8f4-35a04c4dba1f": {
-                                                            "Something Here": true,
-                                                            "Other Obscure feature": false
+                                                "user": {
+                                                    "7a2e3c4d-1b9f-4e2a-8c1d-6f2b7e3a4d5c": {
+                                                        "assignedService": {
+                                                            "3a7e2c4d-1b9f-4e2a-8c1d-6f2b7e3c4d5a": {
+                                                                "Conditional Access": false,
+                                                                "Access Review": true,
+                                                                "Entitlement Management": false,
+                                                                "Identity Protection": true
+                                                            },
+                                                            "7b2e1c4d-3a8f-4e2b-9d1a-6f3c7e2a4d5b": null
+                                                        },
+                                                        "assignedLicense": [
+                                                            {
+                                                                "id": "4e2b7a1c-3d8f-4e2a-9c1d-5f6a7b8e2c3d",
+                                                                "servicePlanList": [
+                                                                    "6f2a3c4d-1b7e-4e2c-8a1d-5f3b7e2a4d6c",
+                                                                    "9c1d2a3e-4b7f-4e2c-8a1d-5f6b7c8e2d3a"
+                                                                ]
+                                                            }
+                                                        ],
+                                                        "consumedService": {
+                                                            "2a7e3c4d-1b8f-4e2a-9c1d-5f6a7b8e2c3d": {
+                                                                "Conditional Access": true,
+                                                                "Access Review": false,
+                                                                "Entitlement Management": false,
+                                                                "Identity Protection": true
+                                                            },
+                                                            "4c7e2a1d-8b3f-4e2c-9a1d-5f6b7e2c3d4a": 15
+                                                        },
+                                                        "llmInferred": {
+                                                            "isServiceAccount": true,
+                                                            "isFrontlineWorker": false,
+                                                            "isTempWorker": null
+                                                        },
+                                                        "principalMetadata": {
+                                                            "sharedMailbox": false
+                                                        },
+                                                        "enhancedData": {
+                                                            "userPrincipalName": "some_user@example.com",
+                                                            "idpJobTitle": "Senior Engineer",
+                                                            "idpDepartment": "Engineering",
+                                                            "idpOfficeLocation": "Building 1 / Floor 3",
+                                                            "idpEmployeeType": "Full-Time"
                                                         }
                                                     }
                                                 }
-                                            }
+                                            },
+                                            "schemaVersion": "1"
                                         }
                                     }
                                 },
