@@ -45,13 +45,13 @@ jobs:
         steps:
             # Download all of the source code
             - name: Clone Repo Locally
-              uses: actions/checkout@v5
+              uses: actions/checkout@v6
 
             # Set up NodeJS on the build host
             - name: Setup Node.JS Runtime
               uses: actions/setup-node@v6
               with:
-                  node-version: 22
+                  node-version: 24
                   registry-url: https://registry.npmjs.org
                   scope: shi-corp
 
