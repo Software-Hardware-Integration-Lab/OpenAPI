@@ -2690,7 +2690,7 @@
                         "crmId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
                         "discoverDate": "2025-12-15T21:13:12.821Z",
                         "isComplete": true,
-                        "publisher": "Test Publisher One",
+                        "template": "Test Template - Microsoft Enterprise",
                         "updatedAt": "2025-12-15T21:13:12.821Z",
                         "schemaVersion": 0
                     }
@@ -2748,10 +2748,10 @@
                         ],
                         "type": "boolean"
                     },
-                    "publisher": {
-                        "description": "The name of the publisher associated with this cloud matrix correlation record.",
+                    "template": {
+                        "description": "The name of the template associated with this cloud matrix correlation record.",
                         "examples": [
-                            "Test Publisher"
+                            "Test Template - Microsoft Enterprise"
                         ],
                         "type": "string"
                     },
@@ -2777,7 +2777,7 @@
                     "crmId",
                     "discoverDate",
                     "isComplete",
-                    "publisher",
+                    "template",
                     "updatedAt",
                     "schemaVersion"
                 ],
