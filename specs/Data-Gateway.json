@@ -18,7 +18,7 @@
                 },
                 "examples": {
                     "valid correlation Id": {
-                        "summary": "Example valid correlation ID",
+                        "summary": "Example Valid Correlation ID",
                         "description": "An example of a valid correlation ID in type UUID string.",
                         "value": "1d71e0fe-6e4a-464d-a690-80addf3bda55"
                     }
@@ -41,7 +41,7 @@
                 },
                 "examples": {
                     "valid tenant Id": {
-                        "summary": "Example valid tenant ID",
+                        "summary": "Example Valid Tenant ID",
                         "description": "An example of a valid tenant ID in type UUID string.",
                         "value": "1d71e0fe-6e4a-464d-a690-80addf3bda55"
                     }
@@ -60,7 +60,7 @@
                 },
                 "examples": {
                     "valid channel name": {
-                        "summary": "Example valid channel name",
+                        "summary": "Example Valid Channel Name",
                         "description": "An example string of a valid channel name.",
                         "value": "stable"
                     }
@@ -80,17 +80,17 @@
                 },
                 "examples": {
                     "valid channel ring": {
-                        "summary": "Example valid channel ring",
+                        "summary": "Example Valid Channel Ring",
                         "description": "An example integer that represents a valid channel ring.",
                         "value": 1
                     },
                     "minimum channel ring": {
-                        "summary": "Example minimum channel ring",
+                        "summary": "Example Minimum Channel Ring",
                         "description": "An example integer that represents the minimum valid channel ring.",
                         "value": 0
                     },
                     "invalid channel ring": {
-                        "summary": "Example invalid channel ring",
+                        "summary": "Example Invalid Channel Ring",
                         "description": "An example integer that represents an invalid channel ring, which is negative.",
                         "value": -1
                     }
@@ -109,7 +109,7 @@
                 },
                 "examples": {
                     "Valid version number": {
-                        "summary": "Example valid version number",
+                        "summary": "Example Valid Version Number",
                         "description": "An example string represents a valid semantic version number.",
                         "value": "1.2.3"
                     }
@@ -132,7 +132,7 @@
                 },
                 "examples": {
                     "Valid parent ID": {
-                        "summary": "Example valid parent ID",
+                        "summary": "Example Valid Parent ID",
                         "description": "An example UUID string that represents a valid parent object ID.",
                         "value": "3b241101-e2bb-4255-8caf-4136c566a962"
                     }
@@ -152,7 +152,7 @@
                 },
                 "examples": {
                     "Valid start date": {
-                        "summary": "Example valid start date",
+                        "summary": "Example Valid Start Date",
                         "description": "An example ISO8601 date string that represents a valid start date in a query.",
                         "value": "2025-01-01T00:00:00Z"
                     }
@@ -172,7 +172,7 @@
                 },
                 "examples": {
                     "Valid end date": {
-                        "summary": "Example valid end date",
+                        "summary": "Example Valid End Date",
                         "description": "An example ISO8601 date string that represents a valid end date in a query.",
                         "value": "2025-02-05T23:59:59Z"
                     }
@@ -760,7 +760,7 @@
                 "properties": {
                     "availableLicense": {
                         "type": "array",
-                        "description": "Array of license bundles available. Each item includes the total purchased, the unique license bundle ID, and a list of associated service plan list.",
+                        "description": "Array of available license bundles. Each item includes the total purchased, the unique license bundle ID, and the list of associated service plans.",
                         "items": {
                             "type": "object",
                             "required": [
@@ -772,7 +772,7 @@
                                 "count": {
                                     "type": "integer",
                                     "format": "int32",
-                                    "description": "Number of licenses that are purchased of the specific license.",
+                                    "description": "Total number of licenses purchased for this license bundle.",
                                     "examples": [
                                         10
                                     ]
@@ -1383,7 +1383,7 @@
             },
             "Report.PrincipalData.PrincipalMetadata": {
                 "type": "object",
-                "description": "Metadata about the principal, such as whether the account is a shared.",
+                "description": "Metadata about the principal, such as whether the account is a shared mailbox.",
                 "required": [
                     "sharedMailbox"
                 ],
@@ -1863,7 +1863,7 @@
                         "type": "string"
                     },
                     "createdAt": {
-                        "description": "Timestamp on when the record was created. This is auto managed by sequelize.",
+                        "description": "Timestamp indicating when the record was created. This value is automatically managed by Sequelize.",
                         "examples": [
                             "2024-08-02T23:48:50.231Z"
                         ],
@@ -1871,7 +1871,7 @@
                         "type": "string"
                     },
                     "updatedAt": {
-                        "description": "Timestamp on when the record was last updated. This is auto managed by sequelize.",
+                        "description": "Timestamp indicating when the record was last updated. This value is automatically managed by Sequelize.",
                         "examples": [
                             "2024-08-02T23:48:50.231Z"
                         ],
@@ -1952,7 +1952,7 @@
                 "description": "Channel configuration for the SHIELD update service.",
                 "properties": {
                     "latest": {
-                        "description": "Version number of the latest update available to the chanel.",
+                        "description": "Version number of the latest update available to the channel.",
                         "examples": [
                             "1.12.5"
                         ],
@@ -2038,7 +2038,7 @@
                         "type": "string"
                     },
                     "ring": {
-                        "description": "Ring number that the client is a member of for the current chanel.",
+                        "description": "Ring number that the client belongs to for the current channel.",
                         "examples": [
                             1
                         ],
@@ -2258,7 +2258,7 @@
                 "title": "Architecture Report V1 - Complete Object"
             },
             "ArchitectureReportV1.TenantMetadata": {
-                "description": "This is the the tenant data calculated for the architecture report",
+                "description": "Tenant data calculated for the architecture report.",
                 "examples": [
                     {
                         "totalDeviceCount": 1,
@@ -2804,8 +2804,8 @@
             "name": "SHI - Lab"
         },
         "description": "Collects data from the various SHI Lab products and makes it available in a standardized way.",
-        "title": "SHI Data Gateway",
-        "version": "2.5.0"
+        "title": "SHI - Data Gateway",
+        "version": "3.1.0"
     },
     "openapi": "3.1.1",
     "paths": {
@@ -2826,7 +2826,7 @@
                                 },
                                 "examples": {
                                     "Auth system failure": {
-                                        "summary": "Example health report - Auth failure",
+                                        "summary": "Example Health Report - Auth Failure",
                                         "description": "An example health report returned indicates the authentication components are not working.",
                                         "value": {
                                             "authClient": false,
@@ -2836,7 +2836,7 @@
                                         }
                                     },
                                     "Storage system failure": {
-                                        "summary": "Example health report - Storage failure",
+                                        "summary": "Example Health Report - Storage Failure",
                                         "description": "An example health report returned indicates the storage components are not working.",
                                         "value": {
                                             "authClient": true,
@@ -2934,8 +2934,8 @@
                             "application/json": {
                                 "examples": {
                                     "License Report": {
-                                        "description": "Sample, truncated report from an example customer environment. This will return the same report as the request input.",
-                                        "summary": "Example of license report stored.",
+                                        "description": "A sample, truncated report from a customer environment. The response returns the same report as provided in the request input.",
+                                        "summary": "Example of License Report Stored.",
                                         "value": {
                                             "availableLicense": {
                                                 "3d282045-ec7f-4813-88e2-29b74ee609f7": 123456,
@@ -3301,7 +3301,7 @@
                 "tags": [
                     "License Analytics"
                 ],
-                "summary": "Delete the Specified License Report for the currently authenticated tenant."
+                "summary": "Delete the Specified License Report for the Currently Authenticated Tenant."
             }
         },
         "/Api/LicenseReport/Correlation/{correlationId}/Tenant/{tenantId}/Data": {
@@ -3438,7 +3438,7 @@
                         "application/json": {
                             "examples": {
                                 "License Report": {
-                                    "description": "Sample, truncated report from an example customer environment. The request body is the License Report V1 that to be stored.",
+                                    "description": "A sample, truncated report from a customer environment. The request body should contain the License Report V1 to be stored.",
                                     "summary": "Example License Report Request",
                                     "value": {
                                         "availableLicense": [
@@ -3538,7 +3538,7 @@
                                 "examples": {
                                     "License Report V1": {
                                         "description": "Sample, truncated report from an example customer environment. This will return the same report as the request input.",
-                                        "summary": "Example of license report stored.",
+                                        "summary": "Example of License Report Stored.",
                                         "value": {
                                             "availableLicense": [
                                                 {
@@ -3997,7 +3997,7 @@
                 "tags": [
                     "License Analytics"
                 ],
-                "summary": "Delete the Specified License Report for the currently authenticated tenant."
+                "summary": "Delete the Specified License Report for the Currently Authenticated Tenant."
             }
         },
         "/Api/V1/LicenseReport/Correlation/{correlationId}/Tenant/{tenantId}/Data": {
@@ -4170,7 +4170,7 @@
         "/Api/Chat/LicenseGpt": {
             "post": {
                 "summary": "Inquire License Data from AI Agent",
-                "description": "Enables a conversation mode with AI agent to request details of the available license reports for the currently authenticated tenant.\n\nThis endpoint requires the `LicenseReport.Read`, `LicenseReport.ReadWrite`, `LicenseReport.Read.All`, or `LicenseReport.ReadWrite.All` scope (permission).  This endpoint is also only accessible from the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "description": "Process OpenAI GPT chat messages with tool calls available. Chats are not stored on data gateway, API client is expected to store chats. Available tools is dynamically determined by assigned API permissions. This endpoint is also only accessible from the `SHI` and `SHI Lab` tenants. End user access is restricted.",
                 "operationId": "/Api/Chat/LicenseGpt/Post",
                 "requestBody": {
                     "content": {
@@ -4184,7 +4184,7 @@
                             },
                             "examples": {
                                 "Tool call": {
-                                    "summary": "Example tool call request",
+                                    "summary": "Example Tool Call Request",
                                     "description": "An example request that represent a message initiated by the chat assistant to call a tool function for the currently authenticated tenant.",
                                     "value": {
                                         "role": "assistant",
@@ -4315,7 +4315,7 @@
                                 },
                                 "examples": {
                                     "Chat response": {
-                                        "summary": "Example chat response with context",
+                                        "summary": "Example Chat Response with Context",
                                         "description": "An example chat response that includes context of current chat session with the request appended for the currently authenticated tenant.",
                                         "value": {
                                             "messageList": [
@@ -4372,231 +4372,28 @@
                 ]
             }
         },
-        "/Api/Chat/LicenseGpt/Tenant/{tenantId}": {
+        "/Api/Chat/UpdateDocs": {
             "post": {
-                "summary": "Inquire License Data from AI Agent",
-                "description": "Enables a conversation mode with AI agent to request details of the available license reports for the specified tenant.\n\nThis endpoint requires the `LicenseReport.Read.All`, or `LicenseReport.ReadWrite.All` scope (permission).  This endpoint is also only accessible from the `SHI` and `SHI Lab` tenants. End user access is restricted.",
-                "operationId": "/Api/Chat/LicenseGpt/Tenant/:tenantId/Post",
-                "parameters": [
-                    {
-                        "$ref": "#/components/parameters/tenantId"
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "description": "Collection of conversation parts provided by user to be ingested by the agent",
-                                "type": "array",
-                                "items": {
-                                    "$ref": "#/components/schemas/Chat.OpenAIChatMessage"
-                                },
-                                "examples": [
-                                    [
-                                        {
-                                            "role": "assistant",
-                                            "content": "What are the available IDs?",
-                                            "tool_calls": [
-                                                {
-                                                    "id": "call_abc123",
-                                                    "type": "function",
-                                                    "function": {
-                                                        "arguments": "{\"startDate\":\"2025-07-01\",\"endDate\":\"2025-07-10\"}",
-                                                        "name": "getCorrelationIDs"
-                                                    }
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                ]
-                            },
-                            "examples": {
-                                "Chat request": {
-                                    "summary": "Example chat request",
-                                    "description": "An example request that represent a message initiated by the chat assistant to call a tool function for the specified tenant.",
-                                    "value": [
-                                        {
-                                            "role": "assistant",
-                                            "content": "What are the available IDs?",
-                                            "tool_calls": [
-                                                {
-                                                    "id": "call_abc123",
-                                                    "type": "function",
-                                                    "function": {
-                                                        "arguments": "{\"startDate\":\"2025-07-01\",\"endDate\":\"2025-07-10\"}",
-                                                        "name": "getCorrelationIDs"
-                                                    }
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                },
+                "description": "Sends a request to update the cached Data Gateway documentation if there is a newer version.\n\nThis endpoint requires the `LicenseGptCache.ReadWrite` scope (permission). This endpoint is also only accessible from the `SHI Lab` tenant. End user access is restricted.",
+                "operationId": "/Api/Chat/UpdateDocs/Post",
                 "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "examples": [
-                                        {
-                                            "messageList": [
-                                                {
-                                                    "role": "user",
-                                                    "content": "Hello"
-                                                },
-                                                {
-                                                    "role": "assistant",
-                                                    "content": "Hello, how can I assist you today?"
-                                                },
-                                                {
-                                                    "role": "user",
-                                                    "content": "Can you show me what correlation records I have?"
-                                                },
-                                                {
-                                                    "role": "assistant",
-                                                    "content": "What are the available IDs?",
-                                                    "tool_calls": [
-                                                        {
-                                                            "id": "call_abc123",
-                                                            "type": "function",
-                                                            "function": {
-                                                                "arguments": "{\"startDate\":\"2025-07-01\",\"endDate\":\"2025-07-10\"}",
-                                                                "name": "getCorrelationIDs"
-                                                            }
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "role": "tool",
-                                                    "content": "{\"825a9d7e-0b62-4392-b8ef-ab6951a46ebd\":\"2025-07-03T18:39:50.828Z\",\"744c0878-3a82-48a7-b239-a1d4b9298a69\":\"2025-07-07T21:01:20.995Z\"}",
-                                                    "tool_call_id": "call_abc123"
-                                                },
-                                                {
-                                                    "role": "assistant",
-                                                    "content": "You have correlation records for the following dates:\n- July 3, 2025\n- July 7, 2025\n\nWould you like to see details from any of these correlation records?"
-                                                }
-                                            ],
-                                            "responseText": "You have correlation records for the following dates:\n- July 3, 2025\n- July 7, 2025\n\nWould you like to see details from any of these correlation records?"
-                                        }
-                                    ],
-                                    "type": "object",
-                                    "properties": {
-                                        "messageList": {
-                                            "type": "array",
-                                            "description": "List of message objects in current conversation",
-                                            "items": {
-                                                "$ref": "#/components/schemas/Chat.OpenAIChatMessage"
-                                            },
-                                            "examples": [
-                                                [
-                                                    {
-                                                        "role": "user",
-                                                        "content": "Hello"
-                                                    },
-                                                    {
-                                                        "role": "assistant",
-                                                        "content": "Hello, how can I assist you today?"
-                                                    },
-                                                    {
-                                                        "role": "user",
-                                                        "content": "Can you show me what correlation records I have?"
-                                                    },
-                                                    {
-                                                        "role": "assistant",
-                                                        "content": "What are the available IDs?",
-                                                        "tool_calls": [
-                                                            {
-                                                                "id": "call_abc123",
-                                                                "type": "function",
-                                                                "function": {
-                                                                    "arguments": "{\"startDate\":\"2025-07-01\",\"endDate\":\"2025-07-10\"}",
-                                                                    "name": "getCorrelationIDs"
-                                                                }
-                                                            }
-                                                        ]
-                                                    },
-                                                    {
-                                                        "role": "tool",
-                                                        "content": "{\"825a9d7e-0b62-4392-b8ef-ab6951a46ebd\":\"2025-07-03T18:39:50.828Z\",\"744c0878-3a82-48a7-b239-a1d4b9298a69\":\"2025-07-07T21:01:20.995Z\"}",
-                                                        "tool_call_id": "call_abc123"
-                                                    },
-                                                    {
-                                                        "role": "assistant",
-                                                        "content": "You have correlation records for the following dates:\n- July 3, 2025\n- July 7, 2025\n\nWould you like to see details from any of these correlation records?"
-                                                    }
-                                                ]
-                                            ]
-                                        },
-                                        "responseText": {
-                                            "type": "string",
-                                            "description": "Most recent response text",
-                                            "examples": [
-                                                "You have correlation records for the following dates:\n- July 3, 2025\n- July 7, 2025\n\nWould you like to see details from any of these correlation records?"
-                                            ]
-                                        }
-                                    },
-                                    "required": [
-                                        "messageList",
-                                        "responseText"
-                                    ]
-                                },
-                                "examples": {
-                                    "Chat response": {
-                                        "summary": "Example chat response",
-                                        "description": "An example chat response that includes context of current chat session with the request appended for the specified tenant.",
-                                        "value": {
-                                            "messageList": [
-                                                {
-                                                    "role": "user",
-                                                    "content": "Hello"
-                                                },
-                                                {
-                                                    "role": "assistant",
-                                                    "content": "Hello, how can I assist you today?"
-                                                },
-                                                {
-                                                    "role": "user",
-                                                    "content": "Can you show me what correlation records I have?"
-                                                },
-                                                {
-                                                    "role": "assistant",
-                                                    "content": "What are the available IDs?",
-                                                    "tool_calls": [
-                                                        {
-                                                            "id": "call_abc123",
-                                                            "type": "function",
-                                                            "function": {
-                                                                "arguments": "{\"startDate\":\"2025-07-01\",\"endDate\":\"2025-07-10\"}",
-                                                                "name": "getCorrelationIDs"
-                                                            }
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "role": "tool",
-                                                    "content": "{\"825a9d7e-0b62-4392-b8ef-ab6951a46ebd\":\"2025-07-03T18:39:50.828Z\",\"744c0878-3a82-48a7-b239-a1d4b9298a69\":\"2025-07-07T21:01:20.995Z\"}",
-                                                    "tool_call_id": "call_abc123"
-                                                },
-                                                {
-                                                    "role": "assistant",
-                                                    "content": "You have correlation records for the following dates:\n- July 3, 2025\n- July 7, 2025\n\nWould you like to see details from any of these correlation records?"
-                                                }
-                                            ],
-                                            "responseText": "You have correlation records for the following dates:\n- July 3, 2025\n- July 7, 2025\n\nWould you like to see details from any of these correlation records?"
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        "description": "OK"
+                    "204": {
+                        "description": "Documentation updated successfully"
                     },
                     "400": {
                         "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "500": {
+                        "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
                     }
                 },
+                "summary": "Update Cached Documentation",
                 "tags": [
                     "Chat"
                 ]
@@ -4735,7 +4532,7 @@
                 "tags": [
                     "License Entitlement"
                 ],
-                "summary": "Creates a new License Entitlement for SHIELD."
+                "summary": "Creates a New License Entitlement for SHIELD."
             }
         },
         "/Api/Entitlement/Shield/Active": {
@@ -4865,7 +4662,7 @@
                                 },
                                 "examples": {
                                     "Example Purchase": {
-                                        "summary": "Example entitlement purchase",
+                                        "summary": "Example Entitlement Purchase",
                                         "description": "An example SHIELD entitlement for the specified tenant.",
                                         "value": [
                                             {
@@ -5044,7 +4841,7 @@
                                 "examples": {
                                     "List of Reports": {
                                         "description": "List of all available SHIELD telemetry reports for the current authenticated tenant.",
-                                        "summary": "List of SHIELD telemetry reports",
+                                        "summary": "List of SHIELD Telemetry Reports",
                                         "value": [
                                             {
                                                 "correlationId": "6fe3cd30-931c-439a-b759-1e7f3a73622e",
@@ -5185,7 +4982,7 @@
                                 "examples": {
                                     "List of Reports": {
                                         "description": "List of all available SHIELD telemetry reports for the specified tenant.",
-                                        "summary": "List of SHIELD telemetry reports",
+                                        "summary": "List of SHIELD Telemetry Reports",
                                         "value": [
                                             {
                                                 "correlationId": "6fe3cd30-931c-439a-b759-1e7f3a73622e",
@@ -5376,7 +5173,7 @@
                                 },
                                 "examples": {
                                     "Channel configuration": {
-                                        "summary": "Example all channel configs",
+                                        "summary": "Example All Channel Configs",
                                         "description": "An example showing the all channel configurations.",
                                         "value": [
                                             {
@@ -5435,7 +5232,7 @@
                                 },
                                 "examples": {
                                     "Stable channel config": {
-                                        "summary": "Example stable channel config",
+                                        "summary": "Example Stable Channel Config",
                                         "description": "An example showing the stable update channel configuration.",
                                         "value": {
                                             "latest": "1.12.5",
@@ -5444,7 +5241,7 @@
                                         }
                                     },
                                     "Alpha channel config": {
-                                        "summary": "Example alpha channel config",
+                                        "summary": "Example Alpha Channel Config",
                                         "description": "An example showing the alpha update channel configuration.",
                                         "value": {
                                             "latest": "1.12.7",
@@ -5497,7 +5294,7 @@
                                 "type": "object",
                                 "properties": {
                                     "latest": {
-                                        "description": "Version number of the latest update available to the chanel.",
+                                        "description": "Version number of the latest update available to the channel.",
                                         "examples": [
                                             "1.12.5"
                                         ],
@@ -5618,7 +5415,7 @@
                                 },
                                 "examples": {
                                     "All ring config": {
-                                        "summary": "Example all ring configs",
+                                        "summary": "Example All Ring Configs",
                                         "description": "An example showing the configurations of all rings of the specified channel.",
                                         "value": [
                                             {
@@ -5673,7 +5470,7 @@
                                 },
                                 "examples": {
                                     "Sample ring config": {
-                                        "summary": "Example ring configuration",
+                                        "summary": "Example Ring Configuration",
                                         "description": "An example ring configuration for the specified channel and ring.",
                                         "value": {
                                             "latest": true,
@@ -5871,7 +5668,7 @@
                                 },
                                 "examples": {
                                     "Latest package version": {
-                                        "summary": "Example latest application version",
+                                        "summary": "Example Latest Application Version",
                                         "description": "An example showing the latest SHIELD package available.",
                                         "value": {
                                             "updateVersion": "1.12.5"
@@ -5910,7 +5707,7 @@
                                 },
                                 "examples": {
                                     "Latest package version": {
-                                        "summary": "Example latest application version",
+                                        "summary": "Example Latest Application Version",
                                         "description": "An example showing the latest SHIELD package available for the specified channel.",
                                         "value": {
                                             "updateVersion": "1.12.5"
@@ -6037,7 +5834,7 @@
                                 },
                                 "examples": {
                                     "All tenant list": {
-                                        "summary": "Example all tenant list",
+                                        "summary": "Example All Tenant List",
                                         "description": "A example truncated list of all tenant configurations that present in the update service.",
                                         "value": [
                                             {
@@ -6087,7 +5884,7 @@
                                 },
                                 "examples": {
                                     "Tenant config": {
-                                        "summary": "Example tenant config",
+                                        "summary": "Example Tenant Config",
                                         "description": "A example configurations that present in the update service of the specified tenant.",
                                         "value": {
                                             "alphaEnabled": false,
@@ -6156,7 +5953,7 @@
                                         "type": "string"
                                     },
                                     "ring": {
-                                        "description": "Ring number that the client is a member of for the current chanel.",
+                                        "description": "Ring number that the client belongs to for the current channel.",
                                         "examples": [
                                             1
                                         ],
@@ -6535,7 +6332,7 @@
                             "examples": {
                                 "Architecture Report V1": {
                                     "description": "Sample, truncated report from an example customer environment. This will return the same report as the request input.",
-                                    "summary": "Example of license report stored.",
+                                    "summary": "Example of License Report Stored.",
                                     "value": {
                                         "correlation": {
                                             "auditTenantAccount": "user@example.com"
@@ -6626,7 +6423,7 @@
                                 "examples": {
                                     "Architecture Report V1": {
                                         "description": "Sample, truncated report from an example customer environment. This will return the same report as the request input.",
-                                        "summary": "Example of license report stored.",
+                                        "summary": "Example of License Report Stored.",
                                         "value": {
                                             "correlation": {
                                                 "auditTenantAccount": "user@example.com",
@@ -6938,83 +6735,87 @@
                             "application/json": {
                                 "examples": {
                                     "Example Architecture Report V1": {
-                                        "correlation": {
-                                            "auditTenantAccount": "user@example.com",
-                                            "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-                                            "createdAt": "2023-11-19T10:00:00.000Z",
-                                            "reportTenantAccount": "user@example.com",
-                                            "tenantId": "123e4567-e89b-12d3-a456-426614174000",
-                                            "updatedAt": "2023-11-19T10:05:00.000Z"
-                                        },
-                                        "principalData": {
-                                            "user": {
-                                                "e7b8c8a2-1f2e-4c3a-9b6a-2d8e4f8a9b7c": {
-                                                    "assignedService": {
-                                                        "3d282045-ec7f-4813-88e2-29b74ee609f7": {
-                                                            "featureA": true,
-                                                            "featureB": false
+                                        "description": "Sample structure of the valid architecture report along with all relevant metadata retrieved using correlation record ID.",
+                                        "summary": "Architecture Report Details",
+                                        "value": {
+                                            "correlation": {
+                                                "auditTenantAccount": "user@example.com",
+                                                "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                                                "createdAt": "2023-11-19T10:00:00.000Z",
+                                                "reportTenantAccount": "user@example.com",
+                                                "tenantId": "123e4567-e89b-12d3-a456-426614174000",
+                                                "updatedAt": "2023-11-19T10:05:00.000Z"
+                                            },
+                                            "principalData": {
+                                                "user": {
+                                                    "e7b8c8a2-1f2e-4c3a-9b6a-2d8e4f8a9b7c": {
+                                                        "assignedService": {
+                                                            "3d282045-ec7f-4813-88e2-29b74ee609f7": {
+                                                                "featureA": true,
+                                                                "featureB": false
+                                                            }
+                                                        },
+                                                        "assignedLicense": [
+                                                            {
+                                                                "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                                                                "servicePlanList": [
+                                                                    "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                                                                ]
+                                                            }
+                                                        ],
+                                                        "consumedService": {
+                                                            "3d282045-ec7f-4813-88e2-29b74ee609f7": {
+                                                                "featureA": true,
+                                                                "featureB": false
+                                                            }
+                                                        },
+                                                        "llmInferred": {
+                                                            "isServiceAccount": false,
+                                                            "isFrontlineWorker": true,
+                                                            "isTempWorker": null
+                                                        },
+                                                        "principalMetadata": {
+                                                            "sharedMailbox": false
+                                                        },
+                                                        "enhancedData": {
+                                                            "userPrincipalName": "user@example.com",
+                                                            "idpJobTitle": "Engineer",
+                                                            "idpDepartment": "IT",
+                                                            "idpOfficeLocation": "HQ",
+                                                            "idpEmployeeType": "Full-Time"
                                                         }
-                                                    },
-                                                    "assignedLicense": [
-                                                        {
-                                                            "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
-                                                            "servicePlanList": [
-                                                                "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-                                                            ]
+                                                    }
+                                                },
+                                                "device": {
+                                                    "f1e2d3c4-b5a6-7890-1234-56789abcdef0": {
+                                                        "assignedService": {
+                                                            "3d282045-ec7f-4813-88e2-29b74ee609f7": 5
+                                                        },
+                                                        "assignedLicense": [
+                                                            {
+                                                                "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                                                                "servicePlanList": [
+                                                                    "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                                                                ]
+                                                            }
+                                                        ],
+                                                        "consumedService": {
+                                                            "3d282045-ec7f-4813-88e2-29b74ee609f7": 5
+                                                        },
+                                                        "principalMetadata": {
+                                                            "sharedComputer": true
                                                         }
-                                                    ],
-                                                    "consumedService": {
-                                                        "3d282045-ec7f-4813-88e2-29b74ee609f7": {
-                                                            "featureA": true,
-                                                            "featureB": false
-                                                        }
-                                                    },
-                                                    "llmInferred": {
-                                                        "isServiceAccount": false,
-                                                        "isFrontlineWorker": true,
-                                                        "isTempWorker": null
-                                                    },
-                                                    "principalMetadata": {
-                                                        "sharedMailbox": false
-                                                    },
-                                                    "enhancedData": {
-                                                        "userPrincipalName": "user@example.com",
-                                                        "idpJobTitle": "Engineer",
-                                                        "idpDepartment": "IT",
-                                                        "idpOfficeLocation": "HQ",
-                                                        "idpEmployeeType": "Full-Time"
                                                     }
                                                 }
                                             },
-                                            "device": {
-                                                "f1e2d3c4-b5a6-7890-1234-56789abcdef0": {
-                                                    "assignedService": {
-                                                        "3d282045-ec7f-4813-88e2-29b74ee609f7": 5
-                                                    },
-                                                    "assignedLicense": [
-                                                        {
-                                                            "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
-                                                            "servicePlanList": [
-                                                                "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "consumedService": {
-                                                        "3d282045-ec7f-4813-88e2-29b74ee609f7": 5
-                                                    },
-                                                    "principalMetadata": {
-                                                        "sharedComputer": true
-                                                    }
-                                                }
-                                            }
-                                        },
-                                        "tenantMetadata": {
-                                            "totalDeviceCount": 1,
-                                            "totalGuestCount": 1,
-                                            "totalMemberCount": 1,
-                                            "totalUserCount": 1
-                                        },
-                                        "schemaVersion": 1
+                                            "tenantMetadata": {
+                                                "totalDeviceCount": 1,
+                                                "totalGuestCount": 1,
+                                                "totalMemberCount": 1,
+                                                "totalUserCount": 1
+                                            },
+                                            "schemaVersion": 1
+                                        }
                                     }
                                 },
                                 "schema": {
@@ -7030,7 +6831,7 @@
                         "$ref": "#/components/responses/500"
                     }
                 },
-                "summary": "Retrieve the specified Architecture Report V1 by Correlation ID",
+                "summary": "Retrieve the Specified Architecture Report V1 by Correlation ID",
                 "tags": [
                     "Architecture Reporting"
                 ]
@@ -7038,7 +6839,7 @@
         },
         "/Api/V1/ArchitectureReport/Correlation/{correlationId}/Tenant/{tenantId}/Data": {
             "delete": {
-                "summary": "Delete the specified Architecture Report V1 for specified tenant",
+                "summary": "Delete the Specified Architecture Report V1 for Specified Tenant",
                 "description": "Deletes the full architecture report v1 for the specified correlation ID and tenant.\n\nThis endpoint requires the `ArchitectureReport.ReadWrite.All` scope (permission). This endpoint is also only accessible from the `SHI` and `SHI Lab` tenants. End user access is restricted.",
                 "operationId": "/Api/V1/ArchitectureReport/Correlation/:correlationId/Tenant/:tenantId/Data/Delete",
                 "parameters": [
@@ -7067,7 +6868,7 @@
                 ]
             },
             "get": {
-                "summary": "Get Architecture Report v1 Data by Correlation ID and Tenant ID",
+                "summary": "Get Architecture Report V1 Data by Correlation ID and Tenant ID",
                 "description": "Retrieves the architecture report data associated with the specified correlation ID and tenant ID.\n\nThis endpoint requires the `ArchitectureReport.Read.All`, `ArchitectureReport.ReadWrite.All` scope (permission). This endpoint is also only accessible from the `SHI` and `SHI Lab` tenants. End user access is restricted.",
                 "operationId": "/Api/V1/ArchitectureReport/Correlation/:correlationId/Tenant/:tenantId/Data/Get",
                 "parameters": [
@@ -7086,83 +6887,87 @@
                             "application/json": {
                                 "examples": {
                                     "Architecture Report V1": {
-                                        "correlation": {
-                                            "auditTenantAccount": "user@example.com",
-                                            "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-                                            "createdAt": "2023-11-19T10:00:00.000Z",
-                                            "reportTenantAccount": "user@example.com",
-                                            "tenantId": "123e4567-e89b-12d3-a456-426614174000",
-                                            "updatedAt": "2023-11-19T10:05:00.000Z"
-                                        },
-                                        "principalData": {
-                                            "user": {
-                                                "e7b8c8a2-1f2e-4c3a-9b6a-2d8e4f8a9b7c": {
-                                                    "assignedService": {
-                                                        "3d282045-ec7f-4813-88e2-29b74ee609f7": {
-                                                            "featureA": true,
-                                                            "featureB": false
+                                        "description": "Sample structure of the valid architecture report along with all relevant metadata retrieved using correlation record ID and specific tenant ID.",
+                                        "summary": "Architecture Report Details",
+                                        "value": {
+                                            "correlation": {
+                                                "auditTenantAccount": "user@example.com",
+                                                "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                                                "createdAt": "2023-11-19T10:00:00.000Z",
+                                                "reportTenantAccount": "user@example.com",
+                                                "tenantId": "123e4567-e89b-12d3-a456-426614174000",
+                                                "updatedAt": "2023-11-19T10:05:00.000Z"
+                                            },
+                                            "principalData": {
+                                                "user": {
+                                                    "e7b8c8a2-1f2e-4c3a-9b6a-2d8e4f8a9b7c": {
+                                                        "assignedService": {
+                                                            "3d282045-ec7f-4813-88e2-29b74ee609f7": {
+                                                                "featureA": true,
+                                                                "featureB": false
+                                                            }
+                                                        },
+                                                        "assignedLicense": [
+                                                            {
+                                                                "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                                                                "servicePlanList": [
+                                                                    "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                                                                ]
+                                                            }
+                                                        ],
+                                                        "consumedService": {
+                                                            "3d282045-ec7f-4813-88e2-29b74ee609f7": {
+                                                                "featureA": true,
+                                                                "featureB": false
+                                                            }
+                                                        },
+                                                        "llmInferred": {
+                                                            "isServiceAccount": false,
+                                                            "isFrontlineWorker": true,
+                                                            "isTempWorker": null
+                                                        },
+                                                        "principalMetadata": {
+                                                            "sharedMailbox": false
+                                                        },
+                                                        "enhancedData": {
+                                                            "userPrincipalName": "user@example.com",
+                                                            "idpJobTitle": "Engineer",
+                                                            "idpDepartment": "IT",
+                                                            "idpOfficeLocation": "HQ",
+                                                            "idpEmployeeType": "Full-Time"
                                                         }
-                                                    },
-                                                    "assignedLicense": [
-                                                        {
-                                                            "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
-                                                            "servicePlanList": [
-                                                                "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-                                                            ]
+                                                    }
+                                                },
+                                                "device": {
+                                                    "f1e2d3c4-b5a6-7890-1234-56789abcdef0": {
+                                                        "assignedService": {
+                                                            "3d282045-ec7f-4813-88e2-29b74ee609f7": 5
+                                                        },
+                                                        "assignedLicense": [
+                                                            {
+                                                                "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                                                                "servicePlanList": [
+                                                                    "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                                                                ]
+                                                            }
+                                                        ],
+                                                        "consumedService": {
+                                                            "3d282045-ec7f-4813-88e2-29b74ee609f7": 5
+                                                        },
+                                                        "principalMetadata": {
+                                                            "sharedComputer": true
                                                         }
-                                                    ],
-                                                    "consumedService": {
-                                                        "3d282045-ec7f-4813-88e2-29b74ee609f7": {
-                                                            "featureA": true,
-                                                            "featureB": false
-                                                        }
-                                                    },
-                                                    "llmInferred": {
-                                                        "isServiceAccount": false,
-                                                        "isFrontlineWorker": true,
-                                                        "isTempWorker": null
-                                                    },
-                                                    "principalMetadata": {
-                                                        "sharedMailbox": false
-                                                    },
-                                                    "enhancedData": {
-                                                        "userPrincipalName": "user@example.com",
-                                                        "idpJobTitle": "Engineer",
-                                                        "idpDepartment": "IT",
-                                                        "idpOfficeLocation": "HQ",
-                                                        "idpEmployeeType": "Full-Time"
                                                     }
                                                 }
                                             },
-                                            "device": {
-                                                "f1e2d3c4-b5a6-7890-1234-56789abcdef0": {
-                                                    "assignedService": {
-                                                        "3d282045-ec7f-4813-88e2-29b74ee609f7": 5
-                                                    },
-                                                    "assignedLicense": [
-                                                        {
-                                                            "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
-                                                            "servicePlanList": [
-                                                                "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "consumedService": {
-                                                        "3d282045-ec7f-4813-88e2-29b74ee609f7": 5
-                                                    },
-                                                    "principalMetadata": {
-                                                        "sharedComputer": true
-                                                    }
-                                                }
-                                            }
-                                        },
-                                        "tenantMetadata": {
-                                            "totalDeviceCount": 1,
-                                            "totalGuestCount": 1,
-                                            "totalMemberCount": 1,
-                                            "totalUserCount": 1
-                                        },
-                                        "schemaVersion": 1
+                                            "tenantMetadata": {
+                                                "totalDeviceCount": 1,
+                                                "totalGuestCount": 1,
+                                                "totalMemberCount": 1,
+                                                "totalUserCount": 1
+                                            },
+                                            "schemaVersion": 1
+                                        }
                                     }
                                 },
                                 "schema": {

@@ -27,19 +27,19 @@ jobs:
         steps:
             # Checks-out your repository under $GITHUB_WORKSPACE
             - name: Download Source Files
-              uses: actions/checkout@v5
+              uses: actions/checkout@v6
 
               # Set up NodeJS on the build host
             - name: Setup Node.JS Environment
               uses: actions/setup-node@v6
               with:
-                  node-version: 22
+                  node-version: 24
 
             # Sets up OpenJDK on the build host
             - name: Set up Microsoft OpenJDK
               uses: actions/setup-java@v5
               with:
-                  java-version: '21'
+                  java-version: '25'
                   distribution: 'microsoft'
 
             # Install all of the dependencies
