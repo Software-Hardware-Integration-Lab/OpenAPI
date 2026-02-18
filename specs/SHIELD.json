@@ -4125,7 +4125,7 @@
         },
         "description": "Deprive your threats of practical significance. Deploy the Securing Privilege Access architecture. All in a few seconds.",
         "title": "SHI Environment Lockdown and Defense",
-        "version": "3.2.0"
+        "version": "3.2.1"
     },
     "openapi": "3.1.1",
     "paths": {
@@ -5591,11 +5591,11 @@
                 ]
             }
         },
-        "/Api/Deploy/Component/ConfigurationItemMetaData/{templateId}": {
+        "/Api/Deploy/Component/ConfigurationItem/{templateId}/Docs": {
             "get": {
                 "summary": "Return Result of Retrieving Configuration Item Documentation",
                 "description": "Retrieves additional metadata from the configuration item if it was entered, or provides a message indicating it is missing.\n\nThis endpoint requires the `Deploy.Read`, `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission). ",
-                "operationId": "/Api/Deploy/Component/ConfigurationItemMetaData/:templateId/Get",
+                "operationId": "/Api/Deploy/Component/ConfigurationItem/:templateId/Docs/Get",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/templateId"
