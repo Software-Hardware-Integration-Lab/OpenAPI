@@ -30,7 +30,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/Software-Hardware-Integration-Lab/OpenAPI"
+        "url": "git+https://github.com/Software-Hardware-Integration-Lab/OpenAPI.git"
     },
     "license": "MIT",
     "author": "Elliot Huffman (elliot_huffman@shi.com)",
