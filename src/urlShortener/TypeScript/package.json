@@ -16,7 +16,7 @@
     "bugs": {
         "url": "https://github.com/Software-Hardware-Integration-Lab/OpenAPI/issues"
     },
-    "packageManager": "npm@11.9.0",
+    "packageManager": "npm@11.10.0",
     "devEngines": {
         "runtime": {
             "name": "node",
@@ -45,7 +45,7 @@
     "devDependencies": {
         "@azure/core-auth": "~1.10.1",
         "@shi-corp/development-utilities": "~2.2.0",
-        "@types/node": "~25.2.2",
+        "@types/node": "~25.2.3",
         "ts-patch": "~3.3.0",
         "typescript": "~5.9.3"
     },
