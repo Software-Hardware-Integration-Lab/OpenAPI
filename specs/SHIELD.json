@@ -3945,6 +3945,16 @@
                 ],
                 "title": "Architecture Report - Correlation Record",
                 "type": "object"
+            },
+            "ZeroTrustAssessment": {
+                "title": "Zero Trust Assessment - Complete Object",
+                "description": "Calculated structure that represents details needed to present Zero Trust assessment in UI.",
+                "type": "object",
+                "properties": {},
+                "required": [],
+                "examples": [
+                    {}
+                ]
             }
         },
         "securitySchemes": {
@@ -3967,7 +3977,7 @@
         },
         "description": "Deprive your threats of practical significance. Deploy the Securing Privilege Access architecture. All in a few seconds.",
         "title": "SHI Environment Lockdown and Defense",
-        "version": "3.3.0"
+        "version": "3.4.0"
     },
     "openapi": "3.1.1",
     "paths": {
@@ -4760,6 +4770,35 @@
                     },
                     "403": {
                         "$ref": "#/components/responses/403"
+                    }
+                },
+                "tags": [
+                    "Discover"
+                ]
+            }
+        },
+        "/Api/Discover/ZeroTrust": {
+            "get": {
+                "summary": "Generates Zero Trust Assessment",
+                "description": "Initiates collection of data that matches details needed to compose Zero Trust assessment.\n\nThis endpoint requires the `Permissions TBD` scope (permission).",
+                "operationId": "/Api/Discover/ZeroTrust/Get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Zero Trust Assessment": {
+                                        "description": "Sample object representing data needed for Zero Trust assessment.",
+                                        "summary": "Sample Zero Trust Assessment",
+                                        "value": {}
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ZeroTrustAssessment"
+                                }
+                            }
+                        },
+                        "description": "OK"
                     }
                 },
                 "tags": [
