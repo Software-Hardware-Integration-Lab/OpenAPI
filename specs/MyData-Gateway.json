@@ -1,5 +1,5 @@
 {
-    "openapi": "3.1.1",
+    "openapi": "3.1.1 Test",
     "info": {
         "title": "Data Gateway - CloudMatrix Schema",
         "version": "1.0.0",
