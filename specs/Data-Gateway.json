@@ -7554,69 +7554,69 @@
                                                                     ]
                                                                 }
                                                             ]
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "roadmapElementPath": "User Experience /Productivity Apps/Extended Productivity App Ecosystem",
-                                                    "elementSubdimension": "Productivity Apps",
-                                                    "roadmapProduct": "Platform Only",
-                                                    "feature": "Lists",
-                                                    "description": "Microsoft Lists is a Microsoft 365 app that helps you track information and organize work with customizable lists for tasks, projects, and more.",
-                                                    "publisherLink": "",
-                                                    "subscriptionFeatures": [
-                                                        {
-                                                            "licensing": "M365",
-                                                            "products": [
-                                                                {
-                                                                    "product": "E5",
-                                                                    "value": "available",
-                                                                    "comment": ""
-                                                                },
-                                                                {
-                                                                    "product": "E3",
-                                                                    "value": "available",
-                                                                    "comment": ""
-                                                                }
-                                                            ]
                                                         },
                                                         {
-                                                            "licensing": "M365 FLW",
-                                                            "products": [
+                                                            "roadmapElementPath": "User Experience /Productivity Apps/Extended Productivity App Ecosystem",
+                                                            "elementSubdimension": "Productivity Apps",
+                                                            "roadmapProduct": "Platform Only",
+                                                            "feature": "Lists",
+                                                            "description": "Microsoft Lists is a Microsoft 365 app that helps you track information and organize work with customizable lists for tasks, projects, and more.",
+                                                            "publisherLink": "",
+                                                            "subscriptionFeatures": [
                                                                 {
-                                                                    "product": "F1",
-                                                                    "value": "available",
-                                                                    "comment": ""
+                                                                    "licensing": "M365",
+                                                                    "products": [
+                                                                        {
+                                                                            "product": "E5",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        },
+                                                                        {
+                                                                            "product": "E3",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        }
+                                                                    ]
                                                                 },
                                                                 {
-                                                                    "product": "F3",
-                                                                    "value": "available",
-                                                                    "comment": ""
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "licensing": "O365",
-                                                            "products": [
-                                                                {
-                                                                    "product": "F3",
-                                                                    "value": "available",
-                                                                    "comment": ""
+                                                                    "licensing": "M365 FLW",
+                                                                    "products": [
+                                                                        {
+                                                                            "product": "F1",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        },
+                                                                        {
+                                                                            "product": "F3",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        }
+                                                                    ]
                                                                 },
                                                                 {
-                                                                    "product": "E5",
-                                                                    "value": "available",
-                                                                    "comment": ""
-                                                                },
-                                                                {
-                                                                    "product": "E1",
-                                                                    "value": "available",
-                                                                    "comment": ""
-                                                                },
-                                                                {
-                                                                    "product": "E3",
-                                                                    "value": "available",
-                                                                    "comment": ""
+                                                                    "licensing": "O365",
+                                                                    "products": [
+                                                                        {
+                                                                            "product": "F3",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        },
+                                                                        {
+                                                                            "product": "E5",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        },
+                                                                        {
+                                                                            "product": "E1",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        },
+                                                                        {
+                                                                            "product": "E3",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        }
+                                                                    ]
                                                                 }
                                                             ]
                                                         }
