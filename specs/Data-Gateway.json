@@ -2785,60 +2785,61 @@
                 "type": "object"
             },
             "CloudMatrix": {
-                "type": "object",
                 "title": "Cloud Matrix Assessment",
-                "description": "Information about a single cloud matrix assessment record",
+                "description": "Top-level container for a complete Cloud Matrix assessment, including correlation, assessment, value assessment content, and breakout feature mappings.",
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                    "correlation",
+                    "title",
+                    "version",
+                    "valueAssessment",
+                    "breakouts"
+                ],
                 "properties": {
                     "correlation": {
                         "$ref": "#/components/schemas/CloudMatrixCorrelationRecord"
                     },
                     "title": {
                         "type": "string",
+                        "description": "Display title of the Cloud Matrix assessment payload.",
                         "examples": [
-                            "Cloud Matrix"
-                        ],
-                        "default": "CloudMatrix"
+                            "CloudMatrix Value Assessment"
+                        ]
                     },
                     "description": {
                         "type": [
                             "string",
                             "null"
                         ],
+                        "description": "Optional narrative summary of the Cloud Matrix assessment.",
                         "examples": [
-                            "MICROSOFT CLOUD ADOPTION MATRIX",
+                            "MICROSOFT CLOUD ADOPTION MATRIX v5.0",
                             null
-                        ],
-                        "default": "MICROSOFT CLOUD ADOPTION MATRIX"
+                        ]
                     },
                     "version": {
                         "type": "string",
+                        "description": "Version identifier of the current Cloud Matrix assessment schema.",
                         "examples": [
-                            "Cloud Matrix Version 5.0.13"
-                        ],
-                        "default": "5.0.13"
+                            "5.0.13"
+                        ]
                     },
                     "valueAssessment": {
-                        "$ref": ""
+                        "$ref": "#/components/schemas/CloudMatrix/ValueAssessment"
                     },
                     "breakouts": {
                         "type": "array",
+                        "description": "Collection of breakout sections included in the assessment.",
                         "items": {
-                            "$ref": ""
+                            "$ref": "#/components/schemas/CloudMatrix/Breakout"
                         }
                     }
                 },
-                "required": [
-                    "correlation",
-                    "title",
-                    "description",
-                    "version",
-                    "valueAssessment",
-                    "breakouts"
-                ],
                 "examples": [
                     {
                         "correlation": {
-                            "accountName": "Contoso Ltd",
+                            "accountName": "Test Account Name",
                             "correlationId": "3f6e9be8-3f99-4d2c-b98c-bf559f42970f",
                             "createdAt": "2026-03-06T10:15:30.000Z",
                             "crmId": "9cbafdc4-1207-4f11-bf6a-f5c7fc6fb4a3",
@@ -2853,7 +2854,7 @@
                         "version": "5.0.13",
                         "valueAssessment": {
                             "actionPlan": {
-                                "accountName": "Contoso Ltd",
+                                "accountName": "Test Account Name",
                                 "discoveryDate": "2026-02-28T14:30:00.000Z",
                                 "accountManager": "Alex Morgan",
                                 "consultant": "Jordan Lee",
@@ -2878,52 +2879,55 @@
                                                     "value": "Information Worker"
                                                 },
                                                 {
-                                                    "name": "Current",
+                                                    "name": "License Type",
                                                     "value": "E3"
-                                                },
-                                                {
-                                                    "name": "Future",
-                                                    "value": "E5"
                                                 }
                                             ]
                                         },
                                         {
-                                            "name": "Devices",
+                                            "name": "User Count",
+                                            "values": [
+                                                {
+                                                    "name": "Current",
+                                                    "value": "10"
+                                                },
+                                                {
+                                                    "name": "Future",
+                                                    "value": "100"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "name": "Physical Devices",
+                                            "values": [
+                                                {
+                                                    "name": "Dedicated",
+                                                    "value": "10"
+                                                },
+                                                {
+                                                    "name": "Secondary",
+                                                    "value": "100"
+                                                },
+                                                {
+                                                    "name": "Shared",
+                                                    "value": "100"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "name": "Virtual Devices",
                                             "values": [
                                                 {
                                                     "name": "Apps",
-                                                    "value": "1200"
+                                                    "value": "10"
                                                 },
                                                 {
                                                     "name": "Desktop",
-                                                    "value": "850"
+                                                    "value": "100"
                                                 },
                                                 {
                                                     "name": "Cloud PC",
                                                     "value": "100"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "id": "4aaecf3f-e4fc-41a6-a8ac-cf36d2f8ca33",
-                                    "name": "Frontline Worker",
-                                    "details": [
-                                        {
-                                            "name": "Profile Details",
-                                            "values": [
-                                                {
-                                                    "name": "Profile Name",
-                                                    "value": "Frontline Worker"
-                                                },
-                                                {
-                                                    "name": "Current",
-                                                    "value": "F1"
-                                                },
-                                                {
-                                                    "name": "Future",
-                                                    "value": "F3"
                                                 }
                                             ]
                                         }
@@ -2934,7 +2938,7 @@
                                 {
                                     "metadata": {
                                         "name": "Teams Phone Enablement",
-                                        "breakoutId": "collab-voice",
+                                        "breakoutId": "2b92f035-275c-4d9b-b662-e5323cb9c769",
                                         "category": "Collaboration",
                                         "subCategory": "Voice",
                                         "help": "Assess Teams Phone rollout readiness.",
@@ -2958,8 +2962,7 @@
                                         "yearPlusOneConfig": {
                                             "value": 55,
                                             "userProfileIds": [
-                                                "0d8e0c84-c0b4-4459-8b23-11ccff5ae319",
-                                                "4aaecf3f-e4fc-41a6-a8ac-cf36d2f8ca33"
+                                                "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
                                             ],
                                             "isDeepDive": true,
                                             "altProduct": null,
@@ -2969,8 +2972,7 @@
                                         "yearPlusTwoConfig": {
                                             "value": 80,
                                             "userProfileIds": [
-                                                "0d8e0c84-c0b4-4459-8b23-11ccff5ae319",
-                                                "4aaecf3f-e4fc-41a6-a8ac-cf36d2f8ca33"
+                                                "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
                                             ],
                                             "isDeepDive": false,
                                             "altProduct": null,
@@ -2980,8 +2982,7 @@
                                         "yearPlusThreeConfig": {
                                             "value": 95,
                                             "userProfileIds": [
-                                                "0d8e0c84-c0b4-4459-8b23-11ccff5ae319",
-                                                "4aaecf3f-e4fc-41a6-a8ac-cf36d2f8ca33"
+                                                "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
                                             ],
                                             "isDeepDive": false,
                                             "altProduct": null,
@@ -2995,11 +2996,6 @@
                                             "name": "Information Worker",
                                             "abbreviation": "IW",
                                             "value": 90
-                                        },
-                                        {
-                                            "name": "Frontline Worker",
-                                            "abbreviation": "FLW",
-                                            "value": 65
                                         }
                                     ],
                                     "features": [
@@ -3010,11 +3006,6 @@
                                                     "product": "Teams Phone Standard",
                                                     "value": "Included",
                                                     "comment": "Primary voice service"
-                                                },
-                                                {
-                                                    "product": "Audio Conferencing",
-                                                    "value": "Included",
-                                                    "comment": "For dial-in meetings"
                                                 }
                                             ]
                                         }
@@ -3056,7 +3047,7 @@
                         "breakouts": [
                             {
                                 "title": "Collaboration & Communication",
-                                "breakoutId": "collab-core",
+                                "breakoutId": "2b92f035-275c-4d9b-b662-e5323cb9c769",
                                 "breakoutName": "Collaboration",
                                 "features": [
                                     {
@@ -3064,8 +3055,8 @@
                                         "elementSubdimension": "Adoption",
                                         "roadmapProduct": "Microsoft Teams",
                                         "feature": "Teams Phone",
-                                        "description": "Cloud PBX with PSTN capabilities.",
-                                        "publisherLink": "https://www.microsoft.com/microsoft-teams/microsoft-teams-phone",
+                                        "description": "Cloud PBX with ABC capabilities.",
+                                        "publisherLink": "https://www.abcd123.com/abcd",
                                         "subscriptionFeatures": [
                                             {
                                                 "licensing": "E5",
@@ -3074,11 +3065,6 @@
                                                         "product": "Teams Phone Standard",
                                                         "value": "Included",
                                                         "comment": "Base entitlement"
-                                                    },
-                                                    {
-                                                        "product": "Domestic Calling Plan",
-                                                        "value": "Addon",
-                                                        "comment": "Optional by region"
                                                     }
                                                 ]
                                             }
@@ -3088,7 +3074,1639 @@
                             }
                         ]
                     }
-                ]
+                ],
+                "ValueAssessment": {
+                    "title": "Value Assessment",
+                    "description": "Aggregates action planning, profile data, assessment elements, and displacement opportunities.",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                        "actionPlan",
+                        "userProfiles",
+                        "assessment",
+                        "displacements"
+                    ],
+                    "properties": {
+                        "actionPlan": {
+                            "$ref": "#/components/schemas/CloudMatrix/ActionPlan"
+                        },
+                        "userProfiles": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/components/schemas/CloudMatrix/UserProfile"
+                            }
+                        },
+                        "assessment": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/components/schemas/CloudMatrix/AssessmentElement"
+                            }
+                        },
+                        "displacements": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/components/schemas/CloudMatrix/DisplacementEntry"
+                            }
+                        }
+                    },
+                    "examples": [
+                        {
+                            "actionPlan": {
+                                "accountName": "Test Account Name",
+                                "discoveryDate": "2026-02-28T14:30:00.000Z",
+                                "accountManager": "Alex Morgan",
+                                "consultant": "Jordan Lee",
+                                "licensingExecutive": "Taylor Kim",
+                                "customerSuccessManager": "Sam Patel",
+                                "notesAndObjectives": "Consolidate collaboration tools.",
+                                "crmId": "9cbafdc4-1207-4f11-bf6a-f5c7fc6fb4a3",
+                                "createdDate": "2026-02-28T14:30:00.000Z",
+                                "modifiedDate": "2026-03-06T10:20:00.000Z",
+                                "primaryPublisher": "Microsoft"
+                            },
+                            "userProfiles": [
+                                {
+                                    "id": "0d8e0c84-c0b4-4459-8b23-11ccff5ae319",
+                                    "name": "Information Worker",
+                                    "details": [
+                                        {
+                                            "name": "Profile Details",
+                                            "values": [
+                                                {
+                                                    "name": "Profile Name",
+                                                    "value": "Information Worker"
+                                                },
+                                                {
+                                                    "name": "License Type",
+                                                    "value": "E3"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "name": "User Count",
+                                            "values": [
+                                                {
+                                                    "name": "Current",
+                                                    "value": "10"
+                                                },
+                                                {
+                                                    "name": "Future",
+                                                    "value": "100"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "name": "Physical Devices",
+                                            "values": [
+                                                {
+                                                    "name": "Dedicated",
+                                                    "value": "10"
+                                                },
+                                                {
+                                                    "name": "Secondary",
+                                                    "value": "100"
+                                                },
+                                                {
+                                                    "name": "Shared",
+                                                    "value": "100"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "name": "Virtual Devices",
+                                            "values": [
+                                                {
+                                                    "name": "Apps",
+                                                    "value": "10"
+                                                },
+                                                {
+                                                    "name": "Desktop",
+                                                    "value": "100"
+                                                },
+                                                {
+                                                    "name": "Cloud PC",
+                                                    "value": "100"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            "assessment": [
+                                {
+                                    "metadata": {
+                                        "name": "Teams Phone Enablement",
+                                        "breakoutId": "2b92f035-275c-4d9b-b662-e5323cb9c769",
+                                        "category": "Collaboration",
+                                        "subCategory": "Voice",
+                                        "help": "Assess Teams Phone rollout readiness.",
+                                        "licensingProduct": "Microsoft Teams Phone",
+                                        "licensingProductHelp": "Requires Teams Phone compatible license.",
+                                        "isAddon": true,
+                                        "isStrategicAddon": true,
+                                        "isTenantBased": false,
+                                        "availability": "GA",
+                                        "notes": "Pilot with 100 users before phase 2.",
+                                        "startYearConfig": {
+                                            "value": 20,
+                                            "userProfileIds": [
+                                                "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
+                                            ],
+                                            "isDeepDive": true,
+                                            "altProduct": null,
+                                            "publisher": "Microsoft",
+                                            "useCase": "PBX replacement"
+                                        },
+                                        "yearPlusOneConfig": {
+                                            "value": 55,
+                                            "userProfileIds": [
+                                                "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
+                                            ],
+                                            "isDeepDive": true,
+                                            "altProduct": null,
+                                            "publisher": "Microsoft",
+                                            "useCase": "Enterprise voice"
+                                        },
+                                        "yearPlusTwoConfig": {
+                                            "value": 80,
+                                            "userProfileIds": [
+                                                "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
+                                            ],
+                                            "isDeepDive": false,
+                                            "altProduct": null,
+                                            "publisher": "Microsoft",
+                                            "useCase": "Global rollout"
+                                        },
+                                        "yearPlusThreeConfig": {
+                                            "value": 95,
+                                            "userProfileIds": [
+                                                "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
+                                            ],
+                                            "isDeepDive": false,
+                                            "altProduct": null,
+                                            "publisher": "Microsoft",
+                                            "useCase": "Optimization"
+                                        },
+                                        "sourceValue": 10
+                                    },
+                                    "userProfiles": [
+                                        {
+                                            "name": "Information Worker",
+                                            "abbreviation": "IW",
+                                            "value": 90
+                                        }
+                                    ],
+                                    "features": [
+                                        {
+                                            "licensing": "M365 E5 + Teams Phone",
+                                            "products": [
+                                                {
+                                                    "product": "Teams Phone Standard",
+                                                    "value": "Included",
+                                                    "comment": "Primary voice service"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            "displacements": [
+                                {
+                                    "name": "Legacy PBX",
+                                    "currentProvider": {
+                                        "name": "OldTelecom",
+                                        "terms": "36 months",
+                                        "contractNumber": "PBX-2023-991",
+                                        "expiryDate": "2026-12-31T23:59:59.000Z",
+                                        "costs": {
+                                            "monthlyCost": 18000,
+                                            "annualCost": 216000,
+                                            "contractValue": 648000
+                                        }
+                                    },
+                                    "displacement": {
+                                        "name": "Microsoft Teams Phone",
+                                        "terms": "36 months",
+                                        "contractNumber": "MS-VOICE-2026-01",
+                                        "expiryDate": "2029-03-01T00:00:00.000Z",
+                                        "replacementDate": "2026-06-01T00:00:00.000Z",
+                                        "costs": [
+                                            {
+                                                "monthlyCost": 12000,
+                                                "annualCost": 144000,
+                                                "contractValue": 432000
+                                            }
+                                        ]
+                                    },
+                                    "notes": "Expected 33% reduction in total voice platform cost."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "ActionPlan": {
+                    "title": "Action Plan",
+                    "description": "High-level discovery and ownership metadata for the account.",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                        "accountName",
+                        "discoveryDate"
+                    ],
+                    "properties": {
+                        "accountName": {
+                            "type": "string",
+                            "description": "Customer account name associated with the action plan.",
+                            "examples": [
+                                "Test Account Name"
+                            ]
+                        },
+                        "discoveryDate": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "Date and time when discovery was performed.",
+                            "format": "date-time",
+                            "examples": [
+                                "2026-02-28T14:30:00.000Z",
+                                null
+                            ]
+                        },
+                        "accountManager": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "Name of the account manager assigned to the engagement.",
+                            "examples": [
+                                "Alex Morgan",
+                                null
+                            ]
+                        },
+                        "consultant": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "Name of the consultant supporting the assessment.",
+                            "examples": [
+                                "Jordan Lee",
+                                null
+                            ]
+                        },
+                        "licensingExecutive": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "Name of the licensing executive for the account.",
+                            "examples": [
+                                "Taylor Kim",
+                                null
+                            ]
+                        },
+                        "customerSuccessManager": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "Name of the customer success manager supporting adoption.",
+                            "examples": [
+                                "Sam Patel",
+                                null
+                            ]
+                        },
+                        "notesAndObjectives": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "Summary of engagement notes, goals, and business objectives.",
+                            "examples": [
+                                "Consolidate collaboration tools.",
+                                null
+                            ]
+                        },
+                        "crmId": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "CRM identifier associated with the customer record.",
+                            "examples": [
+                                "9cbafdc4-1207-4f11-bf6a-f5c7fc6fb4a3",
+                                null
+                            ]
+                        },
+                        "createdDate": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "Timestamp when the action plan was created.",
+                            "format": "date-time",
+                            "examples": [
+                                "2026-02-28T14:30:00.000Z",
+                                null
+                            ]
+                        },
+                        "modifiedDate": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "Timestamp when the action plan was last modified.",
+                            "format": "date-time",
+                            "examples": [
+                                "2026-03-06T10:20:00.000Z",
+                                null
+                            ]
+                        },
+                        "primaryPublisher": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "Primary software publisher identified in the assessment.",
+                            "examples": [
+                                "Microsoft",
+                                null
+                            ]
+                        }
+                    },
+                    "examples": [
+                        {
+                            "accountName": "Test Account Name",
+                            "discoveryDate": "2026-02-28T14:30:00.000Z",
+                            "accountManager": "Alex Morgan",
+                            "consultant": "Jordan Lee",
+                            "licensingExecutive": "Taylor Kim",
+                            "customerSuccessManager": "Sam Patel",
+                            "notesAndObjectives": "Consolidate collaboration tools.",
+                            "crmId": "9cbafdc4-1207-4f11-bf6a-f5c7fc6fb4a3",
+                            "createdDate": "2026-02-28T14:30:00.000Z",
+                            "modifiedDate": "2026-03-06T10:20:00.000Z",
+                            "primaryPublisher": "Microsoft"
+                        }
+                    ]
+                },
+                "UserProfileValue": {
+                    "title": "User Profile Value",
+                    "description": "Single named value inside a user profile detail group.",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                        "name",
+                        "value"
+                    ],
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "description": "Label of the user profile value field.",
+                            "examples": [
+                                "Profile Name"
+                            ]
+                        },
+                        "value": {
+                            "type": "string",
+                            "description": "Value associated with the profile field name.",
+                            "examples": [
+                                "Information Worker"
+                            ]
+                        }
+                    },
+                    "examples": [
+                        {
+                            "name": "Profile Name",
+                            "value": "Information Worker"
+                        }
+                    ]
+                },
+                "UserProfileDetailGroup": {
+                    "title": "User Profile Detail Group",
+                    "description": "Groups related user-profile values under a section name.",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                        "name",
+                        "values"
+                    ],
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "description": "Section name grouping related profile values.",
+                            "examples": [
+                                "Profile Details"
+                            ]
+                        },
+                        "values": {
+                            "type": "array",
+                            "description": "List of named values within the profile detail group.",
+                            "items": {
+                                "$ref": "#/components/schemas/CloudMatrix/UserProfileValue"
+                            }
+                        }
+                    },
+                    "examples": [
+                        {
+                            "name": "Profile Details",
+                            "values": [
+                                {
+                                    "name": "Profile Name",
+                                    "value": "Information Worker"
+                                },
+                                {
+                                    "name": "Current",
+                                    "value": "E3"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "UserProfile": {
+                    "title": "User Profile",
+                    "description": "Named user profile and grouped details used by assessment elements.",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                        "id",
+                        "name",
+                        "details"
+                    ],
+                    "properties": {
+                        "id": {
+                            "description": "Unique identifier of the user profile.",
+                            "$ref": "#/components/schemas/Uuid"
+                        },
+                        "name": {
+                            "type": "string",
+                            "description": "Display name of the user profile.",
+                            "examples": [
+                                "Information Worker"
+                            ]
+                        },
+                        "details": {
+                            "type": "array",
+                            "description": "Grouped detail sections describing the user profile.",
+                            "items": {
+                                "$ref": "#/components/schemas/CloudMatrix/UserProfileDetailGroup"
+                            }
+                        }
+                    },
+                    "examples": [
+                        {
+                            "id": "0d8e0c84-c0b4-4459-8b23-11ccff5ae319",
+                            "name": "Information Worker",
+                            "details": [
+                                {
+                                    "name": "Profile Details",
+                                    "values": [
+                                        {
+                                            "name": "Profile Name",
+                                            "value": "Information Worker"
+                                        },
+                                        {
+                                            "name": "Current",
+                                            "value": "E3"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "AssessmentElement": {
+                    "title": "Assessment Element",
+                    "description": "One roadmap element with metadata, profile values, and product licensing features.",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                        "metadata",
+                        "userProfiles",
+                        "features"
+                    ],
+                    "properties": {
+                        "metadata": {
+                            "$ref": "#/components/schemas/CloudMatrix/AssessmentMetadata"
+                        },
+                        "userProfiles": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/components/schemas/CloudMatrix/ProfileValue"
+                            }
+                        },
+                        "features": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/components/schemas/CloudMatrix/FeatureEntry"
+                            }
+                        }
+                    },
+                    "example": {
+                        "metadata": {
+                            "name": "Teams Phone Enablement",
+                            "breakoutId": "2b92f035-275c-4d9b-b662-e5323cb9c769",
+                            "category": "Collaboration",
+                            "subCategory": "Voice",
+                            "help": "Assess Teams Phone rollout readiness.",
+                            "licensingProduct": "Microsoft Teams Phone",
+                            "licensingProductHelp": "Requires Teams Phone compatible license.",
+                            "isAddon": true,
+                            "isStrategicAddon": true,
+                            "isTenantBased": false,
+                            "availability": "GA",
+                            "notes": "Pilot with 100 users before phase 2.",
+                            "startYearConfig": {
+                                "value": 20,
+                                "userProfileIds": [
+                                    "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
+                                ],
+                                "isDeepDive": true,
+                                "altProduct": null,
+                                "publisher": "Microsoft",
+                                "useCase": "PBX replacement"
+                            },
+                            "yearPlusOneConfig": {
+                                "value": 55,
+                                "userProfileIds": [
+                                    "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
+                                ],
+                                "isDeepDive": true,
+                                "altProduct": null,
+                                "publisher": "Microsoft",
+                                "useCase": "Enterprise voice"
+                            },
+                            "yearPlusTwoConfig": {
+                                "value": 80,
+                                "userProfileIds": [
+                                    "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
+                                ],
+                                "isDeepDive": false,
+                                "altProduct": null,
+                                "publisher": "Microsoft",
+                                "useCase": "Global rollout"
+                            },
+                            "yearPlusThreeConfig": {
+                                "value": 95,
+                                "userProfileIds": [
+                                    "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
+                                ],
+                                "isDeepDive": false,
+                                "altProduct": null,
+                                "publisher": "Microsoft",
+                                "useCase": "Optimization"
+                            },
+                            "sourceValue": 10
+                        },
+                        "userProfiles": [
+                            {
+                                "name": "Information Worker",
+                                "abbreviation": "IW",
+                                "value": 90
+                            }
+                        ],
+                        "features": [
+                            {
+                                "licensing": "M365 E5 + Teams Phone",
+                                "products": [
+                                    {
+                                        "product": "Teams Phone Standard",
+                                        "value": "Included",
+                                        "comment": "Primary voice service"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "AssessmentMetadata": {
+                    "title": "Assessment Metadata",
+                    "description": "Descriptive data and year-based configuration for a roadmap element.",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                        "name",
+                        "breakoutId",
+                        "category",
+                        "subCategory",
+                        "help",
+                        "licensingProduct",
+                        "licensingProductHelp",
+                        "isAddon",
+                        "isStrategicAddon",
+                        "isTenantBased",
+                        "availability",
+                        "notes",
+                        "startYearConfig",
+                        "yearPlusOneConfig",
+                        "yearPlusTwoConfig",
+                        "yearPlusThreeConfig",
+                        "sourceValue"
+                    ],
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "description": "Name of the roadmap element being assessed.",
+                            "examples": [
+                                "Teams Phone Enablement"
+                            ]
+                        },
+                        "breakoutId": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "Identifier of the breakout associated with this element.",
+                            "examples": [
+                                "testBreakOutId",
+                                null
+                            ]
+                        },
+                        "category": {
+                            "type": "string",
+                            "description": "Primary category for the roadmap element.",
+                            "examples": [
+                                "Collaboration"
+                            ]
+                        },
+                        "subCategory": {
+                            "type": "string",
+                            "description": "Secondary category within the primary category.",
+                            "examples": [
+                                "Voice"
+                            ]
+                        },
+                        "help": {
+                            "type": "string",
+                            "description": "Guidance text explaining the purpose of the element.",
+                            "examples": [
+                                "Assess Teams Phone rollout readiness"
+                            ]
+                        },
+                        "licensingProduct": {
+                            "type": "string",
+                            "description": "Licensing product mapped to this element.",
+                            "examples": [
+                                "Microsoft Teams Phone"
+                            ]
+                        },
+                        "licensingProductHelp": {
+                            "type": "string",
+                            "description": "Additional licensing guidance for the mapped product.",
+                            "examples": [
+                                "Requires Teams Phone compatible license"
+                            ]
+                        },
+                        "isAddon": {
+                            "type": "boolean",
+                            "description": "Indicates whether the element is treated as an add-on.",
+                            "examples": [
+                                true
+                            ]
+                        },
+                        "isStrategicAddon": {
+                            "type": "boolean",
+                            "description": "Indicates whether the add-on is classified as strategic.",
+                            "example": true
+                        },
+                        "isTenantBased": {
+                            "type": "boolean",
+                            "description": "Indicates whether the element is tenant-level rather than profile-level.",
+                            "examples": [
+                                true
+                            ]
+                        },
+                        "availability": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "Availability state of the element.",
+                            "examples": [
+                                "GA",
+                                null
+                            ]
+                        },
+                        "notes": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "Optional notes relevant to planning or rollout context.",
+                            "examples": [
+                                "Pilot with 100 users before phase 2",
+                                null
+                            ]
+                        },
+                        "startYearConfig": {
+                            "$ref": "#/components/schemas/CloudMatrix/YearConfig"
+                        },
+                        "yearPlusOneConfig": {
+                            "$ref": "#/components/schemas/CloudMatrix/YearConfig"
+                        },
+                        "yearPlusTwoConfig": {
+                            "$ref": "#/components/schemas/CloudMatrix/YearConfig"
+                        },
+                        "yearPlusThreeConfig": {
+                            "$ref": "#/components/schemas/CloudMatrix/YearConfig"
+                        },
+                        "sourceValue": {
+                            "type": "number",
+                            "description": "Source baseline value used for this assessment element.",
+                            "examples": [
+                                10
+                            ]
+                        }
+                    },
+                    "examples": [
+                        {
+                            "name": "Teams Phone Enablement",
+                            "breakoutId": "2b92f035-275c-4d9b-b662-e5323cb9c769",
+                            "category": "Collaboration",
+                            "subCategory": "Voice",
+                            "help": "Assess Teams Phone rollout readiness.",
+                            "licensingProduct": "Microsoft Teams Phone",
+                            "licensingProductHelp": "Requires Teams Phone compatible license.",
+                            "isAddon": true,
+                            "isStrategicAddon": true,
+                            "isTenantBased": false,
+                            "availability": "GA",
+                            "notes": "Pilot with 100 users before phase 2.",
+                            "startYearConfig": {
+                                "value": 20,
+                                "userProfileIds": [
+                                    "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
+                                ],
+                                "isDeepDive": true,
+                                "altProduct": null,
+                                "publisher": "Microsoft",
+                                "useCase": "PBX replacement"
+                            },
+                            "yearPlusOneConfig": {
+                                "value": 55,
+                                "userProfileIds": [
+                                    "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
+                                ],
+                                "isDeepDive": true,
+                                "altProduct": null,
+                                "publisher": "Microsoft",
+                                "useCase": "Enterprise voice"
+                            },
+                            "yearPlusTwoConfig": {
+                                "value": 80,
+                                "userProfileIds": [
+                                    "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
+                                ],
+                                "isDeepDive": false,
+                                "altProduct": null,
+                                "publisher": "Microsoft",
+                                "useCase": "Global rollout"
+                            },
+                            "yearPlusThreeConfig": {
+                                "value": 95,
+                                "userProfileIds": [
+                                    "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
+                                ],
+                                "isDeepDive": false,
+                                "altProduct": null,
+                                "publisher": "Microsoft",
+                                "useCase": "Optimization"
+                            },
+                            "sourceValue": 10
+                        }
+                    ]
+                },
+                "YearConfig": {
+                    "title": "Year Configuration",
+                    "description": "Year-specific value and mapping configuration for an assessment element.",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                        "value",
+                        "userProfileIds",
+                        "isDeepDive",
+                        "altProduct",
+                        "publisher",
+                        "useCase"
+                    ],
+                    "properties": {
+                        "value": {
+                            "type": [
+                                "number",
+                                "null"
+                            ],
+                            "description": "Planned value for the given year configuration.",
+                            "examples": [
+                                55,
+                                null
+                            ]
+                        },
+                        "userProfileIds": {
+                            "type": [
+                                "array",
+                                "null"
+                            ],
+                            "description": "User profile IDs included in this year configuration.",
+                            "items": {
+                                "type": "string",
+                                "format": "uuid"
+                            },
+                            "examples": [
+                                [
+                                    "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
+                                ],
+                                null
+                            ]
+                        },
+                        "isDeepDive": {
+                            "type": "boolean",
+                            "description": "Indicates whether this configuration requires deep-dive analysis.",
+                            "examples": [
+                                true
+                            ]
+                        },
+                        "altProduct": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "Alternative product considered for this configuration.",
+                            "examples": [
+                                "Teams Premium",
+                                null
+                            ]
+                        },
+                        "publisher": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "Publisher associated with the selected or alternative product.",
+                            "examples": [
+                                "Microsoft",
+                                null
+                            ]
+                        },
+                        "useCase": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "Business use case targeted by this configuration.",
+                            "examples": [
+                                "Enterprise voice",
+                                null
+                            ]
+                        }
+                    },
+                    "examples": [
+                        {
+                            "value": 55,
+                            "userProfileIds": [
+                                "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
+                            ],
+                            "isDeepDive": true,
+                            "altProduct": null,
+                            "publisher": "Microsoft",
+                            "useCase": "Enterprise voice"
+                        }
+                    ]
+                },
+                "ProfileValue": {
+                    "title": "Profile Value",
+                    "description": "Profile-level numeric score/value on an assessment element.",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                        "name",
+                        "abbreviation",
+                        "value"
+                    ],
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "description": "Name of the user profile associated with the score.",
+                            "example": "Information Worker"
+                        },
+                        "abbreviation": {
+                            "type": "string",
+                            "description": "Short code used to represent the user profile.",
+                            "example": "IW"
+                        },
+                        "value": {
+                            "type": [
+                                "number",
+                                "null"
+                            ],
+                            "description": "Numeric score or value assigned to the user profile.",
+                            "examples": [
+                                90,
+                                null
+                            ]
+                        }
+                    },
+                    "example": {
+                        "name": "Information Worker",
+                        "abbreviation": "IW",
+                        "value": 90
+                    }
+                },
+                "FeatureEntry": {
+                    "title": "Feature Entry",
+                    "description": "Licensing bucket and mapped product entries for an assessment element.",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                        "licensing",
+                        "products"
+                    ],
+                    "properties": {
+                        "licensing": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "Licensing bundle associated with this feature entry.",
+                            "examples": [
+                                "M365 E5 + Teams Phone",
+                                null
+                            ]
+                        },
+                        "products": {
+                            "type": "array",
+                            "description": "Product mappings included in this licensing bucket.",
+                            "items": {
+                                "$ref": "#/components/schemas/CloudMatrix/ProductEntry"
+                            }
+                        }
+                    },
+                    "examples": [
+                        {
+                            "licensing": "M365 E5 + Teams Phone",
+                            "products": [
+                                {
+                                    "product": "Teams Phone Standard",
+                                    "value": "Included",
+                                    "comment": "Primary voice service"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "SubscriptionFeature": {
+                    "title": "Subscription Feature",
+                    "description": "Licensing group used inside breakout subscription mappings.",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                        "licensing",
+                        "products"
+                    ],
+                    "properties": {
+                        "licensing": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "Licensing label for the subscription feature grouping.",
+                            "examples": [
+                                "E5",
+                                null
+                            ]
+                        },
+                        "products": {
+                            "type": "array",
+                            "description": "Product mappings associated with the subscription license.",
+                            "items": {
+                                "$ref": "#/components/schemas/CloudMatrix/SubscriptionProductEntry"
+                            }
+                        }
+                    },
+                    "examples": [
+                        {
+                            "licensing": "E5",
+                            "products": [
+                                {
+                                    "product": "Teams Phone Standard",
+                                    "value": "Included",
+                                    "comment": "Base entitlement"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "ProductEntry": {
+                    "title": "Product Entry",
+                    "description": "Product mapping with value and optional comment.",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                        "product",
+                        "value",
+                        "comment"
+                    ],
+                    "properties": {
+                        "product": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "The product name for this licensing entry.",
+                            "examples": [
+                                "Teams Phone Standard",
+                                null
+                            ]
+                        },
+                        "value": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "The assigned licensing value for the product.",
+                            "examples": [
+                                "Included",
+                                null
+                            ]
+                        },
+                        "comment": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "Additional notes or clarification about the product value.",
+                            "examples": [
+                                "Primary voice service",
+                                null
+                            ]
+                        }
+                    },
+                    "examples": [
+                        {
+                            "product": "Teams Phone Standard",
+                            "value": "Included",
+                            "comment": "Primary voice service"
+                        }
+                    ]
+                },
+                "SubscriptionProductEntry": {
+                    "title": "Subscription Product Entry",
+                    "description": "Product entry used for breakout subscription features.",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                        "product",
+                        "value",
+                        "comment"
+                    ],
+                    "properties": {
+                        "product": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "The product name for this licensing entry.",
+                            "examples": [
+                                "Teams Phone Standard",
+                                null
+                            ]
+                        },
+                        "value": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "The assigned licensing value for the product.",
+                            "examples": [
+                                "Included",
+                                null
+                            ]
+                        },
+                        "comment": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "Additional notes or clarification about the product value.",
+                            "examples": [
+                                "Base entitlement",
+                                null
+                            ]
+                        }
+                    },
+                    "examples": [
+                        {
+                            "product": "Teams Phone Standard",
+                            "value": "Included",
+                            "comment": "Base entitlement"
+                        }
+                    ]
+                },
+                "DisplacementEntry": {
+                    "title": "Displacement Entry",
+                    "description": "Current provider and replacement proposal for a displacement opportunity.",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                        "name",
+                        "currentProvider",
+                        "displacement"
+                    ],
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "description": "The name of the displacement opportunity or current solution being evaluated.",
+                            "examples": [
+                                "Legacy PBX"
+                            ]
+                        },
+                        "currentProvider": {
+                            "$ref": "#/components/schemas/CloudMatrix/ProviderInfo"
+                        },
+                        "displacement": {
+                            "$ref": "#/components/schemas/CloudMatrix/DisplacementInfo"
+                        },
+                        "notes": {
+                            "type": "string",
+                            "description": "Additional context, assumptions, or business rationale for the displacement entry.",
+                            "examples": [
+                                "Expected 33% reduction in total voice platform cost."
+                            ]
+                        }
+                    },
+                    "examples": [
+                        {
+                            "name": "Legacy PBX",
+                            "currentProvider": {
+                                "name": "OldTelecom",
+                                "terms": "36 months",
+                                "contractNumber": "PBX-2023-991",
+                                "expiryDate": "2026-12-31T23:59:59.000Z",
+                                "costs": {
+                                    "monthlyCost": 18000,
+                                    "annualCost": 216000,
+                                    "contractValue": 648000
+                                }
+                            },
+                            "displacement": {
+                                "name": "Microsoft Teams Phone",
+                                "terms": "36 months",
+                                "contractNumber": "MS-VOICE-2026-01",
+                                "expiryDate": "2029-03-01T00:00:00.000Z",
+                                "replacementDate": "2026-06-01T00:00:00.000Z",
+                                "costs": [
+                                    {
+                                        "monthlyCost": 12000,
+                                        "annualCost": 144000,
+                                        "contractValue": 432000
+                                    }
+                                ]
+                            },
+                            "notes": "Expected 33% reduction in total voice platform cost."
+                        }
+                    ]
+                },
+                "ProviderInfo": {
+                    "title": "Provider Info",
+                    "description": "Current provider contract and cost details.",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                        "name",
+                        "terms",
+                        "contractNumber",
+                        "expiryDate",
+                        "costs"
+                    ],
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "description": "Name of the current provider or solution.",
+                            "examples": [
+                                "OldTelecom"
+                            ]
+                        },
+                        "terms": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "Contract terms for the provider agreement.",
+                            "examples": [
+                                "36 months",
+                                null
+                            ]
+                        },
+                        "contractNumber": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "Contract number associated with the provider agreement.",
+                            "examples": [
+                                "PBX-2023-991",
+                                null
+                            ]
+                        },
+                        "expiryDate": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "Contract expiration date for the current provider.",
+                            "format": "date-time",
+                            "examples": [
+                                "2026-12-31T23:59:59.000Z",
+                                null
+                            ]
+                        },
+                        "costs": {
+                            "$ref": "#/components/schemas/CloudMatrix/ProviderCosts"
+                        }
+                    },
+                    "examples": [
+                        {
+                            "name": "OldTelecom",
+                            "terms": "36 months",
+                            "contractNumber": "PBX-2023-991",
+                            "expiryDate": "2026-12-31T23:59:59.000Z",
+                            "costs": {
+                                "monthlyCost": 18000,
+                                "annualCost": 216000,
+                                "contractValue": 648000
+                            }
+                        }
+                    ]
+                },
+                "DisplacementInfo": {
+                    "title": "Displacement Info",
+                    "description": "Replacement solution details and projected cost scenarios.",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                        "name",
+                        "terms",
+                        "contractNumber",
+                        "expiryDate",
+                        "replacementDate",
+                        "costs"
+                    ],
+                    "properties": {
+                        "name": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "Name of the replacement solution.",
+                            "examples": [
+                                "Microsoft Teams Phone",
+                                null
+                            ]
+                        },
+                        "terms": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "Contract terms proposed for the replacement solution.",
+                            "examples": [
+                                "36 months",
+                                null
+                            ]
+                        },
+                        "contractNumber": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "Contract number for the replacement agreement.",
+                            "examples": [
+                                "MS-VOICE-2026-01",
+                                null
+                            ]
+                        },
+                        "expiryDate": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "Contract expiration date for the replacement solution.",
+                            "format": "date-time",
+                            "examples": [
+                                "2029-03-01T00:00:00.000Z",
+                                null
+                            ]
+                        },
+                        "replacementDate": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "Date when the replacement solution is expected to take effect.",
+                            "format": "date-time",
+                            "examples": [
+                                "2026-06-01T00:00:00.000Z",
+                                null
+                            ]
+                        },
+                        "costs": {
+                            "type": "array",
+                            "description": "Projected cost entries for the replacement solution.",
+                            "items": {
+                                "$ref": "#/components/schemas/CloudMatrix/MonetaryCostEntry"
+                            }
+                        }
+                    },
+                    "examples": [
+                        {
+                            "name": "Microsoft Teams Phone",
+                            "terms": "36 months",
+                            "contractNumber": "MS-VOICE-2026-01",
+                            "expiryDate": "2029-03-01T00:00:00.000Z",
+                            "replacementDate": "2026-06-01T00:00:00.000Z",
+                            "costs": [
+                                {
+                                    "monthlyCost": 12000,
+                                    "annualCost": 144000,
+                                    "contractValue": 432000
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "ProviderCosts": {
+                    "title": "Provider Costs",
+                    "description": "Aggregated cost fields for a provider contract.",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                        "monthlyCost",
+                        "annualCost",
+                        "contractValue"
+                    ],
+                    "properties": {
+                        "monthlyCost": {
+                            "type": "number",
+                            "description": "Monthly contract cost amount.",
+                            "examples": [
+                                18000
+                            ]
+                        },
+                        "annualCost": {
+                            "type": "number",
+                            "description": "Annualized contract cost amount.",
+                            "examples": [
+                                216000
+                            ]
+                        },
+                        "contractValue": {
+                            "type": "number",
+                            "description": "Total contract value over the full term.",
+                            "examples": [
+                                648000
+                            ]
+                        }
+                    },
+                    "examples": [
+                        {
+                            "monthlyCost": 18000,
+                            "annualCost": 216000,
+                            "contractValue": 648000
+                        }
+                    ]
+                },
+                "MonetaryCostEntry": {
+                    "title": "Monetary Cost Entry",
+                    "description": "One cost scenario containing monthly, annual, and total contract values.",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                        "monthlyCost",
+                        "annualCost",
+                        "contractValue"
+                    ],
+                    "properties": {
+                        "monthlyCost": {
+                            "type": "number",
+                            "description": "Monthly cost amount for this scenario.",
+                            "examples": [
+                                12000
+                            ]
+                        },
+                        "annualCost": {
+                            "type": "number",
+                            "description": "Annualized cost amount for this scenario.",
+                            "examples": [
+                                144000
+                            ]
+                        },
+                        "contractValue": {
+                            "type": "number",
+                            "description": "Total contract value for this scenario.",
+                            "examples": [
+                                432000
+                            ]
+                        }
+                    },
+                    "example": [
+                        {
+                            "monthlyCost": 12000,
+                            "annualCost": 144000,
+                            "contractValue": 432000
+                        }
+                    ]
+                },
+                "Breakout": {
+                    "title": "Breakout",
+                    "description": "A breakout section that groups related domain features.",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                        "title",
+                        "breakoutId",
+                        "breakoutName",
+                        "features"
+                    ],
+                    "properties": {
+                        "title": {
+                            "type": "string",
+                            "description": "The display title of the breakout section.",
+                            "examples": [
+                                "Collaboration & Communication"
+                            ]
+                        },
+                        "breakoutId": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "A unique identifier for the breakout section.",
+                            "examples": [
+                                "2b92f035-275c-4d9b-b662-e5323cb9c769",
+                                null
+                            ]
+                        },
+                        "breakoutName": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "The normalized name of the breakout domain.",
+                            "examples": [
+                                "Breakout -Portal Apps",
+                                null
+                            ]
+                        },
+                        "features": {
+                            "type": "array",
+                            "description": "Feature rows included in this breakout section.",
+                            "items": {
+                                "$ref": "#/components/schemas/CloudMatrix/BreakoutFeature"
+                            }
+                        }
+                    },
+                    "examples": [
+                        {
+                            "title": "Collaboration & Communication",
+                            "breakoutId": "2b92f035-275c-4d9b-b662-e5323cb9c769",
+                            "breakoutName": "Collaboration",
+                            "features": [
+                                {
+                                    "roadmapElementPath": "Collaboration/Voice/Teams Phone",
+                                    "elementSubdimension": "Adoption",
+                                    "roadmapProduct": "Microsoft Teams",
+                                    "feature": "Teams Phone",
+                                    "description": "Cloud PBX with ABC capabilities.",
+                                    "publisherLink": "https://www.abcd123.com/abcd",
+                                    "subscriptionFeatures": [
+                                        {
+                                            "licensing": "E5",
+                                            "products": [
+                                                {
+                                                    "product": "Teams Phone Standard",
+                                                    "value": "Included",
+                                                    "comment": "Base entitlement"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "BreakoutFeature": {
+                    "title": "Breakout Feature",
+                    "description": "Feature row inside a breakout section with subscription mappings.",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                        "roadmapElementPath",
+                        "elementSubdimension",
+                        "roadmapProduct",
+                        "feature",
+                        "description",
+                        "publisherLink",
+                        "subscriptionFeatures"
+                    ],
+                    "properties": {
+                        "roadmapElementPath": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "Hierarchical path of the roadmap element represented by this feature.",
+                            "examples": [
+                                "Collaboration/Voice/Teams Phone",
+                                null
+                            ]
+                        },
+                        "elementSubdimension": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "Subdimension used to classify the roadmap element.",
+                            "examples": [
+                                "Adoption",
+                                null
+                            ]
+                        },
+                        "roadmapProduct": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "Product family or platform associated with the roadmap element.",
+                            "examples": [
+                                "Microsoft Teams",
+                                null
+                            ]
+                        },
+                        "feature": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "Specific feature name within the roadmap product.",
+                            "examples": [
+                                "Teams Phone",
+                                null
+                            ]
+                        },
+                        "description": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "Functional summary of the feature and its primary capability.",
+                            "examples": [
+                                "Cloud PBX with ABC capabilities.",
+                                null
+                            ]
+                        },
+                        "publisherLink": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "URL to the publisher or official reference page for this feature.",
+                            "examples": [
+                                "https://www.abcd123.com/abcd",
+                                null
+                            ]
+                        },
+                        "subscriptionFeatures": {
+                            "type": "array",
+                            "description": "Subscription-based licensing mappings for this feature.",
+                            "items": {
+                                "$ref": "#/components/schemas/CloudMatrix/SubscriptionFeature"
+                            }
+                        }
+                    },
+                    "examples": [
+                        {
+                            "roadmapElementPath": "Collaboration/Voice/Teams Phone",
+                            "elementSubdimension": "Adoption",
+                            "roadmapProduct": "Microsoft Teams",
+                            "feature": "Teams Phone",
+                            "description": "Cloud PBX with ABC capabilities.",
+                            "publisherLink": "https://www.abcd123.com/abcd",
+                            "subscriptionFeatures": [
+                                {
+                                    "licensing": "E5",
+                                    "products": [
+                                        {
+                                            "product": "Teams Phone Standard",
+                                            "value": "Included",
+                                            "comment": "Base entitlement"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
             }
         },
         "securitySchemes": {
@@ -7498,6 +9116,527 @@
                     "Cloud Matrix"
                 ],
                 "summary": "Get a default assessment schema object"
+            }
+        },
+        "/Api/CloudMatrix/Correlation": {
+            "post": {
+                "description": "Stores the Cloud Matrix Assessment data.\n\nThis endpoint requires the `CloudMatrix.ReadWrite`, `CloudMatrix.ReadWrite.All` scope (permission).",
+                "operationId": "Api/CloudMatrix/Correlation/Post",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "examples": {
+                                "Cloud Matrix Assessment": {
+                                    "description": "Sample, truncated Cloud Matrix assessment payload from a representative customer environment. The response echoes the same assessment data provided in the request.",
+                                    "summary": "Example of Cloud Matrix Assessment.",
+                                    "value": {
+                                        "correlation": {
+                                            "accountName": "Test Account Name",
+                                            "crmId": "9cbafdc4-1207-4f11-bf6a-f5c7fc6fb4a3",
+                                            "discoverDate": "2026-02-28T14:30:00.000Z",
+                                            "isComplete": false,
+                                            "template": "CloudMatrix-V-5.0.13",
+                                            "schemaVersion": 5
+                                        },
+                                        "title": "CloudMatrix",
+                                        "description": "MICROSOFT CLOUD ADOPTION MATRIX v5.0",
+                                        "version": "5.0.13",
+                                        "valueAssessment": {
+                                            "actionPlan": {
+                                                "accountName": "Test Account Name",
+                                                "discoveryDate": "2026-02-28T14:30:00.000Z",
+                                                "accountManager": "Alex Morgan",
+                                                "consultant": "Jordan Lee",
+                                                "licensingExecutive": "Taylor Kim",
+                                                "customerSuccessManager": "Sam Patel",
+                                                "notesAndObjectives": "Consolidate collaboration tools and reduce third-party overlap.",
+                                                "crmId": "9cbafdc4-1207-4f11-bf6a-f5c7fc6fb4a3",
+                                                "createdDate": "2026-02-28T14:30:00.000Z",
+                                                "modifiedDate": "2026-03-06T10:20:00.000Z",
+                                                "primaryPublisher": "Microsoft"
+                                            },
+                                            "userProfiles": [
+                                                {
+                                                    "id": "0d8e0c84-c0b4-4459-8b23-11ccff5ae319",
+                                                    "name": "Information Worker",
+                                                    "details": [
+                                                        {
+                                                            "name": "Profile Details",
+                                                            "values": [
+                                                                {
+                                                                    "name": "Profile Name",
+                                                                    "value": "Information Worker"
+                                                                },
+                                                                {
+                                                                    "name": "License Type",
+                                                                    "value": "E3"
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "name": "User Count",
+                                                            "values": [
+                                                                {
+                                                                    "name": "Current",
+                                                                    "value": "10"
+                                                                },
+                                                                {
+                                                                    "name": "Future",
+                                                                    "value": "100"
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "name": "Physical Devices",
+                                                            "values": [
+                                                                {
+                                                                    "name": "Dedicated",
+                                                                    "value": "10"
+                                                                },
+                                                                {
+                                                                    "name": "Secondary",
+                                                                    "value": "100"
+                                                                },
+                                                                {
+                                                                    "name": "Shared",
+                                                                    "value": "100"
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "name": "Virtual Devices",
+                                                            "values": [
+                                                                {
+                                                                    "name": "Apps",
+                                                                    "value": "10"
+                                                                },
+                                                                {
+                                                                    "name": "Desktop",
+                                                                    "value": "100"
+                                                                },
+                                                                {
+                                                                    "name": "Cloud PC",
+                                                                    "value": "100"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "assessment": [
+                                                {
+                                                    "metadata": {
+                                                        "name": "Teams Phone Enablement",
+                                                        "breakoutId": "2b92f035-275c-4d9b-b662-e5323cb9c769",
+                                                        "category": "Collaboration",
+                                                        "subCategory": "Voice",
+                                                        "help": "Assess Teams Phone rollout readiness.",
+                                                        "licensingProduct": "Microsoft Teams Phone",
+                                                        "licensingProductHelp": "Requires Teams Phone compatible license.",
+                                                        "isAddon": true,
+                                                        "isStrategicAddon": true,
+                                                        "isTenantBased": false,
+                                                        "availability": "GA",
+                                                        "notes": "Pilot with 100 users before phase 2.",
+                                                        "startYearConfig": {
+                                                            "value": 20,
+                                                            "userProfileIds": [
+                                                                "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
+                                                            ],
+                                                            "isDeepDive": true,
+                                                            "altProduct": null,
+                                                            "publisher": "Microsoft",
+                                                            "useCase": "PBX replacement"
+                                                        },
+                                                        "yearPlusOneConfig": {
+                                                            "value": 55,
+                                                            "userProfileIds": [
+                                                                "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
+                                                            ],
+                                                            "isDeepDive": true,
+                                                            "altProduct": null,
+                                                            "publisher": "Microsoft",
+                                                            "useCase": "Enterprise voice"
+                                                        },
+                                                        "yearPlusTwoConfig": {
+                                                            "value": 80,
+                                                            "userProfileIds": [
+                                                                "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
+                                                            ],
+                                                            "isDeepDive": false,
+                                                            "altProduct": null,
+                                                            "publisher": "Microsoft",
+                                                            "useCase": "Global rollout"
+                                                        },
+                                                        "yearPlusThreeConfig": {
+                                                            "value": 95,
+                                                            "userProfileIds": [
+                                                                "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
+                                                            ],
+                                                            "isDeepDive": false,
+                                                            "altProduct": null,
+                                                            "publisher": "Microsoft",
+                                                            "useCase": "Optimization"
+                                                        },
+                                                        "sourceValue": 10
+                                                    },
+                                                    "userProfiles": [
+                                                        {
+                                                            "name": "Information Worker",
+                                                            "abbreviation": "IW",
+                                                            "value": 90
+                                                        }
+                                                    ],
+                                                    "features": [
+                                                        {
+                                                            "licensing": "M365 E5 + Teams Phone",
+                                                            "products": [
+                                                                {
+                                                                    "product": "Teams Phone Standard",
+                                                                    "value": "Included",
+                                                                    "comment": "Primary voice service"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "displacements": [
+                                                {
+                                                    "name": "Legacy PBX",
+                                                    "currentProvider": {
+                                                        "name": "OldTelecom",
+                                                        "terms": "36 months",
+                                                        "contractNumber": "PBX-2023-991",
+                                                        "expiryDate": "2026-12-31T23:59:59.000Z",
+                                                        "costs": {
+                                                            "monthlyCost": 18000,
+                                                            "annualCost": 216000,
+                                                            "contractValue": 648000
+                                                        }
+                                                    },
+                                                    "displacement": {
+                                                        "name": "Microsoft Teams Phone",
+                                                        "terms": "36 months",
+                                                        "contractNumber": "MS-VOICE-2026-01",
+                                                        "expiryDate": "2029-03-01T00:00:00.000Z",
+                                                        "replacementDate": "2026-06-01T00:00:00.000Z",
+                                                        "costs": [
+                                                            {
+                                                                "monthlyCost": 12000,
+                                                                "annualCost": 144000,
+                                                                "contractValue": 432000
+                                                            }
+                                                        ]
+                                                    },
+                                                    "notes": "Expected 33% reduction in total voice platform cost."
+                                                }
+                                            ]
+                                        },
+                                        "breakouts": [
+                                            {
+                                                "title": "Collaboration & Communication",
+                                                "breakoutId": "2b92f035-275c-4d9b-b662-e5323cb9c769",
+                                                "breakoutName": "Collaboration",
+                                                "features": [
+                                                    {
+                                                        "roadmapElementPath": "Collaboration/Voice/Teams Phone",
+                                                        "elementSubdimension": "Adoption",
+                                                        "roadmapProduct": "Microsoft Teams",
+                                                        "feature": "Teams Phone",
+                                                        "description": "Cloud PBX with ABC capabilities.",
+                                                        "publisherLink": "https://www.abcd123.com/abcd",
+                                                        "subscriptionFeatures": [
+                                                            {
+                                                                "licensing": "E5",
+                                                                "products": [
+                                                                    {
+                                                                        "product": "Teams Phone Standard",
+                                                                        "value": "Included",
+                                                                        "comment": "Base entitlement"
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "schema": {
+                                "$ref": "#/components/schemas/CloudMatrix"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cloud Matrix Asessment data submitted successfully.",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Cloud Matrix Assessment": {
+                                        "description": "Sample, truncated Cloud Matrix assessment payload from a representative customer environment. The response echoes the same assessment data provided in the request.",
+                                        "summary": "Example of Cloud Matrix Assessment.",
+                                        "value": {
+                                            "correlation": {
+                                                "accountName": "Test Account Name",
+                                                "correlationId": "3f6e9be8-3f99-4d2c-b98c-bf559f42970f",
+                                                "createdAt": "2026-03-06T10:15:30.000Z",
+                                                "crmId": "9cbafdc4-1207-4f11-bf6a-f5c7fc6fb4a3",
+                                                "discoverDate": "2026-02-28T14:30:00.000Z",
+                                                "isComplete": true,
+                                                "template": "CloudMatrix-v5",
+                                                "updatedAt": "2026-03-06T10:20:00.000Z",
+                                                "schemaVersion": 5
+                                            },
+                                            "title": "CloudMatrix",
+                                            "description": "MICROSOFT CLOUD ADOPTION MATRIX v5.0",
+                                            "version": "5.0.13",
+                                            "valueAssessment": {
+                                                "actionPlan": {
+                                                    "accountName": "Test Account Name",
+                                                    "discoveryDate": "2026-02-28T14:30:00.000Z",
+                                                    "accountManager": "Alex Morgan",
+                                                    "consultant": "Jordan Lee",
+                                                    "licensingExecutive": "Taylor Kim",
+                                                    "customerSuccessManager": "Sam Patel",
+                                                    "notesAndObjectives": "Consolidate collaboration tools and reduce third-party overlap.",
+                                                    "crmId": "9cbafdc4-1207-4f11-bf6a-f5c7fc6fb4a3",
+                                                    "createdDate": "2026-02-28T14:30:00.000Z",
+                                                    "modifiedDate": "2026-03-06T10:20:00.000Z",
+                                                    "primaryPublisher": "Microsoft"
+                                                },
+                                                "userProfiles": [
+                                                    {
+                                                        "id": "0d8e0c84-c0b4-4459-8b23-11ccff5ae319",
+                                                        "name": "Information Worker",
+                                                        "details": [
+                                                            {
+                                                                "name": "Profile Details",
+                                                                "values": [
+                                                                    {
+                                                                        "name": "Profile Name",
+                                                                        "value": "Information Worker"
+                                                                    },
+                                                                    {
+                                                                        "name": "License Type",
+                                                                        "value": "E3"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "name": "User Count",
+                                                                "values": [
+                                                                    {
+                                                                        "name": "Current",
+                                                                        "value": "10"
+                                                                    },
+                                                                    {
+                                                                        "name": "Future",
+                                                                        "value": "100"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "name": "Physical Devices",
+                                                                "values": [
+                                                                    {
+                                                                        "name": "Dedicated",
+                                                                        "value": "10"
+                                                                    },
+                                                                    {
+                                                                        "name": "Secondary",
+                                                                        "value": "100"
+                                                                    },
+                                                                    {
+                                                                        "name": "Shared",
+                                                                        "value": "100"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "name": "Virtual Devices",
+                                                                "values": [
+                                                                    {
+                                                                        "name": "Apps",
+                                                                        "value": "10"
+                                                                    },
+                                                                    {
+                                                                        "name": "Desktop",
+                                                                        "value": "100"
+                                                                    },
+                                                                    {
+                                                                        "name": "Cloud PC",
+                                                                        "value": "100"
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ],
+                                                "assessment": [
+                                                    {
+                                                        "metadata": {
+                                                            "name": "Teams Phone Enablement",
+                                                            "breakoutId": "2b92f035-275c-4d9b-b662-e5323cb9c769",
+                                                            "category": "Collaboration",
+                                                            "subCategory": "Voice",
+                                                            "help": "Assess Teams Phone rollout readiness.",
+                                                            "licensingProduct": "Microsoft Teams Phone",
+                                                            "licensingProductHelp": "Requires Teams Phone compatible license.",
+                                                            "isAddon": true,
+                                                            "isStrategicAddon": true,
+                                                            "isTenantBased": false,
+                                                            "availability": "GA",
+                                                            "notes": "Pilot with 100 users before phase 2.",
+                                                            "startYearConfig": {
+                                                                "value": 20,
+                                                                "userProfileIds": [
+                                                                    "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
+                                                                ],
+                                                                "isDeepDive": true,
+                                                                "altProduct": null,
+                                                                "publisher": "Microsoft",
+                                                                "useCase": "PBX replacement"
+                                                            },
+                                                            "yearPlusOneConfig": {
+                                                                "value": 55,
+                                                                "userProfileIds": [
+                                                                    "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
+                                                                ],
+                                                                "isDeepDive": true,
+                                                                "altProduct": null,
+                                                                "publisher": "Microsoft",
+                                                                "useCase": "Enterprise voice"
+                                                            },
+                                                            "yearPlusTwoConfig": {
+                                                                "value": 80,
+                                                                "userProfileIds": [
+                                                                    "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
+                                                                ],
+                                                                "isDeepDive": false,
+                                                                "altProduct": null,
+                                                                "publisher": "Microsoft",
+                                                                "useCase": "Global rollout"
+                                                            },
+                                                            "yearPlusThreeConfig": {
+                                                                "value": 95,
+                                                                "userProfileIds": [
+                                                                    "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
+                                                                ],
+                                                                "isDeepDive": false,
+                                                                "altProduct": null,
+                                                                "publisher": "Microsoft",
+                                                                "useCase": "Optimization"
+                                                            },
+                                                            "sourceValue": 10
+                                                        },
+                                                        "userProfiles": [
+                                                            {
+                                                                "name": "Information Worker",
+                                                                "abbreviation": "IW",
+                                                                "value": 90
+                                                            }
+                                                        ],
+                                                        "features": [
+                                                            {
+                                                                "licensing": "M365 E5 + Teams Phone",
+                                                                "products": [
+                                                                    {
+                                                                        "product": "Teams Phone Standard",
+                                                                        "value": "Included",
+                                                                        "comment": "Primary voice service"
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ],
+                                                "displacements": [
+                                                    {
+                                                        "name": "Legacy PBX",
+                                                        "currentProvider": {
+                                                            "name": "OldTelecom",
+                                                            "terms": "36 months",
+                                                            "contractNumber": "PBX-2023-991",
+                                                            "expiryDate": "2026-12-31T23:59:59.000Z",
+                                                            "costs": {
+                                                                "monthlyCost": 18000,
+                                                                "annualCost": 216000,
+                                                                "contractValue": 648000
+                                                            }
+                                                        },
+                                                        "displacement": {
+                                                            "name": "Microsoft Teams Phone",
+                                                            "terms": "36 months",
+                                                            "contractNumber": "MS-VOICE-2026-01",
+                                                            "expiryDate": "2029-03-01T00:00:00.000Z",
+                                                            "replacementDate": "2026-06-01T00:00:00.000Z",
+                                                            "costs": [
+                                                                {
+                                                                    "monthlyCost": 12000,
+                                                                    "annualCost": 144000,
+                                                                    "contractValue": 432000
+                                                                }
+                                                            ]
+                                                        },
+                                                        "notes": "Expected 33% reduction in total voice platform cost."
+                                                    }
+                                                ]
+                                            },
+                                            "breakouts": [
+                                                {
+                                                    "title": "Collaboration & Communication",
+                                                    "breakoutId": "2b92f035-275c-4d9b-b662-e5323cb9c769",
+                                                    "breakoutName": "Collaboration",
+                                                    "features": [
+                                                        {
+                                                            "roadmapElementPath": "Collaboration/Voice/Teams Phone",
+                                                            "elementSubdimension": "Adoption",
+                                                            "roadmapProduct": "Microsoft Teams",
+                                                            "feature": "Teams Phone",
+                                                            "description": "Cloud PBX with ABC capabilities.",
+                                                            "publisherLink": "https://www.abcd123.com/abcd",
+                                                            "subscriptionFeatures": [
+                                                                {
+                                                                    "licensing": "E5",
+                                                                    "products": [
+                                                                        {
+                                                                            "product": "Teams Phone Standard",
+                                                                            "value": "Included",
+                                                                            "comment": "Base entitlement"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/CloudMatrix"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "tags": [
+                    "Cloud Matrix"
+                ],
+                "summary": "Submit Cloud Matrix Assessment"
             }
         }
     },
