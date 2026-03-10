@@ -7486,27 +7486,137 @@
                                             },
                                             "breakouts": [
                                                 {
-                                                    "title": "",
-                                                    "breakoutId": "",
-                                                    "breakoutName": "",
+                                                    "title": "PORTAL APPS",
+                                                    "breakoutId": "f1ebe6ab-1164-4ab8-8970-2d561ee7634f",
+                                                    "breakoutName": "BREAKOUT -Portal Apps",
                                                     "features": [
                                                         {
-                                                            "roadmapElementPath": "",
-                                                            "elementSubdimension": "",
-                                                            "roadmapProduct": "",
-                                                            "feature": "",
-                                                            "description": "",
+                                                            "roadmapElementPath": "User Experience /Productivity Apps/Extended Productivity App Ecosystem",
+                                                            "elementSubdimension": "Productivity Apps",
+                                                            "roadmapProduct": "Platform Only",
+                                                            "feature": "Viva Insights - Personal",
+                                                            "description": "Microsoft Lists is a Microsoft 365 app that helps you track information and organize work with customizable lists for tasks, projects, and more.",
                                                             "publisherLink": "",
                                                             "subscriptionFeatures": [
                                                                 {
-                                                                    "licensing": "",
+                                                                    "licensing": "M365",
                                                                     "products": [
                                                                         {
-                                                                            "product": "",
-                                                                            "value": "",
+                                                                            "product": "E5",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        },
+                                                                        {
+                                                                            "product": "E3",
+                                                                            "value": "available",
                                                                             "comment": ""
                                                                         }
                                                                     ]
+                                                                },
+                                                                {
+                                                                    "licensing": "M365 FLW",
+                                                                    "products": [
+                                                                        {
+                                                                            "product": "F1",
+                                                                            "value": "na",
+                                                                            "comment": ""
+                                                                        },
+                                                                        {
+                                                                            "product": "F3",
+                                                                            "value": "na",
+                                                                            "comment": ""
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "licensing": "O365",
+                                                                    "products": [
+                                                                        {
+                                                                            "product": "F3",
+                                                                            "value": "na",
+                                                                            "comment": ""
+                                                                        },
+                                                                        {
+                                                                            "product": "E5",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        },
+                                                                        {
+                                                                            "product": "E1",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        },
+                                                                        {
+                                                                            "product": "E3",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "roadmapElementPath": "User Experience /Productivity Apps/Extended Productivity App Ecosystem",
+                                                    "elementSubdimension": "Productivity Apps",
+                                                    "roadmapProduct": "Platform Only",
+                                                    "feature": "Lists",
+                                                    "description": "Microsoft Lists is a Microsoft 365 app that helps you track information and organize work with customizable lists for tasks, projects, and more.",
+                                                    "publisherLink": "",
+                                                    "subscriptionFeatures": [
+                                                        {
+                                                            "licensing": "M365",
+                                                            "products": [
+                                                                {
+                                                                    "product": "E5",
+                                                                    "value": "available",
+                                                                    "comment": ""
+                                                                },
+                                                                {
+                                                                    "product": "E3",
+                                                                    "value": "available",
+                                                                    "comment": ""
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "licensing": "M365 FLW",
+                                                            "products": [
+                                                                {
+                                                                    "product": "F1",
+                                                                    "value": "available",
+                                                                    "comment": ""
+                                                                },
+                                                                {
+                                                                    "product": "F3",
+                                                                    "value": "available",
+                                                                    "comment": ""
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "licensing": "O365",
+                                                            "products": [
+                                                                {
+                                                                    "product": "F3",
+                                                                    "value": "available",
+                                                                    "comment": ""
+                                                                },
+                                                                {
+                                                                    "product": "E5",
+                                                                    "value": "available",
+                                                                    "comment": ""
+                                                                },
+                                                                {
+                                                                    "product": "E1",
+                                                                    "value": "available",
+                                                                    "comment": ""
+                                                                },
+                                                                {
+                                                                    "product": "E3",
+                                                                    "value": "available",
+                                                                    "comment": ""
                                                                 }
                                                             ]
                                                         }
@@ -7766,27 +7876,137 @@
                                             },
                                             "breakouts": [
                                                 {
-                                                    "title": "",
-                                                    "breakoutId": "",
-                                                    "breakoutName": "",
+                                                    "title": "PORTAL APPS",
+                                                    "breakoutId": "f1ebe6ab-1164-4ab8-8970-2d561ee7634f",
+                                                    "breakoutName": "BREAKOUT -Portal Apps",
                                                     "features": [
                                                         {
-                                                            "roadmapElementPath": "",
-                                                            "elementSubdimension": "",
-                                                            "roadmapProduct": "",
-                                                            "feature": "",
-                                                            "description": "",
+                                                            "roadmapElementPath": "User Experience /Productivity Apps/Extended Productivity App Ecosystem",
+                                                            "elementSubdimension": "Productivity Apps",
+                                                            "roadmapProduct": "Platform Only",
+                                                            "feature": "Viva Insights - Personal",
+                                                            "description": "Microsoft Lists is a Microsoft 365 app that helps you track information and organize work with customizable lists for tasks, projects, and more.",
                                                             "publisherLink": "",
                                                             "subscriptionFeatures": [
                                                                 {
-                                                                    "licensing": "",
+                                                                    "licensing": "M365",
                                                                     "products": [
                                                                         {
-                                                                            "product": "",
-                                                                            "value": "",
+                                                                            "product": "E5",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        },
+                                                                        {
+                                                                            "product": "E3",
+                                                                            "value": "available",
                                                                             "comment": ""
                                                                         }
                                                                     ]
+                                                                },
+                                                                {
+                                                                    "licensing": "M365 FLW",
+                                                                    "products": [
+                                                                        {
+                                                                            "product": "F1",
+                                                                            "value": "na",
+                                                                            "comment": ""
+                                                                        },
+                                                                        {
+                                                                            "product": "F3",
+                                                                            "value": "na",
+                                                                            "comment": ""
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "licensing": "O365",
+                                                                    "products": [
+                                                                        {
+                                                                            "product": "F3",
+                                                                            "value": "na",
+                                                                            "comment": ""
+                                                                        },
+                                                                        {
+                                                                            "product": "E5",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        },
+                                                                        {
+                                                                            "product": "E1",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        },
+                                                                        {
+                                                                            "product": "E3",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "roadmapElementPath": "User Experience /Productivity Apps/Extended Productivity App Ecosystem",
+                                                    "elementSubdimension": "Productivity Apps",
+                                                    "roadmapProduct": "Platform Only",
+                                                    "feature": "Lists",
+                                                    "description": "Microsoft Lists is a Microsoft 365 app that helps you track information and organize work with customizable lists for tasks, projects, and more.",
+                                                    "publisherLink": "",
+                                                    "subscriptionFeatures": [
+                                                        {
+                                                            "licensing": "M365",
+                                                            "products": [
+                                                                {
+                                                                    "product": "E5",
+                                                                    "value": "available",
+                                                                    "comment": ""
+                                                                },
+                                                                {
+                                                                    "product": "E3",
+                                                                    "value": "available",
+                                                                    "comment": ""
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "licensing": "M365 FLW",
+                                                            "products": [
+                                                                {
+                                                                    "product": "F1",
+                                                                    "value": "available",
+                                                                    "comment": ""
+                                                                },
+                                                                {
+                                                                    "product": "F3",
+                                                                    "value": "available",
+                                                                    "comment": ""
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "licensing": "O365",
+                                                            "products": [
+                                                                {
+                                                                    "product": "F3",
+                                                                    "value": "available",
+                                                                    "comment": ""
+                                                                },
+                                                                {
+                                                                    "product": "E5",
+                                                                    "value": "available",
+                                                                    "comment": ""
+                                                                },
+                                                                {
+                                                                    "product": "E1",
+                                                                    "value": "available",
+                                                                    "comment": ""
+                                                                },
+                                                                {
+                                                                    "product": "E3",
+                                                                    "value": "available",
+                                                                    "comment": ""
                                                                 }
                                                             ]
                                                         }
