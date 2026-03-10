@@ -7217,10 +7217,10 @@
                 "summary": "Get a default assessment schema object"
             }
         },
-        "/Api/CloudMatrix/Customer/:crmId/Correlation/:correlationId": {
+        "/Api/CloudMatrix/Customer/{crmId}/Correlation/{correlationId}/Data": {
             "get": {
                 "description": "Retrieves Cloud Matrix Assessment data for a specific correlation. Cloud matrix records store the metadata for a specific cloud matrix assessment.\n\nThis endpoint requires the `CloudMatrix.Read`,  `CloudMatrix.Read.All`, `CloudMatrix.ReadWrite`, or `CloudMatrix.ReadWrite.All` scope (permission).",
-                "operationId": "/Api/CloudMatrix/Customer/:crmId/Correlation/:correlationId/Get",
+                "operationId": "/Api/CloudMatrix/Customer/{crmId}/Correlation/{correlationId}/Data/Get",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/crmId"
@@ -7495,7 +7495,7 @@
                                                             "elementSubdimension": "Productivity Apps",
                                                             "roadmapProduct": "Platform Only",
                                                             "feature": "Viva Insights - Personal",
-                                                            "description": "Microsoft Lists is a Microsoft 365 app that helps you track information and organize work with customizable lists for tasks, projects, and more.",
+                                                            "description": "Microsoft Viva Insights - Personal provides privacy-protected insights and data-driven recommendations to help individuals improve productivity and wellbeing in Microsoft 365.",
                                                             "publisherLink": "",
                                                             "subscriptionFeatures": [
                                                                 {
@@ -7885,7 +7885,7 @@
                                                             "elementSubdimension": "Productivity Apps",
                                                             "roadmapProduct": "Platform Only",
                                                             "feature": "Viva Insights - Personal",
-                                                            "description": "Microsoft Lists is a Microsoft 365 app that helps you track information and organize work with customizable lists for tasks, projects, and more.",
+                                                            "description": "Viva Insights - Personal is a Microsoft 365 experience that helps individuals improve productivity and wellbeing with data-driven, privacy-protected insights and recommendations based on their work patterns.",
                                                             "publisherLink": "",
                                                             "subscriptionFeatures": [
                                                                 {
@@ -8015,11 +8015,7 @@
                                             ]
                                         }
                                     ],
-                                    "items": {
-                                        "$ref": "#/components/schemas/CloudMatrixCorrelationRecord"
-                                    },
-                                    "minItems": 0,
-                                    "type": "array"
+                                    "$ref": "#/components/schemas/CloudMatrixCorrelationRecord"
                                 }
                             }
                         }
