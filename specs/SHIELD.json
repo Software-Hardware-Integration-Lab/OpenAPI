@@ -3960,14 +3960,18 @@
                                 "examples": [
                                     1200
                                 ],
-                                "type": "number"
+                                "type": "integer",
+                                "format": "int32",
+                                "minimum": 0
                             },
                             "singleFactor": {
                                 "description": "Count of records for privileged accounts that do not include use of MFA.",
                                 "examples": [
                                     250
                                 ],
-                                "type": "number"
+                                "type": "integer",
+                                "format": "int32",
+                                "minimum": 0
                             },
                             "nonPhishResistant": {
                                 "description": "Details of records for privileged accounts that utilize MFA that is not phish-resistant.",
@@ -3978,42 +3982,54 @@
                                         "examples": [
                                             600
                                         ],
-                                        "type": "number"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
                                     },
                                     "phone": {
                                         "description": "Count of records where phone authentication option was used.",
                                         "examples": [
                                             120
                                         ],
-                                        "type": "number"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
                                     },
                                     "authenticator": {
                                         "description": "Count of records where authenticator was involved during authentication.",
                                         "examples": [
                                             220
                                         ],
-                                        "type": "number"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
                                     },
                                     "sms": {
                                         "description": "Count of records where SMS confirmation was used during authentication.",
                                         "examples": [
                                             140
                                         ],
-                                        "type": "number"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
                                     },
                                     "otp": {
                                         "description": "Count of records where OTP was used during authentication.",
                                         "examples": [
                                             80
                                         ],
-                                        "type": "number"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
                                     },
                                     "deviceCode": {
                                         "description": "Count of records where device code was used for authentication.",
                                         "examples": [
                                             40
                                         ],
-                                        "type": "number"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
                                     }
                                 },
                                 "required": [
@@ -4044,35 +4060,45 @@
                                         "examples": [
                                             350
                                         ],
-                                        "type": "number"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
                                     },
                                     "passkey": {
                                         "description": "Count of records where passkey was used for authentication.",
                                         "examples": [
                                             90
                                         ],
-                                        "type": "number"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
                                     },
                                     "whfb": {
                                         "description": "Count of records where Windows Hello for Business was used for authentication.",
                                         "examples": [
                                             110
                                         ],
-                                        "type": "number"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
                                     },
                                     "certificate": {
                                         "description": "Count of records where certificate was used for authentication.",
                                         "examples": [
                                             60
                                         ],
-                                        "type": "number"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
                                     },
                                     "fido2": {
                                         "description": "Count of records where FIDO2-based authentication was utilized.",
                                         "examples": [
                                             90
                                         ],
-                                        "type": "number"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
                                     }
                                 },
                                 "required": [
@@ -4130,14 +4156,18 @@
                                 "examples": [
                                     1200
                                 ],
-                                "type": "number"
+                                "type": "integer",
+                                "format": "int32",
+                                "minimum": 0
                             },
                             "singleFactor": {
                                 "description": "Count of records that did not include any MFA methods.",
                                 "examples": [
                                     250
                                 ],
-                                "type": "number"
+                                "type": "integer",
+                                "format": "int32",
+                                "minimum": 0
                             },
                             "nonPhishResistant": {
                                 "description": "Details of records that utilized MFA methods that are not phish-resistant.",
@@ -4148,42 +4178,54 @@
                                         "examples": [
                                             600
                                         ],
-                                        "type": "number"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
                                     },
                                     "phone": {
-                                        "description": "Count of records where phone option was used during authentication..",
+                                        "description": "Count of records where phone option was used during authentication.",
                                         "examples": [
                                             120
                                         ],
-                                        "type": "number"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
                                     },
                                     "authenticator": {
                                         "description": "Count of records where authenticator was involved during authentication.",
                                         "examples": [
                                             220
                                         ],
-                                        "type": "number"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
                                     },
                                     "sms": {
-                                        "description": "Count of records where SMS confirmation was used during authentication..",
+                                        "description": "Count of records where SMS confirmation was used during authentication.",
                                         "examples": [
                                             140
                                         ],
-                                        "type": "number"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
                                     },
                                     "otp": {
-                                        "description": "Count of records where OTP was used during authentication..",
+                                        "description": "Count of records where OTP was used during authentication.",
                                         "examples": [
                                             80
                                         ],
-                                        "type": "number"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
                                     },
                                     "deviceCode": {
-                                        "description": "Count of records where device code was used during authentication..",
+                                        "description": "Count of records where device code was used during authentication.",
                                         "examples": [
                                             40
                                         ],
-                                        "type": "number"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
                                     }
                                 },
                                 "required": [
@@ -4214,35 +4256,45 @@
                                         "examples": [
                                             350
                                         ],
-                                        "type": "number"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
                                     },
                                     "passkey": {
                                         "description": "Count of records where passkey was used for authentication.",
                                         "examples": [
                                             90
                                         ],
-                                        "type": "number"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
                                     },
                                     "whfb": {
                                         "description": "Count of records where Windows Hello for Business was used for authentication.",
                                         "examples": [
                                             110
                                         ],
-                                        "type": "number"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
                                     },
                                     "certificate": {
                                         "description": "Count of records where certificate was used for authentication.",
                                         "examples": [
                                             60
                                         ],
-                                        "type": "number"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
                                     },
                                     "fido2": {
                                         "description": "Count of records where FIDO2-based authentication was utilized.",
                                         "examples": [
                                             90
                                         ],
-                                        "type": "number"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
                                     }
                                 },
                                 "required": [
@@ -4300,14 +4352,18 @@
                                 "examples": [
                                     1200
                                 ],
-                                "type": "number"
+                                "type": "integer",
+                                "format": "int32",
+                                "minimum": 0
                             },
                             "noConditionalAccess": {
                                 "description": "Count of records that did not have conditional access applied.",
                                 "examples": [
                                     300
                                 ],
-                                "type": "number"
+                                "type": "integer",
+                                "format": "int32",
+                                "minimum": 0
                             },
                             "withConditionalAccess": {
                                 "description": "Details of records that had conditional access applied.",
@@ -4318,21 +4374,27 @@
                                         "examples": [
                                             900
                                         ],
-                                        "type": "number"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
                                     },
                                     "withMfa": {
                                         "description": "Count of records that used MFA method during authentication.",
                                         "examples": [
                                             700
                                         ],
-                                        "type": "number"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
                                     },
                                     "withoutMfa": {
                                         "description": "Count of records that did not use any MFA method during authentication.",
                                         "examples": [
                                             200
                                         ],
-                                        "type": "number"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
                                     }
                                 },
                                 "required": [
@@ -4375,14 +4437,18 @@
                                 "examples": [
                                     1200
                                 ],
-                                "type": "number"
+                                "type": "integer",
+                                "format": "int32",
+                                "minimum": 0
                             },
                             "unmanaged": {
                                 "description": "Count of records where device is not managed or pre-enrolled with Intune.",
                                 "examples": [
                                     450
                                 ],
-                                "type": "number"
+                                "type": "integer",
+                                "format": "int32",
+                                "minimum": 0
                             },
                             "managed": {
                                 "description": "Details of records where device is managed or pre-enrolled with Intune.",
@@ -4393,21 +4459,27 @@
                                         "examples": [
                                             750
                                         ],
-                                        "type": "number"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
                                     },
                                     "compliant": {
                                         "description": "Count of records indicating compliant devices.",
                                         "examples": [
                                             600
                                         ],
-                                        "type": "number"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
                                     },
                                     "nonCompliant": {
                                         "description": "Count of records indicating non-compliant devices.",
                                         "examples": [
                                             150
                                         ],
-                                        "type": "number"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
                                     }
                                 },
                                 "required": [
@@ -4450,7 +4522,9 @@
                                 "examples": [
                                     800
                                 ],
-                                "type": "number"
+                                "type": "integer",
+                                "format": "int32",
+                                "minimum": 0
                             },
                             "windows": {
                                 "description": "Details of records for Windows-based devices.",
@@ -4461,18 +4535,22 @@
                                         "examples": [
                                             600
                                         ],
-                                        "type": "number"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
                                     },
                                     "entraJoined": {
                                         "description": "Details of records indicating devices joined Entra.",
                                         "type": "object",
                                         "properties": {
                                             "total": {
-                                                "description": "Total count of records where decide recognized as joined Entra.",
+                                                "description": "Total count of records where device is recognized as joined Entra.",
                                                 "examples": [
                                                     300
                                                 ],
-                                                "type": "number"
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "minimum": 0
                                             },
                                             "managed": {
                                                 "description": "Details of records indicating devices that are managed.",
@@ -4483,21 +4561,27 @@
                                                         "examples": [
                                                             220
                                                         ],
-                                                        "type": "number"
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "minimum": 0
                                                     },
                                                     "compliant": {
                                                         "description": "Count of records indicating compliant devices.",
                                                         "examples": [
                                                             180
                                                         ],
-                                                        "type": "number"
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "minimum": 0
                                                     },
                                                     "nonCompliant": {
                                                         "description": "Count of records indicating non-compliant devices.",
                                                         "examples": [
                                                             40
                                                         ],
-                                                        "type": "number"
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "minimum": 0
                                                     }
                                                 },
                                                 "required": [
@@ -4518,7 +4602,9 @@
                                                 "examples": [
                                                     80
                                                 ],
-                                                "type": "number"
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "minimum": 0
                                             }
                                         },
                                         "examples": [
@@ -4547,7 +4633,9 @@
                                                 "examples": [
                                                     180
                                                 ],
-                                                "type": "number"
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "minimum": 0
                                             },
                                             "managed": {
                                                 "description": "Details of records indicating devices that are managed.",
@@ -4558,21 +4646,27 @@
                                                         "examples": [
                                                             120
                                                         ],
-                                                        "type": "number"
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "minimum": 0
                                                     },
                                                     "compliant": {
                                                         "description": "Count of records indicating compliant devices.",
                                                         "examples": [
                                                             90
                                                         ],
-                                                        "type": "number"
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "minimum": 0
                                                     },
                                                     "nonCompliant": {
                                                         "description": "Count of records indicating non-compliant devices.",
                                                         "examples": [
                                                             30
                                                         ],
-                                                        "type": "number"
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "minimum": 0
                                                     }
                                                 },
                                                 "required": [
@@ -4593,7 +4687,9 @@
                                                 "examples": [
                                                     60
                                                 ],
-                                                "type": "number"
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "minimum": 0
                                             }
                                         },
                                         "examples": [
@@ -4622,7 +4718,9 @@
                                                 "examples": [
                                                     90
                                                 ],
-                                                "type": "number"
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "minimum": 0
                                             },
                                             "managed": {
                                                 "description": "Details of records indicating devices that are managed.",
@@ -4633,21 +4731,27 @@
                                                         "examples": [
                                                             70
                                                         ],
-                                                        "type": "number"
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "minimum": 0
                                                     },
                                                     "compliant": {
                                                         "description": "Count of records indicating compliant devices.",
                                                         "examples": [
                                                             60
                                                         ],
-                                                        "type": "number"
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "minimum": 0
                                                     },
                                                     "nonCompliant": {
                                                         "description": "Count of records indicating non-compliant devices.",
                                                         "examples": [
                                                             10
                                                         ],
-                                                        "type": "number"
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "minimum": 0
                                                     }
                                                 },
                                                 "required": [
@@ -4668,7 +4772,9 @@
                                                 "examples": [
                                                     20
                                                 ],
-                                                "type": "number"
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "minimum": 0
                                             }
                                         },
                                         "examples": [
@@ -4693,7 +4799,9 @@
                                         "examples": [
                                             30
                                         ],
-                                        "type": "number"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
                                     }
                                 },
                                 "examples": [
@@ -4746,28 +4854,36 @@
                                         "examples": [
                                             120
                                         ],
-                                        "type": "number"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
                                     },
                                     "compliant": {
                                         "description": "Count of records indicating compliant devices.",
                                         "examples": [
                                             70
                                         ],
-                                        "type": "number"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
                                     },
                                     "nonCompliant": {
                                         "description": "Count of records indicating non-compliant devices.",
                                         "examples": [
                                             20
                                         ],
-                                        "type": "number"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
                                     },
                                     "unmanaged": {
                                         "description": "Count of records indicating devices that are not managed.",
                                         "examples": [
                                             30
                                         ],
-                                        "type": "number"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
                                     }
                                 },
                                 "examples": [
@@ -4794,28 +4910,36 @@
                                         "examples": [
                                             80
                                         ],
-                                        "type": "number"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
                                     },
                                     "compliant": {
                                         "description": "Count of records indicating compliant devices.",
                                         "examples": [
                                             50
                                         ],
-                                        "type": "number"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
                                     },
                                     "nonCompliant": {
                                         "description": "Count of records indicating non-compliant devices.",
                                         "examples": [
                                             10
                                         ],
-                                        "type": "number"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
                                     },
                                     "unmanaged": {
                                         "description": "Count of records indicating devices that are not managed.",
                                         "examples": [
                                             20
                                         ],
-                                        "type": "number"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
                                     }
                                 },
                                 "examples": [
@@ -4898,7 +5022,9 @@
                                 "examples": [
                                     400
                                 ],
-                                "type": "number"
+                                "type": "integer",
+                                "format": "int32",
+                                "minimum": 0
                             },
                             "ios": {
                                 "description": "Details of records for iOS devices.",
@@ -4909,7 +5035,9 @@
                                         "examples": [
                                             220
                                         ],
-                                        "type": "number"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
                                     },
                                     "company": {
                                         "description": "Detail of records indicating devices owned by company.",
@@ -4920,21 +5048,27 @@
                                                 "examples": [
                                                     140
                                                 ],
-                                                "type": "number"
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "minimum": 0
                                             },
                                             "compliant": {
                                                 "description": "Count of records indicating compliant devices.",
                                                 "examples": [
                                                     100
                                                 ],
-                                                "type": "number"
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "minimum": 0
                                             },
                                             "nonCompliant": {
                                                 "description": "Count of records indicating non-compliant devices.",
                                                 "examples": [
                                                     40
                                                 ],
-                                                "type": "number"
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "minimum": 0
                                             }
                                         },
                                         "required": [
@@ -4959,21 +5093,27 @@
                                                 "examples": [
                                                     80
                                                 ],
-                                                "type": "number"
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "minimum": 0
                                             },
                                             "compliant": {
                                                 "description": "Count of records indicating compliant devices.",
                                                 "examples": [
                                                     60
                                                 ],
-                                                "type": "number"
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "minimum": 0
                                             },
                                             "nonCompliant": {
                                                 "description": "Count of records indicating non-compliant devices.",
                                                 "examples": [
                                                     20
                                                 ],
-                                                "type": "number"
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "minimum": 0
                                             }
                                         },
                                         "required": [
@@ -5020,7 +5160,9 @@
                                         "examples": [
                                             180
                                         ],
-                                        "type": "number"
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
                                     },
                                     "company": {
                                         "description": "Detail of records indicating devices owned by company.",
@@ -5031,21 +5173,27 @@
                                                 "examples": [
                                                     90
                                                 ],
-                                                "type": "number"
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "minimum": 0
                                             },
                                             "compliant": {
                                                 "description": "Count of records indicating compliant devices.",
                                                 "examples": [
                                                     70
                                                 ],
-                                                "type": "number"
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "minimum": 0
                                             },
                                             "nonCompliant": {
                                                 "description": "Count of records indicating non-compliant devices.",
                                                 "examples": [
                                                     20
                                                 ],
-                                                "type": "number"
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "minimum": 0
                                             }
                                         },
                                         "required": [
@@ -5070,21 +5218,27 @@
                                                 "examples": [
                                                     90
                                                 ],
-                                                "type": "number"
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "minimum": 0
                                             },
                                             "compliant": {
                                                 "description": "Count of records indicating compliant devices.",
                                                 "examples": [
                                                     65
                                                 ],
-                                                "type": "number"
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "minimum": 0
                                             },
                                             "nonCompliant": {
                                                 "description": "Count of records indicating non-compliant devices.",
                                                 "examples": [
                                                     25
                                                 ],
-                                                "type": "number"
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "minimum": 0
                                             }
                                         },
                                         "required": [
