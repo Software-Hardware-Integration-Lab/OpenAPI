@@ -8965,8 +8965,9 @@
                                                 "crmId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
                                                 "discoverDate": "2025-12-15T21:13:12.821Z",
                                                 "isComplete": true,
-                                                "publisher": "Test Publisher One",
-                                                "updatedAt": "2025-12-15T21:13:12.821Z"
+                                                "template": "Microsoft Enterprise",
+                                                "updatedAt": "2025-12-15T21:13:12.821Z",
+                                                "schemaVersion": 0
                                             },
                                             {
                                                 "accountName": "Test Account Name",
@@ -8975,8 +8976,9 @@
                                                 "crmId": "fbea61c3-6c80-4fbb-9bd7-b6fa2356892e",
                                                 "discoverDate": "2025-12-15T21:13:12.821Z",
                                                 "isComplete": false,
-                                                "publisher": "Test Publisher Two",
-                                                "updatedAt": "2025-12-15T21:13:12.821Z"
+                                                "template": "Google",
+                                                "updatedAt": "2025-12-15T21:13:12.821Z",
+                                                "schemaVersion": 1
                                             }
                                         ]
                                     }
@@ -8991,8 +8993,9 @@
                                                 "crmId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
                                                 "discoverDate": "2025-12-15T21:13:12.821Z",
                                                 "isComplete": true,
-                                                "publisher": "Test Publisher One",
-                                                "updatedAt": "2025-12-15T21:13:12.821Z"
+                                                "template": "Microsoft Enterprise",
+                                                "updatedAt": "2025-12-15T21:13:12.821Z",
+                                                "schemaVersion": 0
                                             },
                                             {
                                                 "accountName": "Test Account Name",
@@ -9001,8 +9004,9 @@
                                                 "crmId": "fbea61c3-6c80-4fbb-9bd7-b6fa2356892e",
                                                 "discoverDate": "2025-12-15T21:13:12.821Z",
                                                 "isComplete": false,
-                                                "publisher": "Test Publisher Two",
-                                                "updatedAt": "2025-12-15T21:13:12.821Z"
+                                                "template": "Google",
+                                                "updatedAt": "2025-12-15T21:13:12.821Z",
+                                                "schemaVersion": 1
                                             }
                                         ]
                                     ],
