@@ -6283,7 +6283,7 @@
         "/Api/Discover/ZeroTrust": {
             "get": {
                 "summary": "Generates Zero Trust Assessment",
-                "description": "Initiates collection of data that matches details needed to compose Zero Trust assessment.\n\nThis endpoint requires the `Permissions TBD` scope (permission).",
+                "description": "Initiates collection of data that matches details needed to compose Zero Trust assessment.\n\nThis endpoint requires the `Discover.Read`, or the `Everything.ReadWrite` scope (permission).",
                 "operationId": "/Api/Discover/ZeroTrust/Get",
                 "responses": {
                     "200": {
