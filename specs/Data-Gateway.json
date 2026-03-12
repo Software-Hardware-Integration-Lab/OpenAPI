@@ -10360,11 +10360,11 @@
                                                                 "values": [
                                                                     {
                                                                         "name": "Current",
-                                                                        "value": 1251
+                                                                        "value": "1251"
                                                                     },
                                                                     {
                                                                         "name": "Future",
-                                                                        "value": 144
+                                                                        "value": "144"
                                                                     }
                                                                 ]
                                                             },
@@ -10373,15 +10373,15 @@
                                                                 "values": [
                                                                     {
                                                                         "name": "Dedicated",
-                                                                        "value": 250
+                                                                        "value": "250"
                                                                     },
                                                                     {
                                                                         "name": "Secondary",
-                                                                        "value": 7500
+                                                                        "value": "7500"
                                                                     },
                                                                     {
                                                                         "name": "Shared",
-                                                                        "value": 260
+                                                                        "value": "260"
                                                                     }
                                                                 ]
                                                             },
@@ -10390,15 +10390,15 @@
                                                                 "values": [
                                                                     {
                                                                         "name": "Apps",
-                                                                        "value": 1125
+                                                                        "value": "1125"
                                                                     },
                                                                     {
                                                                         "name": "Desktop",
-                                                                        "value": 1620
+                                                                        "value": "1620"
                                                                     },
                                                                     {
                                                                         "name": "Cloud PC",
-                                                                        "value": 4875
+                                                                        "value": "4875"
                                                                     }
                                                                 ]
                                                             }
@@ -10426,11 +10426,11 @@
                                                                 "values": [
                                                                     {
                                                                         "name": "Current",
-                                                                        "value": 4578
+                                                                        "value": "4578"
                                                                     },
                                                                     {
                                                                         "name": "Future",
-                                                                        "value": 1545
+                                                                        "value": "1545"
                                                                     }
                                                                 ]
                                                             },
@@ -10439,15 +10439,15 @@
                                                                 "values": [
                                                                     {
                                                                         "name": "Dedicated",
-                                                                        "value": 4587
+                                                                        "value": "4587"
                                                                     },
                                                                     {
                                                                         "name": "Secondary",
-                                                                        "value": 220
+                                                                        "value": "220"
                                                                     },
                                                                     {
                                                                         "name": "Shared",
-                                                                        "value": 100
+                                                                        "value": "100"
                                                                     }
                                                                 ]
                                                             },
@@ -10456,15 +10456,15 @@
                                                                 "values": [
                                                                     {
                                                                         "name": "Apps",
-                                                                        "value": 350
+                                                                        "value": "350"
                                                                     },
                                                                     {
                                                                         "name": "Desktop",
-                                                                        "value": 150
+                                                                        "value": "150"
                                                                     },
                                                                     {
                                                                         "name": "Cloud PC",
-                                                                        "value": 4780
+                                                                        "value": "4780"
                                                                     }
                                                                 ]
                                                             }
@@ -10476,7 +10476,7 @@
                                                         "name": "Legacy ABC",
                                                         "currentProvider": {
                                                             "name": "Old Widgets",
-                                                            "term": "36 months",
+                                                            "terms": "36 months",
                                                             "contractNumber": "Wid-0475477",
                                                             "expiryDate": "2026-12-31T23:59:59.000Z",
                                                             "costs": {
