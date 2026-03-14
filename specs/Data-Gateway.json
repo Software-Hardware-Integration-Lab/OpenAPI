@@ -3583,8 +3583,8 @@
                     ]
                 },
                 "Assessment": {
-                    "title": "Assessment Element",
-                    "description": "One roadmap element with metadata, profile values, and product licensing features.",
+                    "title": "Assessment",
+                    "description": "A single assessment containing metadata, profile values, and product licensing features.",
                     "type": "object",
                     "required": [
                         "metadata",
@@ -10021,7 +10021,7 @@
                                                             "availability": "GA",
                                                             "notes": "Pilot with 100 users before phase 2.",
                                                             "startYearConfig": {
-                                                                "value": 20,
+                                                                "value": "Full",
                                                                 "userProfileIds": [
                                                                     "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
                                                                 ],
@@ -10031,7 +10031,7 @@
                                                                 "useCase": "PBX replacement"
                                                             },
                                                             "yearPlusOneConfig": {
-                                                                "value": 55,
+                                                                "value": "Partial",
                                                                 "userProfileIds": [
                                                                     "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
                                                                 ],
@@ -10041,7 +10041,7 @@
                                                                 "useCase": "Enterprise voice"
                                                             },
                                                             "yearPlusTwoConfig": {
-                                                                "value": 80,
+                                                                "value": "Alternative",
                                                                 "userProfileIds": [
                                                                     "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
                                                                 ],
@@ -10051,7 +10051,7 @@
                                                                 "useCase": "Global rollout"
                                                             },
                                                             "yearPlusThreeConfig": {
-                                                                "value": 95,
+                                                                "value": "NA",
                                                                 "userProfileIds": [
                                                                     "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
                                                                 ],
@@ -10215,7 +10215,7 @@
                 "tags": [
                     "Cloud Matrix"
                 ],
-                "summary": "Get a specfic Cloud Matrix Correlation Record"
+                "summary": "Get a specific Cloud Matrix Correlation Record"
             }
         }
     },
