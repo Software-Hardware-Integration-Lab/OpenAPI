@@ -238,6 +238,25 @@
                     "fd9a6a53-594d-41aa-950a-b21ff41d4688"
                 ]
             },
+            "NullableUuid": {
+                "oneOf": [
+                    { "$ref": "#/components/schemas/Uuid" },
+                    { "type": "null" }
+                ],
+                "examples": ["fd9a6a53-594d-41aa-950a-b21ff41d4688", null]
+            },            
+            "DateTimeStringType": {
+                "type": "string",
+                "format": "date-time",
+                "examples": ["2026-01-01T00:00:00Z"]
+            },
+            "NullableDateTimeStringType": {
+                "oneOf": [
+                    { "$ref": "#/components/schemas/DateTimeStringType" },
+                    { "type": "null" }
+                ],
+                "examples": ["2026-01-01T00:00:00Z", null]
+            },
             "Core.HealthReport": {
                 "description": "Health report that indicates if a service is down or not that the data gateway relies on.",
                 "properties": {
