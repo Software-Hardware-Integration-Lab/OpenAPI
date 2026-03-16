@@ -10269,7 +10269,7 @@
                                                     "createdDate": "2026-01-08T21:13:12.821Z",
                                                     "modifiedDate": "2026-01-08T21:13:12.821Z"
                                                 },
-                                                "assessment": [
+                                                "assessments": [
                                                     {
                                                         "metadata": {
                                                             "name": "Microsoft 365 Copilot Chat",
@@ -10286,7 +10286,7 @@
                                                             "isTenantBased": false,
                                                             "sourceValue": 10,
                                                             "startYearConfig": {
-                                                                "value": 26,
+                                                                "value": "Full",
                                                                 "isDeepDive": true,
                                                                 "altProduct": null,
                                                                 "publisher": "Microsoft",
@@ -10298,7 +10298,7 @@
                                                                 ]
                                                             },
                                                             "yearPlusOneConfig": {
-                                                                "value": 27,
+                                                                "value": "Partial",
                                                                 "isDeepDive": true,
                                                                 "altProduct": null,
                                                                 "publisher": "Microsoft",
@@ -10310,7 +10310,7 @@
                                                                 ]
                                                             },
                                                             "yearPlusTwoConfig": {
-                                                                "value": 28,
+                                                                "value": "Alternative",
                                                                 "isDeepDive": true,
                                                                 "altProduct": null,
                                                                 "publisher": "Microsoft",
@@ -10322,7 +10322,7 @@
                                                                 ]
                                                             },
                                                             "yearPlusThreeConfig": {
-                                                                "value": 29,
+                                                                "value": "Full",
                                                                 "isDeepDive": true,
                                                                 "altProduct": null,
                                                                 "publisher": "Microsoft",
