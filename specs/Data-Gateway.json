@@ -10217,6 +10217,470 @@
                 ],
                 "summary": "Get a specific Cloud Matrix Correlation Record"
             }
+        },
+        "/Api/CloudMatrix/Customer/{crmId}/Correlation/{correlationId}/Data": {
+            "get": {
+                "summary": "Get specific Cloud Matrix Assessment Record by crmId and correlationId.",
+                "description": "Retrieves Cloud Matrix Assessment data associated with the specified customer ID (`crmId`) and correlation ID.\n\nThis endpoint requires the `CloudMatrix.Read`,  `CloudMatrix.Read.All`, `CloudMatrix.ReadWrite`, or `CloudMatrix.ReadWrite.All` scope (permission).",
+                "operationId": "/Api/CloudMatrix/Customer/:crmId/Correlation/:correlationId/Data/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/crmId",
+                        "required": true
+                    },
+                    {
+                        "$ref": "#/components/parameters/correlationId",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A cloud matrix assessment record.",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Example Cloud Matrix Record": {
+                                        "description": "Sample cloud matrix assessment record.",
+                                        "summary": "Requested Cloud Matrix Assessment Record",
+                                        "value": {
+                                            "title": "Microsoft Security & Productivity Roadmap (Sample)",
+                                            "version": "5.0.4",
+                                            "description": "Sample roadmap data showing service offerings, values, and plan profiles.",
+                                            "correlation": {
+                                                "accountName": "CMTestAccount1",
+                                                "correlationId": "745b00d0-d772-11f0-899c-41d4a068f985",
+                                                "crmId": "de186670-d772-11f0-899c-41d4a068f985",
+                                                "template": "Microsoft",
+                                                "isComplete": true,
+                                                "discoverDate": "2026-01-08T21:13:12.821Z",
+                                                "createdAt": "2026-01-08T21:13:12.821Z",
+                                                "updatedAt": "2026-01-08T21:13:12.821Z"
+                                            },
+                                            "valueAssessment": {
+                                                "actionPlan": {
+                                                    "accountName": "CMTestAccount1",
+                                                    "accountManager": "John Jones",
+                                                    "consultant": "Oliver Smith",
+                                                    "licensingExecutive": "Taylor Johnson",
+                                                    "customerSuccessManager": "Sam Monroe",
+                                                    "notesAndObjectives": "These are notes.",
+                                                    "crmId": "de186670-d772-11f0-899c-41d4a068f985",
+                                                    "primaryPublisher": "Microsoft",
+                                                    "discoveryDate": "2026-01-08T21:13:12.821Z",
+                                                    "createdDate": "2026-01-08T21:13:12.821Z",
+                                                    "modifiedDate": "2026-01-08T21:13:12.821Z"
+                                                },
+                                                "assessments": [
+                                                    {
+                                                        "metadata": {
+                                                            "name": "Microsoft 365 Copilot Chat",
+                                                            "breakoutId": "97676a10-6875-4a32-8f2f-4bee4b147a84",
+                                                            "category": "Productivity",
+                                                            "notes": "these are notes.",
+                                                            "availability": "",
+                                                            "subCategory": "AI Assistance",
+                                                            "help": "Assess Teams Phone rollout readiness.",
+                                                            "licensingProduct": "Microsoft Teams Phone",
+                                                            "licensingProductHelp": "Requires Teams Phone compatible license.",
+                                                            "isAddon": true,
+                                                            "isStrategicAddon": true,
+                                                            "isTenantBased": false,
+                                                            "sourceValue": 10,
+                                                            "startYearConfig": {
+                                                                "value": "Full",
+                                                                "isDeepDive": true,
+                                                                "altProduct": null,
+                                                                "publisher": "Microsoft",
+                                                                "useCase": "PBX replacement",
+                                                                "userProfileIds": [
+                                                                    "ab568208-250b-48e2-a635-42a9a45b3bf4",
+                                                                    "181d908f-9f04-441d-8da7-2ab5c121372e",
+                                                                    "7205a11c-085a-403b-a276-c7111482d53e"
+                                                                ]
+                                                            },
+                                                            "yearPlusOneConfig": {
+                                                                "value": "Partial",
+                                                                "isDeepDive": true,
+                                                                "altProduct": null,
+                                                                "publisher": "Microsoft",
+                                                                "useCase": "Enterprise voice",
+                                                                "userProfileIds": [
+                                                                    "ab568208-250b-48e2-a635-42a9a45b3bf4",
+                                                                    "181d908f-9f04-441d-8da7-2ab5c121372e",
+                                                                    "7205a11c-085a-403b-a276-c7111482d53e"
+                                                                ]
+                                                            },
+                                                            "yearPlusTwoConfig": {
+                                                                "value": "Alternative",
+                                                                "isDeepDive": true,
+                                                                "altProduct": null,
+                                                                "publisher": "Microsoft",
+                                                                "useCase": "Global rollout",
+                                                                "userProfileIds": [
+                                                                    "ab568208-250b-48e2-a635-42a9a45b3bf4",
+                                                                    "181d908f-9f04-441d-8da7-2ab5c121372e",
+                                                                    "7205a11c-085a-403b-a276-c7111482d53e"
+                                                                ]
+                                                            },
+                                                            "yearPlusThreeConfig": {
+                                                                "value": "Full",
+                                                                "isDeepDive": true,
+                                                                "altProduct": null,
+                                                                "publisher": "Microsoft",
+                                                                "useCase": "Optimization",
+                                                                "userProfileIds": [
+                                                                    "ab568208-250b-48e2-a635-42a9a45b3bf4",
+                                                                    "181d908f-9f04-441d-8da7-2ab5c121372e",
+                                                                    "7205a11c-085a-403b-a276-c7111482d53e"
+                                                                ]
+                                                            }
+                                                        },
+                                                        "profiles": [
+                                                            {
+                                                                "name": "Information Worker",
+                                                                "abbreviation": "IW",
+                                                                "value": 90
+                                                            }
+                                                        ],
+                                                        "features": [
+                                                            {
+                                                                "licensing": "M365 E5 + Teams Phone",
+                                                                "products": [
+                                                                    {
+                                                                        "product": "Teams Phone Standard",
+                                                                        "value": "Included",
+                                                                        "comment": "Primary voice service"
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ],
+                                                "userProfiles": [
+                                                    {
+                                                        "id": "0971a859-11d3-4c7b-a8e3-5137fea503ee",
+                                                        "name": "Knowledge Worker",
+                                                        "details": [
+                                                            {
+                                                                "name": "Profile Details",
+                                                                "values": [
+                                                                    {
+                                                                        "name": "Profile Name",
+                                                                        "value": "Knowledge Worker"
+                                                                    },
+                                                                    {
+                                                                        "name": "Licensing Type",
+                                                                        "value": "E5"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "name": "User Count",
+                                                                "values": [
+                                                                    {
+                                                                        "name": "Current",
+                                                                        "value": "1251"
+                                                                    },
+                                                                    {
+                                                                        "name": "Future",
+                                                                        "value": "144"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "name": "Physical Devices",
+                                                                "values": [
+                                                                    {
+                                                                        "name": "Dedicated",
+                                                                        "value": "250"
+                                                                    },
+                                                                    {
+                                                                        "name": "Secondary",
+                                                                        "value": "7500"
+                                                                    },
+                                                                    {
+                                                                        "name": "Shared",
+                                                                        "value": "260"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "name": "Virtual Devices",
+                                                                "values": [
+                                                                    {
+                                                                        "name": "Apps",
+                                                                        "value": "1125"
+                                                                    },
+                                                                    {
+                                                                        "name": "Desktop",
+                                                                        "value": "1620"
+                                                                    },
+                                                                    {
+                                                                        "name": "Cloud PC",
+                                                                        "value": "4875"
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": "af401211-3bf7-43cc-abed-22bbeae69412",
+                                                        "name": "Frontline Worker",
+                                                        "details": [
+                                                            {
+                                                                "name": "Profile Details",
+                                                                "values": [
+                                                                    {
+                                                                        "name": "Profile Name",
+                                                                        "value": "Frontline Worker"
+                                                                    },
+                                                                    {
+                                                                        "name": "Licensing Type",
+                                                                        "value": "F3"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "name": "User Count",
+                                                                "values": [
+                                                                    {
+                                                                        "name": "Current",
+                                                                        "value": "4578"
+                                                                    },
+                                                                    {
+                                                                        "name": "Future",
+                                                                        "value": "1545"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "name": "Physical Devices",
+                                                                "values": [
+                                                                    {
+                                                                        "name": "Dedicated",
+                                                                        "value": "4587"
+                                                                    },
+                                                                    {
+                                                                        "name": "Secondary",
+                                                                        "value": "220"
+                                                                    },
+                                                                    {
+                                                                        "name": "Shared",
+                                                                        "value": "100"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "name": "Virtual Devices",
+                                                                "values": [
+                                                                    {
+                                                                        "name": "Apps",
+                                                                        "value": "350"
+                                                                    },
+                                                                    {
+                                                                        "name": "Desktop",
+                                                                        "value": "150"
+                                                                    },
+                                                                    {
+                                                                        "name": "Cloud PC",
+                                                                        "value": "4780"
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ],
+                                                "displacements": [
+                                                    {
+                                                        "name": "Legacy ABC",
+                                                        "currentProvider": {
+                                                            "name": "Old Widgets",
+                                                            "terms": "36 months",
+                                                            "contractNumber": "Wid-0475477",
+                                                            "expiryDate": "2026-12-31T23:59:59.000Z",
+                                                            "costs": {
+                                                                "monthlyCost": 1000,
+                                                                "annualCost": 2000,
+                                                                "contractValue": 3000
+                                                            }
+                                                        },
+                                                        "displacement": {
+                                                            "name": "New Widgets",
+                                                            "terms": "36 months",
+                                                            "contractNumber": "NWid-20948372",
+                                                            "expiryDate": "2029-03-01T00:00:00.000Z",
+                                                            "replacementDate": "2026-06-01T00:00:00.000Z",
+                                                            "costs": [
+                                                                {
+                                                                    "monthlyCost": 4000,
+                                                                    "annualCost": 5000,
+                                                                    "contractValue": 6000
+                                                                }
+                                                            ]
+                                                        },
+                                                        "notes": "Here are my notes."
+                                                    }
+                                                ]
+                                            },
+                                            "breakouts": [
+                                                {
+                                                    "title": "PORTAL APPS",
+                                                    "breakoutId": "f1ebe6ab-1164-4ab8-8970-2d561ee7634f",
+                                                    "breakoutName": "BREAKOUT -Portal Apps",
+                                                    "features": [
+                                                        {
+                                                            "roadmapElementPath": "User Experience /Productivity Apps/Extended Productivity App Ecosystem",
+                                                            "elementSubdimension": "Productivity Apps",
+                                                            "roadmapProduct": "Platform Only",
+                                                            "feature": "Viva Insights - Personal",
+                                                            "description": "Microsoft Viva Insights - Personal provides privacy-protected insights and data-driven recommendations to help individuals improve productivity and wellbeing in Microsoft 365.",
+                                                            "publisherLink": "https://www.abcd123.com/abcd",
+                                                            "subscriptionFeatures": [
+                                                                {
+                                                                    "licensing": "M365",
+                                                                    "products": [
+                                                                        {
+                                                                            "product": "E5",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        },
+                                                                        {
+                                                                            "product": "E3",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "licensing": "M365 FLW",
+                                                                    "products": [
+                                                                        {
+                                                                            "product": "F1",
+                                                                            "value": "na",
+                                                                            "comment": ""
+                                                                        },
+                                                                        {
+                                                                            "product": "F3",
+                                                                            "value": "na",
+                                                                            "comment": ""
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "licensing": "O365",
+                                                                    "products": [
+                                                                        {
+                                                                            "product": "F3",
+                                                                            "value": "na",
+                                                                            "comment": ""
+                                                                        },
+                                                                        {
+                                                                            "product": "E5",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        },
+                                                                        {
+                                                                            "product": "E1",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        },
+                                                                        {
+                                                                            "product": "E3",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "roadmapElementPath": "User Experience /Productivity Apps/Extended Productivity App Ecosystem",
+                                                            "elementSubdimension": "Productivity Apps",
+                                                            "roadmapProduct": "Platform Only",
+                                                            "feature": "Lists",
+                                                            "description": "Microsoft Lists is a Microsoft 365 app that helps you track information and organize work with customizable lists for tasks, projects, and more.",
+                                                            "publisherLink": "",
+                                                            "subscriptionFeatures": [
+                                                                {
+                                                                    "licensing": "M365",
+                                                                    "products": [
+                                                                        {
+                                                                            "product": "E5",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        },
+                                                                        {
+                                                                            "product": "E3",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "licensing": "M365 FLW",
+                                                                    "products": [
+                                                                        {
+                                                                            "product": "F1",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        },
+                                                                        {
+                                                                            "product": "F3",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "licensing": "O365",
+                                                                    "products": [
+                                                                        {
+                                                                            "product": "F3",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        },
+                                                                        {
+                                                                            "product": "E5",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        },
+                                                                        {
+                                                                            "product": "E1",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        },
+                                                                        {
+                                                                            "product": "E3",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/CloudMatrix"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "tags": [
+                    "Cloud Matrix"
+                ]
+            }
         }
     },
     "security": [
