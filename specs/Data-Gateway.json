@@ -2714,8 +2714,7 @@
                         "discoverDate": "2025-12-15T21:13:12.821Z",
                         "isComplete": true,
                         "template": "Test Template - Microsoft Enterprise",
-                        "updatedAt": "2025-12-15T21:13:12.821Z",
-                        "schemaVersion": 0
+                        "updatedAt": "2025-12-15T21:13:12.821Z"
                     }
                 ],
                 "properties": {
@@ -2785,24 +2784,14 @@
                         ],
                         "format": "date-time",
                         "type": "string"
-                    },
-                    "schemaVersion": {
-                        "type": "number",
-                        "examples": [
-                            0
-                        ]
                     }
                 },
                 "required": [
                     "accountName",
-                    "correlationId",
-                    "createdAt",
                     "crmId",
                     "discoverDate",
                     "isComplete",
-                    "template",
-                    "updatedAt",
-                    "schemaVersion"
+                    "template"
                 ],
                 "title": "Cloud Matrix Correlation Record",
                 "type": "object"
@@ -2811,10 +2800,10 @@
                 "title": "Cloud Matrix Assessment",
                 "description": "Top-level container for a complete Cloud Matrix assessment, including correlation, value assessment content, and breakout feature mappings.",
                 "type": "object",
-                "additionalProperties": false,
                 "required": [
                     "correlation",
                     "title",
+                    "description",
                     "version",
                     "valueAssessment",
                     "breakouts"
@@ -2869,8 +2858,7 @@
                             "discoverDate": "2026-02-28T14:30:00.000Z",
                             "isComplete": true,
                             "template": "CloudMatrix-v5",
-                            "updatedAt": "2026-03-06T10:20:00.000Z",
-                            "schemaVersion": 5
+                            "updatedAt": "2026-03-06T10:20:00.000Z"
                         },
                         "title": "CloudMatrix",
                         "description": "MICROSOFT CLOUD ADOPTION MATRIX v5.0",
@@ -2957,7 +2945,7 @@
                                     ]
                                 }
                             ],
-                            "assessment": [
+                            "assessments": [
                                 {
                                     "metadata": {
                                         "name": "Teams Phone Enablement",
@@ -2973,7 +2961,7 @@
                                         "availability": "GA",
                                         "notes": "Pilot with 100 users before phase 2.",
                                         "startYearConfig": {
-                                            "value": 20,
+                                            "value": "Full",
                                             "userProfileIds": [
                                                 "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
                                             ],
@@ -2983,7 +2971,7 @@
                                             "useCase": "PBX replacement"
                                         },
                                         "yearPlusOneConfig": {
-                                            "value": 55,
+                                            "value": "Partial",
                                             "userProfileIds": [
                                                 "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
                                             ],
@@ -2993,7 +2981,7 @@
                                             "useCase": "Enterprise voice"
                                         },
                                         "yearPlusTwoConfig": {
-                                            "value": 80,
+                                            "value": "Alternative",
                                             "userProfileIds": [
                                                 "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
                                             ],
@@ -3003,7 +2991,7 @@
                                             "useCase": "Global rollout"
                                         },
                                         "yearPlusThreeConfig": {
-                                            "value": 95,
+                                            "value": "NA",
                                             "userProfileIds": [
                                                 "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
                                             ],
@@ -3014,7 +3002,7 @@
                                         },
                                         "sourceValue": 10
                                     },
-                                    "userProfiles": [
+                                    "profiles": [
                                         {
                                             "name": "Information Worker",
                                             "abbreviation": "IW",
@@ -3102,11 +3090,10 @@
                     "title": "Value Assessment",
                     "description": "Aggregates action planning, profile data, assessment elements, and displacement opportunities.",
                     "type": "object",
-                    "additionalProperties": false,
                     "required": [
                         "actionPlan",
                         "userProfiles",
-                        "assessment",
+                        "assessments",
                         "displacements"
                     ],
                     "properties": {
@@ -3119,10 +3106,10 @@
                                 "$ref": "#/components/schemas/CloudMatrix/UserProfile"
                             }
                         },
-                        "assessment": {
+                        "assessments": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/components/schemas/CloudMatrix/AssessmentElement"
+                                "$ref": "#/components/schemas/CloudMatrix/Assessment"
                             }
                         },
                         "displacements": {
@@ -3215,7 +3202,7 @@
                                     ]
                                 }
                             ],
-                            "assessment": [
+                            "assessments": [
                                 {
                                     "metadata": {
                                         "name": "Teams Phone Enablement",
@@ -3231,7 +3218,7 @@
                                         "availability": "GA",
                                         "notes": "Pilot with 100 users before phase 2.",
                                         "startYearConfig": {
-                                            "value": 20,
+                                            "value": "Full",
                                             "userProfileIds": [
                                                 "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
                                             ],
@@ -3241,7 +3228,7 @@
                                             "useCase": "PBX replacement"
                                         },
                                         "yearPlusOneConfig": {
-                                            "value": 55,
+                                            "value": "Partial",
                                             "userProfileIds": [
                                                 "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
                                             ],
@@ -3251,7 +3238,7 @@
                                             "useCase": "Enterprise voice"
                                         },
                                         "yearPlusTwoConfig": {
-                                            "value": 80,
+                                            "value": "Alternative",
                                             "userProfileIds": [
                                                 "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
                                             ],
@@ -3261,7 +3248,7 @@
                                             "useCase": "Global rollout"
                                         },
                                         "yearPlusThreeConfig": {
-                                            "value": 95,
+                                            "value": "NA",
                                             "userProfileIds": [
                                                 "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
                                             ],
@@ -3272,7 +3259,7 @@
                                         },
                                         "sourceValue": 10
                                     },
-                                    "userProfiles": [
+                                    "profiles": [
                                         {
                                             "name": "Information Worker",
                                             "abbreviation": "IW",
@@ -3331,7 +3318,6 @@
                     "title": "Action Plan",
                     "description": "High-level discovery and ownership metadata for the account.",
                     "type": "object",
-                    "additionalProperties": false,
                     "required": [
                         "accountName",
                         "discoveryDate"
@@ -3478,7 +3464,6 @@
                     "title": "User Profile Value",
                     "description": "Single named value inside a user profile detail group.",
                     "type": "object",
-                    "additionalProperties": false,
                     "required": [
                         "name",
                         "value"
@@ -3510,7 +3495,6 @@
                     "title": "User Profile Detail Group",
                     "description": "Groups related user-profile values under a section name.",
                     "type": "object",
-                    "additionalProperties": false,
                     "required": [
                         "name",
                         "values"
@@ -3551,7 +3535,6 @@
                     "title": "User Profile",
                     "description": "Named user profile and grouped details used by assessment elements.",
                     "type": "object",
-                    "additionalProperties": false,
                     "required": [
                         "id",
                         "name",
@@ -3599,21 +3582,20 @@
                         }
                     ]
                 },
-                "AssessmentElement": {
-                    "title": "Assessment Element",
-                    "description": "One roadmap element with metadata, profile values, and product licensing features.",
+                "Assessment": {
+                    "title": "Assessment",
+                    "description": "A single assessment containing metadata, profile values, and product licensing features.",
                     "type": "object",
-                    "additionalProperties": false,
                     "required": [
                         "metadata",
-                        "userProfiles",
+                        "profiles",
                         "features"
                     ],
                     "properties": {
                         "metadata": {
                             "$ref": "#/components/schemas/CloudMatrix/AssessmentMetadata"
                         },
-                        "userProfiles": {
+                        "profiles": {
                             "type": "array",
                             "items": {
                                 "$ref": "#/components/schemas/CloudMatrix/ProfileValue"
@@ -3626,88 +3608,89 @@
                             }
                         }
                     },
-                    "example": {
-                        "metadata": {
-                            "name": "Teams Phone Enablement",
-                            "breakoutId": "2b92f035-275c-4d9b-b662-e5323cb9c769",
-                            "category": "Collaboration",
-                            "subCategory": "Voice",
-                            "help": "Assess Teams Phone rollout readiness.",
-                            "licensingProduct": "Microsoft Teams Phone",
-                            "licensingProductHelp": "Requires Teams Phone compatible license.",
-                            "isAddon": true,
-                            "isStrategicAddon": true,
-                            "isTenantBased": false,
-                            "availability": "GA",
-                            "notes": "Pilot with 100 users before phase 2.",
-                            "startYearConfig": {
-                                "value": 20,
-                                "userProfileIds": [
-                                    "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
-                                ],
-                                "isDeepDive": true,
-                                "altProduct": null,
-                                "publisher": "Microsoft",
-                                "useCase": "PBX replacement"
+                    "examples": [
+                        {
+                            "metadata": {
+                                "name": "Teams Phone Enablement",
+                                "breakoutId": "2b92f035-275c-4d9b-b662-e5323cb9c769",
+                                "category": "Collaboration",
+                                "subCategory": "Voice",
+                                "help": "Assess Teams Phone rollout readiness.",
+                                "licensingProduct": "Microsoft Teams Phone",
+                                "licensingProductHelp": "Requires Teams Phone compatible license.",
+                                "isAddon": true,
+                                "isStrategicAddon": true,
+                                "isTenantBased": false,
+                                "availability": "GA",
+                                "notes": "Pilot with 100 users before phase 2.",
+                                "startYearConfig": {
+                                    "value": "Full",
+                                    "userProfileIds": [
+                                        "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
+                                    ],
+                                    "isDeepDive": true,
+                                    "altProduct": null,
+                                    "publisher": "Microsoft",
+                                    "useCase": "PBX replacement"
+                                },
+                                "yearPlusOneConfig": {
+                                    "value": "Partial",
+                                    "userProfileIds": [
+                                        "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
+                                    ],
+                                    "isDeepDive": true,
+                                    "altProduct": null,
+                                    "publisher": "Microsoft",
+                                    "useCase": "Enterprise voice"
+                                },
+                                "yearPlusTwoConfig": {
+                                    "value": "Alternative",
+                                    "userProfileIds": [
+                                        "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
+                                    ],
+                                    "isDeepDive": false,
+                                    "altProduct": null,
+                                    "publisher": "Microsoft",
+                                    "useCase": "Global rollout"
+                                },
+                                "yearPlusThreeConfig": {
+                                    "value": "NA",
+                                    "userProfileIds": [
+                                        "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
+                                    ],
+                                    "isDeepDive": false,
+                                    "altProduct": null,
+                                    "publisher": "Microsoft",
+                                    "useCase": "Optimization"
+                                },
+                                "sourceValue": 10
                             },
-                            "yearPlusOneConfig": {
-                                "value": 55,
-                                "userProfileIds": [
-                                    "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
-                                ],
-                                "isDeepDive": true,
-                                "altProduct": null,
-                                "publisher": "Microsoft",
-                                "useCase": "Enterprise voice"
-                            },
-                            "yearPlusTwoConfig": {
-                                "value": 80,
-                                "userProfileIds": [
-                                    "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
-                                ],
-                                "isDeepDive": false,
-                                "altProduct": null,
-                                "publisher": "Microsoft",
-                                "useCase": "Global rollout"
-                            },
-                            "yearPlusThreeConfig": {
-                                "value": 95,
-                                "userProfileIds": [
-                                    "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
-                                ],
-                                "isDeepDive": false,
-                                "altProduct": null,
-                                "publisher": "Microsoft",
-                                "useCase": "Optimization"
-                            },
-                            "sourceValue": 10
-                        },
-                        "userProfiles": [
-                            {
-                                "name": "Information Worker",
-                                "abbreviation": "IW",
-                                "value": 90
-                            }
-                        ],
-                        "features": [
-                            {
-                                "licensing": "M365 E5 + Teams Phone",
-                                "products": [
-                                    {
-                                        "product": "Teams Phone Standard",
-                                        "value": "Included",
-                                        "comment": "Primary voice service"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
+                            "profiles": [
+                                {
+                                    "name": "Information Worker",
+                                    "abbreviation": "IW",
+                                    "value": 90
+                                }
+                            ],
+                            "features": [
+                                {
+                                    "licensing": "M365 E5 + Teams Phone",
+                                    "products": [
+                                        {
+                                            "product": "Teams Phone Standard",
+                                            "value": "Included",
+                                            "comment": "Primary voice service"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
                 },
                 "AssessmentMetadata": {
                     "title": "Assessment Metadata",
                     "description": "Descriptive data and year-based configuration for a roadmap element.",
                     "type": "object",
-                    "additionalProperties": false,
                     "required": [
                         "name",
                         "breakoutId",
@@ -3736,13 +3719,17 @@
                             ]
                         },
                         "breakoutId": {
-                            "type": [
-                                "string",
-                                "null"
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/Uuid"
+                                },
+                                {
+                                    "type": "null"
+                                }
                             ],
                             "description": "Identifier of the breakout associated with this element.",
                             "examples": [
-                                "testBreakOutId",
+                                "2b92f035-275c-4d9b-b662-e5323cb9c769",
                                 null
                             ]
                         },
@@ -3791,7 +3778,9 @@
                         "isStrategicAddon": {
                             "type": "boolean",
                             "description": "Indicates whether the add-on is classified as strategic.",
-                            "example": true
+                            "examples": [
+                                true
+                            ]
                         },
                         "isTenantBased": {
                             "type": "boolean",
@@ -3857,7 +3846,7 @@
                             "availability": "GA",
                             "notes": "Pilot with 100 users before phase 2.",
                             "startYearConfig": {
-                                "value": 20,
+                                "value": "Full",
                                 "userProfileIds": [
                                     "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
                                 ],
@@ -3867,7 +3856,7 @@
                                 "useCase": "PBX replacement"
                             },
                             "yearPlusOneConfig": {
-                                "value": 55,
+                                "value": "Partial",
                                 "userProfileIds": [
                                     "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
                                 ],
@@ -3877,7 +3866,7 @@
                                 "useCase": "Enterprise voice"
                             },
                             "yearPlusTwoConfig": {
-                                "value": 80,
+                                "value": "Alternative",
                                 "userProfileIds": [
                                     "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
                                 ],
@@ -3887,7 +3876,7 @@
                                 "useCase": "Global rollout"
                             },
                             "yearPlusThreeConfig": {
-                                "value": 95,
+                                "value": "NA",
                                 "userProfileIds": [
                                     "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
                                 ],
@@ -3904,7 +3893,6 @@
                     "title": "Year Configuration",
                     "description": "Year-specific value and mapping configuration for an assessment element.",
                     "type": "object",
-                    "additionalProperties": false,
                     "required": [
                         "value",
                         "userProfileIds",
@@ -3916,12 +3904,12 @@
                     "properties": {
                         "value": {
                             "type": [
-                                "number",
+                                "string",
                                 "null"
                             ],
                             "description": "Planned value for the given year configuration.",
                             "examples": [
-                                55,
+                                "Partial",
                                 null
                             ]
                         },
@@ -3985,7 +3973,7 @@
                     },
                     "examples": [
                         {
-                            "value": 55,
+                            "value": "Partial",
                             "userProfileIds": [
                                 "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
                             ],
@@ -4000,7 +3988,6 @@
                     "title": "Profile Value",
                     "description": "Profile-level numeric score/value on an assessment element.",
                     "type": "object",
-                    "additionalProperties": false,
                     "required": [
                         "name",
                         "abbreviation",
@@ -4009,37 +3996,46 @@
                     "properties": {
                         "name": {
                             "type": "string",
-                            "description": "Name of the user profile associated with the score.",
-                            "example": "Information Worker"
+                            "description": "Name of the profile associated with the score.",
+                            "examples": [
+                                "Information Worker"
+                            ]
                         },
                         "abbreviation": {
-                            "type": "string",
-                            "description": "Short code used to represent the user profile.",
-                            "example": "IW"
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "Short code used to represent the profile.",
+                            "examples": [
+                                "IW",
+                                null
+                            ]
                         },
                         "value": {
                             "type": [
                                 "number",
                                 "null"
                             ],
-                            "description": "Numeric score or value assigned to the user profile.",
+                            "description": "Numeric score or value assigned to the profile.",
                             "examples": [
                                 90,
                                 null
                             ]
                         }
                     },
-                    "example": {
-                        "name": "Information Worker",
-                        "abbreviation": "IW",
-                        "value": 90
-                    }
+                    "examples": [
+                        {
+                            "name": "Information Worker",
+                            "abbreviation": "IW",
+                            "value": 90
+                        }
+                    ]
                 },
                 "FeatureEntry": {
                     "title": "Feature Entry",
                     "description": "Licensing bucket and mapped product entries for an assessment element.",
                     "type": "object",
-                    "additionalProperties": false,
                     "required": [
                         "licensing",
                         "products"
@@ -4081,7 +4077,6 @@
                     "title": "Subscription Feature",
                     "description": "Licensing group used inside breakout subscription mappings.",
                     "type": "object",
-                    "additionalProperties": false,
                     "required": [
                         "licensing",
                         "products"
@@ -4123,7 +4118,6 @@
                     "title": "Product Entry",
                     "description": "Product mapping with value and optional comment.",
                     "type": "object",
-                    "additionalProperties": false,
                     "required": [
                         "product",
                         "value",
@@ -4131,25 +4125,17 @@
                     ],
                     "properties": {
                         "product": {
-                            "type": [
-                                "string",
-                                "null"
-                            ],
+                            "type": "string",
                             "description": "The product name for this licensing entry.",
                             "examples": [
-                                "Teams Phone Standard",
-                                null
+                                "Teams Phone Standard"
                             ]
                         },
                         "value": {
-                            "type": [
-                                "string",
-                                "null"
-                            ],
+                            "type": "string",
                             "description": "The assigned licensing value for the product.",
                             "examples": [
-                                "Included",
-                                null
+                                "Included"
                             ]
                         },
                         "comment": {
@@ -4176,7 +4162,6 @@
                     "title": "Subscription Product Entry",
                     "description": "Product entry used for breakout subscription features.",
                     "type": "object",
-                    "additionalProperties": false,
                     "required": [
                         "product",
                         "value",
@@ -4184,25 +4169,17 @@
                     ],
                     "properties": {
                         "product": {
-                            "type": [
-                                "string",
-                                "null"
-                            ],
+                            "type": "string",
                             "description": "The product name for this licensing entry.",
                             "examples": [
-                                "Teams Phone Standard",
-                                null
+                                "Teams Phone Standard"
                             ]
                         },
                         "value": {
-                            "type": [
-                                "string",
-                                "null"
-                            ],
+                            "type": "string",
                             "description": "The assigned licensing value for the product.",
                             "examples": [
-                                "Included",
-                                null
+                                "Included"
                             ]
                         },
                         "comment": {
@@ -4229,7 +4206,6 @@
                     "title": "Displacement Entry",
                     "description": "Current provider and replacement proposal for a displacement opportunity.",
                     "type": "object",
-                    "additionalProperties": false,
                     "required": [
                         "name",
                         "currentProvider",
@@ -4293,7 +4269,6 @@
                     "title": "Provider Info",
                     "description": "Current provider contract and cost details.",
                     "type": "object",
-                    "additionalProperties": false,
                     "required": [
                         "name",
                         "terms",
@@ -4365,7 +4340,6 @@
                     "title": "Displacement Info",
                     "description": "Replacement solution details and projected cost scenarios.",
                     "type": "object",
-                    "additionalProperties": false,
                     "required": [
                         "name",
                         "terms",
@@ -4461,7 +4435,6 @@
                     "title": "Provider Costs",
                     "description": "Aggregated cost fields for a provider contract.",
                     "type": "object",
-                    "additionalProperties": false,
                     "required": [
                         "monthlyCost",
                         "annualCost",
@@ -4502,7 +4475,6 @@
                     "title": "Monetary Cost Entry",
                     "description": "One cost scenario containing monthly, annual, and total contract values.",
                     "type": "object",
-                    "additionalProperties": false,
                     "required": [
                         "monthlyCost",
                         "annualCost",
@@ -4531,7 +4503,7 @@
                             ]
                         }
                     },
-                    "example": [
+                    "examples": [
                         {
                             "monthlyCost": 12000,
                             "annualCost": 144000,
@@ -4543,7 +4515,6 @@
                     "title": "Breakout",
                     "description": "A breakout section that groups related domain features.",
                     "type": "object",
-                    "additionalProperties": false,
                     "required": [
                         "title",
                         "breakoutId",
@@ -4559,9 +4530,13 @@
                             ]
                         },
                         "breakoutId": {
-                            "type": [
-                                "string",
-                                "null"
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/Uuid"
+                                },
+                                {
+                                    "type": "null"
+                                }
                             ],
                             "description": "A unique identifier for the breakout section.",
                             "examples": [
@@ -4622,7 +4597,6 @@
                     "title": "Breakout Feature",
                     "description": "Feature row inside a breakout section with subscription mappings.",
                     "type": "object",
-                    "additionalProperties": false,
                     "required": [
                         "roadmapElementPath",
                         "elementSubdimension",
@@ -8966,8 +8940,7 @@
                                                 "discoverDate": "2025-12-15T21:13:12.821Z",
                                                 "isComplete": true,
                                                 "template": "Microsoft Enterprise",
-                                                "updatedAt": "2025-12-15T21:13:12.821Z",
-                                                "schemaVersion": 0
+                                                "updatedAt": "2025-12-15T21:13:12.821Z"
                                             },
                                             {
                                                 "accountName": "Test Account Name",
@@ -8977,8 +8950,7 @@
                                                 "discoverDate": "2025-12-15T21:13:12.821Z",
                                                 "isComplete": false,
                                                 "template": "Google",
-                                                "updatedAt": "2025-12-15T21:13:12.821Z",
-                                                "schemaVersion": 1
+                                                "updatedAt": "2025-12-15T21:13:12.821Z"
                                             }
                                         ]
                                     }
@@ -8994,8 +8966,7 @@
                                                 "discoverDate": "2025-12-15T21:13:12.821Z",
                                                 "isComplete": true,
                                                 "template": "Microsoft Enterprise",
-                                                "updatedAt": "2025-12-15T21:13:12.821Z",
-                                                "schemaVersion": 0
+                                                "updatedAt": "2025-12-15T21:13:12.821Z"
                                             },
                                             {
                                                 "accountName": "Test Account Name",
@@ -9005,8 +8976,7 @@
                                                 "discoverDate": "2025-12-15T21:13:12.821Z",
                                                 "isComplete": false,
                                                 "template": "Google",
-                                                "updatedAt": "2025-12-15T21:13:12.821Z",
-                                                "schemaVersion": 1
+                                                "updatedAt": "2025-12-15T21:13:12.821Z"
                                             }
                                         ]
                                     ],
@@ -9163,8 +9133,7 @@
                                             "crmId": "9cbafdc4-1207-4f11-bf6a-f5c7fc6fb4a3",
                                             "discoverDate": "2026-02-28T14:30:00.000Z",
                                             "isComplete": false,
-                                            "template": "CloudMatrix-V-5.0.13",
-                                            "schemaVersion": 5
+                                            "template": "CloudMatrix-V-5.0.13"
                                         },
                                         "title": "CloudMatrix",
                                         "description": "MICROSOFT CLOUD ADOPTION MATRIX v5.0",
@@ -9251,7 +9220,7 @@
                                                     ]
                                                 }
                                             ],
-                                            "assessment": [
+                                            "assessments": [
                                                 {
                                                     "metadata": {
                                                         "name": "Teams Phone Enablement",
@@ -9267,7 +9236,7 @@
                                                         "availability": "GA",
                                                         "notes": "Pilot with 100 users before phase 2.",
                                                         "startYearConfig": {
-                                                            "value": 20,
+                                                            "value": "Full",
                                                             "userProfileIds": [
                                                                 "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
                                                             ],
@@ -9277,7 +9246,7 @@
                                                             "useCase": "PBX replacement"
                                                         },
                                                         "yearPlusOneConfig": {
-                                                            "value": 55,
+                                                            "value": "Partial",
                                                             "userProfileIds": [
                                                                 "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
                                                             ],
@@ -9287,7 +9256,7 @@
                                                             "useCase": "Enterprise voice"
                                                         },
                                                         "yearPlusTwoConfig": {
-                                                            "value": 80,
+                                                            "value": "Alternative",
                                                             "userProfileIds": [
                                                                 "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
                                                             ],
@@ -9297,7 +9266,7 @@
                                                             "useCase": "Global rollout"
                                                         },
                                                         "yearPlusThreeConfig": {
-                                                            "value": 95,
+                                                            "value": "NA",
                                                             "userProfileIds": [
                                                                 "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
                                                             ],
@@ -9308,7 +9277,7 @@
                                                         },
                                                         "sourceValue": 10
                                                     },
-                                                    "userProfiles": [
+                                                    "profiles": [
                                                         {
                                                             "name": "Information Worker",
                                                             "abbreviation": "IW",
@@ -9417,8 +9386,7 @@
                                                 "discoverDate": "2026-02-28T14:30:00.000Z",
                                                 "isComplete": true,
                                                 "template": "CloudMatrix-v5",
-                                                "updatedAt": "2026-03-06T10:20:00.000Z",
-                                                "schemaVersion": 5
+                                                "updatedAt": "2026-03-06T10:20:00.000Z"
                                             },
                                             "title": "CloudMatrix",
                                             "description": "MICROSOFT CLOUD ADOPTION MATRIX v5.0",
@@ -9505,7 +9473,7 @@
                                                         ]
                                                     }
                                                 ],
-                                                "assessment": [
+                                                "assessments": [
                                                     {
                                                         "metadata": {
                                                             "name": "Teams Phone Enablement",
@@ -9521,7 +9489,7 @@
                                                             "availability": "GA",
                                                             "notes": "Pilot with 100 users before phase 2.",
                                                             "startYearConfig": {
-                                                                "value": 20,
+                                                                "value": "Full",
                                                                 "userProfileIds": [
                                                                     "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
                                                                 ],
@@ -9531,7 +9499,7 @@
                                                                 "useCase": "PBX replacement"
                                                             },
                                                             "yearPlusOneConfig": {
-                                                                "value": 55,
+                                                                "value": "Partial",
                                                                 "userProfileIds": [
                                                                     "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
                                                                 ],
@@ -9541,7 +9509,7 @@
                                                                 "useCase": "Enterprise voice"
                                                             },
                                                             "yearPlusTwoConfig": {
-                                                                "value": 80,
+                                                                "value": "Alternative",
                                                                 "userProfileIds": [
                                                                     "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
                                                                 ],
@@ -9551,7 +9519,7 @@
                                                                 "useCase": "Global rollout"
                                                             },
                                                             "yearPlusThreeConfig": {
-                                                                "value": 95,
+                                                                "value": "NA",
                                                                 "userProfileIds": [
                                                                     "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
                                                                 ],
@@ -9562,7 +9530,7 @@
                                                             },
                                                             "sourceValue": 10
                                                         },
-                                                        "userProfiles": [
+                                                        "profiles": [
                                                             {
                                                                 "name": "Information Worker",
                                                                 "abbreviation": "IW",
@@ -9669,7 +9637,7 @@
         "/Api/CloudMatrix/Customer/{crmId}/Correlation/{correlationId}": {
             "patch": {
                 "description": "Updates the existing Cloud Matrix assessment data for specified crmId and correlationId.\n\nThis endpoint requires the `CloudMatrix.ReadWrite`, `CloudMatrix.ReadWrite.All` scope (permission).",
-                "operationId": "/Api/CloudMatrix/Customer/:crmId/Correlation/:correlationId",
+                "operationId": "/Api/CloudMatrix/Customer/:crmId/Correlation/:correlationId/Patch",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/crmId",
@@ -9697,8 +9665,7 @@
                                             "discoverDate": "2026-02-28T14:30:00.000Z",
                                             "isComplete": true,
                                             "template": "CloudMatrix-v5",
-                                            "updatedAt": "2026-03-06T10:20:00.000Z",
-                                            "schemaVersion": 5
+                                            "updatedAt": "2026-03-06T10:20:00.000Z"
                                         },
                                         "title": "CloudMatrix",
                                         "description": "MICROSOFT CLOUD ADOPTION MATRIX v5.0",
@@ -9785,7 +9752,7 @@
                                                     ]
                                                 }
                                             ],
-                                            "assessment": [
+                                            "assessments": [
                                                 {
                                                     "metadata": {
                                                         "name": "Teams Phone Enablement",
@@ -9801,7 +9768,7 @@
                                                         "availability": "GA",
                                                         "notes": "Pilot with 100 users before phase 2.",
                                                         "startYearConfig": {
-                                                            "value": 20,
+                                                            "value": "Full",
                                                             "userProfileIds": [
                                                                 "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
                                                             ],
@@ -9811,7 +9778,7 @@
                                                             "useCase": "PBX replacement"
                                                         },
                                                         "yearPlusOneConfig": {
-                                                            "value": 55,
+                                                            "value": "Partial",
                                                             "userProfileIds": [
                                                                 "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
                                                             ],
@@ -9821,7 +9788,7 @@
                                                             "useCase": "Enterprise voice"
                                                         },
                                                         "yearPlusTwoConfig": {
-                                                            "value": 80,
+                                                            "value": "Alternative",
                                                             "userProfileIds": [
                                                                 "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
                                                             ],
@@ -9831,7 +9798,7 @@
                                                             "useCase": "Global rollout"
                                                         },
                                                         "yearPlusThreeConfig": {
-                                                            "value": 95,
+                                                            "value": "NA",
                                                             "userProfileIds": [
                                                                 "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
                                                             ],
@@ -9842,7 +9809,7 @@
                                                         },
                                                         "sourceValue": 10
                                                     },
-                                                    "userProfiles": [
+                                                    "profiles": [
                                                         {
                                                             "name": "Information Worker",
                                                             "abbreviation": "IW",
@@ -9951,8 +9918,7 @@
                                                 "discoverDate": "2026-02-28T14:30:00.000Z",
                                                 "isComplete": true,
                                                 "template": "CloudMatrix-v5",
-                                                "updatedAt": "2026-03-06T10:20:00.000Z",
-                                                "schemaVersion": 5
+                                                "updatedAt": "2026-03-06T10:20:00.000Z"
                                             },
                                             "title": "CloudMatrix",
                                             "description": "MICROSOFT CLOUD ADOPTION MATRIX v5.0",
@@ -10039,7 +10005,7 @@
                                                         ]
                                                     }
                                                 ],
-                                                "assessment": [
+                                                "assessments": [
                                                     {
                                                         "metadata": {
                                                             "name": "Teams Phone Enablement",
@@ -10055,7 +10021,7 @@
                                                             "availability": "GA",
                                                             "notes": "Pilot with 100 users before phase 2.",
                                                             "startYearConfig": {
-                                                                "value": 20,
+                                                                "value": "Full",
                                                                 "userProfileIds": [
                                                                     "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
                                                                 ],
@@ -10065,7 +10031,7 @@
                                                                 "useCase": "PBX replacement"
                                                             },
                                                             "yearPlusOneConfig": {
-                                                                "value": 55,
+                                                                "value": "Partial",
                                                                 "userProfileIds": [
                                                                     "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
                                                                 ],
@@ -10075,7 +10041,7 @@
                                                                 "useCase": "Enterprise voice"
                                                             },
                                                             "yearPlusTwoConfig": {
-                                                                "value": 80,
+                                                                "value": "Alternative",
                                                                 "userProfileIds": [
                                                                     "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
                                                                 ],
@@ -10085,7 +10051,7 @@
                                                                 "useCase": "Global rollout"
                                                             },
                                                             "yearPlusThreeConfig": {
-                                                                "value": 95,
+                                                                "value": "NA",
                                                                 "userProfileIds": [
                                                                     "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
                                                                 ],
@@ -10096,7 +10062,7 @@
                                                             },
                                                             "sourceValue": 10
                                                         },
-                                                        "userProfiles": [
+                                                        "profiles": [
                                                             {
                                                                 "name": "Information Worker",
                                                                 "abbreviation": "IW",
@@ -10198,6 +10164,58 @@
                     "Cloud Matrix"
                 ],
                 "summary": "Update Cloud Matrix Assessment"
+            },
+            "get": {
+                "description": "Retrieves the details of a specific Cloud Matrix correlation record.\n\nThis endpoint requires the `CloudMatrix.Read` or `CloudMatrix.Read.All` scope (permission).",
+                "operationId": "/Api/CloudMatrix/Customer/:crmId/Correlation/:correlationId/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/crmId",
+                        "required": true
+                    },
+                    {
+                        "$ref": "#/components/parameters/correlationId",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A specific cloud matrix correlation record.",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Example Cloud Matrix Record": {
+                                        "description": "A single existing Cloud Matrix correlation record.",
+                                        "summary": "Existing Cloud Matrix Correlation Record",
+                                        "value": {
+                                            "accountName": "Test Account Name",
+                                            "correlationId": "bbab2907-c781-4bf1-b912-b91510853052",
+                                            "createdAt": "2025-12-15T21:13:12.821Z",
+                                            "crmId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
+                                            "discoverDate": "2025-12-15T21:13:12.821Z",
+                                            "isComplete": true,
+                                            "template": "Microsoft Enterprise",
+                                            "updatedAt": "2025-12-15T21:13:12.821Z"
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/CloudMatrixCorrelationRecord"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "tags": [
+                    "Cloud Matrix"
+                ],
+                "summary": "Get a specific Cloud Matrix Correlation Record"
             }
         }
     },
