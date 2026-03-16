@@ -10225,10 +10225,12 @@
                 "operationId": "/Api/CloudMatrix/Customer/:crmId/Correlation/:correlationId/Data/Get",
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/crmId"
+                        "$ref": "#/components/parameters/crmId",
+                        "required": true
                     },
                     {
-                        "$ref": "#/components/parameters/correlationId"
+                        "$ref": "#/components/parameters/correlationId",
+                        "required": true
                     }
                 ],
                 "responses": {
