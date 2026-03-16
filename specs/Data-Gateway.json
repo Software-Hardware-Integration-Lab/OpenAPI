@@ -240,22 +240,58 @@
             },
             "NullableUuid": {
                 "oneOf": [
-                    { "$ref": "#/components/schemas/Uuid" },
-                    { "type": "null" }
+                    {
+                        "$ref": "#/components/schemas/Uuid"
+                    },
+                    {
+                        "type": "null"
+                    }
                 ],
-                "examples": ["fd9a6a53-594d-41aa-950a-b21ff41d4688", null]
-            },            
+                "examples": [
+                    "fd9a6a53-594d-41aa-950a-b21ff41d4688",
+                    null
+                ]
+            },
             "DateTimeStringType": {
                 "type": "string",
                 "format": "date-time",
-                "examples": ["2026-01-01T00:00:00Z"]
+                "examples": [
+                    "2026-01-01T00:00:00Z"
+                ]
             },
             "NullableDateTimeStringType": {
                 "oneOf": [
-                    { "$ref": "#/components/schemas/DateTimeStringType" },
-                    { "type": "null" }
+                    {
+                        "$ref": "#/components/schemas/DateTimeStringType"
+                    },
+                    {
+                        "type": "null"
+                    }
                 ],
-                "examples": ["2026-01-01T00:00:00Z", null]
+                "examples": [
+                    "2026-01-01T00:00:00Z",
+                    null
+                ]
+            },
+            "NullableNumber": {
+                "type": [
+                    "number",
+                    "null"
+                ],
+                "examples": [
+                    1.0,
+                    null
+                ]
+            },
+            "NullableString": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "examples": [
+                    "A string",
+                    null
+                ]
             },
             "Core.HealthReport": {
                 "description": "Health report that indicates if a service is down or not that the data gateway relies on.",
@@ -2356,66 +2392,6 @@
                 "$ref": "#/components/schemas/Report.PrincipalData",
                 "title": "Architecture Report - Principal Data"
             },
-            "CloudMatrixProfileKeyValue": {
-                "title": "Cloud Matrix Profile Key Value",
-                "description": "Key value pair in a Cloud Matrix profile",
-                "examples": [
-                    {
-                        "name": "Microsoft E5 Premium",
-                        "abbreviation": "ME5P",
-                        "value": 5
-                    }
-                ],
-                "properties": {
-                    "name": {
-                        "type": "string",
-                        "description": "Display name of the Cloud Matrix profile.",
-                        "examples": [
-                            "Microsoft E5 Premium"
-                        ]
-                    },
-                    "abbreviation": {
-                        "oneOf": [
-                            {
-                                "type": "string",
-                                "description": "Short code used to abbreviate the profile name.",
-                                "examples": [
-                                    "ME5P"
-                                ]
-                            },
-                            {
-                                "type": "null",
-                                "description": "Null when the abbreviation is not available.",
-                                "examples": [
-                                    null
-                                ]
-                            }
-                        ]
-                    },
-                    "value": {
-                        "oneOf": [
-                            {
-                                "type": "number",
-                                "description": "Numeric score or weighting for the profile.",
-                                "examples": [
-                                    5
-                                ]
-                            },
-                            {
-                                "type": "null",
-                                "description": "Null when the profile value is not available.",
-                                "examples": [
-                                    null
-                                ]
-                            }
-                        ]
-                    }
-                },
-                "required": [
-                    "name",
-                    "value"
-                ]
-            },
             "CloudMatrixRoadmapElementMetadata": {
                 "title": "Cloud Matrix Roadmap Element Metadata",
                 "description": "The metadata related to a Cloud Matrix Value Assessment.",
@@ -2584,7 +2560,7 @@
                         "type": "array",
                         "description": "Profile scores associated with this roadmap element.",
                         "items": {
-                            "$ref": "#/components/schemas/CloudMatrixProfileKeyValue"
+                            "$ref": "#/components/schemas/CloudMatrix.UserProfileDetailEntry"
                         }
                     }
                 },
@@ -4723,6 +4699,1829 @@
                         }
                     ]
                 }
+            },
+            "CloudMatrix.CloudMatrixCorrelation": {
+                "type": "object",
+                "description": "Correlation Data that points to a specific matrix assessment/roadmap that belongs in the database.",
+                "properties": {
+                    "accountName": {
+                        "type": "string",
+                        "description": "Stores the name of the customer associated with this cloud matrix assessment record.",
+                        "examples": [
+                            "AstraZeneca"
+                        ]
+                    },
+                    "correlationId": {
+                        "$ref": "#/components/schemas/Uuid",
+                        "description": "Unique Identifier representing a single set of cloud matrix assessment."
+                    },
+                    "createdAt": {
+                        "$ref": "#/components/schemas/DateTimeStringType",
+                        "description": "Timestamp indicating when the record was created. This is auto managed by sequelize."
+                    },
+                    "crmId": {
+                        "$ref": "#/components/schemas/Uuid",
+                        "description": "Unique Identifier representing the customer identity for this cloud matrix assessment."
+                    },
+                    "discoverDate": {
+                        "$ref": "#/components/schemas/DateTimeStringType",
+                        "description": "Date when the discovery process was initiated, as specified by the user."
+                    },
+                    "isComplete": {
+                        "type": "boolean",
+                        "description": "Indicates whether the discovery process has been completed for this cloud matrix assessment record.",
+                        "examples": [
+                            true,
+                            false
+                        ]
+                    },
+                    "template": {
+                        "type": "string",
+                        "description": "Stores the name of the template associated with this cloud matrix assessment record.",
+                        "examples": [
+                            "Microsoft Enterprise"
+                        ]
+                    },
+                    "updatedAt": {
+                        "$ref": "#/components/schemas/DateTimeStringType",
+                        "description": "Timestamp indicating when the record was last updated. This is auto managed by sequelize."
+                    },
+                    "schemaVersion": {
+                        "type": "number",
+                        "description": "Version number of the Cloud Matrix schema used for this assessment record.",
+                        "examples": [
+                            1.0
+                        ]
+                    }
+                },
+                "required": [
+                    "accountName",
+                    "crmId",
+                    "discoverDate",
+                    "isComplete",
+                    "template"
+                ],
+                "additionalProperties": false,
+                "examples": [
+                    {
+                        "accountName": "AstraZeneca",
+                        "correlationId": "bbab2907-c781-4bf1-b912-b91510853052",
+                        "createdAt": "2025-12-15T21:13:12.821Z",
+                        "crmId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
+                        "discoverDate": "2025-12-15T21:13:12.821Z",
+                        "isComplete": true,
+                        "template": "Microsoft Enterprise",
+                        "updatedAt": "2025-12-15T21:13:12.821Z"
+                    }
+                ]
+            },
+            "CloudMatrix.CloudMatrix": {
+                "type": "object",
+                "description": "Root document for the Microsoft Cloud Adoption Matrix (derived from schema).",
+                "properties": {
+                    "correlation": {
+                        "$ref": "#/components/schemas/CloudMatrix.CloudMatrixCorrelation",
+                        "description": "Correlation data to identify a specific record."
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "Document title; Default: 'CloudMatrix'.",
+                        "examples": [
+                            "CloudMatrix"
+                        ]
+                    },
+                    "description": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Document description; Default: 'MICROSOFT CLOUD ADOPTION MATRIX v5.0'.",
+                        "examples": [
+                            "MICROSOFT CLOUD ADOPTION MATRIX v5.0",
+                            null
+                        ]
+                    },
+                    "version": {
+                        "type": "string",
+                        "description": "Document version string; Default: '5.0.14'.",
+                        "examples": [
+                            "5.0.14"
+                        ]
+                    },
+                    "valueAssessment": {
+                        "$ref": "#/components/schemas/CloudMatrix.ValueAssessment",
+                        "description": "Value assessment content block."
+                    },
+                    "breakouts": {
+                        "type": "array",
+                        "description": "Feature breakouts catalog.",
+                        "items": {
+                            "$ref": "#/components/schemas/CloudMatrix.Breakout"
+                        },
+                        "examples": [
+                            [
+                                {
+                                    "title": "PORTAL APPS",
+                                    "breakoutId": "f1ebe6ab-1164-4ab8-8970-2d561ee7634f",
+                                    "breakoutName": "BREAKOUT -Portal Apps",
+                                    "features": [
+                                        {
+                                            "roadmapElementPath": "User Experience /Productivity Apps/Extended Productivity App Ecosystem",
+                                            "elementSubdimension": "Productivity Apps",
+                                            "roadmapProduct": "Platform Only",
+                                            "feature": "Viva Insights - Personal",
+                                            "description": "Microsoft Lists is a Microsoft 365 app that helps you track information and organize work with customizable lists for tasks, projects, and more.",
+                                            "publisherLink": "",
+                                            "subscriptionFeatures": [
+                                                {
+                                                    "licensing": "M365 FLW",
+                                                    "products": [
+                                                        {
+                                                            "product": "F1",
+                                                            "value": "na",
+                                                            "comment": ""
+                                                        },
+                                                        {
+                                                            "product": "F3",
+                                                            "value": "na",
+                                                            "comment": ""
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        ]
+                    }
+                },
+                "required": [
+                    "correlation",
+                    "title",
+                    "description",
+                    "version",
+                    "valueAssessment",
+                    "breakouts"
+                ],
+                "additionalProperties": false,
+                "examples": [
+                    {
+                        "title": "CloudMatrix",
+                        "description": "MICROSOFT CLOUD ADOPTION MATRIX v5.0",
+                        "version": "5.0.14",
+                        "valueAssessment": {
+                            "actionPlan": {
+                                "accountName": "AstraZeneca",
+                                "discoveryDate": "2000-01-01T00:00:00Z",
+                                "accountManager": "John Smith",
+                                "consultant": "MSAG Consultant",
+                                "licensingExecutive": "Jane Doe",
+                                "customerSuccessManager": "John Doe",
+                                "notesAndObjectives": ""
+                            },
+                            "userProfiles": [
+                                {
+                                    "id": "00000000-0000-0000-0000-000000000001",
+                                    "name": "Profile Details",
+                                    "values": [
+                                        {
+                                            "name": "Profile Name",
+                                            "value": "Information Worker"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "assessments": [
+                                {
+                                    "metadata": {
+                                        "name": "M365 Apps for Enterprise - Mobile/Online",
+                                        "breakoutId": null,
+                                        "category": "USER EXPERIENCE",
+                                        "subCategory": "Productivity",
+                                        "help": "Brief:  Common applications available through a browser used for business purposes typically bundled together by software vendors like Microsoft and Google. i.e., spreadsheets, slide presentations, word processor, etc.",
+                                        "licensingProduct": "M365 Mobile Apps",
+                                        "licensingProductHelp": "Mobile Apps The Microsoft 365 mobile app combines Word, Excel, and PowerPoint into a single app for iOS and Android devices. It offers features like creating, editing, and sharing documents on the go, scanning and signing PDFs, and using voice commands for quick tasks. You can also connect your email accounts and calendars in one convenient spot1.\n\nWeb Apps Microsoft 365 for the web includes online versions of Word, Excel, PowerPoint, OneNote, and Outlook. These web apps allow you to create, edit, and share documents directly from your browser without needing to install any software. You can access your documents from anywhere with an internet connection, making it easy to collaborate with others in real-time2.",
+                                        "isAddon": false,
+                                        "isStrategicAddon": false,
+                                        "isTenantBased": false,
+                                        "availability": null,
+                                        "notes": "",
+                                        "startYearConfig": {
+                                            "value": null,
+                                            "userProfileIds": null,
+                                            "isDeepDive": false,
+                                            "altProduct": null,
+                                            "publisher": null,
+                                            "useCase": null
+                                        },
+                                        "yearPlusOneConfig": {
+                                            "value": null,
+                                            "userProfileIds": null,
+                                            "isDeepDive": false,
+                                            "altProduct": null,
+                                            "publisher": null,
+                                            "useCase": null
+                                        },
+                                        "yearPlusTwoConfig": {
+                                            "value": null,
+                                            "userProfileIds": null,
+                                            "isDeepDive": false,
+                                            "altProduct": null,
+                                            "publisher": null,
+                                            "useCase": null
+                                        },
+                                        "yearPlusThreeConfig": {
+                                            "value": null,
+                                            "userProfileIds": null,
+                                            "isDeepDive": false,
+                                            "altProduct": null,
+                                            "publisher": null,
+                                            "useCase": null
+                                        },
+                                        "sourceValue": 0.0
+                                    },
+                                    "profiles": [
+                                        {
+                                            "name": "Microsoft E5",
+                                            "abbreviation": "ME5P",
+                                            "value": 5.0
+                                        }
+                                    ],
+                                    "features": [
+                                        {
+                                            "licensing": "M365 SMB",
+                                            "products": [
+                                                {
+                                                    "product": "PS",
+                                                    "value": "na",
+                                                    "comment": ""
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            "displacements": [
+                                {
+                                    "name": "Example displacement opportunity",
+                                    "currentProvider": {
+                                        "name": "Microsoft",
+                                        "terms": "5 Years",
+                                        "contractNumber": "C12345678",
+                                        "expiryDate": "2026-01-01T00:00:00Z",
+                                        "costs": {
+                                            "monthlyCost": 5001,
+                                            "annualCost": 5002,
+                                            "contractValue": 5003
+                                        }
+                                    },
+                                    "displacement": {
+                                        "name": "Google",
+                                        "terms": "3 Years",
+                                        "contractNumber": "C87654321",
+                                        "expiryDate": "20260101T00:00:00Z",
+                                        "costs": [
+                                            {
+                                                "monthlyCost": 5001,
+                                                "annualCost": 5002,
+                                                "contractValue": 5003
+                                            }
+                                        ],
+                                        "replacementDate": "20261231T00:00:00Z"
+                                    },
+                                    "notes": "Example notes"
+                                }
+                            ]
+                        },
+                        "breakouts": [
+                            {
+                                "title": "PORTAL APPS",
+                                "breakoutId": "f1ebe6ab-1164-4ab8-8970-2d561ee7634f",
+                                "breakoutName": "BREAKOUT -Portal Apps",
+                                "features": [
+                                    {
+                                        "roadmapElementPath": "User Experience /Productivity Apps/Extended Productivity App Ecosystem",
+                                        "elementSubdimension": "Productivity Apps",
+                                        "roadmapProduct": "Platform Only",
+                                        "feature": "Viva Insights - Personal",
+                                        "description": "Microsoft Lists is a Microsoft 365 app that helps you track information and organize work with customizable lists for tasks, projects, and more.",
+                                        "publisherLink": "",
+                                        "subscriptionFeatures": [
+                                            {
+                                                "licensing": "M365 FLW",
+                                                "products": [
+                                                    {
+                                                        "product": "F1",
+                                                        "value": "na",
+                                                        "comment": ""
+                                                    },
+                                                    {
+                                                        "product": "F3",
+                                                        "value": "na",
+                                                        "comment": ""
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "CloudMatrix.UserProfileDetailEntry": {
+                "type": "object",
+                "description": "A single name/value pair for profile details, allowing for extensibility in the future.",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the detail field.",
+                        "examples": [
+                            "Profile Name"
+                        ]
+                    },
+                    "value": {
+                        "type": "string",
+                        "description": "Value of the detail field.",
+                        "examples": [
+                            "Knowledge Worker"
+                        ]
+                    }
+                },
+                "required": [
+                    "name",
+                    "value"
+                ],
+                "additionalProperties": false,
+                "examples": [
+                    {
+                        "name": "Profile Name",
+                        "value": "Knowledge Worker"
+                    }
+                ]
+            },
+            "CloudMatrix.UserProfileDetail": {
+                "type": "object",
+                "description": "A section of related profile details grouped under a common header.",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Section header name for this group of profile details.",
+                        "examples": [
+                            "Profile Details"
+                        ]
+                    },
+                    "values": {
+                        "type": "array",
+                        "description": "Array of name/value pairs for the details under this section.",
+                        "items": {
+                            "$ref": "#/components/schemas/CloudMatrix.UserProfileDetailEntry"
+                        },
+                        "examples": [
+                            {
+                                "name": "Profile Name",
+                                "value": "Knowledge Worker"
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "name",
+                    "values"
+                ],
+                "additionalProperties": false,
+                "examples": [
+                    {
+                        "name": "Profile Details",
+                        "values": [
+                            {
+                                "name": "Profile Name",
+                                "value": "Knowledge Worker"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "CloudMatrix.UserProfile": {
+                "type": "object",
+                "description": "A named user profile with a set of detail rows.",
+                "properties": {
+                    "id": {
+                        "$ref": "#/components/schemas/Uuid",
+                        "description": "Unique identifier for the user profile."
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "User profile display name.",
+                        "examples": [
+                            "Information Worker"
+                        ]
+                    },
+                    "details": {
+                        "type": "array",
+                        "description": "Array of section blocks that group related fields under a header.",
+                        "items": {
+                            "$ref": "#/components/schemas/CloudMatrix.UserProfileDetail"
+                        },
+                        "examples": [
+                            {
+                                "id": "00000000-0000-0000-0000-000000000001",
+                                "name": "Profile Details",
+                                "values": [
+                                    {
+                                        "name": "Profile Name",
+                                        "value": "Information Worker"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "id",
+                    "name",
+                    "details"
+                ],
+                "additionalProperties": false
+            },
+            "CloudMatrix.YearConfig": {
+                "type": "object",
+                "description": "Standardized configuration shape for a year phase.",
+                "properties": {
+                    "value": {
+                        "$ref": "#/components/schemas/NullableNumber",
+                        "description": "Numeric assessment value for this year phase (e.g., score/percentage) or null."
+                    },
+                    "userProfileIds": {
+                        "description": "Associated user profile IDs or null.",
+                        "oneOf": [
+                            {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Uuid"
+                                }
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "examples": [
+                            [
+                                "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
+                            ],
+                            null
+                        ]
+                    },
+                    "isDeepDive": {
+                        "type": "boolean",
+                        "description": "Indicates deep-dive applicability.",
+                        "examples": [
+                            true
+                        ]
+                    },
+                    "altProduct": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Alternate product, if any, or null.",
+                        "examples": [
+                            "Other Product"
+                        ]
+                    },
+                    "publisher": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Publisher label, if any, or null.",
+                        "examples": [
+                            "Microsoft",
+                            "Google",
+                            "Apple",
+                            "Slack",
+                            "Zoom",
+                            "Adobe",
+                            "Salesforce",
+                            "Other",
+                            null
+                        ]
+                    },
+                    "useCase": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Use-case descriptor, if any, or null.",
+                        "examples": [
+                            "Augment",
+                            "In place of",
+                            "Will be deprecated",
+                            null
+                        ]
+                    }
+                },
+                "required": [
+                    "value",
+                    "userProfileIds",
+                    "isDeepDive",
+                    "altProduct",
+                    "publisher",
+                    "useCase"
+                ],
+                "additionalProperties": false,
+                "examples": [
+                    {
+                        "value": 1.0,
+                        "userProfileIds": [
+                            "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
+                        ],
+                        "isDeepDive": true,
+                        "altProduct": "Other Product",
+                        "publisher": "Microsoft",
+                        "useCase": "Augment"
+                    }
+                ]
+            },
+            "CloudMatrix.AssessmentMetadata": {
+                "type": "object",
+                "description": "Descriptive and time-phased configuration for an assessment element.",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Element name.",
+                        "examples": [
+                            "M365 Apps for Enterprise - Mobile/Online"
+                        ]
+                    },
+                    "breakoutId": {
+                        "$ref": "#/components/schemas/NullableUuid",
+                        "description": "Optional breakout identifier, may be null."
+                    },
+                    "category": {
+                        "type": "string",
+                        "description": "Top-level category name.",
+                        "examples": [
+                            "USER EXPERIENCE"
+                        ]
+                    },
+                    "subCategory": {
+                        "type": "string",
+                        "description": "Sub-category name.",
+                        "examples": [
+                            "Productivity"
+                        ]
+                    },
+                    "help": {
+                        "type": "string",
+                        "description": "Additional context or guidance text for this element.",
+                        "examples": [
+                            "Brief:  Common applications available through a browser used for business purposes typically bundled together by software vendors like Microsoft and Google. i.e., spreadsheets, slide presentations, word processor, etc."
+                        ]
+                    },
+                    "licensingProduct": {
+                        "type": "string",
+                        "description": "Licensing product this element maps to.",
+                        "examples": [
+                            "M365 Mobile Apps"
+                        ]
+                    },
+                    "licensingProductHelp": {
+                        "type": "string",
+                        "description": "Help text for the licensing product.",
+                        "examples": [
+                            "Mobile Apps The Microsoft 365 mobile app combines Word, Excel, and PowerPoint into a single app for iOS and Android devices. It offers features like creating, editing, and sharing documents on the go, scanning and signing PDFs, and using voice commands for quick tasks. You can also connect your email accounts and calendars in one convenient spot1.\n\nWeb Apps Microsoft 365 for the web includes online versions of Word, Excel, PowerPoint, OneNote, and Outlook. These web apps allow you to create, edit, and share documents directly from your browser without needing to install any software. You can access your documents from anywhere with an internet connection, making it easy to collaborate with others in real-time."
+                        ]
+                    },
+                    "isAddon": {
+                        "type": "boolean",
+                        "description": "Indicates if this element is an add-on.",
+                        "examples": [
+                            false
+                        ]
+                    },
+                    "isStrategicAddon": {
+                        "type": "boolean",
+                        "description": "Indicates if this element is a strategic add-on.",
+                        "examples": [
+                            false
+                        ]
+                    },
+                    "isTenantBased": {
+                        "type": "boolean",
+                        "description": "Indicates if this element is tenant-based.",
+                        "examples": [
+                            false
+                        ]
+                    },
+                    "availability": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Availability status of this element.",
+                        "examples": [
+                            "Available",
+                            null
+                        ]
+                    },
+                    "notes": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Free-form notes.",
+                        "examples": [
+                            "Some notes",
+                            null
+                        ]
+                    },
+                    "startYearConfig": {
+                        "$ref": "#/components/schemas/CloudMatrix.YearConfig"
+                    },
+                    "yearPlusOneConfig": {
+                        "$ref": "#/components/schemas/CloudMatrix.YearConfig"
+                    },
+                    "yearPlusTwoConfig": {
+                        "$ref": "#/components/schemas/CloudMatrix.YearConfig"
+                    },
+                    "yearPlusThreeConfig": {
+                        "$ref": "#/components/schemas/CloudMatrix.YearConfig"
+                    },
+                    "sourceValue": {
+                        "type": "number",
+                        "description": "Source or baseline numeric value.",
+                        "examples": [
+                            1.0
+                        ]
+                    }
+                },
+                "required": [
+                    "name",
+                    "breakoutId",
+                    "category",
+                    "subCategory",
+                    "help",
+                    "licensingProduct",
+                    "licensingProductHelp",
+                    "isAddon",
+                    "isStrategicAddon",
+                    "isTenantBased",
+                    "availability",
+                    "notes",
+                    "startYearConfig",
+                    "yearPlusOneConfig",
+                    "yearPlusTwoConfig",
+                    "yearPlusThreeConfig",
+                    "sourceValue"
+                ],
+                "additionalProperties": false,
+                "examples": [
+                    {
+                        "name": "M365 Apps for Enterprise - Mobile/Online",
+                        "breakoutId": null,
+                        "category": "USER EXPERIENCE",
+                        "subCategory": "Productivity",
+                        "help": "Brief:  Common applications available through a browser used for business purposes typically bundled together by software vendors like Microsoft and Google. i.e., spreadsheets, slide presentations, word processor, etc.",
+                        "licensingProduct": "M365 Mobile Apps",
+                        "licensingProductHelp": "Mobile Apps The Microsoft 365 mobile app combines Word, Excel, and PowerPoint into a single app for iOS and Android devices. It offers features like creating, editing, and sharing documents on the go, scanning and signing PDFs, and using voice commands for quick tasks. You can also connect your email accounts and calendars in one convenient spot1.\n\nWeb Apps Microsoft 365 for the web includes online versions of Word, Excel, PowerPoint, OneNote, and Outlook. These web apps allow you to create, edit, and share documents directly from your browser without needing to install any software. You can access your documents from anywhere with an internet connection, making it easy to collaborate with others in real-time2.",
+                        "isAddon": false,
+                        "isStrategicAddon": false,
+                        "isTenantBased": false,
+                        "availability": null,
+                        "notes": "",
+                        "startYearConfig": {
+                            "value": null,
+                            "userProfileIds": null,
+                            "isDeepDive": false,
+                            "altProduct": null,
+                            "publisher": null,
+                            "useCase": null
+                        },
+                        "yearPlusOneConfig": {
+                            "value": null,
+                            "userProfileIds": null,
+                            "isDeepDive": false,
+                            "altProduct": null,
+                            "publisher": null,
+                            "useCase": null
+                        },
+                        "yearPlusTwoConfig": {
+                            "value": null,
+                            "userProfileIds": null,
+                            "isDeepDive": false,
+                            "altProduct": null,
+                            "publisher": null,
+                            "useCase": null
+                        },
+                        "yearPlusThreeConfig": {
+                            "value": null,
+                            "userProfileIds": null,
+                            "isDeepDive": false,
+                            "altProduct": null,
+                            "publisher": null,
+                            "useCase": null
+                        },
+                        "sourceValue": 0.0
+                    }
+                ]
+            },
+            "CloudMatrix.AssessmentProfile": {
+                "type": "object",
+                "description": "A named profile value attached to the element.",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Profile display name.",
+                        "examples": [
+                            "Microsoft E5"
+                        ]
+                    },
+                    "abbreviation": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Short abbreviation for the profile.",
+                        "examples": [
+                            "ME5P",
+                            null
+                        ]
+                    },
+                    "value": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "description": "Numeric value or null if unset.",
+                        "examples": [
+                            5.0,
+                            null
+                        ]
+                    }
+                },
+                "required": [
+                    "name",
+                    "abbreviation",
+                    "value"
+                ],
+                "additionalProperties": false,
+                "examples": [
+                    {
+                        "name": "Microsoft E5",
+                        "abbreviation": "ME5P",
+                        "value": 5.0
+                    }
+                ]
+            },
+            "CloudMatrix.Product": {
+                "type": "object",
+                "description": "A single product mapping with value and comment.",
+                "properties": {
+                    "product": {
+                        "type": "string",
+                        "description": "Product name.",
+                        "examples": [
+                            "PS"
+                        ]
+                    },
+                    "value": {
+                        "type": "string",
+                        "description": "Product value string (e.g., tier or flag).",
+                        "examples": [
+                            "na"
+                        ]
+                    },
+                    "comment": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Comment or notes string.",
+                        "examples": [
+                            "Example comment",
+                            null
+                        ]
+                    }
+                },
+                "required": [
+                    "product",
+                    "value",
+                    "comment"
+                ],
+                "additionalProperties": false,
+                "examples": [
+                    {
+                        "product": "E5",
+                        "value": "available",
+                        "comment": ""
+                    }
+                ]
+            },
+            "CloudMatrix.AssessmentFeature": {
+                "type": "object",
+                "description": "Licensing block with product-level entries.",
+                "properties": {
+                    "licensing": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Licensing descriptor string.",
+                        "examples": [
+                            "O365",
+                            null
+                        ]
+                    },
+                    "products": {
+                        "type": "array",
+                        "description": "Mapped product entries under this licensing.",
+                        "items": {
+                            "$ref": "#/components/schemas/CloudMatrix.Product"
+                        },
+                        "examples": [
+                            [
+                                {
+                                    "product": "E5",
+                                    "value": "available",
+                                    "comment": ""
+                                }
+                            ]
+                        ]
+                    }
+                },
+                "required": [
+                    "licensing",
+                    "products"
+                ],
+                "additionalProperties": false,
+                "examples": [
+                    {
+                        "licensing": "O365",
+                        "products": [
+                            {
+                                "product": "E5",
+                                "value": "available",
+                                "comment": ""
+                            }
+                        ]
+                    }
+                ]
+            },
+            "CloudMatrix.Assessment": {
+                "type": "object",
+                "description": "A single assessment element with metadata, profile values, and features.",
+                "properties": {
+                    "metadata": {
+                        "$ref": "#/components/schemas/CloudMatrix.AssessmentMetadata"
+                    },
+                    "profiles": {
+                        "type": "array",
+                        "description": "Profile scores or values associated with this element.",
+                        "items": {
+                            "$ref": "#/components/schemas/CloudMatrix.AssessmentProfile"
+                        },
+                        "examples": [
+                            [
+                                {
+                                    "name": "Microsoft E5",
+                                    "abbreviation": "ME5P",
+                                    "value": 5.0
+                                }
+                            ]
+                        ]
+                    },
+                    "features": {
+                        "type": "array",
+                        "description": "Feature licensing and product mappings for this element.",
+                        "items": {
+                            "$ref": "#/components/schemas/CloudMatrix.AssessmentFeature"
+                        },
+                        "examples": [
+                            [
+                                {
+                                    "licensing": "O365",
+                                    "products": [
+                                        {
+                                            "product": "E5",
+                                            "value": "available",
+                                            "comment": ""
+                                        }
+                                    ]
+                                }
+                            ]
+                        ]
+                    }
+                },
+                "required": [
+                    "metadata",
+                    "profiles",
+                    "features"
+                ],
+                "additionalProperties": false,
+                "examples": [
+                    {
+                        "metadata": {
+                            "name": "M365 Apps for Enterprise - Mobile/Online",
+                            "breakoutId": null,
+                            "category": "USER EXPERIENCE",
+                            "subCategory": "Productivity",
+                            "help": "Brief:  Common applications available through a browser used for business purposes typically bundled together by software vendors like Microsoft and Google. i.e., spreadsheets, slide presentations, word processor, etc.",
+                            "licensingProduct": "M365 Mobile Apps",
+                            "licensingProductHelp": "Mobile Apps The Microsoft 365 mobile app combines Word, Excel, and PowerPoint into a single app for iOS and Android devices. It offers features like creating, editing, and sharing documents on the go, scanning and signing PDFs, and using voice commands for quick tasks. You can also connect your email accounts and calendars in one convenient spot1.\n\nWeb Apps Microsoft 365 for the web includes online versions of Word, Excel, PowerPoint, OneNote, and Outlook. These web apps allow you to create, edit, and share documents directly from your browser without needing to install any software. You can access your documents from anywhere with an internet connection, making it easy to collaborate with others in real-time2.",
+                            "isAddon": false,
+                            "isStrategicAddon": false,
+                            "isTenantBased": false,
+                            "availability": null,
+                            "notes": "",
+                            "startYearConfig": {
+                                "value": null,
+                                "userProfileIds": null,
+                                "isDeepDive": false,
+                                "altProduct": null,
+                                "publisher": null,
+                                "useCase": null
+                            },
+                            "yearPlusOneConfig": {
+                                "value": null,
+                                "userProfileIds": null,
+                                "isDeepDive": false,
+                                "altProduct": null,
+                                "publisher": null,
+                                "useCase": null
+                            },
+                            "yearPlusTwoConfig": {
+                                "value": null,
+                                "userProfileIds": null,
+                                "isDeepDive": false,
+                                "altProduct": null,
+                                "publisher": null,
+                                "useCase": null
+                            },
+                            "yearPlusThreeConfig": {
+                                "value": null,
+                                "userProfileIds": null,
+                                "isDeepDive": false,
+                                "altProduct": null,
+                                "publisher": null,
+                                "useCase": null
+                            },
+                            "sourceValue": 0.0
+                        },
+                        "profiles": [
+                            {
+                                "name": "Microsoft E5",
+                                "abbreviation": "ME5P",
+                                "value": 5.0
+                            }
+                        ],
+                        "features": [
+                            {
+                                "licensing": "M365 SMB",
+                                "products": [
+                                    {
+                                        "product": "PS",
+                                        "value": "na",
+                                        "comment": ""
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "CloudMatrix.Costs": {
+                "type": "object",
+                "description": "Cost fields for a current provider.",
+                "properties": {
+                    "monthlyCost": {
+                        "type": "number",
+                        "description": "Monthly cost numeric value.",
+                        "examples": [
+                            5001
+                        ]
+                    },
+                    "annualCost": {
+                        "type": "number",
+                        "description": "Annual cost numeric value.",
+                        "examples": [
+                            5002
+                        ]
+                    },
+                    "contractValue": {
+                        "type": "number",
+                        "description": "Total contract value numeric amount.",
+                        "examples": [
+                            5003
+                        ]
+                    }
+                },
+                "required": [
+                    "monthlyCost",
+                    "annualCost",
+                    "contractValue"
+                ],
+                "additionalProperties": false,
+                "examples": [
+                    {
+                        "monthlyCost": 5001,
+                        "annualCost": 5002,
+                        "contractValue": 5003
+                    }
+                ]
+            },
+            "CloudMatrix.Provider": {
+                "type": "object",
+                "description": "Current provider contract info with aggregated costs.",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Current provider name.",
+                        "examples": [
+                            "Microsoft"
+                        ]
+                    },
+                    "terms": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Contract terms text.",
+                        "examples": [
+                            "5 Years",
+                            null
+                        ]
+                    },
+                    "contractNumber": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Contract number or identifier.",
+                        "examples": [
+                            "C12345678"
+                        ]
+                    },
+                    "expiryDate": {
+                        "$ref": "#/components/schemas/NullableDateTimeStringType",
+                        "description": "Contract expiry date string."
+                    }
+                },
+                "required": [
+                    "name",
+                    "terms",
+                    "contractNumber",
+                    "expiryDate"
+                ],
+                "additionalProperties": false,
+                "examples": [
+                    {
+                        "name": "Microsoft",
+                        "terms": "5 Years",
+                        "contractNumber": "C12345678",
+                        "expiryDate": "2026-01-01T00:00:00Z"
+                    }
+                ]
+            },
+            "CloudMatrix.CurrentProvider": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/CloudMatrix.Provider"
+                    },
+                    {
+                        "type": "object",
+                        "description": "Extension of Provider to include cost breakdowns for the current provider.",
+                        "properties": {
+                            "costs": {
+                                "$ref": "#/components/schemas/CloudMatrix.Costs",
+                                "description": "Cost breakdown with monthly/annual/contract values."
+                            }
+                        },
+                        "required": [
+                            "costs"
+                        ],
+                        "additionalProperties": false
+                    }
+                ],
+                "examples": [
+                    {
+                        "name": "Microsoft",
+                        "terms": "5 Years",
+                        "contractNumber": "C12345678",
+                        "expiryDate": "2026-01-01T00:00:00Z",
+                        "costs": {
+                            "monthlyCost": 5001,
+                            "annualCost": 5002,
+                            "contractValue": 5003
+                        }
+                    }
+                ]
+            },
+            "CloudMatrix.NewProvider": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/CloudMatrix.Provider"
+                    },
+                    {
+                        "type": "object",
+                        "description": "Proposed displacement contract info and cost scenarios.",
+                        "properties": {
+                            "costs": {
+                                "type": "array",
+                                "description": "One or more cost scenarios.",
+                                "items": {
+                                    "$ref": "#/components/schemas/CloudMatrix.Costs"
+                                },
+                                "examples": [
+                                    [
+                                        {
+                                            "monthlyCost": 5001,
+                                            "annualCost": 5002,
+                                            "contractValue": 5003
+                                        }
+                                    ]
+                                ]
+                            },
+                            "replacementDate": {
+                                "$ref": "#/components/schemas/NullableDateTimeStringType",
+                                "description": "Planned replacement date string."
+                            }
+                        },
+                        "required": [
+                            "costs",
+                            "replacementDate"
+                        ],
+                        "additionalProperties": false
+                    }
+                ],
+                "examples": [
+                    {
+                        "name": "Microsoft",
+                        "terms": "5 Years",
+                        "contractNumber": "C12345678",
+                        "expiryDate": "20260101T00:00:00Z",
+                        "costs": [
+                            {
+                                "monthlyCost": 5001,
+                                "annualCost": 5002,
+                                "contractValue": 5003
+                            }
+                        ],
+                        "replacementDate": "20260101T00:00:00Z"
+                    }
+                ]
+            },
+            "CloudMatrix.Displacement": {
+                "type": "object",
+                "description": "A displacement candidate including current provider and the proposed displacement.",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Displacement opportunity name.",
+                        "examples": [
+                            "Example displacement opportunity"
+                        ]
+                    },
+                    "currentProvider": {
+                        "$ref": "#/components/schemas/CloudMatrix.CurrentProvider",
+                        "description": "Current provider information including contract costs."
+                    },
+                    "displacement": {
+                        "$ref": "#/components/schemas/CloudMatrix.NewProvider",
+                        "description": "Replacement/displacement proposal details."
+                    },
+                    "notes": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Additional notes string.",
+                        "examples": [
+                            "Example notes",
+                            null
+                        ]
+                    }
+                },
+                "required": [
+                    "name",
+                    "currentProvider",
+                    "displacement"
+                ],
+                "additionalProperties": false,
+                "examples": [
+                    {
+                        "name": "Example displacement opportunity",
+                        "currentProvider": {
+                            "name": "Microsoft",
+                            "terms": "5 Years",
+                            "contractNumber": "C12345678",
+                            "expiryDate": "2026-01-01T00:00:00Z",
+                            "costs": {
+                                "monthlyCost": 5001,
+                                "annualCost": 5002,
+                                "contractValue": 5003
+                            }
+                        },
+                        "displacement": {
+                            "name": "Google",
+                            "terms": "3 Years",
+                            "contractNumber": "C87654321",
+                            "expiryDate": "20260101T00:00:00Z",
+                            "costs": [
+                                {
+                                    "monthlyCost": 5001,
+                                    "annualCost": 5002,
+                                    "contractValue": 5003
+                                }
+                            ],
+                            "replacementDate": "20261231T00:00:00Z"
+                        },
+                        "notes": "Example notes"
+                    }
+                ]
+            },
+            "CloudMatrix.ActionPlan": {
+                "type": "object",
+                "description": "Key planning metadata related to account and authorship.",
+                "properties": {
+                    "accountName": {
+                        "type": "string",
+                        "description": "Customer account name; Default: empty string.",
+                        "examples": [
+                            "AstraZeneca"
+                        ]
+                    },
+                    "discoveryDate": {
+                        "$ref": "#/components/schemas/NullableDateTimeStringType",
+                        "description": "Date the discovery occurred (string); Default: null."
+                    },
+                    "accountManager": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Account manager name; Default: empty string if not specified.",
+                        "examples": [
+                            "John Smith",
+                            null
+                        ]
+                    },
+                    "consultant": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Consultant name; Default: empty string if not specified.",
+                        "examples": [
+                            "MSAG Consultant",
+                            null
+                        ]
+                    },
+                    "licensingExecutive": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Licensing executive name; Default: empty string if not specified.",
+                        "examples": [
+                            "Jane Doe",
+                            null
+                        ]
+                    },
+                    "customerSuccessManager": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Customer success manager name; Default: empty string if not specified.",
+                        "examples": [
+                            "John Doe",
+                            null
+                        ]
+                    },
+                    "notesAndObjectives": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Free-form notes and objectives; Default: empty string if not specified.",
+                        "examples": [
+                            "Example notes",
+                            null
+                        ]
+                    },
+                    "crmId": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "CRM identifier (optional); Default: empty string if not specified.",
+                        "examples": [
+                            "fd9a6a53-594d-41aa-950a-b21ff41d4688",
+                            null
+                        ]
+                    },
+                    "createdDate": {
+                        "$ref": "#/components/schemas/NullableDateTimeStringType",
+                        "description": "ISO 8601 date-time string when created; Default: null."
+                    },
+                    "modifiedDate": {
+                        "$ref": "#/components/schemas/NullableDateTimeStringType",
+                        "description": "ISO 8601 date-time string when last modified; Default: null."
+                    },
+                    "primaryPublisher": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Primary publisher label; Default: \"Microsoft\" if not specified.",
+                        "examples": [
+                            "Microsoft",
+                            null
+                        ]
+                    }
+                },
+                "required": [
+                    "accountName",
+                    "discoveryDate"
+                ],
+                "additionalProperties": false,
+                "examples": [
+                    {
+                        "accountName": "AstraZeneca",
+                        "discoveryDate": "2000-01-01T00:00:00Z",
+                        "accountManager": "John Smith",
+                        "consultant": "MSAG Consultant",
+                        "licensingExecutive": "Jane Doe",
+                        "customerSuccessManager": "John Doe",
+                        "notesAndObjectives": ""
+                    }
+                ]
+            },
+            "CloudMatrix.ValueAssessment": {
+                "type": "object",
+                "description": "Consolidates action plan, user profiles, assessment, and displacement data.",
+                "properties": {
+                    "actionPlan": {
+                        "$ref": "#/components/schemas/CloudMatrix.ActionPlan",
+                        "description": "High-level account and planning metadata."
+                    },
+                    "userProfiles": {
+                        "type": "array",
+                        "description": "Named user profiles with licensing details.",
+                        "items": {
+                            "$ref": "#/components/schemas/CloudMatrix.UserProfile"
+                        },
+                        "examples": []
+                    },
+                    "assessments": {
+                        "type": "array",
+                        "description": "Assessment elements with metadata, profile values, and features.",
+                        "items": {
+                            "$ref": "#/components/schemas/CloudMatrix.Assessment"
+                        }
+                    },
+                    "displacements": {
+                        "type": "array",
+                        "description": "Displacement opportunities and provider details.",
+                        "items": {
+                            "$ref": "#/components/schemas/CloudMatrix.Displacement"
+                        }
+                    }
+                },
+                "required": [
+                    "actionPlan",
+                    "userProfiles",
+                    "assessments",
+                    "displacements"
+                ],
+                "additionalProperties": false,
+                "examples": [
+                    {
+                        "actionPlan": {
+                            "accountName": "AstraZeneca",
+                            "discoveryDate": "2000-01-01T00:00:00Z",
+                            "accountManager": "John Smith",
+                            "consultant": "MSAG Consultant",
+                            "licensingExecutive": "Jane Doe",
+                            "customerSuccessManager": "John Doe",
+                            "notesAndObjectives": ""
+                        },
+                        "userProfiles": [
+                            {
+                                "id": "00000000-0000-0000-0000-000000000001",
+                                "name": "Profile Details",
+                                "values": [
+                                    {
+                                        "name": "Profile Name",
+                                        "value": "Information Worker"
+                                    }
+                                ]
+                            }
+                        ],
+                        "assessments": [
+                            {
+                                "metadata": {
+                                    "name": "M365 Apps for Enterprise - Mobile/Online",
+                                    "breakoutId": null,
+                                    "category": "USER EXPERIENCE",
+                                    "subCategory": "Productivity",
+                                    "help": "Brief:  Common applications available through a browser used for business purposes typically bundled together by software vendors like Microsoft and Google. i.e., spreadsheets, slide presentations, word processor, etc.",
+                                    "licensingProduct": "M365 Mobile Apps",
+                                    "licensingProductHelp": "Mobile Apps The Microsoft 365 mobile app combines Word, Excel, and PowerPoint into a single app for iOS and Android devices. It offers features like creating, editing, and sharing documents on the go, scanning and signing PDFs, and using voice commands for quick tasks. You can also connect your email accounts and calendars in one convenient spot1.\n\nWeb Apps Microsoft 365 for the web includes online versions of Word, Excel, PowerPoint, OneNote, and Outlook. These web apps allow you to create, edit, and share documents directly from your browser without needing to install any software. You can access your documents from anywhere with an internet connection, making it easy to collaborate with others in real-time2.",
+                                    "isAddon": false,
+                                    "isStrategicAddon": false,
+                                    "isTenantBased": false,
+                                    "availability": null,
+                                    "notes": "",
+                                    "startYearConfig": {
+                                        "value": null,
+                                        "userProfileIds": null,
+                                        "isDeepDive": false,
+                                        "altProduct": null,
+                                        "publisher": null,
+                                        "useCase": null
+                                    },
+                                    "yearPlusOneConfig": {
+                                        "value": null,
+                                        "userProfileIds": null,
+                                        "isDeepDive": false,
+                                        "altProduct": null,
+                                        "publisher": null,
+                                        "useCase": null
+                                    },
+                                    "yearPlusTwoConfig": {
+                                        "value": null,
+                                        "userProfileIds": null,
+                                        "isDeepDive": false,
+                                        "altProduct": null,
+                                        "publisher": null,
+                                        "useCase": null
+                                    },
+                                    "yearPlusThreeConfig": {
+                                        "value": null,
+                                        "userProfileIds": null,
+                                        "isDeepDive": false,
+                                        "altProduct": null,
+                                        "publisher": null,
+                                        "useCase": null
+                                    },
+                                    "sourceValue": 0.0
+                                },
+                                "profiles": [
+                                    {
+                                        "name": "Microsoft E5",
+                                        "abbreviation": "ME5P",
+                                        "value": 5.0
+                                    }
+                                ],
+                                "features": [
+                                    {
+                                        "licensing": "M365 SMB",
+                                        "products": [
+                                            {
+                                                "product": "PS",
+                                                "value": "na",
+                                                "comment": ""
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "displacements": [
+                            {
+                                "name": "Example displacement opportunity",
+                                "currentProvider": {
+                                    "name": "Microsoft",
+                                    "terms": "5 Years",
+                                    "contractNumber": "C12345678",
+                                    "expiryDate": "2026-01-01T00:00:00Z",
+                                    "costs": {
+                                        "monthlyCost": 5001,
+                                        "annualCost": 5002,
+                                        "contractValue": 5003
+                                    }
+                                },
+                                "displacement": {
+                                    "name": "Google",
+                                    "terms": "3 Years",
+                                    "contractNumber": "C87654321",
+                                    "expiryDate": "20260101T00:00:00Z",
+                                    "costs": [
+                                        {
+                                            "monthlyCost": 5001,
+                                            "annualCost": 5002,
+                                            "contractValue": 5003
+                                        }
+                                    ],
+                                    "replacementDate": "20261231T00:00:00Z"
+                                },
+                                "notes": "Example notes"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "CloudMatrix.SubscriptionProductEntry": {
+                "$ref": "#/components/schemas/CloudMatrix.Product"
+            },
+            "CloudMatrix.SubscriptionFeature": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/CloudMatrix.AssessmentFeature"
+                    },
+                    {
+                        "type": "object",
+                        "description": "Semantic alias for subscription feature entries to align with schema naming and legacy consumers.",
+                        "properties": {
+                            "products": {
+                                "type": "array",
+                                "description": "Subscription product entries under this feature.",
+                                "items": {
+                                    "$ref": "#/components/schemas/CloudMatrix.SubscriptionProductEntry"
+                                },
+                                "examples": [
+                                    [
+                                        {
+                                            "product": "E5",
+                                            "value": "available",
+                                            "comment": ""
+                                        }
+                                    ]
+                                ]
+                            }
+                        },
+                        "required": [
+                            "products"
+                        ],
+                        "additionalProperties": false
+                    }
+                ],
+                "examples": [
+                    {
+                        "licensing": "O365",
+                        "products": [
+                            {
+                                "product": "E5",
+                                "value": "available",
+                                "comment": ""
+                            }
+                        ]
+                    }
+                ]
+            },
+            "CloudMatrix.BreakoutFeature": {
+                "type": "object",
+                "description": "A single breakout feature with subscription mappings.",
+                "properties": {
+                    "roadmapElementPath": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Hierarchical path to the roadmap element.",
+                        "examples": [
+                            "User Experience / Windows Productivity / Windows OS Productivity Optimization",
+                            null
+                        ]
+                    },
+                    "elementSubdimension": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Sub-dimension label within the element.",
+                        "examples": [
+                            "USER EXPERIENCE-Windows Productivity",
+                            null
+                        ]
+                    },
+                    "roadmapProduct": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Associated product in the roadmap.",
+                        "examples": [
+                            "Windows E3",
+                            null
+                        ]
+                    },
+                    "feature": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Feature name within the product.",
+                        "examples": [
+                            "MDOP: User Experience Virtualization (UE-V)",
+                            null
+                        ]
+                    },
+                    "description": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Feature description text.",
+                        "examples": [
+                            "User Experience Virtualization (UE-V) is a feature of the Microsoft Desktop Optimization Pack (MDOP) that captures and centralizes user-customized Windows and application settings, storing them on a centrally managed network file share to ensure personalized settings are applied across different devices and virtual desktop infrastructure (VDI) sessions",
+                            null
+                        ]
+                    },
+                    "publisherLink": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "URL or link provided by the publisher.",
+                        "examples": [
+                            "https://learn.microsoft.com/en-us/microsoft-desktop-optimization-pack/uev-v2/",
+                            null
+                        ]
+                    },
+                    "subscriptionFeatures": {
+                        "type": "array",
+                        "description": "Subscription feature mappings for licensing and products.",
+                        "items": {
+                            "$ref": "#/components/schemas/CloudMatrix.SubscriptionFeature"
+                        },
+                        "examples": [
+                            [
+                                {
+                                    "licensing": "Windows 10",
+                                    "products": [
+                                        {
+                                            "product": "Enterprise",
+                                            "value": "available",
+                                            "comment": ""
+                                        }
+                                    ]
+                                }
+                            ]
+                        ]
+                    }
+                },
+                "required": [
+                    "roadmapElementPath",
+                    "elementSubdimension",
+                    "roadmapProduct",
+                    "feature",
+                    "description",
+                    "publisherLink",
+                    "subscriptionFeatures"
+                ],
+                "additionalProperties": false,
+                "examples": [
+                    {
+                        "roadmapElementPath": "User Experience / Windows Productivity / Windows OS Productivity Optimization",
+                        "elementSubdimension": "USER EXPERIENCE-Windows Productivity",
+                        "roadmapProduct": "Windows E3",
+                        "feature": "MDOP: User Experience Virtualization (UE-V)",
+                        "description": "User Experience Virtualization (UE-V) is a feature of the Microsoft Desktop Optimization Pack (MDOP) that captures and centralizes user-customized Windows and application settings, storing them on a centrally managed network file share to ensure personalized settings are applied across different devices and virtual desktop infrastructure (VDI) sessions",
+                        "publisherLink": "https://learn.microsoft.com/en-us/microsoft-desktop-optimization-pack/uev-v2/",
+                        "subscriptionFeatures": [
+                            {
+                                "licensing": "Windows 10",
+                                "products": [
+                                    {
+                                        "product": "Enterprise",
+                                        "value": "available",
+                                        "comment": ""
+                                    }
+                                ]
+                            },
+                            {
+                                "licensing": "Windows",
+                                "products": [
+                                    {
+                                        "product": "Bus",
+                                        "value": "na",
+                                        "comment": ""
+                                    }
+                                ]
+                            },
+                            {
+                                "licensing": "Windows 11",
+                                "products": [
+                                    {
+                                        "product": "Enterprise",
+                                        "value": "available",
+                                        "comment": ""
+                                    },
+                                    {
+                                        "product": "Pro",
+                                        "value": "na",
+                                        "comment": ""
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "CloudMatrix.Breakout": {
+                "type": "object",
+                "description": "A breakout section grouping features by path and product.",
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "description": "Breakout title.",
+                        "examples": [
+                            "WINDOWS"
+                        ]
+                    },
+                    "breakoutId": {
+                        "$ref": "#/components/schemas/NullableUuid",
+                        "description": "Breakout identifier or null."
+                    },
+                    "breakoutName": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Breakout display name or null.",
+                        "examples": [
+                            "BREAKOUT - WINDOWS OS",
+                            null
+                        ]
+                    },
+                    "features": {
+                        "type": "array",
+                        "description": "Feature entries under this breakout.",
+                        "items": {
+                            "$ref": "#/components/schemas/CloudMatrix.BreakoutFeature"
+                        },
+                        "examples": [
+                            [
+                                {
+                                    "roadmapElementPath": "User Experience / Windows Productivity / Windows OS Productivity Optimization",
+                                    "elementSubdimension": "USER EXPERIENCE-Windows Productivity",
+                                    "roadmapProduct": "Windows E3",
+                                    "feature": "MDOP: User Experience Virtualization (UE-V)",
+                                    "description": "User Experience Virtualization (UE-V) is a feature of the Microsoft Desktop Optimization Pack (MDOP) that captures and centralizes user-customized Windows and application settings, storing them on a centrally managed network file share to ensure personalized settings are applied across different devices and virtual desktop infrastructure (VDI) sessions",
+                                    "publisherLink": "https://learn.microsoft.com/en-us/microsoft-desktop-optimization-pack/uev-v2/",
+                                    "subscriptionFeatures": [
+                                        {
+                                            "licensing": "Windows 10",
+                                            "products": [
+                                                {
+                                                    "product": "Enterprise",
+                                                    "value": "available",
+                                                    "comment": ""
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        ]
+                    }
+                },
+                "required": [
+                    "title",
+                    "breakoutId",
+                    "breakoutName",
+                    "features"
+                ],
+                "additionalProperties": false,
+                "examples": [
+                    {
+                        "title": "PORTAL APPS",
+                        "breakoutId": "f1ebe6ab-1164-4ab8-8970-2d561ee7634f",
+                        "breakoutName": "BREAKOUT -Portal Apps",
+                        "features": [
+                            {
+                                "roadmapElementPath": "User Experience /Productivity Apps/Extended Productivity App Ecosystem",
+                                "elementSubdimension": "Productivity Apps",
+                                "roadmapProduct": "Platform Only",
+                                "feature": "Viva Insights - Personal",
+                                "description": "Microsoft Lists is a Microsoft 365 app that helps you track information and organize work with customizable lists for tasks, projects, and more.",
+                                "publisherLink": "",
+                                "subscriptionFeatures": [
+                                    {
+                                        "licensing": "M365 FLW",
+                                        "products": [
+                                            {
+                                                "product": "F1",
+                                                "value": "na",
+                                                "comment": ""
+                                            },
+                                            {
+                                                "product": "F3",
+                                                "value": "na",
+                                                "comment": ""
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         },
         "securitySchemes": {
