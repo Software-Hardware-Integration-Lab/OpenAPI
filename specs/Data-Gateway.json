@@ -2486,15 +2486,15 @@
                 "additionalProperties": false,
                 "examples": [
                     {
-                                "id": "00000000-0000-0000-0000-000000000001",
-                                "name": "Profile Details",
-                                "values": [
-                                    {
-                                        "name": "Profile Name",
-                                        "value": "Information Worker"
-                                    }
-                                ]
+                        "id": "00000000-0000-0000-0000-000000000001",
+                        "name": "Profile Details",
+                        "values": [
+                            {
+                                "name": "Profile Name",
+                                "value": "Information Worker"
                             }
+                        ]
+                    }
                 ]
             },
             "CloudMatrix.YearConfig": {
@@ -2503,9 +2503,15 @@
                 "description": "Standardized configuration shape for a year phase.",
                 "properties": {
                     "value": {
-                        "type": ["number", "null"],
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "description": "Numeric assessment value for this year phase (e.g., score/percentage) or null.",
-                        "examples": [1.0, null]
+                        "examples": [
+                            1.0,
+                            null
+                        ]
                     },
                     "userProfileIds": {
                         "description": "Associated user profile IDs or null.",
@@ -3443,21 +3449,139 @@
                         "items": {
                             "$ref": "#/components/schemas/CloudMatrix.UserProfile"
                         },
-                        "examples": []
+                        "examples": [
+                            [
+                                {
+                                    "id": "00000000-0000-0000-0000-000000000001",
+                                    "name": "Profile Details",
+                                    "values": [
+                                        {
+                                            "name": "Profile Name",
+                                            "value": "Information Worker"
+                                        }
+                                    ]
+                                }
+                            ]
+                        ]
                     },
                     "assessments": {
                         "type": "array",
                         "description": "Assessment elements with metadata, profile values, and features.",
                         "items": {
                             "$ref": "#/components/schemas/CloudMatrix.Assessment"
-                        }
+                        },
+                        "examples": [
+                            [
+                                {
+                                    "metadata": {
+                                        "name": "M365 Apps for Enterprise - Mobile/Online",
+                                        "breakoutId": null,
+                                        "category": "USER EXPERIENCE",
+                                        "subCategory": "Productivity",
+                                        "help": "Brief:  Common applications available through a browser used for business purposes typically bundled together by software vendors like Microsoft and Google. i.e., spreadsheets, slide presentations, word processor, etc.",
+                                        "licensingProduct": "M365 Mobile Apps",
+                                        "licensingProductHelp": "Mobile Apps The Microsoft 365 mobile app combines Word, Excel, and PowerPoint into a single app for iOS and Android devices. It offers features like creating, editing, and sharing documents on the go, scanning and signing PDFs, and using voice commands for quick tasks. You can also connect your email accounts and calendars in one convenient spot1.\n\nWeb Apps Microsoft 365 for the web includes online versions of Word, Excel, PowerPoint, OneNote, and Outlook. These web apps allow you to create, edit, and share documents directly from your browser without needing to install any software. You can access your documents from anywhere with an internet connection, making it easy to collaborate with others in real-time2.",
+                                        "isAddon": false,
+                                        "isStrategicAddon": false,
+                                        "isTenantBased": false,
+                                        "availability": null,
+                                        "notes": "",
+                                        "startYearConfig": {
+                                            "value": null,
+                                            "userProfileIds": null,
+                                            "isDeepDive": false,
+                                            "altProduct": null,
+                                            "publisher": null,
+                                            "useCase": null
+                                        },
+                                        "yearPlusOneConfig": {
+                                            "value": null,
+                                            "userProfileIds": null,
+                                            "isDeepDive": false,
+                                            "altProduct": null,
+                                            "publisher": null,
+                                            "useCase": null
+                                        },
+                                        "yearPlusTwoConfig": {
+                                            "value": null,
+                                            "userProfileIds": null,
+                                            "isDeepDive": false,
+                                            "altProduct": null,
+                                            "publisher": null,
+                                            "useCase": null
+                                        },
+                                        "yearPlusThreeConfig": {
+                                            "value": null,
+                                            "userProfileIds": null,
+                                            "isDeepDive": false,
+                                            "altProduct": null,
+                                            "publisher": null,
+                                            "useCase": null
+                                        },
+                                        "sourceValue": 0.0
+                                    },
+                                    "profiles": [
+                                        {
+                                            "name": "Microsoft E5",
+                                            "abbreviation": "ME5P",
+                                            "value": 5.0
+                                        }
+                                    ],
+                                    "features": [
+                                        {
+                                            "licensing": "M365 SMB",
+                                            "products": [
+                                                {
+                                                    "product": "PS",
+                                                    "value": "na",
+                                                    "comment": ""
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        ]
                     },
                     "displacements": {
                         "type": "array",
                         "description": "Displacement opportunities and provider details.",
                         "items": {
                             "$ref": "#/components/schemas/CloudMatrix.Displacement"
-                        }
+                        },
+                        "examples": [
+                            [
+                                {
+                                    "name": "Example displacement opportunity",
+                                    "currentProvider": {
+                                        "name": "Microsoft",
+                                        "terms": "5 Years",
+                                        "contractNumber": "C12345678",
+                                        "expiryDate": "2026-01-01T00:00:00Z",
+                                        "costs": {
+                                            "monthlyCost": 5001,
+                                            "annualCost": 5002,
+                                            "contractValue": 5003
+                                        }
+                                    },
+                                    "displacement": {
+                                        "name": "Google",
+                                        "terms": "3 Years",
+                                        "contractNumber": "C87654321",
+                                        "expiryDate": "20260101T00:00:00Z",
+                                        "costs": [
+                                            {
+                                                "monthlyCost": 5001,
+                                                "annualCost": 5002,
+                                                "contractValue": 5003
+                                            }
+                                        ],
+                                        "replacementDate": "20261231T00:00:00Z"
+                                    },
+                                    "notes": "Example notes"
+                                }
+                            ]
+                        ]
                     }
                 },
                 "required": [
