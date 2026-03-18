@@ -3403,7 +3403,7 @@
                 "examples": [
                     {
                         "accountName": "AstraZeneca",
-                        "discoveryDate": "2036-01-01T00:00:00Z",
+                        "discoveryDate": "2026-01-01T00:00:00Z",
                         "accountManager": "John Smith",
                         "consultant": "MSAG Consultant",
                         "licensingExecutive": "Jane Doe",
@@ -3459,7 +3459,7 @@
                     {
                         "actionPlan": {
                             "accountName": "AstraZeneca",
-                            "discoveryDate": "2036-01-01T00:00:00Z",
+                            "discoveryDate": "2026-01-01T00:00:00Z",
                             "accountManager": "John Smith",
                             "consultant": "MSAG Consultant",
                             "licensingExecutive": "Jane Doe",
@@ -3954,7 +3954,7 @@
                         "valueAssessment": {
                             "actionPlan": {
                                 "accountName": "AstraZeneca",
-                                "discoveryDate": "2036-01-01T00:00:00Z",
+                                "discoveryDate": "2026-01-01T00:00:00Z",
                                 "accountManager": "John Smith",
                                 "consultant": "MSAG Consultant",
                                 "licensingExecutive": "Jane Doe",
@@ -4225,7 +4225,7 @@
                         "valueAssessment": {
                             "actionPlan": {
                                 "accountName": "AstraZeneca",
-                                "discoveryDate": "2036-01-01T00:00:00Z",
+                                "discoveryDate": "2026-01-01T00:00:00Z",
                                 "accountManager": "John Smith",
                                 "consultant": "MSAG Consultant",
                                 "licensingExecutive": "Jane Doe",
@@ -8689,7 +8689,7 @@
                                             "valueAssessment": {
                                                 "actionPlan": {
                                                     "accountName": "AstraZeneca",
-                                                    "discoveryDate": "2036-01-01T00:00:00Z",
+                                                    "discoveryDate": "2026-01-01T00:00:00Z",
                                                     "accountManager": "John Smith",
                                                     "consultant": "MSAG Consultant",
                                                     "licensingExecutive": "Jane Doe",
@@ -8899,7 +8899,7 @@
                                         "valueAssessment": {
                                             "actionPlan": {
                                                 "accountName": "AstraZeneca",
-                                                "discoveryDate": "2036-01-01T00:00:00Z",
+                                                "discoveryDate": "2026-01-01T00:00:00Z",
                                                 "accountManager": "John Smith",
                                                 "consultant": "MSAG Consultant",
                                                 "licensingExecutive": "Jane Doe",
@@ -9088,7 +9088,7 @@
                                             "valueAssessment": {
                                                 "actionPlan": {
                                                     "accountName": "AstraZeneca",
-                                                    "discoveryDate": "2036-01-01T00:00:00Z",
+                                                    "discoveryDate": "2026-01-01T00:00:00Z",
                                                     "accountManager": "John Smith",
                                                     "consultant": "MSAG Consultant",
                                                     "licensingExecutive": "Jane Doe",
@@ -9301,7 +9301,7 @@
                                         "valueAssessment": {
                                             "actionPlan": {
                                                 "accountName": "AstraZeneca",
-                                                "discoveryDate": "2036-01-01T00:00:00Z",
+                                                "discoveryDate": "2026-01-01T00:00:00Z",
                                                 "accountManager": "John Smith",
                                                 "consultant": "MSAG Consultant",
                                                 "licensingExecutive": "Jane Doe",
@@ -9490,7 +9490,7 @@
                                             "valueAssessment": {
                                                 "actionPlan": {
                                                     "accountName": "AstraZeneca",
-                                                    "discoveryDate": "2036-01-01T00:00:00Z",
+                                                    "discoveryDate": "2026-01-01T00:00:00Z",
                                                     "accountManager": "John Smith",
                                                     "consultant": "MSAG Consultant",
                                                     "licensingExecutive": "Jane Doe",
@@ -9755,7 +9755,7 @@
                                             "valueAssessment": {
                                                 "actionPlan": {
                                                     "accountName": "AstraZeneca",
-                                                    "discoveryDate": "2036-01-01T00:00:00Z",
+                                                    "discoveryDate": "2026-01-01T00:00:00Z",
                                                     "accountManager": "John Smith",
                                                     "consultant": "MSAG Consultant",
                                                     "licensingExecutive": "Jane Doe",
