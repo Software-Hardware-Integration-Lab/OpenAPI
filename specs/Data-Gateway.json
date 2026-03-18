@@ -2483,7 +2483,19 @@
                     "name",
                     "details"
                 ],
-                "additionalProperties": false
+                "additionalProperties": false,
+                "examples": [
+                    {
+                                "id": "00000000-0000-0000-0000-000000000001",
+                                "name": "Profile Details",
+                                "values": [
+                                    {
+                                        "name": "Profile Name",
+                                        "value": "Information Worker"
+                                    }
+                                ]
+                            }
+                ]
             },
             "CloudMatrix.YearConfig": {
                 "title": "Cloud Matrix - Year Config",
@@ -2820,7 +2832,7 @@
                 ]
             },
             "CloudMatrix.Product": {
-                "title": "Cloud Matrix - Product Mapping",
+                "title": "Cloud Matrix - Product",
                 "type": "object",
                 "description": "A single product mapping with value and comment.",
                 "properties": {
