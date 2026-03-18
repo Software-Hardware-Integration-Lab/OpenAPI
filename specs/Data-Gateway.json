@@ -3404,12 +3404,16 @@
                 "examples": [
                     {
                         "accountName": "AstraZeneca",
-                        "discoveryDate": "2000-01-01T00:00:00Z",
+                        "discoveryDate": "2036-01-01T00:00:00Z",
                         "accountManager": "John Smith",
                         "consultant": "MSAG Consultant",
                         "licensingExecutive": "Jane Doe",
                         "customerSuccessManager": "John Doe",
-                        "notesAndObjectives": ""
+                        "notesAndObjectives": "Sample notes and objectives for the account.",
+                        "crmId": "fd9a6a53-594d-41aa-950a-b21ff41d4688",
+                        "createdDate": "2026-01-01T00:00:00Z",
+                        "modifiedDate": "2026-01-01T00:00:00Z",
+                        "primaryPublisher": "Microsoft"
                     }
                 ]
             },
@@ -3455,12 +3459,16 @@
                     {
                         "actionPlan": {
                             "accountName": "AstraZeneca",
-                            "discoveryDate": "2000-01-01T00:00:00Z",
+                            "discoveryDate": "2036-01-01T00:00:00Z",
                             "accountManager": "John Smith",
                             "consultant": "MSAG Consultant",
                             "licensingExecutive": "Jane Doe",
                             "customerSuccessManager": "John Doe",
-                            "notesAndObjectives": ""
+                            "notesAndObjectives": "Sample notes and objectives for the account.",
+                            "crmId": "fd9a6a53-594d-41aa-950a-b21ff41d4688",
+                            "createdDate": "2026-01-01T00:00:00Z",
+                            "modifiedDate": "2026-01-01T00:00:00Z",
+                            "primaryPublisher": "Microsoft"
                         },
                         "userProfiles": [
                             {
@@ -3938,12 +3946,16 @@
                         "valueAssessment": {
                             "actionPlan": {
                                 "accountName": "AstraZeneca",
-                                "discoveryDate": "2000-01-01T00:00:00Z",
+                                "discoveryDate": "2036-01-01T00:00:00Z",
                                 "accountManager": "John Smith",
                                 "consultant": "MSAG Consultant",
                                 "licensingExecutive": "Jane Doe",
                                 "customerSuccessManager": "John Doe",
-                                "notesAndObjectives": ""
+                                "notesAndObjectives": "Sample notes and objectives for the account.",
+                                "crmId": "fd9a6a53-594d-41aa-950a-b21ff41d4688",
+                                "createdDate": "2026-01-01T00:00:00Z",
+                                "modifiedDate": "2026-01-01T00:00:00Z",
+                                "primaryPublisher": "Microsoft"
                             },
                             "userProfiles": [
                                 {
@@ -4203,12 +4215,16 @@
                         "valueAssessment": {
                             "actionPlan": {
                                 "accountName": "AstraZeneca",
-                                "discoveryDate": "2000-01-01T00:00:00Z",
+                                "discoveryDate": "2036-01-01T00:00:00Z",
                                 "accountManager": "John Smith",
                                 "consultant": "MSAG Consultant",
                                 "licensingExecutive": "Jane Doe",
                                 "customerSuccessManager": "John Doe",
-                                "notesAndObjectives": ""
+                                "notesAndObjectives": "Sample notes and objectives for the account.",
+                                "crmId": "fd9a6a53-594d-41aa-950a-b21ff41d4688",
+                                "createdDate": "2026-01-01T00:00:00Z",
+                                "modifiedDate": "2026-01-01T00:00:00Z",
+                                "primaryPublisher": "Microsoft"
                             },
                             "userProfiles": [
                                 {
@@ -8663,12 +8679,16 @@
                                             "valueAssessment": {
                                                 "actionPlan": {
                                                     "accountName": "AstraZeneca",
-                                                    "discoveryDate": "2000-01-01T00:00:00Z",
+                                                    "discoveryDate": "2036-01-01T00:00:00Z",
                                                     "accountManager": "John Smith",
                                                     "consultant": "MSAG Consultant",
                                                     "licensingExecutive": "Jane Doe",
                                                     "customerSuccessManager": "John Doe",
-                                                    "notesAndObjectives": ""
+                                                    "notesAndObjectives": "Sample notes and objectives for the account.",
+                                                    "crmId": "fd9a6a53-594d-41aa-950a-b21ff41d4688",
+                                                    "createdDate": "2026-01-01T00:00:00Z",
+                                                    "modifiedDate": "2026-01-01T00:00:00Z",
+                                                    "primaryPublisher": "Microsoft"
                                                 },
                                                 "userProfiles": [
                                                     {
@@ -8869,12 +8889,16 @@
                                         "valueAssessment": {
                                             "actionPlan": {
                                                 "accountName": "AstraZeneca",
-                                                "discoveryDate": "2000-01-01T00:00:00Z",
+                                                "discoveryDate": "2036-01-01T00:00:00Z",
                                                 "accountManager": "John Smith",
                                                 "consultant": "MSAG Consultant",
                                                 "licensingExecutive": "Jane Doe",
                                                 "customerSuccessManager": "John Doe",
-                                                "notesAndObjectives": ""
+                                                "notesAndObjectives": "Sample notes and objectives for the account.",
+                                                "crmId": "fd9a6a53-594d-41aa-950a-b21ff41d4688",
+                                                "createdDate": "2026-01-01T00:00:00Z",
+                                                "modifiedDate": "2026-01-01T00:00:00Z",
+                                                "primaryPublisher": "Microsoft"
                                             },
                                             "userProfiles": [
                                                 {
@@ -9054,12 +9078,16 @@
                                             "valueAssessment": {
                                                 "actionPlan": {
                                                     "accountName": "AstraZeneca",
-                                                    "discoveryDate": "2000-01-01T00:00:00Z",
+                                                    "discoveryDate": "2036-01-01T00:00:00Z",
                                                     "accountManager": "John Smith",
                                                     "consultant": "MSAG Consultant",
                                                     "licensingExecutive": "Jane Doe",
                                                     "customerSuccessManager": "John Doe",
-                                                    "notesAndObjectives": ""
+                                                    "notesAndObjectives": "Sample notes and objectives for the account.",
+                                                    "crmId": "fd9a6a53-594d-41aa-950a-b21ff41d4688",
+                                                    "createdDate": "2026-01-01T00:00:00Z",
+                                                    "modifiedDate": "2026-01-01T00:00:00Z",
+                                                    "primaryPublisher": "Microsoft"
                                                 },
                                                 "userProfiles": [
                                                     {
@@ -9263,12 +9291,16 @@
                                         "valueAssessment": {
                                             "actionPlan": {
                                                 "accountName": "AstraZeneca",
-                                                "discoveryDate": "2000-01-01T00:00:00Z",
+                                                "discoveryDate": "2036-01-01T00:00:00Z",
                                                 "accountManager": "John Smith",
                                                 "consultant": "MSAG Consultant",
                                                 "licensingExecutive": "Jane Doe",
                                                 "customerSuccessManager": "John Doe",
-                                                "notesAndObjectives": ""
+                                                "notesAndObjectives": "Sample notes and objectives for the account.",
+                                                "crmId": "fd9a6a53-594d-41aa-950a-b21ff41d4688",
+                                                "createdDate": "2026-01-01T00:00:00Z",
+                                                "modifiedDate": "2026-01-01T00:00:00Z",
+                                                "primaryPublisher": "Microsoft"
                                             },
                                             "userProfiles": [
                                                 {
@@ -9448,12 +9480,16 @@
                                             "valueAssessment": {
                                                 "actionPlan": {
                                                     "accountName": "AstraZeneca",
-                                                    "discoveryDate": "2000-01-01T00:00:00Z",
+                                                    "discoveryDate": "2036-01-01T00:00:00Z",
                                                     "accountManager": "John Smith",
                                                     "consultant": "MSAG Consultant",
                                                     "licensingExecutive": "Jane Doe",
                                                     "customerSuccessManager": "John Doe",
-                                                    "notesAndObjectives": ""
+                                                    "notesAndObjectives": "Sample notes and objectives for the account.",
+                                                    "crmId": "fd9a6a53-594d-41aa-950a-b21ff41d4688",
+                                                    "createdDate": "2026-01-01T00:00:00Z",
+                                                    "modifiedDate": "2026-01-01T00:00:00Z",
+                                                    "primaryPublisher": "Microsoft"
                                                 },
                                                 "userProfiles": [
                                                     {
@@ -9708,17 +9744,17 @@
                                             },
                                             "valueAssessment": {
                                                 "actionPlan": {
-                                                    "accountName": "CMTestAccount1",
-                                                    "accountManager": "John Jones",
-                                                    "consultant": "Oliver Smith",
-                                                    "licensingExecutive": "Taylor Johnson",
-                                                    "customerSuccessManager": "Sam Monroe",
-                                                    "notesAndObjectives": "These are notes.",
-                                                    "crmId": "de186670-d772-11f0-899c-41d4a068f985",
-                                                    "primaryPublisher": "Microsoft",
-                                                    "discoveryDate": "2026-01-08T21:13:12.821Z",
-                                                    "createdDate": "2026-01-08T21:13:12.821Z",
-                                                    "modifiedDate": "2026-01-08T21:13:12.821Z"
+                                                    "accountName": "AstraZeneca",
+                                                    "discoveryDate": "2036-01-01T00:00:00Z",
+                                                    "accountManager": "John Smith",
+                                                    "consultant": "MSAG Consultant",
+                                                    "licensingExecutive": "Jane Doe",
+                                                    "customerSuccessManager": "John Doe",
+                                                    "notesAndObjectives": "Sample notes and objectives for the account.",
+                                                    "crmId": "fd9a6a53-594d-41aa-950a-b21ff41d4688",
+                                                    "createdDate": "2026-01-01T00:00:00Z",
+                                                    "modifiedDate": "2026-01-01T00:00:00Z",
+                                                    "primaryPublisher": "Microsoft"
                                                 },
                                                 "assessments": [
                                                     {
