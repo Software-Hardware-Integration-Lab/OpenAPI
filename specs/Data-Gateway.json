@@ -231,6 +231,7 @@
                 ]
             },
             "NullableUuid": {
+                "title": "Nullable Unique identifier",
                 "oneOf": [
                     {
                         "$ref": "#/components/schemas/Uuid"
@@ -245,6 +246,7 @@
                 ]
             },
             "DateTimeStringType": {
+                "title": "Date Time String In ISO8601 Format",
                 "type": "string",
                 "format": "date-time",
                 "examples": [
@@ -252,6 +254,7 @@
                 ]
             },
             "NullableDateTimeStringType": {
+                "title": "Nullable Date Time String In ISO8601 Format",
                 "oneOf": [
                     {
                         "$ref": "#/components/schemas/DateTimeStringType"
@@ -262,26 +265,6 @@
                 ],
                 "examples": [
                     "2026-01-01T00:00:00Z",
-                    null
-                ]
-            },
-            "NullableNumber": {
-                "type": [
-                    "number",
-                    "null"
-                ],
-                "examples": [
-                    1.0,
-                    null
-                ]
-            },
-            "NullableString": {
-                "type": [
-                    "string",
-                    "null"
-                ],
-                "examples": [
-                    "A string",
                     null
                 ]
             },
@@ -2385,6 +2368,7 @@
                 "title": "Architecture Report - Principal Data"
             },
             "CloudMatrix.UserProfileDetailEntry": {
+                "title": "Cloud Matrix - User Profile Detail Entry",
                 "type": "object",
                 "description": "A single name/value pair for profile details, allowing for extensibility in the future.",
                 "properties": {
@@ -2416,6 +2400,7 @@
                 ]
             },
             "CloudMatrix.UserProfileDetail": {
+                "title": "Cloud Matrix - User Profile Detail",
                 "type": "object",
                 "description": "A section of related profile details grouped under a common header.",
                 "properties": {
@@ -2458,6 +2443,7 @@
                 ]
             },
             "CloudMatrix.UserProfile": {
+                "title": "Cloud Matrix - User Profile",
                 "type": "object",
                 "description": "A named user profile with a set of detail rows.",
                 "properties": {
@@ -2500,12 +2486,14 @@
                 "additionalProperties": false
             },
             "CloudMatrix.YearConfig": {
+                "title": "Cloud Matrix - Year Config",
                 "type": "object",
                 "description": "Standardized configuration shape for a year phase.",
                 "properties": {
                     "value": {
-                        "$ref": "#/components/schemas/NullableNumber",
-                        "description": "Numeric assessment value for this year phase (e.g., score/percentage) or null."
+                        "type": ["number", "null"],
+                        "description": "Numeric assessment value for this year phase (e.g., score/percentage) or null.",
+                        "examples": [1.0, null]
                     },
                     "userProfileIds": {
                         "description": "Associated user profile IDs or null.",
@@ -2599,6 +2587,7 @@
                 ]
             },
             "CloudMatrix.AssessmentMetadata": {
+                "title": "Cloud Matrix - Assessment Metadata",
                 "type": "object",
                 "description": "Descriptive and time-phased configuration for an assessment element.",
                 "properties": {
@@ -2782,6 +2771,7 @@
                 ]
             },
             "CloudMatrix.AssessmentProfile": {
+                "title": "Cloud Matrix - Assessment Profile",
                 "type": "object",
                 "description": "A named profile value attached to the element.",
                 "properties": {
@@ -2830,6 +2820,7 @@
                 ]
             },
             "CloudMatrix.Product": {
+                "title": "Cloud Matrix - Product Mapping",
                 "type": "object",
                 "description": "A single product mapping with value and comment.",
                 "properties": {
@@ -2874,6 +2865,7 @@
                 ]
             },
             "CloudMatrix.AssessmentFeature": {
+                "title": "Cloud Matrix - Assessment Feature",
                 "type": "object",
                 "description": "Licensing block with product-level entries.",
                 "properties": {
@@ -2924,6 +2916,7 @@
                 ]
             },
             "CloudMatrix.Assessment": {
+                "title": "Cloud Matrix - Assessment Element",
                 "type": "object",
                 "description": "A single assessment element with metadata, profile values, and features.",
                 "properties": {
@@ -3046,6 +3039,7 @@
                 ]
             },
             "CloudMatrix.Costs": {
+                "title": "Cloud Matrix - Costs",
                 "type": "object",
                 "description": "Cost fields for a current provider.",
                 "properties": {
@@ -3086,6 +3080,7 @@
                 ]
             },
             "CloudMatrix.Provider": {
+                "title": "Cloud Matrix - Provider",
                 "type": "object",
                 "description": "Current provider contract info with aggregated costs.",
                 "properties": {
@@ -3139,6 +3134,7 @@
                 ]
             },
             "CloudMatrix.CurrentProvider": {
+                "title": "Cloud Matrix - Current Provider",
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/CloudMatrix.Provider"
@@ -3173,6 +3169,7 @@
                 ]
             },
             "CloudMatrix.NewProvider": {
+                "title": "Cloud Matrix - New Provider",
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/CloudMatrix.Provider"
@@ -3227,6 +3224,7 @@
                 ]
             },
             "CloudMatrix.Displacement": {
+                "title": "Cloud Matrix - Displacement",
                 "type": "object",
                 "description": "A displacement candidate including current provider and the proposed displacement.",
                 "properties": {
@@ -3296,6 +3294,7 @@
                 ]
             },
             "CloudMatrix.ActionPlan": {
+                "title": "Cloud Matrix - Action Plan",
                 "type": "object",
                 "description": "Key planning metadata related to account and authorship.",
                 "properties": {
@@ -3418,6 +3417,7 @@
                 ]
             },
             "CloudMatrix.ValueAssessment": {
+                "title": "Cloud Matrix - Value Assessment",
                 "type": "object",
                 "description": "Consolidates action plan, user profiles, assessment, and displacement data.",
                 "properties": {
@@ -3587,9 +3587,15 @@
                 ]
             },
             "CloudMatrix.SubscriptionProductEntry": {
-                "$ref": "#/components/schemas/CloudMatrix.Product"
+                "title": "Cloud Matrix - Subscription Product Entry",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/CloudMatrix.Product"
+                    }
+                ]
             },
             "CloudMatrix.SubscriptionFeature": {
+                "title": "Cloud Matrix - Subscription Feature",
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/CloudMatrix.AssessmentFeature"
@@ -3635,6 +3641,7 @@
                 ]
             },
             "CloudMatrix.BreakoutFeature": {
+                "title": "Cloud Matrix - Breakout Feature",
                 "type": "object",
                 "description": "A single breakout feature with subscription mappings.",
                 "properties": {
@@ -3760,6 +3767,7 @@
                 ]
             },
             "CloudMatrix.Breakout": {
+                "title": "Cloud Matrix - Breakout",
                 "type": "object",
                 "description": "A breakout section grouping features by path and product.",
                 "properties": {
@@ -3855,7 +3863,7 @@
                 ]
             },
             "CloudMatrix.BulkCloudMatrix": {
-                "title": "Bulk Cloud Matrix Assessment",
+                "title": "Cloud Matrix - Bulk Cloud Matrix Assessment",
                 "description": "Cloud Matrix assessment payload for bulk operations, excluding correlation metadata.",
                 "type": "object",
                 "required": [
@@ -4104,6 +4112,7 @@
                 ]
             },
             "CloudMatrix.CloudMatrixCorrelation": {
+                "title": "Cloud Matrix - Correlation",
                 "type": "object",
                 "description": "Correlation Data that points to a specific matrix assessment/roadmap that belongs in the database.",
                 "properties": {
@@ -4179,6 +4188,7 @@
                 ]
             },
             "CloudMatrix": {
+                "title": "Cloud Matrix",
                 "description": "Root document for the Microsoft Cloud Adoption Matrix (derived from schema).",
                 "allOf": [
                     {
