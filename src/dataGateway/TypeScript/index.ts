@@ -8,7 +8,7 @@ import { createDataGatewayClient } from './sdk/dataGatewayClient.js';
 export type * from './sdk/models/index.js';
 
 // This is required for the type DataGatewayClient
-export type * from './sdk/dataGatewayClient.js';
+export type { DataGatewayClient } from './sdk/dataGatewayClient.js';
 
 /**
  * Function that initializes the Data Gateway SDK.
