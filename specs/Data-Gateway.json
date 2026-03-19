@@ -2517,8 +2517,7 @@
                         "description": "Associated user profile IDs or null.",
                         "type": ["array", "null"],
                         "items": {
-                            "type": "string",
-                            "format": "uuid"
+                            "$ref": "#/components/schemas/Uuid"
                         },
                         "examples": [
                             [
