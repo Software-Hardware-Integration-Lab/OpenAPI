@@ -8998,7 +8998,7 @@
         "/Api/CloudMatrix/Assessment": {
             "post": {
                 "description": "Stores a new Cloud Matrix assessment payload.\n\nThis endpoint requires the `CloudMatrix.ReadWrite.All` scope (permission).",
-                "operationId": "Api/CloudMatrix/Assessment/Post",
+                "operationId": "/Api/CloudMatrix/Assessment/Post",
                 "requestBody": {
                     "required": true,
                     "content": {
