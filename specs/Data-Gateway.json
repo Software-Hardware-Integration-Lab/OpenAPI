@@ -4306,7 +4306,6 @@
                     "accountName",
                     "crmId",
                     "discoverDate",
-                    "isComplete",
                     "template"
                 ],
                 "additionalProperties": false,
