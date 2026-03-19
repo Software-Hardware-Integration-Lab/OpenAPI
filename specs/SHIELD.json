@@ -282,7 +282,7 @@
                 "title": "Core - System Requirements",
                 "description": "Collection of indicators that notify the caller if the system requirements have been met for various sub components to operate.",
                 "properties": {
-                    "authenticatorPermissions": {
+                    "desktopPermissions": {
                         "description": "Flag that indicates if the core permissions for the SHIELD - Authenticator App have been configured properly or not.",
                         "type": "boolean",
                         "examples": [
@@ -341,7 +341,7 @@
                 },
                 "type": "object",
                 "required": [
-                    "authenticatorPermissions",
+                    "desktopPermissions",
                     "azurePermissions",
                     "defendEntitlement",
                     "deployEntitlement",
@@ -352,7 +352,7 @@
                 ],
                 "examples": [
                     {
-                        "authenticatorPermissions": true,
+                        "desktopPermissions": true,
                         "azurePermissions": false,
                         "defendEntitlement": true,
                         "deployEntitlement": false,
@@ -3967,7 +3967,7 @@
         },
         "description": "Deprive your threats of practical significance. Deploy the Securing Privilege Access architecture. All in a few seconds.",
         "title": "SHI Environment Lockdown and Defense",
-        "version": "4.0.0"
+        "version": "3.3.0"
     },
     "openapi": "3.1.1",
     "paths": {
@@ -3985,7 +3985,7 @@
                                 "examples": {
                                     "System Requirement": {
                                         "value": {
-                                            "authenticatorPermissions": true,
+                                            "desktopPermissions": true,
                                             "azurePermissions": false,
                                             "defendEntitlement": true,
                                             "deployEntitlement": false,
