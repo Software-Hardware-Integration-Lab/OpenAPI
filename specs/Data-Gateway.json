@@ -2515,17 +2515,11 @@
                     },
                     "userProfileIds": {
                         "description": "Associated user profile IDs or null.",
-                        "oneOf": [
-                            {
-                                "type": "array",
-                                "items": {
-                                    "$ref": "#/components/schemas/Uuid"
-                                }
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
+                        "type": ["array", "null"],
+                        "items": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
                         "examples": [
                             [
                                 "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
@@ -8991,9 +8985,6 @@
                                 }
                             }
                         }
-                    },
-                    "400": {
-                        "$ref": "#/components/responses/400"
                     },
                     "500": {
                         "$ref": "#/components/responses/500"
