@@ -9392,7 +9392,7 @@
         },
         "/Api/CloudMatrix/Customer/{crmId}/Correlation/{correlationId}": {
             "patch": {
-                "description": "Updates the existing Cloud Matrix assessment data for specified crmId and correlationId.\n\nThis endpoint requires the `SHI Lab Tenant`, `CloudMatrix.ReadWrite`, `CloudMatrix.ReadWrite.All` scope (permission).",
+                "description": "Updates the existing Cloud Matrix assessment data for specified crmId and correlationId.\n\nThis endpoint is only accessible from the `SHI` and `SHI Lab` tenants and requires the `CloudMatrix.ReadWrite`, `CloudMatrix.ReadWrite.All` scope (permission).",
                 "operationId": "/Api/CloudMatrix/Customer/:crmId/Correlation/:correlationId/Patch",
                 "parameters": [
                     {
