@@ -7,14 +7,7 @@
                 "name": "correlationId",
                 "required": true,
                 "schema": {
-                    "examples": [
-                        "1d71e0fe-6e4a-464d-a690-80addf3bda55"
-                    ],
-                    "format": "uuid",
-                    "maxLength": 36,
-                    "minLength": 36,
-                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
-                    "type": "string"
+                    "$ref": "#/components/schemas/Uuid"
                 },
                 "examples": {
                     "valid correlation Id": {
@@ -30,21 +23,7 @@
                 "name": "tenantId",
                 "required": true,
                 "schema": {
-                    "examples": [
-                        "b2fd105a-2594-437e-b934-1a62a51c28b4"
-                    ],
-                    "format": "uuid",
-                    "maxLength": 36,
-                    "minLength": 36,
-                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
-                    "type": "string"
-                },
-                "examples": {
-                    "valid tenant Id": {
-                        "summary": "Example Valid Tenant ID",
-                        "description": "An example of a valid tenant ID in type UUID string.",
-                        "value": "1d71e0fe-6e4a-464d-a690-80addf3bda55"
-                    }
+                    "$ref": "#/components/schemas/Uuid"
                 }
             },
             "channelName": {
@@ -176,14 +155,7 @@
                 "name": "crmId",
                 "required": true,
                 "schema": {
-                    "examples": [
-                        "9b2c13f4-6e7a-4e8e-9c9a-a5b9c3f6ad12"
-                    ],
-                    "format": "uuid",
-                    "maxLength": 36,
-                    "minLength": 36,
-                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
-                    "type": "string"
+                    "$ref": "#/components/schemas/Uuid"
                 },
                 "examples": {
                     "valid crm Id": {
