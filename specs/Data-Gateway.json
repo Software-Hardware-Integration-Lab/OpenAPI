@@ -8992,7 +8992,7 @@
                 "tags": [
                     "Cloud Matrix"
                 ],
-                "summary": "Get a default assessment schema object"
+                "summary": "Get a Default Assessment Schema Object"
             }
         },
         "/Api/CloudMatrix/Assessment": {
@@ -9838,12 +9838,12 @@
                 "tags": [
                     "Cloud Matrix"
                 ],
-                "summary": "Get a specific Cloud Matrix Correlation Record"
+                "summary": "Get a Specific Cloud Matrix Correlation Record"
             }
         },
         "/Api/CloudMatrix/Customer/{crmId}/Correlation/{correlationId}/Data": {
             "get": {
-                "summary": "Get specific Cloud Matrix Assessment data with correlation record by crmId and correlationId.",
+                "summary": "Get Specific Cloud Matrix Assessment Data With Correlation Record by Crmid and CorrelationId",
                 "description": "Retrieves Cloud Matrix Assessment data with correlation record associated with the specified customer ID (`crmId`) and correlation ID.\n\nThis endpoint requires the `CloudMatrix.Read.All` scope (permission).",
                 "operationId": "/Api/CloudMatrix/Customer/:crmId/Correlation/:correlationId/Data/Get",
                 "parameters": [
