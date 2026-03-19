@@ -9792,7 +9792,7 @@
                 "summary": "Update Cloud Matrix Assessment"
             },
             "get": {
-                "description": "Retrieves the details of a specific Cloud Matrix correlation record.\n\nThis endpoint requires the `CloudMatrix.Read` or `CloudMatrix.Read.All` scope (permission).",
+                "description": "Retrieves the details of a specific Cloud Matrix correlation record.\n\nThis endpoint requires the `CloudMatrix.Read` scope (permission).",
                 "operationId": "/Api/CloudMatrix/Customer/:crmId/Correlation/:correlationId/Get",
                 "parameters": [
                     {
