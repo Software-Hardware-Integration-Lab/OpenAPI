@@ -65,12 +65,6 @@
 				"severity": "warn"
 			}
 		],
-		"github.copilot.enable": {
-			"*": false
-		},
-		"github.copilot.chat.agent.autoFix": false,
-		"github.copilot.chat.agent.runTasks": false,
-		"github.copilot.editor.enableCodeActions": false,
 		"todo-tree.general.tags": [
 			"BUG",
 			"HACK",
