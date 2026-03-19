@@ -9845,7 +9845,7 @@
         "/Api/CloudMatrix/Customer/{crmId}/Correlation/{correlationId}/Data": {
             "get": {
                 "summary": "Get specific Cloud Matrix Assessment data with correlation record by crmId and correlationId.",
-                "description": "Retrieves Cloud Matrix Assessment data with correlation record associated with the specified customer ID (`crmId`) and correlation ID.\n\nThis endpoint requires the `CloudMatrix.Read`,  `CloudMatrix.Read.All` scope (permission).",
+                "description": "Retrieves Cloud Matrix Assessment data with correlation record associated with the specified customer ID (`crmId`) and correlation ID.\n\nThis endpoint requires the `CloudMatrix.Read.All` scope (permission).",
                 "operationId": "/Api/CloudMatrix/Customer/:crmId/Correlation/:correlationId/Data/Get",
                 "parameters": [
                     {
