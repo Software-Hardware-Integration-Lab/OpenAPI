@@ -9189,12 +9189,12 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Cloud Matrix asessment created successfully.",
+                        "description": "Cloud Matrix assessment created successfully.",
                         "content": {
                             "application/json": {
                                 "examples": {
                                     "Cloud Matrix Assessment Post Response": {
-                                        "description": "Sample, truncated response payload after creating a new Cloud Matrix asessment. In this example, the response echoes the submitted asessment data.",
+                                        "description": "Sample, truncated response payload after creating a new Cloud Matrix assessment. In this example, the response echoes the submitted assessment data.",
                                         "summary": "Example response payload for the newly created Cloud Matrix assessment.",
                                         "value": {
                                             "correlation": {
