@@ -2441,12 +2441,11 @@
                         "examples": [
                             [
                             {
-                                "id": "00000000-0000-0000-0000-000000000001",
                                 "name": "Profile Details",
                                 "values": [
                                     {
                                         "name": "Profile Name",
-                                        "value": "Information Worker"
+                                            "value": "Knowledge Worker"
                                     }
                                 ]
                             }
@@ -2464,10 +2463,15 @@
                     {
                         "id": "00000000-0000-0000-0000-000000000001",
                         "name": "Profile Details",
+                        "details": [
+                            {
+                                "name": "Profile Details",
                         "values": [
                             {
                                 "name": "Profile Name",
-                                "value": "Information Worker"
+                                        "value": "Knowledge Worker"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -3419,10 +3423,15 @@
                                 {
                                     "id": "00000000-0000-0000-0000-000000000001",
                                     "name": "Profile Details",
+                                    "details": [
+                                        {
+                                    "name": "Profile Details",
                                     "values": [
                                         {
                                             "name": "Profile Name",
-                                            "value": "Information Worker"
+                                                    "value": "Knowledge Worker"
+                                                }
+                                            ]
                                         }
                                     ]
                                 }
@@ -3575,10 +3584,15 @@
                             {
                                 "id": "00000000-0000-0000-0000-000000000001",
                                 "name": "Profile Details",
+                                "details": [
+                                    {
+                                "name": "Profile Details",
                                 "values": [
                                     {
                                         "name": "Profile Name",
-                                        "value": "Information Worker"
+                                                "value": "Knowledge Worker"
+                                            }
+                                        ]
                                     }
                                 ]
                             }
@@ -4069,10 +4083,15 @@
                                 {
                                     "id": "00000000-0000-0000-0000-000000000001",
                                     "name": "Profile Details",
+                                    "details": [
+                                        {
+                                    "name": "Profile Details",
                                     "values": [
                                         {
                                             "name": "Profile Name",
-                                            "value": "Information Worker"
+                                                    "value": "Knowledge Worker"
+                                                }
+                                            ]
                                         }
                                     ]
                                 }
@@ -4339,10 +4358,15 @@
                                 {
                                     "id": "00000000-0000-0000-0000-000000000001",
                                     "name": "Profile Details",
+                                    "details": [
+                                        {
+                                    "name": "Profile Details",
                                     "values": [
                                         {
                                             "name": "Profile Name",
-                                            "value": "Information Worker"
+                                                    "value": "Knowledge Worker"
+                                                }
+                                            ]
                                         }
                                     ]
                                 }
@@ -8803,10 +8827,15 @@
                                                     {
                                                         "id": "00000000-0000-0000-0000-000000000001",
                                                         "name": "Profile Details",
+                                                        "details": [
+                                                            {
+                                                        "name": "Profile Details",
                                                         "values": [
                                                             {
                                                                 "name": "Profile Name",
-                                                                "value": "Information Worker"
+                                                                        "value": "Knowledge Worker"
+                                                                    }
+                                                                ]
                                                             }
                                                         ]
                                                     }
@@ -9010,10 +9039,15 @@
                                                 {
                                                     "id": "00000000-0000-0000-0000-000000000001",
                                                     "name": "Profile Details",
+                                                    "details": [
+                                                        {
+                                                    "name": "Profile Details",
                                                     "values": [
                                                         {
                                                             "name": "Profile Name",
-                                                            "value": "Information Worker"
+                                                                    "value": "Knowledge Worker"
+                                                                }
+                                                            ]
                                                         }
                                                     ]
                                                 }
@@ -9199,10 +9233,15 @@
                                                     {
                                                         "id": "00000000-0000-0000-0000-000000000001",
                                                         "name": "Profile Details",
+                                                        "details": [
+                                                            {
+                                                        "name": "Profile Details",
                                                         "values": [
                                                             {
                                                                 "name": "Profile Name",
-                                                                "value": "Information Worker"
+                                                                        "value": "Knowledge Worker"
+                                                                    }
+                                                                ]
                                                             }
                                                         ]
                                                     }
@@ -9412,10 +9451,15 @@
                                                 {
                                                     "id": "00000000-0000-0000-0000-000000000001",
                                                     "name": "Profile Details",
+                                                    "details": [
+                                                        {
+                                                    "name": "Profile Details",
                                                     "values": [
                                                         {
                                                             "name": "Profile Name",
-                                                            "value": "Information Worker"
+                                                                    "value": "Knowledge Worker"
+                                                                }
+                                                            ]
                                                         }
                                                     ]
                                                 }
@@ -9601,10 +9645,15 @@
                                                     {
                                                         "id": "00000000-0000-0000-0000-000000000001",
                                                         "name": "Profile Details",
+                                                        "details": [
+                                                            {
+                                                        "name": "Profile Details",
                                                         "values": [
                                                             {
                                                                 "name": "Profile Name",
-                                                                "value": "Information Worker"
+                                                                        "value": "Knowledge Worker"
+                                                                    }
+                                                                ]
                                                             }
                                                         ]
                                                     }
@@ -9934,8 +9983,8 @@
                                                 ],
                                                 "userProfiles": [
                                                     {
-                                                        "id": "0971a859-11d3-4c7b-a8e3-5137fea503ee",
-                                                        "name": "Knowledge Worker",
+                                                        "id": "00000000-0000-0000-0000-000000000001",
+                                                        "name": "Profile Details",
                                                         "details": [
                                                             {
                                                                 "name": "Profile Details",
@@ -9943,123 +9992,6 @@
                                                                     {
                                                                         "name": "Profile Name",
                                                                         "value": "Knowledge Worker"
-                                                                    },
-                                                                    {
-                                                                        "name": "Licensing Type",
-                                                                        "value": "E5"
-                                                                    }
-                                                                ]
-                                                            },
-                                                            {
-                                                                "name": "User Count",
-                                                                "values": [
-                                                                    {
-                                                                        "name": "Current",
-                                                                        "value": "1251"
-                                                                    },
-                                                                    {
-                                                                        "name": "Future",
-                                                                        "value": "144"
-                                                                    }
-                                                                ]
-                                                            },
-                                                            {
-                                                                "name": "Physical Devices",
-                                                                "values": [
-                                                                    {
-                                                                        "name": "Dedicated",
-                                                                        "value": "250"
-                                                                    },
-                                                                    {
-                                                                        "name": "Secondary",
-                                                                        "value": "7500"
-                                                                    },
-                                                                    {
-                                                                        "name": "Shared",
-                                                                        "value": "260"
-                                                                    }
-                                                                ]
-                                                            },
-                                                            {
-                                                                "name": "Virtual Devices",
-                                                                "values": [
-                                                                    {
-                                                                        "name": "Apps",
-                                                                        "value": "1125"
-                                                                    },
-                                                                    {
-                                                                        "name": "Desktop",
-                                                                        "value": "1620"
-                                                                    },
-                                                                    {
-                                                                        "name": "Cloud PC",
-                                                                        "value": "4875"
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ]
-                                                    },
-                                                    {
-                                                        "id": "af401211-3bf7-43cc-abed-22bbeae69412",
-                                                        "name": "Frontline Worker",
-                                                        "details": [
-                                                            {
-                                                                "name": "Profile Details",
-                                                                "values": [
-                                                                    {
-                                                                        "name": "Profile Name",
-                                                                        "value": "Frontline Worker"
-                                                                    },
-                                                                    {
-                                                                        "name": "Licensing Type",
-                                                                        "value": "F3"
-                                                                    }
-                                                                ]
-                                                            },
-                                                            {
-                                                                "name": "User Count",
-                                                                "values": [
-                                                                    {
-                                                                        "name": "Current",
-                                                                        "value": "4578"
-                                                                    },
-                                                                    {
-                                                                        "name": "Future",
-                                                                        "value": "1545"
-                                                                    }
-                                                                ]
-                                                            },
-                                                            {
-                                                                "name": "Physical Devices",
-                                                                "values": [
-                                                                    {
-                                                                        "name": "Dedicated",
-                                                                        "value": "4587"
-                                                                    },
-                                                                    {
-                                                                        "name": "Secondary",
-                                                                        "value": "220"
-                                                                    },
-                                                                    {
-                                                                        "name": "Shared",
-                                                                        "value": "100"
-                                                                    }
-                                                                ]
-                                                            },
-                                                            {
-                                                                "name": "Virtual Devices",
-                                                                "values": [
-                                                                    {
-                                                                        "name": "Apps",
-                                                                        "value": "350"
-                                                                    },
-                                                                    {
-                                                                        "name": "Desktop",
-                                                                        "value": "150"
-                                                                    },
-                                                                    {
-                                                                        "name": "Cloud PC",
-                                                                        "value": "4780"
                                                                     }
                                                                 ]
                                                             }
