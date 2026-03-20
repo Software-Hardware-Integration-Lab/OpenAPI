@@ -9884,52 +9884,36 @@
                                                             "isTenantBased": false,
                                                             "sourceValue": 10,
                                                             "startYearConfig": {
-                                                                "value": "Full",
-                                                                "isDeepDive": true,
+                                                                "value": null,
+                                                                "userProfileIds": null,
+                                                                "isDeepDive": false,
                                                                 "altProduct": null,
-                                                                "publisher": "Microsoft",
-                                                                "useCase": "PBX replacement",
-                                                                "userProfileIds": [
-                                                                    "ab568208-250b-48e2-a635-42a9a45b3bf4",
-                                                                    "181d908f-9f04-441d-8da7-2ab5c121372e",
-                                                                    "7205a11c-085a-403b-a276-c7111482d53e"
-                                                                ]
+                                                                "publisher": null,
+                                                                "useCase": null
                                                             },
                                                             "yearPlusOneConfig": {
-                                                                "value": "Partial",
-                                                                "isDeepDive": true,
+                                                                "value": null,
+                                                                "userProfileIds": null,
+                                                                "isDeepDive": false,
                                                                 "altProduct": null,
-                                                                "publisher": "Microsoft",
-                                                                "useCase": "Enterprise voice",
-                                                                "userProfileIds": [
-                                                                    "ab568208-250b-48e2-a635-42a9a45b3bf4",
-                                                                    "181d908f-9f04-441d-8da7-2ab5c121372e",
-                                                                    "7205a11c-085a-403b-a276-c7111482d53e"
-                                                                ]
+                                                                "publisher": null,
+                                                                "useCase": null
                                                             },
                                                             "yearPlusTwoConfig": {
-                                                                "value": "Alternative",
-                                                                "isDeepDive": true,
+                                                                "value": null,
+                                                                "userProfileIds": null,
+                                                                "isDeepDive": false,
                                                                 "altProduct": null,
-                                                                "publisher": "Microsoft",
-                                                                "useCase": "Global rollout",
-                                                                "userProfileIds": [
-                                                                    "ab568208-250b-48e2-a635-42a9a45b3bf4",
-                                                                    "181d908f-9f04-441d-8da7-2ab5c121372e",
-                                                                    "7205a11c-085a-403b-a276-c7111482d53e"
-                                                                ]
+                                                                "publisher": null,
+                                                                "useCase": null
                                                             },
                                                             "yearPlusThreeConfig": {
-                                                                "value": "Full",
-                                                                "isDeepDive": true,
+                                                                "value": null,
+                                                                "userProfileIds": null,
+                                                                "isDeepDive": false,
                                                                 "altProduct": null,
-                                                                "publisher": "Microsoft",
-                                                                "useCase": "Optimization",
-                                                                "userProfileIds": [
-                                                                    "ab568208-250b-48e2-a635-42a9a45b3bf4",
-                                                                    "181d908f-9f04-441d-8da7-2ab5c121372e",
-                                                                    "7205a11c-085a-403b-a276-c7111482d53e"
-                                                                ]
+                                                                "publisher": null,
+                                                                "useCase": null
                                                             }
                                                         },
                                                         "profiles": [
