@@ -2391,11 +2391,11 @@
                         },
                         "examples": [
                             [
-                            {
-                                "name": "Profile Name",
-                                "value": "Knowledge Worker"
-                            }
-                        ]
+                                {
+                                    "name": "Profile Name",
+                                    "value": "Knowledge Worker"
+                                }
+                            ]
                         ]
                     }
                 },
@@ -2440,15 +2440,15 @@
                         },
                         "examples": [
                             [
-                            {
-                                "name": "Profile Details",
-                                "values": [
-                                    {
-                                        "name": "Profile Name",
+                                {
+                                    "name": "Profile Details",
+                                    "values": [
+                                        {
+                                            "name": "Profile Name",
                                             "value": "Knowledge Worker"
-                                    }
-                                ]
-                            }
+                                        }
+                                    ]
+                                }
                             ]
                         ]
                     }
@@ -2466,9 +2466,9 @@
                         "details": [
                             {
                                 "name": "Profile Details",
-                        "values": [
-                            {
-                                "name": "Profile Name",
+                                "values": [
+                                    {
+                                        "name": "Profile Name",
                                         "value": "Knowledge Worker"
                                     }
                                 ]
@@ -2495,7 +2495,10 @@
                     },
                     "userProfileIds": {
                         "description": "Associated user profile IDs or null.",
-                        "type": ["array", "null"],
+                        "type": [
+                            "array",
+                            "null"
+                        ],
                         "items": {
                             "$ref": "#/components/schemas/Uuid"
                         },
@@ -3425,10 +3428,10 @@
                                     "name": "Profile Details",
                                     "details": [
                                         {
-                                    "name": "Profile Details",
-                                    "values": [
-                                        {
-                                            "name": "Profile Name",
+                                            "name": "Profile Details",
+                                            "values": [
+                                                {
+                                                    "name": "Profile Name",
                                                     "value": "Knowledge Worker"
                                                 }
                                             ]
@@ -3586,10 +3589,10 @@
                                 "name": "Profile Details",
                                 "details": [
                                     {
-                                "name": "Profile Details",
-                                "values": [
-                                    {
-                                        "name": "Profile Name",
+                                        "name": "Profile Details",
+                                        "values": [
+                                            {
+                                                "name": "Profile Name",
                                                 "value": "Knowledge Worker"
                                             }
                                         ]
@@ -4085,10 +4088,10 @@
                                     "name": "Profile Details",
                                     "details": [
                                         {
-                                    "name": "Profile Details",
-                                    "values": [
-                                        {
-                                            "name": "Profile Name",
+                                            "name": "Profile Details",
+                                            "values": [
+                                                {
+                                                    "name": "Profile Name",
                                                     "value": "Knowledge Worker"
                                                 }
                                             ]
@@ -4360,10 +4363,10 @@
                                     "name": "Profile Details",
                                     "details": [
                                         {
-                                    "name": "Profile Details",
-                                    "values": [
-                                        {
-                                            "name": "Profile Name",
+                                            "name": "Profile Details",
+                                            "values": [
+                                                {
+                                                    "name": "Profile Name",
                                                     "value": "Knowledge Worker"
                                                 }
                                             ]
@@ -4526,7 +4529,7 @@
         },
         "description": "Collects data from the various SHI Lab products and makes it available in a standardized way.",
         "title": "SHI - Data Gateway",
-        "version": "3.1.0"
+        "version": "3.2.0"
     },
     "openapi": "3.1.1",
     "paths": {
@@ -8829,10 +8832,10 @@
                                                         "name": "Profile Details",
                                                         "details": [
                                                             {
-                                                        "name": "Profile Details",
-                                                        "values": [
-                                                            {
-                                                                "name": "Profile Name",
+                                                                "name": "Profile Details",
+                                                                "values": [
+                                                                    {
+                                                                        "name": "Profile Name",
                                                                         "value": "Knowledge Worker"
                                                                     }
                                                                 ]
@@ -9041,10 +9044,10 @@
                                                     "name": "Profile Details",
                                                     "details": [
                                                         {
-                                                    "name": "Profile Details",
-                                                    "values": [
-                                                        {
-                                                            "name": "Profile Name",
+                                                            "name": "Profile Details",
+                                                            "values": [
+                                                                {
+                                                                    "name": "Profile Name",
                                                                     "value": "Knowledge Worker"
                                                                 }
                                                             ]
@@ -9235,10 +9238,10 @@
                                                         "name": "Profile Details",
                                                         "details": [
                                                             {
-                                                        "name": "Profile Details",
-                                                        "values": [
-                                                            {
-                                                                "name": "Profile Name",
+                                                                "name": "Profile Details",
+                                                                "values": [
+                                                                    {
+                                                                        "name": "Profile Name",
                                                                         "value": "Knowledge Worker"
                                                                     }
                                                                 ]
@@ -9453,10 +9456,10 @@
                                                     "name": "Profile Details",
                                                     "details": [
                                                         {
-                                                    "name": "Profile Details",
-                                                    "values": [
-                                                        {
-                                                            "name": "Profile Name",
+                                                            "name": "Profile Details",
+                                                            "values": [
+                                                                {
+                                                                    "name": "Profile Name",
                                                                     "value": "Knowledge Worker"
                                                                 }
                                                             ]
@@ -9647,10 +9650,10 @@
                                                         "name": "Profile Details",
                                                         "details": [
                                                             {
-                                                        "name": "Profile Details",
-                                                        "values": [
-                                                            {
-                                                                "name": "Profile Name",
+                                                                "name": "Profile Details",
+                                                                "values": [
+                                                                    {
+                                                                        "name": "Profile Name",
                                                                         "value": "Knowledge Worker"
                                                                     }
                                                                 ]
