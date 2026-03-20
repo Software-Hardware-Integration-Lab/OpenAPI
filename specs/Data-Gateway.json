@@ -3201,7 +3201,7 @@
                         "name": "Microsoft",
                         "terms": "5 Years",
                         "contractNumber": "C12345678",
-                        "expiryDate": "20260101T00:00:00Z",
+                        "expiryDate": "2026-01-01T00:00:00Z",
                         "costs": [
                             {
                                 "monthlyCost": 5001,
@@ -3209,7 +3209,7 @@
                                 "contractValue": 5003
                             }
                         ],
-                        "replacementDate": "20260101T00:00:00Z"
+                        "replacementDate": "2026-01-01T00:00:00Z"
                     }
                 ]
             },
@@ -3269,7 +3269,7 @@
                             "name": "Google",
                             "terms": "3 Years",
                             "contractNumber": "C87654321",
-                            "expiryDate": "20260101T00:00:00Z",
+                            "expiryDate": "2026-01-01T00:00:00Z",
                             "costs": [
                                 {
                                     "monthlyCost": 5001,
@@ -3277,7 +3277,7 @@
                                     "contractValue": 5003
                                 }
                             ],
-                            "replacementDate": "20261231T00:00:00Z"
+                            "replacementDate": "2026-12-31T00:00:00Z"
                         },
                         "notes": "Example notes"
                     }
@@ -3545,7 +3545,7 @@
                                         "name": "Google",
                                         "terms": "3 Years",
                                         "contractNumber": "C87654321",
-                                        "expiryDate": "20260101T00:00:00Z",
+                                        "expiryDate": "2026-01-01T00:00:00Z",
                                         "costs": [
                                             {
                                                 "monthlyCost": 5001,
@@ -3553,7 +3553,7 @@
                                                 "contractValue": 5003
                                             }
                                         ],
-                                        "replacementDate": "20261231T00:00:00Z"
+                                        "replacementDate": "2026-12-31T00:00:00Z"
                                     },
                                     "notes": "Example notes"
                                 }
@@ -3688,7 +3688,7 @@
                                     "name": "Google",
                                     "terms": "3 Years",
                                     "contractNumber": "C87654321",
-                                    "expiryDate": "20260101T00:00:00Z",
+                                    "expiryDate": "2026-01-01T00:00:00Z",
                                     "costs": [
                                         {
                                             "monthlyCost": 5001,
@@ -3696,7 +3696,7 @@
                                             "contractValue": 5003
                                         }
                                     ],
-                                    "replacementDate": "20261231T00:00:00Z"
+                                    "replacementDate": "2026-12-31T00:00:00Z"
                                 },
                                 "notes": "Example notes"
                             }
@@ -4187,7 +4187,7 @@
                                         "name": "Google",
                                         "terms": "3 Years",
                                         "contractNumber": "C87654321",
-                                        "expiryDate": "20260101T00:00:00Z",
+                                        "expiryDate": "2026-01-01T00:00:00Z",
                                         "costs": [
                                             {
                                                 "monthlyCost": 5001,
@@ -4195,7 +4195,7 @@
                                                 "contractValue": 5003
                                             }
                                         ],
-                                        "replacementDate": "20261231T00:00:00Z"
+                                        "replacementDate": "2026-12-31T00:00:00Z"
                                     },
                                     "notes": "Example notes"
                                 }
@@ -4462,7 +4462,7 @@
                                         "name": "Google",
                                         "terms": "3 Years",
                                         "contractNumber": "C87654321",
-                                        "expiryDate": "20260101T00:00:00Z",
+                                        "expiryDate": "2026-01-01T00:00:00Z",
                                         "costs": [
                                             {
                                                 "monthlyCost": 5001,
@@ -4470,7 +4470,7 @@
                                                 "contractValue": 5003
                                             }
                                         ],
-                                        "replacementDate": "20261231T00:00:00Z"
+                                        "replacementDate": "2026-12-31T00:00:00Z"
                                     },
                                     "notes": "Example notes"
                                 }
@@ -8931,7 +8931,7 @@
                                                             "name": "Google",
                                                             "terms": "3 Years",
                                                             "contractNumber": "C87654321",
-                                                            "expiryDate": "20260101T00:00:00Z",
+                                                            "expiryDate": "2026-01-01T00:00:00Z",
                                                             "costs": [
                                                                 {
                                                                     "monthlyCost": 5001,
@@ -8939,7 +8939,7 @@
                                                                     "contractValue": 5003
                                                                 }
                                                             ],
-                                                            "replacementDate": "20261231T00:00:00Z"
+                                                            "replacementDate": "2026-12-31T00:00:00Z"
                                                         },
                                                         "notes": "Example notes"
                                                     }
@@ -9143,7 +9143,7 @@
                                                         "name": "Google",
                                                         "terms": "3 Years",
                                                         "contractNumber": "C87654321",
-                                                        "expiryDate": "20260101T00:00:00Z",
+                                                        "expiryDate": "2026-01-01T00:00:00Z",
                                                         "costs": [
                                                             {
                                                                 "monthlyCost": 5001,
@@ -9151,7 +9151,7 @@
                                                                 "contractValue": 5003
                                                             }
                                                         ],
-                                                        "replacementDate": "20261231T00:00:00Z"
+                                                        "replacementDate": "2026-12-31T00:00:00Z"
                                                     },
                                                     "notes": "Example notes"
                                                 }
@@ -9337,7 +9337,7 @@
                                                             "name": "Google",
                                                             "terms": "3 Years",
                                                             "contractNumber": "C87654321",
-                                                            "expiryDate": "20260101T00:00:00Z",
+                                                            "expiryDate": "2026-01-01T00:00:00Z",
                                                             "costs": [
                                                                 {
                                                                     "monthlyCost": 5001,
@@ -9345,7 +9345,7 @@
                                                                     "contractValue": 5003
                                                                 }
                                                             ],
-                                                            "replacementDate": "20261231T00:00:00Z"
+                                                            "replacementDate": "2026-12-31T00:00:00Z"
                                                         },
                                                         "notes": "Example notes"
                                                     }
@@ -9555,7 +9555,7 @@
                                                         "name": "Google",
                                                         "terms": "3 Years",
                                                         "contractNumber": "C87654321",
-                                                        "expiryDate": "20260101T00:00:00Z",
+                                                        "expiryDate": "2026-01-01T00:00:00Z",
                                                         "costs": [
                                                             {
                                                                 "monthlyCost": 5001,
@@ -9563,7 +9563,7 @@
                                                                 "contractValue": 5003
                                                             }
                                                         ],
-                                                        "replacementDate": "20261231T00:00:00Z"
+                                                        "replacementDate": "2026-12-31T00:00:00Z"
                                                     },
                                                     "notes": "Example notes"
                                                 }
@@ -9749,7 +9749,7 @@
                                                             "name": "Google",
                                                             "terms": "3 Years",
                                                             "contractNumber": "C87654321",
-                                                            "expiryDate": "20260101T00:00:00Z",
+                                                            "expiryDate": "2026-01-01T00:00:00Z",
                                                             "costs": [
                                                                 {
                                                                     "monthlyCost": 5001,
@@ -9757,7 +9757,7 @@
                                                                     "contractValue": 5003
                                                                 }
                                                             ],
-                                                            "replacementDate": "20261231T00:00:00Z"
+                                                            "replacementDate": "2026-12-31T00:00:00Z"
                                                         },
                                                         "notes": "Example notes"
                                                     }
