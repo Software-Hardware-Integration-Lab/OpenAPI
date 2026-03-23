@@ -7796,7 +7796,7 @@
                                         [
                                             {
                                                 "tenantId": "7e8f9a0b-1c2d-3e4b-5a6c-7d8e9f0a1b2c",
-                                                "displayName": "Contoso - R&D",
+                                                "tenantDisplayName": "Contoso - R&D",
                                                 "parentId": "f3ed1efc-4e62-46b8-bf2a-6b59ca9784e5",
                                                 "authorizedPrincipalList": []
                                             }
@@ -7882,7 +7882,7 @@
                                         "summary": "Existing Tenant Record",
                                         "value": {
                                             "tenantId": "9f0a1b2c-3d4e-5f6a-7b8c-9d0e1f2a3b4c",
-                                            "displayName": "Contoso - Testing",
+                                            "tenantDisplayName": "Contoso - Testing",
                                             "parentId": "f3ed1efc-4e62-46b8-bf2a-6b59ca9784e5",
                                             "authorizedPrincipalList": [
                                                 "9f0a1b2c-3d4e-5f6a-7b8c-9d0e1f2a3b4c",
@@ -7964,7 +7964,7 @@
                                 "anyOf": [
                                     {
                                         "required": [
-                                            "displayName"
+                                            "tenantDisplayName"
                                         ]
                                     },
                                     {
@@ -8002,7 +8002,7 @@
                                     "summary": "Update Tenant Record Name and Parent Information",
                                     "value": {
                                         "parentId": "8f9a0b1c-2d3e-4f5a-6b7c-8d9e0a1b2c3d",
-                                        "displayName": "Contoso - R&D West"
+                                        "tenantDisplayName": "Contoso - R&D West"
                                     }
                                 },
                                 "Example Request for Tenant Authorized Principals Update": {
@@ -8032,7 +8032,7 @@
                                         "summary": "Updated Tenant Record",
                                         "value": {
                                             "tenantId": "c00ffc2c-b6f6-4121-bd8e-4d02e9504eb9",
-                                            "displayName": "Contoso - Testing",
+                                            "tenantDisplayName": "Contoso - Testing",
                                             "parentId": "8c291062-a4f7-4706-b4df-59e605497f06",
                                             "authorizedPrincipalList": [
                                                 "b856517a-2086-4be4-b63e-d6ca8a5b0ff6"
