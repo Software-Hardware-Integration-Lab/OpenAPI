@@ -264,6 +264,13 @@
                         ],
                         "type": "boolean"
                     },
+                    "cloudMatrix": {
+                        "description": "Flag that indicates if the Cloud Matrix system is down (`false`) or not (`true`). False indicate the service is not working, true indicates the service is working.",
+                        "examples": [
+                            false
+                        ],
+                        "type": "boolean"
+                    },
                     "database": {
                         "description": "Flag that indicates if the ORM (Database) system is down (`false`) or not (`true`). False indicate the service is not working, true indicates the service is working.",
                         "examples": [
@@ -285,6 +292,7 @@
                         "authClient": false,
                         "authServer": true,
                         "bulkStorage": true,
+                        "cloudMatrix": true,
                         "database": false
                     }
                 ]
@@ -4556,6 +4564,7 @@
                                             "authClient": false,
                                             "authServer": false,
                                             "bulkStorage": true,
+                                            "cloudMatrix": true,
                                             "database": true
                                         }
                                     },
