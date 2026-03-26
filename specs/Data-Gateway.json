@@ -149,18 +149,18 @@
                     }
                 }
             },
-            "crmId": {
-                "description": "The customer identifier (object ID) for the specified record.",
+            "accountId": {
+                "description": "The customer account identifier (object ID) for the specified record.",
                 "in": "path",
-                "name": "crmId",
+                "name": "accountId",
                 "required": true,
                 "schema": {
                     "$ref": "#/components/schemas/Uuid"
                 },
                 "examples": {
-                    "valid crm Id": {
-                        "summary": "Example Valid CRM ID",
-                        "description": "An example of a valid crm ID in type UUID string.",
+                    "valid account Id": {
+                        "summary": "Example Valid Account ID",
+                        "description": "An example of a valid Account ID in type UUID string.",
                         "value": "9b2c13f4-6e7a-4e8e-9c9a-a5b9c3f6ad12"
                     }
                 }
@@ -3362,12 +3362,12 @@
                             null
                         ]
                     },
-                    "crmId": {
+                    "accountId": {
                         "type": [
                             "string",
                             "null"
                         ],
-                        "description": "CRM identifier (optional); Default: empty string if not specified.",
+                        "description": "Account identifier (optional); Default: empty string if not specified.",
                         "examples": [
                             "fd9a6a53-594d-41aa-950a-b21ff41d4688",
                             null
@@ -3407,7 +3407,7 @@
                         "licensingExecutive": "Jane Doe",
                         "customerSuccessManager": "John Doe",
                         "notesAndObjectives": "Sample notes and objectives for the account.",
-                        "crmId": "fd9a6a53-594d-41aa-950a-b21ff41d4688",
+                        "accountId": "fd9a6a53-594d-41aa-950a-b21ff41d4688",
                         "createdDate": "2026-01-01T00:00:00Z",
                         "modifiedDate": "2026-01-01T00:00:00Z",
                         "primaryPublisher": "Microsoft"
@@ -3586,7 +3586,7 @@
                             "licensingExecutive": "Jane Doe",
                             "customerSuccessManager": "John Doe",
                             "notesAndObjectives": "Sample notes and objectives for the account.",
-                            "crmId": "fd9a6a53-594d-41aa-950a-b21ff41d4688",
+                            "accountId": "fd9a6a53-594d-41aa-950a-b21ff41d4688",
                             "createdDate": "2026-01-01T00:00:00Z",
                             "modifiedDate": "2026-01-01T00:00:00Z",
                             "primaryPublisher": "Microsoft"
@@ -4085,7 +4085,7 @@
                                 "licensingExecutive": "Jane Doe",
                                 "customerSuccessManager": "John Doe",
                                 "notesAndObjectives": "Sample notes and objectives for the account.",
-                                "crmId": "fd9a6a53-594d-41aa-950a-b21ff41d4688",
+                                "accountId": "fd9a6a53-594d-41aa-950a-b21ff41d4688",
                                 "createdDate": "2026-01-01T00:00:00Z",
                                 "modifiedDate": "2026-01-01T00:00:00Z",
                                 "primaryPublisher": "Microsoft"
@@ -4261,11 +4261,11 @@
                         "$ref": "#/components/schemas/DateTimeStringType",
                         "description": "Timestamp indicating when the record was created. This is auto managed by sequelize."
                     },
-                    "crmId": {
+                    "accountId": {
                         "$ref": "#/components/schemas/Uuid",
-                        "description": "Unique Identifier representing the customer identity for this cloud matrix assessment."
+                        "description": "Unique Identifier representing the customer account for this cloud matrix assessment."
                     },
-                    "discoverDate": {
+                    "discoveryDate": {
                         "$ref": "#/components/schemas/DateTimeStringType",
                         "description": "Date when the discovery process was initiated, as specified by the user."
                     },
@@ -4298,8 +4298,8 @@
                 },
                 "required": [
                     "accountName",
-                    "crmId",
-                    "discoverDate",
+                    "accountId",
+                    "discoveryDate",
                     "template"
                 ],
                 "additionalProperties": false,
@@ -4308,8 +4308,8 @@
                         "accountName": "AstraZeneca",
                         "correlationId": "bbab2907-c781-4bf1-b912-b91510853052",
                         "createdAt": "2025-12-15T21:13:12.821Z",
-                        "crmId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
-                        "discoverDate": "2025-12-15T21:13:12.821Z",
+                        "accountId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
+                        "discoveryDate": "2025-12-15T21:13:12.821Z",
                         "isComplete": true,
                         "template": "Microsoft Enterprise",
                         "updatedAt": "2025-12-15T21:13:12.821Z"
@@ -4342,8 +4342,8 @@
                             "accountName": "AstraZeneca",
                             "correlationId": "bbab2907-c781-4bf1-b912-b91510853052",
                             "createdAt": "2025-12-15T21:13:12.821Z",
-                            "crmId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
-                            "discoverDate": "2025-12-15T21:13:12.821Z",
+                            "accountId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
+                            "discoveryDate": "2025-12-15T21:13:12.821Z",
                             "isComplete": true,
                             "template": "Microsoft Enterprise",
                             "updatedAt": "2025-12-15T21:13:12.821Z"
@@ -4360,7 +4360,7 @@
                                 "licensingExecutive": "Jane Doe",
                                 "customerSuccessManager": "John Doe",
                                 "notesAndObjectives": "Sample notes and objectives for the account.",
-                                "crmId": "fd9a6a53-594d-41aa-950a-b21ff41d4688",
+                                "accountId": "fd9a6a53-594d-41aa-950a-b21ff41d4688",
                                 "createdDate": "2026-01-01T00:00:00Z",
                                 "modifiedDate": "2026-01-01T00:00:00Z",
                                 "primaryPublisher": "Microsoft"
@@ -8724,7 +8724,7 @@
         },
         "/Api/CloudMatrix/Dashboard": {
             "get": {
-                "description": "Retrieves the list of cloud matrix correlation records. Can use filters targeting creation date to limit results. Cloud matrix records store the metadata for a specific cloud matrix correlation.\n\nThis endpoint requires the `CloudMatrix.Read` scope (permission).",
+                "description": "Retrieves the list of cloud matrix correlation records on the tenant provided inside the token. Can use filters targeting creation date to limit results. Cloud matrix records store the metadata for a specific cloud matrix correlation.\n\nThis endpoint requires the `CloudMatrix.Read` scope (permission).",
                 "operationId": "/Api/CloudMatrix/Dashboard/Get",
                 "parameters": [
                     {
@@ -8748,8 +8748,8 @@
                                                 "accountName": "Test Account Name",
                                                 "correlationId": "bbab2907-c781-4bf1-b912-b91510853052",
                                                 "createdAt": "2025-12-15T21:13:12.821Z",
-                                                "crmId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
-                                                "discoverDate": "2025-12-15T21:13:12.821Z",
+                                                "accountId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
+                                                "discoveryDate": "2025-12-15T21:13:12.821Z",
                                                 "isComplete": true,
                                                 "template": "Microsoft Enterprise",
                                                 "updatedAt": "2025-12-15T21:13:12.821Z"
@@ -8758,8 +8758,8 @@
                                                 "accountName": "Test Account Name",
                                                 "correlationId": "e7cc9996-3c5f-4be4-bba2-c815a157dedb",
                                                 "createdAt": "2025-12-15T21:13:12.821Z",
-                                                "crmId": "fbea61c3-6c80-4fbb-9bd7-b6fa2356892e",
-                                                "discoverDate": "2025-12-15T21:13:12.821Z",
+                                                "accountId": "fbea61c3-6c80-4fbb-9bd7-b6fa2356892e",
+                                                "discoveryDate": "2025-12-15T21:13:12.821Z",
                                                 "isComplete": false,
                                                 "template": "Google",
                                                 "updatedAt": "2025-12-15T21:13:12.821Z"
@@ -8774,8 +8774,94 @@
                                                 "accountName": "AstraZeneca",
                                                 "correlationId": "bbab2907-c781-4bf1-b912-b91510853052",
                                                 "createdAt": "2025-12-15T21:13:12.821Z",
-                                                "crmId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
-                                                "discoverDate": "2025-12-15T21:13:12.821Z",
+                                                "accountId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
+                                                "discoveryDate": "2025-12-15T21:13:12.821Z",
+                                                "isComplete": true,
+                                                "template": "Microsoft Enterprise",
+                                                "updatedAt": "2025-12-15T21:13:12.821Z"
+                                            }
+                                        ]
+                                    ],
+                                    "items": {
+                                        "$ref": "#/components/schemas/CloudMatrix.CloudMatrixCorrelation"
+                                    },
+                                    "minItems": 0,
+                                    "type": "array"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "tags": [
+                    "Cloud Matrix"
+                ],
+                "summary": "Get Cloud Matrix Correlation Records"
+            }
+        },
+        "/Api/CloudMatrix/Account/{accountId}/Dashboard": {
+            "get": {
+                "description": "Retrieves the list of cloud matrix correlation records on the account passed in. Can use filters targeting creation date to limit results. Cloud matrix records store the metadata for a specific cloud matrix correlation.\n\nThis endpoint requires the `CloudMatrix.Read.All` scope (permission).",
+                "operationId": "/Api/CloudMatrix/Account/:accountId/Dashboard",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/accountId",
+                        "required": true
+                    },
+                    {
+                        "$ref": "#/components/parameters/dateStart"
+                    },
+                    {
+                        "$ref": "#/components/parameters/dateEnd"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A list of cloud matrix correlation records.",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Example Cloud Matrix Records": {
+                                        "description": "Sample list of cloud matrix correlation records.",
+                                        "summary": "Available Cloud Matrix correlation Records",
+                                        "value": [
+                                            {
+                                                "accountName": "Test Account Name",
+                                                "correlationId": "bbab2907-c781-4bf1-b912-b91510853052",
+                                                "createdAt": "2025-12-15T21:13:12.821Z",
+                                                "accountId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
+                                                "discoveryDate": "2025-12-15T21:13:12.821Z",
+                                                "isComplete": true,
+                                                "template": "Microsoft Enterprise",
+                                                "updatedAt": "2025-12-15T21:13:12.821Z"
+                                            },
+                                            {
+                                                "accountName": "Test Account Name",
+                                                "correlationId": "e7cc9996-3c5f-4be4-bba2-c815a157dedb",
+                                                "createdAt": "2025-12-15T21:13:12.821Z",
+                                                "accountId": "fbea61c3-6c80-4fbb-9bd7-b6fa2356892e",
+                                                "discoveryDate": "2025-12-15T21:13:12.821Z",
+                                                "isComplete": false,
+                                                "template": "Google",
+                                                "updatedAt": "2025-12-15T21:13:12.821Z"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "schema": {
+                                    "examples": [
+                                        [
+                                            {
+                                                "accountName": "AstraZeneca",
+                                                "correlationId": "bbab2907-c781-4bf1-b912-b91510853052",
+                                                "createdAt": "2025-12-15T21:13:12.821Z",
+                                                "accountId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
+                                                "discoveryDate": "2025-12-15T21:13:12.821Z",
                                                 "isComplete": true,
                                                 "template": "Microsoft Enterprise",
                                                 "updatedAt": "2025-12-15T21:13:12.821Z"
@@ -8830,7 +8916,7 @@
                                                     "licensingExecutive": "Jane Doe",
                                                     "customerSuccessManager": "John Doe",
                                                     "notesAndObjectives": "Sample notes and objectives for the account.",
-                                                    "crmId": "fd9a6a53-594d-41aa-950a-b21ff41d4688",
+                                                    "accountId": "fd9a6a53-594d-41aa-950a-b21ff41d4688",
                                                     "createdDate": "2026-01-01T00:00:00Z",
                                                     "modifiedDate": "2026-01-01T00:00:00Z",
                                                     "primaryPublisher": "Microsoft"
@@ -9009,7 +9095,7 @@
         },
         "/Api/CloudMatrix/Assessment": {
             "post": {
-                "description": "Stores a new Cloud Matrix assessment payload.\n\nThis endpoint requires the `CloudMatrix.ReadWrite.All` scope (permission).",
+                "description": "Stores a new Cloud Matrix assessment payload.\n\nThis endpoint is only accessible from the `SHI` and `SHI Lab` tenants and requires the `CloudMatrix.ReadWrite.All` scope (permission).",
                 "operationId": "/Api/CloudMatrix/Assessment/Post",
                 "requestBody": {
                     "required": true,
@@ -9024,8 +9110,8 @@
                                             "accountName": "AstraZeneca",
                                             "correlationId": "bbab2907-c781-4bf1-b912-b91510853052",
                                             "createdAt": "2025-12-15T21:13:12.821Z",
-                                            "crmId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
-                                            "discoverDate": "2025-12-15T21:13:12.821Z",
+                                            "accountId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
+                                            "discoveryDate": "2025-12-15T21:13:12.821Z",
                                             "isComplete": true,
                                             "template": "Microsoft Enterprise",
                                             "updatedAt": "2025-12-15T21:13:12.821Z"
@@ -9042,7 +9128,7 @@
                                                 "licensingExecutive": "Jane Doe",
                                                 "customerSuccessManager": "John Doe",
                                                 "notesAndObjectives": "Sample notes and objectives for the account.",
-                                                "crmId": "fd9a6a53-594d-41aa-950a-b21ff41d4688",
+                                                "accountId": "fd9a6a53-594d-41aa-950a-b21ff41d4688",
                                                 "createdDate": "2026-01-01T00:00:00Z",
                                                 "modifiedDate": "2026-01-01T00:00:00Z",
                                                 "primaryPublisher": "Microsoft"
@@ -9218,8 +9304,8 @@
                                                 "accountName": "AstraZeneca",
                                                 "correlationId": "bbab2907-c781-4bf1-b912-b91510853052",
                                                 "createdAt": "2025-12-15T21:13:12.821Z",
-                                                "crmId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
-                                                "discoverDate": "2025-12-15T21:13:12.821Z",
+                                                "accountId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
+                                                "discoveryDate": "2025-12-15T21:13:12.821Z",
                                                 "isComplete": true,
                                                 "template": "Microsoft Enterprise",
                                                 "updatedAt": "2025-12-15T21:13:12.821Z"
@@ -9236,7 +9322,7 @@
                                                     "licensingExecutive": "Jane Doe",
                                                     "customerSuccessManager": "John Doe",
                                                     "notesAndObjectives": "Sample notes and objectives for the account.",
-                                                    "crmId": "fd9a6a53-594d-41aa-950a-b21ff41d4688",
+                                                    "accountId": "fd9a6a53-594d-41aa-950a-b21ff41d4688",
                                                     "createdDate": "2026-01-01T00:00:00Z",
                                                     "modifiedDate": "2026-01-01T00:00:00Z",
                                                     "primaryPublisher": "Microsoft"
@@ -9411,16 +9497,18 @@
                 "summary": "Submit Cloud Matrix Assessment"
             }
         },
-        "/Api/CloudMatrix/Customer/{crmId}/Correlation/{correlationId}": {
+        "/Api/CloudMatrix/Account/{accountId}/Correlation/{correlationId}": {
             "patch": {
-                "description": "Updates the existing Cloud Matrix assessment data for specified crmId and correlationId.\n\nThis endpoint is only accessible from the `SHI` and `SHI Lab` tenants and requires the `CloudMatrix.ReadWrite`, `CloudMatrix.ReadWrite.All` scope (permission).",
-                "operationId": "/Api/CloudMatrix/Customer/:crmId/Correlation/:correlationId/Patch",
+                "description": "Updates the existing Cloud Matrix assessment data for specified accountId and correlationId.\n\nThis endpoint is only accessible from the `SHI` and `SHI Lab` tenants and requires the `CloudMatrix.ReadWrite.All` scope (permission).",
+                "operationId": "/Api/CloudMatrix/Account/:accountId/Correlation/:correlationId/Patch",
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/crmId"
+                        "$ref": "#/components/parameters/accountId",
+                        "required": true
                     },
                     {
-                        "$ref": "#/components/parameters/correlationId"
+                        "$ref": "#/components/parameters/correlationId",
+                        "required": true
                     }
                 ],
                 "requestBody": {
@@ -9436,8 +9524,8 @@
                                             "accountName": "AstraZeneca",
                                             "correlationId": "bbab2907-c781-4bf1-b912-b91510853052",
                                             "createdAt": "2025-12-15T21:13:12.821Z",
-                                            "crmId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
-                                            "discoverDate": "2025-12-15T21:13:12.821Z",
+                                            "accountId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
+                                            "discoveryDate": "2025-12-15T21:13:12.821Z",
                                             "isComplete": true,
                                             "template": "Microsoft Enterprise",
                                             "updatedAt": "2025-12-15T21:13:12.821Z"
@@ -9454,7 +9542,7 @@
                                                 "licensingExecutive": "Jane Doe",
                                                 "customerSuccessManager": "John Doe",
                                                 "notesAndObjectives": "Sample notes and objectives for the account.",
-                                                "crmId": "fd9a6a53-594d-41aa-950a-b21ff41d4688",
+                                                "accountId": "fd9a6a53-594d-41aa-950a-b21ff41d4688",
                                                 "createdDate": "2026-01-01T00:00:00Z",
                                                 "modifiedDate": "2026-01-01T00:00:00Z",
                                                 "primaryPublisher": "Microsoft"
@@ -9630,8 +9718,8 @@
                                                 "accountName": "AstraZeneca",
                                                 "correlationId": "bbab2907-c781-4bf1-b912-b91510853052",
                                                 "createdAt": "2025-12-15T21:13:12.821Z",
-                                                "crmId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
-                                                "discoverDate": "2025-12-15T21:13:12.821Z",
+                                                "accountId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
+                                                "discoveryDate": "2025-12-15T21:13:12.821Z",
                                                 "isComplete": true,
                                                 "template": "Microsoft Enterprise",
                                                 "updatedAt": "2025-12-15T21:13:12.821Z"
@@ -9648,7 +9736,7 @@
                                                     "licensingExecutive": "Jane Doe",
                                                     "customerSuccessManager": "John Doe",
                                                     "notesAndObjectives": "Sample notes and objectives for the account.",
-                                                    "crmId": "fd9a6a53-594d-41aa-950a-b21ff41d4688",
+                                                    "accountId": "fd9a6a53-594d-41aa-950a-b21ff41d4688",
                                                     "createdDate": "2026-01-01T00:00:00Z",
                                                     "modifiedDate": "2026-01-01T00:00:00Z",
                                                     "primaryPublisher": "Microsoft"
@@ -9823,14 +9911,16 @@
                 "summary": "Update Cloud Matrix Assessment"
             },
             "get": {
-                "description": "Retrieves the details of a specific Cloud Matrix correlation record.\n\nThis endpoint requires the `CloudMatrix.Read` scope (permission).",
-                "operationId": "/Api/CloudMatrix/Customer/:crmId/Correlation/:correlationId/Get",
+                "description": "Retrieves the details of a specific Cloud Matrix correlation record.\n\nThis endpoint requires the `CloudMatrix.Read.All` scope (permission).",
+                "operationId": "/Api/CloudMatrix/Account/:accountId/Correlation/:correlationId/Get",
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/crmId"
+                        "$ref": "#/components/parameters/accountId",
+                        "required": true
                     },
                     {
-                        "$ref": "#/components/parameters/correlationId"
+                        "$ref": "#/components/parameters/correlationId",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -9846,8 +9936,8 @@
                                             "accountName": "AstraZeneca",
                                             "correlationId": "bbab2907-c781-4bf1-b912-b91510853052",
                                             "createdAt": "2025-12-15T21:13:12.821Z",
-                                            "crmId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
-                                            "discoverDate": "2025-12-15T21:13:12.821Z",
+                                            "accountId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
+                                            "discoveryDate": "2025-12-15T21:13:12.821Z",
                                             "isComplete": true,
                                             "template": "Microsoft Enterprise",
                                             "updatedAt": "2025-12-15T21:13:12.821Z"
@@ -9873,17 +9963,63 @@
                 "summary": "Get a Specific Cloud Matrix Correlation Record"
             }
         },
-        "/Api/CloudMatrix/Customer/{crmId}/Correlation/{correlationId}/Data": {
+        "/Api/CloudMatrix/Correlation/{correlationId}": {
+            "description": "Retrieves the details of a specific Cloud Matrix correlation record if it exists on the tenant found in the token.\n\nThis endpoint requires the `CloudMatrix.Read` scope (permission).",
+            "operationId": "/Api/CloudMatrix/Correlation/:correlationId/Get",
+            "parameters": [
+                {
+                    "$ref": "#/components/parameters/correlationId",
+                    "required": true
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "A specific cloud matrix correlation record.",
+                    "content": {
+                        "application/json": {
+                            "examples": {
+                                "Example Cloud Matrix CorrelationRecord": {
+                                    "description": "A single existing Cloud Matrix correlation record.",
+                                    "summary": "Existing Cloud Matrix Correlation Record",
+                                    "value": {
+                                        "accountName": "AstraZeneca",
+                                        "correlationId": "bbab2907-c781-4bf1-b912-b91510853052",
+                                        "createdAt": "2025-12-15T21:13:12.821Z",
+                                        "accountId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
+                                        "discoveryDate": "2025-12-15T21:13:12.821Z",
+                                        "isComplete": true,
+                                        "template": "Microsoft Enterprise",
+                                        "updatedAt": "2025-12-15T21:13:12.821Z"
+                                    }
+                                }
+                            },
+                            "schema": {
+                                "$ref": "#/components/schemas/CloudMatrix.CloudMatrixCorrelation"
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "#/components/responses/400"
+                },
+                "500": {
+                    "$ref": "#/components/responses/500"
+                }
+            },
+            "tags": [
+                "Cloud Matrix"
+            ],
+            "summary": "Get a Specific Cloud Matrix Correlation Record"
+        },
+        "/Api/CloudMatrix/Correlation/{correlationId}/Data": {
             "get": {
-                "summary": "Get Specific Cloud Matrix Assessment Data With Correlation Record by Crmid and CorrelationId",
-                "description": "Retrieves Cloud Matrix Assessment data with correlation record associated with the specified customer ID (`crmId`) and correlation ID.\n\nThis endpoint requires the `CloudMatrix.Read.All` scope (permission).",
-                "operationId": "/Api/CloudMatrix/Customer/:crmId/Correlation/:correlationId/Data/Get",
+                "summary": "Get Specific Cloud Matrix Assessment Data With Correlation Record by CorrelationId.",
+                "description": "Retrieves Cloud Matrix Assessment data with correlation record associated with the specified correlation ID if it exists on the tenant on the token.\n\nThis endpoint requires the `CloudMatrix.Read` scope (permission).",
+                "operationId": "/Api/CloudMatrix/Correlation/:correlationId/Data/Get",
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/crmId"
-                    },
-                    {
-                        "$ref": "#/components/parameters/correlationId"
+                        "$ref": "#/components/parameters/correlationId",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -9902,10 +10038,10 @@
                                             "correlation": {
                                                 "accountName": "CMTestAccount1",
                                                 "correlationId": "745b00d0-d772-11f0-899c-41d4a068f985",
-                                                "crmId": "de186670-d772-11f0-899c-41d4a068f985",
+                                                "accountId": "de186670-d772-11f0-899c-41d4a068f985",
                                                 "template": "Microsoft",
                                                 "isComplete": true,
-                                                "discoverDate": "2026-01-08T21:13:12.821Z",
+                                                "discoveryDate": "2026-01-08T21:13:12.821Z",
                                                 "createdAt": "2026-01-08T21:13:12.821Z",
                                                 "updatedAt": "2026-01-08T21:13:12.821Z"
                                             },
@@ -9918,7 +10054,338 @@
                                                     "licensingExecutive": "Jane Doe",
                                                     "customerSuccessManager": "John Doe",
                                                     "notesAndObjectives": "Sample notes and objectives for the account.",
-                                                    "crmId": "fd9a6a53-594d-41aa-950a-b21ff41d4688",
+                                                    "accountId": "fd9a6a53-594d-41aa-950a-b21ff41d4688",
+                                                    "createdDate": "2026-01-01T00:00:00Z",
+                                                    "modifiedDate": "2026-01-01T00:00:00Z",
+                                                    "primaryPublisher": "Microsoft"
+                                                },
+                                                "assessments": [
+                                                    {
+                                                        "metadata": {
+                                                            "name": "Microsoft 365 Copilot Chat",
+                                                            "breakoutId": "97676a10-6875-4a32-8f2f-4bee4b147a84",
+                                                            "category": "Productivity",
+                                                            "notes": "these are notes.",
+                                                            "availability": "",
+                                                            "subCategory": "AI Assistance",
+                                                            "help": "Assess Teams Phone rollout readiness.",
+                                                            "licensingProduct": "Microsoft Teams Phone",
+                                                            "licensingProductHelp": "Requires Teams Phone compatible license.",
+                                                            "isAddon": true,
+                                                            "isStrategicAddon": true,
+                                                            "isTenantBased": false,
+                                                            "sourceValue": 10,
+                                                            "startYearConfig": {
+                                                                "value": null,
+                                                                "userProfileIds": null,
+                                                                "isDeepDive": false,
+                                                                "altProduct": null,
+                                                                "publisher": null,
+                                                                "useCase": null
+                                                            },
+                                                            "yearPlusOneConfig": {
+                                                                "value": null,
+                                                                "userProfileIds": null,
+                                                                "isDeepDive": false,
+                                                                "altProduct": null,
+                                                                "publisher": null,
+                                                                "useCase": null
+                                                            },
+                                                            "yearPlusTwoConfig": {
+                                                                "value": null,
+                                                                "userProfileIds": null,
+                                                                "isDeepDive": false,
+                                                                "altProduct": null,
+                                                                "publisher": null,
+                                                                "useCase": null
+                                                            },
+                                                            "yearPlusThreeConfig": {
+                                                                "value": null,
+                                                                "userProfileIds": null,
+                                                                "isDeepDive": false,
+                                                                "altProduct": null,
+                                                                "publisher": null,
+                                                                "useCase": null
+                                                            }
+                                                        },
+                                                        "profiles": [
+                                                            {
+                                                                "name": "Information Worker",
+                                                                "abbreviation": "IW",
+                                                                "value": 90
+                                                            }
+                                                        ],
+                                                        "features": [
+                                                            {
+                                                                "licensing": "M365 E5 + Teams Phone",
+                                                                "products": [
+                                                                    {
+                                                                        "product": "Teams Phone Standard",
+                                                                        "value": "Included",
+                                                                        "comment": "Primary voice service"
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ],
+                                                "userProfiles": [
+                                                    {
+                                                        "id": "00000000-0000-0000-0000-000000000001",
+                                                        "name": "Profile Details",
+                                                        "details": [
+                                                            {
+                                                                "name": "Profile Details",
+                                                                "values": [
+                                                                    {
+                                                                        "name": "Profile Name",
+                                                                        "value": "Knowledge Worker"
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ],
+                                                "displacements": [
+                                                    {
+                                                        "name": "Legacy ABC",
+                                                        "currentProvider": {
+                                                            "name": "Old Widgets",
+                                                            "terms": "36 months",
+                                                            "contractNumber": "Wid-0475477",
+                                                            "expiryDate": "2026-12-31T23:59:59.000Z",
+                                                            "costs": {
+                                                                "monthlyCost": 1000,
+                                                                "annualCost": 2000,
+                                                                "contractValue": 3000
+                                                            }
+                                                        },
+                                                        "displacement": {
+                                                            "name": "New Widgets",
+                                                            "terms": "36 months",
+                                                            "contractNumber": "NWid-20948372",
+                                                            "expiryDate": "2029-03-01T00:00:00.000Z",
+                                                            "replacementDate": "2026-06-01T00:00:00.000Z",
+                                                            "costs": [
+                                                                {
+                                                                    "monthlyCost": 4000,
+                                                                    "annualCost": 5000,
+                                                                    "contractValue": 6000
+                                                                }
+                                                            ]
+                                                        },
+                                                        "notes": "Here are my notes."
+                                                    }
+                                                ]
+                                            },
+                                            "breakouts": [
+                                                {
+                                                    "title": "PORTAL APPS",
+                                                    "breakoutId": "f1ebe6ab-1164-4ab8-8970-2d561ee7634f",
+                                                    "breakoutName": "BREAKOUT -Portal Apps",
+                                                    "features": [
+                                                        {
+                                                            "roadmapElementPath": "User Experience /Productivity Apps/Extended Productivity App Ecosystem",
+                                                            "elementSubdimension": "Productivity Apps",
+                                                            "roadmapProduct": "Platform Only",
+                                                            "feature": "Viva Insights - Personal",
+                                                            "description": "Microsoft Viva Insights - Personal provides privacy-protected insights and data-driven recommendations to help individuals improve productivity and wellbeing in Microsoft 365.",
+                                                            "publisherLink": "https://www.abcd123.com/abcd",
+                                                            "subscriptionFeatures": [
+                                                                {
+                                                                    "licensing": "M365",
+                                                                    "products": [
+                                                                        {
+                                                                            "product": "E5",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        },
+                                                                        {
+                                                                            "product": "E3",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "licensing": "M365 FLW",
+                                                                    "products": [
+                                                                        {
+                                                                            "product": "F1",
+                                                                            "value": "na",
+                                                                            "comment": ""
+                                                                        },
+                                                                        {
+                                                                            "product": "F3",
+                                                                            "value": "na",
+                                                                            "comment": ""
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "licensing": "O365",
+                                                                    "products": [
+                                                                        {
+                                                                            "product": "F3",
+                                                                            "value": "na",
+                                                                            "comment": ""
+                                                                        },
+                                                                        {
+                                                                            "product": "E5",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        },
+                                                                        {
+                                                                            "product": "E1",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        },
+                                                                        {
+                                                                            "product": "E3",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "roadmapElementPath": "User Experience /Productivity Apps/Extended Productivity App Ecosystem",
+                                                            "elementSubdimension": "Productivity Apps",
+                                                            "roadmapProduct": "Platform Only",
+                                                            "feature": "Lists",
+                                                            "description": "Microsoft Lists is a Microsoft 365 app that helps you track information and organize work with customizable lists for tasks, projects, and more.",
+                                                            "publisherLink": "",
+                                                            "subscriptionFeatures": [
+                                                                {
+                                                                    "licensing": "M365",
+                                                                    "products": [
+                                                                        {
+                                                                            "product": "E5",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        },
+                                                                        {
+                                                                            "product": "E3",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "licensing": "M365 FLW",
+                                                                    "products": [
+                                                                        {
+                                                                            "product": "F1",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        },
+                                                                        {
+                                                                            "product": "F3",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "licensing": "O365",
+                                                                    "products": [
+                                                                        {
+                                                                            "product": "F3",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        },
+                                                                        {
+                                                                            "product": "E5",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        },
+                                                                        {
+                                                                            "product": "E1",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        },
+                                                                        {
+                                                                            "product": "E3",
+                                                                            "value": "available",
+                                                                            "comment": ""
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/CloudMatrix"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "tags": [
+                    "Cloud Matrix"
+                ]
+            }
+        },
+        "/Api/CloudMatrix/Account/{accountId}/Correlation/{correlationId}/Data": {
+            "get": {
+                "summary": "Get Specific Cloud Matrix Assessment Data With Correlation Record by AccountId and CorrelationId",
+                "description": "Retrieves Cloud Matrix Assessment data with correlation record associated with the specified account ID (`accountId`) and correlation ID (`correlationId`).\n\nThis endpoint requires the `CloudMatrix.Read.All` scope (permission).",
+                "operationId": "/Api/CloudMatrix/Account/:accountId/Correlation/:correlationId/Data/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/accountId",
+                        "required": true
+                    },
+                    {
+                        "$ref": "#/components/parameters/correlationId",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A cloud matrix assessment record.",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Example Cloud Matrix Data with Correlation Record": {
+                                        "description": "Sample cloud matrix assessment with correlation record.",
+                                        "summary": "Requested Cloud Matrix Assessment With Correlation Record",
+                                        "value": {
+                                            "title": "Microsoft Security & Productivity Roadmap (Sample)",
+                                            "version": "5.0.4",
+                                            "description": "Sample roadmap data showing service offerings, values, and plan profiles.",
+                                            "correlation": {
+                                                "accountName": "CMTestAccount1",
+                                                "correlationId": "745b00d0-d772-11f0-899c-41d4a068f985",
+                                                "accountId": "de186670-d772-11f0-899c-41d4a068f985",
+                                                "template": "Microsoft",
+                                                "isComplete": true,
+                                                "discoveryDate": "2026-01-08T21:13:12.821Z",
+                                                "createdAt": "2026-01-08T21:13:12.821Z",
+                                                "updatedAt": "2026-01-08T21:13:12.821Z"
+                                            },
+                                            "valueAssessment": {
+                                                "actionPlan": {
+                                                    "accountName": "AstraZeneca",
+                                                    "discoveryDate": "2026-01-01T00:00:00Z",
+                                                    "accountManager": "John Smith",
+                                                    "consultant": "MSAG Consultant",
+                                                    "licensingExecutive": "Jane Doe",
+                                                    "customerSuccessManager": "John Doe",
+                                                    "notesAndObjectives": "Sample notes and objectives for the account.",
+                                                    "accountId": "fd9a6a53-594d-41aa-950a-b21ff41d4688",
                                                     "createdDate": "2026-01-01T00:00:00Z",
                                                     "modifiedDate": "2026-01-01T00:00:00Z",
                                                     "primaryPublisher": "Microsoft"
