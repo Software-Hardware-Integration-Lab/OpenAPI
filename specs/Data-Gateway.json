@@ -2484,12 +2484,12 @@
                 "properties": {
                     "value": {
                         "type": [
-                            "number",
+                            "string",
                             "null"
                         ],
-                        "description": "Numeric assessment value for this year phase (e.g., score/percentage) or null.",
+                        "description": "Assessment value label for this year phase (for example, \"Full\") or null.",
                         "examples": [
-                            1.0,
+                            "Full",
                             null
                         ]
                     },
@@ -2523,7 +2523,8 @@
                         ],
                         "description": "Alternate product, if any, or null.",
                         "examples": [
-                            "Other Product"
+                            "Other Product",
+                            null
                         ]
                     },
                     "publisher": {
@@ -2593,8 +2594,16 @@
                         ]
                     },
                     "breakoutId": {
-                        "$ref": "#/components/schemas/NullableUuid",
-                        "description": "Optional breakout identifier, may be null."
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "uuid",
+                        "description": "Optional breakout identifier, may be null.",
+                        "examples": [
+                            "fd9a6a53-594d-41aa-950a-b21ff41d4688",
+                            null
+                        ]
                     },
                     "category": {
                         "type": "string",
@@ -3106,7 +3115,14 @@
                         ]
                     },
                     "expiryDate": {
-                        "$ref": "#/components/schemas/NullableDateTimeStringType",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "examples": [
+                            "2026-01-01T00:00:00Z",
+                            null
+                        ],
                         "description": "Contract expiry date string."
                     }
                 },
@@ -3186,7 +3202,14 @@
                                 ]
                             },
                             "replacementDate": {
-                                "$ref": "#/components/schemas/NullableDateTimeStringType",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "examples": [
+                                    "2026-01-01T00:00:00Z",
+                                    null
+                                ],
                                 "description": "Planned replacement date string."
                             }
                         },
@@ -3296,7 +3319,14 @@
                         ]
                     },
                     "discoveryDate": {
-                        "$ref": "#/components/schemas/NullableDateTimeStringType",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "examples": [
+                            "2026-01-01T00:00:00Z",
+                            null
+                        ],
                         "description": "Date the discovery occurred (string); Default: null."
                     },
                     "accountManager": {
@@ -3366,11 +3396,25 @@
                         ]
                     },
                     "createdDate": {
-                        "$ref": "#/components/schemas/NullableDateTimeStringType",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "examples": [
+                            "2026-01-01T00:00:00Z",
+                            null
+                        ],
                         "description": "ISO 8601 date-time string when created; Default: null."
                     },
                     "modifiedDate": {
-                        "$ref": "#/components/schemas/NullableDateTimeStringType",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "examples": [
+                            "2026-01-01T00:00:00Z",
+                            null
+                        ],
                         "description": "ISO 8601 date-time string when last modified; Default: null."
                     },
                     "primaryPublisher": {
@@ -3896,8 +3940,16 @@
                         ]
                     },
                     "breakoutId": {
-                        "$ref": "#/components/schemas/NullableUuid",
-                        "description": "Breakout identifier or null."
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "uuid",
+                        "description": "Breakout identifier or null.",
+                        "examples": [
+                            "fd9a6a53-594d-41aa-950a-b21ff41d4688",
+                            null
+                        ]
                     },
                     "breakoutName": {
                         "type": [
