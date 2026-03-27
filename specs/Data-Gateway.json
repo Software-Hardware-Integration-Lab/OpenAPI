@@ -8633,12 +8633,10 @@
                 "operationId": "/Api/V1/ArchitectureReport/Correlation/:correlationId/Tenant/:tenantId/Data/Delete",
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/correlationId",
-                        "required": true
+                        "$ref": "#/components/parameters/correlationId"
                     },
                     {
-                        "$ref": "#/components/parameters/tenantId",
-                        "required": true
+                        "$ref": "#/components/parameters/tenantId"
                     }
                 ],
                 "responses": {
@@ -8662,12 +8660,10 @@
                 "operationId": "/Api/V1/ArchitectureReport/Correlation/:correlationId/Tenant/:tenantId/Data/Get",
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/correlationId",
-                        "required": true
+                        "$ref": "#/components/parameters/correlationId"
                     },
                     {
-                        "$ref": "#/components/parameters/tenantId",
-                        "required": true
+                        "$ref": "#/components/parameters/tenantId"
                     }
                 ],
                 "responses": {
