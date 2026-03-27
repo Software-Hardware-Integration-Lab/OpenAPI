@@ -2570,7 +2570,7 @@
                 "additionalProperties": false,
                 "examples": [
                     {
-                        "value": 1.0,
+                        "value": "Full",
                         "userProfileIds": [
                             "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
                         ],
@@ -3119,11 +3119,12 @@
                             "string",
                             "null"
                         ],
+                        "format": "date-time",
                         "examples": [
                             "2026-01-01T00:00:00Z",
                             null
                         ],
-                        "description": "Contract expiry date string."
+                        "description": "Contract expiry date as an ISO 8601 date-time string, or null."
                     }
                 },
                 "required": [
@@ -3206,11 +3207,12 @@
                                     "string",
                                     "null"
                                 ],
+                                "format": "date-time",
                                 "examples": [
                                     "2026-01-01T00:00:00Z",
                                     null
                                 ],
-                                "description": "Planned replacement date string."
+                                "description": "Planned replacement date as an ISO 8601 date-time string, or null."
                             }
                         },
                         "required": [
@@ -3323,6 +3325,7 @@
                             "string",
                             "null"
                         ],
+                        "format": "date-time",
                         "examples": [
                             "2026-01-01T00:00:00Z",
                             null
@@ -3400,6 +3403,7 @@
                             "string",
                             "null"
                         ],
+                        "format": "date-time",
                         "examples": [
                             "2026-01-01T00:00:00Z",
                             null
@@ -3411,6 +3415,7 @@
                             "string",
                             "null"
                         ],
+                        "format": "date-time",
                         "examples": [
                             "2026-01-01T00:00:00Z",
                             null
@@ -3944,7 +3949,6 @@
                             "string",
                             "null"
                         ],
-                        "format": "uuid",
                         "description": "Breakout identifier or null.",
                         "examples": [
                             "fd9a6a53-594d-41aa-950a-b21ff41d4688",
