@@ -191,27 +191,28 @@
         },
         "schemas": {
             "Uuid": {
-                "format": "uuid",
                 "title": "Unique identifier",
+                "type": "string",
+                "format": "uuid",
                 "description": "36 characters long unique identifier (RFC 4122)",
                 "maxLength": 36,
                 "minLength": 36,
                 "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
-                "type": "string",
                 "examples": [
                     "fd9a6a53-594d-41aa-950a-b21ff41d4688"
                 ]
             },
             "NullableUuid": {
                 "title": "Nullable Unique identifier",
-                "oneOf": [
-                    {
-                        "$ref": "#/components/schemas/Uuid"
-                    },
-                    {
-                        "type": "null"
-                    }
+                "type": [
+                    "string",
+                    "null"
                 ],
+                "format": "uuid",
+                "description": "36 characters long unique identifier (RFC 4122) or null",
+                "maxLength": 36,
+                "minLength": 36,
+                "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
                 "examples": [
                     "fd9a6a53-594d-41aa-950a-b21ff41d4688",
                     null
@@ -227,14 +228,11 @@
             },
             "NullableDateTimeStringType": {
                 "title": "Nullable Date Time String In ISO8601 Format",
-                "oneOf": [
-                    {
-                        "$ref": "#/components/schemas/DateTimeStringType"
-                    },
-                    {
-                        "type": "null"
-                    }
+                "type": [
+                    "string",
+                    "null"
                 ],
+                "format": "date-time",
                 "examples": [
                     "2026-01-01T00:00:00Z",
                     null
@@ -2602,16 +2600,8 @@
                         ]
                     },
                     "breakoutId": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "uuid",
-                        "description": "Optional breakout identifier, may be null.",
-                        "examples": [
-                            "fd9a6a53-594d-41aa-950a-b21ff41d4688",
-                            null
-                        ]
+                        "$ref": "#/components/schemas/NullableUuid",
+                        "description": "Optional breakout identifier, may be null."
                     },
                     "category": {
                         "type": "string",
@@ -3123,15 +3113,7 @@
                         ]
                     },
                     "expiryDate": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "date-time",
-                        "examples": [
-                            "2026-01-01T00:00:00Z",
-                            null
-                        ],
+                        "$ref": "#/components/schemas/NullableDateTimeStringType",
                         "description": "Contract expiry date as an ISO 8601 date-time string, or null."
                     }
                 },
@@ -3211,15 +3193,7 @@
                                 ]
                             },
                             "replacementDate": {
-                                "type": [
-                                    "string",
-                                    "null"
-                                ],
-                                "format": "date-time",
-                                "examples": [
-                                    "2026-01-01T00:00:00Z",
-                                    null
-                                ],
+                                "$ref": "#/components/schemas/NullableDateTimeStringType",
                                 "description": "Planned replacement date as an ISO 8601 date-time string, or null."
                             }
                         },
@@ -3329,15 +3303,7 @@
                         ]
                     },
                     "discoveryDate": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "date-time",
-                        "examples": [
-                            "2026-01-01T00:00:00Z",
-                            null
-                        ],
+                        "$ref": "#/components/schemas/NullableDateTimeStringType",
                         "description": "Date the discovery occurred (string); Default: null."
                     },
                     "accountManager": {
@@ -3396,38 +3362,15 @@
                         ]
                     },
                     "accountId": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "description": "Account identifier (optional); Default: empty string if not specified.",
-                        "examples": [
-                            "fd9a6a53-594d-41aa-950a-b21ff41d4688",
-                            null
-                        ]
+                        "$ref": "#/components/schemas/NullableUuid",
+                        "description": "Account identifier (optional); Default: null if not specified."
                     },
                     "createdDate": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "date-time",
-                        "examples": [
-                            "2026-01-01T00:00:00Z",
-                            null
-                        ],
+                        "$ref": "#/components/schemas/NullableDateTimeStringType",
                         "description": "ISO 8601 date-time string when created; Default: null."
                     },
                     "modifiedDate": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "date-time",
-                        "examples": [
-                            "2026-01-01T00:00:00Z",
-                            null
-                        ],
+                        "$ref": "#/components/schemas/NullableDateTimeStringType",
                         "description": "ISO 8601 date-time string when last modified; Default: null."
                     },
                     "primaryPublisher": {
@@ -3953,15 +3896,8 @@
                         ]
                     },
                     "breakoutId": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "description": "Breakout identifier or null.",
-                        "examples": [
-                            "fd9a6a53-594d-41aa-950a-b21ff41d4688",
-                            null
-                        ]
+                        "$ref": "#/components/schemas/NullableUuid",
+                        "description": "Breakout identifier or null."
                     },
                     "breakoutName": {
                         "type": [
