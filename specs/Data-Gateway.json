@@ -10016,52 +10016,54 @@
             }
         },
         "/Api/CloudMatrix/Correlation/{correlationId}": {
-            "description": "Retrieves the details of a specific Cloud Matrix correlation record if it exists on the tenant found in the token.\n\nThis endpoint requires the `CloudMatrix.Read` scope (permission).",
-            "operationId": "/Api/CloudMatrix/Correlation/:correlationId/Get",
-            "parameters": [
-                {
-                    "$ref": "#/components/parameters/correlationId",
-                    "required": true
-                }
-            ],
-            "responses": {
-                "200": {
-                    "description": "A specific cloud matrix correlation record.",
-                    "content": {
-                        "application/json": {
-                            "examples": {
-                                "Example Cloud Matrix CorrelationRecord": {
-                                    "description": "A single existing Cloud Matrix correlation record.",
-                                    "summary": "Existing Cloud Matrix Correlation Record",
-                                    "value": {
-                                        "accountName": "AstraZeneca",
-                                        "correlationId": "bbab2907-c781-4bf1-b912-b91510853052",
-                                        "createdAt": "2025-12-15T21:13:12.821Z",
-                                        "accountId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
-                                        "discoveryDate": "2025-12-15T21:13:12.821Z",
-                                        "isComplete": true,
-                                        "template": "Microsoft Enterprise",
-                                        "updatedAt": "2025-12-15T21:13:12.821Z"
+            "get": {
+                "description": "Retrieves the details of a specific Cloud Matrix correlation record if it exists on the tenant found in the token.\n\nThis endpoint requires the `CloudMatrix.Read` scope (permission).",
+                "operationId": "/Api/CloudMatrix/Correlation/:correlationId/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/correlationId",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A specific cloud matrix correlation record.",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Example Cloud Matrix CorrelationRecord": {
+                                        "description": "A single existing Cloud Matrix correlation record.",
+                                        "summary": "Existing Cloud Matrix Correlation Record",
+                                        "value": {
+                                            "accountName": "AstraZeneca",
+                                            "correlationId": "bbab2907-c781-4bf1-b912-b91510853052",
+                                            "createdAt": "2025-12-15T21:13:12.821Z",
+                                            "accountId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
+                                            "discoveryDate": "2025-12-15T21:13:12.821Z",
+                                            "isComplete": true,
+                                            "template": "Microsoft Enterprise",
+                                            "updatedAt": "2025-12-15T21:13:12.821Z"
+                                        }
                                     }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/CloudMatrix.CloudMatrixCorrelation"
                                 }
-                            },
-                            "schema": {
-                                "$ref": "#/components/schemas/CloudMatrix.CloudMatrixCorrelation"
                             }
                         }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
                     }
                 },
-                "400": {
-                    "$ref": "#/components/responses/400"
-                },
-                "500": {
-                    "$ref": "#/components/responses/500"
-                }
-            },
-            "tags": [
-                "Cloud Matrix"
-            ],
-            "summary": "Get a Specific Cloud Matrix Correlation Record"
+                "tags": [
+                    "Cloud Matrix"
+                ],
+                "summary": "Get a Specific Cloud Matrix Correlation Record"
+            }
         },
         "/Api/CloudMatrix/Correlation/{correlationId}/Data": {
             "get": {
