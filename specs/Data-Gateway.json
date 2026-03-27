@@ -8866,8 +8866,7 @@
                 "operationId": "/Api/CloudMatrix/Account/:accountId/Dashboard/Get",
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/accountId",
-                        "required": true
+                        "$ref": "#/components/parameters/accountId"
                     },
                     {
                         "$ref": "#/components/parameters/dateStart"
@@ -9559,8 +9558,7 @@
                 "operationId": "/Api/CloudMatrix/Account/:accountId/Correlation/:correlationId/Patch",
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/accountId",
-                        "required": true
+                        "$ref": "#/components/parameters/accountId"
                     },
                     {
                         "$ref": "#/components/parameters/correlationId",
@@ -9971,8 +9969,7 @@
                 "operationId": "/Api/CloudMatrix/Account/:accountId/Correlation/:correlationId/Get",
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/accountId",
-                        "required": true
+                        "$ref": "#/components/parameters/accountId"
                     },
                     {
                         "$ref": "#/components/parameters/correlationId",
@@ -10403,8 +10400,7 @@
                 "operationId": "/Api/CloudMatrix/Account/:accountId/Correlation/:correlationId/Data/Get",
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/accountId",
-                        "required": true
+                        "$ref": "#/components/parameters/accountId"
                     },
                     {
                         "$ref": "#/components/parameters/correlationId",
