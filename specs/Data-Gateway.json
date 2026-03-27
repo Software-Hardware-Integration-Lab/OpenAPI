@@ -7802,7 +7802,7 @@
                                         "value": [
                                             {
                                                 "tenantId": "5d6e7f8a-9b0c-1d2e-3f4a-5b6c7d8e9f0a",
-                                                "displayName": "Contoso - Legal",
+                                                "tenantDisplayName": "Contoso - Legal",
                                                 "parentId": "f3ed1efc-4e62-46b8-bf2a-6b59ca9784e5",
                                                 "authorizedPrincipalList": [
                                                     "59673771-3b4f-4518-9187-aee8a51c8c07",
@@ -7811,7 +7811,7 @@
                                             },
                                             {
                                                 "tenantId": "7e8f9a0b-1c2d-3e4b-5a6c-7d8e9f0a1b2c",
-                                                "displayName": "Contoso - R&D",
+                                                "tenantDisplayName": "Contoso - R&D",
                                                 "parentId": "f3ed1efc-4e62-46b8-bf2a-6b59ca9784e5",
                                                 "authorizedPrincipalList": [
                                                     "7e9ce415-32b2-4e7a-a920-d4dbaae022e3"
@@ -7825,7 +7825,7 @@
                                         "value": [
                                             {
                                                 "tenantId": "7e8f9a0b-1c2d-3e4b-5a6c-7d8e9f0a1b2c",
-                                                "displayName": "Contoso - R&D",
+                                                "tenantDisplayName": "Contoso - R&D",
                                                 "parentId": "f3ed1efc-4e62-46b8-bf2a-6b59ca9784e5",
                                                 "authorizedPrincipalList": []
                                             }
