@@ -158,7 +158,7 @@
                     "$ref": "#/components/schemas/Uuid"
                 },
                 "examples": {
-                    "Valid Account Id": {
+                    "Valid Account ID": {
                         "summary": "Example Valid Account ID",
                         "description": "An example of a valid account ID in type UUID string.",
                         "value": "9b2c13f4-6e7a-4e8e-9c9a-a5b9c3f6ad12"
