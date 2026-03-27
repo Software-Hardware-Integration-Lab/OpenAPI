@@ -9557,8 +9557,7 @@
                         "$ref": "#/components/parameters/accountId"
                     },
                     {
-                        "$ref": "#/components/parameters/correlationId",
-                        "required": true
+                        "$ref": "#/components/parameters/correlationId"
                     }
                 ],
                 "requestBody": {
@@ -9968,8 +9967,7 @@
                         "$ref": "#/components/parameters/accountId"
                     },
                     {
-                        "$ref": "#/components/parameters/correlationId",
-                        "required": true
+                        "$ref": "#/components/parameters/correlationId"
                     }
                 ],
                 "responses": {
@@ -10018,8 +10016,7 @@
                 "operationId": "/Api/CloudMatrix/Correlation/:correlationId/Get",
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/correlationId",
-                        "required": true
+                        "$ref": "#/components/parameters/correlationId"
                     }
                 ],
                 "responses": {
@@ -10069,8 +10066,7 @@
                 "operationId": "/Api/CloudMatrix/Correlation/:correlationId/Data/Get",
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/correlationId",
-                        "required": true
+                        "$ref": "#/components/parameters/correlationId"
                     }
                 ],
                 "responses": {
