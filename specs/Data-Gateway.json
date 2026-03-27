@@ -3363,7 +3363,7 @@
                     },
                     "accountId": {
                         "$ref": "#/components/schemas/NullableUuid",
-                        "description": "Account identifier (optional); Default: empty string if not specified."
+                        "description": "Account identifier (optional); Default: null if not specified."
                     },
                     "createdDate": {
                         "$ref": "#/components/schemas/NullableDateTimeStringType",
