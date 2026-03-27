@@ -158,9 +158,9 @@
                     "$ref": "#/components/schemas/Uuid"
                 },
                 "examples": {
-                    "valid account Id": {
+                    "Valid Account Id": {
                         "summary": "Example Valid Account ID",
-                        "description": "An example of a valid Account ID in type UUID string.",
+                        "description": "An example of a valid account ID in type UUID string.",
                         "value": "9b2c13f4-6e7a-4e8e-9c9a-a5b9c3f6ad12"
                     }
                 }
@@ -8863,7 +8863,7 @@
         "/Api/CloudMatrix/Account/{accountId}/Dashboard": {
             "get": {
                 "description": "Retrieves the list of cloud matrix correlation records on the account passed in. Can use filters targeting creation date to limit results. Cloud matrix records store the metadata for a specific cloud matrix correlation.\n\nThis endpoint requires the `CloudMatrix.Read.All` scope (permission).",
-                "operationId": "/Api/CloudMatrix/Account/:accountId/Dashboard",
+                "operationId": "/Api/CloudMatrix/Account/:accountId/Dashboard/Get",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/accountId",
@@ -10072,7 +10072,7 @@
         "/Api/CloudMatrix/Correlation/{correlationId}/Data": {
             "get": {
                 "summary": "Get Specific Cloud Matrix Assessment Data With Correlation Record by CorrelationId.",
-                "description": "Retrieves Cloud Matrix Assessment data with correlation record associated with the specified correlation ID if it exists on the tenant on the token.\n\nThis endpoint requires the `CloudMatrix.Read` scope (permission).",
+                "description": "Retrieves Cloud Matrix Assessment data with correlation record associated with the specified correlation ID if it exists on the tenant found in the token.\n\nThis endpoint requires the `CloudMatrix.Read` scope (permission).",
                 "operationId": "/Api/CloudMatrix/Correlation/:correlationId/Data/Get",
                 "parameters": [
                     {
