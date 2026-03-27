@@ -10399,8 +10399,7 @@
                         "$ref": "#/components/parameters/accountId"
                     },
                     {
-                        "$ref": "#/components/parameters/correlationId",
-                        "required": true
+                        "$ref": "#/components/parameters/correlationId"
                     }
                 ],
                 "responses": {
