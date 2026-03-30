@@ -9998,7 +9998,7 @@
         "/Api/CloudMatrix/Correlation/{correlationId}/Data": {
             "get": {
                 "summary": "Get Specific Cloud Matrix Assessment Data With Correlation Record by CorrelationId.",
-                "description": "Retrieves Cloud Matrix Assessment data with correlation record associated with the specified correlation ID if it exists on the tenant found in the token.\n\nThis endpoint is only accessible from the `SHI` and `SHI Lab` tenants and  requires the `CloudMatrix.Read` scope (permission).",
+                "description": "Retrieves Cloud Matrix Assessment data with correlation record associated with the specified correlation ID if it exists on the tenant found in the token.\n\nThis endpoint requires the `CloudMatrix.Read` scope (permission).",
                 "operationId": "/Api/CloudMatrix/Correlation/:correlationId/Data/Get",
                 "parameters": [
                     {
@@ -10324,7 +10324,7 @@
         "/Api/CloudMatrix/Account/{accountId}/Correlation/{correlationId}/Data": {
             "get": {
                 "summary": "Get Specific Cloud Matrix Assessment Data With Correlation Record by AccountId and CorrelationId",
-                "description": "Retrieves Cloud Matrix Assessment data with correlation record associated with the specified account ID (`accountId`) and correlation ID (`correlationId`).\n\nThis endpoint requires the `CloudMatrix.Read.All` scope (permission).",
+                "description": "Retrieves Cloud Matrix Assessment data with correlation record associated with the specified account ID (`accountId`) and correlation ID (`correlationId`).\n\nThis endpoint is only accessible from the `SHI` and `SHI Lab` tenants and requires the `CloudMatrix.Read.All` scope (permission).",
                 "operationId": "/Api/CloudMatrix/Account/:accountId/Correlation/:correlationId/Data/Get",
                 "parameters": [
                     {
