@@ -46,7 +46,7 @@
         "@shi-corp/development-utilities": "~2.2.0",
         "@types/node": "~25.5.0",
         "ts-patch": "~3.3.0",
-        "typescript": "~5.9.3"
+        "typescript": "~6.0.2"
     },
     "dependencies": {
         "@microsoft/kiota-authentication-azure": "~1.0.0-preview.100",
