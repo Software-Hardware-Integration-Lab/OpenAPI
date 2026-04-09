@@ -9467,8 +9467,11 @@
                     }
                 },
                 "responses": {
+                    "200": {
+                        "description": "Value assessment template overwritten successfully."
+                    },
                     "201": {
-                        "description": "Upserted the value assessment template successfully."
+                        "description": "Value assessment template created successfully."
                     },
                     "400": {
                         "$ref": "#/components/responses/400"
