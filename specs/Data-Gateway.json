@@ -4708,7 +4708,7 @@
             },
             "CloudMatrix.TemplateMetadata": {
                 "title": "Template Metadata",
-                "description": "Metadata information for a value CloudMatrix template in the data gateway.",
+                "description": "Metadata information for a valid CloudMatrix template in the data gateway.",
                 "type": "object",
                 "properties": {
                     "name": {
@@ -4743,13 +4743,13 @@
                         "createdOn": "2026-03-24T16:56:43.000Z",
                         "name": "cloudMatrix",
                         "lastModified": "2026-03-24T16:56:43.000Z",
-                        "type": ""
+                        "type": "Standard"
                     },
                     {
                         "createdOn": "2026-04-08T14:15:44.000Z",
                         "name": "CloudMatrixPremium",
                         "lastModified": "2026-04-08T14:15:44.000Z",
-                        "type": ""
+                        "type": "Premium"
                     }
                 ]
             }
@@ -11124,20 +11124,20 @@
                                                 "createdOn": "2026-03-24T16:56:43.000Z",
                                                 "name": "cloudMatrix",
                                                 "lastModified": "2026-03-24T16:56:43.000Z",
-                                                "type": ""
+                                                "type": "Standard"
                                             },
                                             {
                                                 "createdOn": "2026-04-08T14:15:44.000Z",
                                                 "name": "Google",
                                                 "lastModified": "2026-04-08T14:15:44.000Z",
-                                                "type": ""
+                                                "type": "Premium"
                                             }
                                         ]
                                     }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/CloudMatrix.TemplateMetadata"
                                 }
-                            },
-                            "schema": {
-                                "$ref": "#/components/schemas/CloudMatrix.TemplateMetadata"
                             }
                         }
                     },
