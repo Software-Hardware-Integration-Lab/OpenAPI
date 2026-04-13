@@ -4713,6 +4713,8 @@
                 "properties": {
                     "name": {
                         "type": "string",
+                        "minLength": 2,
+                        "maxLength": 100,
                         "description": "A valid template name allows alphanumeric characters, spaces, underscores, and hyphens, but may not start or end with special characters.",
                         "examples": [
                             "cloud-matrix",
@@ -11117,7 +11119,7 @@
                             "application/json": {
                                 "examples": {
                                     "Default Output": {
-                                        "description": "A list (metadata) templates that are stored in blob storage. This is the default output when there are two templates stored in blob storage.",
+                                        "description": "A list of template metadata that is stored in blob storage. This is the default output when there are two templates stored in blob storage.",
                                         "summary": "Default Output",
                                         "value": [
                                             {
