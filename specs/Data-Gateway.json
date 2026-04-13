@@ -9097,7 +9097,7 @@
                 "summary": "Get Cloud Matrix Correlation Records"
             }
         },
-        "/Api/CloudMatrix/Template/{templateName}": {
+        "/Api/CloudMatrix/Template": {
             "get": {
                 "description": "Retrieves the specified Cloud Matrix assessment template by template name.\n\nThis endpoint requires the `CloudMatrix.Read`, `CloudMatrix.Read.Del`, `CloudMatrix.Read.All`, `CloudMatrix.ReadWrite`, or `CloudMatrix.ReadWrite.All` scope (permission).",
                 "operationId": "/Api/CloudMatrix/Template/:templateName/Get",
@@ -9113,9 +9113,23 @@
                             "application/json": {
                                 "examples": {
                                     "Named Template Output": {
-                                        "description": "Returns the requested template stored in blob storage.",
                                         "summary": "Named Template Output",
-                                        "value": {}
+                                        "description": "Returns the requested template stored in blob storage.",
+                                        "value": {
+                                            "title": "CloudMatrix Value Assessment",
+                                            "description": "MICROSOFT CLOUD ADOPTION MATRIX v5.0",
+                                            "version": "5.0.14",
+                                            "valueAssessment": {
+                                                "actionPlan": {
+                                                    "accountName": "New Account",
+                                                    "discoveryDate": "2026-01-01T00:00:00Z"
+                                                },
+                                                "userProfiles": [],
+                                                "assessments": [],
+                                                "displacements": []
+                                            },
+                                            "breakouts": []
+                                        }
                                     }
                                 },
                                 "schema": {
