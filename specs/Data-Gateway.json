@@ -164,6 +164,28 @@
                         "value": "9b2c13f4-6e7a-4e8e-9c9a-a5b9c3f6ad12"
                     }
                 }
+            },
+            "templateName": {
+                "description": "Name of the Cloud Matrix template to retrieve.",
+                "in": "path",
+                "name": "templateName",
+                "required": true,
+                "schema": {
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 100,
+                    "pattern": "^[A-Za-z0-9][A-Za-z0-9_ -]*[A-Za-z0-9]$",
+                    "examples": [
+                        "Microsoft Enterprise"
+                    ]
+                },
+                "examples": {
+                    "valid template name": {
+                        "summary": "Example Valid Template Name",
+                        "description": "An example of a valid Cloud Matrix template name.",
+                        "value": "Microsoft Enterprise"
+                    }
+                }
             }
         },
         "responses": {
@@ -9075,191 +9097,25 @@
                 "summary": "Get Cloud Matrix Correlation Records"
             }
         },
-        "/Api/CloudMatrix/Template": {
+        "/Api/CloudMatrix/Template/{templateName}": {
             "get": {
-                "description": "Get a default assessment schema object as schema structure reference. \n\nThis endpoint requires the `CloudMatrix.Read`, `CloudMatrix.Read.Del`, `CloudMatrix.Read.All`, `CloudMatrix.ReadWrite`, or `CloudMatrix.ReadWrite.All` scope (permission).",
-                "operationId": "/Api/CloudMatrix/Template/Get",
+                "description": "Retrieves the specified Cloud Matrix assessment template by template name.\n\nThis endpoint requires the `CloudMatrix.Read`, `CloudMatrix.Read.Del`, `CloudMatrix.Read.All`, `CloudMatrix.ReadWrite`, or `CloudMatrix.ReadWrite.All` scope (permission).",
+                "operationId": "/Api/CloudMatrix/Template/:templateName/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/templateName"
+                    }
+                ],
                 "responses": {
                     "200": {
-                        "description": "The default assessment schema object.",
+                        "description": "The requested assessment template object.",
                         "content": {
                             "application/json": {
                                 "examples": {
-                                    "Default Output": {
-                                        "description": "Always returns the default schema template that stored in blob storage. This has been trimmed to contain one element for brevity.",
-                                        "summary": "Default Output",
-                                        "value": {
-                                            "title": "CloudMatrix Value Assessment",
-                                            "description": "MICROSOFT CLOUD ADOPTION MATRIX v5.0",
-                                            "version": "5.0.14",
-                                            "valueAssessment": {
-                                                "actionPlan": {
-                                                    "accountName": "AstraZeneca",
-                                                    "discoveryDate": "2026-01-01T00:00:00Z",
-                                                    "accountManager": "John Smith",
-                                                    "consultant": "MSAG Consultant",
-                                                    "licensingExecutive": "Jane Doe",
-                                                    "customerSuccessManager": "John Doe",
-                                                    "notesAndObjectives": "Sample notes and objectives for the account.",
-                                                    "accountId": "fd9a6a53-594d-41aa-950a-b21ff41d4688",
-                                                    "createdDate": "2026-01-01T00:00:00Z",
-                                                    "modifiedDate": "2026-01-01T00:00:00Z",
-                                                    "primaryPublisher": "Microsoft"
-                                                },
-                                                "userProfiles": [
-                                                    {
-                                                        "id": "00000000-0000-0000-0000-000000000001",
-                                                        "name": "Profile Details",
-                                                        "details": [
-                                                            {
-                                                                "name": "Profile Details",
-                                                                "values": [
-                                                                    {
-                                                                        "name": "Profile Name",
-                                                                        "value": "Knowledge Worker"
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ]
-                                                    }
-                                                ],
-                                                "assessments": [
-                                                    {
-                                                        "metadata": {
-                                                            "name": "M365 Apps for Enterprise - Mobile/Online",
-                                                            "breakoutId": null,
-                                                            "category": "USER EXPERIENCE",
-                                                            "subCategory": "Productivity",
-                                                            "help": "Brief:  Common applications available through a browser used for business purposes typically bundled together by software vendors like Microsoft and Google. i.e., spreadsheets, slide presentations, word processor, etc.",
-                                                            "licensingProduct": "M365 Mobile Apps",
-                                                            "licensingProductHelp": "Mobile Apps The Microsoft 365 mobile app combines Word, Excel, and PowerPoint into a single app for iOS and Android devices. It offers features like creating, editing, and sharing documents on the go, scanning and signing PDFs, and using voice commands for quick tasks. You can also connect your email accounts and calendars in one convenient spot1.\n\nWeb Apps Microsoft 365 for the web includes online versions of Word, Excel, PowerPoint, OneNote, and Outlook. These web apps allow you to create, edit, and share documents directly from your browser without needing to install any software. You can access your documents from anywhere with an internet connection, making it easy to collaborate with others in real-time2.",
-                                                            "isAddon": false,
-                                                            "isStrategicAddon": false,
-                                                            "isTenantBased": false,
-                                                            "availability": null,
-                                                            "notes": "",
-                                                            "startYearConfig": {
-                                                                "value": null,
-                                                                "userProfileIds": null,
-                                                                "isDeepDive": false,
-                                                                "altProduct": null,
-                                                                "publisher": null,
-                                                                "useCase": null
-                                                            },
-                                                            "yearPlusOneConfig": {
-                                                                "value": null,
-                                                                "userProfileIds": null,
-                                                                "isDeepDive": false,
-                                                                "altProduct": null,
-                                                                "publisher": null,
-                                                                "useCase": null
-                                                            },
-                                                            "yearPlusTwoConfig": {
-                                                                "value": null,
-                                                                "userProfileIds": null,
-                                                                "isDeepDive": false,
-                                                                "altProduct": null,
-                                                                "publisher": null,
-                                                                "useCase": null
-                                                            },
-                                                            "yearPlusThreeConfig": {
-                                                                "value": null,
-                                                                "userProfileIds": null,
-                                                                "isDeepDive": false,
-                                                                "altProduct": null,
-                                                                "publisher": null,
-                                                                "useCase": null
-                                                            },
-                                                            "sourceValue": 0.0
-                                                        },
-                                                        "profiles": [
-                                                            {
-                                                                "name": "Microsoft E5",
-                                                                "abbreviation": "ME5P",
-                                                                "value": 5.0
-                                                            }
-                                                        ],
-                                                        "features": [
-                                                            {
-                                                                "licensing": "M365 SMB",
-                                                                "products": [
-                                                                    {
-                                                                        "product": "PS",
-                                                                        "value": "na",
-                                                                        "comment": ""
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ]
-                                                    }
-                                                ],
-                                                "displacements": [
-                                                    {
-                                                        "name": "Example displacement opportunity",
-                                                        "currentProvider": {
-                                                            "name": "Microsoft",
-                                                            "terms": "5 Years",
-                                                            "contractNumber": "C12345678",
-                                                            "expiryDate": "2026-01-01T00:00:00Z",
-                                                            "costs": {
-                                                                "monthlyCost": 5001,
-                                                                "annualCost": 5002,
-                                                                "contractValue": 5003
-                                                            }
-                                                        },
-                                                        "displacement": {
-                                                            "name": "Google",
-                                                            "terms": "3 Years",
-                                                            "contractNumber": "C87654321",
-                                                            "expiryDate": "2026-01-01T00:00:00Z",
-                                                            "costs": [
-                                                                {
-                                                                    "monthlyCost": 5001,
-                                                                    "annualCost": 5002,
-                                                                    "contractValue": 5003
-                                                                }
-                                                            ],
-                                                            "replacementDate": "2026-12-31T00:00:00Z"
-                                                        },
-                                                        "notes": "Example notes"
-                                                    }
-                                                ]
-                                            },
-                                            "breakouts": [
-                                                {
-                                                    "title": "PORTAL APPS",
-                                                    "breakoutId": "f1ebe6ab-1164-4ab8-8970-2d561ee7634f",
-                                                    "breakoutName": "BREAKOUT -Portal Apps",
-                                                    "features": [
-                                                        {
-                                                            "roadmapElementPath": "User Experience /Productivity Apps/Extended Productivity App Ecosystem",
-                                                            "elementSubdimension": "Productivity Apps",
-                                                            "roadmapProduct": "Platform Only",
-                                                            "feature": "Viva Insights - Personal",
-                                                            "description": "Microsoft Lists is a Microsoft 365 app that helps you track information and organize work with customizable lists for tasks, projects, and more.",
-                                                            "publisherLink": "",
-                                                            "subscriptionFeatures": [
-                                                                {
-                                                                    "licensing": "M365 FLW",
-                                                                    "products": [
-                                                                        {
-                                                                            "product": "F1",
-                                                                            "value": "na",
-                                                                            "comment": ""
-                                                                        },
-                                                                        {
-                                                                            "product": "F3",
-                                                                            "value": "na",
-                                                                            "comment": ""
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
+                                    "Named Template Output": {
+                                        "description": "Returns the requested template stored in blob storage.",
+                                        "summary": "Named Template Output",
+                                        "value": {}
                                     }
                                 },
                                 "schema": {
@@ -9268,6 +9124,9 @@
                             }
                         }
                     },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
                     "500": {
                         "$ref": "#/components/responses/500"
                     }
@@ -9275,7 +9134,7 @@
                 "tags": [
                     "Cloud Matrix"
                 ],
-                "summary": "Get a Default Assessment Schema Object"
+                "summary": "Get a Specific Assessment Template"
             },
             "post": {
                 "description": "Add or update a value assessment template. When the specified template name exists, it will overwrite the existing template JSON file in blob storage.\n\nThis endpoint is only accessible from the `SHI` and `SHI Lab` tenants and requires the `CloudMatrix.ReadWrite.All` scope (permission).",
