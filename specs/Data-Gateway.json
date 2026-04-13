@@ -167,9 +167,9 @@
             },
             "templateName": {
                 "description": "Name of the Cloud Matrix template to retrieve.",
-                "in": "path",
+                "in": "query",
                 "name": "templateName",
-                "required": true,
+                "required": false,
                 "schema": {
                     "type": "string",
                     "minLength": 2,
