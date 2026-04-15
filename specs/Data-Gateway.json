@@ -171,16 +171,10 @@
                 "name": "templateName",
                 "required": true,
                 "schema": {
-                    "type": "string",
-                    "minLength": 2,
-                    "maxLength": 100,
-                    "pattern": "^[A-Za-z0-9][A-Za-z0-9_ -]*[A-Za-z0-9]$",
-                    "examples": [
-                        "Microsoft Enterprise"
-                    ]
+                    "$ref": "#/components/schemas/CloudMatrix.TemplateName"
                 },
                 "examples": {
-                    "valid template name": {
+                    "Valid Template Name": {
                         "summary": "Example Valid Template Name",
                         "description": "An example string of a valid template name.",
                         "value": "Microsoft Enterprise"
@@ -4536,16 +4530,7 @@
                 "type": "object",
                 "properties": {
                     "templateName": {
-                        "type": "string",
-                        "minLength": 2,
-                        "maxLength": 100,
-                        "pattern": "^[A-Za-z0-9][A-Za-z0-9_ -]*[A-Za-z0-9]$",
-                        "description": "A valid template name allows alphanumeric characters, spaces, underscores, and hyphens, but may not start or end with special characters.",
-                        "examples": [
-                            "Microsoft Enterprise",
-                            "Microsoft_Academic",
-                            "Google-Workspace"
-                        ]
+                        "$ref": "#/components/schemas/CloudMatrix.TemplateName"
                     },
                     "templateContent": {
                         "$ref": "#/components/schemas/CloudMatrix.BulkCloudMatrix"
@@ -4726,6 +4711,18 @@
                             ]
                         }
                     }
+                ]
+            },
+            "CloudMatrix.TemplateName": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 100,
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_ -]*[A-Za-z0-9]$",
+                "description": "A valid template name allows alphanumeric characters, spaces, underscores, and hyphens, but may not start or end with special characters.",
+                "examples": [
+                    "Microsoft Enterprise",
+                    "Microsoft_Academic",
+                    "Google-Workspace"
                 ]
             }
         },
