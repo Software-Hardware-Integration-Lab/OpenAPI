@@ -4732,18 +4732,15 @@
                 "properties": {
                     "createdOn": {
                         "$ref": "#/components/schemas/DateTimeStringType",
-                        "description": "Creation date of the template file.",
+                        "description": "Creation date of the template file."
                     },
                     "name": {
-                        "type": "string",
-                        "description": "Name of available template.",
-                        "examples": [
-                            "cloud-matrix"
-                        ]
+                        "$ref": "#/components/schemas/CloudMatrix.TemplateName",
+                        "description": "Name of available template."
                     },
                     "lastModified": {
                         "$ref": "#/components/schemas/DateTimeStringType",
-                        "description": "Last modified date of the template file.",
+                        "description": "Last modified date of the template file."
                     },
                     "type": {
                         "type": "string",
@@ -4752,7 +4749,25 @@
                             "Microsoft Cloud Adoption Matrix Template"
                         ]
                     }
-                }
+                },
+                "required": [
+                    "name",
+                    "type"
+                ],
+                "examples": [
+                    {
+                        "createdOn": "2025-12-15T21:13:12.821Z",
+                        "name": "Microsoft Enterprise",
+                        "lastModified": "2025-12-15T21:13:12.821Z",
+                        "type": "Microsoft Cloud Adoption Matrix Template"
+                    },
+                    {
+                        "createdOn": "2025-12-15T21:13:12.821Z",
+                        "name": "Google-Workspace",
+                        "lastModified": "2025-12-15T21:13:12.821Z",
+                        "type": "Microsoft Cloud Adoption Matrix Template"
+                    }
+                ]
             }
         },
         "securitySchemes": {
