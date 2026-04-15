@@ -4724,6 +4724,35 @@
                     "Microsoft_Academic",
                     "Google-Workspace"
                 ]
+            },
+            "CloudMatrix.TemplateMetadata": {
+                "title": "Cloud Matrix Template File Metadata",
+                "type": "object",
+                "description": "Information about Cloud Matrix template files.",
+                "properties": {
+                    "createdOn": {
+                        "$ref": "#/components/schemas/DateTimeStringType",
+                        "description": "Creation date of the template file.",
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Name of available template.",
+                        "examples": [
+                            "cloud-matrix"
+                        ]
+                    },
+                    "lastModified": {
+                        "$ref": "#/components/schemas/DateTimeStringType",
+                        "description": "Last modified date of the template file.",
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "Type of the template.",
+                        "examples": [
+                            "Microsoft Cloud Adoption Matrix Template"
+                        ]
+                    }
+                }
             }
         },
         "securitySchemes": {
