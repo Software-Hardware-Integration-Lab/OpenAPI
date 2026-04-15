@@ -11108,10 +11108,10 @@
                 ]
             }
         },
-        "/Api/CloudMatrix/Template/List": {
+        "/Api/CloudMatrix/TemplateMetadata/List": {
             "get": {
                 "description": "Get a list of all available templates from CM storage. \n\nThis endpoint requires the `CloudMatrix.Read`, `CloudMatrix.Read.Del`, `CloudMatrix.Read.All`, `CloudMatrix.ReadWrite`, or `CloudMatrix.ReadWrite.All` scope (permission).",
-                "operationId": "/Api/CloudMatrix/Template/List/Get",
+                "operationId": "/Api/CloudMatrix/TemplateMetadata/List/Get",
                 "responses": {
                     "200": {
                         "description": "List of TemplateFileMetadata objects.",
