@@ -11159,7 +11159,11 @@
                                     }
                                 },
                                 "schema": {
-                                    "$ref": "#/components/schemas/CloudMatrix.TemplateMetadata"
+                                    "type": "array",
+                                    "minItems": 0,
+                                    "items": {
+                                        "$ref": "#/components/schemas/CloudMatrix.TemplateMetadata"
+                                    }
                                 }
                             }
                         }
