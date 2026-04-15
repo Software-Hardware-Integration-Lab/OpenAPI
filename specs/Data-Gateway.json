@@ -164,6 +164,22 @@
                         "value": "9b2c13f4-6e7a-4e8e-9c9a-a5b9c3f6ad12"
                     }
                 }
+            },
+            "templateName": {
+                "description": "Name of the Cloud Matrix template to retrieve.",
+                "in": "path",
+                "name": "templateName",
+                "required": true,
+                "schema": {
+                    "$ref": "#/components/schemas/CloudMatrix.TemplateName"
+                },
+                "examples": {
+                    "Valid Template Name": {
+                        "summary": "Example Valid Template Name",
+                        "description": "An example string of a valid template name.",
+                        "value": "Microsoft Enterprise"
+                    }
+                }
             }
         },
         "responses": {
@@ -4514,16 +4530,7 @@
                 "type": "object",
                 "properties": {
                     "templateName": {
-                        "type": "string",
-                        "minLength": 2,
-                        "maxLength": 100,
-                        "pattern": "^[A-Za-z0-9][A-Za-z0-9_ -]*[A-Za-z0-9]$",
-                        "description": "A valid template name allows alphanumeric characters, spaces, underscores, and hyphens, but may not start or end with special characters.",
-                        "examples": [
-                            "Microsoft Enterprise",
-                            "Microsoft_Academic",
-                            "Google-Workspace"
-                        ]
+                        "$ref": "#/components/schemas/CloudMatrix.TemplateName"
                     },
                     "templateContent": {
                         "$ref": "#/components/schemas/CloudMatrix.BulkCloudMatrix"
@@ -4704,6 +4711,18 @@
                             ]
                         }
                     }
+                ]
+            },
+            "CloudMatrix.TemplateName": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 100,
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_ -]*[A-Za-z0-9]$",
+                "description": "A valid template name allows alphanumeric characters, spaces, underscores, and hyphens, but may not start or end with special characters.",
+                "examples": [
+                    "Microsoft Enterprise",
+                    "Microsoft_Academic",
+                    "Google-Workspace"
                 ]
             }
         },
@@ -9075,19 +9094,24 @@
                 "summary": "Get Cloud Matrix Correlation Records"
             }
         },
-        "/Api/CloudMatrix/Template": {
+        "/Api/CloudMatrix/Template/{templateName}": {
             "get": {
-                "description": "Get a default assessment schema object as schema structure reference. \n\nThis endpoint requires the `CloudMatrix.Read`, `CloudMatrix.Read.Del`, `CloudMatrix.Read.All`, `CloudMatrix.ReadWrite`, or `CloudMatrix.ReadWrite.All` scope (permission).",
-                "operationId": "/Api/CloudMatrix/Template/Get",
+                "description": "Retrieves the specified Cloud Matrix assessment template by template name. \n\nThis endpoint requires the `CloudMatrix.Read`, `CloudMatrix.Read.Del`, `CloudMatrix.Read.All`, `CloudMatrix.ReadWrite`, or `CloudMatrix.ReadWrite.All` scope (permission).",
+                "operationId": "/Api/CloudMatrix/Template/:templateName/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/templateName"
+                    }
+                ],
                 "responses": {
                     "200": {
-                        "description": "The default assessment schema object.",
+                        "description": "The requested assessment template object.",
                         "content": {
                             "application/json": {
                                 "examples": {
-                                    "Default Output": {
-                                        "description": "Always returns the default schema template that stored in blob storage. This has been trimmed to contain one element for brevity.",
-                                        "summary": "Default Output",
+                                    "Named Template Output": {
+                                        "description": "Returns the requested template stored in blob storage. This has been trimmed to contain one element for brevity.",
+                                        "summary": "Named Template Output",
                                         "value": {
                                             "title": "CloudMatrix Value Assessment",
                                             "description": "MICROSOFT CLOUD ADOPTION MATRIX v5.0",
@@ -9275,8 +9299,10 @@
                 "tags": [
                     "Cloud Matrix"
                 ],
-                "summary": "Get a Default Assessment Schema Object"
-            },
+                "summary": "Get a Specific Assessment Template Schema Object"
+            }
+        },
+        "/Api/CloudMatrix/Template": {
             "post": {
                 "description": "Add or update a value assessment template. When the specified template name exists, it will overwrite the existing template JSON file in blob storage.\n\nThis endpoint is only accessible from the `SHI` and `SHI Lab` tenants and requires the `CloudMatrix.ReadWrite.All` scope (permission).",
                 "operationId": "/Api/CloudMatrix/Template/Post",
