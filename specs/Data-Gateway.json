@@ -166,7 +166,7 @@
                 }
             },
             "templateName": {
-                "description": "Name of the Cloud Matrix template to retrieve.",
+                "description": "Name of the Cloud Matrix template to retrieve. Because this value is sent as a path segment, clients must URL-encode spaces and other reserved characters.",
                 "in": "path",
                 "name": "templateName",
                 "required": true,
@@ -175,9 +175,9 @@
                 },
                 "examples": {
                     "Valid Template Name": {
-                        "summary": "Example Valid Template Name",
-                        "description": "An example string of a valid template name.",
-                        "value": "Microsoft Enterprise"
+                        "summary": "Example URL-Encoded Template Name",
+                        "description": "An example of a valid template name as it appears in the request path after URL encoding.",
+                        "value": "Microsoft%20Enterprise"
                     }
                 }
             }
@@ -9140,7 +9140,7 @@
         },
         "/Api/CloudMatrix/Template/{templateName}": {
             "get": {
-                "description": "Retrieves the specified Cloud Matrix assessment template by template name. \n\nThis endpoint requires the `CloudMatrix.Read`, `CloudMatrix.Read.Del`, `CloudMatrix.Read.All`, `CloudMatrix.ReadWrite`, or `CloudMatrix.ReadWrite.All` scope (permission).",
+                "description": "Retrieves the specified Cloud Matrix assessment template by template name. \n\nThis endpoint requires the `CloudMatrix.Read` scope (permission).",
                 "operationId": "/Api/CloudMatrix/Template/:templateName/Get",
                 "parameters": [
                     {
@@ -11131,7 +11131,7 @@
         },
         "/Api/CloudMatrix/TemplateMetadata/List": {
             "get": {
-                "description": "Get a list of all available templates from CM storage. \n\nThis endpoint requires the `CloudMatrix.Read`, `CloudMatrix.Read.Del`, `CloudMatrix.Read.All`, `CloudMatrix.ReadWrite`, or `CloudMatrix.ReadWrite.All` scope (permission).",
+                "description": "Get a list of all available templates from CM storage. \n\nThis endpoint requires the `CloudMatrix.Read` scope (permission).",
                 "operationId": "/Api/CloudMatrix/TemplateMetadata/List/Get",
                 "responses": {
                     "200": {
