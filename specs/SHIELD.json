@@ -4906,7 +4906,9 @@
                                         "tagList": [
                                             "7a2e5b1f-9c4d-4e3a-8f1b-2d6c3e9a7f4e"
                                         ],
-                                        "include": true
+                                        "configIdList": [
+                                            "ac37e450-2b84-4d71-8a96-e8f1b7b7d3f3"
+                                        ]
                                     }
                                 },
                                 "User Consented": {
@@ -5017,7 +5019,7 @@
             },
             "patch": {
                 "summary": "Augments the List of Tags Set as Deployed and Provisions New Resources",
-                "description": "Changes the list of tags based on include flags, calculates the list of matchings resources and deploys all the ones marked as not provisioned.\n\nThis endpoint requires the `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
+                "description": "Changes the list of tags, calculates the list of matching resources based on provided list and deploys all the ones marked as not provisioned.\n\nThis endpoint requires the `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
                 "operationId": "/Api/Deploy/Patch",
                 "requestBody": {
                     "content": {
