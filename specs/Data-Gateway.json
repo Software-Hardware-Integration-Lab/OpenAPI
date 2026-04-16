@@ -4724,6 +4724,50 @@
                     "Microsoft_Academic",
                     "Google-Workspace"
                 ]
+            },
+            "CloudMatrix.TemplateMetadata": {
+                "title": "Cloud Matrix Template File Metadata",
+                "type": "object",
+                "description": "Information about Cloud Matrix template files.",
+                "properties": {
+                    "createdOn": {
+                        "$ref": "#/components/schemas/DateTimeStringType",
+                        "description": "Creation date of the template file."
+                    },
+                    "name": {
+                        "$ref": "#/components/schemas/CloudMatrix.TemplateName",
+                        "description": "Name of available template."
+                    },
+                    "lastModified": {
+                        "$ref": "#/components/schemas/DateTimeStringType",
+                        "description": "Last modified date of the template file."
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "Type of the template.",
+                        "examples": [
+                            "Microsoft Cloud Adoption Matrix Template"
+                        ]
+                    }
+                },
+                "required": [
+                    "name",
+                    "type"
+                ],
+                "examples": [
+                    {
+                        "createdOn": "2025-12-15T21:13:12.821Z",
+                        "name": "Microsoft Enterprise",
+                        "lastModified": "2025-12-15T21:13:12.821Z",
+                        "type": "Microsoft Cloud Adoption Matrix Template"
+                    },
+                    {
+                        "createdOn": "2025-12-15T21:13:12.821Z",
+                        "name": "Google-Workspace",
+                        "lastModified": "2025-12-15T21:13:12.821Z",
+                        "type": "Microsoft Cloud Adoption Matrix Template"
+                    }
+                ]
             }
         },
         "securitySchemes": {
@@ -11083,6 +11127,55 @@
                 "tags": [
                     "Cloud Matrix"
                 ]
+            }
+        },
+        "/Api/CloudMatrix/TemplateMetadata/List": {
+            "get": {
+                "description": "Get a list of all available templates from CM storage. \n\nThis endpoint requires the `CloudMatrix.Read`, `CloudMatrix.Read.Del`, `CloudMatrix.Read.All`, `CloudMatrix.ReadWrite`, or `CloudMatrix.ReadWrite.All` scope (permission).",
+                "operationId": "/Api/CloudMatrix/TemplateMetadata/List/Get",
+                "responses": {
+                    "200": {
+                        "description": "List of TemplateFileMetadata objects.",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Default Output": {
+                                        "description": "A list of template metadata that is stored in blob storage. This is the default output when there are two templates stored in blob storage.",
+                                        "summary": "Default Output",
+                                        "value": [
+                                            {
+                                                "createdOn": "2026-03-24T16:56:43.000Z",
+                                                "name": "cloudMatrix",
+                                                "lastModified": "2026-03-24T16:56:43.000Z",
+                                                "type": "Standard"
+                                            },
+                                            {
+                                                "createdOn": "2026-04-08T14:15:44.000Z",
+                                                "name": "Google",
+                                                "lastModified": "2026-04-08T14:15:44.000Z",
+                                                "type": "Premium"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "schema": {
+                                    "type": "array",
+                                    "minItems": 0,
+                                    "items": {
+                                        "$ref": "#/components/schemas/CloudMatrix.TemplateMetadata"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "tags": [
+                    "Cloud Matrix"
+                ],
+                "summary": "Get a list of all available CM template objects"
             }
         }
     },
