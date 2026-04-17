@@ -4525,8 +4525,8 @@
                 ]
             },
             "CloudMatrix.TemplateUploadRequest": {
-                "title": "Value Assessment Template Upload Request",
-                "description": "Request body for uploading a value assessment template to the data gateway.",
+                "title": "Cloud Matrix Template Upload Request",
+                "description": "Request body for uploading a Cloud Matrix template to the data gateway.",
                 "type": "object",
                 "properties": {
                     "templateName": {
@@ -9348,7 +9348,7 @@
                 "tags": [
                     "Cloud Matrix"
                 ],
-                "summary": "Get a Specific Assessment Template Schema Object"
+                "summary": "Get a Specific Cloud Matrix Assessment Template"
             }
         },
         "/Api/CloudMatrix/Template": {
