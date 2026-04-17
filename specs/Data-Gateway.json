@@ -175,9 +175,9 @@
                 },
                 "examples": {
                     "Valid Template Name": {
-                        "summary": "Example URL-Encoded Template Name",
-                        "description": "An example of a valid template name as it appears in the request path after URL encoding.",
-                        "value": "Microsoft%20Enterprise"
+                        "summary": "Example Valid Template Name",
+                        "description": "An example of a valid template name before URL encoding for use in the request path.",
+                        "value": "Microsoft Enterprise"
                     }
                 }
             }
@@ -4792,7 +4792,7 @@
         },
         "description": "Collects data from the various SHI Lab products and makes it available in a standardized way.",
         "title": "SHI - Data Gateway",
-        "version": "3.2.0"
+        "version": "3.2.1"
     },
     "openapi": "3.1.1",
     "paths": {
@@ -9338,6 +9338,9 @@
                             }
                         }
                     },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
                     "500": {
                         "$ref": "#/components/responses/500"
                     }
@@ -11137,7 +11140,7 @@
                 "operationId": "/Api/CloudMatrix/TemplateMetadata/Get",
                 "responses": {
                     "200": {
-                        "description": "List of TemplateFileMetadata objects.",
+                        "description": "List of CloudMatrix TemplateMetadata objects.",
                         "content": {
                             "application/json": {
                                 "examples": {
