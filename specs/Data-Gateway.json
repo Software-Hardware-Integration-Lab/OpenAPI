@@ -4751,7 +4751,9 @@
                     }
                 },
                 "required": [
+                    "createdOn",
                     "name",
+                    "lastModified",
                     "type"
                 ],
                 "examples": [
@@ -11131,7 +11133,7 @@
         },
         "/Api/CloudMatrix/TemplateMetadata": {
             "get": {
-                "description": "Get a list of all available templates from CM storage. \n\nThis endpoint requires the `CloudMatrix.Read` scope (permission).",
+                "description": "Get a list of all template metadata objects for available templates from CM storage. \n\nThis endpoint requires the `CloudMatrix.Read` scope (permission).",
                 "operationId": "/Api/CloudMatrix/TemplateMetadata/Get",
                 "responses": {
                     "200": {
@@ -11147,13 +11149,13 @@
                                                 "createdOn": "2026-03-24T16:56:43.000Z",
                                                 "name": "cloudMatrix",
                                                 "lastModified": "2026-03-24T16:56:43.000Z",
-                                                "type": "Standard"
+                                                "type": "Microsoft Cloud Adoption Matrix Template"
                                             },
                                             {
                                                 "createdOn": "2026-04-08T14:15:44.000Z",
                                                 "name": "Google",
                                                 "lastModified": "2026-04-08T14:15:44.000Z",
-                                                "type": "Premium"
+                                                "type": "Microsoft Cloud Adoption Matrix Template"
                                             }
                                         ]
                                     }
@@ -11175,7 +11177,7 @@
                 "tags": [
                     "Cloud Matrix"
                 ],
-                "summary": "Get a list of all available CM template objects"
+                "summary": "Get a List of Template Metadata Objects"
             }
         }
     },
