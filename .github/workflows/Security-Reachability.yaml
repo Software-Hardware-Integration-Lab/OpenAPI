@@ -1,0 +1,71 @@
+# Display Name of the workflow
+name: Static Analysis - CVE Reachability Scan
+
+# When this workflow triggers
+on:
+    # Run by hand
+    workflow_dispatch: # Run on PR
+
+    # Run when PR is raised to protected branches
+    pull_request:
+        branches: [ main ]
+
+    # Run on a schedule (weekly) to ensure scan with latest definitions
+    schedule:
+        - cron: '59 23 * * 0' # Weekly on Sundays at midnight
+
+# Only allow one scan to run at a time
+concurrency:
+    group: socket-scan-${{ github.ref }}-${{ github.sha }}
+    cancel-in-progress: true
+
+# Define each session of execution that should be executed
+jobs:
+    socket-security:
+        # Display name of the job
+        name: Compute Tier-1 Reachability
+
+        # Configures the filter for which operating system that should be used when selecting runners
+        runs-on: ubuntu-latest
+
+        # Sets the scopes available to the github_token injected to the GH Actions runner
+        permissions:
+            issues: read
+            contents: read
+            pull-requests: read
+
+        # Set of commands to run to compute the reachability of CVEs in the codebase
+        steps:
+            # Downloads the repo at the specified depth calculated previously 
+            - name: Clone Repo
+              uses: actions/checkout@v6
+              with:
+                  # For PRs, fetch one additional commit for proper diff analysis
+                  fetch-depth: ${{ github.event_name == 'pull_request' && 2 || 0 }}
+
+            # Set up NodeJS on the build host with caching support to optimize execution
+            - name: Set up Node.js
+              uses: actions/setup-node@v6
+              with:
+                  node-version: 24
+
+            # Set up Python runtime on the build host
+            - name: Set up Python
+              uses: actions/setup-python@v6
+              with:
+                  python-version: '3.14'
+
+            # Update the NPM CLI to the latest available version
+            - name: Update NPM CLI
+              run: npm install -g npm
+
+            # Install the Socket CLI tool using pip and ensure it's up to date
+            - name: Install Socket CLI
+              run: pip install socketsecurity uv --upgrade
+
+            # Run the reachability scan
+            - name: Run Socket Security Scan
+              env:
+                  SOCKET_SECURITY_API_KEY: ${{ secrets.SOCKET_REACHABILITY }}
+                  GH_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: socketcli --target-path $GITHUB_WORKSPACE --scm github --reach
