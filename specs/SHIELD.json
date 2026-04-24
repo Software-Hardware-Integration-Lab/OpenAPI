@@ -1117,6 +1117,13 @@
                                 "deployed"
                             ]
                         },
+                        "docs": {
+                            "type": "string",
+                            "description": "URL to the documentation of the Configuration Item.",
+                            "examples": [
+                                    "https://docs.shilab.com"
+                                    ]
+                         },
                         "groupTagList": {
                             "type": "array",
                             "description": "List of metadata tags that indicate which deployment sets the configuration item is compatible with.",
@@ -1189,6 +1196,13 @@
                                 ]
                             ]
                         },
+                        "name": {
+                            "type": "string",
+                            "description": "Human friendly name of the Configuration Item.",
+                            "examples": [
+                                    "Conditional Policy"
+                                    ]
+                         },
                         "parentDependencies": {
                             "type": "array",
                             "description": "List of Object IDs in UUID format that reference configuration items identified as entities which deploy and existence is required for the current item.",
@@ -5202,6 +5216,7 @@
                                                     "9c2e7a1b-5d3f-4a8b-2c6e-7f1a3d9e8b5c"
                                                 ],
                                                 "deployState": "deployed",
+                                                "docs": "https://docs.shilab.com",
                                                 "groupTagList": [
                                                     {
                                                         "description": "Collection of policies covering critical conditional access settings.",
@@ -5212,6 +5227,7 @@
                                                 "msCloudTypes": [
                                                     "Public"
                                                 ],
+                                                "name": "Conditional Access - Baseline",
                                                 "parentDependencies": [
                                                     "8e6a1c2b-7f3d-4a8b-9c2e-5d3f7a1b2e4a"
                                                 ],
@@ -5223,6 +5239,7 @@
                                                     "1c2b5d3f-7a1b-4a8b-9e6a-2e4a3b7e8c5d"
                                                 ],
                                                 "deployState": "notDeployed",
+                                                "docs": "https://docs.shilab.com",
                                                 "groupTagList": [
                                                     {
                                                         "description": "Principal containers that are used to provide assignments.",
@@ -5233,6 +5250,8 @@
                                                 "msCloudTypes": [
                                                     "Public"
                                                 ],
+                                                "name": "Admin Unit - Baseline",
+                                               
                                                 "parentDependencies": [],
                                                 "templateId": "4a8b7e1a-2b3c-4d5f-9e6a-1c2b7f3d8e4a",
                                                 "urlPath": "/directory/administrativeUnits"
