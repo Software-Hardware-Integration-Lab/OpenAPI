@@ -3945,6 +3945,1519 @@
                 ],
                 "title": "Architecture Report - Correlation Record",
                 "type": "object"
+            },
+            "ZeroTrustAssessment": {
+                "title": "Zero Trust Assessment - Complete Object",
+                "description": "Calculated structure that represents details needed to present Zero Trust assessment in UI.",
+                "type": "object",
+                "properties": {
+                    "privilegedSignIns": {
+                        "description": "Summary about sign-ins for privileged accounts.",
+                        "type": "object",
+                        "properties": {
+                            "totalSignIns": {
+                                "description": "Count of all records associated with privileged accounts.",
+                                "examples": [
+                                    1200
+                                ],
+                                "type": "integer",
+                                "format": "int32",
+                                "minimum": 0
+                            },
+                            "singleFactor": {
+                                "description": "Count of records for privileged accounts that do not include use of MFA.",
+                                "examples": [
+                                    250
+                                ],
+                                "type": "integer",
+                                "format": "int32",
+                                "minimum": 0
+                            },
+                            "nonPhishResistant": {
+                                "description": "Details of records for privileged accounts that utilize MFA that is not phish-resistant.",
+                                "type": "object",
+                                "properties": {
+                                    "total": {
+                                        "description": "Total count of records for sign-ins that used not phish-resistant authentication methods.",
+                                        "examples": [
+                                            600
+                                        ],
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
+                                    },
+                                    "phone": {
+                                        "description": "Count of records where phone authentication option was used.",
+                                        "examples": [
+                                            120
+                                        ],
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
+                                    },
+                                    "authenticator": {
+                                        "description": "Count of records where authenticator was involved during authentication.",
+                                        "examples": [
+                                            220
+                                        ],
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
+                                    },
+                                    "sms": {
+                                        "description": "Count of records where SMS confirmation was used during authentication.",
+                                        "examples": [
+                                            140
+                                        ],
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
+                                    },
+                                    "otp": {
+                                        "description": "Count of records where OTP was used during authentication.",
+                                        "examples": [
+                                            80
+                                        ],
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
+                                    },
+                                    "deviceCode": {
+                                        "description": "Count of records where device code was used for authentication.",
+                                        "examples": [
+                                            40
+                                        ],
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
+                                    }
+                                },
+                                "required": [
+                                    "total",
+                                    "phone",
+                                    "authenticator",
+                                    "sms",
+                                    "otp",
+                                    "deviceCode"
+                                ],
+                                "examples": [
+                                    {
+                                        "total": 600,
+                                        "phone": 120,
+                                        "authenticator": 220,
+                                        "sms": 140,
+                                        "otp": 80,
+                                        "deviceCode": 40
+                                    }
+                                ]
+                            },
+                            "phishResistant": {
+                                "description": "Details of records for privileged accounts that utilize MFA that is phish-resistant during authentication.",
+                                "type": "object",
+                                "properties": {
+                                    "total": {
+                                        "description": "Total count of records for sign-ins that used phish-resistant authentication methods.",
+                                        "examples": [
+                                            350
+                                        ],
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
+                                    },
+                                    "passkey": {
+                                        "description": "Count of records where passkey was used for authentication.",
+                                        "examples": [
+                                            90
+                                        ],
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
+                                    },
+                                    "whfb": {
+                                        "description": "Count of records where Windows Hello for Business was used for authentication.",
+                                        "examples": [
+                                            110
+                                        ],
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
+                                    },
+                                    "certificate": {
+                                        "description": "Count of records where certificate was used for authentication.",
+                                        "examples": [
+                                            60
+                                        ],
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
+                                    },
+                                    "fido2": {
+                                        "description": "Count of records where FIDO2-based authentication was utilized.",
+                                        "examples": [
+                                            90
+                                        ],
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
+                                    }
+                                },
+                                "required": [
+                                    "total",
+                                    "passkey",
+                                    "whfb",
+                                    "certificate",
+                                    "fido2"
+                                ],
+                                "examples": [
+                                    {
+                                        "total": 350,
+                                        "passkey": 90,
+                                        "whfb": 110,
+                                        "certificate": 60,
+                                        "fido2": 90
+                                    }
+                                ]
+                            }
+                        },
+                        "examples": [
+                            {
+                                "totalSignIns": 1200,
+                                "singleFactor": 250,
+                                "nonPhishResistant": {
+                                    "total": 600,
+                                    "phone": 120,
+                                    "authenticator": 220,
+                                    "sms": 140,
+                                    "otp": 80,
+                                    "deviceCode": 40
+                                },
+                                "phishResistant": {
+                                    "total": 350,
+                                    "passkey": 90,
+                                    "whfb": 110,
+                                    "certificate": 60,
+                                    "fido2": 90
+                                }
+                            }
+                        ],
+                        "required": [
+                            "totalSignIns",
+                            "singleFactor",
+                            "nonPhishResistant",
+                            "phishResistant"
+                        ]
+                    },
+                    "allSignIns": {
+                        "description": "Summary about sign-ins for all accounts.",
+                        "type": "object",
+                        "properties": {
+                            "totalSignIns": {
+                                "description": "Count of all sign-in records.",
+                                "examples": [
+                                    1200
+                                ],
+                                "type": "integer",
+                                "format": "int32",
+                                "minimum": 0
+                            },
+                            "singleFactor": {
+                                "description": "Count of records that did not include any MFA methods.",
+                                "examples": [
+                                    250
+                                ],
+                                "type": "integer",
+                                "format": "int32",
+                                "minimum": 0
+                            },
+                            "nonPhishResistant": {
+                                "description": "Details of records that utilized MFA methods that are not phish-resistant.",
+                                "type": "object",
+                                "properties": {
+                                    "total": {
+                                        "description": "Total count of records for sign-ins that used not phish-resistant authentication methods.",
+                                        "examples": [
+                                            600
+                                        ],
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
+                                    },
+                                    "phone": {
+                                        "description": "Count of records where phone option was used during authentication.",
+                                        "examples": [
+                                            120
+                                        ],
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
+                                    },
+                                    "authenticator": {
+                                        "description": "Count of records where authenticator was involved during authentication.",
+                                        "examples": [
+                                            220
+                                        ],
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
+                                    },
+                                    "sms": {
+                                        "description": "Count of records where SMS confirmation was used during authentication.",
+                                        "examples": [
+                                            140
+                                        ],
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
+                                    },
+                                    "otp": {
+                                        "description": "Count of records where OTP was used during authentication.",
+                                        "examples": [
+                                            80
+                                        ],
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
+                                    },
+                                    "deviceCode": {
+                                        "description": "Count of records where device code was used during authentication.",
+                                        "examples": [
+                                            40
+                                        ],
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
+                                    }
+                                },
+                                "required": [
+                                    "total",
+                                    "phone",
+                                    "authenticator",
+                                    "sms",
+                                    "otp",
+                                    "deviceCode"
+                                ],
+                                "examples": [
+                                    {
+                                        "total": 600,
+                                        "phone": 120,
+                                        "authenticator": 220,
+                                        "sms": 140,
+                                        "otp": 80,
+                                        "deviceCode": 40
+                                    }
+                                ]
+                            },
+                            "phishResistant": {
+                                "description": "Details of records that utilized MFA methods that are considered phish-resistant.",
+                                "type": "object",
+                                "properties": {
+                                    "total": {
+                                        "description": "Total count of records for sign-ins that used phish-resistant authentication methods.",
+                                        "examples": [
+                                            350
+                                        ],
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
+                                    },
+                                    "passkey": {
+                                        "description": "Count of records where passkey was used for authentication.",
+                                        "examples": [
+                                            90
+                                        ],
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
+                                    },
+                                    "whfb": {
+                                        "description": "Count of records where Windows Hello for Business was used for authentication.",
+                                        "examples": [
+                                            110
+                                        ],
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
+                                    },
+                                    "certificate": {
+                                        "description": "Count of records where certificate was used for authentication.",
+                                        "examples": [
+                                            60
+                                        ],
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
+                                    },
+                                    "fido2": {
+                                        "description": "Count of records where FIDO2-based authentication was utilized.",
+                                        "examples": [
+                                            90
+                                        ],
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
+                                    }
+                                },
+                                "required": [
+                                    "total",
+                                    "passkey",
+                                    "whfb",
+                                    "certificate",
+                                    "fido2"
+                                ],
+                                "examples": [
+                                    {
+                                        "total": 350,
+                                        "passkey": 90,
+                                        "whfb": 110,
+                                        "certificate": 60,
+                                        "fido2": 90
+                                    }
+                                ]
+                            }
+                        },
+                        "examples": [
+                            {
+                                "totalSignIns": 1200,
+                                "singleFactor": 250,
+                                "nonPhishResistant": {
+                                    "total": 600,
+                                    "phone": 120,
+                                    "authenticator": 220,
+                                    "sms": 140,
+                                    "otp": 80,
+                                    "deviceCode": 40
+                                },
+                                "phishResistant": {
+                                    "total": 350,
+                                    "passkey": 90,
+                                    "whfb": 110,
+                                    "certificate": 60,
+                                    "fido2": 90
+                                }
+                            }
+                        ],
+                        "required": [
+                            "totalSignIns",
+                            "singleFactor",
+                            "nonPhishResistant",
+                            "phishResistant"
+                        ]
+                    },
+                    "conditionalAccess": {
+                        "description": "Summary of applicability of the conditional access flow during authentication.",
+                        "type": "object",
+                        "properties": {
+                            "totalSignIns": {
+                                "description": "Count of all records.",
+                                "examples": [
+                                    1200
+                                ],
+                                "type": "integer",
+                                "format": "int32",
+                                "minimum": 0
+                            },
+                            "noConditionalAccess": {
+                                "description": "Count of records that did not have conditional access applied.",
+                                "examples": [
+                                    300
+                                ],
+                                "type": "integer",
+                                "format": "int32",
+                                "minimum": 0
+                            },
+                            "withConditionalAccess": {
+                                "description": "Details of records that had conditional access applied.",
+                                "type": "object",
+                                "properties": {
+                                    "total": {
+                                        "description": "Total count of records where conditional access flow applied.",
+                                        "examples": [
+                                            900
+                                        ],
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
+                                    },
+                                    "withMfa": {
+                                        "description": "Count of records that used MFA method during authentication.",
+                                        "examples": [
+                                            700
+                                        ],
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
+                                    },
+                                    "withoutMfa": {
+                                        "description": "Count of records that did not use any MFA method during authentication.",
+                                        "examples": [
+                                            200
+                                        ],
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
+                                    }
+                                },
+                                "required": [
+                                    "total",
+                                    "withMfa",
+                                    "withoutMfa"
+                                ],
+                                "examples": [
+                                    {
+                                        "total": 900,
+                                        "withMfa": 700,
+                                        "withoutMfa": 200
+                                    }
+                                ]
+                            }
+                        },
+                        "examples": [
+                            {
+                                "totalSignIns": 1200,
+                                "noConditionalAccess": 300,
+                                "withConditionalAccess": {
+                                    "total": 900,
+                                    "withMfa": 700,
+                                    "withoutMfa": 200
+                                }
+                            }
+                        ],
+                        "required": [
+                            "totalSignIns",
+                            "noConditionalAccess",
+                            "withConditionalAccess"
+                        ]
+                    },
+                    "deviceSignIns": {
+                        "description": "Summary about sign-ins for all devices.",
+                        "type": "object",
+                        "properties": {
+                            "totalSignIns": {
+                                "description": "Count of all records.",
+                                "examples": [
+                                    1200
+                                ],
+                                "type": "integer",
+                                "format": "int32",
+                                "minimum": 0
+                            },
+                            "unmanaged": {
+                                "description": "Count of records where device is not managed or pre-enrolled with Intune.",
+                                "examples": [
+                                    450
+                                ],
+                                "type": "integer",
+                                "format": "int32",
+                                "minimum": 0
+                            },
+                            "managed": {
+                                "description": "Details of records where device is managed or pre-enrolled with Intune.",
+                                "type": "object",
+                                "properties": {
+                                    "total": {
+                                        "description": "Total count of records where device was identified as managed.",
+                                        "examples": [
+                                            750
+                                        ],
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
+                                    },
+                                    "compliant": {
+                                        "description": "Count of records indicating compliant devices.",
+                                        "examples": [
+                                            600
+                                        ],
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
+                                    },
+                                    "nonCompliant": {
+                                        "description": "Count of records indicating non-compliant devices.",
+                                        "examples": [
+                                            150
+                                        ],
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
+                                    }
+                                },
+                                "required": [
+                                    "total",
+                                    "compliant",
+                                    "nonCompliant"
+                                ],
+                                "examples": [
+                                    {
+                                        "total": 750,
+                                        "compliant": 600,
+                                        "nonCompliant": 150
+                                    }
+                                ]
+                            }
+                        },
+                        "examples": [
+                            {
+                                "totalSignIns": 1200,
+                                "unmanaged": 450,
+                                "managed": {
+                                    "total": 750,
+                                    "compliant": 600,
+                                    "nonCompliant": 150
+                                }
+                            }
+                        ],
+                        "required": [
+                            "totalSignIns",
+                            "unmanaged",
+                            "managed"
+                        ]
+                    },
+                    "desktopSignIns": {
+                        "description": "Summary about sign-ins for desktop devices.",
+                        "type": "object",
+                        "properties": {
+                            "totalSignIns": {
+                                "description": "Count of all records where device was identified as desktop-like.",
+                                "examples": [
+                                    800
+                                ],
+                                "type": "integer",
+                                "format": "int32",
+                                "minimum": 0
+                            },
+                            "windows": {
+                                "description": "Details of records for Windows-based devices.",
+                                "type": "object",
+                                "properties": {
+                                    "total": {
+                                        "description": "Count of records where device was using Windows platform.",
+                                        "examples": [
+                                            600
+                                        ],
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
+                                    },
+                                    "entraJoined": {
+                                        "description": "Details of records indicating devices joined Entra.",
+                                        "type": "object",
+                                        "properties": {
+                                            "total": {
+                                                "description": "Total count of records where device is recognized as joined Entra.",
+                                                "examples": [
+                                                    300
+                                                ],
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "minimum": 0
+                                            },
+                                            "managed": {
+                                                "description": "Details of records indicating devices that are managed.",
+                                                "type": "object",
+                                                "properties": {
+                                                    "total": {
+                                                        "description": "Count of records of devices under management.",
+                                                        "examples": [
+                                                            220
+                                                        ],
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "minimum": 0
+                                                    },
+                                                    "compliant": {
+                                                        "description": "Count of records indicating compliant devices.",
+                                                        "examples": [
+                                                            180
+                                                        ],
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "minimum": 0
+                                                    },
+                                                    "nonCompliant": {
+                                                        "description": "Count of records indicating non-compliant devices.",
+                                                        "examples": [
+                                                            40
+                                                        ],
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "minimum": 0
+                                                    }
+                                                },
+                                                "required": [
+                                                    "total",
+                                                    "compliant",
+                                                    "nonCompliant"
+                                                ],
+                                                "examples": [
+                                                    {
+                                                        "total": 220,
+                                                        "compliant": 180,
+                                                        "nonCompliant": 40
+                                                    }
+                                                ]
+                                            },
+                                            "unmanaged": {
+                                                "description": "Count of records indicating devices that are not managed.",
+                                                "examples": [
+                                                    80
+                                                ],
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "minimum": 0
+                                            }
+                                        },
+                                        "examples": [
+                                            {
+                                                "total": 300,
+                                                "managed": {
+                                                    "total": 220,
+                                                    "compliant": 180,
+                                                    "nonCompliant": 40
+                                                },
+                                                "unmanaged": 80
+                                            }
+                                        ],
+                                        "required": [
+                                            "total",
+                                            "managed",
+                                            "unmanaged"
+                                        ]
+                                    },
+                                    "entraRegistered": {
+                                        "description": "Details of records indicating devices registered with Entra.",
+                                        "type": "object",
+                                        "properties": {
+                                            "total": {
+                                                "description": "Total count of records identified as registered with Entra.",
+                                                "examples": [
+                                                    180
+                                                ],
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "minimum": 0
+                                            },
+                                            "managed": {
+                                                "description": "Details of records indicating devices that are managed.",
+                                                "type": "object",
+                                                "properties": {
+                                                    "total": {
+                                                        "description": "Total count of records of the devices under management.",
+                                                        "examples": [
+                                                            120
+                                                        ],
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "minimum": 0
+                                                    },
+                                                    "compliant": {
+                                                        "description": "Count of records indicating compliant devices.",
+                                                        "examples": [
+                                                            90
+                                                        ],
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "minimum": 0
+                                                    },
+                                                    "nonCompliant": {
+                                                        "description": "Count of records indicating non-compliant devices.",
+                                                        "examples": [
+                                                            30
+                                                        ],
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "minimum": 0
+                                                    }
+                                                },
+                                                "required": [
+                                                    "total",
+                                                    "compliant",
+                                                    "nonCompliant"
+                                                ],
+                                                "examples": [
+                                                    {
+                                                        "total": 120,
+                                                        "compliant": 90,
+                                                        "nonCompliant": 30
+                                                    }
+                                                ]
+                                            },
+                                            "unmanaged": {
+                                                "description": "Count of records indicating devices that are not managed.",
+                                                "examples": [
+                                                    60
+                                                ],
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "minimum": 0
+                                            }
+                                        },
+                                        "examples": [
+                                            {
+                                                "total": 180,
+                                                "managed": {
+                                                    "total": 120,
+                                                    "compliant": 90,
+                                                    "nonCompliant": 30
+                                                },
+                                                "unmanaged": 60
+                                            }
+                                        ],
+                                        "required": [
+                                            "total",
+                                            "managed",
+                                            "unmanaged"
+                                        ]
+                                    },
+                                    "entraHybridJoined": {
+                                        "description": "Details of records indicating devices that are hybrid joined with Entra.",
+                                        "type": "object",
+                                        "properties": {
+                                            "total": {
+                                                "description": "Count of records of the devices identified as joined with Entra in a hybrid fashion.",
+                                                "examples": [
+                                                    90
+                                                ],
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "minimum": 0
+                                            },
+                                            "managed": {
+                                                "description": "Details of records indicating devices that are managed.",
+                                                "type": "object",
+                                                "properties": {
+                                                    "total": {
+                                                        "description": "Total count of records of the devices under management.",
+                                                        "examples": [
+                                                            70
+                                                        ],
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "minimum": 0
+                                                    },
+                                                    "compliant": {
+                                                        "description": "Count of records indicating compliant devices.",
+                                                        "examples": [
+                                                            60
+                                                        ],
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "minimum": 0
+                                                    },
+                                                    "nonCompliant": {
+                                                        "description": "Count of records indicating non-compliant devices.",
+                                                        "examples": [
+                                                            10
+                                                        ],
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "minimum": 0
+                                                    }
+                                                },
+                                                "required": [
+                                                    "total",
+                                                    "compliant",
+                                                    "nonCompliant"
+                                                ],
+                                                "examples": [
+                                                    {
+                                                        "total": 70,
+                                                        "compliant": 60,
+                                                        "nonCompliant": 10
+                                                    }
+                                                ]
+                                            },
+                                            "unmanaged": {
+                                                "description": "Count of records indicating devices that are not managed.",
+                                                "examples": [
+                                                    20
+                                                ],
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "minimum": 0
+                                            }
+                                        },
+                                        "examples": [
+                                            {
+                                                "total": 90,
+                                                "managed": {
+                                                    "total": 70,
+                                                    "compliant": 60,
+                                                    "nonCompliant": 10
+                                                },
+                                                "unmanaged": 20
+                                            }
+                                        ],
+                                        "required": [
+                                            "total",
+                                            "managed",
+                                            "unmanaged"
+                                        ]
+                                    },
+                                    "unmanaged": {
+                                        "description": "Count of records indicating devices that do not have Entra connection.",
+                                        "examples": [
+                                            30
+                                        ],
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
+                                    }
+                                },
+                                "examples": [
+                                    {
+                                        "total": 600,
+                                        "entraJoined": {
+                                            "total": 300,
+                                            "managed": {
+                                                "total": 220,
+                                                "compliant": 180,
+                                                "nonCompliant": 40
+                                            },
+                                            "unmanaged": 80
+                                        },
+                                        "entraRegistered": {
+                                            "total": 180,
+                                            "managed": {
+                                                "total": 120,
+                                                "compliant": 90,
+                                                "nonCompliant": 30
+                                            },
+                                            "unmanaged": 60
+                                        },
+                                        "entraHybridJoined": {
+                                            "total": 90,
+                                            "managed": {
+                                                "total": 70,
+                                                "compliant": 60,
+                                                "nonCompliant": 10
+                                            },
+                                            "unmanaged": 20
+                                        },
+                                        "unmanaged": 30
+                                    }
+                                ],
+                                "required": [
+                                    "total",
+                                    "entraJoined",
+                                    "entraRegistered",
+                                    "entraHybridJoined",
+                                    "unmanaged"
+                                ]
+                            },
+                            "linux": {
+                                "description": "Details of records for Linux-based devices.",
+                                "type": "object",
+                                "properties": {
+                                    "total": {
+                                        "description": "Total count of records of the devices using Linux platform.",
+                                        "examples": [
+                                            120
+                                        ],
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
+                                    },
+                                    "compliant": {
+                                        "description": "Count of records indicating compliant devices.",
+                                        "examples": [
+                                            70
+                                        ],
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
+                                    },
+                                    "nonCompliant": {
+                                        "description": "Count of records indicating non-compliant devices.",
+                                        "examples": [
+                                            20
+                                        ],
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
+                                    },
+                                    "unmanaged": {
+                                        "description": "Count of records indicating devices that are not managed.",
+                                        "examples": [
+                                            30
+                                        ],
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
+                                    }
+                                },
+                                "examples": [
+                                    {
+                                        "total": 120,
+                                        "compliant": 70,
+                                        "nonCompliant": 20,
+                                        "unmanaged": 30
+                                    }
+                                ],
+                                "required": [
+                                    "total",
+                                    "compliant",
+                                    "nonCompliant",
+                                    "unmanaged"
+                                ]
+                            },
+                            "macos": {
+                                "description": "Details of records for macOS-based devices.",
+                                "type": "object",
+                                "properties": {
+                                    "total": {
+                                        "description": "Total count of records of the devices using macOS platform.",
+                                        "examples": [
+                                            80
+                                        ],
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
+                                    },
+                                    "compliant": {
+                                        "description": "Count of records indicating compliant devices.",
+                                        "examples": [
+                                            50
+                                        ],
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
+                                    },
+                                    "nonCompliant": {
+                                        "description": "Count of records indicating non-compliant devices.",
+                                        "examples": [
+                                            10
+                                        ],
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
+                                    },
+                                    "unmanaged": {
+                                        "description": "Count of records indicating devices that are not managed.",
+                                        "examples": [
+                                            20
+                                        ],
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
+                                    }
+                                },
+                                "examples": [
+                                    {
+                                        "total": 80,
+                                        "compliant": 50,
+                                        "nonCompliant": 10,
+                                        "unmanaged": 20
+                                    }
+                                ],
+                                "required": [
+                                    "total",
+                                    "compliant",
+                                    "nonCompliant",
+                                    "unmanaged"
+                                ]
+                            }
+                        },
+                        "examples": [
+                            {
+                                "totalSignIns": 800,
+                                "windows": {
+                                    "total": 600,
+                                    "entraJoined": {
+                                        "total": 300,
+                                        "managed": {
+                                            "total": 220,
+                                            "compliant": 180,
+                                            "nonCompliant": 40
+                                        },
+                                        "unmanaged": 80
+                                    },
+                                    "entraRegistered": {
+                                        "total": 180,
+                                        "managed": {
+                                            "total": 120,
+                                            "compliant": 90,
+                                            "nonCompliant": 30
+                                        },
+                                        "unmanaged": 60
+                                    },
+                                    "entraHybridJoined": {
+                                        "total": 90,
+                                        "managed": {
+                                            "total": 70,
+                                            "compliant": 60,
+                                            "nonCompliant": 10
+                                        },
+                                        "unmanaged": 20
+                                    },
+                                    "unmanaged": 30
+                                },
+                                "linux": {
+                                    "total": 120,
+                                    "compliant": 70,
+                                    "nonCompliant": 20,
+                                    "unmanaged": 30
+                                },
+                                "macos": {
+                                    "total": 80,
+                                    "compliant": 50,
+                                    "nonCompliant": 10,
+                                    "unmanaged": 20
+                                }
+                            }
+                        ],
+                        "required": [
+                            "totalSignIns",
+                            "windows",
+                            "linux",
+                            "macos"
+                        ]
+                    },
+                    "mobileSignIns": {
+                        "description": "Summary about sign-ins for mobile devices.",
+                        "type": "object",
+                        "properties": {
+                            "totalSignIns": {
+                                "description": "Count of all records where device was identified as a mobile device.",
+                                "examples": [
+                                    400
+                                ],
+                                "type": "integer",
+                                "format": "int32",
+                                "minimum": 0
+                            },
+                            "ios": {
+                                "description": "Details of records for iOS devices.",
+                                "type": "object",
+                                "properties": {
+                                    "total": {
+                                        "description": "Total count of records of the devices based on iOS platform.",
+                                        "examples": [
+                                            220
+                                        ],
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
+                                    },
+                                    "company": {
+                                        "description": "Detail of records indicating devices owned by company.",
+                                        "type": "object",
+                                        "properties": {
+                                            "total": {
+                                                "description": "Total count of records of the devices associated with company use.",
+                                                "examples": [
+                                                    140
+                                                ],
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "minimum": 0
+                                            },
+                                            "compliant": {
+                                                "description": "Count of records indicating compliant devices.",
+                                                "examples": [
+                                                    100
+                                                ],
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "minimum": 0
+                                            },
+                                            "nonCompliant": {
+                                                "description": "Count of records indicating non-compliant devices.",
+                                                "examples": [
+                                                    40
+                                                ],
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "minimum": 0
+                                            }
+                                        },
+                                        "required": [
+                                            "total",
+                                            "compliant",
+                                            "nonCompliant"
+                                        ],
+                                        "examples": [
+                                            {
+                                                "total": 140,
+                                                "compliant": 100,
+                                                "nonCompliant": 40
+                                            }
+                                        ]
+                                    },
+                                    "personal": {
+                                        "description": "Detail of records indicating devices owned by users.",
+                                        "type": "object",
+                                        "properties": {
+                                            "total": {
+                                                "description": "Total count of records of the devices established as personal devices.",
+                                                "examples": [
+                                                    80
+                                                ],
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "minimum": 0
+                                            },
+                                            "compliant": {
+                                                "description": "Count of records indicating compliant devices.",
+                                                "examples": [
+                                                    60
+                                                ],
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "minimum": 0
+                                            },
+                                            "nonCompliant": {
+                                                "description": "Count of records indicating non-compliant devices.",
+                                                "examples": [
+                                                    20
+                                                ],
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "minimum": 0
+                                            }
+                                        },
+                                        "required": [
+                                            "total",
+                                            "compliant",
+                                            "nonCompliant"
+                                        ],
+                                        "examples": [
+                                            {
+                                                "total": 80,
+                                                "compliant": 60,
+                                                "nonCompliant": 20
+                                            }
+                                        ]
+                                    }
+                                },
+                                "examples": [
+                                    {
+                                        "total": 220,
+                                        "company": {
+                                            "total": 140,
+                                            "compliant": 100,
+                                            "nonCompliant": 40
+                                        },
+                                        "personal": {
+                                            "total": 80,
+                                            "compliant": 60,
+                                            "nonCompliant": 20
+                                        }
+                                    }
+                                ],
+                                "required": [
+                                    "total",
+                                    "company",
+                                    "personal"
+                                ]
+                            },
+                            "android": {
+                                "description": "Details of records for Android devices.",
+                                "type": "object",
+                                "properties": {
+                                    "total": {
+                                        "description": "Total count of records of the devices identified as using Android platform.",
+                                        "examples": [
+                                            180
+                                        ],
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": 0
+                                    },
+                                    "company": {
+                                        "description": "Detail of records indicating devices owned by company.",
+                                        "type": "object",
+                                        "properties": {
+                                            "total": {
+                                                "description": "Total count of records of the devices associated with company use.",
+                                                "examples": [
+                                                    90
+                                                ],
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "minimum": 0
+                                            },
+                                            "compliant": {
+                                                "description": "Count of records indicating compliant devices.",
+                                                "examples": [
+                                                    70
+                                                ],
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "minimum": 0
+                                            },
+                                            "nonCompliant": {
+                                                "description": "Count of records indicating non-compliant devices.",
+                                                "examples": [
+                                                    20
+                                                ],
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "minimum": 0
+                                            }
+                                        },
+                                        "required": [
+                                            "total",
+                                            "compliant",
+                                            "nonCompliant"
+                                        ],
+                                        "examples": [
+                                            {
+                                                "total": 90,
+                                                "compliant": 70,
+                                                "nonCompliant": 20
+                                            }
+                                        ]
+                                    },
+                                    "personal": {
+                                        "description": "Detail of records indicating devices owned by users.",
+                                        "type": "object",
+                                        "properties": {
+                                            "total": {
+                                                "description": "Total count of records of the devices established as personal devices.",
+                                                "examples": [
+                                                    90
+                                                ],
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "minimum": 0
+                                            },
+                                            "compliant": {
+                                                "description": "Count of records indicating compliant devices.",
+                                                "examples": [
+                                                    65
+                                                ],
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "minimum": 0
+                                            },
+                                            "nonCompliant": {
+                                                "description": "Count of records indicating non-compliant devices.",
+                                                "examples": [
+                                                    25
+                                                ],
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "minimum": 0
+                                            }
+                                        },
+                                        "required": [
+                                            "total",
+                                            "compliant",
+                                            "nonCompliant"
+                                        ],
+                                        "examples": [
+                                            {
+                                                "total": 90,
+                                                "compliant": 65,
+                                                "nonCompliant": 25
+                                            }
+                                        ]
+                                    }
+                                },
+                                "examples": [
+                                    {
+                                        "total": 180,
+                                        "company": {
+                                            "total": 90,
+                                            "compliant": 70,
+                                            "nonCompliant": 20
+                                        },
+                                        "personal": {
+                                            "total": 90,
+                                            "compliant": 65,
+                                            "nonCompliant": 25
+                                        }
+                                    }
+                                ],
+                                "required": [
+                                    "total",
+                                    "company",
+                                    "personal"
+                                ]
+                            }
+                        },
+                        "examples": [
+                            {
+                                "totalSignIns": 400,
+                                "ios": {
+                                    "total": 220,
+                                    "company": {
+                                        "total": 140,
+                                        "compliant": 100,
+                                        "nonCompliant": 40
+                                    },
+                                    "personal": {
+                                        "total": 80,
+                                        "compliant": 60,
+                                        "nonCompliant": 20
+                                    }
+                                },
+                                "android": {
+                                    "total": 180,
+                                    "company": {
+                                        "total": 90,
+                                        "compliant": 70,
+                                        "nonCompliant": 20
+                                    },
+                                    "personal": {
+                                        "total": 90,
+                                        "compliant": 65,
+                                        "nonCompliant": 25
+                                    }
+                                }
+                            }
+                        ],
+                        "required": [
+                            "totalSignIns",
+                            "ios",
+                            "android"
+                        ]
+                    }
+                },
+                "required": [
+                    "privilegedSignIns",
+                    "allSignIns",
+                    "conditionalAccess",
+                    "deviceSignIns",
+                    "desktopSignIns",
+                    "mobileSignIns"
+                ],
+                "examples": [
+                    {
+                        "privilegedSignIns": {
+                            "totalSignIns": 1200,
+                            "singleFactor": 250,
+                            "nonPhishResistant": {
+                                "total": 600,
+                                "phone": 120,
+                                "authenticator": 220,
+                                "sms": 140,
+                                "otp": 80,
+                                "deviceCode": 40
+                            },
+                            "phishResistant": {
+                                "total": 350,
+                                "passkey": 90,
+                                "whfb": 110,
+                                "certificate": 60,
+                                "fido2": 90
+                            }
+                        },
+                        "allSignIns": {
+                            "totalSignIns": 1200,
+                            "singleFactor": 250,
+                            "nonPhishResistant": {
+                                "total": 600,
+                                "phone": 120,
+                                "authenticator": 220,
+                                "sms": 140,
+                                "otp": 80,
+                                "deviceCode": 40
+                            },
+                            "phishResistant": {
+                                "total": 350,
+                                "passkey": 90,
+                                "whfb": 110,
+                                "certificate": 60,
+                                "fido2": 90
+                            }
+                        },
+                        "conditionalAccess": {
+                            "totalSignIns": 1200,
+                            "noConditionalAccess": 300,
+                            "withConditionalAccess": {
+                                "total": 900,
+                                "withMfa": 700,
+                                "withoutMfa": 200
+                            }
+                        },
+                        "deviceSignIns": {
+                            "totalSignIns": 1200,
+                            "unmanaged": 450,
+                            "managed": {
+                                "total": 750,
+                                "compliant": 600,
+                                "nonCompliant": 150
+                            }
+                        },
+                        "desktopSignIns": {
+                            "totalSignIns": 800,
+                            "windows": {
+                                "total": 600,
+                                "entraJoined": {
+                                    "total": 300,
+                                    "managed": {
+                                        "total": 220,
+                                        "compliant": 180,
+                                        "nonCompliant": 40
+                                    },
+                                    "unmanaged": 80
+                                },
+                                "entraRegistered": {
+                                    "total": 180,
+                                    "managed": {
+                                        "total": 120,
+                                        "compliant": 90,
+                                        "nonCompliant": 30
+                                    },
+                                    "unmanaged": 60
+                                },
+                                "entraHybridJoined": {
+                                    "total": 90,
+                                    "managed": {
+                                        "total": 70,
+                                        "compliant": 60,
+                                        "nonCompliant": 10
+                                    },
+                                    "unmanaged": 20
+                                },
+                                "unmanaged": 30
+                            },
+                            "linux": {
+                                "total": 120,
+                                "compliant": 70,
+                                "nonCompliant": 20,
+                                "unmanaged": 30
+                            },
+                            "macos": {
+                                "total": 80,
+                                "compliant": 50,
+                                "nonCompliant": 10,
+                                "unmanaged": 20
+                            }
+                        },
+                        "mobileSignIns": {
+                            "totalSignIns": 400,
+                            "ios": {
+                                "total": 220,
+                                "company": {
+                                    "total": 140,
+                                    "compliant": 100,
+                                    "nonCompliant": 40
+                                },
+                                "personal": {
+                                    "total": 80,
+                                    "compliant": 60,
+                                    "nonCompliant": 20
+                                }
+                            },
+                            "android": {
+                                "total": 180,
+                                "company": {
+                                    "total": 90,
+                                    "compliant": 70,
+                                    "nonCompliant": 20
+                                },
+                                "personal": {
+                                    "total": 90,
+                                    "compliant": 65,
+                                    "nonCompliant": 25
+                                }
+                            }
+                        }
+                    }
+                ]
             }
         },
         "securitySchemes": {
@@ -4760,6 +6273,167 @@
                     },
                     "403": {
                         "$ref": "#/components/responses/403"
+                    }
+                },
+                "tags": [
+                    "Discover"
+                ]
+            }
+        },
+        "/Api/Discover/ZeroTrust": {
+            "get": {
+                "summary": "Generates Zero Trust Assessment",
+                "description": "Initiates collection of data that matches details needed to compose Zero Trust assessment.\n\nThis endpoint requires the `Discover.Read`, or the `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Discover/ZeroTrust/Get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Zero Trust Assessment": {
+                                        "description": "Sample object representing data needed for Zero Trust assessment.",
+                                        "summary": "Sample Zero Trust Assessment",
+                                        "value": {
+                                            "privilegedSignIns": {
+                                                "totalSignIns": 1200,
+                                                "singleFactor": 250,
+                                                "nonPhishResistant": {
+                                                    "total": 600,
+                                                    "phone": 120,
+                                                    "authenticator": 220,
+                                                    "sms": 140,
+                                                    "otp": 80,
+                                                    "deviceCode": 40
+                                                },
+                                                "phishResistant": {
+                                                    "total": 350,
+                                                    "passkey": 90,
+                                                    "whfb": 110,
+                                                    "certificate": 60,
+                                                    "fido2": 90
+                                                }
+                                            },
+                                            "allSignIns": {
+                                                "totalSignIns": 1200,
+                                                "singleFactor": 250,
+                                                "nonPhishResistant": {
+                                                    "total": 600,
+                                                    "phone": 120,
+                                                    "authenticator": 220,
+                                                    "sms": 140,
+                                                    "otp": 80,
+                                                    "deviceCode": 40
+                                                },
+                                                "phishResistant": {
+                                                    "total": 350,
+                                                    "passkey": 90,
+                                                    "whfb": 110,
+                                                    "certificate": 60,
+                                                    "fido2": 90
+                                                }
+                                            },
+                                            "conditionalAccess": {
+                                                "totalSignIns": 1200,
+                                                "noConditionalAccess": 300,
+                                                "withConditionalAccess": {
+                                                    "total": 900,
+                                                    "withMfa": 700,
+                                                    "withoutMfa": 200
+                                                }
+                                            },
+                                            "deviceSignIns": {
+                                                "totalSignIns": 1200,
+                                                "unmanaged": 450,
+                                                "managed": {
+                                                    "total": 750,
+                                                    "compliant": 600,
+                                                    "nonCompliant": 150
+                                                }
+                                            },
+                                            "desktopSignIns": {
+                                                "totalSignIns": 800,
+                                                "windows": {
+                                                    "total": 600,
+                                                    "entraJoined": {
+                                                        "total": 300,
+                                                        "managed": {
+                                                            "total": 220,
+                                                            "compliant": 180,
+                                                            "nonCompliant": 40
+                                                        },
+                                                        "unmanaged": 80
+                                                    },
+                                                    "entraRegistered": {
+                                                        "total": 180,
+                                                        "managed": {
+                                                            "total": 120,
+                                                            "compliant": 90,
+                                                            "nonCompliant": 30
+                                                        },
+                                                        "unmanaged": 60
+                                                    },
+                                                    "entraHybridJoined": {
+                                                        "total": 90,
+                                                        "managed": {
+                                                            "total": 70,
+                                                            "compliant": 60,
+                                                            "nonCompliant": 10
+                                                        },
+                                                        "unmanaged": 20
+                                                    },
+                                                    "unmanaged": 30
+                                                },
+                                                "linux": {
+                                                    "total": 120,
+                                                    "compliant": 70,
+                                                    "nonCompliant": 20,
+                                                    "unmanaged": 30
+                                                },
+                                                "macos": {
+                                                    "total": 80,
+                                                    "compliant": 50,
+                                                    "nonCompliant": 10,
+                                                    "unmanaged": 20
+                                                }
+                                            },
+                                            "mobileSignIns": {
+                                                "totalSignIns": 400,
+                                                "ios": {
+                                                    "total": 220,
+                                                    "company": {
+                                                        "total": 140,
+                                                        "compliant": 100,
+                                                        "nonCompliant": 40
+                                                    },
+                                                    "personal": {
+                                                        "total": 80,
+                                                        "compliant": 60,
+                                                        "nonCompliant": 20
+                                                    }
+                                                },
+                                                "android": {
+                                                    "total": 180,
+                                                    "company": {
+                                                        "total": 90,
+                                                        "compliant": 70,
+                                                        "nonCompliant": 20
+                                                    },
+                                                    "personal": {
+                                                        "total": 90,
+                                                        "compliant": 65,
+                                                        "nonCompliant": 25
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ZeroTrustAssessment"
+                                }
+                            }
+                        },
+                        "description": "OK"
                     }
                 },
                 "tags": [
