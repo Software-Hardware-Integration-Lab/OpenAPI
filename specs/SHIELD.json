@@ -1245,8 +1245,10 @@
                     "required": [
                         "childDependencies",
                         "deployState",
+                        "docs",
                         "groupTagList",
                         "msCloudTypes",
+                        "name",
                         "parentDependencies",
                         "templateId",
                         "urlPath"
@@ -1258,6 +1260,7 @@
                                 "9c2e7a1b-5d3f-4a8b-2c6e-7f1a3d9e8b5c"
                             ],
                             "deployState": "deployed",
+                            "docs": "https://docs.shilab.com",
                             "groupTagList": [
                                 {
                                     "description": "Collection of policies covering critical conditional access settings.",
@@ -1268,6 +1271,7 @@
                             "msCloudTypes": [
                                 "Public"
                             ],
+                            "name": "Conditional Policy",
                             "parentDependencies": [
                                 "8e6a1c2b-7f3d-4a8b-9c2e-5d3f7a1b2e4a"
                             ],
@@ -1284,6 +1288,7 @@
                                 "9c2e7a1b-5d3f-4a8b-2c6e-7f1a3d9e8b5c"
                             ],
                             "deployState": "deployed",
+                            "docs": "https://docs.shilab.com",
                             "groupTagList": [
                                 {
                                     "description": "Collection of policies covering critical conditional access settings.",
@@ -1294,6 +1299,7 @@
                             "msCloudTypes": [
                                 "Public"
                             ],
+                            "name": "Conditional Policy",
                             "parentDependencies": [
                                 "8e6a1c2b-7f3d-4a8b-9c2e-5d3f7a1b2e4a"
                             ],
