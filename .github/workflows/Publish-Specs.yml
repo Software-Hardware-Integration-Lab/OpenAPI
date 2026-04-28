@@ -4,8 +4,8 @@ name: Publish - OpenAPI Specs to GitHub Pages
 # Determine when to run this workflow
 on:
     # Allow manual triggering of the workflow
-    workflow_dispatch:
-    # Runs every Sunday at 00:00 UTC
+    workflow_dispatch: # Runs every Sunday at 00:00 UTC
+
     schedule:
         - cron: '0 0 * * 0'
 
@@ -31,7 +31,7 @@ jobs:
         steps:
             # Configure the GH pages environment
             - name: Setup Pages
-              uses: actions/configure-pages@v5
+              uses: actions/configure-pages@v6
 
             # Grab a copy of the latest binaries
             - name: Download Latest Swagger UI Release
@@ -54,7 +54,7 @@ jobs:
 
             # Uploads the built artifact to github pages
             - name: Upload Artifact
-              uses: actions/upload-pages-artifact@v4
+              uses: actions/upload-pages-artifact@v5
               with:
                   # Upload static files
                   path: 'swagger-ui/dist/'
@@ -62,4 +62,4 @@ jobs:
             # Deploy the compiled pages
             - name: Deploy to GitHub Pages
               id: deployment
-              uses: actions/deploy-pages@v4
+              uses: actions/deploy-pages@v5
