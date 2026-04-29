@@ -1311,6 +1311,7 @@
                                 "1c2b5d3f-7a1b-4a8b-9e6a-2e4a3b7e8c5d"
                             ],
                             "deployState": "notDeployed",
+                            "docs": "https://docs.shilab.com",
                             "groupTagList": [
                                 {
                                     "description": "Principal containers that are used to provide assignments.",
@@ -1321,6 +1322,7 @@
                             "msCloudTypes": [
                                 "Public"
                             ],
+                            "name": "Conditional Policy",
                             "parentDependencies": [],
                             "templateId": "4a8b7e1a-2b3c-4d5f-9e6a-1c2b7f3d8e4a",
                             "urlPath": "/directory/administrativeUnits"
@@ -5323,7 +5325,6 @@
                                                     "Public"
                                                 ],
                                                 "name": "Admin Unit - Baseline",
-                                               
                                                 "parentDependencies": [],
                                                 "templateId": "4a8b7e1a-2b3c-4d5f-9e6a-1c2b7f3d8e4a",
                                                 "urlPath": "/directory/administrativeUnits"
