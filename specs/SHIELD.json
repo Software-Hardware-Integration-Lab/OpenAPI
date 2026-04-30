@@ -1120,10 +1120,11 @@
                         "docs": {
                             "type": "string",
                             "description": "URL to the documentation of the Configuration Item.",
+                            "format": "uri",
                             "examples": [
-                                    "https://docs.shilab.com"
-                                    ]
-                         },
+                                "https://docs.shilab.com"
+                            ]
+                        },
                         "groupTagList": {
                             "type": "array",
                             "description": "List of metadata tags that indicate which deployment sets the configuration item is compatible with.",
@@ -1200,9 +1201,9 @@
                             "type": "string",
                             "description": "Human friendly name of the Configuration Item.",
                             "examples": [
-                                    "Conditional Policy"
-                                    ]
-                         },
+                                "Conditional Policy"
+                            ]
+                        },
                         "parentDependencies": {
                             "type": "array",
                             "description": "List of Object IDs in UUID format that reference configuration items identified as entities which deploy and existence is required for the current item.",
@@ -1322,7 +1323,7 @@
                             "msCloudTypes": [
                                 "Public"
                             ],
-                            "name": "Conditional Policy",
+                            "name": "Privileged Objects",
                             "parentDependencies": [],
                             "templateId": "4a8b7e1a-2b3c-4d5f-9e6a-1c2b7f3d8e4a",
                             "urlPath": "/directory/administrativeUnits"
