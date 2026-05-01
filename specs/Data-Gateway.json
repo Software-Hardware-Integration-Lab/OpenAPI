@@ -180,6 +180,22 @@
                         "value": "Microsoft Enterprise"
                     }
                 }
+            },
+            "templateId": {
+                "description": "The object ID of the Cloud Matrix template metadata record to publish.",
+                "in": "path",
+                "name": "templateId",
+                "required": true,
+                "schema": {
+                    "$ref": "#/components/schemas/Uuid"
+                },
+                "examples": {
+                    "Valid Template ID": {
+                        "summary": "Example Valid Template ID",
+                        "description": "An example UUID string that represents a valid Cloud Matrix template metadata record ID.",
+                        "value": "5a2f4c89-7d68-4f2e-8d40-2dca5d5a5c11"
+                    }
+                }
             }
         },
         "responses": {
@@ -9349,6 +9365,41 @@
                     "Cloud Matrix"
                 ],
                 "summary": "Get a Specific Cloud Matrix Assessment Template"
+            }
+        },
+        "/Api/CloudMatrix/Template/{templateId}/Publish": {
+            "patch": {
+                "description": "Publishes the specified Cloud Matrix assessment template metadata record. If the template is already published, the operation still succeeds without making further changes.\n\nThis endpoint is only accessible from the `SHI` and `SHI Lab` tenants and requires the `CloudMatrix.ReadWrite.All` scope (permission).",
+                "operationId": "/Api/CloudMatrix/Template/:templateId/Publish/Patch",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/templateId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Template published successfully."
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "tags": [
+                    "Cloud Matrix"
+                ],
+                "summary": "Publish Cloud Matrix Assessment Template"
             }
         },
         "/Api/CloudMatrix/Template": {
