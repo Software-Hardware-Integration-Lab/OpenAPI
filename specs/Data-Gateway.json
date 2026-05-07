@@ -4762,6 +4762,11 @@
             "CloudMatrix.UpdateType": {
                 "type": "string",
                 "description": "Update type, Major, Minor or Patch.",
+                "enum": [
+                    "Major",
+                    "Minor",
+                    "Patch"
+                ],
                 "examples": [
                     "Major",
                     "Minor",
