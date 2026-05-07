@@ -196,38 +196,6 @@
                         "value": "5a2f4c89-7d68-4f2e-8d40-2dca5d5a5c11"
                     }
                 }
-            },
-            "type": {
-                "description": "Name of the Cloud Matrix template type",
-                "in": "path",
-                "name": "type",
-                "required": true,
-                "schema": {
-                    "$ref": "#/components/schemas/CloudMatrix.Type"
-                },
-                "examples": {
-                    "Valid Template Type": {
-                        "summary": "Example Valid Template Type",
-                        "description": "An example of a valid template type.",
-                        "value": "Google"
-                    }
-                }
-            },
-            "updateType": {
-                "description": "Name of the Cloud Matrix template update type",
-                "in": "path",
-                "name": "updateType",
-                "required": true,
-                "schema": {
-                    "$ref": "#/components/schemas/CloudMatrix.UpdateType"
-                },
-                "examples": {
-                    "Valid Template Update Type": {
-                        "summary": "Example Valid Template Update Type",
-                        "description": "An example of a valid template update type.",
-                        "value": "Major"
-                    }
-                }
             }
         },
         "responses": {
