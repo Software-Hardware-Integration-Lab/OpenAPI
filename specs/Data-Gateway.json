@@ -4773,7 +4773,8 @@
                 "type": "string",
                 "minLength": 2,
                 "maxLength": 100,
-                "description": "The name of the template",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_ -]*[A-Za-z0-9]$",
+                "description": "A valid template name allows alphanumeric characters, spaces, underscores, and hyphens, but may not start or end with special characters.",
                 "examples": [
                     "Microsoft Enterprise",
                     "Microsoft_Academic",
