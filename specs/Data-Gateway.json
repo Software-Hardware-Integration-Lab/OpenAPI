@@ -4567,6 +4567,8 @@
                 "examples": [
                     {
                         "templateName": "Microsoft Enterprise",
+                        "type": "Microsoft",
+                        "updateType": "Major",
                         "templateContent": {
                             "title": "CloudMatrix Value Assessment - Microsoft Enterprise",
                             "description": "MICROSOFT CLOUD ADOPTION MATRIX v5.0 for Microsoft Enterprise",
