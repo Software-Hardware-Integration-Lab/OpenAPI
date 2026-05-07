@@ -9429,7 +9429,7 @@
         },
         "/Api/CloudMatrix/Template": {
             "post": {
-                "description": "Creates the template metadata and adds or updates a value assessment template. When the specified template name exists, it will overwrite the existing template JSON file in blob storage.\n\nThis endpoint is only accessible from the `SHI` and `SHI Lab` tenants and requires the `CloudMatrix.ReadWrite.All` scope (permission)",
+                "description": "Creates the template metadata and adds or updates a value assessment template. When the specified template name exists, it will overwrite the existing template JSON file in blob storage.\n\nThis endpoint is only accessible from the `SHI` and `SHI Lab` tenants and requires the `CloudMatrix.ReadWrite.All` scope (permission).",
                 "operationId": "/Api/CloudMatrix/Template/Post",
                 "requestBody": {
                     "required": true,
