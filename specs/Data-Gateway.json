@@ -9628,10 +9628,28 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Value assessment template overwritten successfully."
-                    },
-                    "201": {
-                        "description": "Value assessment template created successfully."
+                        "description": "Value assessment template overwritten successfully.",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Sample value assessment template upload response": {
+                                        "description": "This is a sample response for uploading a value assessment template. The response includes the metadata of the uploaded template.",
+                                        "summary": "A sample response for a value assessment template upload.",
+                                        "value": {
+                                            "isPublished": false,
+                                            "major": 5,
+                                            "minor": 0,
+                                            "patch": 14,
+                                            "templateId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
+                                            "templateName": "Microsoft Enterprise",
+                                            "templateType": "Microsoft",
+                                            "updatedAt": "2026-05-08T12:34:56Z",
+                                            "updatedBy": "bbab2907-c781-4bf1-b912-b91510853052"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     },
                     "400": {
                         "$ref": "#/components/responses/400"
