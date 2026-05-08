@@ -4550,15 +4550,25 @@
                     },
                     "templateContent": {
                         "$ref": "#/components/schemas/CloudMatrix.BulkCloudMatrix"
+                    },
+                    "type": {
+                        "$ref": "#/components/schemas/CloudMatrix.Type"
+                    },
+                    "updateType": {
+                        "$ref": "#/components/schemas/CloudMatrix.UpdateType"
                     }
                 },
                 "required": [
                     "templateName",
-                    "templateContent"
+                    "templateContent",
+                    "type",
+                    "updateType"
                 ],
                 "examples": [
                     {
                         "templateName": "Microsoft Enterprise",
+                        "type": "Microsoft",
+                        "updateType": "Major",
                         "templateContent": {
                             "title": "CloudMatrix Value Assessment - Microsoft Enterprise",
                             "description": "MICROSOFT CLOUD ADOPTION MATRIX v5.0 for Microsoft Enterprise",
@@ -4739,6 +4749,28 @@
                     "Microsoft Enterprise",
                     "Microsoft_Academic",
                     "Google-Workspace"
+                ]
+            },
+            "CloudMatrix.Type": {
+                "type": "string",
+                "description": "A valid template type.",
+                "examples": [
+                    "Microsoft",
+                    "Google"
+                ]
+            },
+            "CloudMatrix.UpdateType": {
+                "type": "string",
+                "description": "Update type, Major, Minor or Patch.",
+                "enum": [
+                    "Major",
+                    "Minor",
+                    "Patch"
+                ],
+                "examples": [
+                    "Major",
+                    "Minor",
+                    "Patch"
                 ]
             },
             "CloudMatrix.TemplateMetadata": {
@@ -9404,7 +9436,7 @@
         },
         "/Api/CloudMatrix/Template": {
             "post": {
-                "description": "Add or update a value assessment template. When the specified template name exists, it will overwrite the existing template JSON file in blob storage.\n\nThis endpoint is only accessible from the `SHI` and `SHI Lab` tenants and requires the `CloudMatrix.ReadWrite.All` scope (permission).",
+                "description": "Creates the template metadata and adds or updates a value assessment template. When the specified template name exists, it will overwrite the existing template JSON file in blob storage.\n\nThis endpoint is only accessible from the `SHI` and `SHI Lab` tenants and requires the `CloudMatrix.ReadWrite.All` scope (permission).",
                 "operationId": "/Api/CloudMatrix/Template/Post",
                 "requestBody": {
                     "required": true,
@@ -9416,6 +9448,8 @@
                                     "summary": "A sample value assessment template upload request for the Microsoft Enterprise template.",
                                     "value": {
                                         "templateName": "Microsoft Enterprise",
+                                        "type": "Microsoft",
+                                        "updateType": "Major",
                                         "templateContent": {
                                             "title": "CloudMatrix Value Assessment - Microsoft Enterprise",
                                             "description": "MICROSOFT CLOUD ADOPTION MATRIX v5.0 for Microsoft Enterprise",
@@ -9594,10 +9628,28 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Value assessment template overwritten successfully."
-                    },
-                    "201": {
-                        "description": "Value assessment template created successfully."
+                        "description": "Value assessment template overwritten successfully.",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Sample value assessment template upload response": {
+                                        "description": "This is a sample response for uploading a value assessment template. The response includes the metadata of the uploaded template.",
+                                        "summary": "A sample response for a value assessment template upload.",
+                                        "value": {
+                                            "isPublished": false,
+                                            "major": 5,
+                                            "minor": 0,
+                                            "patch": 14,
+                                            "templateId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
+                                            "templateName": "Microsoft Enterprise",
+                                            "templateType": "Microsoft",
+                                            "updatedAt": "2026-05-08T12:34:56Z",
+                                            "updatedBy": "bbab2907-c781-4bf1-b912-b91510853052"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     },
                     "400": {
                         "$ref": "#/components/responses/400"
