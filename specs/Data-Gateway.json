@@ -4918,7 +4918,7 @@
         },
         "description": "Collects data from the various SHI Lab products and makes it available in a standardized way.",
         "title": "SHI - Data Gateway",
-        "version": "3.2.1"
+        "version": "3.2.2"
     },
     "openapi": "3.1.1",
     "paths": {
@@ -9721,9 +9721,9 @@
                                         "summary": "A sample response for a value assessment template upload.",
                                         "value": {
                                             "isPublished": false,
-                                            "major": 5,
-                                            "minor": 0,
-                                            "patch": 14,
+                                            "majorVersion": 5,
+                                            "minorVersion": 0,
+                                            "patchVersion": 14,
                                             "id": "75498125-33cb-4b33-8705-f0fadadb1a2f",
                                             "name": "Microsoft Enterprise",
                                             "type": "Microsoft",
