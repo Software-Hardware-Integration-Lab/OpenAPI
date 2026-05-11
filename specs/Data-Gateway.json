@@ -165,22 +165,6 @@
                     }
                 }
             },
-            "templateName": {
-                "description": "Name of the Cloud Matrix template to retrieve. Because this value is sent as a path segment, clients must URL-encode spaces and other reserved characters.",
-                "in": "path",
-                "name": "templateName",
-                "required": true,
-                "schema": {
-                    "$ref": "#/components/schemas/CloudMatrix.TemplateName"
-                },
-                "examples": {
-                    "Valid Template Name": {
-                        "summary": "Example Valid Template Name",
-                        "description": "An example of a valid template name before URL encoding for use in the request path.",
-                        "value": "Microsoft Enterprise"
-                    }
-                }
-            },
             "templateId": {
                 "description": "The unique identifier of the Cloud Matrix template metadata record.",
                 "in": "path",
