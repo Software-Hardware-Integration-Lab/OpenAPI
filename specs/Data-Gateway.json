@@ -182,7 +182,7 @@
                 }
             },
             "templateId": {
-                "description": "The object ID of the Cloud Matrix template metadata record to publish.",
+                "description": "The unique identifier of the Cloud Matrix template metadata record.",
                 "in": "path",
                 "name": "templateId",
                 "required": true,
@@ -4568,13 +4568,13 @@
                 "required": [
                     "templateName",
                     "templateContent",
-                    "type",
+                    "templateType",
                     "updateType"
                 ],
                 "examples": [
                     {
                         "templateName": "Microsoft Enterprise",
-                        "type": "Microsoft",
+                        "templateType": "Microsoft",
                         "updateType": "Major",
                         "templateContent": {
                             "title": "CloudMatrix Value Assessment - Microsoft Enterprise",
@@ -4809,14 +4809,18 @@
                         ]
                     },
                     "majorVersion": {
-                        "type": "number",
+                        "type": "integer",
+                        "format": "int32",
+                        "minimum": 0,
                         "description": "Major version number of the cloud matrix template file associated with this record",
                         "examples": [
                             1
                         ]
                     },
                     "minorVersion": {
-                        "type": "number",
+                        "type": "integer",
+                        "format": "int32",
+                        "minimum": 0,
                         "description": "Minor version number of the cloud matrix template file associated with this record",
                         "examples": [
                             1
@@ -4827,7 +4831,9 @@
                         "description": "Name of the cloud matrix template file associated with this record."
                     },
                     "patchVersion": {
-                        "type": "number",
+                        "type": "integer",
+                        "format": "int32",
+                        "minimum": 0,
                         "description": "Patch version number of the cloud matrix template file associated with this record",
                         "examples": [
                             1
@@ -9718,13 +9724,16 @@
                                             "major": 5,
                                             "minor": 0,
                                             "patch": 14,
-                                            "templateId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
+                                            "id": "75498125-33cb-4b33-8705-f0fadadb1a2f",
                                             "name": "Microsoft Enterprise",
                                             "type": "Microsoft",
                                             "updatedAt": "2026-05-08T12:34:56Z",
                                             "updatedBy": "bbab2907-c781-4bf1-b912-b91510853052"
                                         }
                                     }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/CloudMatrix.TemplateMetadata"
                                 }
                             }
                         }
