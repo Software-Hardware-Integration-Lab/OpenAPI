@@ -9502,10 +9502,10 @@
                 "summary": "Publish Cloud Matrix Assessment Template"
             }
         },
-        "/Api/CloudMatrix/TemplatePatch/{templateId}": {
+        "/Api/CloudMatrix/Template/{templateId}/Update": {
             "patch": {
                 "description": "Updates the existing Cloud Matrix Template data for specified templateId (also updates related metadata). The template must exist and the request body must contain valid data.\n\nThis endpoint is only accessible from the `SHI` and `SHI Lab` tenants and requires the `CloudMatrix.ReadWrite.All` scope (permission).",
-                "operationId": "/Api/CloudMatrix/Template/:templateId/Patch",
+                "operationId": "/Api/CloudMatrix/Template/:templateId/Update",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/templateId"
@@ -9705,7 +9705,7 @@
                     }
                 },
                 "responses": {
-                    "200": {
+                    "204": {
                         "description": "Cloud Matrix Template updated successfully"
                     },
                     "400": {
