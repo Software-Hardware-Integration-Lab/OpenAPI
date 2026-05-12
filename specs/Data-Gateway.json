@@ -9516,175 +9516,110 @@
                     "content": {
                         "application/json": {
                             "examples": {
-                                "Cloud Matrix Template Update Request": {
-                                    "description": "Sample, truncated Cloud Matrix template payload from a production-like environment.",
-                                    "summary": "Example request payload for updating a Cloud Matrix template.",
+                                "Sample Cloud Matrix template update request": {
+                                    "description": "This is a sample request for updating a Cloud Matrix template. The templateId must be specified in the URL path and identifies which template will be overwritten.",
+                                    "summary": "A sample Cloud Matrix template update request for the Microsoft Enterprise template.",
                                     "value": {
-                                        "correlation": {
-                                            "accountName": "AstraZeneca",
-                                            "correlationId": "bbab2907-c781-4bf1-b912-b91510853052",
-                                            "createdAt": "2025-12-15T21:13:12.821Z",
-                                            "accountId": "75498125-33cb-4b33-8705-f0fadadb1a2f",
-                                            "discoveryDate": "2025-12-15T21:13:12.821Z",
-                                            "isComplete": true,
-                                            "template": "Microsoft Enterprise",
-                                            "updatedAt": "2025-12-15T21:13:12.821Z"
-                                        },
-                                        "title": "CloudMatrix Value Assessment",
-                                        "description": "MICROSOFT CLOUD ADOPTION MATRIX v5.0",
-                                        "version": "5.0.14",
-                                        "valueAssessment": {
-                                            "actionPlan": {
-                                                "accountName": "AstraZeneca",
-                                                "discoveryDate": "2026-01-01T00:00:00Z",
-                                                "accountManager": "John Smith",
-                                                "consultant": "MSAG Consultant",
-                                                "licensingExecutive": "Jane Doe",
-                                                "customerSuccessManager": "John Doe",
-                                                "notesAndObjectives": "Sample notes and objectives for the account.",
-                                                "accountId": "fd9a6a53-594d-41aa-950a-b21ff41d4688",
-                                                "createdDate": "2026-01-01T00:00:00Z",
-                                                "modifiedDate": "2026-01-01T00:00:00Z",
-                                                "primaryPublisher": "Microsoft"
-                                            },
-                                            "userProfiles": [
-                                                {
-                                                    "id": "00000000-0000-0000-0000-000000000001",
-                                                    "name": "Profile Details",
-                                                    "details": [
-                                                        {
-                                                            "name": "Profile Details",
-                                                            "values": [
-                                                                {
-                                                                    "name": "Profile Name",
-                                                                    "value": "Knowledge Worker"
-                                                                }
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "assessments": [
-                                                {
-                                                    "metadata": {
-                                                        "name": "M365 Apps for Enterprise - Mobile/Online",
-                                                        "breakoutId": null,
-                                                        "category": "USER EXPERIENCE",
-                                                        "subCategory": "Productivity",
-                                                        "help": "Brief:  Common applications available through a browser used for business purposes typically bundled together by software vendors like Microsoft and Google. i.e., spreadsheets, slide presentations, word processor, etc.",
-                                                        "licensingProduct": "M365 Mobile Apps",
-                                                        "licensingProductHelp": "Mobile Apps The Microsoft 365 mobile app combines Word, Excel, and PowerPoint into a single app for iOS and Android devices. It offers features like creating, editing, and sharing documents on the go, scanning and signing PDFs, and using voice commands for quick tasks. You can also connect your email accounts and calendars in one convenient spot1.\n\nWeb Apps Microsoft 365 for the web includes online versions of Word, Excel, PowerPoint, OneNote, and Outlook. These web apps allow you to create, edit, and share documents directly from your browser without needing to install any software. You can access your documents from anywhere with an internet connection, making it easy to collaborate with others in real-time2.",
-                                                        "isAddon": false,
-                                                        "isStrategicAddon": false,
-                                                        "isTenantBased": false,
-                                                        "availability": null,
-                                                        "notes": "",
-                                                        "startYearConfig": {
-                                                            "value": null,
-                                                            "userProfileIds": null,
-                                                            "isDeepDive": false,
-                                                            "altProduct": null,
-                                                            "publisher": null,
-                                                            "useCase": null
-                                                        },
-                                                        "yearPlusOneConfig": {
-                                                            "value": null,
-                                                            "userProfileIds": null,
-                                                            "isDeepDive": false,
-                                                            "altProduct": null,
-                                                            "publisher": null,
-                                                            "useCase": null
-                                                        },
-                                                        "yearPlusTwoConfig": {
-                                                            "value": null,
-                                                            "userProfileIds": null,
-                                                            "isDeepDive": false,
-                                                            "altProduct": null,
-                                                            "publisher": null,
-                                                            "useCase": null
-                                                        },
-                                                        "yearPlusThreeConfig": {
-                                                            "value": null,
-                                                            "userProfileIds": null,
-                                                            "isDeepDive": false,
-                                                            "altProduct": null,
-                                                            "publisher": null,
-                                                            "useCase": null
-                                                        },
-                                                        "sourceValue": 0.0
-                                                    },
-                                                    "profiles": [
-                                                        {
-                                                            "name": "Microsoft E5",
-                                                            "abbreviation": "ME5P",
-                                                            "value": 5.0
-                                                        }
-                                                    ],
-                                                    "features": [
-                                                        {
-                                                            "licensing": "M365 SMB",
-                                                            "products": [
-                                                                {
-                                                                    "product": "PS",
-                                                                    "value": "na",
-                                                                    "comment": ""
-                                                                }
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ],
-                                            "displacements": [
-                                                {
-                                                    "name": "Example displacement opportunity",
-                                                    "currentProvider": {
-                                                        "name": "Microsoft",
-                                                        "terms": "5 Years",
-                                                        "contractNumber": "C12345678",
-                                                        "expiryDate": "2026-01-01T00:00:00Z",
-                                                        "costs": {
-                                                            "monthlyCost": 5001,
-                                                            "annualCost": 5002,
-                                                            "contractValue": 5003
-                                                        }
-                                                    },
-                                                    "displacement": {
-                                                        "name": "Google",
-                                                        "terms": "3 Years",
-                                                        "contractNumber": "C87654321",
-                                                        "expiryDate": "2026-01-01T00:00:00Z",
-                                                        "costs": [
+                                        "templateName": "Microsoft Enterprise",
+                                        "templateType": "Microsoft",
+                                        "updateType": "Major",
+                                        "templateContent": {
+                                            "title": "CloudMatrix Value Assessment - Microsoft Enterprise",
+                                            "description": "MICROSOFT CLOUD ADOPTION MATRIX v5.0 for Microsoft Enterprise",
+                                            "version": "5.0.14",
+                                            "valueAssessment": {
+                                                "actionPlan": {
+                                                    "accountName": "New Account",
+                                                    "discoveryDate": "2026-01-01T00:00:00Z",
+                                                    "accountManager": "John Smith",
+                                                    "consultant": "MSAG Consultant",
+                                                    "licensingExecutive": "Jane Doe",
+                                                    "customerSuccessManager": "John Doe",
+                                                    "notesAndObjectives": "Sample notes and objectives for the account.",
+                                                    "accountId": "fd9a6a53-594d-41aa-950a-b21ff41d4688",
+                                                    "createdDate": "2026-01-01T00:00:00Z",
+                                                    "modifiedDate": "2026-01-01T00:00:00Z",
+                                                    "primaryPublisher": "Microsoft"
+                                                },
+                                                "userProfiles": [
+                                                    {
+                                                        "id": "00000000-0000-0000-0000-000000000001",
+                                                        "name": "Profile Details",
+                                                        "details": [
                                                             {
-                                                                "monthlyCost": 5001,
-                                                                "annualCost": 5002,
-                                                                "contractValue": 5003
+                                                                "name": "Profile Details",
+                                                                "values": [
+                                                                    {
+                                                                        "name": "Profile Name",
+                                                                        "value": "Knowledge Worker"
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ],
+                                                "assessments": [
+                                                    {
+                                                        "metadata": {
+                                                            "name": "M365 Apps for Enterprise - Mobile/Online",
+                                                            "breakoutId": null,
+                                                            "category": "USER EXPERIENCE",
+                                                            "subCategory": "Productivity",
+                                                            "help": "Brief:  Common applications available through a browser used for business purposes typically bundled together by software vendors like Microsoft and Google. i.e., spreadsheets, slide presentations, word processor, etc.",
+                                                            "licensingProduct": "M365 Mobile Apps",
+                                                            "licensingProductHelp": "Mobile Apps The Microsoft 365 mobile app combines Word, Excel, and PowerPoint into a single app for iOS and Android devices. It offers features like creating, editing, and sharing documents on the go, scanning and signing PDFs, and using voice commands for quick tasks. You can also connect your email accounts and calendars in one convenient spot1.\n\nWeb Apps Microsoft 365 for the web includes online versions of Word, Excel, PowerPoint, OneNote, and Outlook. These web apps allow you to create, edit, and share documents directly from your browser without needing to install any software. You can access your documents from anywhere with an internet connection, making it easy to collaborate with others in real-time2.",
+                                                            "isAddon": false,
+                                                            "isStrategicAddon": false,
+                                                            "isTenantBased": false,
+                                                            "availability": null,
+                                                            "notes": "",
+                                                            "startYearConfig": {
+                                                                "value": null,
+                                                                "userProfileIds": null,
+                                                                "isDeepDive": false,
+                                                                "altProduct": null,
+                                                                "publisher": null,
+                                                                "useCase": null
+                                                            },
+                                                            "yearPlusOneConfig": {
+                                                                "value": null,
+                                                                "userProfileIds": null,
+                                                                "isDeepDive": false,
+                                                                "altProduct": null,
+                                                                "publisher": null,
+                                                                "useCase": null
+                                                            },
+                                                            "yearPlusTwoConfig": {
+                                                                "value": null,
+                                                                "userProfileIds": null,
+                                                                "isDeepDive": false,
+                                                                "altProduct": null,
+                                                                "publisher": null,
+                                                                "useCase": null
+                                                            },
+                                                            "yearPlusThreeConfig": {
+                                                                "value": null,
+                                                                "userProfileIds": null,
+                                                                "isDeepDive": false,
+                                                                "altProduct": null,
+                                                                "publisher": null,
+                                                                "useCase": null
+                                                            },
+                                                            "sourceValue": 0.0
+                                                        },
+                                                        "profiles": [
+                                                            {
+                                                                "name": "Microsoft E5",
+                                                                "abbreviation": "ME5P",
+                                                                "value": 5.0
                                                             }
                                                         ],
-                                                        "replacementDate": "2026-12-31T00:00:00Z"
-                                                    },
-                                                    "notes": "Example notes"
-                                                }
-                                            ]
-                                        },
-                                        "breakouts": [
-                                            {
-                                                "title": "PORTAL APPS",
-                                                "breakoutId": "f1ebe6ab-1164-4ab8-8970-2d561ee7634f",
-                                                "breakoutName": "BREAKOUT -Portal Apps",
-                                                "features": [
-                                                    {
-                                                        "roadmapElementPath": "User Experience /Productivity Apps/Extended Productivity App Ecosystem",
-                                                        "elementSubdimension": "Productivity Apps",
-                                                        "roadmapProduct": "Platform Only",
-                                                        "feature": "Viva Insights - Personal",
-                                                        "description": "Microsoft Lists is a Microsoft 365 app that helps you track information and organize work with customizable lists for tasks, projects, and more.",
-                                                        "publisherLink": "",
-                                                        "subscriptionFeatures": [
+                                                        "features": [
                                                             {
-                                                                "licensing": "M365 FLW",
+                                                                "licensing": "M365 SMB",
                                                                 "products": [
                                                                     {
-                                                                        "product": "F1",
+                                                                        "product": "PS",
                                                                         "value": "na",
                                                                         "comment": ""
                                                                     }
@@ -9692,14 +9627,74 @@
                                                             }
                                                         ]
                                                     }
+                                                ],
+                                                "displacements": [
+                                                    {
+                                                        "name": "Example displacement opportunity",
+                                                        "currentProvider": {
+                                                            "name": "Microsoft",
+                                                            "terms": "5 Years",
+                                                            "contractNumber": "C12345678",
+                                                            "expiryDate": "2026-01-01T00:00:00Z",
+                                                            "costs": {
+                                                                "monthlyCost": 5001,
+                                                                "annualCost": 5002,
+                                                                "contractValue": 5003
+                                                            }
+                                                        },
+                                                        "displacement": {
+                                                            "name": "Google",
+                                                            "terms": "3 Years",
+                                                            "contractNumber": "C87654321",
+                                                            "expiryDate": "2026-01-01T00:00:00Z",
+                                                            "costs": [
+                                                                {
+                                                                    "monthlyCost": 5001,
+                                                                    "annualCost": 5002,
+                                                                    "contractValue": 5003
+                                                                }
+                                                            ],
+                                                            "replacementDate": "2026-12-31T00:00:00Z"
+                                                        },
+                                                        "notes": "Example notes"
+                                                    }
                                                 ]
-                                            }
-                                        ]
+                                            },
+                                            "breakouts": [
+                                                {
+                                                    "title": "PORTAL APPS",
+                                                    "breakoutId": "f1ebe6ab-1164-4ab8-8970-2d561ee7634f",
+                                                    "breakoutName": "BREAKOUT -Portal Apps",
+                                                    "features": [
+                                                        {
+                                                            "roadmapElementPath": "User Experience /Productivity Apps/Extended Productivity App Ecosystem",
+                                                            "elementSubdimension": "Productivity Apps",
+                                                            "roadmapProduct": "Platform Only",
+                                                            "feature": "Viva Insights - Personal",
+                                                            "description": "Microsoft Lists is a Microsoft 365 app that helps you track information and organize work with customizable lists for tasks, projects, and more.",
+                                                            "publisherLink": "",
+                                                            "subscriptionFeatures": [
+                                                                {
+                                                                    "licensing": "M365 FLW",
+                                                                    "products": [
+                                                                        {
+                                                                            "product": "F1",
+                                                                            "value": "na",
+                                                                            "comment": ""
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
                                     }
                                 }
                             },
                             "schema": {
-                                "$ref": "#/components/schemas/CloudMatrix.BulkCloudMatrix"
+                                "$ref": "#/components/schemas/CloudMatrix.TemplateUploadRequest"
                             }
                         }
                     }
