@@ -184,7 +184,7 @@
         },
         "responses": {
             "204": {
-                "description": "Successful,No content."
+                "description": "Successful. No content."
             },
             "400": {
                 "description": "Invalid input!"
@@ -9508,7 +9508,7 @@
         "/Api/CloudMatrix/Template/{templateId}/Update": {
             "patch": {
                 "description": "Updates the existing Cloud Matrix Template data for specified templateId (also updates related metadata). The template must exist and the request body must contain valid data.\n\nThis endpoint is only accessible from the `SHI` and `SHI Lab` tenants and requires the `CloudMatrix.ReadWrite.All` scope (permission).",
-                "operationId": "/Api/CloudMatrix/Template/:templateId/Update",
+                "operationId": "/Api/CloudMatrix/Template/:templateId/Update/Patch",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/templateId"
@@ -9544,23 +9544,7 @@
                                                     "modifiedDate": "2026-01-01T00:00:00Z",
                                                     "primaryPublisher": "Microsoft"
                                                 },
-                                                "userProfiles": [
-                                                    {
-                                                        "id": "00000000-0000-0000-0000-000000000001",
-                                                        "name": "Profile Details",
-                                                        "details": [
-                                                            {
-                                                                "name": "Profile Details",
-                                                                "values": [
-                                                                    {
-                                                                        "name": "Profile Name",
-                                                                        "value": "Knowledge Worker"
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ]
-                                                    }
-                                                ],
+                                                "userProfiles": [],
                                                 "assessments": [
                                                     {
                                                         "metadata": {
@@ -9631,37 +9615,7 @@
                                                         ]
                                                     }
                                                 ],
-                                                "displacements": [
-                                                    {
-                                                        "name": "Example displacement opportunity",
-                                                        "currentProvider": {
-                                                            "name": "Microsoft",
-                                                            "terms": "5 Years",
-                                                            "contractNumber": "C12345678",
-                                                            "expiryDate": "2026-01-01T00:00:00Z",
-                                                            "costs": {
-                                                                "monthlyCost": 5001,
-                                                                "annualCost": 5002,
-                                                                "contractValue": 5003
-                                                            }
-                                                        },
-                                                        "displacement": {
-                                                            "name": "Google",
-                                                            "terms": "3 Years",
-                                                            "contractNumber": "C87654321",
-                                                            "expiryDate": "2026-01-01T00:00:00Z",
-                                                            "costs": [
-                                                                {
-                                                                    "monthlyCost": 5001,
-                                                                    "annualCost": 5002,
-                                                                    "contractValue": 5003
-                                                                }
-                                                            ],
-                                                            "replacementDate": "2026-12-31T00:00:00Z"
-                                                        },
-                                                        "notes": "Example notes"
-                                                    }
-                                                ]
+                                                "displacements": []
                                             },
                                             "breakouts": [
                                                 {
@@ -9704,7 +9658,7 @@
                 },
                 "responses": {
                     "204": {
-                        "description": "Cloud Matrix Template updated successfully, no content returned."
+                        "$ref": "#/components/responses/204"
                     },
                     "400": {
                         "$ref": "#/components/responses/400"
