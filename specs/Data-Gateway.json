@@ -9833,6 +9833,8 @@
                                             "majorVersion": 5,
                                             "minorVersion": 0,
                                             "patchVersion": 14,
+                                            "createdAt": "2026-05-08T12:34:56Z",
+                                            "createdBy": "bbab2907-c781-4bf1-b912-b91510853052",
                                             "id": "75498125-33cb-4b33-8705-f0fadadb1a2f",
                                             "name": "Microsoft Enterprise",
                                             "type": "Microsoft",
