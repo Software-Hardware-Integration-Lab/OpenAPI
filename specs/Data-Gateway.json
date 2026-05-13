@@ -165,24 +165,27 @@
                     }
                 }
             },
-            "templateName": {
-                "description": "Name of the Cloud Matrix template to retrieve. Because this value is sent as a path segment, clients must URL-encode spaces and other reserved characters.",
+            "templateId": {
+                "description": "The unique identifier of the Cloud Matrix template metadata record.",
                 "in": "path",
-                "name": "templateName",
+                "name": "templateId",
                 "required": true,
                 "schema": {
-                    "$ref": "#/components/schemas/CloudMatrix.TemplateName"
+                    "$ref": "#/components/schemas/Uuid"
                 },
                 "examples": {
-                    "Valid Template Name": {
-                        "summary": "Example Valid Template Name",
-                        "description": "An example of a valid template name before URL encoding for use in the request path.",
-                        "value": "Microsoft Enterprise"
+                    "Valid Template ID": {
+                        "summary": "Example Valid Template ID",
+                        "description": "An example UUID string that represents a valid Cloud Matrix template metadata record ID.",
+                        "value": "5a2f4c89-7d68-4f2e-8d40-2dca5d5a5c11"
                     }
                 }
             }
         },
         "responses": {
+            "204": {
+                "description": "Successful. No content."
+            },
             "400": {
                 "description": "Invalid input!"
             },
@@ -4292,6 +4295,10 @@
                             "Microsoft Enterprise"
                         ]
                     },
+                    "templateId": {
+                        "$ref": "#/components/schemas/Uuid",
+                        "description": "Unique Identifier representing the template for this cloud matrix assessment."
+                    },
                     "updatedAt": {
                         "$ref": "#/components/schemas/DateTimeStringType",
                         "description": "Timestamp indicating when the record was last updated. This is auto managed by sequelize."
@@ -4308,7 +4315,8 @@
                     "accountName",
                     "accountId",
                     "discoveryDate",
-                    "template"
+                    "template",
+                    "templateId"
                 ],
                 "additionalProperties": false,
                 "examples": [
@@ -4320,6 +4328,7 @@
                         "discoveryDate": "2025-12-15T21:13:12.821Z",
                         "isComplete": true,
                         "template": "Microsoft Enterprise",
+                        "templateId": "d1a6f8e2-3c4b-4e5f-9a1b-2c3d4e5f6a7b",
                         "updatedAt": "2025-12-15T21:13:12.821Z"
                     }
                 ]
@@ -4354,6 +4363,7 @@
                             "discoveryDate": "2025-12-15T21:13:12.821Z",
                             "isComplete": true,
                             "template": "Microsoft Enterprise",
+                            "templateId": "d1a6f8e2-3c4b-4e5f-9a1b-2c3d4e5f6a7b",
                             "updatedAt": "2025-12-15T21:13:12.821Z"
                         },
                         "title": "CloudMatrix Value Assessment",
@@ -4534,15 +4544,25 @@
                     },
                     "templateContent": {
                         "$ref": "#/components/schemas/CloudMatrix.BulkCloudMatrix"
+                    },
+                    "templateType": {
+                        "$ref": "#/components/schemas/CloudMatrix.TemplateType"
+                    },
+                    "updateType": {
+                        "$ref": "#/components/schemas/CloudMatrix.UpdateType"
                     }
                 },
                 "required": [
                     "templateName",
-                    "templateContent"
+                    "templateContent",
+                    "templateType",
+                    "updateType"
                 ],
                 "examples": [
                     {
                         "templateName": "Microsoft Enterprise",
+                        "templateType": "Microsoft",
+                        "updateType": "Major",
                         "templateContent": {
                             "title": "CloudMatrix Value Assessment - Microsoft Enterprise",
                             "description": "MICROSOFT CLOUD ADOPTION MATRIX v5.0 for Microsoft Enterprise",
@@ -4725,49 +4745,142 @@
                     "Google-Workspace"
                 ]
             },
+            "CloudMatrix.TemplateType": {
+                "type": "string",
+                "description": "A valid template type.",
+                "examples": [
+                    "Microsoft",
+                    "Google"
+                ]
+            },
+            "CloudMatrix.UpdateType": {
+                "type": "string",
+                "description": "Update type, Major, Minor or Patch.",
+                "enum": [
+                    "Major",
+                    "Minor",
+                    "Patch"
+                ],
+                "examples": [
+                    "Major",
+                    "Minor",
+                    "Patch"
+                ]
+            },
             "CloudMatrix.TemplateMetadata": {
                 "title": "Cloud Matrix Template File Metadata",
                 "type": "object",
-                "description": "Information about Cloud Matrix template files.",
+                "description": "Metadata describing a Cloud Matrix template file, including versioning, publication status, and audit fields.",
                 "properties": {
-                    "createdOn": {
+                    "createdAt": {
                         "$ref": "#/components/schemas/DateTimeStringType",
-                        "description": "Creation date of the template file."
+                        "description": "Timestamp indicating when the record was created. This is auto managed by sequelize."
+                    },
+                    "createdBy": {
+                        "type": "string",
+                        "description": "Stores the name of the user who created the template file associated with this record.",
+                        "examples": [
+                            "John Doe"
+                        ]
+                    },
+                    "id": {
+                        "$ref": "#/components/schemas/Uuid",
+                        "description": "Unique Identifier representing a single cloud matrix template."
+                    },
+                    "isPublished": {
+                        "type": "boolean",
+                        "description": "Indicates whether the template file associated with this record has been published.",
+                        "examples": [
+                            true,
+                            false
+                        ]
+                    },
+                    "majorVersion": {
+                        "type": "integer",
+                        "format": "int32",
+                        "minimum": 0,
+                        "description": "Major version number of the cloud matrix template file associated with this record",
+                        "examples": [
+                            1
+                        ]
+                    },
+                    "minorVersion": {
+                        "type": "integer",
+                        "format": "int32",
+                        "minimum": 0,
+                        "description": "Minor version number of the cloud matrix template file associated with this record",
+                        "examples": [
+                            1
+                        ]
                     },
                     "name": {
                         "$ref": "#/components/schemas/CloudMatrix.TemplateName",
-                        "description": "Name of available template."
+                        "description": "Name of the cloud matrix template file associated with this record."
                     },
-                    "lastModified": {
-                        "$ref": "#/components/schemas/DateTimeStringType",
-                        "description": "Last modified date of the template file."
+                    "patchVersion": {
+                        "type": "integer",
+                        "format": "int32",
+                        "minimum": 0,
+                        "description": "Patch version number of the cloud matrix template file associated with this record",
+                        "examples": [
+                            1
+                        ]
                     },
                     "type": {
+                        "$ref": "#/components/schemas/CloudMatrix.TemplateType",
+                        "description": "Type of the cloud matrix template file associated with this record."
+                    },
+                    "updatedAt": {
+                        "$ref": "#/components/schemas/DateTimeStringType",
+                        "description": "Timestamp indicating when the record was last updated. This is auto managed by sequelize."
+                    },
+                    "updatedBy": {
                         "type": "string",
-                        "description": "Type of the template.",
+                        "description": "Stores the name of the user who last updated the template file associated with this record.",
                         "examples": [
-                            "Microsoft Cloud Adoption Matrix Template"
+                            "John Doe"
                         ]
                     }
                 },
                 "required": [
-                    "createdOn",
+                    "id",
+                    "createdAt",
+                    "createdBy",
+                    "isPublished",
+                    "majorVersion",
+                    "minorVersion",
+                    "patchVersion",
                     "name",
-                    "lastModified",
-                    "type"
+                    "type",
+                    "updatedAt",
+                    "updatedBy"
                 ],
                 "examples": [
                     {
-                        "createdOn": "2025-12-15T21:13:12.821Z",
+                        "id": "034d1003-cab4-4a91-9ebc-c8931fdf0063",
+                        "createdAt": "2025-12-15T21:13:12.821Z",
+                        "createdBy": "John Doe",
+                        "isPublished": true,
+                        "majorVersion": 1,
+                        "minorVersion": 1,
+                        "patchVersion": 1,
                         "name": "Microsoft Enterprise",
-                        "lastModified": "2025-12-15T21:13:12.821Z",
-                        "type": "Microsoft Cloud Adoption Matrix Template"
+                        "type": "Microsoft",
+                        "updatedAt": "2025-12-15T21:13:12.821Z",
+                        "updatedBy": "John Doe"
                     },
                     {
-                        "createdOn": "2025-12-15T21:13:12.821Z",
+                        "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                        "createdAt": "2025-12-15T21:13:12.821Z",
+                        "createdBy": "John Doe",
+                        "isPublished": false,
+                        "majorVersion": 1,
+                        "minorVersion": 0,
+                        "patchVersion": 1,
                         "name": "Google-Workspace",
-                        "lastModified": "2025-12-15T21:13:12.821Z",
-                        "type": "Microsoft Cloud Adoption Matrix Template"
+                        "type": "Google",
+                        "updatedAt": "2025-12-15T21:13:12.821Z",
+                        "updatedBy": "John Doe"
                     }
                 ]
             }
@@ -4792,7 +4905,7 @@
         },
         "description": "Collects data from the various SHI Lab products and makes it available in a standardized way.",
         "title": "SHI - Data Gateway",
-        "version": "3.2.1"
+        "version": "3.2.2"
     },
     "openapi": "3.1.1",
     "paths": {
@@ -9003,6 +9116,7 @@
                                                 "discoveryDate": "2025-12-15T21:13:12.821Z",
                                                 "isComplete": true,
                                                 "template": "Microsoft Enterprise",
+                                                "templateId": "d1a6f8e2-3c4b-4e5f-9a1b-2c3d4e5f6a7b",
                                                 "updatedAt": "2025-12-15T21:13:12.821Z"
                                             },
                                             {
@@ -9013,6 +9127,7 @@
                                                 "discoveryDate": "2025-12-15T21:13:12.821Z",
                                                 "isComplete": false,
                                                 "template": "Google",
+                                                "templateId": "d1a6f8e2-3c4b-4e5f-9a1b-2c3d4e5f6a7b",
                                                 "updatedAt": "2025-12-15T21:13:12.821Z"
                                             }
                                         ]
@@ -9029,6 +9144,7 @@
                                                 "discoveryDate": "2025-12-15T21:13:12.821Z",
                                                 "isComplete": true,
                                                 "template": "Microsoft Enterprise",
+                                                "templateId": "d1a6f8e2-3c4b-4e5f-9a1b-2c3d4e5f6a7b",
                                                 "updatedAt": "2025-12-15T21:13:12.821Z"
                                             }
                                         ]
@@ -9088,6 +9204,7 @@
                                                 "discoveryDate": "2025-12-15T21:13:12.821Z",
                                                 "isComplete": true,
                                                 "template": "Microsoft Enterprise",
+                                                "templateId": "d1a6f8e2-3c4b-4e5f-9a1b-2c3d4e5f6a7b",
                                                 "updatedAt": "2025-12-15T21:13:12.821Z"
                                             },
                                             {
@@ -9098,6 +9215,7 @@
                                                 "discoveryDate": "2025-12-15T21:13:12.821Z",
                                                 "isComplete": false,
                                                 "template": "Google",
+                                                "templateId": "d1a6f8e2-3c4b-4e5f-9a1b-2c3d4e5f6a7b",
                                                 "updatedAt": "2025-12-15T21:13:12.821Z"
                                             }
                                         ]
@@ -9114,6 +9232,7 @@
                                                 "discoveryDate": "2025-12-15T21:13:12.821Z",
                                                 "isComplete": true,
                                                 "template": "Microsoft Enterprise",
+                                                "templateId": "d1a6f8e2-3c4b-4e5f-9a1b-2c3d4e5f6a7b",
                                                 "updatedAt": "2025-12-15T21:13:12.821Z"
                                             }
                                         ]
@@ -9140,13 +9259,13 @@
                 "summary": "Get Cloud Matrix Correlation Records"
             }
         },
-        "/Api/CloudMatrix/Template/{templateName}": {
+        "/Api/CloudMatrix/Template/{templateId}": {
             "get": {
-                "description": "Retrieves the specified Cloud Matrix assessment template by template name. \n\nThis endpoint requires the `CloudMatrix.Read` scope (permission).",
-                "operationId": "/Api/CloudMatrix/Template/:templateName/Get",
+                "description": "Retrieves the specified Cloud Matrix assessment template by template ID. \n\nThis endpoint requires the `CloudMatrix.Read` scope (permission).",
+                "operationId": "/Api/CloudMatrix/Template/:templateId/Get",
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/templateName"
+                        "$ref": "#/components/parameters/templateId"
                     }
                 ],
                 "responses": {
@@ -9351,20 +9470,56 @@
                 "summary": "Get a Specific Cloud Matrix Assessment Template"
             }
         },
-        "/Api/CloudMatrix/Template": {
-            "post": {
-                "description": "Add or update a value assessment template. When the specified template name exists, it will overwrite the existing template JSON file in blob storage.\n\nThis endpoint is only accessible from the `SHI` and `SHI Lab` tenants and requires the `CloudMatrix.ReadWrite.All` scope (permission).",
-                "operationId": "/Api/CloudMatrix/Template/Post",
+        "/Api/CloudMatrix/Template/{templateId}/Publish": {
+            "patch": {
+                "description": "Publishes the specified Cloud Matrix assessment template metadata record. If the template is already published, the operation still succeeds without making further changes.\n\nThis endpoint is only accessible from the `SHI` and `SHI Lab` tenants and requires the `CloudMatrix.ReadWrite.All` scope (permission).",
+                "operationId": "/Api/CloudMatrix/Template/:templateId/Publish/Patch",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/templateId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Template published successfully."
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "tags": [
+                    "Cloud Matrix"
+                ],
+                "summary": "Publish Cloud Matrix Assessment Template"
+            }
+        },
+        "/Api/CloudMatrix/Template/{templateId}/Update": {
+            "patch": {
+                "description": "Updates the existing Cloud Matrix Template data for specified templateId (also updates related metadata). The template must exist and the request body must contain valid data.\n\nThis endpoint is only accessible from the `SHI` and `SHI Lab` tenants and requires the `CloudMatrix.ReadWrite.All` scope (permission).",
+                "operationId": "/Api/CloudMatrix/Template/:templateId/Update/Patch",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/templateId"
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
                         "application/json": {
                             "examples": {
-                                "Sample value assessment template upload request": {
-                                    "description": "This is a sample request for uploading a value assessment template. Multiple invocations of this endpoint with the same template name will overwrite the existing template.",
-                                    "summary": "A sample value assessment template upload request for the Microsoft Enterprise template.",
+                                "Sample Cloud Matrix template update request": {
+                                    "description": "This is a sample request for updating a Cloud Matrix template. The templateId must be specified in the URL path and identifies which template will be overwritten.",
+                                    "summary": "A sample Cloud Matrix template update request for the Microsoft Enterprise template.",
                                     "value": {
                                         "templateName": "Microsoft Enterprise",
+                                        "templateType": "Microsoft",
+                                        "updateType": "Major",
                                         "templateContent": {
                                             "title": "CloudMatrix Value Assessment - Microsoft Enterprise",
                                             "description": "MICROSOFT CLOUD ADOPTION MATRIX v5.0 for Microsoft Enterprise",
@@ -9383,23 +9538,7 @@
                                                     "modifiedDate": "2026-01-01T00:00:00Z",
                                                     "primaryPublisher": "Microsoft"
                                                 },
-                                                "userProfiles": [
-                                                    {
-                                                        "id": "00000000-0000-0000-0000-000000000001",
-                                                        "name": "Profile Details",
-                                                        "details": [
-                                                            {
-                                                                "name": "Profile Details",
-                                                                "values": [
-                                                                    {
-                                                                        "name": "Profile Name",
-                                                                        "value": "Knowledge Worker"
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ]
-                                                    }
-                                                ],
+                                                "userProfiles": [],
                                                 "assessments": [
                                                     {
                                                         "metadata": {
@@ -9470,37 +9609,176 @@
                                                         ]
                                                     }
                                                 ],
-                                                "displacements": [
-                                                    {
-                                                        "name": "Example displacement opportunity",
-                                                        "currentProvider": {
-                                                            "name": "Microsoft",
-                                                            "terms": "5 Years",
-                                                            "contractNumber": "C12345678",
-                                                            "expiryDate": "2026-01-01T00:00:00Z",
-                                                            "costs": {
-                                                                "monthlyCost": 5001,
-                                                                "annualCost": 5002,
-                                                                "contractValue": 5003
-                                                            }
-                                                        },
-                                                        "displacement": {
-                                                            "name": "Google",
-                                                            "terms": "3 Years",
-                                                            "contractNumber": "C87654321",
-                                                            "expiryDate": "2026-01-01T00:00:00Z",
-                                                            "costs": [
+                                                "displacements": []
+                                            },
+                                            "breakouts": [
+                                                {
+                                                    "title": "PORTAL APPS",
+                                                    "breakoutId": "f1ebe6ab-1164-4ab8-8970-2d561ee7634f",
+                                                    "breakoutName": "BREAKOUT -Portal Apps",
+                                                    "features": [
+                                                        {
+                                                            "roadmapElementPath": "User Experience /Productivity Apps/Extended Productivity App Ecosystem",
+                                                            "elementSubdimension": "Productivity Apps",
+                                                            "roadmapProduct": "Platform Only",
+                                                            "feature": "Viva Insights - Personal",
+                                                            "description": "Microsoft Lists is a Microsoft 365 app that helps you track information and organize work with customizable lists for tasks, projects, and more.",
+                                                            "publisherLink": "",
+                                                            "subscriptionFeatures": [
                                                                 {
-                                                                    "monthlyCost": 5001,
-                                                                    "annualCost": 5002,
-                                                                    "contractValue": 5003
+                                                                    "licensing": "M365 FLW",
+                                                                    "products": [
+                                                                        {
+                                                                            "product": "F1",
+                                                                            "value": "na",
+                                                                            "comment": ""
+                                                                        }
+                                                                    ]
                                                                 }
-                                                            ],
-                                                            "replacementDate": "2026-12-31T00:00:00Z"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            },
+                            "schema": {
+                                "$ref": "#/components/schemas/CloudMatrix.TemplateUploadRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "$ref": "#/components/responses/204"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "415": {
+                        "description": "Unsupported Media Type - The request payload must use the application/json media type."
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "tags": [
+                    "Cloud Matrix"
+                ],
+                "summary": "Update Cloud Matrix Template"
+            }
+        },
+        "/Api/CloudMatrix/Template": {
+            "post": {
+                "description": "Creates the Cloud Matrix template metadata record, then stores the template content in blob storage using that metadata. On success, the endpoint returns the metadata information of the created template.\n\nThis endpoint is only accessible from the `SHI` and `SHI Lab` tenants and requires the `CloudMatrix.ReadWrite.All` scope (permission).",
+                "operationId": "/Api/CloudMatrix/Template/Post",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "examples": {
+                                "Sample value assessment template upload request": {
+                                    "description": "This is a sample request for uploading a value assessment template. The request body contains the template content along with metadata such as template name, type, and update type.",
+                                    "summary": "A sample value assessment template upload request for the Microsoft Enterprise template.",
+                                    "value": {
+                                        "templateName": "Microsoft Enterprise",
+                                        "templateType": "Microsoft",
+                                        "updateType": "Major",
+                                        "templateContent": {
+                                            "title": "CloudMatrix Value Assessment - Microsoft Enterprise",
+                                            "description": "MICROSOFT CLOUD ADOPTION MATRIX v5.0 for Microsoft Enterprise",
+                                            "version": "5.0.14",
+                                            "valueAssessment": {
+                                                "actionPlan": {
+                                                    "accountName": "New Account",
+                                                    "discoveryDate": "2026-01-01T00:00:00Z",
+                                                    "accountManager": "John Smith",
+                                                    "consultant": "MSAG Consultant",
+                                                    "licensingExecutive": "Jane Doe",
+                                                    "customerSuccessManager": "John Doe",
+                                                    "notesAndObjectives": "Sample notes and objectives for the account.",
+                                                    "accountId": "fd9a6a53-594d-41aa-950a-b21ff41d4688",
+                                                    "createdDate": "2026-01-01T00:00:00Z",
+                                                    "modifiedDate": "2026-01-01T00:00:00Z",
+                                                    "primaryPublisher": "Microsoft"
+                                                },
+                                                "userProfiles": [],
+                                                "assessments": [
+                                                    {
+                                                        "metadata": {
+                                                            "name": "M365 Apps for Enterprise - Mobile/Online",
+                                                            "breakoutId": null,
+                                                            "category": "USER EXPERIENCE",
+                                                            "subCategory": "Productivity",
+                                                            "help": "Brief:  Common applications available through a browser used for business purposes typically bundled together by software vendors like Microsoft and Google. i.e., spreadsheets, slide presentations, word processor, etc.",
+                                                            "licensingProduct": "M365 Mobile Apps",
+                                                            "licensingProductHelp": "Mobile Apps The Microsoft 365 mobile app combines Word, Excel, and PowerPoint into a single app for iOS and Android devices. It offers features like creating, editing, and sharing documents on the go, scanning and signing PDFs, and using voice commands for quick tasks. You can also connect your email accounts and calendars in one convenient spot1.\n\nWeb Apps Microsoft 365 for the web includes online versions of Word, Excel, PowerPoint, OneNote, and Outlook. These web apps allow you to create, edit, and share documents directly from your browser without needing to install any software. You can access your documents from anywhere with an internet connection, making it easy to collaborate with others in real-time2.",
+                                                            "isAddon": false,
+                                                            "isStrategicAddon": false,
+                                                            "isTenantBased": false,
+                                                            "availability": null,
+                                                            "notes": "",
+                                                            "startYearConfig": {
+                                                                "value": null,
+                                                                "userProfileIds": null,
+                                                                "isDeepDive": false,
+                                                                "altProduct": null,
+                                                                "publisher": null,
+                                                                "useCase": null
+                                                            },
+                                                            "yearPlusOneConfig": {
+                                                                "value": null,
+                                                                "userProfileIds": null,
+                                                                "isDeepDive": false,
+                                                                "altProduct": null,
+                                                                "publisher": null,
+                                                                "useCase": null
+                                                            },
+                                                            "yearPlusTwoConfig": {
+                                                                "value": null,
+                                                                "userProfileIds": null,
+                                                                "isDeepDive": false,
+                                                                "altProduct": null,
+                                                                "publisher": null,
+                                                                "useCase": null
+                                                            },
+                                                            "yearPlusThreeConfig": {
+                                                                "value": null,
+                                                                "userProfileIds": null,
+                                                                "isDeepDive": false,
+                                                                "altProduct": null,
+                                                                "publisher": null,
+                                                                "useCase": null
+                                                            },
+                                                            "sourceValue": 0.0
                                                         },
-                                                        "notes": "Example notes"
+                                                        "profiles": [
+                                                            {
+                                                                "name": "Microsoft E5",
+                                                                "abbreviation": "ME5P",
+                                                                "value": 5.0
+                                                            }
+                                                        ],
+                                                        "features": [
+                                                            {
+                                                                "licensing": "M365 SMB",
+                                                                "products": [
+                                                                    {
+                                                                        "product": "PS",
+                                                                        "value": "na",
+                                                                        "comment": ""
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
                                                     }
-                                                ]
+                                                ],
+                                                "displacements": []
                                             },
                                             "breakouts": [
                                                 {
@@ -9543,10 +9821,33 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Value assessment template overwritten successfully."
-                    },
-                    "201": {
-                        "description": "Value assessment template created successfully."
+                        "description": "Value assessment template overwritten successfully.",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Sample value assessment template upload response": {
+                                        "description": "This is a sample response for uploading a value assessment template. The response includes the metadata of the uploaded template.",
+                                        "summary": "A sample response for a value assessment template upload.",
+                                        "value": {
+                                            "isPublished": false,
+                                            "majorVersion": 5,
+                                            "minorVersion": 0,
+                                            "patchVersion": 14,
+                                            "createdAt": "2026-05-08T12:34:56Z",
+                                            "createdBy": "bbab2907-c781-4bf1-b912-b91510853052",
+                                            "id": "75498125-33cb-4b33-8705-f0fadadb1a2f",
+                                            "name": "Microsoft Enterprise",
+                                            "type": "Microsoft",
+                                            "updatedAt": "2026-05-08T12:34:56Z",
+                                            "updatedBy": "bbab2907-c781-4bf1-b912-b91510853052"
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/CloudMatrix.TemplateMetadata"
+                                }
+                            }
+                        }
                     },
                     "400": {
                         "$ref": "#/components/responses/400"
@@ -9585,6 +9886,7 @@
                                             "discoveryDate": "2025-12-15T21:13:12.821Z",
                                             "isComplete": true,
                                             "template": "Microsoft Enterprise",
+                                            "templateId": "3f8a9c2d-7b54-4e6a-9c2e-1f6a9d0b8a71",
                                             "updatedAt": "2025-12-15T21:13:12.821Z"
                                         },
                                         "title": "CloudMatrix Value Assessment",
@@ -9779,6 +10081,7 @@
                                                 "discoveryDate": "2025-12-15T21:13:12.821Z",
                                                 "isComplete": true,
                                                 "template": "Microsoft Enterprise",
+                                                "templateId": "3f8a9c2d-7b54-4e6a-9c2e-1f6a9d0b8a71",
                                                 "updatedAt": "2025-12-15T21:13:12.821Z"
                                             },
                                             "title": "CloudMatrix Value Assessment",
@@ -9997,6 +10300,7 @@
                                             "discoveryDate": "2025-12-15T21:13:12.821Z",
                                             "isComplete": true,
                                             "template": "Microsoft Enterprise",
+                                            "templateId": "3f8a9c2d-7b54-4e6a-9c2e-1f6a9d0b8a71",
                                             "updatedAt": "2025-12-15T21:13:12.821Z"
                                         },
                                         "title": "CloudMatrix Value Assessment",
@@ -10191,6 +10495,7 @@
                                                 "discoveryDate": "2025-12-15T21:13:12.821Z",
                                                 "isComplete": true,
                                                 "template": "Microsoft Enterprise",
+                                                "templateId": "3f8a9c2d-7b54-4e6a-9c2e-1f6a9d0b8a71",
                                                 "updatedAt": "2025-12-15T21:13:12.821Z"
                                             },
                                             "title": "CloudMatrix Value Assessment",
@@ -10407,6 +10712,7 @@
                                             "discoveryDate": "2025-12-15T21:13:12.821Z",
                                             "isComplete": true,
                                             "template": "Microsoft Enterprise",
+                                            "templateId": "3f8a9c2d-7b54-4e6a-9c2e-1f6a9d0b8a71",
                                             "updatedAt": "2025-12-15T21:13:12.821Z"
                                         }
                                     }
@@ -10456,6 +10762,7 @@
                                             "discoveryDate": "2025-12-15T21:13:12.821Z",
                                             "isComplete": true,
                                             "template": "Microsoft Enterprise",
+                                            "templateId": "3f8a9c2d-7b54-4e6a-9c2e-1f6a9d0b8a71",
                                             "updatedAt": "2025-12-15T21:13:12.821Z"
                                         }
                                     }
@@ -10507,6 +10814,7 @@
                                                 "correlationId": "745b00d0-d772-11f0-899c-41d4a068f985",
                                                 "accountId": "de186670-d772-11f0-899c-41d4a068f985",
                                                 "template": "Microsoft",
+                                                "templateId": "3f8a9c2d-7b54-4e6a-9c2e-1f6a9d0b8a71",
                                                 "isComplete": true,
                                                 "discoveryDate": "2026-01-08T21:13:12.821Z",
                                                 "createdAt": "2026-01-08T21:13:12.821Z",
@@ -10836,6 +11144,7 @@
                                                 "correlationId": "745b00d0-d772-11f0-899c-41d4a068f985",
                                                 "accountId": "de186670-d772-11f0-899c-41d4a068f985",
                                                 "template": "Microsoft",
+                                                "templateId": "3f8a9c2d-7b54-4e6a-9c2e-1f6a9d0b8a71",
                                                 "isComplete": true,
                                                 "discoveryDate": "2026-01-08T21:13:12.821Z",
                                                 "createdAt": "2026-01-08T21:13:12.821Z",
@@ -11136,7 +11445,7 @@
         },
         "/Api/CloudMatrix/TemplateMetadata": {
             "get": {
-                "description": "Get a list of all template metadata objects for available templates from CM storage. \n\nThis endpoint requires the `CloudMatrix.Read` scope (permission).",
+                "description": "Retrieves a list of all cloud matrix template metadata records from the database. \n\nThis endpoint requires the `CloudMatrix.Read` scope (permission).",
                 "operationId": "/Api/CloudMatrix/TemplateMetadata/Get",
                 "responses": {
                     "200": {
@@ -11145,20 +11454,34 @@
                             "application/json": {
                                 "examples": {
                                     "Default Output": {
-                                        "description": "A list of template metadata that is stored in blob storage. This is the default output when there are two templates stored in blob storage.",
+                                        "description": "A list of cloud matrix template metadata records that are stored in the database. This is the default output when there are two templates stored in the database.",
                                         "summary": "Default Output",
                                         "value": [
                                             {
-                                                "createdOn": "2026-03-24T16:56:43.000Z",
-                                                "name": "cloudMatrix",
-                                                "lastModified": "2026-03-24T16:56:43.000Z",
-                                                "type": "Microsoft Cloud Adoption Matrix Template"
+                                                "id": "034d1003-cab4-4a91-9ebc-c8931fdf0063",
+                                                "createdAt": "2025-12-15T21:13:12.821Z",
+                                                "createdBy": "John Doe",
+                                                "isPublished": true,
+                                                "majorVersion": 1,
+                                                "minorVersion": 1,
+                                                "patchVersion": 1,
+                                                "name": "Microsoft Enterprise",
+                                                "type": "Microsoft",
+                                                "updatedAt": "2025-12-15T21:13:12.821Z",
+                                                "updatedBy": "John Doe"
                                             },
                                             {
-                                                "createdOn": "2026-04-08T14:15:44.000Z",
-                                                "name": "Google",
-                                                "lastModified": "2026-04-08T14:15:44.000Z",
-                                                "type": "Microsoft Cloud Adoption Matrix Template"
+                                                "id": "3d282045-ec7f-4813-88e2-29b74ee609f7",
+                                                "createdAt": "2025-12-15T21:13:12.821Z",
+                                                "createdBy": "John Doe",
+                                                "isPublished": false,
+                                                "majorVersion": 1,
+                                                "minorVersion": 0,
+                                                "patchVersion": 1,
+                                                "name": "Google-Workspace",
+                                                "type": "Google",
+                                                "updatedAt": "2025-12-15T21:13:12.821Z",
+                                                "updatedBy": "John Doe"
                                             }
                                         ]
                                     }
@@ -11183,7 +11506,7 @@
                 "tags": [
                     "Cloud Matrix"
                 ],
-                "summary": "Get a List of Template Metadata Objects"
+                "summary": "Get a List of Cloud Matrix Template Metadata Objects"
             }
         }
     },
