@@ -4887,7 +4887,7 @@
             "CloudMatrix.TemplatePublisher": {
                 "title": "Cloud Matrix Template Publisher",
                 "type": "object",
-                "description": "Represents a publisher of Cloud Matrix templates, including their name and a link to their website.",
+                "description": "Represents a publisher of Cloud Matrix templates, including their name, isActive and optional metadata field for extensibility.",
                 "properties": {
                     "name": {
                         "type": "string",
@@ -11621,6 +11621,7 @@
                 "operationId": "/Api/CloudMatrix/TemplatePublishers/Put",
                 "requestBody": {
                     "description": "The JSON payload containing all cloud matrix template publishers to update.",
+                    "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
