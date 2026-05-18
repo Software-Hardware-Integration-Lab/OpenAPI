@@ -4884,14 +4884,14 @@
                     }
                 ]
             },
-            "CloudMatrix.TemplatePublisher": {
-                "title": "Cloud Matrix Template Publisher",
+            "CloudMatrix.Publisher": {
+                "title": "Cloud Matrix Third-Party Publisher",
                 "type": "object",
-                "description": "Represents a publisher of Cloud Matrix templates, including their name, isActive and optional metadata field for extensibility.",
+                "description": "Represents a third-party publisher of Cloud Matrix assessment alternate product, including their name, isActive and optional metadata field for extensibility.",
                 "properties": {
                     "name": {
                         "type": "string",
-                        "description": "Name of the template publisher.",
+                        "description": "Name of the publisher.",
                         "examples": [
                             "Microsoft",
                             "Google"
@@ -4899,7 +4899,7 @@
                     },
                     "isActive": {
                         "type": "boolean",
-                        "description": "Indicates whether the template publisher is currently active for users to choose from.",
+                        "description": "Indicates whether the publisher is currently active for users to choose from.",
                         "examples": [true, false]
                     },
                     "metadata": {
@@ -4913,7 +4913,7 @@
                                 "examples": ["John Doe", "admin"]
                             }
                         },
-                        "description": "Additional metadata about the template publisher to provide extensibility.",
+                        "description": "Additional metadata about the publisher to provide extensibility.",
                         "examples": [{
                             "updatedAt": "2025-12-15T21:13:12.821Z",
                             "updatedBy": "John Doe"
@@ -11564,26 +11564,26 @@
                 "summary": "Get a List of Cloud Matrix Template Metadata Objects"
             }
         },
-        "/Api/CloudMatrix/TemplatePublishers":{
+        "/Api/CloudMatrix/Publishers":{
             "get": {
-                "description": "Get a list of Cloud Matrix Template Publishers.\n\nThis endpoint requires the `CloudMatrix.Read` scope (permission).",
-                "operationId": "/Api/CloudMatrix/TemplatePublishers/Get",
+                "description": "Get a list of Cloud Matrix third-party publishers.\n\nThis endpoint requires the `CloudMatrix.Read` scope (permission).",
+                "operationId": "/Api/CloudMatrix/Publishers/Get",
                 "responses": {
                     "200": {
-                        "description": "Successful request to return the whole list of cloud matrix template publishers.",
+                        "description": "Successful request to return the whole list of publishers.",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "type": "array",
                                     "minItems": 1,
                                     "items": {
-                                        "$ref": "#/components/schemas/CloudMatrix.TemplatePublisher"
+                                        "$ref": "#/components/schemas/CloudMatrix.Publisher"
                                     }
                                 },
                                 "examples": {
-                                    "Default Output": {
-                                        "description": "A list of all cloud matrix template publishers.",
-                                        "summary": "All Template Publishers",
+                                    "Sample Output": {
+                                        "description": "A list of all publishers.",
+                                        "summary": "All Publishers",
                                         "value": [
                                             {
                                                 "name": "Microsoft",
@@ -11604,7 +11604,7 @@
                         }
                     },
                     "204": {
-                        "description": "When the template publisher JSON file does not exist on blob storage.",
+                        "description": "When the publisher JSON file does not exist on blob storage.",
                         "$ref": "#/components/responses/204"
                     },
                     "500": {
@@ -11614,13 +11614,13 @@
                 "tags": [
                     "Cloud Matrix"
                 ],
-                "summary": "Get a List of All Cloud Matrix Template Publishers"
+                "summary": "Get a List of All Cloud Matrix Third-Party Publishers"
             },
             "put": {
-                "description": "Replace the list of Cloud Matrix Template Publishers. This will overwrite the existing list of publishers with the list provided in the request body. \n\nThis endpoint is only accessible from the `SHI` and `SHI Lab` tenants and requires the `CloudMatrix.ReadWrite.All` scope (permission).",
-                "operationId": "/Api/CloudMatrix/TemplatePublishers/Put",
+                "description": "Replace the list of Cloud Matrix third-party publishers. This will overwrite the existing list of publishers with the list provided in the request body. \n\nThis endpoint is only accessible from the `SHI` and `SHI Lab` tenants and requires the `CloudMatrix.ReadWrite.All` scope (permission).",
+                "operationId": "/Api/CloudMatrix/Publishers/Put",
                 "requestBody": {
-                    "description": "The JSON payload containing all cloud matrix template publishers to update.",
+                    "description": "The JSON payload containing all publishers to update.",
                     "required": true,
                     "content": {
                         "application/json": {
@@ -11628,12 +11628,12 @@
                                 "type": "array",
                                 "minItems": 1,
                                 "items": {
-                                    "$ref": "#/components/schemas/CloudMatrix.TemplatePublisher"
+                                    "$ref": "#/components/schemas/CloudMatrix.Publisher"
                                 }
                             },
                             "examples": {
                                 "Minimal Input": {
-                                    "description": "Sample input which includes one cloud matrix template publisher.",
+                                    "description": "Sample input which includes one publisher.",
                                     "summary": "A Sample Input That Is Valid",
                                     "value": [
                                         {
@@ -11643,7 +11643,7 @@
                                     ]
                                 },
                                 "Minimal Input With Metadata": {
-                                    "description": "Sample input which includes two cloud matrix template publishers, one with metadata.",
+                                    "description": "Sample input which includes two publishers, one with metadata.",
                                     "summary": "A Sample Input With One Publisher That Contains Metadata",
                                     "value": [
                                         {
@@ -11666,7 +11666,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Indicates successful upload and replacement of template publisher list on blob storage.",
+                        "description": "Indicates successful upload and replacement of publisher list on blob storage.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -11680,15 +11680,15 @@
                                 },
                                 "examples":{
                                     "Initial Upload": {
-                                        "description": "This example demonstrates the response when the list of template publishers is being uploaded for the first time. Since there is no existing list on blob storage, the `isOverwrite` property is set to false.",
-                                        "summary": "Initial Upload of Template Publishers",
+                                        "description": "This example demonstrates the response when the list of publishers is being uploaded for the first time. Since there is no existing list on blob storage, the `isOverwrite` property is set to false.",
+                                        "summary": "Initial Upload of Publishers",
                                         "value": {
                                             "isOverwrite": false
                                         }
                                     },
                                     "Replace Successful": {
-                                        "description": "This example demonstrates the response when the list of template publishers is being replaced successfully. Since there is an existing list on blob storage, the `isOverwrite` property is set to true.",
-                                        "summary": "Replace Successful of Template Publishers",
+                                        "description": "This example demonstrates the response when the list of publishers is being replaced successfully. Since there is an existing list on blob storage, the `isOverwrite` property is set to true.",
+                                        "summary": "Successful Replacement of Publishers",
                                         "value": {
                                             "isOverwrite": true
                                         }
@@ -11698,7 +11698,7 @@
                         }                                            
                     },
                     "400": {
-                        "description": "Indicating the request body is missing, null, not a valid CloudMatrix.TemplatePublisher array or empty array",
+                        "description": "Indicates the request body is missing, is null, is not a valid CloudMatrix.Publisher array, or is an empty array.",
                         "$ref": "#/components/responses/400"
                     },
                     "415": {
@@ -11711,7 +11711,7 @@
                 "tags": [
                     "Cloud Matrix"
                 ],
-                "summary": "Upload and Replace the List of Cloud Matrix Template Publishers"
+                "summary": "Upload and Replace the List of Cloud Matrix Third-Party Publishers"
             }
         }
     },
