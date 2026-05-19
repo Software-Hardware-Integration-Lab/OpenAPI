@@ -4900,7 +4900,10 @@
                     "isActive": {
                         "type": "boolean",
                         "description": "Indicates whether the publisher is currently active for users to choose from.",
-                        "examples": [true, false]
+                        "examples": [
+                            true,
+                            false
+                        ]
                     },
                     "metadata": {
                         "type": "object",
@@ -4910,14 +4913,19 @@
                             },
                             "updatedBy": {
                                 "type": "string",
-                                "examples": ["John Doe", "admin"]
+                                "examples": [
+                                    "John Doe",
+                                    "admin"
+                                ]
                             }
                         },
                         "description": "Additional metadata about the publisher to provide extensibility.",
-                        "examples": [{
-                            "updatedAt": "2025-12-15T21:13:12.821Z",
-                            "updatedBy": "John Doe"
-                        }]
+                        "examples": [
+                            {
+                                "updatedAt": "2025-12-15T21:13:12.821Z",
+                                "updatedBy": "John Doe"
+                            }
+                        ]
                     }
                 },
                 "required": [
@@ -4960,7 +4968,7 @@
         },
         "description": "Collects data from the various SHI Lab products and makes it available in a standardized way.",
         "title": "SHI - Data Gateway",
-        "version": "3.2.2"
+        "version": "3.3.0"
     },
     "openapi": "3.1.1",
     "paths": {
@@ -11564,7 +11572,7 @@
                 "summary": "Get a List of Cloud Matrix Template Metadata Objects"
             }
         },
-        "/Api/CloudMatrix/Publishers":{
+        "/Api/CloudMatrix/Publishers": {
             "get": {
                 "description": "Get a list of Cloud Matrix third-party publishers.\n\nThis endpoint requires the `CloudMatrix.Read` scope (permission).",
                 "operationId": "/Api/CloudMatrix/Publishers/Get",
@@ -11658,7 +11666,7 @@
                                                 "updatedBy": "John Doe"
                                             }
                                         }
-                                    ]                                    
+                                    ]
                                 }
                             }
                         }
@@ -11674,11 +11682,14 @@
                                     "properties": {
                                         "isOverwrite": {
                                             "type": "boolean",
-                                            "examples": [true, false]
+                                            "examples": [
+                                                true,
+                                                false
+                                            ]
                                         }
                                     }
                                 },
-                                "examples":{
+                                "examples": {
                                     "Initial Upload": {
                                         "description": "This example demonstrates the response when the list of publishers is being uploaded for the first time. Since there is no existing list on blob storage, the `isOverwrite` property is set to false.",
                                         "summary": "Initial Upload of Publishers",
@@ -11695,7 +11706,7 @@
                                     }
                                 }
                             }
-                        }                                            
+                        }
                     },
                     "400": {
                         "description": "Indicates the request body is missing, is null, is not a valid CloudMatrix.Publisher array, or is an empty array.",
