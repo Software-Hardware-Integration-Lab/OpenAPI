@@ -16,7 +16,7 @@
     "bugs": {
         "url": "https://github.com/Software-Hardware-Integration-Lab/OpenAPI/issues"
     },
-    "packageManager": "npm@11.13.0",
+    "packageManager": "npm@11.15.0",
     "devEngines": {
         "runtime": {
             "name": "node",
@@ -44,14 +44,14 @@
     "devDependencies": {
         "@azure/core-auth": "~1.10.1",
         "@shi-corp/development-utilities": "~2.2.0",
-        "@types/node": "~25.6.0",
+        "@types/node": "~25.9.1",
         "ts-patch": "~3.3.0",
         "typescript": "~5.9.3"
     },
     "dependencies": {
         "@microsoft/kiota-authentication-azure": "~1.0.0-preview.100",
         "@microsoft/kiota-bundle": "~1.0.0-preview.100",
-        "typia": "~12.0.2"
+        "typia": "~12.1.1"
     },
     "overrides": {
         "array-buffer-byte-length": "npm:@socketregistry/array-buffer-byte-length@^1",
