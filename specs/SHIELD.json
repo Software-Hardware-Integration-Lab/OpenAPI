@@ -5642,9 +5642,6 @@
                             }
                         },
                         "description": "OK"
-                    },
-                    "400": {
-                        "$ref": "#/components/responses/400"
                     }
                 },
                 "tags": [
