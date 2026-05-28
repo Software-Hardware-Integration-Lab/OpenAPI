@@ -1331,6 +1331,125 @@
                     ]
                 ]
             },
+            "Deploy.ConfigurationCategory": {
+                "title": "Deploy - Configuration Category List",
+                "description": "Collection of objects representing configuration categories used to organize deployable configuration items.",
+                "type": "array",
+                "items": {
+                    "description": "Single configuration category with curated properties and values in a user-friendly format.",
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "string",
+                            "description": "Internal Object ID in UUID format to uniquely identify this configuration category definition.",
+                            "format": "uuid",
+                            "maxLength": 36,
+                            "minLength": 36,
+                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                            "examples": [
+                                "6a2c7e1b-4d5f-4a8b-9e6a-2b1c7f3d8e4a"
+                            ]
+                        },
+                        "displayName": {
+                            "type": "string",
+                            "description": "Human friendly name of the Configuration Category.",
+                            "examples": [
+                                "Identity Protection"
+                            ]
+                        },
+                        "description": {
+                            "type": "string",
+                            "description": "Lengthier explanation of how this category groups related configuration items.",
+                            "examples": [
+                                "Baseline controls that harden identity and access related workloads."
+                            ]
+                        },
+                        "parentCategoryId": {
+                            "type": "string",
+                            "description": "Object ID in UUID format that references the parent configuration category when this category is nested.",
+                            "format": "uuid",
+                            "maxLength": 36,
+                            "minLength": 36,
+                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                            "examples": [
+                                "1b7e2a3c-5d4f-4a8b-9e6a-7c2b1d3f8e4a"
+                            ]
+                        },
+                        "groupTagMetadataId": {
+                            "type": "string",
+                            "description": "Object ID in UUID format that references the deploy group tag metadata record associated with this category.",
+                            "format": "uuid",
+                            "maxLength": 36,
+                            "minLength": 36,
+                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                            "examples": [
+                                "5d3f9c2e-7a1b-4a8b-8c6e-1a3d7e8b5c4a"
+                            ]
+                        },
+                        "templateIds": {
+                            "type": "array",
+                            "description": "List of configuration item templateIds assigned to this category.",
+                            "minItems": 0,
+                            "items": {
+                                "type": "string",
+                                "format": "uuid",
+                                "maxLength": 36,
+                                "minLength": 36,
+                                "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                                "examples": [
+                                    "2a1c7e3b-5d4f-4a8b-9e6a-7f3d2b1c8e4a"
+                                ]
+                            },
+                            "examples": [
+                                [
+                                    "2a1c7e3b-5d4f-4a8b-9e6a-7f3d2b1c8e4a",
+                                    "4a8b7e1a-2b3c-4d5f-9e6a-1c2b7f3d8e4a"
+                                ]
+                            ]
+                        }
+                    },
+                    "required": [
+                        "id",
+                        "displayName"
+                    ],
+                    "examples": [
+                        {
+                            "id": "6a2c7e1b-4d5f-4a8b-9e6a-2b1c7f3d8e4a",
+                            "displayName": "Identity Protection",
+                            "description": "Baseline controls that harden identity and access related workloads.",
+                            "groupTagMetadataId": "5d3f9c2e-7a1b-4a8b-8c6e-1a3d7e8b5c4a",
+                            "templateIds": [
+                                "2a1c7e3b-5d4f-4a8b-9e6a-7f3d2b1c8e4a",
+                                "4a8b7e1a-2b3c-4d5f-9e6a-1c2b7f3d8e4a"
+                            ]
+                        },
+                        {
+                            "id": "7e1a2b3c-4d5f-4a8b-9e6a-1c2b7f3d8e4a",
+                            "displayName": "Conditional Access",
+                            "parentCategoryId": "6a2c7e1b-4d5f-4a8b-9e6a-2b1c7f3d8e4a"
+                        }
+                    ]
+                },
+                "examples": [
+                    [
+                        {
+                            "id": "6a2c7e1b-4d5f-4a8b-9e6a-2b1c7f3d8e4a",
+                            "displayName": "Identity Protection",
+                            "description": "Baseline controls that harden identity and access related workloads.",
+                            "groupTagMetadataId": "5d3f9c2e-7a1b-4a8b-8c6e-1a3d7e8b5c4a",
+                            "templateIds": [
+                                "2a1c7e3b-5d4f-4a8b-9e6a-7f3d2b1c8e4a",
+                                "4a8b7e1a-2b3c-4d5f-9e6a-1c2b7f3d8e4a"
+                            ]
+                        },
+                        {
+                            "id": "7e1a2b3c-4d5f-4a8b-9e6a-1c2b7f3d8e4a",
+                            "displayName": "Conditional Access",
+                            "parentCategoryId": "6a2c7e1b-4d5f-4a8b-9e6a-2b1c7f3d8e4a"
+                        }
+                    ]
+                ]
+            },
             "Deploy.ConfigurationItemMetaData": {
                 "title": "Deploy - Configuration Item Meta Data",
                 "description": "Object representing populated information expanding details of the Configuration Item with user friendly information.",
@@ -3990,7 +4109,7 @@
         },
         "description": "Deprive your threats of practical significance. Deploy the Securing Privilege Access architecture. All in a few seconds.",
         "title": "SHI Environment Lockdown and Defense",
-        "version": "3.4.1"
+        "version": "3.4.2"
     },
     "openapi": "3.1.1",
     "paths": {
@@ -5335,6 +5454,51 @@
                                 },
                                 "schema": {
                                     "$ref": "#/components/schemas/Deploy.ConfigurationItem"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "Deploy"
+                ]
+            }
+        },
+        "/Api/Deploy/Component/ConfigurationCategory": {
+            "get": {
+                "summary": "Returns List of Available Configuration Categories",
+                "description": "Retrieves the collection of all existing configuration categories with curated set of metadata.\n\nThis endpoint requires the `Deploy.Read`, `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Deploy/Component/ConfigurationCategory/Get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Sample List of Available Configuration Categories": {
+                                        "description": "Sample list of configuration category records available for deploy component organization.",
+                                        "summary": "Available Configuration Categories",
+                                        "value": [
+                                            {
+                                                "id": "6a2c7e1b-4d5f-4a8b-9e6a-2b1c7f3d8e4a",
+                                                "displayName": "Identity Protection",
+                                                "description": "Baseline controls that harden identity and access related workloads.",
+                                                "groupTagMetadataId": "5d3f9c2e-7a1b-4a8b-8c6e-1a3d7e8b5c4a",
+                                                "templateIds": [
+                                                    "2a1c7e3b-5d4f-4a8b-9e6a-7f3d2b1c8e4a",
+                                                    "4a8b7e1a-2b3c-4d5f-9e6a-1c2b7f3d8e4a"
+                                                ]
+                                            },
+                                            {
+                                                "id": "7e1a2b3c-4d5f-4a8b-9e6a-1c2b7f3d8e4a",
+                                                "displayName": "Conditional Access",
+                                                "parentCategoryId": "6a2c7e1b-4d5f-4a8b-9e6a-2b1c7f3d8e4a"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/Deploy.ConfigurationCategory"
                                 }
                             }
                         },
