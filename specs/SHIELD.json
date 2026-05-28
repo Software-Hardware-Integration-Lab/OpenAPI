@@ -1339,7 +1339,7 @@
                     "description": "Single configuration category with curated properties and values in a user-friendly format.",
                     "type": "object",
                     "properties": {
-                        "categoryId": {
+                        "id": {
                             "type": "string",
                             "description": "Internal Object ID in UUID format to uniquely identify this configuration category definition.",
                             "format": "uuid",
@@ -1350,7 +1350,7 @@
                                 "6a2c7e1b-4d5f-4a8b-9e6a-2b1c7f3d8e4a"
                             ]
                         },
-                        "name": {
+                        "displayName": {
                             "type": "string",
                             "description": "Human friendly name of the Configuration Category.",
                             "examples": [
@@ -1409,13 +1409,13 @@
                         }
                     },
                     "required": [
-                        "categoryId",
-                        "name"
+                        "id",
+                        "displayName"
                     ],
                     "examples": [
                         {
-                            "categoryId": "6a2c7e1b-4d5f-4a8b-9e6a-2b1c7f3d8e4a",
-                            "name": "Identity Protection",
+                            "id": "6a2c7e1b-4d5f-4a8b-9e6a-2b1c7f3d8e4a",
+                            "displayName": "Identity Protection",
                             "description": "Baseline controls that harden identity and access related workloads.",
                             "groupTagMetadataId": "5d3f9c2e-7a1b-4a8b-8c6e-1a3d7e8b5c4a",
                             "templateIds": [
@@ -1424,8 +1424,8 @@
                             ]
                         },
                         {
-                            "categoryId": "7e1a2b3c-4d5f-4a8b-9e6a-1c2b7f3d8e4a",
-                            "name": "Conditional Access",
+                            "id": "7e1a2b3c-4d5f-4a8b-9e6a-1c2b7f3d8e4a",
+                            "displayName": "Conditional Access",
                             "parentCategoryId": "6a2c7e1b-4d5f-4a8b-9e6a-2b1c7f3d8e4a"
                         }
                     ]
@@ -1433,8 +1433,8 @@
                 "examples": [
                     [
                         {
-                            "categoryId": "6a2c7e1b-4d5f-4a8b-9e6a-2b1c7f3d8e4a",
-                            "name": "Identity Protection",
+                            "id": "6a2c7e1b-4d5f-4a8b-9e6a-2b1c7f3d8e4a",
+                            "displayName": "Identity Protection",
                             "description": "Baseline controls that harden identity and access related workloads.",
                             "groupTagMetadataId": "5d3f9c2e-7a1b-4a8b-8c6e-1a3d7e8b5c4a",
                             "templateIds": [
@@ -1443,8 +1443,8 @@
                             ]
                         },
                         {
-                            "categoryId": "7e1a2b3c-4d5f-4a8b-9e6a-1c2b7f3d8e4a",
-                            "name": "Conditional Access",
+                            "id": "7e1a2b3c-4d5f-4a8b-9e6a-1c2b7f3d8e4a",
+                            "displayName": "Conditional Access",
                             "parentCategoryId": "6a2c7e1b-4d5f-4a8b-9e6a-2b1c7f3d8e4a"
                         }
                     ]
@@ -5480,8 +5480,8 @@
                                         "summary": "Available Configuration Categories",
                                         "value": [
                                             {
-                                                "categoryId": "6a2c7e1b-4d5f-4a8b-9e6a-2b1c7f3d8e4a",
-                                                "name": "Identity Protection",
+                                                "id": "6a2c7e1b-4d5f-4a8b-9e6a-2b1c7f3d8e4a",
+                                                "displayName": "Identity Protection",
                                                 "description": "Baseline controls that harden identity and access related workloads.",
                                                 "groupTagMetadataId": "5d3f9c2e-7a1b-4a8b-8c6e-1a3d7e8b5c4a",
                                                 "templateIds": [
@@ -5490,8 +5490,8 @@
                                                 ]
                                             },
                                             {
-                                                "categoryId": "7e1a2b3c-4d5f-4a8b-9e6a-1c2b7f3d8e4a",
-                                                "name": "Conditional Access",
+                                                "id": "7e1a2b3c-4d5f-4a8b-9e6a-1c2b7f3d8e4a",
+                                                "displayName": "Conditional Access",
                                                 "parentCategoryId": "6a2c7e1b-4d5f-4a8b-9e6a-2b1c7f3d8e4a"
                                             }
                                         ]
