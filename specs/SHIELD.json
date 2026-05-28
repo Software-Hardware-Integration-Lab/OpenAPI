@@ -1782,7 +1782,10 @@
                             "format": "uuid",
                             "maxLength": 36,
                             "minLength": 36,
-                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                            "examples": [
+                                "6b3e2f1a-8d9c-4f7e-9a3b-1c2d5e7f4a6b"
+                            ]
                         },
                         "examples": [
                             [
@@ -1799,7 +1802,10 @@
                             "format": "uuid",
                             "maxLength": 36,
                             "minLength": 36,
-                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                            "examples": [
+                                "ac37e450-2b84-4d71-8a96-e8f1b7b7d3f3"
+                            ]
                         },
                         "examples": [
                             [
@@ -1864,8 +1870,16 @@
                             "format": "uuid",
                             "maxLength": 36,
                             "minLength": 36,
-                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
-                        }
+                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                            "examples": [
+                                "7a2e5b1f-9c4d-4e3a-8f1b-2d6c3e9a7f4e"
+                            ]
+                        },
+                        "examples": [
+                            [
+                                "7a2e5b1f-9c4d-4e3a-8f1b-2d6c3e9a7f4e"
+                            ]
+                        ]
                     },
                     "missingDependencies": {
                         "description": "Parent configuration dependencies missing from the requested selection.",
@@ -1876,8 +1890,16 @@
                             "format": "uuid",
                             "maxLength": 36,
                             "minLength": 36,
-                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
-                        }
+                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                            "examples": [
+                                "8e6a1c2b-7f3d-4a8b-9c2e-5d3f7a1b2e4a"
+                            ]
+                        },
+                        "examples": [
+                            [
+                                "8e6a1c2b-7f3d-4a8b-9c2e-5d3f7a1b2e4a"
+                            ]
+                        ]
                     }
                 },
                 "required": [
