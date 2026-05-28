@@ -1757,6 +1757,179 @@
                     }
                 ]
             },
+            "Deploy.ValidationRequest": {
+                "title": "Deploy - Validation Request",
+                "description": "Request payload used to validate a proposed deployment selection without starting deployment.",
+                "type": "object",
+                "properties": {
+                    "architectureId": {
+                        "description": "Reference of the architecture type being validated.",
+                        "type": "string",
+                        "format": "uuid",
+                        "maxLength": 36,
+                        "minLength": 36,
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                        "examples": [
+                            "1d4f9c7a-3e2b-4a6d-9f8e-7c2a1b5e3d9f"
+                        ]
+                    },
+                    "tagList": {
+                        "description": "Collection of references to the groupings that list related or dependent resources to be validated.",
+                        "type": "array",
+                        "minItems": 0,
+                        "items": {
+                            "type": "string",
+                            "format": "uuid",
+                            "maxLength": 36,
+                            "minLength": 36,
+                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                            "examples": [
+                                "6b3e2f1a-8d9c-4f7e-9a3b-1c2d5e7f4a6b"
+                            ]
+                        },
+                        "examples": [
+                            [
+                                "6b3e2f1a-8d9c-4f7e-9a3b-1c2d5e7f4a6b"
+                            ]
+                        ]
+                    },
+                    "configIdList": {
+                        "description": "List of configuration items intentionally selected by the user for validation.",
+                        "type": "array",
+                        "minItems": 0,
+                        "items": {
+                            "type": "string",
+                            "format": "uuid",
+                            "maxLength": 36,
+                            "minLength": 36,
+                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                            "examples": [
+                                "ac37e450-2b84-4d71-8a96-e8f1b7b7d3f3"
+                            ]
+                        },
+                        "examples": [
+                            [
+                                "ac37e450-2b84-4d71-8a96-e8f1b7b7d3f3"
+                            ]
+                        ]
+                    }
+                },
+                "required": [
+                    "architectureId",
+                    "tagList",
+                    "configIdList"
+                ],
+                "examples": [
+                    {
+                        "architectureId": "1d4f9c7a-3e2b-4a6d-9f8e-7c2a1b5e3d9f",
+                        "tagList": [
+                            "6b3e2f1a-8d9c-4f7e-9a3b-1c2d5e7f4a6b"
+                        ],
+                        "configIdList": [
+                            "ac37e450-2b84-4d71-8a96-e8f1b7b7d3f3"
+                        ]
+                    }
+                ]
+            },
+            "Deploy.ValidationResponse": {
+                "title": "Deploy - Validation Response",
+                "description": "Result payload returned by deploy selection validation. The response always includes the error flag; additional properties provide validation context when error is true.",
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "description": "Flag that indicates if validation failed.",
+                        "type": "boolean",
+                        "examples": [
+                            false
+                        ]
+                    },
+                    "message": {
+                        "description": "Friendly message describing the validation outcome.",
+                        "type": "string",
+                        "examples": [
+                            "One or more requested tags are not valid for the selected architecture."
+                        ]
+                    },
+                    "itemWithMissingDependencies": {
+                        "description": "Configuration item that is missing one or more parent dependencies.",
+                        "type": "string",
+                        "format": "uuid",
+                        "maxLength": 36,
+                        "minLength": 36,
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                        "examples": [
+                            "2a1c7e3b-5d4f-4a8b-9e6a-7f3d2b1c8e4a"
+                        ]
+                    },
+                    "invalidTags": {
+                        "description": "Tag IDs that are not valid for the selected architecture.",
+                        "type": "array",
+                        "minItems": 0,
+                        "items": {
+                            "type": "string",
+                            "format": "uuid",
+                            "maxLength": 36,
+                            "minLength": 36,
+                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                            "examples": [
+                                "7a2e5b1f-9c4d-4e3a-8f1b-2d6c3e9a7f4e"
+                            ]
+                        },
+                        "examples": [
+                            [
+                                "7a2e5b1f-9c4d-4e3a-8f1b-2d6c3e9a7f4e"
+                            ]
+                        ]
+                    },
+                    "missingDependencies": {
+                        "description": "Parent configuration dependencies missing from the requested selection.",
+                        "type": "array",
+                        "minItems": 0,
+                        "items": {
+                            "type": "string",
+                            "format": "uuid",
+                            "maxLength": 36,
+                            "minLength": 36,
+                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                            "examples": [
+                                "8e6a1c2b-7f3d-4a8b-9c2e-5d3f7a1b2e4a"
+                            ]
+                        },
+                        "examples": [
+                            [
+                                "8e6a1c2b-7f3d-4a8b-9c2e-5d3f7a1b2e4a"
+                            ]
+                        ]
+                    }
+                },
+                "required": [
+                    "error"
+                ],
+                "examples": [
+                    {
+                        "error": false
+                    },
+                    {
+                        "error": true,
+                        "message": "There is already another architecture deployed!"
+                    },
+                    {
+                        "error": true,
+                        "message": "One or more requested tags are not valid for the selected architecture.",
+                        "invalidTags": [
+                            "7a2e5b1f-9c4d-4e3a-8f1b-2d6c3e9a7f4e"
+                        ]
+                    },
+                    {
+                        "error": true,
+                        "message": "Item 2a1c7e3b-5d4f-4a8b-9e6a-7f3d2b1c8e4a has missing dependencies",
+                        "itemWithMissingDependencies": "2a1c7e3b-5d4f-4a8b-9e6a-7f3d2b1c8e4a",
+                        "missingDependencies": [
+                            "8e6a1c2b-7f3d-4a8b-9c2e-5d3f7a1b2e4a"
+                        ]
+                    }
+                ]
+            },
             "Discover.ExecutionStatus": {
                 "title": "Discover - Status",
                 "description": "Detailed status that indicates the current state of the Discover engine and its progress.",
@@ -4109,7 +4282,7 @@
         },
         "description": "Deprive your threats of practical significance. Deploy the Securing Privilege Access architecture. All in a few seconds.",
         "title": "SHI Environment Lockdown and Defense",
-        "version": "3.4.2"
+        "version": "3.5.0"
     },
     "openapi": "3.1.1",
     "paths": {
@@ -6187,6 +6360,106 @@
                     },
                     "503": {
                         "description": "Deployed architecture is invalid or missing!"
+                    }
+                },
+                "tags": [
+                    "Deploy"
+                ]
+            }
+        },
+        "/Api/Deploy/Validate": {
+            "post": {
+                "summary": "Validates Proposed Infrastructure Deployment Selection",
+                "description": "Validates the requested architecture, tag list, and configuration item list for deployment compatibility without mutating state or starting deployment.\n\nThis endpoint requires the `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Deploy/Validate/Post",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Deploy.ValidationRequest"
+                            },
+                            "examples": {
+                                "Valid Selection Request": {
+                                    "summary": "Example Valid Selection",
+                                    "description": "An example selection request that can be validated for deployment readiness.",
+                                    "value": {
+                                        "architectureId": "1d4f9c7a-3e2b-4a6d-9f8e-7c2a1b5e3d9f",
+                                        "tagList": [
+                                            "6b3e2f1a-8d9c-4f7e-9a3b-1c2d5e7f4a6b",
+                                            "9e1c3a7b-2f4d-4e6a-8c9f-3b7d1a5e2f6c"
+                                        ],
+                                        "configIdList": [
+                                            "ac37e450-2b84-4d71-8a96-e8f1b7b7d3f3"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Validation result payload returned successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Deploy.ValidationResponse"
+                                },
+                                "examples": {
+                                    "Validation Success": {
+                                        "summary": "Selection Is Valid",
+                                        "description": "Validation completed successfully and no errors were found.",
+                                        "value": {
+                                            "error": false
+                                        }
+                                    },
+                                    "Invalid Tag Selection": {
+                                        "summary": "Selection Contains Invalid Tags",
+                                        "description": "One or more requested tags are not valid for the selected architecture.",
+                                        "value": {
+                                            "error": true,
+                                            "message": "One or more requested tags are not valid for the selected architecture.",
+                                            "invalidTags": [
+                                                "7a2e5b1f-9c4d-4e3a-8f1b-2d6c3e9a7f4e"
+                                            ]
+                                        }
+                                    },
+                                    "Missing Dependencies": {
+                                        "summary": "Selection Has Missing Dependencies",
+                                        "description": "Validation failed because one of the selected configuration items is missing required parent dependencies.",
+                                        "value": {
+                                            "error": true,
+                                            "message": "Item 2a1c7e3b-5d4f-4a8b-9e6a-7f3d2b1c8e4a has missing dependencies",
+                                            "itemWithMissingDependencies": "2a1c7e3b-5d4f-4a8b-9e6a-7f3d2b1c8e4a",
+                                            "missingDependencies": [
+                                                "8e6a1c2b-7f3d-4a8b-9c2e-5d3f7a1b2e4a"
+                                            ]
+                                        }
+                                    },
+                                    "Architecture Conflict": {
+                                        "summary": "Another Architecture Already Deployed",
+                                        "description": "Validation failed because an incompatible architecture has already been deployed.",
+                                        "value": {
+                                            "error": true,
+                                            "message": "There is already another architecture deployed!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "409": {
+                        "$ref": "#/components/responses/409"
+                    },
+                    "503": {
+                        "description": "System requirements have not been met!"
+                    },
+                    "500": {
+                        "description": "An unknown error occurred during deploy validation!"
                     }
                 },
                 "tags": [
