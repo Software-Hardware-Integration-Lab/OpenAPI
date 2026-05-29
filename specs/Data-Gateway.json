@@ -3133,7 +3133,7 @@
                     },
                     "expiryDate": {
                         "$ref": "#/components/schemas/NullableDateTimeStringType",
-                        "description": "Contract expiry date as an ISO 8601 date-time string, or null."
+                        "description": "DEPRECATED: Contract expiry date as an ISO 8601 date-time string, or null."
                     }
                 },
                 "required": [
@@ -3213,7 +3213,11 @@
                             },
                             "replacementDate": {
                                 "$ref": "#/components/schemas/NullableDateTimeStringType",
-                                "description": "Planned replacement date as an ISO 8601 date-time string, or null."
+                                "description": "DEPRECATED: Planned replacement date as an ISO 8601 date-time string, or null. Use expirationDate instead."
+                            },
+                            "expirationDate": {
+                                "$ref": "#/components/schemas/NullableDateTimeStringType",
+                                "description": "Preferred planned expiration date as an ISO 8601 date-time string, or null."
                             }
                         },
                         "required": [
@@ -3235,7 +3239,8 @@
                                 "contractValue": 5003
                             }
                         ],
-                        "replacementDate": "2026-01-01T00:00:00Z"
+                        "replacementDate": "2026-01-01T00:00:00Z",
+                        "expirationDate": "2026-01-01T00:00:00Z"
                     }
                 ]
             },
@@ -3303,7 +3308,8 @@
                                     "contractValue": 5003
                                 }
                             ],
-                            "replacementDate": "2026-12-31T00:00:00Z"
+                            "replacementDate": "2026-12-31T00:00:00Z",
+                            "expirationDate": "2026-12-31T00:00:00Z"
                         },
                         "notes": "Example notes"
                     }
@@ -3572,7 +3578,8 @@
                                                 "contractValue": 5003
                                             }
                                         ],
-                                        "replacementDate": "2026-12-31T00:00:00Z"
+                                        "replacementDate": "2026-12-31T00:00:00Z",
+                                        "expirationDate": "2026-12-31T00:00:00Z"
                                     },
                                     "notes": "Example notes"
                                 }
@@ -3715,7 +3722,8 @@
                                             "contractValue": 5003
                                         }
                                     ],
-                                    "replacementDate": "2026-12-31T00:00:00Z"
+                                    "replacementDate": "2026-12-31T00:00:00Z",
+                                    "expirationDate": "2026-12-31T00:00:00Z"
                                 },
                                 "notes": "Example notes"
                             }
@@ -4214,7 +4222,8 @@
                                                 "contractValue": 5003
                                             }
                                         ],
-                                        "replacementDate": "2026-12-31T00:00:00Z"
+                                        "replacementDate": "2026-12-31T00:00:00Z",
+                                        "expirationDate": "2026-12-31T00:00:00Z"
                                     },
                                     "notes": "Example notes"
                                 }
@@ -4496,7 +4505,8 @@
                                                 "contractValue": 5003
                                             }
                                         ],
-                                        "replacementDate": "2026-12-31T00:00:00Z"
+                                        "replacementDate": "2026-12-31T00:00:00Z",
+                                        "expirationDate": "2026-12-31T00:00:00Z"
                                     },
                                     "notes": "Example notes"
                                 }
@@ -4694,7 +4704,8 @@
                                                     "contractValue": 5003
                                                 }
                                             ],
-                                            "replacementDate": "2026-12-31T00:00:00Z"
+                                            "replacementDate": "2026-12-31T00:00:00Z",
+                                            "expirationDate": "2026-12-31T00:00:00Z"
                                         },
                                         "notes": "Example notes"
                                     }
@@ -4968,7 +4979,7 @@
         },
         "description": "Collects data from the various SHI Lab products and makes it available in a standardized way.",
         "title": "SHI - Data Gateway",
-        "version": "3.3.0"
+        "version": "3.3.1"
     },
     "openapi": "3.1.1",
     "paths": {
@@ -9471,7 +9482,8 @@
                                                                     "contractValue": 5003
                                                                 }
                                                             ],
-                                                            "replacementDate": "2026-12-31T00:00:00Z"
+                                                            "replacementDate": "2026-12-31T00:00:00Z",
+                                                            "expirationDate": "2026-12-31T00:00:00Z"
                                                         },
                                                         "notes": "Example notes"
                                                     }
@@ -10082,7 +10094,8 @@
                                                                 "contractValue": 5003
                                                             }
                                                         ],
-                                                        "replacementDate": "2026-12-31T00:00:00Z"
+                                                        "replacementDate": "2026-12-31T00:00:00Z",
+                                                        "expirationDate": "2026-12-31T00:00:00Z"
                                                     },
                                                     "notes": "Example notes"
                                                 }
@@ -10277,7 +10290,8 @@
                                                                     "contractValue": 5003
                                                                 }
                                                             ],
-                                                            "replacementDate": "2026-12-31T00:00:00Z"
+                                                            "replacementDate": "2026-12-31T00:00:00Z",
+                                                            "expirationDate": "2026-12-31T00:00:00Z"
                                                         },
                                                         "notes": "Example notes"
                                                     }
@@ -10496,7 +10510,8 @@
                                                                 "contractValue": 5003
                                                             }
                                                         ],
-                                                        "replacementDate": "2026-12-31T00:00:00Z"
+                                                        "replacementDate": "2026-12-31T00:00:00Z",
+                                                        "expirationDate": "2026-12-31T00:00:00Z"
                                                     },
                                                     "notes": "Example notes"
                                                 }
@@ -10691,7 +10706,8 @@
                                                                     "contractValue": 5003
                                                                 }
                                                             ],
-                                                            "replacementDate": "2026-12-31T00:00:00Z"
+                                                            "replacementDate": "2026-12-31T00:00:00Z",
+                                                            "expirationDate": "2026-12-31T00:00:00Z"
                                                         },
                                                         "notes": "Example notes"
                                                     }
@@ -11004,6 +11020,7 @@
                                                             "contractNumber": "NWid-20948372",
                                                             "expiryDate": "2029-03-01T00:00:00.000Z",
                                                             "replacementDate": "2026-06-01T00:00:00.000Z",
+                                                            "expirationDate": "2026-06-01T00:00:00.000Z",
                                                             "costs": [
                                                                 {
                                                                     "monthlyCost": 4000,
@@ -11334,6 +11351,7 @@
                                                             "contractNumber": "NWid-20948372",
                                                             "expiryDate": "2029-03-01T00:00:00.000Z",
                                                             "replacementDate": "2026-06-01T00:00:00.000Z",
+                                                            "expirationDate": "2026-06-01T00:00:00.000Z",
                                                             "costs": [
                                                                 {
                                                                     "monthlyCost": 4000,
