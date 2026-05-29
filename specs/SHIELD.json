@@ -1362,6 +1362,125 @@
                     ]
                 ]
             },
+            "Deploy.ConfigurationCategory": {
+                "title": "Deploy - Configuration Category List",
+                "description": "Collection of objects representing configuration categories used to organize deployable configuration items.",
+                "type": "array",
+                "items": {
+                    "description": "Single configuration category with curated properties and values in a user-friendly format.",
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "string",
+                            "description": "Internal Object ID in UUID format to uniquely identify this configuration category definition.",
+                            "format": "uuid",
+                            "maxLength": 36,
+                            "minLength": 36,
+                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                            "examples": [
+                                "6a2c7e1b-4d5f-4a8b-9e6a-2b1c7f3d8e4a"
+                            ]
+                        },
+                        "displayName": {
+                            "type": "string",
+                            "description": "Human friendly name of the Configuration Category.",
+                            "examples": [
+                                "Identity Protection"
+                            ]
+                        },
+                        "description": {
+                            "type": "string",
+                            "description": "Lengthier explanation of how this category groups related configuration items.",
+                            "examples": [
+                                "Baseline controls that harden identity and access related workloads."
+                            ]
+                        },
+                        "parentCategoryId": {
+                            "type": "string",
+                            "description": "Object ID in UUID format that references the parent configuration category when this category is nested.",
+                            "format": "uuid",
+                            "maxLength": 36,
+                            "minLength": 36,
+                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                            "examples": [
+                                "1b7e2a3c-5d4f-4a8b-9e6a-7c2b1d3f8e4a"
+                            ]
+                        },
+                        "groupTagMetadataId": {
+                            "type": "string",
+                            "description": "Object ID in UUID format that references the deploy group tag metadata record associated with this category.",
+                            "format": "uuid",
+                            "maxLength": 36,
+                            "minLength": 36,
+                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                            "examples": [
+                                "5d3f9c2e-7a1b-4a8b-8c6e-1a3d7e8b5c4a"
+                            ]
+                        },
+                        "templateIds": {
+                            "type": "array",
+                            "description": "List of configuration item templateIds assigned to this category.",
+                            "minItems": 0,
+                            "items": {
+                                "type": "string",
+                                "format": "uuid",
+                                "maxLength": 36,
+                                "minLength": 36,
+                                "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                                "examples": [
+                                    "2a1c7e3b-5d4f-4a8b-9e6a-7f3d2b1c8e4a"
+                                ]
+                            },
+                            "examples": [
+                                [
+                                    "2a1c7e3b-5d4f-4a8b-9e6a-7f3d2b1c8e4a",
+                                    "4a8b7e1a-2b3c-4d5f-9e6a-1c2b7f3d8e4a"
+                                ]
+                            ]
+                        }
+                    },
+                    "required": [
+                        "id",
+                        "displayName"
+                    ],
+                    "examples": [
+                        {
+                            "id": "6a2c7e1b-4d5f-4a8b-9e6a-2b1c7f3d8e4a",
+                            "displayName": "Identity Protection",
+                            "description": "Baseline controls that harden identity and access related workloads.",
+                            "groupTagMetadataId": "5d3f9c2e-7a1b-4a8b-8c6e-1a3d7e8b5c4a",
+                            "templateIds": [
+                                "2a1c7e3b-5d4f-4a8b-9e6a-7f3d2b1c8e4a",
+                                "4a8b7e1a-2b3c-4d5f-9e6a-1c2b7f3d8e4a"
+                            ]
+                        },
+                        {
+                            "id": "7e1a2b3c-4d5f-4a8b-9e6a-1c2b7f3d8e4a",
+                            "displayName": "Conditional Access",
+                            "parentCategoryId": "6a2c7e1b-4d5f-4a8b-9e6a-2b1c7f3d8e4a"
+                        }
+                    ]
+                },
+                "examples": [
+                    [
+                        {
+                            "id": "6a2c7e1b-4d5f-4a8b-9e6a-2b1c7f3d8e4a",
+                            "displayName": "Identity Protection",
+                            "description": "Baseline controls that harden identity and access related workloads.",
+                            "groupTagMetadataId": "5d3f9c2e-7a1b-4a8b-8c6e-1a3d7e8b5c4a",
+                            "templateIds": [
+                                "2a1c7e3b-5d4f-4a8b-9e6a-7f3d2b1c8e4a",
+                                "4a8b7e1a-2b3c-4d5f-9e6a-1c2b7f3d8e4a"
+                            ]
+                        },
+                        {
+                            "id": "7e1a2b3c-4d5f-4a8b-9e6a-1c2b7f3d8e4a",
+                            "displayName": "Conditional Access",
+                            "parentCategoryId": "6a2c7e1b-4d5f-4a8b-9e6a-2b1c7f3d8e4a"
+                        }
+                    ]
+                ]
+            },
             "Deploy.ConfigurationItemMetaData": {
                 "title": "Deploy - Configuration Item Meta Data",
                 "description": "Object representing populated information expanding details of the Configuration Item with user friendly information.",
@@ -1666,6 +1785,179 @@
                 "examples": [
                     {
                         "path": "/roleScopeTagIds"
+                    }
+                ]
+            },
+            "Deploy.ValidationRequest": {
+                "title": "Deploy - Validation Request",
+                "description": "Request payload used to validate a proposed deployment selection without starting deployment.",
+                "type": "object",
+                "properties": {
+                    "architectureId": {
+                        "description": "Reference of the architecture type being validated.",
+                        "type": "string",
+                        "format": "uuid",
+                        "maxLength": 36,
+                        "minLength": 36,
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                        "examples": [
+                            "1d4f9c7a-3e2b-4a6d-9f8e-7c2a1b5e3d9f"
+                        ]
+                    },
+                    "tagList": {
+                        "description": "Collection of references to the groupings that list related or dependent resources to be validated.",
+                        "type": "array",
+                        "minItems": 0,
+                        "items": {
+                            "type": "string",
+                            "format": "uuid",
+                            "maxLength": 36,
+                            "minLength": 36,
+                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                            "examples": [
+                                "6b3e2f1a-8d9c-4f7e-9a3b-1c2d5e7f4a6b"
+                            ]
+                        },
+                        "examples": [
+                            [
+                                "6b3e2f1a-8d9c-4f7e-9a3b-1c2d5e7f4a6b"
+                            ]
+                        ]
+                    },
+                    "configIdList": {
+                        "description": "List of configuration items intentionally selected by the user for validation.",
+                        "type": "array",
+                        "minItems": 0,
+                        "items": {
+                            "type": "string",
+                            "format": "uuid",
+                            "maxLength": 36,
+                            "minLength": 36,
+                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                            "examples": [
+                                "ac37e450-2b84-4d71-8a96-e8f1b7b7d3f3"
+                            ]
+                        },
+                        "examples": [
+                            [
+                                "ac37e450-2b84-4d71-8a96-e8f1b7b7d3f3"
+                            ]
+                        ]
+                    }
+                },
+                "required": [
+                    "architectureId",
+                    "tagList",
+                    "configIdList"
+                ],
+                "examples": [
+                    {
+                        "architectureId": "1d4f9c7a-3e2b-4a6d-9f8e-7c2a1b5e3d9f",
+                        "tagList": [
+                            "6b3e2f1a-8d9c-4f7e-9a3b-1c2d5e7f4a6b"
+                        ],
+                        "configIdList": [
+                            "ac37e450-2b84-4d71-8a96-e8f1b7b7d3f3"
+                        ]
+                    }
+                ]
+            },
+            "Deploy.ValidationResponse": {
+                "title": "Deploy - Validation Response",
+                "description": "Result payload returned by deploy selection validation. The response always includes the error flag; additional properties provide validation context when error is true.",
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "description": "Flag that indicates if validation failed.",
+                        "type": "boolean",
+                        "examples": [
+                            false
+                        ]
+                    },
+                    "message": {
+                        "description": "Friendly message describing the validation outcome.",
+                        "type": "string",
+                        "examples": [
+                            "One or more requested tags are not valid for the selected architecture."
+                        ]
+                    },
+                    "itemWithMissingDependencies": {
+                        "description": "Configuration item that is missing one or more parent dependencies.",
+                        "type": "string",
+                        "format": "uuid",
+                        "maxLength": 36,
+                        "minLength": 36,
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                        "examples": [
+                            "2a1c7e3b-5d4f-4a8b-9e6a-7f3d2b1c8e4a"
+                        ]
+                    },
+                    "invalidTags": {
+                        "description": "Tag IDs that are not valid for the selected architecture.",
+                        "type": "array",
+                        "minItems": 0,
+                        "items": {
+                            "type": "string",
+                            "format": "uuid",
+                            "maxLength": 36,
+                            "minLength": 36,
+                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                            "examples": [
+                                "7a2e5b1f-9c4d-4e3a-8f1b-2d6c3e9a7f4e"
+                            ]
+                        },
+                        "examples": [
+                            [
+                                "7a2e5b1f-9c4d-4e3a-8f1b-2d6c3e9a7f4e"
+                            ]
+                        ]
+                    },
+                    "missingDependencies": {
+                        "description": "Parent configuration dependencies missing from the requested selection.",
+                        "type": "array",
+                        "minItems": 0,
+                        "items": {
+                            "type": "string",
+                            "format": "uuid",
+                            "maxLength": 36,
+                            "minLength": 36,
+                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                            "examples": [
+                                "8e6a1c2b-7f3d-4a8b-9c2e-5d3f7a1b2e4a"
+                            ]
+                        },
+                        "examples": [
+                            [
+                                "8e6a1c2b-7f3d-4a8b-9c2e-5d3f7a1b2e4a"
+                            ]
+                        ]
+                    }
+                },
+                "required": [
+                    "error"
+                ],
+                "examples": [
+                    {
+                        "error": false
+                    },
+                    {
+                        "error": true,
+                        "message": "There is already another architecture deployed!"
+                    },
+                    {
+                        "error": true,
+                        "message": "One or more requested tags are not valid for the selected architecture.",
+                        "invalidTags": [
+                            "7a2e5b1f-9c4d-4e3a-8f1b-2d6c3e9a7f4e"
+                        ]
+                    },
+                    {
+                        "error": true,
+                        "message": "Item 2a1c7e3b-5d4f-4a8b-9e6a-7f3d2b1c8e4a has missing dependencies",
+                        "itemWithMissingDependencies": "2a1c7e3b-5d4f-4a8b-9e6a-7f3d2b1c8e4a",
+                        "missingDependencies": [
+                            "8e6a1c2b-7f3d-4a8b-9c2e-5d3f7a1b2e4a"
+                        ]
                     }
                 ]
             },
@@ -5413,6 +5705,51 @@
                 ]
             }
         },
+        "/Api/Deploy/Component/ConfigurationCategory": {
+            "get": {
+                "summary": "Returns List of Available Configuration Categories",
+                "description": "Retrieves the collection of all existing configuration categories with curated set of metadata.\n\nThis endpoint requires the `Deploy.Read`, `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Deploy/Component/ConfigurationCategory/Get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Sample List of Available Configuration Categories": {
+                                        "description": "Sample list of configuration category records available for deploy component organization.",
+                                        "summary": "Available Configuration Categories",
+                                        "value": [
+                                            {
+                                                "id": "6a2c7e1b-4d5f-4a8b-9e6a-2b1c7f3d8e4a",
+                                                "displayName": "Identity Protection",
+                                                "description": "Baseline controls that harden identity and access related workloads.",
+                                                "groupTagMetadataId": "5d3f9c2e-7a1b-4a8b-8c6e-1a3d7e8b5c4a",
+                                                "templateIds": [
+                                                    "2a1c7e3b-5d4f-4a8b-9e6a-7f3d2b1c8e4a",
+                                                    "4a8b7e1a-2b3c-4d5f-9e6a-1c2b7f3d8e4a"
+                                                ]
+                                            },
+                                            {
+                                                "id": "7e1a2b3c-4d5f-4a8b-9e6a-1c2b7f3d8e4a",
+                                                "displayName": "Conditional Access",
+                                                "parentCategoryId": "6a2c7e1b-4d5f-4a8b-9e6a-2b1c7f3d8e4a"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/Deploy.ConfigurationCategory"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "Deploy"
+                ]
+            }
+        },
         "/Api/Deploy/Component/ConfigurationItem/{templateId}/Docs": {
             "get": {
                 "summary": "Return Result of Retrieving Configuration Item Documentation",
@@ -6090,6 +6427,106 @@
                     },
                     "503": {
                         "description": "Deployed architecture is invalid or missing!"
+                    }
+                },
+                "tags": [
+                    "Deploy"
+                ]
+            }
+        },
+        "/Api/Deploy/Validate": {
+            "post": {
+                "summary": "Validates Proposed Infrastructure Deployment Selection",
+                "description": "Validates the requested architecture, tag list, and configuration item list for deployment compatibility without mutating state or starting deployment.\n\nThis endpoint requires the `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Deploy/Validate/Post",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Deploy.ValidationRequest"
+                            },
+                            "examples": {
+                                "Valid Selection Request": {
+                                    "summary": "Example Valid Selection",
+                                    "description": "An example selection request that can be validated for deployment readiness.",
+                                    "value": {
+                                        "architectureId": "1d4f9c7a-3e2b-4a6d-9f8e-7c2a1b5e3d9f",
+                                        "tagList": [
+                                            "6b3e2f1a-8d9c-4f7e-9a3b-1c2d5e7f4a6b",
+                                            "9e1c3a7b-2f4d-4e6a-8c9f-3b7d1a5e2f6c"
+                                        ],
+                                        "configIdList": [
+                                            "ac37e450-2b84-4d71-8a96-e8f1b7b7d3f3"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Validation result payload returned successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Deploy.ValidationResponse"
+                                },
+                                "examples": {
+                                    "Validation Success": {
+                                        "summary": "Selection Is Valid",
+                                        "description": "Validation completed successfully and no errors were found.",
+                                        "value": {
+                                            "error": false
+                                        }
+                                    },
+                                    "Invalid Tag Selection": {
+                                        "summary": "Selection Contains Invalid Tags",
+                                        "description": "One or more requested tags are not valid for the selected architecture.",
+                                        "value": {
+                                            "error": true,
+                                            "message": "One or more requested tags are not valid for the selected architecture.",
+                                            "invalidTags": [
+                                                "7a2e5b1f-9c4d-4e3a-8f1b-2d6c3e9a7f4e"
+                                            ]
+                                        }
+                                    },
+                                    "Missing Dependencies": {
+                                        "summary": "Selection Has Missing Dependencies",
+                                        "description": "Validation failed because one of the selected configuration items is missing required parent dependencies.",
+                                        "value": {
+                                            "error": true,
+                                            "message": "Item 2a1c7e3b-5d4f-4a8b-9e6a-7f3d2b1c8e4a has missing dependencies",
+                                            "itemWithMissingDependencies": "2a1c7e3b-5d4f-4a8b-9e6a-7f3d2b1c8e4a",
+                                            "missingDependencies": [
+                                                "8e6a1c2b-7f3d-4a8b-9c2e-5d3f7a1b2e4a"
+                                            ]
+                                        }
+                                    },
+                                    "Architecture Conflict": {
+                                        "summary": "Another Architecture Already Deployed",
+                                        "description": "Validation failed because an incompatible architecture has already been deployed.",
+                                        "value": {
+                                            "error": true,
+                                            "message": "There is already another architecture deployed!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "409": {
+                        "$ref": "#/components/responses/409"
+                    },
+                    "503": {
+                        "description": "System requirements have not been met!"
+                    },
+                    "500": {
+                        "description": "An unknown error occurred during deploy validation!"
                     }
                 },
                 "tags": [
