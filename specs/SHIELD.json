@@ -363,6 +363,37 @@
                     }
                 ]
             },
+            "Core.HealthReport": {
+                "description": "Health report that indicates if a service is down or not that SHIELD web app relies on.",
+                "properties": {
+                    "authClient": {
+                        "description": "Flag that indicates if the client side authentication validation is working or not.",
+                        "examples": [
+                            false
+                        ],
+                        "type": "boolean"
+                    },
+                    "authServer": {
+                        "description": "Flag that indicates if the server side authentication is working or not.",
+                        "examples": [
+                            true
+                        ],
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "authClient",
+                    "authServer"
+                ],
+                "title": "Core System - Health Report",
+                "type": "object",
+                "examples": [
+                    {
+                        "authClient": false,
+                        "authServer": true
+                    }
+                ]
+            },
             "Core.ProgressBar": {
                 "title": "Core - Progress Bar",
                 "description": "Used to indicate the progress of a long running operation.",
@@ -4282,7 +4313,7 @@
         },
         "description": "Deprive your threats of practical significance. Deploy the Securing Privilege Access architecture. All in a few seconds.",
         "title": "SHI Environment Lockdown and Defense",
-        "version": "3.5.0"
+        "version": "3.5.1"
     },
     "openapi": "3.1.1",
     "paths": {
@@ -4323,6 +4354,42 @@
                 ],
                 "security": [],
                 "summary": "Indicates If the System Requirements Are Met or Not."
+            }
+        },
+        "/Api/Core/Health": {
+            "get": {
+                "description": "Check the health of the various components of the SHIELD app and report back. Useful for automated health probing.",
+                "operationId": "/Api/Core/Health/Get",
+                "responses": {
+                    "201": {
+                        "description": "Service is operational!"
+                    },
+                    "500": {
+                        "description": "Service has a failure described with following report.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Core.HealthReport"
+                                },
+                                "examples": {
+                                    "Auth system failure": {
+                                        "summary": "Example Health Report - Auth Failure",
+                                        "description": "An example health report returned indicates the authentication components are not working.",
+                                        "value": {
+                                            "authClient": false,
+                                            "authServer": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Core"
+                ],
+                "security": [],
+                "summary": "Health of the Service for Probing"
             }
         },
         "/Api/Auth/Id": {
