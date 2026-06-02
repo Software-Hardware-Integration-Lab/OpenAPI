@@ -3133,7 +3133,7 @@
                     },
                     "expiryDate": {
                         "$ref": "#/components/schemas/NullableDateTimeStringType",
-                        "description": "Contract expiry date as an ISO 8601 date-time string, or null."
+                        "description": "DEPRECATED: Contract expiry date as an ISO 8601 date-time string, or null."
                     }
                 },
                 "required": [
@@ -3161,6 +3161,10 @@
                         "type": "object",
                         "description": "Extension of Provider to include cost breakdowns for the current provider.",
                         "properties": {
+                            "expirationDate": {
+                                "$ref": "#/components/schemas/NullableDateTimeStringType",
+                                "description": "Preferred planned expiration date as an ISO 8601 date-time string, or null."
+                            },
                             "costs": {
                                 "$ref": "#/components/schemas/CloudMatrix.Costs",
                                 "description": "Cost breakdown with monthly/annual/contract values."
@@ -3177,6 +3181,7 @@
                         "terms": "5 Years",
                         "contractNumber": "C12345678",
                         "expiryDate": "2026-01-01T00:00:00Z",
+                        "expirationDate": "2026-01-01T00:00:00Z",
                         "costs": {
                             "monthlyCost": 5001,
                             "annualCost": 5002,
@@ -3213,7 +3218,7 @@
                             },
                             "replacementDate": {
                                 "$ref": "#/components/schemas/NullableDateTimeStringType",
-                                "description": "Planned replacement date as an ISO 8601 date-time string, or null."
+                                "description": "DEPRECATED: Planned replacement date as an ISO 8601 date-time string, or null. Use expirationDate instead."
                             }
                         },
                         "required": [
@@ -3285,6 +3290,7 @@
                             "terms": "5 Years",
                             "contractNumber": "C12345678",
                             "expiryDate": "2026-01-01T00:00:00Z",
+                            "expirationDate": "2026-12-31T00:00:00Z",
                             "costs": {
                                 "monthlyCost": 5001,
                                 "annualCost": 5002,
@@ -3303,7 +3309,7 @@
                                     "contractValue": 5003
                                 }
                             ],
-                            "replacementDate": "2026-12-31T00:00:00Z"
+                                "replacementDate": "2026-12-31T00:00:00Z"
                         },
                         "notes": "Example notes"
                     }
@@ -3554,6 +3560,7 @@
                                         "terms": "5 Years",
                                         "contractNumber": "C12345678",
                                         "expiryDate": "2026-01-01T00:00:00Z",
+                                        "expirationDate": "2026-12-31T00:00:00Z",
                                         "costs": {
                                             "monthlyCost": 5001,
                                             "annualCost": 5002,
@@ -3697,6 +3704,7 @@
                                     "terms": "5 Years",
                                     "contractNumber": "C12345678",
                                     "expiryDate": "2026-01-01T00:00:00Z",
+                                    "expirationDate": "2026-12-31T00:00:00Z",
                                     "costs": {
                                         "monthlyCost": 5001,
                                         "annualCost": 5002,
@@ -4196,6 +4204,7 @@
                                         "terms": "5 Years",
                                         "contractNumber": "C12345678",
                                         "expiryDate": "2026-01-01T00:00:00Z",
+                                        "expirationDate": "2026-12-31T00:00:00Z",
                                         "costs": {
                                             "monthlyCost": 5001,
                                             "annualCost": 5002,
@@ -4478,6 +4487,7 @@
                                         "terms": "5 Years",
                                         "contractNumber": "C12345678",
                                         "expiryDate": "2026-01-01T00:00:00Z",
+                                        "expirationDate": "2026-12-31T00:00:00Z",
                                         "costs": {
                                             "monthlyCost": 5001,
                                             "annualCost": 5002,
@@ -4676,6 +4686,7 @@
                                             "terms": "5 Years",
                                             "contractNumber": "C12345678",
                                             "expiryDate": "2026-01-01T00:00:00Z",
+                                            "expirationDate": "2026-12-31T00:00:00Z",
                                             "costs": {
                                                 "monthlyCost": 5001,
                                                 "annualCost": 5002,
@@ -4968,7 +4979,7 @@
         },
         "description": "Collects data from the various SHI Lab products and makes it available in a standardized way.",
         "title": "SHI - Data Gateway",
-        "version": "3.3.0"
+        "version": "3.3.1"
     },
     "openapi": "3.1.1",
     "paths": {
@@ -9453,6 +9464,7 @@
                                                             "terms": "5 Years",
                                                             "contractNumber": "C12345678",
                                                             "expiryDate": "2026-01-01T00:00:00Z",
+                                                            "expirationDate": "2026-12-31T00:00:00Z",
                                                             "costs": {
                                                                 "monthlyCost": 5001,
                                                                 "annualCost": 5002,
@@ -10064,6 +10076,7 @@
                                                         "terms": "5 Years",
                                                         "contractNumber": "C12345678",
                                                         "expiryDate": "2026-01-01T00:00:00Z",
+                                                        "expirationDate": "2026-12-31T00:00:00Z",
                                                         "costs": {
                                                             "monthlyCost": 5001,
                                                             "annualCost": 5002,
@@ -10259,6 +10272,7 @@
                                                             "terms": "5 Years",
                                                             "contractNumber": "C12345678",
                                                             "expiryDate": "2026-01-01T00:00:00Z",
+                                                            "expirationDate": "2026-12-31T00:00:00Z",
                                                             "costs": {
                                                                 "monthlyCost": 5001,
                                                                 "annualCost": 5002,
@@ -10478,6 +10492,7 @@
                                                         "terms": "5 Years",
                                                         "contractNumber": "C12345678",
                                                         "expiryDate": "2026-01-01T00:00:00Z",
+                                                        "expirationDate": "2026-12-31T00:00:00Z",
                                                         "costs": {
                                                             "monthlyCost": 5001,
                                                             "annualCost": 5002,
@@ -10691,7 +10706,8 @@
                                                                     "contractValue": 5003
                                                                 }
                                                             ],
-                                                            "replacementDate": "2026-12-31T00:00:00Z"
+                                                            "replacementDate": "2026-12-31T00:00:00Z",
+                                                            "expirationDate": "2026-12-31T00:00:00Z"
                                                         },
                                                         "notes": "Example notes"
                                                     }
@@ -10992,6 +11008,7 @@
                                                             "terms": "36 months",
                                                             "contractNumber": "Wid-0475477",
                                                             "expiryDate": "2026-12-31T23:59:59.000Z",
+                                                            "expirationDate": "2026-06-01T00:00:00.000Z",
                                                             "costs": {
                                                                 "monthlyCost": 1000,
                                                                 "annualCost": 2000,
@@ -11322,6 +11339,7 @@
                                                             "terms": "36 months",
                                                             "contractNumber": "Wid-0475477",
                                                             "expiryDate": "2026-12-31T23:59:59.000Z",
+                                                            "expirationDate": "2026-06-01T00:00:00.000Z",
                                                             "costs": {
                                                                 "monthlyCost": 1000,
                                                                 "annualCost": 2000,
