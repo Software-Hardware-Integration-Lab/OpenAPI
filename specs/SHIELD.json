@@ -4313,7 +4313,7 @@
         },
         "description": "Deprive your threats of practical significance. Deploy the Securing Privilege Access architecture. All in a few seconds.",
         "title": "SHI Environment Lockdown and Defense",
-        "version": "3.5.1"
+        "version": "3.5.2"
     },
     "openapi": "3.1.1",
     "paths": {
@@ -5489,6 +5489,87 @@
                     },
                     "503": {
                         "description": "System requirements have not been met!"
+                    }
+                },
+                "tags": [
+                    "Deploy"
+                ]
+            }
+        },
+        "/Api/Deploy/Errors": {
+            "get": {
+                "summary": "Gets Captured Deployment Errors",
+                "description": "Returns the current collection of asynchronous deployment errors captured by the deploy engine. Each record identifies the configuration item template and the associated error message.\n\nThis endpoint requires the `Deploy.Read`, `Deploy.ReadWrite`, or the `Everything.ReadWrite` scope (permission).",
+                "operationId": "/Api/Deploy/Errors/Get",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "description": "Collection of deployment errors recorded during asynchronous deploy operations.",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "templateId": {
+                                                "type": "string",
+                                                "description": "Internal reference identifier of the configuration item that encountered the deployment error.",
+                                                "format": "uuid",
+                                                "maxLength": 36,
+                                                "minLength": 36,
+                                                "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                                                "examples": [
+                                                    "7e2b1c3d-4f5a-4a8b-9e6a-1c2b7f3d8e4a"
+                                                ]
+                                            },
+                                            "message": {
+                                                "type": "string",
+                                                "description": "Text with the details of the deployment failure.",
+                                                "examples": [
+                                                    "Deployment failed for test resource"
+                                                ]
+                                            }
+                                        },
+                                        "required": [
+                                            "templateId",
+                                            "message"
+                                        ],
+                                        "examples": [
+                                            {
+                                                "templateId": "7e2b1c3d-4f5a-4a8b-9e6a-1c2b7f3d8e4a",
+                                                "message": "Deployment failed for test resource"
+                                            }
+                                        ]
+                                    },
+                                    "examples": [
+                                        [
+                                            {
+                                                "templateId": "7e2b1c3d-4f5a-4a8b-9e6a-1c2b7f3d8e4a",
+                                                "message": "Deployment failed for test resource"
+                                            }
+                                        ]
+                                    ]
+                                },
+                                "examples": {
+                                    "Captured Deployment Errors": {
+                                        "summary": "Example Deployment Errors",
+                                        "description": "An example response containing one tracked deployment error.",
+                                        "value": [
+                                            {
+                                                "templateId": "7e2b1c3d-4f5a-4a8b-9e6a-1c2b7f3d8e4a",
+                                                "message": "Deployment failed for test resource"
+                                            }
+                                        ]
+                                    },
+                                    "No Deployment Errors": {
+                                        "summary": "No Errors Captured",
+                                        "description": "An example response when no asynchronous deployment errors have been recorded.",
+                                        "value": []
+                                    }
+                                }
+                            }
+                        }
                     }
                 },
                 "tags": [
