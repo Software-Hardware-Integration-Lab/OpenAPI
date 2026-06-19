@@ -205,8 +205,7 @@
                 "description": "Optional entity identifier filter. Must be a GUID when provided.",
                 "required": false,
                 "schema": {
-                    "type": "string",
-                    "format": "uuid"
+                    "$ref": "#/components/schemas/Uuid"
                 }
             },
             "auditStartDate": {
@@ -260,9 +259,9 @@
                 },
                 "examples": {
                     "Valid Audit ID": {
-                    "summary": "Example Valid Audit ID",
-                    "description": "An example UUID string that represents a valid Cloud Matrix audit event ID.",
-                    "value": "8c9d7e36-8b71-4b46-b4da-7d1f7fd9a001"
+                        "summary": "Example Valid Audit ID",
+                        "description": "An example UUID string that represents a valid Cloud Matrix audit event ID.",
+                        "value": "8c9d7e36-8b71-4b46-b4da-7d1f7fd9a001"
                     }
                 }
             }
@@ -3394,7 +3393,7 @@
                                     "contractValue": 5003
                                 }
                             ],
-                                "replacementDate": "2026-12-31T00:00:00Z"
+                            "replacementDate": "2026-12-31T00:00:00Z"
                         },
                         "notes": "Example notes"
                     }
@@ -5047,219 +5046,221 @@
                 "type": "object",
                 "additionalProperties": false,
                 "required": [
-                "aadObjectId",
-                "displayName",
-                "type"
+                    "aadObjectId",
+                    "displayName",
+                    "type"
                 ],
                 "properties": {
-                "aadObjectId": {
-                    "type": "string",
-                    "format": "uuid"
-                },
-                "displayName": {
-                    "type": "string"
-                },
-                "type": {
-                    "type": "string",
-                    "enum": [
-                    "User",
-                    "ServicePrincipal",
-                    "System"
-                    ]
-                }
+                    "aadObjectId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "displayName": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "User",
+                            "ServicePrincipal",
+                            "System"
+                        ]
+                    }
                 }
             },
             "CloudMatrix.AuditEventOperation": {
                 "type": "object",
                 "additionalProperties": false,
                 "required": [
-                "action",
-                "entityType",
-                "entityId",
-                "blobPath"
+                    "action",
+                    "entityType",
+                    "entityId",
+                    "blobPath"
                 ],
                 "properties": {
-                "action": {
-                    "type": "string",
-                    "enum": [
-                    "CREATE",
-                    "UPDATE",
-                    "DELETE"
-                    ]
-                },
-                "entityType": {
-                    "type": "string"
-                },
-                "entityId": {
-                    "type": "string",
-                    "format": "uuid"
-                },
-                "blobPath": {
-                    "type": [
-                    "string",
-                    "null"
-                    ]
-                }
+                    "action": {
+                        "type": "string",
+                        "enum": [
+                            "CREATE",
+                            "UPDATE",
+                            "DELETE"
+                        ]
+                    },
+                    "entityType": {
+                        "type": "string"
+                    },
+                    "entityId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "blobPath": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    }
                 }
             },
             "CloudMatrix.AuditEventChanges": {
                 "type": "object",
                 "additionalProperties": false,
                 "required": [
-                "changedFields",
-                "before",
-                "after"
+                    "changedFields",
+                    "before",
+                    "after"
                 ],
                 "properties": {
-                "changedFields": {
-                    "type": "array",
-                    "items": {
-                    "type": "string"
+                    "changedFields": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "before": {
+                        "type": [
+                            "object",
+                            "null"
+                        ],
+                        "additionalProperties": true
+                    },
+                    "after": {
+                        "type": [
+                            "object",
+                            "null"
+                        ],
+                        "additionalProperties": true
                     }
-                },
-                "before": {
-                    "type": [
-                    "object",
-                    "null"
-                    ],
-                    "additionalProperties": true
-                },
-                "after": {
-                    "type": [
-                    "object",
-                    "null"
-                    ],
-                    "additionalProperties": true
-                }
                 }
             },
             "CloudMatrix.AuditEventContext": {
                 "type": "object",
                 "additionalProperties": false,
                 "required": [
-                "correlationId",
-                "source",
-                "application"
+                    "correlationId",
+                    "source",
+                    "application"
                 ],
                 "properties": {
-                "correlationId": {
-                    "type": [
-                    "string",
-                    "null"
-                    ],
-                    "format": "uuid"
-                },
-                "source": {
-                    "type": "string"
-                },
-                "application": {
-                    "type": "string"
-                }
+                    "correlationId": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "uuid"
+                    },
+                    "source": {
+                        "type": "string"
+                    },
+                    "application": {
+                        "type": "string"
+                    }
                 }
             },
             "CloudMatrix.AuditEvent": {
                 "type": "object",
                 "additionalProperties": false,
                 "required": [
-                "auditId",
-                "timestampUtc",
-                "actor",
-                "operation",
-                "changes",
-                "context"
+                    "auditId",
+                    "timestampUtc",
+                    "actor",
+                    "operation",
+                    "changes",
+                    "context"
                 ],
                 "properties": {
-                "auditId": {
-                    "type": "string",
-                    "format": "uuid"
-                },
-                "timestampUtc": {
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "actor": {
-                    "$ref": "#/components/schemas/CloudMatrix.AuditActor"
-                },
-                "operation": {
-                    "$ref": "#/components/schemas/CloudMatrix.AuditEventOperation"
-                },
-                "changes": {
-                    "$ref": "#/components/schemas/CloudMatrix.AuditEventChanges"
-                },
-                "context": {
-                    "$ref": "#/components/schemas/CloudMatrix.AuditEventContext"
-                }
-                },
-                "example": {
-                "auditId": "8c9d7e36-8b71-4b46-b4da-7d1f7fd9a001",
-                "timestampUtc": "2026-03-09T09:30:16.000Z",
-                "actor": {
-                    "aadObjectId": "3e4d5c6b-7a81-4f01-9a2b-1234567890ab",
-                    "displayName": "Joe Bloggs",
-                    "type": "User"
-                },
-                "operation": {
-                    "action": "UPDATE",
-                    "entityType": "Cloud Matrix Template",
-                    "entityId": "a12f2907-c781-4bf1-b912-b91510853052",
-                    "blobPath": "cloud-matrix/templates/microsoft-enterprise/6.0.1.1.json"
-                },
-                "changes": {
-                    "changedFields": [
-                    "name",
-                    "email",
-                    "lastName"
-                    ],
-                    "before": {
-                    "name": "Claudine Potter",
-                    "email": "claudine.potter@acme_widgets.com",
-                    "lastName": "Potter"
+                    "auditId": {
+                        "type": "string",
+                        "format": "uuid"
                     },
-                    "after": {
-                    "name": "Claudine Moore",
-                    "email": "claudine.moore@acme_widgets.com",
-                    "lastName": "Moore"
+                    "timestampUtc": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "actor": {
+                        "$ref": "#/components/schemas/CloudMatrix.AuditActor"
+                    },
+                    "operation": {
+                        "$ref": "#/components/schemas/CloudMatrix.AuditEventOperation"
+                    },
+                    "changes": {
+                        "$ref": "#/components/schemas/CloudMatrix.AuditEventChanges"
+                    },
+                    "context": {
+                        "$ref": "#/components/schemas/CloudMatrix.AuditEventContext"
                     }
                 },
-                "context": {
-                    "correlationId": "7d9b8d8f-08bb-46f7-b3cb-5d5df18b1d77",
-                    "source": "Cloud Matrix",
-                    "application": "CM Admin"
-                }
-                }
+                "examples": [
+                    {
+                        "auditId": "8c9d7e36-8b71-4b46-b4da-7d1f7fd9a001",
+                        "timestampUtc": "2026-03-09T09:30:16.000Z",
+                        "actor": {
+                            "aadObjectId": "3e4d5c6b-7a81-4f01-9a2b-1234567890ab",
+                            "displayName": "Joe Bloggs",
+                            "type": "User"
+                        },
+                        "operation": {
+                            "action": "UPDATE",
+                            "entityType": "Cloud Matrix Template",
+                            "entityId": "a12f2907-c781-4bf1-b912-b91510853052",
+                            "blobPath": "cloud-matrix/templates/microsoft-enterprise/6.0.1.1.json"
+                        },
+                        "changes": {
+                            "changedFields": [
+                                "name",
+                                "email",
+                                "lastName"
+                            ],
+                            "before": {
+                                "name": "Claudine Potter",
+                                "email": "claudine.potter@acme_widgets.com",
+                                "lastName": "Potter"
+                            },
+                            "after": {
+                                "name": "Claudine Moore",
+                                "email": "claudine.moore@acme_widgets.com",
+                                "lastName": "Moore"
+                            }
+                        },
+                        "context": {
+                            "correlationId": "7d9b8d8f-08bb-46f7-b3cb-5d5df18b1d77",
+                            "source": "Cloud Matrix",
+                            "application": "CM Admin"
+                        }
+                    }
+                ]
             },
             "CloudMatrix.AuditEventListResponse": {
                 "type": "object",
                 "additionalProperties": false,
                 "required": [
-                "items",
-                "offset",
-                "limit",
-                "nextOffset"
+                    "items",
+                    "offset",
+                    "limit",
+                    "nextOffset"
                 ],
                 "properties": {
-                "items": {
-                    "type": "array",
                     "items": {
-                    "$ref": "#/components/schemas/CloudMatrix.AuditEvent"
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/CloudMatrix.AuditEvent"
+                        }
+                    },
+                    "offset": {
+                        "type": "integer",
+                        "minimum": 0
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 1000
+                    },
+                    "nextOffset": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "minimum": 0
                     }
-                },
-                "offset": {
-                    "type": "integer",
-                    "minimum": 0
-                },
-                "limit": {
-                    "type": "integer",
-                    "minimum": 1,
-                    "maximum": 1000
-                },
-                "nextOffset": {
-                    "type": [
-                    "integer",
-                    "null"
-                    ],
-                    "minimum": 0
-                }
                 }
             }
         },
@@ -12053,7 +12054,7 @@
                     "Cloud Matrix"
                 ],
                 "summary": "Get Cloud Matrix audit events",
-                "description": "Returns a filtered, paginated list of Cloud Matrix audit events.",
+                "description": "Returns a filtered, paginated list of Cloud Matrix audit events.\n\nThis endpoint requires the `CloudMatrix.Read`, `CloudMatrix.Read.Del`, `CloudMatrix.Read.All`, `CloudMatrix.ReadWrite`, or `CloudMatrix.ReadWrite.All` scope (permission).",
                 "operationId": "/Api/CloudMatrix/Audits/Get",
                 "security": [
                     {
@@ -12121,7 +12122,7 @@
                     "Cloud Matrix"
                 ],
                 "summary": "Get a specific Cloud Matrix audit event",
-                "description": "Returns the specified Cloud Matrix audit event by audit ID.",
+                "description": "Returns the specified Cloud Matrix audit event by audit ID.\n\nThis endpoint requires the `CloudMatrix.Read`, `CloudMatrix.Read.Del`, `CloudMatrix.Read.All`, `CloudMatrix.ReadWrite`, or `CloudMatrix.ReadWrite.All` scope (permission).",
                 "operationId": "/Api/CloudMatrix/Audits/:auditId/Get",
                 "parameters": [
                     {
