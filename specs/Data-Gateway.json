@@ -249,6 +249,22 @@
                     "maximum": 1000,
                     "default": 50
                 }
+            },
+            "auditId": {
+                "description": "The unique identifier of the Cloud Matrix audit event.",
+                "in": "path",
+                "name": "auditId",
+                "required": true,
+                "schema": {
+                    "$ref": "#/components/schemas/Uuid"
+                },
+                "examples": {
+                    "Valid Audit ID": {
+                    "summary": "Example Valid Audit ID",
+                    "description": "An example UUID string that represents a valid Cloud Matrix audit event ID.",
+                    "value": "8c9d7e36-8b71-4b46-b4da-7d1f7fd9a001"
+                    }
+                }
             }
         },
         "responses": {
@@ -12033,70 +12049,118 @@
         },
         "/Api/CloudMatrix/Audits": {
             "get": {
-            "tags": [
-                "Cloud Matrix"
-            ],
-            "summary": "Get Cloud Matrix audit events",
-            "description": "Returns a filtered, paginated list of Cloud Matrix audit events.",
-            "operationId": "/Api/CloudMatrix/Audits/Get",
-            "security": [
-                {
-                "EntraID": []
-                }
-            ],
-            "parameters": [
-                {
-                "$ref": "#/components/parameters/auditActor"
-                },
-                {
-                "$ref": "#/components/parameters/auditEntityType"
-                },
-                {
-                "$ref": "#/components/parameters/auditEntityId"
-                },
-                {
-                "$ref": "#/components/parameters/auditStartDate"
-                },
-                {
-                "$ref": "#/components/parameters/auditEndDate"
-                },
-                {
-                "$ref": "#/components/parameters/auditOffset"
-                },
-                {
-                "$ref": "#/components/parameters/auditLimit"
-                }
-            ],
-            "responses": {
-                "200": {
-                "description": "Cloud Matrix audit events retrieved successfully.",
-                "content": {
-                    "application/json": {
-                    "schema": {
-                        "$ref": "#/components/schemas/CloudMatrix.AuditEventListResponse"
+                "tags": [
+                    "Cloud Matrix"
+                ],
+                "summary": "Get Cloud Matrix audit events",
+                "description": "Returns a filtered, paginated list of Cloud Matrix audit events.",
+                "operationId": "/Api/CloudMatrix/Audits/Get",
+                "security": [
+                    {
+                        "EntraID": []
                     }
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/auditActor"
+                    },
+                    {
+                        "$ref": "#/components/parameters/auditEntityType"
+                    },
+                    {
+                        "$ref": "#/components/parameters/auditEntityId"
+                    },
+                    {
+                        "$ref": "#/components/parameters/auditStartDate"
+                    },
+                    {
+                        "$ref": "#/components/parameters/auditEndDate"
+                    },
+                    {
+                        "$ref": "#/components/parameters/auditOffset"
+                    },
+                    {
+                        "$ref": "#/components/parameters/auditLimit"
                     }
-                }
-                },
-                "400": {
-                "$ref": "#/components/responses/400"
-                },
-                "401": {
-                "$ref": "#/components/responses/401"
-                },
-                "403": {
-                "$ref": "#/components/responses/403"
-                },
-                "500": {
-                "$ref": "#/components/responses/500"
-                },
-                "503": {
-                "$ref": "#/components/responses/503"
-                },
-                "525": {
-                "$ref": "#/components/responses/525"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cloud Matrix audit events retrieved successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CloudMatrix.AuditEventListResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    },
+                    "503": {
+                        "$ref": "#/components/responses/503"
+                    },
+                    "525": {
+                        "$ref": "#/components/responses/525"
+                    }
                 }
             }
+        },
+        "/Api/CloudMatrix/Audits/{auditId}": {
+            "get": {
+                "tags": [
+                    "Cloud Matrix"
+                ],
+                "summary": "Get a specific Cloud Matrix audit event",
+                "description": "Returns the specified Cloud Matrix audit event by audit ID.",
+                "operationId": "/Api/CloudMatrix/Audits/:auditId/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/auditId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cloud Matrix audit event retrieved successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CloudMatrix.AuditEvent"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    },
+                    "503": {
+                        "$ref": "#/components/responses/503"
+                    },
+                    "525": {
+                        "$ref": "#/components/responses/525"
+                    }
+                }
             }
         }
     },
