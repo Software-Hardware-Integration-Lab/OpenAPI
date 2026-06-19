@@ -180,6 +180,77 @@
                         "value": "5a2f4c89-7d68-4f2e-8d40-2dca5d5a5c11"
                     }
                 }
+            },
+            "auditActor": {
+                "name": "actor",
+                "in": "query",
+                "description": "Optional actor display name filter.",
+                "required": false,
+                "schema": {
+                    "type": "string"
+                }
+            },
+            "auditEntityType": {
+                "name": "entityType",
+                "in": "query",
+                "description": "Optional logical entity type filter.",
+                "required": false,
+                "schema": {
+                    "type": "string"
+                }
+            },
+            "auditEntityId": {
+                "name": "entityId",
+                "in": "query",
+                "description": "Optional entity identifier filter. Must be a GUID when provided.",
+                "required": false,
+                "schema": {
+                    "type": "string",
+                    "format": "uuid"
+                }
+            },
+            "auditStartDate": {
+                "name": "startDate",
+                "in": "query",
+                "description": "Optional inclusive lower bound for event timestamp filtering.",
+                "required": false,
+                "schema": {
+                    "type": "string",
+                    "format": "date-time"
+                }
+            },
+            "auditEndDate": {
+                "name": "endDate",
+                "in": "query",
+                "description": "Optional inclusive upper bound for event timestamp filtering.",
+                "required": false,
+                "schema": {
+                    "type": "string",
+                    "format": "date-time"
+                }
+            },
+            "auditOffset": {
+                "name": "offset",
+                "in": "query",
+                "description": "Zero-based pagination offset.",
+                "required": false,
+                "schema": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "default": 0
+                }
+            },
+            "auditLimit": {
+                "name": "limit",
+                "in": "query",
+                "description": "Page size. Must be between 1 and 1000.",
+                "required": false,
+                "schema": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 1000,
+                    "default": 50
+                }
             }
         },
         "responses": {
@@ -4957,6 +5028,225 @@
                         }
                     }
                 ]
+            },
+            "CloudMatrix.AuditActor": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                "aadObjectId",
+                "displayName",
+                "type"
+                ],
+                "properties": {
+                "aadObjectId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "displayName": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                    "User",
+                    "ServicePrincipal",
+                    "System"
+                    ]
+                }
+                }
+            },
+            "CloudMatrix.AuditEventOperation": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                "action",
+                "entityType",
+                "entityId",
+                "blobPath"
+                ],
+                "properties": {
+                "action": {
+                    "type": "string",
+                    "enum": [
+                    "CREATE",
+                    "UPDATE",
+                    "DELETE"
+                    ]
+                },
+                "entityType": {
+                    "type": "string"
+                },
+                "entityId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "blobPath": {
+                    "type": [
+                    "string",
+                    "null"
+                    ]
+                }
+                }
+            },
+            "CloudMatrix.AuditEventChanges": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                "changedFields",
+                "before",
+                "after"
+                ],
+                "properties": {
+                "changedFields": {
+                    "type": "array",
+                    "items": {
+                    "type": "string"
+                    }
+                },
+                "before": {
+                    "type": [
+                    "object",
+                    "null"
+                    ],
+                    "additionalProperties": true
+                },
+                "after": {
+                    "type": [
+                    "object",
+                    "null"
+                    ],
+                    "additionalProperties": true
+                }
+                }
+            },
+            "CloudMatrix.AuditEventContext": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                "correlationId",
+                "source",
+                "application"
+                ],
+                "properties": {
+                "correlationId": {
+                    "type": [
+                    "string",
+                    "null"
+                    ],
+                    "format": "uuid"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "application": {
+                    "type": "string"
+                }
+                }
+            },
+            "CloudMatrix.AuditEvent": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                "auditId",
+                "timestampUtc",
+                "actor",
+                "operation",
+                "changes",
+                "context"
+                ],
+                "properties": {
+                "auditId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "timestampUtc": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "actor": {
+                    "$ref": "#/components/schemas/CloudMatrix.AuditActor"
+                },
+                "operation": {
+                    "$ref": "#/components/schemas/CloudMatrix.AuditEventOperation"
+                },
+                "changes": {
+                    "$ref": "#/components/schemas/CloudMatrix.AuditEventChanges"
+                },
+                "context": {
+                    "$ref": "#/components/schemas/CloudMatrix.AuditEventContext"
+                }
+                },
+                "example": {
+                "auditId": "8c9d7e36-8b71-4b46-b4da-7d1f7fd9a001",
+                "timestampUtc": "2026-03-09T09:30:16.000Z",
+                "actor": {
+                    "aadObjectId": "3e4d5c6b-7a81-4f01-9a2b-1234567890ab",
+                    "displayName": "Joe Bloggs",
+                    "type": "User"
+                },
+                "operation": {
+                    "action": "UPDATE",
+                    "entityType": "Cloud Matrix Template",
+                    "entityId": "a12f2907-c781-4bf1-b912-b91510853052",
+                    "blobPath": "cloud-matrix/templates/microsoft-enterprise/6.0.1.1.json"
+                },
+                "changes": {
+                    "changedFields": [
+                    "name",
+                    "email",
+                    "lastName"
+                    ],
+                    "before": {
+                    "name": "Claudine Potter",
+                    "email": "claudine.potter@acme_widgets.com",
+                    "lastName": "Potter"
+                    },
+                    "after": {
+                    "name": "Claudine Moore",
+                    "email": "claudine.moore@acme_widgets.com",
+                    "lastName": "Moore"
+                    }
+                },
+                "context": {
+                    "correlationId": "7d9b8d8f-08bb-46f7-b3cb-5d5df18b1d77",
+                    "source": "Cloud Matrix",
+                    "application": "CM Admin"
+                }
+                }
+            },
+            "CloudMatrix.AuditEventListResponse": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                "items",
+                "offset",
+                "limit",
+                "nextOffset"
+                ],
+                "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                    "$ref": "#/components/schemas/CloudMatrix.AuditEvent"
+                    }
+                },
+                "offset": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "limit": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 1000
+                },
+                "nextOffset": {
+                    "type": [
+                    "integer",
+                    "null"
+                    ],
+                    "minimum": 0
+                }
+                }
             }
         },
         "securitySchemes": {
@@ -11741,6 +12031,74 @@
                     "Cloud Matrix"
                 ],
                 "summary": "Upload and Replace the List of Cloud Matrix Third-Party Publishers"
+            }
+        },
+        "/Api/CloudMatrix/Audits": {
+            "get": {
+            "tags": [
+                "Cloud Matrix"
+            ],
+            "summary": "Get Cloud Matrix audit events",
+            "description": "Returns a filtered, paginated list of Cloud Matrix audit events.",
+            "operationId": "getCloudMatrixAuditEvents",
+            "security": [
+                {
+                "EntraID": []
+                }
+            ],
+            "parameters": [
+                {
+                "$ref": "#/components/parameters/auditActor"
+                },
+                {
+                "$ref": "#/components/parameters/auditEntityType"
+                },
+                {
+                "$ref": "#/components/parameters/auditEntityId"
+                },
+                {
+                "$ref": "#/components/parameters/auditStartDate"
+                },
+                {
+                "$ref": "#/components/parameters/auditEndDate"
+                },
+                {
+                "$ref": "#/components/parameters/auditOffset"
+                },
+                {
+                "$ref": "#/components/parameters/auditLimit"
+                }
+            ],
+            "responses": {
+                "200": {
+                "description": "Cloud Matrix audit events retrieved successfully.",
+                "content": {
+                    "application/json": {
+                    "schema": {
+                        "$ref": "#/components/schemas/CloudMatrix.AuditEventListResponse"
+                    }
+                    }
+                }
+                },
+                "400": {
+                "$ref": "#/components/responses/400"
+                },
+                "401": {
+                "$ref": "#/components/responses/401"
+                },
+                "403": {
+                "$ref": "#/components/responses/403"
+                },
+                "500": {
+                "$ref": "#/components/responses/500"
+                },
+                "503": {
+                "$ref": "#/components/responses/503"
+                },
+                "525": {
+                "$ref": "#/components/responses/525"
+                }
+            }
             }
         }
     },
