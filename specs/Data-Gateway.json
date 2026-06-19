@@ -215,8 +215,7 @@
                 "description": "Optional inclusive lower bound for event timestamp filtering.",
                 "required": false,
                 "schema": {
-                    "type": "string",
-                    "format": "date-time"
+                    "$ref": "#/components/schemas/DateTimeStringType"
                 }
             },
             "auditEndDate": {
@@ -225,8 +224,7 @@
                 "description": "Optional inclusive upper bound for event timestamp filtering.",
                 "required": false,
                 "schema": {
-                    "type": "string",
-                    "format": "date-time"
+                    "$ref": "#/components/schemas/DateTimeStringType"
                 }
             },
             "auditOffset": {
@@ -12040,7 +12038,7 @@
             ],
             "summary": "Get Cloud Matrix audit events",
             "description": "Returns a filtered, paginated list of Cloud Matrix audit events.",
-            "operationId": "getCloudMatrixAuditEvents",
+            "operationId": "/Api/CloudMatrix/Audits/Get",
             "security": [
                 {
                 "EntraID": []
