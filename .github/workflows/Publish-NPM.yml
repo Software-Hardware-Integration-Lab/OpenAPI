@@ -45,7 +45,7 @@ jobs:
         steps:
             # Download all of the source code
             - name: Clone Repo Locally
-              uses: actions/checkout@v6
+              uses: actions/checkout@v7
 
             # Set up NodeJS on the build host
             - name: Setup Node.JS Runtime
