@@ -181,10 +181,10 @@
                     }
                 }
             },
-            "auditActor": {
-                "name": "actor",
+            "auditLastUpdatedBy": {
+                "name": "lastUpdatedBy",
                 "in": "query",
-                "description": "Optional actor display name filter.",
+                "description": "Optional last updated by user filter.",
                 "required": false,
                 "schema": {
                     "type": "string"
@@ -5042,31 +5042,9 @@
                     }
                 ]
             },
-            "CloudMatrix.AuditActor": {
-                "type": "object",
-                "additionalProperties": false,
-                "required": [
-                    "aadObjectId",
-                    "displayName",
-                    "type"
-                ],
-                "properties": {
-                    "aadObjectId": {
-                        "type": "string",
-                        "format": "uuid"
-                    },
-                    "displayName": {
-                        "type": "string"
-                    },
-                    "type": {
-                        "type": "string",
-                        "enum": [
-                            "User",
-                            "ServicePrincipal",
-                            "System"
-                        ]
-                    }
-                }
+            "CloudMatrix.LastUpdatedBy": {
+                "type": "string",
+                "description": "User who last updated the entity."
             },
             "CloudMatrix.AuditEventOperation": {
                 "type": "object",
@@ -5162,7 +5140,7 @@
                 "required": [
                     "auditId",
                     "timestampUtc",
-                    "actor",
+                    "lastUpdatedBy",
                     "operation",
                     "changes",
                     "context"
@@ -5176,8 +5154,8 @@
                         "type": "string",
                         "format": "date-time"
                     },
-                    "actor": {
-                        "$ref": "#/components/schemas/CloudMatrix.AuditActor"
+                    "lastUpdatedBy": {
+                        "$ref": "#/components/schemas/CloudMatrix.LastUpdatedBy"
                     },
                     "operation": {
                         "$ref": "#/components/schemas/CloudMatrix.AuditEventOperation"
@@ -5193,11 +5171,7 @@
                     {
                         "auditId": "8c9d7e36-8b71-4b46-b4da-7d1f7fd9a001",
                         "timestampUtc": "2026-03-09T09:30:16.000Z",
-                        "actor": {
-                            "aadObjectId": "3e4d5c6b-7a81-4f01-9a2b-1234567890ab",
-                            "displayName": "Joe Bloggs",
-                            "type": "User"
-                        },
+                        "lastUpdatedBy": "Joe Bloggs",
                         "operation": {
                             "action": "UPDATE",
                             "entityType": "Cloud Matrix Template",
@@ -12063,7 +12037,7 @@
                 ],
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/auditActor"
+                        "$ref": "#/components/parameters/auditLastUpdatedBy"
                     },
                     {
                         "$ref": "#/components/parameters/auditEntityType"
