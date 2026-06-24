@@ -12251,7 +12251,7 @@
                     "Cloud Matrix"
                 ],
                 "summary": "Get a specific Cloud Matrix audit event",
-                "description": "Returns the specified Cloud Matrix audit event by audit ID.\n\nThis endpoint requires the `CloudMatrix.Read`.",
+                "description": "Returns the specified Cloud Matrix audit event by audit ID.\n\nThis endpoint requires the `CloudMatrix.Read` scope (permission).",
                 "operationId": "/Api/CloudMatrix/Audits/:auditId/Get",
                 "parameters": [
                     {
@@ -12294,6 +12294,11 @@
             }
         }
     },
+    "security": [
+        {
+            "EntraID": []
+        }
+    ],
     "servers": [
         {
             "description": "Server the hosts the API described in the document.",
