@@ -12188,13 +12188,8 @@
                     "Cloud Matrix"
                 ],
                 "summary": "Get Cloud Matrix audit events",
-                "description": "Returns a filtered, paginated list of Cloud Matrix audit events.\n\nThis endpoint requires the `CloudMatrix.Read`, `CloudMatrix.Read.Del`, `CloudMatrix.Read.All`, `CloudMatrix.ReadWrite`, or `CloudMatrix.ReadWrite.All` scope (permission).",
+                "description": "Returns a filtered, paginated list of Cloud Matrix audit events.\n\nThis endpoint requires the `CloudMatrix.Read` scope (permission).",
                 "operationId": "/Api/CloudMatrix/Audits/Get",
-                "security": [
-                    {
-                        "EntraID": []
-                    }
-                ],
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/auditLastUpdatedBy"
@@ -12256,7 +12251,7 @@
                     "Cloud Matrix"
                 ],
                 "summary": "Get a specific Cloud Matrix audit event",
-                "description": "Returns the specified Cloud Matrix audit event by audit ID.\n\nThis endpoint requires the `CloudMatrix.Read`, `CloudMatrix.Read.Del`, `CloudMatrix.Read.All`, `CloudMatrix.ReadWrite`, or `CloudMatrix.ReadWrite.All` scope (permission).",
+                "description": "Returns the specified Cloud Matrix audit event by audit ID.\n\nThis endpoint requires the `CloudMatrix.Read`.",
                 "operationId": "/Api/CloudMatrix/Audits/:auditId/Get",
                 "parameters": [
                     {
@@ -12299,11 +12294,6 @@
             }
         }
     },
-    "security": [
-        {
-            "EntraID": []
-        }
-    ],
     "servers": [
         {
             "description": "Server the hosts the API described in the document.",
