@@ -45,7 +45,7 @@
         "@azure/core-auth": "~1.10.1",
         "@shi-corp/development-utilities": "~2.2.0",
         "@types/node": "~25.9.1",
-        "ts-patch": "~3.3.0",
+        "ts-patch": "~4.0.1",
         "typescript": "~5.9.3"
     },
     "dependencies": {
