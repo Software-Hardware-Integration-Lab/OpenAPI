@@ -565,7 +565,7 @@
                                 false
                             ]
                         },
-                        "configTagList": {
+                        "groupTagList": {
                             "type": "array",
                             "description": "List of configuration tags that are a part of this architecture.",
                             "minItems": 0,
