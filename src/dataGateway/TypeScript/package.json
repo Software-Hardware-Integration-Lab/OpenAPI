@@ -16,11 +16,11 @@
     "bugs": {
         "url": "https://github.com/Software-Hardware-Integration-Lab/OpenAPI/issues"
     },
-    "packageManager": "npm@11.15.0",
+    "packageManager": "npm@11.18.0",
     "devEngines": {
         "runtime": {
             "name": "node",
-            "version": ">=24.13.0",
+            "version": ">=24.15.0",
             "onFail": "error"
         },
         "packageManager": {
@@ -44,13 +44,13 @@
     "devDependencies": {
         "@azure/core-auth": "~1.10.1",
         "@shi-corp/development-utilities": "~2.2.0",
-        "@types/node": "~25.9.1",
+        "@types/node": "~26.0.1",
         "ts-patch": "~3.3.0",
         "typescript": "~5.9.3"
     },
     "dependencies": {
-        "@microsoft/kiota-authentication-azure": "~1.0.0-preview.100",
-        "@microsoft/kiota-bundle": "~1.0.0-preview.100",
+        "@microsoft/kiota-authentication-azure": "~1.0.0-preview.103",
+        "@microsoft/kiota-bundle": "~1.0.0-preview.103",
         "typia": "~12.1.1"
     },
     "overrides": {
@@ -212,5 +212,8 @@
         "which-boxed-primitive": "npm:@socketregistry/which-boxed-primitive@^1",
         "which-collection": "npm:@socketregistry/which-collection@^1",
         "which-typed-array": "npm:@socketregistry/which-typed-array@^1"
+    },
+    "allowScripts": {
+        "unrs-resolver@1.12.2": true
     }
 }
