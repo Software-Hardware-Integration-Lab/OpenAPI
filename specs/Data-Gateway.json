@@ -8224,14 +8224,95 @@
                 ]
             }
         },
-        "/Api/Update/Shield/Channel/{channelName}/Version/{version}": {
+        "/Api/Update/Shield/Channel/Stable/Version/{version}": {
             "post": {
-                "description": "Uploads new version of the update package for SHIELD in a specific channel.\n\nThis endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible from the `SHI Lab` tenant. End user access is restricted.",
-                "operationId": "/Api/Update/Shield/Channel/:channelName/Version/:version/Post",
+                "description": "Uploads new version of the update package for SHIELD in a specific channel.\n\nThis endpoint requires the `UpdateShield.ReadWrite.All`, or the `UpdateShield.Actions.Publish.Stable.All` scope (permission). This endpoint is also only accessible from the `SHI Lab` tenant. End user access is restricted.",
+                "operationId": "/Api/Update/Shield/Channel/Stable/Version/:version/Post",
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/channelName"
+                        "$ref": "#/components/parameters/version"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/octet-stream": {
+                            "schema": {
+                                "type": "string",
+                                "format": "binary"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "OK"
                     },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "500": {
+                        "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
+                    }
+                },
+                "summary": "Uploads New Application Package",
+                "tags": [
+                    "SHIELD - Update"
+                ]
+            }
+        },
+        "/Api/Update/Shield/Channel/Beta/Version/{version}": {
+            "post": {
+                "description": "Uploads new version of the update package for SHIELD in a specific channel.\n\nThis endpoint requires the `UpdateShield.ReadWrite.All`, or the `UpdateShield.Actions.Publish.Beta.All` scopes (permission). This endpoint is also only accessible from the `SHI Lab` tenant. End user access is restricted.",
+                "operationId": "/Api/Update/Shield/Channel/Beta/Version/:version/Post",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/version"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/octet-stream": {
+                            "schema": {
+                                "type": "string",
+                                "format": "binary"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "500": {
+                        "description": "Request has a failure that cannot be resolved and might require manual intervention or retry."
+                    }
+                },
+                "summary": "Uploads New Application Package",
+                "tags": [
+                    "SHIELD - Update"
+                ]
+            }
+        },
+        "/Api/Update/Shield/Channel/Alpha/Version/{version}": {
+            "post": {
+                "description": "Uploads new version of the update package for SHIELD in a specific channel.\n\nThis endpoint requires the `UpdateShield.ReadWrite.All`, or the `UpdateShield.Actions.Publish.Alpha.All` scopes (permission). This endpoint is also only accessible from the `SHI Lab` tenant. End user access is restricted.",
+                "operationId": "/Api/Update/Shield/Channel/Alpha/Version/:version/Post",
+                "parameters": [
                     {
                         "$ref": "#/components/parameters/version"
                     }
