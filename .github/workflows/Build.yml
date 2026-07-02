@@ -94,7 +94,7 @@ jobs:
               working-directory: ${{ matrix.specifications.sdkPath }}
 
               # Set up NodeJS on the build host
-            - name: Setup Node.JS Runtime
+            - name: Reconfigure Node.JS Runtime
               uses: actions/setup-node@v6
               with:
                   node-version: 24
@@ -113,8 +113,10 @@ jobs:
 
             # Publish the artifact to NPM with attestation
             - name: Upload Package to NPM Registry
-              run: npm publish --tag alpha
               working-directory: ${{ matrix.specifications.sdkPath }}
+              env:
+                  NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: npm publish --tag alpha
 
             # Generate the NPM package for beta and stable publishing, if required
             - name: Generate NPM Package
