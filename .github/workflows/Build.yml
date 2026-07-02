@@ -1,0 +1,157 @@
+# Display Name of the workflow
+name: Build - GH Packages and Artifacts
+
+# Event listeners for when the job should start execution
+on:
+    # Triggers the workflow on push or pull request events to the main branch
+    push:
+        branches: [main]
+
+    # Allow this workflow to be called from another workflow
+    workflow_call:
+        inputs:
+            correlationId:
+                description: 'Correlates the origin job with the child instance since process start does not return an ID.'
+                type: string
+                required: false
+
+jobs:
+    # Generate the TypeScript SDK client code
+    TypeScript-Build:
+        # Generate each SDK client in a separate build process to speed up execution and publishing
+        strategy:
+            matrix:
+                # Spec and SDK root locations
+                specifications:
+                    - name: SHIELD
+                      sdkPath: 'src/shield/TypeScript'
+                      specPath: 'spec/SHIELD.json'
+                    - name: DataGateway
+                      sdkPath: 'src/dataGateway/TypeScript'
+                      specPath: 'spec/Data-Gateway.json'
+                    - name: UrlShortener
+                      sdkPath: 'src/urlShortener/TypeScript'
+                      specPath: 'spec/Url-Shortener.json'
+
+        # Display name of the job
+        name: Generate NPM Packages
+
+        # Operating system filter for the runners
+        runs-on: ubuntu-latest
+
+        # Allow single failures for SDK publish, e.g. SDG fail due to not getting an update but SHIELD goes through
+        continue-on-error: true
+
+        # Sets the scopes available to the github_token injected to the GH Actions runner
+        permissions:
+            attestations: write
+            contents: read
+            packages: write
+
+        # Set of steps required to generate the API client for TypeScript
+        steps:
+            # Download all of the source code
+            - name: Clone Repo Locally
+              uses: actions/checkout@v7
+              background: true
+
+            # Set up NodeJS on the build host
+            - name: Setup Node.JS Runtime
+              uses: actions/setup-node@v6
+              background: true
+              with:
+                  node-version: 24
+                  registry-url: https://npm.pkg.github.com
+                  scope: shi-corp
+
+            # Set up the socket firewall binary
+            - name: Install - Socket Firewall
+              uses: SocketDev/action@ba6de6cc0565af1f42295590380973573297e31f
+              background: true
+              with:
+                  mode: firewall-free
+
+            # Set up all of the supporting components for SDK generation
+            - name: Initialize Kiota Binaries
+              uses: microsoft/setup-kiota@v0.5.0
+              background: true
+
+            # Bring job back to sync execution by awaiting for all async jobs to finish before continuing
+            - name: Steps - Convert Back To Synchronous Execution - Build
+              wait-all: true
+
+            # Update the NPM CLI to the latest available version
+            - name: Update NPM CLI
+              run: sfw npm install -g npm
+
+            # Install the dependencies needed to build the project
+            - name: Install Build Dependencies
+              run: sfw npm ci
+              working-directory: ${{ matrix.specifications.sdkPath }}
+
+            # Cryptographically attest that packages haven't been tampered where supported
+            - name: Attest Dependency Provenance
+              run: npm audit signatures
+              working-directory: ${{ matrix.specifications.sdkPath }}
+
+            # Generate the TypeScript SDK
+            - name: Generate SDK Client Code via Kiota
+              run: npm run generate:Sdk
+              working-directory: ${{ matrix.specifications.sdkPath }}
+
+            # Generate the TypeScript SDK
+            - name: Build Project
+              run: npm run build:Prod
+              working-directory: ${{ matrix.specifications.sdkPath }}
+
+            # Publish the artifact to NPM with attestation
+            - name: Upload Package to NPM Registry
+              run: npm publish --tag alpha
+              working-directory: ${{ matrix.specifications.sdkPath }}
+
+            # Generate the NPM package for beta and stable publishing, if required
+            - name: Generate NPM Package
+              id: generate-package
+              shell: bash
+              working-directory: ${{ matrix.specifications.sdkPath }}
+              run: |
+                  set -euo pipefail
+
+                  PACK_OUTPUT_FILE="$RUNNER_TEMP/npm-pack-output.json"
+                  npm pack --json > "$PACK_OUTPUT_FILE" 2>&1
+                  sed -i '/^\[+\]/d' "$PACK_OUTPUT_FILE"
+
+                  PACKAGE_FILE=$(node -e '
+                      const fs = require("fs");
+                      const filePath = process.argv[1];
+                      const contents = fs.readFileSync(filePath, "utf8")
+                          .split(/\r?\n/)
+                          .filter((line) => line.trim() && !line.trim().startsWith("[+]"))
+                          .join("\n");
+
+                      const data = JSON.parse(contents);
+                      const filename = Array.isArray(data) ? data[0]?.filename : data?.filename;
+
+                      if (!filename) {
+                          console.error("No filename found in npm pack output.");
+                          process.exit(1);
+                      }
+
+                      console.log(filename);
+                  ' "$PACK_OUTPUT_FILE")
+
+                  echo "package-file=$PACKAGE_FILE" >> "$GITHUB_OUTPUT"
+
+            # Create an attestation for the generated NPM package to ensure integrity and authenticity
+            - name: Attest NPM Package
+              uses: actions/attest@v4
+              with:
+                  subject-path: ${{ matrix.specifications.sdkPath }}/${{ steps.generate-package.outputs.package-file }}
+
+            # Upload the compiled HTML as an artifact for future consumption
+            - name: Upload a Build Artifact
+              uses: actions/upload-artifact@v7
+              with:
+                  name: ${{ matrix.specifications.name }}
+                  if-no-files-found: error
+                  path: ${{ matrix.specifications.sdkPath }}/${{ steps.generate-package.outputs.package-file }}
