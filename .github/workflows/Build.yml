@@ -61,7 +61,6 @@ jobs:
               background: true
               with:
                   node-version: 24
-                  registry-url: https://npm.pkg.github.com
                   scope: shi-corp
 
             # Set up the socket firewall binary
@@ -91,8 +90,16 @@ jobs:
 
             # Cryptographically attest that packages haven't been tampered where supported
             - name: Attest Dependency Provenance
-              run: npm audit signatures --registry=https://registry.npmjs.org
+              run: npm audit signatures
               working-directory: ${{ matrix.specifications.sdkPath }}
+
+              # Set up NodeJS on the build host
+            - name: Setup Node.JS Runtime
+              uses: actions/setup-node@v6
+              with:
+                  node-version: 24
+                  registry-url: https://npm.pkg.github.com
+                  scope: shi-corp
 
             # Generate the TypeScript SDK
             - name: Generate SDK Client Code via Kiota
