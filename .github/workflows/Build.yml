@@ -61,7 +61,7 @@ jobs:
               background: true
               with:
                   node-version: 24
-                  scope: shi-corp
+                  scope: software-hardware-integration-lab
 
             # Set up the socket firewall binary
             - name: Install - Socket Firewall
