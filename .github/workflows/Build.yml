@@ -61,6 +61,7 @@ jobs:
               background: true
               with:
                   node-version: 24
+                  registry-url: https://npm.pkg.github.com
                   scope: software-hardware-integration-lab
 
             # Set up the socket firewall binary
@@ -92,14 +93,6 @@ jobs:
             - name: Attest Dependency Provenance
               run: npm audit signatures
               working-directory: ${{ matrix.specifications.sdkPath }}
-
-              # Set up NodeJS on the build host
-            - name: Reconfigure Node.JS Runtime
-              uses: actions/setup-node@v6
-              with:
-                  node-version: 24
-                  registry-url: https://npm.pkg.github.com
-                  scope: shi-corp
 
             # Generate the TypeScript SDK
             - name: Generate SDK Client Code via Kiota
