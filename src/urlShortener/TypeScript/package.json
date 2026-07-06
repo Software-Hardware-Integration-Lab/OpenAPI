@@ -1,5 +1,5 @@
 {
-    "name": "@shi-corp/sdk-url-shortener",
+    "name": "@software-hardware-integration-lab/sdk-url-shortener",
     "version": "1.0.1",
     "type": "module",
     "main": "bin/index.js",

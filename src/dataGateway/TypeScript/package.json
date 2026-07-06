@@ -1,5 +1,5 @@
 {
-    "name": "@shi-corp/sdk-data-gateway",
+    "name": "@software-hardware-integration-lab/sdk-data-gateway",
     "version": "3.3.1",
     "type": "module",
     "main": "bin/index.js",

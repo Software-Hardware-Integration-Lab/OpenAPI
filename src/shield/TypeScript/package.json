@@ -1,5 +1,5 @@
 {
-    "name": "@shi-corp/sdk-shield",
+    "name": "@software-hardware-integration-lab/sdk-shield",
     "version": "3.5.2",
     "type": "module",
     "main": "bin/index.js",
