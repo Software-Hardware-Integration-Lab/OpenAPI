@@ -114,35 +114,12 @@ jobs:
             # Generate the NPM package for beta and stable publishing, if required
             - name: Generate NPM Package
               id: generate-package
-              shell: bash
+              shell: pwsh
               working-directory: ${{ matrix.specifications.sdkPath }}
               run: |
-                  set -euo pipefail
-
-                  PACK_OUTPUT_FILE="$RUNNER_TEMP/npm-pack-output.json"
-                  npm pack --json > "$PACK_OUTPUT_FILE" 2>&1
-                  sed -i '/^\[+\]/d' "$PACK_OUTPUT_FILE"
-
-                  PACKAGE_FILE=$(node -e '
-                      const fs = require("fs");
-                      const filePath = process.argv[1];
-                      const contents = fs.readFileSync(filePath, "utf8")
-                          .split(/\r?\n/)
-                          .filter((line) => line.trim() && !line.trim().startsWith("[+]"))
-                          .join("\n");
-
-                      const data = JSON.parse(contents);
-                      const filename = Array.isArray(data) ? data[0]?.filename : data?.filename;
-
-                      if (!filename) {
-                          console.error("No filename found in npm pack output.");
-                          process.exit(1);
-                      }
-
-                      console.log(filename);
-                  ' "$PACK_OUTPUT_FILE")
-
-                  echo "package-file=$PACKAGE_FILE" >> "$GITHUB_OUTPUT"
+                  npm pack
+                  $packageFile = Get-ChildItem -File -Name -Filter "shi-corp*.tgz" | Select-Object -First 1
+                  "package-file=$packageFile" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
 
             # Create an attestation for the generated NPM package to ensure integrity and authenticity
             - name: Attest NPM Package
