@@ -85,6 +85,7 @@ jobs:
             - name: Extract Project Version
               id: computedVersion
               background: true
+              working-directory: ${{ matrix.specifications.sdkPath }}
               run: echo "version=$(npm pkg get version --workspaces=false | tr -d \")" >> "$GITHUB_OUTPUT"
 
             # Set the experimental tag to indicate if it is an Alpha or Beta build
@@ -107,7 +108,7 @@ jobs:
               run: echo "shortSha=$(echo ${{ github.sha }} | head -c 7)" >> "$GITHUB_OUTPUT"
 
             # Bring job back to sync execution by awaiting for all async jobs to finish before continuing
-            - name: Steps - Convert Back To Synchronous Execution
+            - name: Steps - Convert Back To Synchronous Execution - Metadata
               wait-all: true
 
             # Update the NPM CLI to the latest available version
