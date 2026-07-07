@@ -5283,8 +5283,7 @@
                 ],
                 "properties": {
                     "correlationId": {
-                        "type": "string",
-                        "format":"uuid",
+                            "$ref": "#/components/schemas/Uuid",
                         "description": "Matches ID from whatever is being audited."
                     },
                     "name": {
