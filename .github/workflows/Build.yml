@@ -16,6 +16,72 @@ on:
                 required: false
 
 jobs:
+    # Calculates the tag and channel metadata based on the event that triggered the workflow, and making that data available to downstream jobs through outputs.
+    Deploy-Metadata:
+        # Human friendly display name for the job
+        name: Calculate Deployment Metadata
+
+        # Operating system that the job will run on
+        runs-on: ubuntu-slim
+
+        # Sets the scopes available to the github_token injected to the GH Actions runner
+        permissions:
+            # Read the files in the repository to be able to compute the version from the package.json.
+            contents: read
+
+        # Set of data that will be made available to downstream jobs.
+        outputs:
+            channel: ${{ steps.computedChannel.outputs.channel }}
+            environment: ${{ steps.computedGitHubEnvironment.outputs.environment }}
+            shortSha: ${{ steps.shortSha.outputs.shortSha }}
+            version: ${{ steps.computedVersion.outputs.version }}
+
+        # Set of actions to perform for this execution sandbox
+        steps:
+            # Download the source code
+            - name: Checkout Files from Repo
+              uses: actions/checkout@v7
+
+            # Extract the project version from the package.json
+            - name: Extract Project Version
+              id: computedVersion
+              background: true
+              run: echo "version=$(npm pkg get version --workspaces=false | tr -d \")" >> "$GITHUB_OUTPUT"
+
+            # Set the experimental tag to indicate if it is an Alpha or Beta build
+            - name: Compute Channel
+              id: computedChannel
+              background: true
+              run: |
+                  if [ "${{ github.event_name }}" = "release" ] && [ "${{ github.event.release.prerelease }}" = "true" ]; then
+                    echo "channel=beta" >> "$GITHUB_OUTPUT"
+                  elif [ "${{ github.event_name }}" = "release" ]; then
+                    echo "channel=stable" >> "$GITHUB_OUTPUT"
+                  else
+                    echo "channel=alpha" >> "$GITHUB_OUTPUT"
+                  fi
+
+            # Compute the GitHub Environment to be used by the deployment
+            - name: Compute GitHub Environment
+              id: computedGitHubEnvironment
+              background: true
+              run: |
+                  if [ "${{ github.event_name }}" = "release" ]; then
+                    echo "environment=Azure-Privileged" >> "$GITHUB_OUTPUT"
+                  else
+                    echo "environment=Azure-Alpha" >> "$GITHUB_OUTPUT"
+                  fi
+
+            # Get the first 7 chars of the SHA hash that represents the current commit that the build is operating off of.
+            - name: Compute Short SHA - Experimental Channel
+              id: shortSha
+              background: true
+              run: echo "shortSha=$(echo ${{ github.sha }} | head -c 7)" >> "$GITHUB_OUTPUT"
+
+            # Bring job back to sync execution by awaiting for all async jobs to finish before continuing
+            - name: Steps - Convert Back To Synchronous Execution
+              wait-all: true
+
     # Generate the TypeScript SDK client code
     TypeScript-Build:
         # Generate each SDK client in a separate build process to speed up execution and publishing
@@ -41,6 +107,9 @@ jobs:
 
         # Allow single failures for SDK publish, e.g. SDG fail due to not getting an update but SHIELD goes through
         continue-on-error: true
+
+        # Ensure that the metadata is calculated before starting the build process
+        needs: [Deploy-Metadata]
 
         # Sets the scopes available to the github_token injected to the GH Actions runner
         permissions:
@@ -105,12 +174,18 @@ jobs:
               run: npm run build:Prod
               working-directory: ${{ matrix.specifications.sdkPath }}
 
+            # Update the version of SHIELD being uploaded to have a different version number to avoid SDG version conflict
+            - name: Tattoo Version - Experimental Channel
+              if: ${{ needs.Deploy-Metadata.outputs.channel != 'stable' }}
+              working-directory: ${{ matrix.specifications.sdkPath }}
+              run: npm version --no-commit-hooks --no-git-tag-version "${{ needs.Deploy-Metadata.outputs.version }}-${{ needs.Deploy-Metadata.outputs.channel }}.${{ needs.Deploy-Metadata.outputs.shortSha }}"
+
             # Publish the artifact to NPM with attestation
             - name: Upload Package to NPM Registry
               working-directory: ${{ matrix.specifications.sdkPath }}
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              run: npm publish --tag alpha
+              run: npm publish --tag ${{ needs.Deploy-Metadata.outputs.channel }}
 
             # Generate the NPM package for beta and stable publishing, if required
             - name: Generate NPM Package
