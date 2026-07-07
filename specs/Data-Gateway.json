@@ -82,7 +82,7 @@
                 "required": true,
                 "schema": {
                     "examples": [
-                        "1.12.5"
+                        "1.12.5.2"
                     ],
                     "type": "string"
                 },
@@ -90,7 +90,7 @@
                     "Valid version number": {
                         "summary": "Example Valid Version Number",
                         "description": "An example string represents a valid semantic version number.",
-                        "value": "1.2.3.1"
+                        "value": "1.12.5.2"
                     }
                 }
             },
@@ -5284,6 +5284,7 @@
                 "properties": {
                     "correlationId": {
                         "type": "string",
+                        "format":"uuid",
                         "description": "Matches ID from whatever is being audited."
                     },
                     "name": {
