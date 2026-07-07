@@ -126,7 +126,7 @@ jobs:
             - name: Attest NPM Package
               uses: actions/attest@v4
               with:
-                  subject-path: ${{ matrix.specifications.sdkPath }}/${{ steps.generate-package.outputs.package-file }}
+                  subject-path: ${{ format('{0}/{1}', matrix.specifications.sdkPath, steps.generate-package.outputs.package-file) }}
 
             # Upload the compiled HTML as an artifact for future consumption
             - name: Upload a Build Artifact
