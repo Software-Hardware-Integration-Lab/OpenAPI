@@ -115,12 +115,8 @@ jobs:
             # Generate the NPM package for beta and stable publishing, if required
             - name: Generate NPM Package
               id: generate-package
-              shell: pwsh
               working-directory: ${{ matrix.specifications.sdkPath }}
-              run: |
-                  npm pack
-                  $packageFile = Get-ChildItem -File -Name -Filter "shi-corp*.tgz" | Select-Object -First 1
-                  Write-Output "package-file=$packageFile" >> $Env:GITHUB_OUTPUT
+              run: echo "package-file=$(npm pack --ignore-scripts)" >> "$GITHUB_OUTPUT"
 
             # Create an attestation for the generated NPM package to ensure integrity and authenticity
             - name: Attest NPM Package
