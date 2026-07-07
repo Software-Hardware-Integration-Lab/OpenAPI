@@ -46,6 +46,7 @@ jobs:
         permissions:
             attestations: write
             contents: read
+            id-token: write
             packages: write
 
         # Set of steps required to generate the API client for TypeScript
