@@ -74,7 +74,7 @@ jobs:
 
             # Set up all of the supporting components for SDK generation
             - name: Initialize Kiota Binaries
-              uses: microsoft/setup-kiota@v0.5.0
+              uses: microsoft/setup-kiota@v0.6.0
               background: true
 
             # Bring job back to sync execution by awaiting for all async jobs to finish before continuing
