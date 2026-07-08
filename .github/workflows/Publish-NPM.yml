@@ -1,13 +1,30 @@
 # Display Name of the workflow
 name: Publish - SDKs to Global Registries
 
+# Event listeners for when the job should start execution
 on:
-    # Allows you to run this workflow manually from the Actions tab
-    workflow_dispatch:
+    # Run automatically when a release is published (stable or pre-release)
+    release:
+        types: [published]
 
 jobs:
+    # Generate the artifacts for the SDKs and application code
+    BuildCodeArtifact:
+        # Human friendly name of the job
+        name: Build - SDK
+
+        # Grant the required permissions to run the job
+        permissions:
+            attestations: write
+            contents: read
+            id-token: write
+            packages: write
+
+        # Execute the workflow
+        uses: ./.github/workflows/Build.yml
+
     # Generate the TypeScript SDK client code
-    TypeScript-Build:
+    NPM-Publish:
         # Generate each SDK client in a separate build process to speed up execution and publishing
         strategy:
             matrix:
@@ -24,13 +41,16 @@ jobs:
                       specPath: 'spec/Url-Shortener.json'
 
         # Display name of the job
-        name: Generate TypeScript SDK
+        name: Publish - NPM Global Packages
 
         # Operating system filter for the runners
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-slim
 
         # Publish the package to NPM
         environment: NPM-OIDC
+
+        # Ensure the build commands succeed before publishing to NPM, otherwise the publish will fail since the artifact will not be available
+        needs: [BuildCodeArtifact]
 
         # Allow single failures for SDK publish, e.g. SDG fail due to not getting an update but SHIELD goes through
         continue-on-error: true
@@ -43,52 +63,82 @@ jobs:
 
         # Set of steps required to generate the API client for TypeScript
         steps:
+            # Set the experimental tag to indicate if it is an Alpha or Beta build
+            - name: Compute Channel
+              id: computedChannel
+              background: true
+              run: |
+                  if [ "${{ github.event_name }}" = "release" ] && [ "${{ github.event.release.prerelease }}" = "true" ]; then
+                    echo "channel=beta" >> "$GITHUB_OUTPUT"
+                  elif [ "${{ github.event_name }}" = "release" ]; then
+                    echo "channel=stable" >> "$GITHUB_OUTPUT"
+                  else
+                    echo "channel=alpha" >> "$GITHUB_OUTPUT"
+                  fi
+
+            # Download the TGZ file that will be published to the NPM Global Registry
+            - name: Download a Build Artifact
+              id: download-artifact
+              uses: actions/download-artifact@v8
+              background: true
+              with:
+                  name: ${{ matrix.specifications.name }}
+
             # Download all of the source code
             - name: Clone Repo Locally
-              uses: actions/checkout@v6
+              uses: actions/checkout@v7
+              background: true
 
             # Set up NodeJS on the build host
             - name: Setup Node.JS Runtime
               uses: actions/setup-node@v6
+              background: true
               with:
                   node-version: 24
                   registry-url: https://registry.npmjs.org
-                  scope: shi-corp
+                  scope: software-hardware-integration-lab
+
+            # Set up the socket firewall binary
+            - name: Install - Socket Firewall
+              uses: SocketDev/action@ba6de6cc0565af1f42295590380973573297e31f
+              background: true
+              with:
+                  mode: firewall-free
+
+            # Bring job back to sync execution by awaiting for all async jobs to finish before continuing
+            - name: Steps - Convert Back To Synchronous Execution - Runtimes
+              wait-all: true
+
+            # Figure out the package name so that the publish command can be issued against it
+            - name: Find NPM Package File Name
+              id: find-package
+              shell: pwsh
+              run: |
+                  $packageFile = Get-ChildItem -Path ${{ steps.download-artifact.outputs.download-path }} -Filter *.tgz | Select-Object -First 1
+                  Write-Host "Package File Name: $($packageFile.Name)"
+                  echo "package-file=$($packageFile.Name)" >> "$GITHUB_OUTPUT"
+
+            # Validate the attestation of the downloaded artifact to prevent tamper
+            - name: Validate Attestation
+              background: true
+              env:
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: gh attestation verify ${{ steps.find-package.outputs.package-file }} --repo Software-Hardware-Integration-Lab/OpenAPI --signer-workflow Software-Hardware-Integration-Lab/OpenAPI/.github/workflows/Build.yml@${{ github.event_name == 'release' && format('refs/tags/{0}', github.ref_name) || 'refs/heads/main' }}
 
             # Update the NPM CLI to the latest available version
             - name: Update NPM CLI
-              run: npm install -g npm
+              background: true
+              run: sfw npm install -g npm
 
-            # Set up all of the supporting components for SDK generation
-            - name: Initialize Kiota Binaries
-              uses: microsoft/setup-kiota@v0.5.0
-
-            # Install the dependencies needed to build the project
-            - name: Install Build Dependencies
-              run: npm install
-              working-directory: ${{matrix.specifications.sdkPath}}
-
-            # Cryptographically attest that packages haven't been tampered where supported
-            - name: Attest Provenance
-              run: npm audit signatures
-              working-directory: ${{matrix.specifications.sdkPath}}
-
-            # Generate the TypeScript SDK
-            - name: Generate SDK Client Code via Kiota
-              run: npm run generate:Sdk
-              working-directory: ${{matrix.specifications.sdkPath}}
-
-            # Enforce linting standards
-            - name: Generate SDK Client Code via Kiota
-              run: npm run lint
-              working-directory: ${{matrix.specifications.sdkPath}}
-
-            # Generate the TypeScript SDK
-            - name: Build Project
-              run: npm run build:Prod
-              working-directory: ${{matrix.specifications.sdkPath}}
+            # Bring job back to sync execution by awaiting for all async jobs to finish before continuing
+            - name: Steps - Convert Back To Synchronous Execution - Config/Attest
+              wait-all: true
 
             # Publish the artifact to NPM with attestation
             - name: Upload Package to NPM Registry
-              run: npm publish
-              working-directory: ${{matrix.specifications.sdkPath}}
+              run: |
+                  if [ "${{ github.event_name }}" = "release" ] && [ "${{ github.event.release.prerelease }}" = "true" ]; then
+                    npm publish ${{ steps.find-package.outputs.package-file }} --tag=${{ steps.computedChannel.outputs.channel }}
+                  elif [ "${{ github.event_name }}" = "release" ]; then
+                    npm publish ${{ steps.find-package.outputs.package-file }}
+                  fi
