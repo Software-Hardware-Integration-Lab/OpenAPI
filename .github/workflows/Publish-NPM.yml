@@ -114,16 +114,15 @@ jobs:
               id: find-package
               shell: pwsh
               run: |
-                  $packageFile = Get-ChildItem -Path ${{ steps.download-artifact.outputs.download-path }} -Filter *.tgz | Select-Object -First 1
-                  Write-Host "Package File Name: $($packageFile.Name)"
-                  echo "package-file=$($packageFile.Name)" >> "$GITHUB_OUTPUT"
+                  [System.String]$FileName = Get-ChildItem -Path '${{ steps.download-artifact.outputs.download-path }}' -Filter '*.tgz' -Name | Select-Object -First 1
+                  "PACKAGE-FILE=$FileName" >> "$Env:GITHUB_OUTPUT"
 
             # Validate the attestation of the downloaded artifact to prevent tamper
             - name: Validate Attestation
               background: true
               env:
                   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              run: gh attestation verify ${{ steps.find-package.outputs.package-file }} --repo Software-Hardware-Integration-Lab/OpenAPI --signer-workflow Software-Hardware-Integration-Lab/OpenAPI/.github/workflows/Build.yml@${{ github.event_name == 'release' && format('refs/tags/{0}', github.ref_name) || 'refs/heads/main' }}
+              run: gh attestation verify ${{ steps.find-package.outputs.PACKAGE-FILE }} --repo Software-Hardware-Integration-Lab/OpenAPI --signer-workflow Software-Hardware-Integration-Lab/OpenAPI/.github/workflows/Build.yml@${{ github.event_name == 'release' && format('refs/tags/{0}', github.ref_name) || 'refs/heads/main' }}
 
             # Update the NPM CLI to the latest available version
             - name: Update NPM CLI
@@ -138,7 +137,7 @@ jobs:
             - name: Upload Package to NPM Registry
               run: |
                   if [ "${{ github.event_name }}" = "release" ] && [ "${{ github.event.release.prerelease }}" = "true" ]; then
-                    npm publish ${{ steps.find-package.outputs.package-file }} --tag=${{ steps.computedChannel.outputs.channel }}
+                    npm publish ${{ steps.find-package.outputs.PACKAGE-FILE }} --tag=${{ steps.computedChannel.outputs.channel }}
                   elif [ "${{ github.event_name }}" = "release" ]; then
-                    npm publish ${{ steps.find-package.outputs.package-file }}
+                    npm publish ${{ steps.find-package.outputs.PACKAGE-FILE }}
                   fi
