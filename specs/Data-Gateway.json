@@ -82,7 +82,7 @@
                 "required": true,
                 "schema": {
                     "examples": [
-                        "1.12.5"
+                        "1.12.5.2"
                     ],
                     "type": "string"
                 },
@@ -90,7 +90,7 @@
                     "Valid version number": {
                         "summary": "Example Valid Version Number",
                         "description": "An example string represents a valid semantic version number.",
-                        "value": "1.2.3"
+                        "value": "1.12.5.2"
                     }
                 }
             },
@@ -247,6 +247,26 @@
                     "minimum": 1,
                     "maximum": 1000,
                     "default": 50
+                }
+            },
+            "auditVersion": {
+                "name": "version",
+                "in": "query",
+                "description": "Exact version selector for the Cloud Matrix audit detail record. Required format: Major.Minor.Patch.IterationVersion.",
+                "required": true,
+                "schema": {
+                    "type": "string",
+                    "pattern": "^\\d+\\.\\d+\\.\\d+\\.\\d+$",
+                    "examples": [
+                        "1.2.3.1"
+                    ]
+                },
+                "examples": {
+                    "valid audit version": {
+                        "summary": "Example valid audit version",
+                        "description": "A valid Cloud Matrix audit detail version.",
+                        "value": "6.0.1.1"
+                    }
                 }
             },
             "auditId": {
@@ -5254,35 +5274,54 @@
                 "type": "object",
                 "additionalProperties": false,
                 "required": [
-                    "auditId",
-                    "auditFilename",
+                    "correlationId",
+                    "name",
                     "lastUpdated",
                     "lastUpdatedBy",
                     "version",
                     "auditArea"
                 ],
                 "properties": {
-                    "auditId": {
-                        "type": "string",
-                        "format": "uuid"
+                    "correlationId": {
+                            "$ref": "#/components/schemas/Uuid",
+                        "description": "Matches ID from whatever is being audited."
                     },
-                    "auditFilename": {
-                        "type": "string"
+                    "name": {
+                        "type": "string",
+                        "description": "Name associated with the audit record."
                     },
                     "lastUpdated": {
-                        "type": "string",
-                        "format": "date-time"
+                        "$ref": "#/components/schemas/DateTimeStringType",
+                        "description": "Timestamp of the last update to the audit record."
                     },
                     "lastUpdatedBy": {
-                        "$ref": "#/components/schemas/CloudMatrix.LastUpdatedBy"
+                        "$ref": "#/components/schemas/CloudMatrix.LastUpdatedBy",
+                        "description": "User who last updated the audit record."
                     },
                     "version": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Version of the audit record."
                     },
                     "auditArea": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Area of the application or system that this audit record pertains to."
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "Reason for the update, if provided."
                     }
-                }
+                },
+                "examples": [
+                    {
+                        "correlationId": "8c9d7e36-8b71-4b46-b4da-7d1f7fd9a001",
+                        "name": "cloud-matrix-template-update.json",
+                        "lastUpdated": "2026-03-09T09:30:16.000Z",
+                        "lastUpdatedBy": "Joe Bloggs",
+                        "version": "6.0.1.1",
+                        "auditArea": "Cloud Matrix Template",
+                        "message": "Updated display name and contact email."
+                    }
+                ]
             },
             "CloudMatrix.AuditDetail": {
                 "allOf": [
@@ -5293,18 +5332,11 @@
                         "type": "object",
                         "additionalProperties": false,
                         "required": [
-                            "template",
                             "originalRecord",
                             "updatedRecord",
                             "diff"
                         ],
                         "properties": {
-                            "template": {
-                                "type": "string"
-                            },
-                            "reasonForUpdate": {
-                                "type": "string"
-                            },
                             "originalRecord": {
                                 "$ref": "#/components/schemas/CloudMatrix.AuditValue"
                             },
@@ -5319,14 +5351,13 @@
                 ],
                 "examples": [
                     {
-                        "auditId": "8c9d7e36-8b71-4b46-b4da-7d1f7fd9a001",
-                        "auditFilename": "cloud-matrix-template-update.json",
+                        "correlationId": "8c9d7e36-8b71-4b46-b4da-7d1f7fd9a001",
+                        "name": "cloud-matrix-template-update.json",
                         "lastUpdated": "2026-03-09T09:30:16.000Z",
                         "lastUpdatedBy": "Joe Bloggs",
                         "version": "6.0.1.1",
                         "auditArea": "Cloud Matrix Template",
-                        "template": "Microsoft Enterprise",
-                        "reasonForUpdate": "Updated display name and contact email.",
+                        "message": "Updated display name and contact email.",
                         "originalRecord": {
                             "name": "Claudine Potter",
                             "email": "claudine.potter@acme_widgets.com"
@@ -12326,22 +12357,25 @@
                 }
             }
         },
-        "/Api/CloudMatrix/Audits/{auditId}": {
+        "/Api/CloudMatrix/Audits/{correlationId}": {
             "get": {
                 "tags": [
                     "Cloud Matrix"
                 ],
-                "summary": "Get a specific Cloud Matrix audit event",
-                "description": "Returns the specified Cloud Matrix audit event by audit ID.\n\nThis endpoint requires the `CloudMatrix.Read` scope (permission).",
-                "operationId": "/Api/CloudMatrix/Audits/:auditId/Get",
+                "summary": "Get a specific Cloud Matrix audit detail record",
+                "description": "Returns the specified Cloud Matrix audit detail record by correlation ID and version.\n\nThis endpoint requires the `CloudMatrix.Read` scope (permission).",
+                "operationId": "/Api/CloudMatrix/Audits/:correlationId/Get",
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/auditId"
+                        "$ref": "#/components/parameters/correlationId"
+                    },
+                    {
+                        "$ref": "#/components/parameters/auditVersion"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Cloud Matrix audit event retrieved successfully.",
+                        "description": "Cloud Matrix audit detail record retrieved successfully.",
                         "content": {
                             "application/json": {
                                 "schema": {
