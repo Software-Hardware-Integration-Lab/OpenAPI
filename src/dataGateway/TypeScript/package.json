@@ -1,6 +1,6 @@
 {
     "name": "@software-hardware-integration-lab/sdk-data-gateway",
-    "version": "3.3.2",
+    "version": "3.3.3",
     "type": "module",
     "main": "bin/index.js",
     "description": "SDK client used to interface with the SHI Data Gateway service.",
@@ -51,6 +51,8 @@
     "dependencies": {
         "@microsoft/kiota-authentication-azure": "~1.0.0-preview.103",
         "@microsoft/kiota-bundle": "~1.0.0-preview.103",
+        "@shi-corp/sdk-data-gateway": "^3.3.1",
+        "@software-hardware-integration-lab/sdk-data-gateway": "^3.3.2",
         "typia": "~12.1.1"
     },
     "overrides": {
