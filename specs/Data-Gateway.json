@@ -5115,17 +5115,24 @@
                 "type": "object",
                 "additionalProperties": false,
                 "required": [
-                    "auditId",
+                    "auditArea",
+                    "correlationId",
+                    "name",
                     "timestampUtc",
                     "lastUpdatedBy",
                     "operation",
-                    "changes",
-                    "context"
+                    "version",
+                    "changes"
                 ],
                 "properties": {
-                    "auditId": {
-                        "type": "string",
-                        "format": "uuid"
+                    "auditArea": {
+                        "type": "string"
+                    },
+                    "correlationId": {
+                        "$ref": "#/components/schemas/Uuid"
+                    },
+                    "name": {
+                        "type": "string"
                     },
                     "timestampUtc": {
                         "type": "string",
@@ -5137,39 +5144,26 @@
                     "operation": {
                         "$ref": "#/components/schemas/CloudMatrix.AuditOperation"
                     },
+                    "version": {
+                        "type": "string"
+                    },
                     "changes": {
                         "type": "array",
                         "items": {
                             "$ref": "#/components/schemas/CloudMatrix.AuditEventChange"
                         }
-                    },
-                    "context": {
-                        "$ref": "#/components/schemas/CloudMatrix.AuditEventContext"
                     }
                 },
                 "examples": [
                     {
-                        "auditId": "8c9d7e36-8b71-4b46-b4da-7d1f7fd9a001",
+                        "auditArea": "Cloud Matrix Template",
+                        "correlationId": "7d9b8d8f-08bb-46f7-b3cb-5d5df18b1d77",
+                        "name": "cloud-matrix-template-update.json",
                         "timestampUtc": "2026-03-09T09:30:16.000Z",
                         "lastUpdatedBy": "Joe Bloggs",
                         "operation": "UPDATE",
-                        "changes": [
-                            {
-                                "path": "$.name",
-                                "oldValue": "Claudine Potter",
-                                "newValue": "Claudine Moore"
-                            },
-                            {
-                                "path": "$.email",
-                                "oldValue": "claudine.potter@acme_widgets.com",
-                                "newValue": "claudine.moore@acme_widgets.com"
-                            }
-                        ],
-                        "context": {
-                            "entityType": "Cloud Matrix Template",
-                            "entityId": "a12f2907-c781-4bf1-b912-b91510853052",
-                            "correlationId": "7d9b8d8f-08bb-46f7-b3cb-5d5df18b1d77"
-                        }
+                        "version": "6.0.0.0",
+                        "changes": []
                     }
                 ]
             },
