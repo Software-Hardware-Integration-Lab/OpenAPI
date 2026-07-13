@@ -1,6 +1,6 @@
 {
     "name": "@software-hardware-integration-lab/sdk-data-gateway",
-    "version": "3.3.2",
+    "version": "3.3.3",
     "type": "module",
     "main": "bin/index.js",
     "description": "SDK client used to interface with the SHI Data Gateway service.",
