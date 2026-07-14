@@ -2468,6 +2468,262 @@
                 "$ref": "#/components/schemas/Report.PrincipalData",
                 "title": "Architecture Report - Principal Data"
             },
+            "CspmPolicyAssessmentV1": {
+                "title": "CSPM Policy Assessment V1 - Complete Object",
+                "type": "object",
+                "description": "Container that represents the entire CSPM policy assessment structure for a complete run.",
+                "properties": {
+                    "correlation": {
+                        "$ref": "#/components/schemas/Report.CorrelationRecord",
+                        "description": "Used for cross record tracking and auditing."
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/CspmPolicyAssessmentV1.CspmPolicyAssessmentData",
+                        "description": "The computed CSPM policy assessment data."
+                    },
+                    "schemaVersion": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "Indicator for migration scripts to auto migrate the data to newer or older formats.",
+                        "examples": [
+                            1
+                        ]
+                    }
+                },
+                "required": [
+                    "correlation",
+                    "data",
+                    "schemaVersion"
+                ],
+                "examples": [
+                    {
+                        "correlation": {
+                            "auditTenantAccount": "user@example.com",
+                            "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                            "createdAt": "2023-11-19T10:00:00.000Z",
+                            "reportTenantAccount": "user@example.com",
+                            "tenantId": "123e4567-e89b-12d3-a456-426614174000",
+                            "updatedAt": "2023-11-19T10:05:00.000Z"
+                        },
+                        "data": {
+                            "reportCreatedDate": "2026-06-26T11:00:00.000Z",
+                            "reportUpdatedDate": "2026-06-26T11:00:00.000Z",
+                            "policyList": {
+                                "a1b2c3d4-e5f6-7890-abcd-ef1234567890": {
+                                    "name": "Require MFA for all users",
+                                    "categoryList": [
+                                        "Conditional Access"
+                                    ],
+                                    "coverageStatus": "partial",
+                                    "coverageMetricsRaw": {
+                                        "covered": 80,
+                                        "partial": 15,
+                                        "noCover": 5
+                                    },
+                                    "coverageMetricsNormalized": {
+                                        "covered": 80,
+                                        "partial": 15,
+                                        "noCover": 5
+                                    }
+                                }
+                            }
+                        },
+                        "schemaVersion": 1
+                    }
+                ]
+            },
+            "CspmPolicyAssessmentV1.CspmPolicyAssessmentData": {
+                "title": "CSPM Policy Assessment Data",
+                "type": "object",
+                "description": "Represents the details of a CSPM policy collection, including a mapping of configuration item template IDs to their corresponding policy records. Optionally includes the creation and last update dates of the associated architecture report.",
+                "properties": {
+                    "policyList": {
+                        "type": "object",
+                        "description": "The calculated mapping between configuration templateIds and their corresponding policy record. Where an architecture report has been provided, each policy record will also contain coverage statistics.",
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/CspmPolicyAssessmentV1.PolicyRecord"
+                        },
+                        "examples": [
+                            {
+                                "a1b2c3d4-e5f6-7890-abcd-ef1234567890": {
+                                    "name": "Require MFA for all users",
+                                    "categoryList": [
+                                        "Conditional Access"
+                                    ],
+                                    "coverageStatus": "partial",
+                                    "coverageMetricsRaw": {
+                                        "covered": 80,
+                                        "partial": 15,
+                                        "noCover": 5
+                                    },
+                                    "coverageMetricsNormalized": {
+                                        "covered": 80,
+                                        "partial": 15,
+                                        "noCover": 5
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "reportCreatedDate": {
+                        "$ref": "#/components/schemas/NullableDateTimeStringType",
+                        "description": "The date the architecture report was created."
+                    },
+                    "reportUpdatedDate": {
+                        "$ref": "#/components/schemas/NullableDateTimeStringType",
+                        "description": "The date the architecture report was last updated."
+                    }
+                },
+                "required": [
+                    "policyList"
+                ],
+                "additionalProperties": false,
+                "examples": [
+                    {
+                        "reportCreatedDate": "2026-06-26T11:00:00.000Z",
+                        "reportUpdatedDate": "2026-06-26T11:00:00.000Z",
+                        "policyList": {
+                            "a1b2c3d4-e5f6-7890-abcd-ef1234567890": {
+                                "name": "Require MFA for all users",
+                                "categoryList": [
+                                    "Conditional Access"
+                                ],
+                                "coverageStatus": "partial",
+                                "coverageMetricsRaw": {
+                                    "covered": 80,
+                                    "partial": 15,
+                                    "noCover": 5
+                                },
+                                "coverageMetricsNormalized": {
+                                    "covered": 80,
+                                    "partial": 15,
+                                    "noCover": 5
+                                }
+                            }
+                        }
+                    }
+                ]
+            },
+            "CspmPolicyAssessmentV1.CoverageMetrics": {
+                "title": "Coverage Metrics",
+                "type": "object",
+                "description": "Represents the coverage status of users.",
+                "properties": {
+                    "covered": {
+                        "type": "integer",
+                        "format": "int64",
+                        "minimum": 0,
+                        "description": "The amount of users fully covered.",
+                        "examples": [
+                            80
+                        ]
+                    },
+                    "partial": {
+                        "type": "integer",
+                        "format": "int64",
+                        "minimum": 0,
+                        "description": "The amount of users partially covered.",
+                        "examples": [
+                            15
+                        ]
+                    },
+                    "noCover": {
+                        "type": "integer",
+                        "format": "int64",
+                        "minimum": 0,
+                        "description": "The amount of users not covered.",
+                        "examples": [
+                            5
+                        ]
+                    }
+                },
+                "required": [
+                    "covered",
+                    "partial",
+                    "noCover"
+                ],
+                "additionalProperties": false,
+                "examples": [
+                    {
+                        "covered": 80,
+                        "partial": 15,
+                        "noCover": 5
+                    }
+                ]
+            },
+            "CspmPolicyAssessmentV1.PolicyRecord": {
+                "title": "Policy Record",
+                "type": "object",
+                "description": "Represents a policy record with associated categories, name, user coverage metrics, and coverage status.",
+                "properties": {
+                    "categoryList": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The categories that this policy belongs to.",
+                        "examples": [
+                            [
+                                "Conditional Access"
+                            ]
+                        ]
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "A human readable descriptive name of the policy.",
+                        "examples": [
+                            "Require MFA for all users"
+                        ]
+                    },
+                    "coverageMetricsRaw": {
+                        "$ref": "#/components/schemas/CspmPolicyAssessmentV1.CoverageMetrics",
+                        "description": "Details raw coverage metrics of the policy."
+                    },
+                    "coverageMetricsNormalized": {
+                        "$ref": "#/components/schemas/CspmPolicyAssessmentV1.CoverageMetrics",
+                        "description": "Details normalized coverage metrics of the policy."
+                    },
+                    "coverageStatus": {
+                        "type": "string",
+                        "enum": [
+                            "full",
+                            "partial",
+                            "none"
+                        ],
+                        "description": "The summary status for the coverage metrics.",
+                        "examples": [
+                            "partial"
+                        ]
+                    }
+                },
+                "required": [
+                    "categoryList",
+                    "name",
+                    "coverageMetricsRaw",
+                    "coverageMetricsNormalized",
+                    "coverageStatus"
+                ],
+                "additionalProperties": false,
+                "examples": [
+                    {
+                        "name": "Require MFA for all users",
+                        "categoryList": [
+                            "Conditional Access"
+                        ],
+                        "coverageStatus": "partial",
+                        "coverageMetricsRaw": {
+                            "covered": 80,
+                            "partial": 15,
+                            "noCover": 5
+                        },
+                        "coverageMetricsNormalized": {
+                            "covered": 80,
+                            "partial": 15,
+                            "noCover": 5
+                        }
+                    }
+                ]
+            },
             "CloudMatrix.UserProfileDetailEntry": {
                 "title": "Cloud Matrix - User Profile Detail Entry",
                 "type": "object",
@@ -9703,6 +9959,113 @@
                 "tags": [
                     "Architecture Reporting"
                 ]
+            }
+        },
+        "/Api/V1/ArchitectureReport/CspmPolicyAssessment": {
+            "post": {
+                "description": "Stores the result of a CSPM Policy Assessment.\n\nThis endpoint requires the `ArchitectureReport.ReadWrite`, `ArchitectureReport.ReadWrite.All` scope (permission).",
+                "operationId": "/Api/V1/ArchitectureReport/CspmPolicyAssessment/Post",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "examples": {
+                                "Cspm Policy Assessment V1": {
+                                    "description": "Sample, truncated report from an example customer environment. This will return the same report as the request input.",
+                                    "summary": "Example of CSPM Policy Assessment Stored.",
+                                    "value": {
+                                        "reportCreatedDate": "2026-06-26T11:00:00.000Z",
+                                        "reportUpdatedDate": "2026-06-26T11:00:00.000Z",
+                                        "policyList": {
+                                            "a1b2c3d4-e5f6-7890-abcd-ef1234567890": {
+                                                "name": "Require MFA for all users",
+                                                "categoryList": [
+                                                    "Conditional Access"
+                                                ],
+                                                "coverageStatus": "partial",
+                                                "coverageMetricsRaw": {
+                                                    "covered": 80,
+                                                    "partial": 15,
+                                                    "noCover": 5
+                                                },
+                                                "coverageMetricsNormalized": {
+                                                    "covered": 80,
+                                                    "partial": 15,
+                                                    "noCover": 5
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "schema": {
+                                "$ref": "#/components/schemas/CspmPolicyAssessmentV1.CspmPolicyAssessmentData"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "CSPM Policy Assessment V1 submitted successfully.",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "CSPM Policy Assessment V1": {
+                                        "description": "Sample, cspm policy assessment result. This will return the same report as the request along with correlation data.",
+                                        "summary": "Example of CSPM Policy Assessment Stored.",
+                                        "value": {
+                                            "correlation": {
+                                                "auditTenantAccount": "user@example.com",
+                                                "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                                                "createdAt": "2023-11-19T10:00:00.000Z",
+                                                "reportTenantAccount": "user@example.com",
+                                                "tenantId": "123e4567-e89b-12d3-a456-426614174000",
+                                                "updatedAt": "2023-11-19T10:05:00.000Z"
+                                            },
+                                            "data": {
+                                                "reportCreatedDate": "2026-06-26T11:00:00.000Z",
+                                                "reportUpdatedDate": "2026-06-26T11:00:00.000Z",
+                                                "policyList": {
+                                                    "a1b2c3d4-e5f6-7890-abcd-ef1234567890": {
+                                                        "name": "Require MFA for all users",
+                                                        "categoryList": [
+                                                            "Conditional Access"
+                                                        ],
+                                                        "coverageStatus": "partial",
+                                                        "coverageMetricsRaw": {
+                                                            "covered": 80,
+                                                            "partial": 15,
+                                                            "noCover": 5
+                                                        },
+                                                        "coverageMetricsNormalized": {
+                                                            "covered": 80,
+                                                            "partial": 15,
+                                                            "noCover": 5
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "schemaVersion": 1
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/CspmPolicyAssessmentV1"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "tags": [
+                    "Architecture Reporting"
+                ],
+                "summary": "Submit CSPM Policy Assessment V1"
             }
         },
         "/Api/CloudMatrix/Dashboard": {
