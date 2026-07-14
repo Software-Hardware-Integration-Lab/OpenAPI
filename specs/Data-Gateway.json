@@ -9938,7 +9938,7 @@
         },
         "/Api/V1/ArchitectureReport/CspmPolicyAssessment": {
             "post": {
-                "description": "Stores the result of a CSPM Policy Assessment.\n\nThis endpoint requires the `ArchitectureReport.ReadWrite`, `ArchitectureReport.ReadWrite.All` scope (permission)."
+                "description": "Stores the result of a CSPM Policy Assessment.\n\nThis endpoint requires the `ArchitectureReport.ReadWrite`, `ArchitectureReport.ReadWrite.All` scope (permission).",
                 "operationId": "/Api/V1/ArchitectureReport/CspmPolicyAssessment/Post",
                 "requestBody": {
                     "required": true,
