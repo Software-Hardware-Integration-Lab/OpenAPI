@@ -394,6 +394,33 @@
                     }
                 ]
             },
+            "Core.OperationMode": {
+                "title": "Core - Operation Mode",
+                "description": "Indicates the operation mode that the SHIELD application is currently running in.",
+                "type": "object",
+                "properties": {
+                    "operationMode": {
+                        "description": "Current operation mode value returned by the application.",
+                        "type": "string",
+                        "minLength": 1,
+                        "examples": [
+                            "normal",
+                            "discover"
+                        ]
+                    }
+                },
+                "required": [
+                    "operationMode"
+                ],
+                "examples": [
+                    {
+                        "operationMode": "normal"
+                    },
+                    {
+                        "operationMode": "discover"
+                    }
+                ]
+            },
             "Core.ProgressBar": {
                 "title": "Core - Progress Bar",
                 "description": "Used to indicate the progress of a long running operation.",
@@ -4390,6 +4417,38 @@
                 ],
                 "security": [],
                 "summary": "Health of the Service for Probing"
+            }
+        },
+        "/Api/Core/OperationMode": {
+            "get": {
+                "description": "Retrieves the current operation mode used by the SHIELD application.",
+                "operationId": "/Api/Core/OperationMode/Get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Core.OperationMode"
+                                },
+                                "examples": {
+                                    "Current operation mode": {
+                                        "summary": "Example Current Operation Mode",
+                                        "description": "An example payload that returns the application's current operation mode.",
+                                        "value": {
+                                            "operationMode": "normal"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "Core"
+                ],
+                "security": [],
+                "summary": "Retrieves the Current Operation Mode"
             }
         },
         "/Api/Auth/Id": {
