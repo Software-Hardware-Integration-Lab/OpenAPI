@@ -5533,7 +5533,7 @@
                 ],
                 "properties": {
                     "correlationId": {
-                            "$ref": "#/components/schemas/Uuid",
+                        "$ref": "#/components/schemas/Uuid",
                         "description": "Matches ID from whatever is being audited."
                     },
                     "name": {
@@ -10066,6 +10066,79 @@
                     "Architecture Reporting"
                 ],
                 "summary": "Submit CSPM Policy Assessment V1"
+            }
+        },
+        "/Api/V1/ArchitectureReport/CspmPolicyAssessment/Correlation/{correlationId}/Data": {
+            "get": {
+                "summary": "Retrieve CSPM Policy Assessment V1 by Correlation ID",
+                "description": "Retrieves the stored CSPM policy assessment for the specified correlation ID in the authenticated tenant.\n\nThis endpoint requires the `ArchitectureReport.Read`, `ArchitectureReport.Read.All`, `ArchitectureReport.ReadWrite`, or `ArchitectureReport.ReadWrite.All` scope (permission). This endpoint is also only accessible from the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "operationId": "/Api/V1/ArchitectureReport/CspmPolicyAssessment/Correlation/:correlationId/Data/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/correlationId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The CSPM policy assessment data for the specified correlation ID.",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "CSPM Policy Assessment V1": {
+                                        "description": "Sample stored CSPM policy assessment result retrieved by correlation record ID.",
+                                        "summary": "CSPM Policy Assessment Details",
+                                        "value": {
+                                            "correlation": {
+                                                "auditTenantAccount": "user@example.com",
+                                                "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                                                "createdAt": "2023-11-19T10:00:00.000Z",
+                                                "reportTenantAccount": "user@example.com",
+                                                "tenantId": "123e4567-e89b-12d3-a456-426614174000",
+                                                "updatedAt": "2023-11-19T10:05:00.000Z"
+                                            },
+                                            "data": {
+                                                "reportCreatedDate": "2026-06-26T11:00:00.000Z",
+                                                "reportUpdatedDate": "2026-06-26T11:00:00.000Z",
+                                                "policyList": {
+                                                    "a1b2c3d4-e5f6-7890-abcd-ef1234567890": {
+                                                        "name": "Require MFA for all users",
+                                                        "categoryList": [
+                                                            "Conditional Access"
+                                                        ],
+                                                        "coverageStatus": "partial",
+                                                        "coverageMetricsRaw": {
+                                                            "covered": 80,
+                                                            "partial": 15,
+                                                            "noCover": 5
+                                                        },
+                                                        "coverageMetricsNormalized": {
+                                                            "covered": 80,
+                                                            "partial": 15,
+                                                            "noCover": 5
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "schemaVersion": 1
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/CspmPolicyAssessmentV1"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "tags": [
+                    "Architecture Reporting"
+                ]
             }
         },
         "/Api/CloudMatrix/Dashboard": {
