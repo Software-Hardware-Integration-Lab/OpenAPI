@@ -2903,14 +2903,28 @@
                     },
                     "altProduct": {
                         "type": [
-                            "string",
+                            "array",
                             "null"
                         ],
-                        "description": "Alternate product, if any, or null.",
-                        "examples": [
-                            "Other Product",
-                            null
-                        ]
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "publisher": {
+                                    "type": "string"
+                                },
+                                "status": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "publisher",
+                                "status"
+                            ]
+                        }
                     },
                     "publisher": {
                         "type": [
@@ -2960,7 +2974,18 @@
                             "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
                         ],
                         "isDeepDive": true,
-                        "altProduct": "Other Product",
+                        "altProduct": [
+                            {
+                                "name": "Other Product",
+                                "publisher": "Other",
+                                "status": "Broad Adoption"
+                            },
+                            {
+                                "name": "Another Product",
+                                "publisher": "Another",
+                                "status": "Limited Adoption"
+                            }
+                        ],
                         "publisher": "Microsoft",
                         "useCase": "Augment"
                     }
