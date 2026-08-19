@@ -2906,25 +2906,17 @@
                             "array",
                             "null"
                         ],
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string"
-                                },
-                                "publisher": {
-                                    "type": "string"
-                                },
-                                "status": {
-                                    "type": "string"
+                        "description": "Alternative products that may be used for this year phase, or null when no alternatives apply.",
+                        "examples": [
+                            [
+                                {
+                                    "name": "Google Workspace",
+                                    "publisher": "Google",
+                                    "status": "Broad Adoption"
                                 }
-                            },
-                            "required": [
-                                "name",
-                                "publisher",
-                                "status"
-                            ]
-                        }
+                            ],
+                            null
+                        ]
                     },
                     "publisher": {
                         "type": [
