@@ -39,6 +39,9 @@ jobs:
                     - name: UrlShortener
                       sdkPath: 'src/urlShortener/TypeScript'
                       specPath: 'spec/Url-Shortener.json'
+                    - name: PowerShellProxy
+                      sdkPath: 'src/powershellProxy/TypeScript'
+                      specPath: 'specs/PowerShell-Proxy.json'
 
         # Display name of the job
         name: Publish - NPM Global Packages

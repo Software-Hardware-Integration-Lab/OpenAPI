@@ -1,0 +1,407 @@
+{
+    "components": {
+        "responses": {
+            "400": {
+                "description": "Malformed JSON, invalid command request shape, or invalid cmdlet argument.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/ProxyErrorResponse"
+                        }
+                    }
+                }
+            },
+            "401": {
+                "description": "Missing, malformed, or invalid bearer access token.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/ProxyErrorResponse"
+                        }
+                    }
+                }
+            },
+            "403": {
+                "description": "The validated tenant or calling application is not authorized, or the requested cmdlet is not allowed.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/ProxyErrorResponse"
+                        }
+                    }
+                }
+            },
+            "500": {
+                "description": "Unexpected internal failure, including cmdlet resolution/execution failures or result serialization failure.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/ProxyErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "schemas": {
+            "ProxyCommandRequest": {
+                "title": "Proxy - Command Request",
+                "description": "Authenticated request to execute a single server-side allowlisted PowerShell command.",
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                    "cmdletName",
+                    "arguments"
+                ],
+                "properties": {
+                    "cmdletName": {
+                        "description": "Name of the PowerShell command requested. Must match one of a fixed, server-side allowlist of Security & Compliance (Purview) commands.",
+                        "type": "string",
+                        "minLength": 1,
+                        "pattern": "^[A-Za-z][A-Za-z0-9_-]*$",
+                        "examples": [
+                            "Get-DlpCompliancePolicy"
+                        ]
+                    },
+                    "arguments": {
+                        "description": "Structured named argument data. Values are bound as PowerShell parameters and are never interpreted, concatenated, or executed as script text.",
+                        "type": "array",
+                        "minItems": 0,
+                        "items": {
+                            "$ref": "#/components/schemas/ProxyArgument"
+                        },
+                        "examples": [
+                            [
+                                {
+                                    "name": "Identity",
+                                    "value": "Global Policy"
+                                }
+                            ]
+                        ]
+                    }
+                },
+                "examples": [
+                    {
+                        "cmdletName": "Get-DlpCompliancePolicy",
+                        "arguments": [
+                            {
+                                "name": "Identity",
+                                "value": "Global Policy"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "ProxyArgument": {
+                "title": "Proxy - Command Argument",
+                "description": "Single named argument to bind to the requested command.",
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                    "name",
+                    "value"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "Name of the requested parameter.",
+                        "type": "string",
+                        "minLength": 1,
+                        "examples": [
+                            "Identity"
+                        ]
+                    },
+                    "value": {
+                        "description": "Arbitrary JSON-compatible parameter value, retained as opaque data. The server owns command-specific parameter validation; this value is never inspected, typed, or transformed by the contract."
+                    }
+                }
+            },
+            "ProxySuccessResponse": {
+                "title": "Proxy - Success Response",
+                "description": "Stable success envelope returned once the requested command has finished executing.",
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                    "success",
+                    "result"
+                ],
+                "properties": {
+                    "success": {
+                        "description": "Always `true` on this response.",
+                        "type": "boolean",
+                        "enum": [
+                            true
+                        ]
+                    },
+                    "result": {
+                        "$ref": "#/components/schemas/ProxyExecutionResult"
+                    }
+                }
+            },
+            "ProxyExecutionResult": {
+                "title": "Proxy - Execution Result",
+                "description": "Structured result of the approved command's execution. `output`, `warnings`, and `errors` are always present arrays, even when empty.",
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                    "output",
+                    "warnings",
+                    "errors"
+                ],
+                "properties": {
+                    "output": {
+                        "description": "Raw command output. Each item is arbitrary, Microsoft/Security & Compliance-defined JSON and is intentionally not modeled - the proxy is transport infrastructure only and never interprets, renames, or normalizes properties, including properties that differ only by case (e.g. `value` vs `Value`).",
+                        "type": "array",
+                        "minItems": 0,
+                        "items": {
+                            "description": "Arbitrary JSON-compatible command output item."
+                        }
+                    },
+                    "warnings": {
+                        "description": "Non-fatal warnings emitted by the command during execution.",
+                        "type": "array",
+                        "minItems": 0,
+                        "items": {
+                            "$ref": "#/components/schemas/ProxyWarning"
+                        }
+                    },
+                    "errors": {
+                        "description": "Non-terminating errors emitted by the command during execution.",
+                        "type": "array",
+                        "minItems": 0,
+                        "items": {
+                            "$ref": "#/components/schemas/ProxyNonTerminatingError"
+                        }
+                    }
+                },
+                "examples": [
+                    {
+                        "output": [
+                            {
+                                "Name": "Global Policy",
+                                "Enabled": true
+                            }
+                        ],
+                        "warnings": [],
+                        "errors": []
+                    }
+                ]
+            },
+            "ProxyWarning": {
+                "title": "Proxy - Warning",
+                "description": "Safe, structured representation of a PowerShell warning emitted during command execution.",
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                    "message"
+                ],
+                "properties": {
+                    "message": {
+                        "description": "Text of the warning.",
+                        "type": "string"
+                    }
+                }
+            },
+            "ProxyNonTerminatingError": {
+                "title": "Proxy - Non-Terminating Error",
+                "description": "Safe, structured representation of a PowerShell non-terminating error emitted during command execution. Never includes raw service messages, stack traces, exception objects, invocation info, or script paths.",
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                    "message",
+                    "category",
+                    "fullyQualifiedErrorId"
+                ],
+                "properties": {
+                    "message": {
+                        "description": "Safe, generic description of the error.",
+                        "type": "string",
+                        "examples": [
+                            "The cmdlet reported a non-terminating error."
+                        ]
+                    },
+                    "category": {
+                        "description": "PowerShell error category name.",
+                        "type": "string",
+                        "examples": [
+                            "InvalidOperation"
+                        ]
+                    },
+                    "fullyQualifiedErrorId": {
+                        "description": "PowerShell fully qualified error ID for the error.",
+                        "type": "string",
+                        "examples": [
+                            "Microsoft.Exchange.Management.Tasks.PolicyNotFoundException"
+                        ]
+                    }
+                }
+            },
+            "ProxyErrorResponse": {
+                "title": "Proxy - Error Response",
+                "description": "Stable failure envelope returned when the request cannot be processed.",
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                    "success",
+                    "error"
+                ],
+                "properties": {
+                    "success": {
+                        "description": "Always `false` on this response.",
+                        "type": "boolean",
+                        "enum": [
+                            false
+                        ]
+                    },
+                    "error": {
+                        "$ref": "#/components/schemas/ProxyError"
+                    }
+                }
+            },
+            "ProxyError": {
+                "title": "Proxy - Error",
+                "description": "Structured failure detail.",
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                    "code",
+                    "message"
+                ],
+                "properties": {
+                    "code": {
+                        "description": "Stable, machine-readable failure code. Known values today: `INVALID_JSON`, `INVALID_COMMAND_REQUEST`, `MISSING_ACCESS_TOKEN`, `INVALID_ACCESS_TOKEN`, `UNAUTHORIZED_TENANT`, `UNAUTHORIZED_CALLER`, `INTERNAL_ERROR`, `CMDLET_NOT_ALLOWED`, `INVALID_CMDLET_ARGUMENT`, `CMDLET_RESOLUTION_FAILED`, `CMDLET_EXECUTION_FAILED`, `RESULT_SERIALIZATION_FAILED`. This list may grow additively over time and is intentionally not a closed enum.",
+                        "type": "string",
+                        "minLength": 1,
+                        "examples": [
+                            "CMDLET_NOT_ALLOWED"
+                        ]
+                    },
+                    "message": {
+                        "description": "Human-readable description of the failure. Never includes stack traces, token contents, signing keys, or internal configuration values.",
+                        "type": "string",
+                        "examples": [
+                            "The requested cmdlet is not allowed."
+                        ]
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "EntraID": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT",
+                "description": "The Access Token from Entra ID, supplied only via the `Authorization: Bearer <token>` request header. The token is never accepted in the URL, query string, cookie, or request body."
+            }
+        }
+    },
+    "externalDocs": {
+        "description": "Official Documentation",
+        "url": "https://docs.shilab.com"
+    },
+    "info": {
+        "contact": {
+            "email": "elliot_huffman@shi.com",
+            "name": "SHI - Lab"
+        },
+        "description": "Authenticated proxy that validates the caller and executes a fixed, server-side allowlisted Security & Compliance (Purview) PowerShell command, returning its structured JSON result.",
+        "title": "SHIELD PowerShell Proxy",
+        "version": "1.0.0"
+    },
+    "openapi": "3.1.1",
+    "paths": {
+        "/api/proxy": {
+            "post": {
+                "summary": "Executes an Allowlisted PowerShell Command",
+                "description": "Validates the bearer token (tenant and calling application must be allowlisted) and the command request body, then executes the requested command only if it is present in the server-side command allowlist. The command result is always returned in the stable `result` property.",
+                "operationId": "/api/proxy/Post",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ProxyCommandRequest"
+                            },
+                            "examples": {
+                                "Get DLP compliance policy": {
+                                    "summary": "Example Command Request",
+                                    "description": "An example request to retrieve a single DLP compliance policy by name.",
+                                    "value": {
+                                        "cmdletName": "Get-DlpCompliancePolicy",
+                                        "arguments": [
+                                            {
+                                                "name": "Identity",
+                                                "value": "Global Policy"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The request was accepted and the command result is returned.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProxySuccessResponse"
+                                },
+                                "examples": {
+                                    "Successful execution": {
+                                        "summary": "Example Success Response",
+                                        "description": "An example response for a command that produced one output record and no warnings or errors.",
+                                        "value": {
+                                            "success": true,
+                                            "result": {
+                                                "output": [
+                                                    {
+                                                        "Name": "Global Policy",
+                                                        "Enabled": true
+                                                    }
+                                                ],
+                                                "warnings": [],
+                                                "errors": []
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "tags": [
+                    "PowerShell Proxy"
+                ]
+            }
+        }
+    },
+    "security": [
+        {
+            "EntraID": []
+        }
+    ],
+    "servers": [
+        {
+            "description": "The service",
+            "url": "/"
+        }
+    ],
+    "tags": [
+        {
+            "description": "Authenticated execution of server-side allowlisted PowerShell commands against Microsoft Security & Compliance (Purview).",
+            "name": "PowerShell Proxy"
+        }
+    ]
+}
