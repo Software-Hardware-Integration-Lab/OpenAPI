@@ -2100,7 +2100,8 @@
                 "properties": {
                     "eventId": {
                         "$ref": "#/components/schemas/Uuid",
-                        "description": "Unique identifier for the event record."
+                        "description": "Unique identifier for the event record.",
+                        "readOnly": true
                     },
                     "eventName": {
                         "$ref": "#/components/schemas/Telemetry.Shield.EventName",
@@ -2108,15 +2109,18 @@
                     },
                     "tenantId": {
                         "$ref": "#/components/schemas/Uuid",
-                        "description": "Tenant that generated the event."
+                        "description": "Tenant that generated the event.",
+                        "readOnly": true
                     },
                     "createdAt": {
                         "$ref": "#/components/schemas/DateTimeStringType",
-                        "description": "Timestamp indicating when the record was created. This value is automatically managed by Sequelize."
+                        "description": "Timestamp indicating when the record was created. This value is automatically managed by Sequelize.",
+                        "readOnly": true
                     },
                     "updatedAt": {
                         "$ref": "#/components/schemas/DateTimeStringType",
-                        "description": "Timestamp indicating when the record was last updated. This value is automatically managed by Sequelize."
+                        "description": "Timestamp indicating when the record was last updated. This value is automatically managed by Sequelize.",
+                        "readOnly": true
                     }
                 },
                 "required": [
@@ -5759,7 +5763,7 @@
         },
         "description": "Collects data from the various SHI Lab products and makes it available in a standardized way.",
         "title": "SHI - Data Gateway",
-        "version": "3.3.4"
+        "version": "3.3.2"
     },
     "openapi": "3.1.1",
     "paths": {
@@ -8186,7 +8190,7 @@
                 "summary": "Creates a SHIELD Event"
             },
             "get": {
-                "description": "Retrieves the SHIELD event records that have been reported across all tenants, optionally filtered to a date range. This endpoint does not filter by tenant, so records for every tenant are returned. Data is not guaranteed to be retrieved in any specific order.\n\nThis endpoint requires the `Telemetry.Shield.Read`, or `Telemetry.Shield.Read.All` scope (permission). This endpoint is also only accessible from the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "description": "Retrieves the SHIELD event records that have been reported across all tenants, optionally filtered to a date range. This endpoint does not filter by tenant, so records for every tenant are returned. Data is not guaranteed to be retrieved in any specific order.\n\nThis endpoint requires the `Telemetry.Shield.Read.All`, or `Telemetry.Shield.ReadWrite.All` scope (permission). This endpoint is also only accessible from the `SHI` and `SHI Lab` tenants. End user access is restricted.",
                 "operationId": "/Api/Telemetry/Shield/Event/Get",
                 "parameters": [
                     {
@@ -8258,7 +8262,7 @@
         },
         "/Api/Telemetry/Shield/Event/Tenant/{tenantId}": {
             "get": {
-                "description": "Retrieves the SHIELD event records that have been reported for the specified tenant, optionally filtered to a date range. Data is not guaranteed to be retrieved in any specific order.\n\nThis endpoint requires the `Telemetry.Shield.Read`, or `Telemetry.Shield.Read.All` scope (permission). This endpoint is also only accessible from the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "description": "Retrieves the SHIELD event records that have been reported for the specified tenant, optionally filtered to a date range. Data is not guaranteed to be retrieved in any specific order.\n\nThis endpoint requires the `Telemetry.Shield.Read.All`, or `Telemetry.Shield.ReadWrite.All` scope (permission). This endpoint is also only accessible from the `SHI` and `SHI Lab` tenants. End user access is restricted.",
                 "operationId": "/Api/Telemetry/Shield/Event/Tenant/:tenantId/Get",
                 "parameters": [
                     {
