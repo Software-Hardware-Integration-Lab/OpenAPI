@@ -2081,7 +2081,7 @@
                 ]
             },
             "Telemetry.Shield.EventName": {
-                "description": "Enumeration of SHIELD telemetry event names that can be recorded for a tenant.",
+                "description": "Enumeration of SHIELD event names that can be recorded for a tenant.",
                 "type": "string",
                 "enum": [
                     "license_report_saved",
@@ -2095,12 +2095,12 @@
                 "title": "Application Telemetry - SHIELD Event Name"
             },
             "Telemetry.Shield.Event": {
-                "description": "A single SHIELD telemetry event recorded for a tenant.",
+                "description": "A single SHIELD event recorded for a tenant.",
                 "type": "object",
                 "properties": {
                     "eventId": {
                         "$ref": "#/components/schemas/Uuid",
-                        "description": "Unique identifier for the event record.",
+                        "description": "Unique identifier for the event.",
                         "readOnly": true
                     },
                     "eventName": {
