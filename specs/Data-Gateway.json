@@ -2967,12 +2967,18 @@
                     },
                     "altProduct": {
                         "type": [
-                            "string",
+                            "array",
                             "null"
                         ],
-                        "description": "Alternate product, if any, or null.",
+                        "description": "Alternative products that may be used for this year phase, or null when no alternatives apply.",
                         "examples": [
-                            "Other Product",
+                            [
+                                {
+                                    "name": "Google Workspace",
+                                    "publisher": "Google",
+                                    "status": "Broad Adoption"
+                                }
+                            ],
                             null
                         ]
                     },
@@ -3024,7 +3030,18 @@
                             "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
                         ],
                         "isDeepDive": true,
-                        "altProduct": "Other Product",
+                        "altProduct": [
+                            {
+                                "name": "Other Product",
+                                "publisher": "Other",
+                                "status": "Broad Adoption"
+                            },
+                            {
+                                "name": "Another Product",
+                                "publisher": "Another",
+                                "status": "Limited Adoption"
+                            }
+                        ],
                         "publisher": "Microsoft",
                         "useCase": "Augment"
                     }
