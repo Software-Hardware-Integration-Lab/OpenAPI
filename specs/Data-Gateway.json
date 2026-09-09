@@ -2907,6 +2907,36 @@
                             "null"
                         ],
                         "description": "Alternative products that may be used for this year phase, or null when no alternatives apply.",
+                        "items": {
+                            "type": "object",
+                            "description": "An alternative product considered for this year phase.",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "description": "Alternative product name."
+                                },
+                                "publisher": {
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "Organization that publishes the alternative product, or null if unspecified."
+                                },
+                                "status": {
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "Adoption status of the alternative product, or null if unspecified."
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "publisher",
+                                "status"
+                            ],
+                            "additionalProperties": false
+                        },
                         "examples": [
                             [
                                 {
