@@ -2080,6 +2080,70 @@
                     }
                 ]
             },
+            "Telemetry.Shield.EventName": {
+                "description": "Enumeration of SHIELD event names that can be recorded for a tenant.",
+                "type": "string",
+                "enum": [
+                    "license_report_saved",
+                    "license_report_started",
+                    "shield_installed"
+                ],
+                "examples": [
+                    "shield_installed",
+                    "license_report_saved"
+                ],
+                "title": "Application Telemetry - SHIELD Event Name"
+            },
+            "Telemetry.Shield.Event": {
+                "description": "A single SHIELD event recorded for a tenant.",
+                "type": "object",
+                "properties": {
+                    "eventId": {
+                        "$ref": "#/components/schemas/Uuid",
+                        "description": "Unique identifier for the event.",
+                        "readOnly": true
+                    },
+                    "eventName": {
+                        "$ref": "#/components/schemas/Telemetry.Shield.EventName",
+                        "description": "Name of the SHIELD event."
+                    },
+                    "tenantId": {
+                        "$ref": "#/components/schemas/Uuid",
+                        "description": "Tenant that generated the event.",
+                        "readOnly": true
+                    },
+                    "createdAt": {
+                        "$ref": "#/components/schemas/DateTimeStringType",
+                        "description": "Timestamp indicating when the record was created. This value is automatically managed by Sequelize.",
+                        "readOnly": true
+                    },
+                    "updatedAt": {
+                        "$ref": "#/components/schemas/DateTimeStringType",
+                        "description": "Timestamp indicating when the record was last updated. This value is automatically managed by Sequelize.",
+                        "readOnly": true
+                    }
+                },
+                "required": [
+                    "eventName"
+                ],
+                "title": "Application Telemetry - SHIELD Event",
+                "examples": [
+                    {
+                        "eventId": "c1a2b3d4-5e6f-4789-9abc-def012345678",
+                        "eventName": "shield_installed",
+                        "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                        "createdAt": "2026-01-01T00:00:00.000Z",
+                        "updatedAt": "2026-01-01T00:00:00.000Z"
+                    },
+                    {
+                        "eventId": "e3c4d5f6-7a8b-4901-bcde-f01234567890",
+                        "eventName": "license_report_saved",
+                        "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                        "createdAt": "2026-01-02T08:20:00.000Z",
+                        "updatedAt": "2026-01-02T08:20:00.000Z"
+                    }
+                ]
+            },
             "Update.Shield.Check": {
                 "description": "Object returning the value of the version of the latest application package available.",
                 "properties": {
@@ -2468,6 +2532,262 @@
                 "$ref": "#/components/schemas/Report.PrincipalData",
                 "title": "Architecture Report - Principal Data"
             },
+            "CspmPolicyAssessmentV1": {
+                "title": "CSPM Policy Assessment V1 - Complete Object",
+                "type": "object",
+                "description": "Container that represents the entire CSPM policy assessment structure for a complete run.",
+                "properties": {
+                    "correlation": {
+                        "$ref": "#/components/schemas/Report.CorrelationRecord",
+                        "description": "Used for cross record tracking and auditing."
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/CspmPolicyAssessmentV1.CspmPolicyAssessmentData",
+                        "description": "The computed CSPM policy assessment data."
+                    },
+                    "schemaVersion": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "Indicator for migration scripts to auto migrate the data to newer or older formats.",
+                        "examples": [
+                            1
+                        ]
+                    }
+                },
+                "required": [
+                    "correlation",
+                    "data",
+                    "schemaVersion"
+                ],
+                "examples": [
+                    {
+                        "correlation": {
+                            "auditTenantAccount": "user@example.com",
+                            "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                            "createdAt": "2023-11-19T10:00:00.000Z",
+                            "reportTenantAccount": "user@example.com",
+                            "tenantId": "123e4567-e89b-12d3-a456-426614174000",
+                            "updatedAt": "2023-11-19T10:05:00.000Z"
+                        },
+                        "data": {
+                            "reportCreatedDate": "2026-06-26T11:00:00.000Z",
+                            "reportUpdatedDate": "2026-06-26T11:00:00.000Z",
+                            "policyList": {
+                                "a1b2c3d4-e5f6-7890-abcd-ef1234567890": {
+                                    "name": "Require MFA for all users",
+                                    "categoryList": [
+                                        "Conditional Access"
+                                    ],
+                                    "coverageStatus": "partial",
+                                    "coverageMetricsRaw": {
+                                        "covered": 80,
+                                        "partial": 15,
+                                        "noCover": 5
+                                    },
+                                    "coverageMetricsNormalized": {
+                                        "covered": 80,
+                                        "partial": 15,
+                                        "noCover": 5
+                                    }
+                                }
+                            }
+                        },
+                        "schemaVersion": 1
+                    }
+                ]
+            },
+            "CspmPolicyAssessmentV1.CspmPolicyAssessmentData": {
+                "title": "CSPM Policy Assessment Data",
+                "type": "object",
+                "description": "Represents the details of a CSPM policy collection, including a mapping of configuration item template IDs to their corresponding policy records. Optionally includes the creation and last update dates of the associated architecture report.",
+                "properties": {
+                    "policyList": {
+                        "type": "object",
+                        "description": "The calculated mapping between configuration templateIds and their corresponding policy record. Where an architecture report has been provided, each policy record will also contain coverage statistics.",
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/CspmPolicyAssessmentV1.PolicyRecord"
+                        },
+                        "examples": [
+                            {
+                                "a1b2c3d4-e5f6-7890-abcd-ef1234567890": {
+                                    "name": "Require MFA for all users",
+                                    "categoryList": [
+                                        "Conditional Access"
+                                    ],
+                                    "coverageStatus": "partial",
+                                    "coverageMetricsRaw": {
+                                        "covered": 80,
+                                        "partial": 15,
+                                        "noCover": 5
+                                    },
+                                    "coverageMetricsNormalized": {
+                                        "covered": 80,
+                                        "partial": 15,
+                                        "noCover": 5
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "reportCreatedDate": {
+                        "$ref": "#/components/schemas/NullableDateTimeStringType",
+                        "description": "The date the architecture report was created."
+                    },
+                    "reportUpdatedDate": {
+                        "$ref": "#/components/schemas/NullableDateTimeStringType",
+                        "description": "The date the architecture report was last updated."
+                    }
+                },
+                "required": [
+                    "policyList"
+                ],
+                "additionalProperties": false,
+                "examples": [
+                    {
+                        "reportCreatedDate": "2026-06-26T11:00:00.000Z",
+                        "reportUpdatedDate": "2026-06-26T11:00:00.000Z",
+                        "policyList": {
+                            "a1b2c3d4-e5f6-7890-abcd-ef1234567890": {
+                                "name": "Require MFA for all users",
+                                "categoryList": [
+                                    "Conditional Access"
+                                ],
+                                "coverageStatus": "partial",
+                                "coverageMetricsRaw": {
+                                    "covered": 80,
+                                    "partial": 15,
+                                    "noCover": 5
+                                },
+                                "coverageMetricsNormalized": {
+                                    "covered": 80,
+                                    "partial": 15,
+                                    "noCover": 5
+                                }
+                            }
+                        }
+                    }
+                ]
+            },
+            "CspmPolicyAssessmentV1.CoverageMetrics": {
+                "title": "Coverage Metrics",
+                "type": "object",
+                "description": "Represents the coverage status of users.",
+                "properties": {
+                    "covered": {
+                        "type": "integer",
+                        "format": "int64",
+                        "minimum": 0,
+                        "description": "The amount of users fully covered.",
+                        "examples": [
+                            80
+                        ]
+                    },
+                    "partial": {
+                        "type": "integer",
+                        "format": "int64",
+                        "minimum": 0,
+                        "description": "The amount of users partially covered.",
+                        "examples": [
+                            15
+                        ]
+                    },
+                    "noCover": {
+                        "type": "integer",
+                        "format": "int64",
+                        "minimum": 0,
+                        "description": "The amount of users not covered.",
+                        "examples": [
+                            5
+                        ]
+                    }
+                },
+                "required": [
+                    "covered",
+                    "partial",
+                    "noCover"
+                ],
+                "additionalProperties": false,
+                "examples": [
+                    {
+                        "covered": 80,
+                        "partial": 15,
+                        "noCover": 5
+                    }
+                ]
+            },
+            "CspmPolicyAssessmentV1.PolicyRecord": {
+                "title": "Policy Record",
+                "type": "object",
+                "description": "Represents a policy record with associated categories, name, user coverage metrics, and coverage status.",
+                "properties": {
+                    "categoryList": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The categories that this policy belongs to.",
+                        "examples": [
+                            [
+                                "Conditional Access"
+                            ]
+                        ]
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "A human readable descriptive name of the policy.",
+                        "examples": [
+                            "Require MFA for all users"
+                        ]
+                    },
+                    "coverageMetricsRaw": {
+                        "$ref": "#/components/schemas/CspmPolicyAssessmentV1.CoverageMetrics",
+                        "description": "Details raw coverage metrics of the policy."
+                    },
+                    "coverageMetricsNormalized": {
+                        "$ref": "#/components/schemas/CspmPolicyAssessmentV1.CoverageMetrics",
+                        "description": "Details normalized coverage metrics of the policy."
+                    },
+                    "coverageStatus": {
+                        "type": "string",
+                        "enum": [
+                            "full",
+                            "partial",
+                            "none"
+                        ],
+                        "description": "The summary status for the coverage metrics.",
+                        "examples": [
+                            "partial"
+                        ]
+                    }
+                },
+                "required": [
+                    "categoryList",
+                    "name",
+                    "coverageMetricsRaw",
+                    "coverageMetricsNormalized",
+                    "coverageStatus"
+                ],
+                "additionalProperties": false,
+                "examples": [
+                    {
+                        "name": "Require MFA for all users",
+                        "categoryList": [
+                            "Conditional Access"
+                        ],
+                        "coverageStatus": "partial",
+                        "coverageMetricsRaw": {
+                            "covered": 80,
+                            "partial": 15,
+                            "noCover": 5
+                        },
+                        "coverageMetricsNormalized": {
+                            "covered": 80,
+                            "partial": 15,
+                            "noCover": 5
+                        }
+                    }
+                ]
+            },
             "CloudMatrix.UserProfileDetailEntry": {
                 "title": "Cloud Matrix - User Profile Detail Entry",
                 "type": "object",
@@ -2647,12 +2967,18 @@
                     },
                     "altProduct": {
                         "type": [
-                            "string",
+                            "array",
                             "null"
                         ],
-                        "description": "Alternate product, if any, or null.",
+                        "description": "Alternative products that may be used for this year phase, or null when no alternatives apply.",
                         "examples": [
-                            "Other Product",
+                            [
+                                {
+                                    "name": "Google Workspace",
+                                    "publisher": "Google",
+                                    "status": "Broad Adoption"
+                                }
+                            ],
                             null
                         ]
                     },
@@ -2704,7 +3030,18 @@
                             "0d8e0c84-c0b4-4459-8b23-11ccff5ae319"
                         ],
                         "isDeepDive": true,
-                        "altProduct": "Other Product",
+                        "altProduct": [
+                            {
+                                "name": "Other Product",
+                                "publisher": "Other",
+                                "status": "Broad Adoption"
+                            },
+                            {
+                                "name": "Another Product",
+                                "publisher": "Another",
+                                "status": "Limited Adoption"
+                            }
+                        ],
                         "publisher": "Microsoft",
                         "useCase": "Augment"
                     }
@@ -5277,7 +5614,7 @@
                 ],
                 "properties": {
                     "correlationId": {
-                            "$ref": "#/components/schemas/Uuid",
+                        "$ref": "#/components/schemas/Uuid",
                         "description": "Matches ID from whatever is being audited."
                     },
                     "name": {
@@ -5443,7 +5780,7 @@
         },
         "description": "Collects data from the various SHI Lab products and makes it available in a standardized way.",
         "title": "SHI - Data Gateway",
-        "version": "3.3.1"
+        "version": "3.4.0"
     },
     "openapi": "3.1.1",
     "paths": {
@@ -7787,6 +8124,280 @@
                 ]
             }
         },
+        "/Api/Telemetry/Shield/Event": {
+            "post": {
+                "description": "Submits a single SHIELD event for the authenticated tenant.\n\nThis endpoint requires the `Telemetry.Shield.ReadWrite`, or `Telemetry.Shield.ReadWrite.All` scope (permission).",
+                "operationId": "/Api/Telemetry/Shield/Event/Post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "examples": {
+                                "Shield Installed": {
+                                    "description": "Example event reported when SHIELD is installed on a tenant.",
+                                    "summary": "Shield Installed Event",
+                                    "value": {
+                                        "eventName": "shield_installed"
+                                    }
+                                },
+                                "License Report Saved": {
+                                    "description": "Example event reported when a license report has finished saving for a tenant.",
+                                    "summary": "License Report Saved Event",
+                                    "value": {
+                                        "eventName": "license_report_saved"
+                                    }
+                                }
+                            },
+                            "schema": {
+                                "$ref": "#/components/schemas/Telemetry.Shield.Event"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Shield Installed": {
+                                        "description": "The recorded event after being saved for the authenticated tenant.",
+                                        "summary": "Recorded Shield Installed Event",
+                                        "value": {
+                                            "eventId": "c1a2b3d4-5e6f-4789-9abc-def012345678",
+                                            "eventName": "shield_installed",
+                                            "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                                            "createdAt": "2026-01-01T00:00:00.000Z",
+                                            "updatedAt": "2026-01-01T00:00:00.000Z"
+                                        }
+                                    },
+                                    "License Report Saved": {
+                                        "description": "The recorded event after being saved for the authenticated tenant.",
+                                        "summary": "Recorded License Report Saved Event",
+                                        "value": {
+                                            "eventId": "e3c4d5f6-7a8b-4901-bcde-f01234567890",
+                                            "eventName": "license_report_saved",
+                                            "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                                            "createdAt": "2026-01-02T08:20:00.000Z",
+                                            "updatedAt": "2026-01-02T08:20:00.000Z"
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/Telemetry.Shield.Event"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "tags": [
+                    "Telemetry"
+                ],
+                "summary": "Creates a SHIELD Event"
+            },
+            "get": {
+                "description": "Retrieves the SHIELD event records that have been reported across all tenants, optionally filtered to a date range. This endpoint does not filter by tenant, so records for every tenant are returned. Data is not guaranteed to be retrieved in any specific order.\n\nThis endpoint requires the `Telemetry.Shield.Read.All`, or `Telemetry.Shield.ReadWrite.All` scope (permission). This endpoint is also only accessible from the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "operationId": "/Api/Telemetry/Shield/Event/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/dateStart"
+                    },
+                    {
+                        "$ref": "#/components/parameters/dateEnd"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "List of Events": {
+                                        "description": "List of SHIELD event records reported across all tenants.",
+                                        "summary": "List of SHIELD Event Records",
+                                        "value": [
+                                            {
+                                                "eventId": "c1a2b3d4-5e6f-4789-9abc-def012345678",
+                                                "eventName": "shield_installed",
+                                                "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                                                "createdAt": "2026-01-01T00:00:00.000Z",
+                                                "updatedAt": "2026-01-01T00:00:00.000Z"
+                                            },
+                                            {
+                                                "eventId": "d2b3c4e5-6f7a-4890-abcd-ef0123456789",
+                                                "eventName": "license_report_started",
+                                                "tenantId": "a7159bdc-678d-4726-901e-cd6d018d46e2",
+                                                "createdAt": "2026-01-02T08:15:00.000Z",
+                                                "updatedAt": "2026-01-02T08:15:00.000Z"
+                                            },
+                                            {
+                                                "eventId": "e3c4d5f6-7a8b-4901-bcde-f01234567890",
+                                                "eventName": "license_report_saved",
+                                                "tenantId": "a7159bdc-678d-4726-901e-cd6d018d46e2",
+                                                "createdAt": "2026-01-02T08:20:00.000Z",
+                                                "updatedAt": "2026-01-02T08:20:00.000Z"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Telemetry.Shield.Event"
+                                    },
+                                    "minItems": 0,
+                                    "examples": [
+                                        {
+                                            "eventId": "c1a2b3d4-5e6f-4789-9abc-def012345678",
+                                            "eventName": "shield_installed",
+                                            "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                                            "createdAt": "2026-01-01T00:00:00.000Z",
+                                            "updatedAt": "2026-01-01T00:00:00.000Z"
+                                        },
+                                        {
+                                            "eventId": "d2b3c4e5-6f7a-4890-abcd-ef0123456789",
+                                            "eventName": "license_report_started",
+                                            "tenantId": "a7159bdc-678d-4726-901e-cd6d018d46e2",
+                                            "createdAt": "2026-01-02T08:15:00.000Z",
+                                            "updatedAt": "2026-01-02T08:15:00.000Z"
+                                        },
+                                        {
+                                            "eventId": "e3c4d5f6-7a8b-4901-bcde-f01234567890",
+                                            "eventName": "license_report_saved",
+                                            "tenantId": "a7159bdc-678d-4726-901e-cd6d018d46e2",
+                                            "createdAt": "2026-01-02T08:20:00.000Z",
+                                            "updatedAt": "2026-01-02T08:20:00.000Z"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    }
+                },
+                "summary": "Lists SHIELD Event Records",
+                "tags": [
+                    "Telemetry"
+                ]
+            }
+        },
+        "/Api/Telemetry/Shield/Event/Tenant/{tenantId}": {
+            "get": {
+                "description": "Retrieves the SHIELD event records that have been reported for the specified tenant, optionally filtered to a date range. Data is not guaranteed to be retrieved in any specific order.\n\nThis endpoint requires the `Telemetry.Shield.Read.All`, or `Telemetry.Shield.ReadWrite.All` scope (permission). This endpoint is also only accessible from the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "operationId": "/Api/Telemetry/Shield/Event/Tenant/:tenantId/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/tenantId"
+                    },
+                    {
+                        "$ref": "#/components/parameters/dateStart"
+                    },
+                    {
+                        "$ref": "#/components/parameters/dateEnd"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "List of Events": {
+                                        "description": "List of SHIELD event records reported for the specified tenant.",
+                                        "summary": "List of SHIELD Event Records",
+                                        "value": [
+                                            {
+                                                "eventId": "c1a2b3d4-5e6f-4789-9abc-def012345678",
+                                                "eventName": "shield_installed",
+                                                "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                                                "createdAt": "2026-01-01T00:00:00.000Z",
+                                                "updatedAt": "2026-01-01T00:00:00.000Z"
+                                            },
+                                            {
+                                                "eventId": "d2b3c4e5-6f7a-4890-abcd-ef0123456789",
+                                                "eventName": "license_report_started",
+                                                "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                                                "createdAt": "2026-01-02T08:15:00.000Z",
+                                                "updatedAt": "2026-01-02T08:15:00.000Z"
+                                            },
+                                            {
+                                                "eventId": "e3c4d5f6-7a8b-4901-bcde-f01234567890",
+                                                "eventName": "license_report_saved",
+                                                "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                                                "createdAt": "2026-01-02T08:20:00.000Z",
+                                                "updatedAt": "2026-01-02T08:20:00.000Z"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Telemetry.Shield.Event"
+                                    },
+                                    "minItems": 0,
+                                    "examples": [
+                                        {
+                                            "eventId": "c1a2b3d4-5e6f-4789-9abc-def012345678",
+                                            "eventName": "shield_installed",
+                                            "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                                            "createdAt": "2026-01-01T00:00:00.000Z",
+                                            "updatedAt": "2026-01-01T00:00:00.000Z"
+                                        },
+                                        {
+                                            "eventId": "d2b3c4e5-6f7a-4890-abcd-ef0123456789",
+                                            "eventName": "license_report_started",
+                                            "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                                            "createdAt": "2026-01-02T08:15:00.000Z",
+                                            "updatedAt": "2026-01-02T08:15:00.000Z"
+                                        },
+                                        {
+                                            "eventId": "e3c4d5f6-7a8b-4901-bcde-f01234567890",
+                                            "eventName": "license_report_saved",
+                                            "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                                            "createdAt": "2026-01-02T08:20:00.000Z",
+                                            "updatedAt": "2026-01-02T08:20:00.000Z"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    }
+                },
+                "summary": "Retrieves SHIELD Event Records for Specified Tenant",
+                "tags": [
+                    "Telemetry"
+                ]
+            }
+        },
         "/Api/Update/Shield/Channel": {
             "get": {
                 "description": "Retrieves all of the channel configurations that are present in the update service.\n\nThis endpoint requires the `UpdateShield.ReadWrite.All` scope (permission). This endpoint is also only accessible from the `SHI Lab` tenant. End user access is restricted.",
@@ -9695,6 +10306,280 @@
                     },
                     "400": {
                         "$ref": "#/components/responses/400"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "tags": [
+                    "Architecture Reporting"
+                ]
+            }
+        },
+        "/Api/V1/ArchitectureReport/CspmPolicyAssessment": {
+            "post": {
+                "description": "Stores the result of a CSPM Policy Assessment.\n\nThis endpoint requires the `ArchitectureReport.ReadWrite`, `ArchitectureReport.ReadWrite.All` scope (permission).",
+                "operationId": "/Api/V1/ArchitectureReport/CspmPolicyAssessment/Post",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "examples": {
+                                "Cspm Policy Assessment V1": {
+                                    "description": "Sample, truncated report from an example customer environment. This will return the same report as the request input.",
+                                    "summary": "Example of CSPM Policy Assessment Stored.",
+                                    "value": {
+                                        "reportCreatedDate": "2026-06-26T11:00:00.000Z",
+                                        "reportUpdatedDate": "2026-06-26T11:00:00.000Z",
+                                        "policyList": {
+                                            "a1b2c3d4-e5f6-7890-abcd-ef1234567890": {
+                                                "name": "Require MFA for all users",
+                                                "categoryList": [
+                                                    "Conditional Access"
+                                                ],
+                                                "coverageStatus": "partial",
+                                                "coverageMetricsRaw": {
+                                                    "covered": 80,
+                                                    "partial": 15,
+                                                    "noCover": 5
+                                                },
+                                                "coverageMetricsNormalized": {
+                                                    "covered": 80,
+                                                    "partial": 15,
+                                                    "noCover": 5
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "schema": {
+                                "$ref": "#/components/schemas/CspmPolicyAssessmentV1.CspmPolicyAssessmentData"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "CSPM Policy Assessment V1 submitted successfully.",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "CSPM Policy Assessment V1": {
+                                        "description": "Sample, cspm policy assessment result. This will return the same report as the request along with correlation data.",
+                                        "summary": "Example of CSPM Policy Assessment Stored.",
+                                        "value": {
+                                            "correlation": {
+                                                "auditTenantAccount": "user@example.com",
+                                                "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                                                "createdAt": "2023-11-19T10:00:00.000Z",
+                                                "reportTenantAccount": "user@example.com",
+                                                "tenantId": "123e4567-e89b-12d3-a456-426614174000",
+                                                "updatedAt": "2023-11-19T10:05:00.000Z"
+                                            },
+                                            "data": {
+                                                "reportCreatedDate": "2026-06-26T11:00:00.000Z",
+                                                "reportUpdatedDate": "2026-06-26T11:00:00.000Z",
+                                                "policyList": {
+                                                    "a1b2c3d4-e5f6-7890-abcd-ef1234567890": {
+                                                        "name": "Require MFA for all users",
+                                                        "categoryList": [
+                                                            "Conditional Access"
+                                                        ],
+                                                        "coverageStatus": "partial",
+                                                        "coverageMetricsRaw": {
+                                                            "covered": 80,
+                                                            "partial": 15,
+                                                            "noCover": 5
+                                                        },
+                                                        "coverageMetricsNormalized": {
+                                                            "covered": 80,
+                                                            "partial": 15,
+                                                            "noCover": 5
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "schemaVersion": 1
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/CspmPolicyAssessmentV1"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "tags": [
+                    "Architecture Reporting"
+                ],
+                "summary": "Submit CSPM Policy Assessment V1"
+            }
+        },
+        "/Api/V1/ArchitectureReport/CspmPolicyAssessment/Correlation/{correlationId}/Data": {
+            "get": {
+                "summary": "Retrieve CSPM Policy Assessment V1 by Correlation ID",
+                "description": "Retrieves the stored CSPM policy assessment for the specified correlation ID in the authenticated tenant.\n\nThis endpoint requires the `ArchitectureReport.Read`, `ArchitectureReport.Read.All`, `ArchitectureReport.ReadWrite`, or `ArchitectureReport.ReadWrite.All` scope (permission).",
+                "operationId": "/Api/V1/ArchitectureReport/CspmPolicyAssessment/Correlation/:correlationId/Data/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/correlationId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The CSPM policy assessment data for the specified correlation ID.",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "CSPM Policy Assessment V1": {
+                                        "description": "Sample stored CSPM policy assessment result retrieved by correlation record ID.",
+                                        "summary": "CSPM Policy Assessment Details",
+                                        "value": {
+                                            "correlation": {
+                                                "auditTenantAccount": "user@example.com",
+                                                "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                                                "createdAt": "2023-11-19T10:00:00.000Z",
+                                                "reportTenantAccount": "user@example.com",
+                                                "tenantId": "123e4567-e89b-12d3-a456-426614174000",
+                                                "updatedAt": "2023-11-19T10:05:00.000Z"
+                                            },
+                                            "data": {
+                                                "reportCreatedDate": "2026-06-26T11:00:00.000Z",
+                                                "reportUpdatedDate": "2026-06-26T11:00:00.000Z",
+                                                "policyList": {
+                                                    "a1b2c3d4-e5f6-7890-abcd-ef1234567890": {
+                                                        "name": "Require MFA for all users",
+                                                        "categoryList": [
+                                                            "Conditional Access"
+                                                        ],
+                                                        "coverageStatus": "partial",
+                                                        "coverageMetricsRaw": {
+                                                            "covered": 80,
+                                                            "partial": 15,
+                                                            "noCover": 5
+                                                        },
+                                                        "coverageMetricsNormalized": {
+                                                            "covered": 80,
+                                                            "partial": 15,
+                                                            "noCover": 5
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "schemaVersion": 1
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/CspmPolicyAssessmentV1"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "tags": [
+                    "Architecture Reporting"
+                ]
+            }
+        },
+        "/Api/V1/ArchitectureReport/CspmPolicyAssessment/Correlation/{correlationId}/Tenant/{tenantId}/Data": {
+            "get": {
+                "summary": "Retrieve CSPM Policy Assessment V1 by Correlation ID and Tenant ID",
+                "description": "Retrieves the stored CSPM policy assessment for the specified correlation ID in the specified tenant.\n\nThis endpoint requires the `ArchitectureReport.Read.All`, `ArchitectureReport.ReadWrite.All` scope (permission). This endpoint is also only accessible from the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "operationId": "/Api/V1/ArchitectureReport/CspmPolicyAssessment/Correlation/:correlationId/Tenant/:tenantId/Data/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/correlationId"
+                    },
+                    {
+                        "$ref": "#/components/parameters/tenantId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The CSPM policy assessment data for the specified correlation ID and tenant ID.",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "CSPM Policy Assessment V1": {
+                                        "description": "Sample stored CSPM policy assessment result retrieved by correlation record ID and tenant ID.",
+                                        "summary": "CSPM Policy Assessment Details",
+                                        "value": {
+                                            "correlation": {
+                                                "auditTenantAccount": "user@example.com",
+                                                "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                                                "createdAt": "2023-11-19T10:00:00.000Z",
+                                                "reportTenantAccount": "user@example.com",
+                                                "tenantId": "123e4567-e89b-12d3-a456-426614174000",
+                                                "updatedAt": "2023-11-19T10:05:00.000Z"
+                                            },
+                                            "data": {
+                                                "reportCreatedDate": "2026-06-26T11:00:00.000Z",
+                                                "reportUpdatedDate": "2026-06-26T11:00:00.000Z",
+                                                "policyList": {
+                                                    "a1b2c3d4-e5f6-7890-abcd-ef1234567890": {
+                                                        "name": "Require MFA for all users",
+                                                        "categoryList": [
+                                                            "Conditional Access"
+                                                        ],
+                                                        "coverageStatus": "partial",
+                                                        "coverageMetricsRaw": {
+                                                            "covered": 80,
+                                                            "partial": 15,
+                                                            "noCover": 5
+                                                        },
+                                                        "coverageMetricsNormalized": {
+                                                            "covered": 80,
+                                                            "partial": 15,
+                                                            "noCover": 5
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "schemaVersion": 1
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/CspmPolicyAssessmentV1"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
                     },
                     "500": {
                         "$ref": "#/components/responses/500"
