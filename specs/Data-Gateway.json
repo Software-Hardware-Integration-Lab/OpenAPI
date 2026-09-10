@@ -2080,6 +2080,70 @@
                     }
                 ]
             },
+            "Telemetry.Shield.EventName": {
+                "description": "Enumeration of SHIELD event names that can be recorded for a tenant.",
+                "type": "string",
+                "enum": [
+                    "license_report_saved",
+                    "license_report_started",
+                    "shield_installed"
+                ],
+                "examples": [
+                    "shield_installed",
+                    "license_report_saved"
+                ],
+                "title": "Application Telemetry - SHIELD Event Name"
+            },
+            "Telemetry.Shield.Event": {
+                "description": "A single SHIELD event recorded for a tenant.",
+                "type": "object",
+                "properties": {
+                    "eventId": {
+                        "$ref": "#/components/schemas/Uuid",
+                        "description": "Unique identifier for the event.",
+                        "readOnly": true
+                    },
+                    "eventName": {
+                        "$ref": "#/components/schemas/Telemetry.Shield.EventName",
+                        "description": "Name of the SHIELD event."
+                    },
+                    "tenantId": {
+                        "$ref": "#/components/schemas/Uuid",
+                        "description": "Tenant that generated the event.",
+                        "readOnly": true
+                    },
+                    "createdAt": {
+                        "$ref": "#/components/schemas/DateTimeStringType",
+                        "description": "Timestamp indicating when the record was created. This value is automatically managed by Sequelize.",
+                        "readOnly": true
+                    },
+                    "updatedAt": {
+                        "$ref": "#/components/schemas/DateTimeStringType",
+                        "description": "Timestamp indicating when the record was last updated. This value is automatically managed by Sequelize.",
+                        "readOnly": true
+                    }
+                },
+                "required": [
+                    "eventName"
+                ],
+                "title": "Application Telemetry - SHIELD Event",
+                "examples": [
+                    {
+                        "eventId": "c1a2b3d4-5e6f-4789-9abc-def012345678",
+                        "eventName": "shield_installed",
+                        "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                        "createdAt": "2026-01-01T00:00:00.000Z",
+                        "updatedAt": "2026-01-01T00:00:00.000Z"
+                    },
+                    {
+                        "eventId": "e3c4d5f6-7a8b-4901-bcde-f01234567890",
+                        "eventName": "license_report_saved",
+                        "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                        "createdAt": "2026-01-02T08:20:00.000Z",
+                        "updatedAt": "2026-01-02T08:20:00.000Z"
+                    }
+                ]
+            },
             "Update.Shield.Check": {
                 "description": "Object returning the value of the version of the latest application package available.",
                 "properties": {
@@ -5716,7 +5780,7 @@
         },
         "description": "Collects data from the various SHI Lab products and makes it available in a standardized way.",
         "title": "SHI - Data Gateway",
-        "version": "3.3.1"
+        "version": "3.4.0"
     },
     "openapi": "3.1.1",
     "paths": {
@@ -8055,6 +8119,280 @@
                     }
                 },
                 "summary": "Delete Specified Telemetry Record",
+                "tags": [
+                    "Telemetry"
+                ]
+            }
+        },
+        "/Api/Telemetry/Shield/Event": {
+            "post": {
+                "description": "Submits a single SHIELD event for the authenticated tenant.\n\nThis endpoint requires the `Telemetry.Shield.ReadWrite`, or `Telemetry.Shield.ReadWrite.All` scope (permission).",
+                "operationId": "/Api/Telemetry/Shield/Event/Post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "examples": {
+                                "Shield Installed": {
+                                    "description": "Example event reported when SHIELD is installed on a tenant.",
+                                    "summary": "Shield Installed Event",
+                                    "value": {
+                                        "eventName": "shield_installed"
+                                    }
+                                },
+                                "License Report Saved": {
+                                    "description": "Example event reported when a license report has finished saving for a tenant.",
+                                    "summary": "License Report Saved Event",
+                                    "value": {
+                                        "eventName": "license_report_saved"
+                                    }
+                                }
+                            },
+                            "schema": {
+                                "$ref": "#/components/schemas/Telemetry.Shield.Event"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Shield Installed": {
+                                        "description": "The recorded event after being saved for the authenticated tenant.",
+                                        "summary": "Recorded Shield Installed Event",
+                                        "value": {
+                                            "eventId": "c1a2b3d4-5e6f-4789-9abc-def012345678",
+                                            "eventName": "shield_installed",
+                                            "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                                            "createdAt": "2026-01-01T00:00:00.000Z",
+                                            "updatedAt": "2026-01-01T00:00:00.000Z"
+                                        }
+                                    },
+                                    "License Report Saved": {
+                                        "description": "The recorded event after being saved for the authenticated tenant.",
+                                        "summary": "Recorded License Report Saved Event",
+                                        "value": {
+                                            "eventId": "e3c4d5f6-7a8b-4901-bcde-f01234567890",
+                                            "eventName": "license_report_saved",
+                                            "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                                            "createdAt": "2026-01-02T08:20:00.000Z",
+                                            "updatedAt": "2026-01-02T08:20:00.000Z"
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/Telemetry.Shield.Event"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "tags": [
+                    "Telemetry"
+                ],
+                "summary": "Creates a SHIELD Event"
+            },
+            "get": {
+                "description": "Retrieves the SHIELD event records that have been reported across all tenants, optionally filtered to a date range. This endpoint does not filter by tenant, so records for every tenant are returned. Data is not guaranteed to be retrieved in any specific order.\n\nThis endpoint requires the `Telemetry.Shield.Read.All`, or `Telemetry.Shield.ReadWrite.All` scope (permission). This endpoint is also only accessible from the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "operationId": "/Api/Telemetry/Shield/Event/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/dateStart"
+                    },
+                    {
+                        "$ref": "#/components/parameters/dateEnd"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "List of Events": {
+                                        "description": "List of SHIELD event records reported across all tenants.",
+                                        "summary": "List of SHIELD Event Records",
+                                        "value": [
+                                            {
+                                                "eventId": "c1a2b3d4-5e6f-4789-9abc-def012345678",
+                                                "eventName": "shield_installed",
+                                                "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                                                "createdAt": "2026-01-01T00:00:00.000Z",
+                                                "updatedAt": "2026-01-01T00:00:00.000Z"
+                                            },
+                                            {
+                                                "eventId": "d2b3c4e5-6f7a-4890-abcd-ef0123456789",
+                                                "eventName": "license_report_started",
+                                                "tenantId": "a7159bdc-678d-4726-901e-cd6d018d46e2",
+                                                "createdAt": "2026-01-02T08:15:00.000Z",
+                                                "updatedAt": "2026-01-02T08:15:00.000Z"
+                                            },
+                                            {
+                                                "eventId": "e3c4d5f6-7a8b-4901-bcde-f01234567890",
+                                                "eventName": "license_report_saved",
+                                                "tenantId": "a7159bdc-678d-4726-901e-cd6d018d46e2",
+                                                "createdAt": "2026-01-02T08:20:00.000Z",
+                                                "updatedAt": "2026-01-02T08:20:00.000Z"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Telemetry.Shield.Event"
+                                    },
+                                    "minItems": 0,
+                                    "examples": [
+                                        {
+                                            "eventId": "c1a2b3d4-5e6f-4789-9abc-def012345678",
+                                            "eventName": "shield_installed",
+                                            "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                                            "createdAt": "2026-01-01T00:00:00.000Z",
+                                            "updatedAt": "2026-01-01T00:00:00.000Z"
+                                        },
+                                        {
+                                            "eventId": "d2b3c4e5-6f7a-4890-abcd-ef0123456789",
+                                            "eventName": "license_report_started",
+                                            "tenantId": "a7159bdc-678d-4726-901e-cd6d018d46e2",
+                                            "createdAt": "2026-01-02T08:15:00.000Z",
+                                            "updatedAt": "2026-01-02T08:15:00.000Z"
+                                        },
+                                        {
+                                            "eventId": "e3c4d5f6-7a8b-4901-bcde-f01234567890",
+                                            "eventName": "license_report_saved",
+                                            "tenantId": "a7159bdc-678d-4726-901e-cd6d018d46e2",
+                                            "createdAt": "2026-01-02T08:20:00.000Z",
+                                            "updatedAt": "2026-01-02T08:20:00.000Z"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    }
+                },
+                "summary": "Lists SHIELD Event Records",
+                "tags": [
+                    "Telemetry"
+                ]
+            }
+        },
+        "/Api/Telemetry/Shield/Event/Tenant/{tenantId}": {
+            "get": {
+                "description": "Retrieves the SHIELD event records that have been reported for the specified tenant, optionally filtered to a date range. Data is not guaranteed to be retrieved in any specific order.\n\nThis endpoint requires the `Telemetry.Shield.Read.All`, or `Telemetry.Shield.ReadWrite.All` scope (permission). This endpoint is also only accessible from the `SHI` and `SHI Lab` tenants. End user access is restricted.",
+                "operationId": "/Api/Telemetry/Shield/Event/Tenant/:tenantId/Get",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/tenantId"
+                    },
+                    {
+                        "$ref": "#/components/parameters/dateStart"
+                    },
+                    {
+                        "$ref": "#/components/parameters/dateEnd"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "List of Events": {
+                                        "description": "List of SHIELD event records reported for the specified tenant.",
+                                        "summary": "List of SHIELD Event Records",
+                                        "value": [
+                                            {
+                                                "eventId": "c1a2b3d4-5e6f-4789-9abc-def012345678",
+                                                "eventName": "shield_installed",
+                                                "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                                                "createdAt": "2026-01-01T00:00:00.000Z",
+                                                "updatedAt": "2026-01-01T00:00:00.000Z"
+                                            },
+                                            {
+                                                "eventId": "d2b3c4e5-6f7a-4890-abcd-ef0123456789",
+                                                "eventName": "license_report_started",
+                                                "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                                                "createdAt": "2026-01-02T08:15:00.000Z",
+                                                "updatedAt": "2026-01-02T08:15:00.000Z"
+                                            },
+                                            {
+                                                "eventId": "e3c4d5f6-7a8b-4901-bcde-f01234567890",
+                                                "eventName": "license_report_saved",
+                                                "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                                                "createdAt": "2026-01-02T08:20:00.000Z",
+                                                "updatedAt": "2026-01-02T08:20:00.000Z"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Telemetry.Shield.Event"
+                                    },
+                                    "minItems": 0,
+                                    "examples": [
+                                        {
+                                            "eventId": "c1a2b3d4-5e6f-4789-9abc-def012345678",
+                                            "eventName": "shield_installed",
+                                            "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                                            "createdAt": "2026-01-01T00:00:00.000Z",
+                                            "updatedAt": "2026-01-01T00:00:00.000Z"
+                                        },
+                                        {
+                                            "eventId": "d2b3c4e5-6f7a-4890-abcd-ef0123456789",
+                                            "eventName": "license_report_started",
+                                            "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                                            "createdAt": "2026-01-02T08:15:00.000Z",
+                                            "updatedAt": "2026-01-02T08:15:00.000Z"
+                                        },
+                                        {
+                                            "eventId": "e3c4d5f6-7a8b-4901-bcde-f01234567890",
+                                            "eventName": "license_report_saved",
+                                            "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                                            "createdAt": "2026-01-02T08:20:00.000Z",
+                                            "updatedAt": "2026-01-02T08:20:00.000Z"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    }
+                },
+                "summary": "Retrieves SHIELD Event Records for Specified Tenant",
                 "tags": [
                     "Telemetry"
                 ]
