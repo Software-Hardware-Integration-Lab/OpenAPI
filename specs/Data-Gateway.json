@@ -8255,7 +8255,30 @@
                                     "items": {
                                         "$ref": "#/components/schemas/Telemetry.Shield.Event"
                                     },
-                                    "minItems": 0
+                                    "minItems": 0,
+                                    "examples": [
+                                        {
+                                            "eventId": "c1a2b3d4-5e6f-4789-9abc-def012345678",
+                                            "eventName": "shield_installed",
+                                            "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                                            "createdAt": "2026-01-01T00:00:00.000Z",
+                                            "updatedAt": "2026-01-01T00:00:00.000Z"
+                                        },
+                                        {
+                                            "eventId": "d2b3c4e5-6f7a-4890-abcd-ef0123456789",
+                                            "eventName": "license_report_started",
+                                            "tenantId": "a7159bdc-678d-4726-901e-cd6d018d46e2",
+                                            "createdAt": "2026-01-02T08:15:00.000Z",
+                                            "updatedAt": "2026-01-02T08:15:00.000Z"
+                                        },
+                                        {
+                                            "eventId": "e3c4d5f6-7a8b-4901-bcde-f01234567890",
+                                            "eventName": "license_report_saved",
+                                            "tenantId": "a7159bdc-678d-4726-901e-cd6d018d46e2",
+                                            "createdAt": "2026-01-02T08:20:00.000Z",
+                                            "updatedAt": "2026-01-02T08:20:00.000Z"
+                                        }
+                                    ]
                                 }
                             }
                         },
@@ -8330,7 +8353,30 @@
                                     "items": {
                                         "$ref": "#/components/schemas/Telemetry.Shield.Event"
                                     },
-                                    "minItems": 0
+                                    "minItems": 0,
+                                    "examples": [
+                                        {
+                                            "eventId": "c1a2b3d4-5e6f-4789-9abc-def012345678",
+                                            "eventName": "shield_installed",
+                                            "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                                            "createdAt": "2026-01-01T00:00:00.000Z",
+                                            "updatedAt": "2026-01-01T00:00:00.000Z"
+                                        },
+                                        {
+                                            "eventId": "d2b3c4e5-6f7a-4890-abcd-ef0123456789",
+                                            "eventName": "license_report_started",
+                                            "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                                            "createdAt": "2026-01-02T08:15:00.000Z",
+                                            "updatedAt": "2026-01-02T08:15:00.000Z"
+                                        },
+                                        {
+                                            "eventId": "e3c4d5f6-7a8b-4901-bcde-f01234567890",
+                                            "eventName": "license_report_saved",
+                                            "tenantId": "46759f55-fb42-49e3-83ab-93de2a39bc1d",
+                                            "createdAt": "2026-01-02T08:20:00.000Z",
+                                            "updatedAt": "2026-01-02T08:20:00.000Z"
+                                        }
+                                    ]
                                 }
                             }
                         },
