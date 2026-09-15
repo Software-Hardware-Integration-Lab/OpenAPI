@@ -32,7 +32,7 @@ jobs:
         permissions:
             issues: write
             contents: read
-            pull-requests: read
+            pull-requests: write
 
         # Set of commands to run to compute the reachability of CVEs in the codebase
         steps:
