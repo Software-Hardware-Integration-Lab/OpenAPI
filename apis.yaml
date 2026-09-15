@@ -19,3 +19,9 @@ apis:
   properties:
   - type: x-openapi
     url: specs/Data-Gateway.json
+- name: SHIELD PowerShell Proxy
+  description: Authenticated proxy that executes a fixed, server-side allowlisted Security & Compliance (Purview) PowerShell command and returns its structured JSON result.
+  image: https://www.content.shi.com/SHIcom/images/Global/HeaderFooter/SHI_LOGO_2022_Positive.svg
+  properties:
+  - type: x-openapi
+    url: specs/PowerShell-Proxy.json
