@@ -30,7 +30,7 @@ jobs:
 
         # Sets the scopes available to the github_token injected to the GH Actions runner
         permissions:
-            issues: read
+            issues: write
             contents: read
             pull-requests: read
 
@@ -68,4 +68,11 @@ jobs:
               env:
                   SOCKET_SECURITY_API_KEY: ${{ secrets.SOCKET_REACHABILITY }}
                   GH_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              run: socketcli --target-path $GITHUB_WORKSPACE --scm github --reach
+              run: |
+                  # socketcli only auto-detects the PR number on some CI providers; on GitHub Actions
+                  # it must be passed explicitly or PR-comment requests are sent with a null PR number.
+                  if [ "${{ github.event_name }}" = "pull_request" ]; then
+                    socketcli --target-path $GITHUB_WORKSPACE --scm github --reach --pr-number ${{ github.event.pull_request.number }}
+                  else
+                    socketcli --target-path $GITHUB_WORKSPACE --scm github --reach
+                  fi
