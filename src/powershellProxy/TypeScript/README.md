@@ -53,6 +53,16 @@ if (results?.success === true) {
 }
 ```
 
+Retrieving proxy metadata (deployed version, build, and contract version):
+
+```TypeScript
+const info = await powerShellProxyClient.api.proxy.info.get();
+
+if (info?.success === true) {
+    // Do something with info.result.name/version/build/apiVersion
+}
+```
+
 ### Advanced Usage
 
 You can optionally configure the SDK client with a custom base URL, including support for it being nested deep in a L7 load balancer. `baseUrl` and `scopeList` are both required by the factory:
