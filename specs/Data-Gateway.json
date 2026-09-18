@@ -12724,7 +12724,18 @@
                                                                 "value": null,
                                                                 "userProfileIds": null,
                                                                 "isDeepDive": false,
-                                                                "altProduct": null,
+                                                                "altProduct": [
+                                                                    {
+                                                                        "name": "Google Workspace",
+                                                                        "publisher": "Google",
+                                                                        "status": "Limted Adoption"
+                                                                    },
+                                                                    {
+                                                                        "name": "Adobe Workspace",
+                                                                        "publisher": "Adobe",
+                                                                        "status": "Limited Adoption"
+                                                                    }
+                                                                ],
                                                                 "publisher": null,
                                                                 "useCase": null
                                                             },
@@ -12732,7 +12743,18 @@
                                                                 "value": null,
                                                                 "userProfileIds": null,
                                                                 "isDeepDive": false,
-                                                                "altProduct": null,
+                                                                "altProduct": [
+                                                                    {
+                                                                        "name": "Google Workspace",
+                                                                        "publisher": "Google",
+                                                                        "status": "Limted Adoption"
+                                                                    },
+                                                                    {
+                                                                        "name": "Adobe Workspace",
+                                                                        "publisher": "Adobe",
+                                                                        "status": "Limited Adoption"
+                                                                    }
+                                                                ],
                                                                 "publisher": null,
                                                                 "useCase": null
                                                             },
@@ -12740,7 +12762,18 @@
                                                                 "value": null,
                                                                 "userProfileIds": null,
                                                                 "isDeepDive": false,
-                                                                "altProduct": null,
+                                                                "altProduct": [
+                                                                    {
+                                                                        "name": "Google Workspace",
+                                                                        "publisher": "Google",
+                                                                        "status": "Limted Adoption"
+                                                                    },
+                                                                    {
+                                                                        "name": "Adobe Workspace",
+                                                                        "publisher": "Adobe",
+                                                                        "status": "Limited Adoption"
+                                                                    }
+                                                                ],
                                                                 "publisher": null,
                                                                 "useCase": null
                                                             },
@@ -12748,7 +12781,18 @@
                                                                 "value": null,
                                                                 "userProfileIds": null,
                                                                 "isDeepDive": false,
-                                                                "altProduct": null,
+                                                                "altProduct": [
+                                                                    {
+                                                                        "name": "Google Workspace",
+                                                                        "publisher": "Google",
+                                                                        "status": "Limted Adoption"
+                                                                    },
+                                                                    {
+                                                                        "name": "Adobe Workspace",
+                                                                        "publisher": "Adobe",
+                                                                        "status": "Limited Adoption"
+                                                                    }
+                                                                ],
                                                                 "publisher": null,
                                                                 "useCase": null
                                                             }
